@@ -17,6 +17,7 @@
     <Folder Include="Repository\" />
     <Folder Include="Services\" />
     <Folder Include="Pages\FaydaliIcerikler\" />
+    <Folder Include="wwwroot\Videos\" />
   </ItemGroup>
 
 </Project>
