@@ -1,0 +1,84 @@
+﻿@page "/duzelticifaaliyet/ekle"
+@page "/duzelticifaaliyet/duzenle"
+
+
+
+<h1>Düzeltici Faaliyet  </h1>
+<hr />
+
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Resim</label>
+        <div class="col-md-4">
+            <text class="form-control"  />
+        </div>
+        
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12">Faaliyet Gurup Konusu</label>
+        <div class="col-md-4">
+            <text class="form-control"  />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Konu Etiket Numarası</label>
+        <div class="col-md-4">
+            <text class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">İstek Faaliytet Konusu</label>
+        <div class="col-md-4">
+            <text class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Ekleyen Personel Ad Soyad</label>
+        <div class="col-md-4">
+            <text class="form-control"  />
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Açıklama</label>
+        <div class="col-md-4">
+            <text class="form-control"  />
+        </div>
+    </div>
+
+    @*<div class="form-group row">
+            <label class="control-label col-md-12">Düzeltme İsteğinde Bulunan Kullanıcı</label>
+            <div class="col-md-4">
+                
+
+                <select class="form-control" onchange="@duzelticiFaaliyet">
+                    <option value="">-- Kullanıcı Seç --</option>
+                    @foreach (var duzelticiFaaliyet in duzelticiFaaliyetlerListesi)
+                    {
+                        <option value="@duzelticiFaaliyet.KisiId">@duzelticiFaaliyet.PersonelBilgi.AdSoyad</option>
+
+                    }
+                </select>
+            </div>
+            <ValidationMessage For="@(() => duzelticiFaaliyet.PersonelBilgi.AdSoyad)" />
+    </div>*@
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Lokasyon Bilgisi</label>
+        <div class="col-md-4">
+            <text class="form-control"  />
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <button class="btn btn-light" >Vazgeç</button>
+    </div>
+
