@@ -1,0 +1,89 @@
+﻿@page "/etkinliklerlistesi"
+
+<h1>Etkinlikler</h1>
+
+<div class="row">
+	<div class="col-md-4">
+		<a href='/etkinlik/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Etkinlik Ekle</a>
+	</div>
+</div>
+<br />
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-header-form">
+					<form>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Etkinlik adı ile arama yapın..."
+								   @bind:event="oninput" />
+							<div class="input-group-btn">
+								<button class="btn btn-info">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="card-body p-0">
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<tbody>
+							<tr>
+								<th class="text-center">
+									<div class="custom-checkbox custom-checkbox-table custom-control">
+										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
+										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+									</div>
+								</th>
+								<th>Etkinlik Adı</th>
+								<th>Katılımcılar</th>
+								<th>Başlangıç Tarihi </th>
+								<th>Bitiş Tarihi</th>
+								<th>Etkinlik Durumu</th>
+								<th>İşlemler</th>
+							</tr>
+
+							<tr>
+								<td class="p-0 text-center">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
+										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+									</div>
+								</td>
+								<td>EtkinlikAd</td>
+
+								<td>
+									<img alt="image" src="assets/img/users/user-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
+								</td>
+
+								<td>EtkinlikBaslangicTarihi</td>
+								<td>EtkinlikBitisTarihi</td>
+								<td>
+									<div class="badge badge-success">EtkinlikDurum</div>
+								</td>
+								<td>
+									<a href="#" class="btn btn-primary">Detay</a>
+
+									<a href='/etkinlik/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+									<button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal">
+										Sil
+									</button>
+
+
+
+								</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
