@@ -1,6 +1,500 @@
 ﻿@page "/IzinTalepFormu"
 <h3>Izin Talep Formu</h3>
 
-@code {
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
 
-}
+		<tr valign="top">
+			<td width="7%" style="border-width:1; border-color:black; border-style:solid;">
+				<div align="left">
+					<p align="center"><font size="1"><img height="46" src="#" width="46"></font></p>
+				</div>
+			</td>
+			<td width="85%" style="border-width:1; border-color:black; border-style:solid;">
+				<div align="center">
+					<strong>
+						<span style="font-size:10pt;">
+							VANGÖLÜ ELEKTRİK DAĞITIM A.Ş
+							<br>İZİN FORMU
+						</span>
+					</strong>
+				</div>
+			</td>
+			<td width="7%" style="border-width:1; border-color:black; border-style:solid;">
+				<div align="right">
+					<p align="center"><font size="1"><img height="46" src="#" width="46"></font></p>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+		<tr>
+			<td width="34%" style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>
+						VATANDAŞLIK
+						NO. / KURUM SİCİL NO.
+					</b>
+				</font>
+			</td>
+			<td width="64%" style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<input lang="tr" dir="ltr" size="18" name="textfield">
+					/ 31-
+				</font><font size="1">
+					<input lang="tr" dir="ltr" size="18" name="textfield2">
+				</font>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>
+						ADI
+						VE SOYADI
+					</b>
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<p>
+					<font size="1">
+						<input lang="tr" dir="ltr" size="45" name="textfield32">
+					</font>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;"><font size="1"><b>GÖREV GRUBU</b></font></td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form1" method="post" action="">
+					<b>
+						<font size="2">
+							<input type="radio" name="formradio2">Akademik
+							<input type="radio" name="formradio2">          İdari
+							<input type="radio" name="formradio2">          Sözleşmeli
+						</font>
+					</b>
+
+
+
+
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;"><font size="1"><b>GÖREV UNVANI</b></font></td>
+
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<p>
+					<font size="1">
+						<select name="formselect2" size="1">
+							<option>.................</option>
+							<option>AMBAR MEMURU</option>
+							<option>ANABİLİM DALI BAŞKANI</option>
+							<option>ARAŞ.GÖR.</option>
+							<option>AŞÇI</option>
+							<option>AYNİYAT SAYMANI</option>
+							<option>BAŞHEMŞİRE</option>
+							<option>BAŞHEKİM</option>
+							<option>BAŞHEKİM YRD.</option>
+							<option>BİLGİSAYAR İŞLETMENİ</option>
+							<option>BİLİM DALI BAŞKANI</option>
+							<option>BİYOLOG</option>
+							<option>BÖLÜM BAŞKANI</option>
+							<option>BÖLÜM BAŞKAN YRD.</option>
+							<option>BÜRO PERSONELİ</option>
+							<option>ÇOCUK GELİŞİMCİSİ</option>
+							<option>DAKTİLOGRAF</option>
+							<option>DESTEK PERSONELİ</option>
+							<option>DİĞER SAĞLIK PERSONELİ</option>
+							<option>DİŞ TABİBİ</option>
+							<option>DİYETİSYEN</option>
+							<option>DOÇ.DR.</option>
+							<option>EBE</option>
+							<option>ECZACI</option>
+							<option>FAHRİ DOKTOR</option>
+							<option>FAKÜLTE SEKRETERİ</option>
+							<option>FİZYOTERAPİST</option>
+							<option>GASSAL</option>
+							<option>HASTABAKICI</option>
+							<option>HASTANE MÜDÜR YARDIMCISI</option>
+							<option>HASTANE MÜDÜRÜ</option>
+							<option>HASTANELER BAŞMÜDÜRÜ</option>
+							<option>HEMŞİRE</option>
+							<option>HİZMETLİ</option>
+							<option>İMAM</option>
+							<option>İŞLETME MÜDÜRÜ</option>
+							<option>KALORİFERCİ</option>
+							<option>KİMYAGER</option>
+							<option>KORUMA VE GÜVENLİK ŞEFİ</option>
+							<option>KORUMA VE GÜVENLİK GÖREVLİSİ</option>
+							<option>KÜTÜPHANECİ</option>
+							<option>LABORANT</option>
+							<option>MEMUR</option>
+							<option>MÜHENDİS</option>
+							<option>ODYOLOG</option>
+							<option>ÖĞRETİM GÖREVLİSİ</option>
+							<option>ÖĞRETMEN</option>
+							<option>PROF.DR.</option>
+							<option>PROGRAMCI</option>
+							<option>PSİKOLOG</option>
+							<option>RONTGEN TEKNİSYENİ</option>
+							<option>SAĞLIK FİZİKÇİSİ</option>
+							<option>SAĞLIK MEMURU</option>
+							<option>SAĞLIK TEKNİSYENİ</option>
+							<option>SAĞLIK TEKNİKERİ</option>
+							<option>SAĞLIK TEKNİSYEN YARDIMCISI</option>
+							<option>SAYMAN</option>
+							<option>SANTRAL MEMURU</option>
+							<option>SEKRETER</option>
+							<option>SİVİL SAVUNMA UZMANI</option>
+							<option>SOSYAL ÇALIŞMACI</option>
+							<option>ŞEF</option>
+							<option>ŞÖFOR</option>
+							<option>TABİP</option>
+							<option>TEKNİKER</option>
+							<option>TEKNİSYEN YARDIMCISI</option>
+							<option>TEKNİSYEN</option>
+							<option>VERİ HAZ.VE KONT.İŞLETMENİ</option>
+							<option>VETERİNER</option>
+							<option>VEZNEDAR</option>
+							<option>DR.ÖĞRETİM ÜYESİ</option>
+						</select>
+					</font>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>
+						GÖREV YERİ (Anabilim Dalı / Bilim
+						Dalı)
+					</b>
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form4">
+					<p><b><font size="2"><input type="radio" name="formradio2">Şirket Müdürlük &nbsp;<input type="radio" name="formradio2">Edremit &nbsp;
+						<input type="radio" name="formradio2">Van </font></b><br>&nbsp;<input type="text" name="formtext1" size="53"></p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>
+						KULLANACAĞI İZİN SÜRESİ (Gün
+						Olarak)
+					</b>
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form7">
+					<p><font size="1"><input type="text" name="formtext2" size="18"> &nbsp;İZİNİN AİT OLDUĞU YIL&nbsp;&nbsp;&nbsp; </font><font size="1">
+						<input type="text" name="formtext3" size="14"></font></p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>
+						İZİNE BAŞLAMA
+						TARİHİ
+					</b>
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form2">
+					<font size="1">
+						<input lang="tr" dir="ltr" size="19" name="textfield32">
+					</font>
+
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;"><font size="1"><b>GÖREVE BAŞLAMA TARİHİ</b></font></td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form6">
+					<font size="1">
+						<input lang="tr" dir="ltr" size="19" name="textfield32">
+					</font>
+
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>İZİN TÜRÜ</b><br>(<strong>
+						Evlilik
+						İzininde
+					</strong>; "Kendisi, Çocuğu", <strong>Ölüm İzininde;</strong>
+					"Eşi, Çocuğu, Annesi, Babası ve Kardeşi" olarak yakınlık derecesi izin
+					nedeninin altında bulunan kutucukta belirtilecek.)
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form8">
+					<p>
+						<font size="1">
+							<strong><input type="radio" name="formradio1">Senelik</strong>
+							<strong><input type="radio" name="formradio1">Mazeret </strong><strong>
+								<input type="radio" name="formradio1">Şua
+							</strong> <strong><input type="radio" name="formradio1">Babalık</strong>
+							<strong><input type="radio" name="formradio1">Evlilik <input type="radio" name="formradio1">Ölüm</strong><strong></strong>
+						</font>
+					</p>
+					<p><input type="text" name="formtext6" size="44"></p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>İZİNDE İKEN YERİNE VEKALET&nbsp;EDEN&nbsp;KİŞİNİN<br></b>(İdari
+					ve Mali Sorumluluğu Bulunan Personel İçin)
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form9">
+					<p><font size="1">Unvanı/Adı ve Soyadı: <input lang="tr" dir="ltr" size="27" name="textfield342"> İmzası : </font></p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;"><font size="1"><b>İZNİNİ GEÇİRECEĞİ ADRES</b></font></td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+
+				<form name="form10">
+					<p><input type="text" name="formtext4" size="55"></p>
+				</form>
+				<form name="form11">
+					<p><input type="text" name="formtext5" size="55"></p>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;"><font size="1"><b>TELEFON NUMARALARI</b></font></td>
+
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<form name="form12">
+					<font size="1">Adres Tel:</font> <font size="1">
+						<input lang="tr" dir="ltr" size="18" name="textfield3222">
+						<font color="#FF0000"> İş Tel / Dahili Tel:</font><font size="3">
+							<input lang="tr" dir="ltr" size="18" name="textfield32222">
+						</font>
+
+					</font>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<font size="1">
+					<b>KALAN İZİN DURUMU</b> (İlgili Personel Bürosu
+					Tarafından Doldurulacaktır.)
+				</font>
+			</td>
+			<td style="border-width:1; border-color:black; border-style:solid;">
+				<form name="form13">
+
+					<p>
+						<font size="1">
+							<strong>
+								<font size="2">
+									2020&nbsp;&nbsp;Yılı&nbsp;
+									&nbsp;
+									<input type="text" name="formtext7" size="2">
+									Gün&nbsp;&nbsp;&nbsp; &nbsp;– &nbsp;&nbsp;&nbsp;&nbsp;2021&nbsp;Yılı&nbsp;
+								</font>
+							</strong>
+						</font><font size="1">
+							<strong>
+								<font size="2">
+									<input type="text" name="formtext7" size="2">  Gün
+								</font>
+							</strong>
+						</font>
+					</p>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+		<tr>
+			<td height="82" style="border-width:1; border-color:black; border-style:solid;">
+				<form name="form14">
+					<p align="left">
+						<font size="2" color="black">
+							Yukarıda belirtmiş olduğum tarihler
+							arasında izinli sayılmam hususunda gereğini saygılarımla arz ederim.<br>
+						</font>
+					</p>
+					<p align="left">
+						<font size="2" color="black"><b>İzin Talebinde Bulunan Personelin;</b></font><b>
+							<br>
+						</b>              <font size="2" color="black">              <b>Tarih&nbsp;:&nbsp;</b> ....../....../........&nbsp;&nbsp;-&nbsp;&nbsp;<b>İmza :</b></font>
+					</p>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+		<tr>
+			<td height="82" style="border-width:1; border-color:black; border-style:solid;">
+				<form name="form14">
+					<p align="center">
+						<strong>
+							<font size="2" color="black">
+								VANGÖLÜ ELEKTRİK DAĞITIM A.Ş MÜDÜRLÜĞÜ'NE
+							</font>
+						</strong>
+					</p>
+
+					<p align="left">
+						<strong><font size="2" color="black">SAYI </font></strong><font size="2" color="black">:<font color="#FFFFFF">...</font></font><font size="1">
+							<input name="textfield322" dir="ltr" lang="tr" value="                   " size="55">
+						</font><font size="2" color="black">
+							<br>
+							<strong>TARİH</strong> :
+						</font><font size="1">
+							<input name="textfield3223" dir="ltr" lang="tr" value="...../....../............" size="25">
+						</font><font size="2" color="black">
+							<br>
+							Yukarıda ayrıntılı durumu çıkartılan personelin belirtilen tarihler
+							arasında izine ayrılmasında sakınca olmadığını bilgilerinize saygılarımla
+							arz ederim.
+						</font>
+					</p>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+
+		<tr>
+			<td width="49%" style="border-width:1; border-color:black; border-style:solid;">
+				<div align="center"><font size="1"><strong>Birim&nbsp; / Bilim &nbsp; Müdürü<br>Veya<br>Birim Sorumlusu</strong></font></div>
+			</td>
+			<td width="51%" style="border-width:1; border-color:black; border-style:solid;">
+				<div align="center">
+					<font size="1">
+						<strong>
+							Şirket Müdürü<br>Veya<br>
+							Şirket Sorumlusu
+						</strong>
+					</font>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+
+		<tr>
+			<td width="49%" style="border-width:1; border-color:black; border-style:solid;" height="31">
+				<form name="form3" action="" method="post">
+					<div align="center">
+						<p align="center">
+							<font size="1">
+								<input lang="tr" dir="ltr" size="31" name="textfield8">
+							</font>
+						</p>
+						<p align="center">
+							<font size="1">
+								<input lang="tr" dir="ltr" size="31" name="textfield82">
+							</font><font size="1"> </font>
+
+						</p>
+					</div>
+				</form>
+			</td>
+			<td width="51%" style="border-width:1; border-color:black; border-style:solid;" height="31">
+				<form name="form5" action="" method="post">
+					<div align="center">
+
+
+						<p>
+							<font size="1">
+								<input lang="tr" dir="ltr" size="31" name="textfield9">
+							</font>
+						</p>
+						<p>
+							<font size="1">
+								<input lang="tr" dir="ltr" size="31" name="textfield83">
+							</font><font size="1"> </font>
+						</p>
+					</div>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table width="100%" cellspacing="0" style="border-collapse:collapse;">
+	<tbody>
+
+		<tr>
+
+			<td height="82" style="border-width:1; border-color:black; border-style:solid;">
+				<p>
+					<font size="1">
+						<strong><font color="#000000">SAYI :</font></strong><font color="#000000">
+							<strong>
+								<font color="black">
+								</font><br>
+								TARİH :<br>
+							</strong>
+						</font>
+					</font>
+				</p>
+				<p>
+					<font size="1">
+						<strong>
+							<font color="#000000">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								UYGUNDUR<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Müdür
+								Adına)<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adı
+								Soyadı , Unvanı , İmzası
+							</font>
+						</strong>
+					</font>
+				</p>
+				<p>&nbsp;</p>
+				<p align="right"><font size="1"><strong><font color="#000000"><a onclick="window.print(); return false" href="#"><img height="20" src="destop1/./Personel%20Form_files/print.gif" width="20"></a></font></strong></font></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+IDR.F.01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rev.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bugünün Tarihi
+
