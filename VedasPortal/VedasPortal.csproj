@@ -20,10 +20,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Smart.Blazor" Version="10.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Videos\" />
+    <Page Include="Pages\Anasayfa\Doviz.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -653,12 +654,9 @@
     <None Include="wwwroot\assets\js\scripts.js" />
     <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
     <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
     <None Include="wwwroot\css\open-iconic\README.md" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="Pages\Anasayfa\Doviz.razor" />
   </ItemGroup>
 
 </Project>

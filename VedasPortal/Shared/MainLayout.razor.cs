@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace VedasPortal.Shared
@@ -16,6 +15,8 @@ namespace VedasPortal.Shared
 
             await jsRun.InvokeVoidAsync("indexInit");
             await jsRun.InvokeVoidAsync("scriptsInit");
+
+
         }
     }
 }
