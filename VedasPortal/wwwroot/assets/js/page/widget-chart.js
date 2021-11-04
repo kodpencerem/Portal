@@ -64,8 +64,7 @@ var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    datasets: [{
+      labels: ["Pazar", "Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi"],    datasets: [{
       label: 'Statistics',
       data: [460, 458, 330, 502, 430, 610, 488],
       borderWidth: 2,
@@ -125,8 +124,7 @@ var ctx = document.getElementById("myChart2").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    datasets: [{
+      labels: ["Pazar", "Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi"],    datasets: [{
       label: 'Statistics',
       data: [428, 354, 425, 528, 450, 632, 429],
       borderWidth: 2,
@@ -178,8 +176,7 @@ var ctx = document.getElementById("myChart3").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    datasets: [{
+      labels: ["Pazar", "Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi"],    datasets: [{
       label: 'Google',
       data: [290, 358, 220, 402, 440, 510, 688],
       borderWidth: 2,
