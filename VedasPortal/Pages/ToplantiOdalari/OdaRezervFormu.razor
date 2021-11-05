@@ -1,71 +1,25 @@
 ﻿@page "/odarezervformu"
-<h3>Toplantı Odası Rezerv Formu</h3>
 
+<section class="section">
+	<div class="section-body">
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h4>Toplantı Odası Durumu</h4>
+					</div>
+					<div class="card-body">
+						<div class="fc-overflow">
+							<div id="myEvent">
 
-<div class="card">
-	<div class="card-header">
-	</div>
-	<div class="card-body">
-		<div class="form-group">
-			<label for="inputAddress">Rezerv Eden Personel Bilgisi</label>
-			<input type="text" class="form-control" id="inputAddress" placeholder="Ör. Kıdemli Yazılım Müh. Lokman Çelik">
-		</div>
-
-		<div class="form-group">
-			<label for="inputAddress">Oda Adı ve Lokasyon Bilgisi</label>
-			<input type="text" class="form-control" id="inputAddress" placeholder="Ör:Edremit Vedaş 2.Kat Toplantı Odası">
-		</div>
-
-
-		<div class="form-group">
-			<label for="inputAddress2">Toplantı Konu Açıklaması</label>
-			<input type="text" class="form-control" id="inputAddress2" placeholder="Konu hakkında kısa bir bilgi">
-		</div>
-
-		<div class="form-group">
-			<label>Toplanti Baslangic Tarih ve Saati</label>
-			<input type="datetime-local" class="form-control">
-		</div>
-
-		<div class="form-group">
-			<label>Toplanti Bitis Tarih ve Saati</label>
-			<input type="datetime-local" class="form-control">
-		</div>
-
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="inputCity">Şehir Bilgisi</label>
-				<input type="text" class="form-control" id="inputCity">
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="form-group col-md-4">
-				<label for="inputState">Kurum</label>
-				<select id="inputState" class="form-control">
-					<option selected="">Seçin...</option>
-					<option>Türkerler</option>
-					<option>Vedaş</option>
-					<option>Vepsaş</option>
-				</select>
-			</div>
-
 		</div>
-
-		<div class="section-title">Toplantı Katılım Durumu</div>
-		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-			<label class="custom-control-label" for="customRadioInline1">Herkese Açık</label>
-		</div>
-		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-			<label class="custom-control-label" for="customRadioInline2">
-				Sadece Davetliler
-			</label>
-		</div>
-
 	</div>
-	<div class="card-footer">
-		<button class="btn btn-primary">Submit</button>
-	</div>
-</div>
+</section>
 
 @code {
 
