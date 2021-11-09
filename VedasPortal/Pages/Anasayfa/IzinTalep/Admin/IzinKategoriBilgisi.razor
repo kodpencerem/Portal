@@ -1,0 +1,79 @@
+﻿@page "/IzinKategoriBilgisi"
+
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4>İzin Kategorileri Listesi</h4>|
+				<div class="col-md-4">
+					<a href='/izinkategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> İzin Kategorisi Ekle</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-striped" id="table-2">
+						<thead>
+							<tr>
+								<th class="text-center pt-3">
+									<div class="custom-checkbox custom-checkbox-table custom-control">
+										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+											   class="custom-control-input" id="checkbox-all">
+										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+									</div>
+								</th>
+								<th>Kategori Adı</th>
+								<th>Açıklama</th>
+								<th>İzin Kategori Durumu</th>
+								<th>İşlemler</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center pt-2">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+											   id="checkbox-1">
+										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+									</div>
+								</td>
+								<td>Doğum İzni</td>
+
+								<td>Açıklama</td>
+								<td>
+									<div class="badge badge-success">Aktif</div>
+								</td>
+								<td>
+									<a href="/etkinlikkategori/duzenle" class="btn btn-info">
+										Düzenle
+									</a>
+									|
+									<a href="etkinlikkategoridetay" class="btn btn-primary">
+										Detay Bilgi
+									</a>
+									|
+									<a href="#" class="btn btn-danger">
+										Sil
+									</a>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@code {
+
+}

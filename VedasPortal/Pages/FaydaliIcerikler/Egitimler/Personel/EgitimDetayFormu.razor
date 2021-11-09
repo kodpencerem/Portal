@@ -1,4 +1,5 @@
-﻿@page "/profil"
+﻿@page "/egitimdetayi"
+
 
 <section class="section">
 	<div class="section-body">
@@ -10,7 +11,7 @@
 							<img alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
 							<div class="clearfix"></div>
 							<div class="author-box-name">
-								<a href="#">Personel Adı</a>
+								<a href="#">Eğitmen Adı</a>
 							</div>
 							<div class="author-box-job">iş email</div>
 						</div>
@@ -19,10 +20,6 @@
 								<p>
 									Hakkında Kısa Bilgi
 								</p>
-								<div class="mb-2 mt-3">
-									<a href="#" class="btn btn-secondary">Hakkında Ekle</a> |
-									<a href="#" class="btn btn-info"> Düzenle</a>
-								</div>
 							</div>
 							<div class="mb-2 mt-3">
 								<div class="text-small font-weight-bold">Takip Et</div>
@@ -45,7 +42,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h4>Personel İletişim Bilgileri</h4>
+						<h4>Eğitmen Hakkında</h4>
 					</div>
 					<div class="card-body">
 						<div class="py-4">
@@ -90,11 +87,6 @@
 								</span>
 							</p>
 						</div>
-						<div class="mb-2 mt-3" style="margin:10px">
-							<a href="#" class="btn btn-secondary">İletişim Bilgi Ekle</a> |
-							<a href="#" class="btn btn-info"> Düzenle</a> |
-							<a href="#" class="btn btn-danger"> Sil</a>
-						</div>
 					</div>
 				</div>
 				<div class="card">
@@ -134,12 +126,6 @@
 								</div>
 							</li>
 						</ul>
-
-						<div class="mb-2 mt-3" style="margin:10px">
-							<a href="#" class="btn btn-secondary">Uzmanlık Alanı Ekle</a> |
-							<a href="#" class="btn btn-info"> Düzenle</a> |
-							<a href="#" class="btn btn-danger"> Sil</a>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -149,11 +135,11 @@
 						<ul class="nav nav-tabs" id="myTab2" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab"
-								   aria-selected="true">Hakkında</a>
+								   aria-selected="true">Eğitim Bilgileri</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
-								   aria-selected="false">Ayarlar</a>
+								   aria-selected="false">Oynatma Listeleri</a>
 							</li>
 						</ul>
 						<div class="tab-content tab-bordered" id="myTab3Content">
@@ -163,18 +149,13 @@
 									Eğitim Açıklaması
 								</p>
 
-								<div class="section-title">Aldığı Eğitimler</div>
+								<div class="section-title">Eğitim İçin Gereksinimler</div>
 								<ul>
 									<li>B.A.,Gujarat University, Ahmedabad,India.</li>
 									<li>M.A.,Gujarat University, Ahmedabad, India.</li>
 									<li>P.H.D., Shaurashtra University, Rajkot</li>
 								</ul>
-								<div class="mb-2 mt-3" style="margin:10px">
-									<a href="#" class="btn btn-secondary">Eğitim Ekle</a> |
-									<a href="#" class="btn btn-info"> Düzenle</a> |
-									<a href="#" class="btn btn-danger"> Sil</a>
-								</div>
-								<div class="section-title">Sertifika ve Kurs Bilgileri</div>
+								<div class="section-title">Eğitimde Yer Alan Konular</div>
 								<ul>
 									<li>
 										One year experience as Jr. Professor from April-2009 to march-2010
@@ -203,15 +184,19 @@
 										industry.
 									</li>
 								</ul>
-								<div class="mb-2 mt-3" style="margin:10px">
-									<a href="#" class="btn btn-secondary">Sertifika Bilgi Ekle</a> |
-									<a href="#" class="btn btn-info"> Düzenle</a> |
-									<a href="#" class="btn btn-danger"> Sil</a>
-								</div>
 							</div>
 							<div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
 
-								Ayarlar
+								<video width="400" controls>
+									<source src="mov_bbb.mp4" type="video/mp4">
+									<source src="mov_bbb.ogg" type="video/ogg">
+									Tarayıcınız Html Video Desteklemiyor.
+								</video>
+
+								@*<p>
+									Video courtesy of
+									<a href="https://www.bigbuckbunny.org/" target="_blank">Big Buck Bunny</a>.
+									</p>*@
 
 							</div>
 						</div>
@@ -228,3 +213,10 @@
 
 
 
+
+
+
+
+@code {
+
+}
