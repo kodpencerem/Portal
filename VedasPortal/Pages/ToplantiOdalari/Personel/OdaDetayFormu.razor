@@ -1,24 +1,18 @@
 ﻿@page "/odadetayformu"
-<h3>Toplantı Odası Detay Formu</h3>
-
 
 <div class="card">
+	<div class="card-header">
+		<h4>Toplantı Odası Detay Formu</h4>
+	</div>
 	<div class="padding-20">
 		<ul class="nav nav-tabs" id="myTab2" role="tablist">
 			<li class="nav-item">
 				<a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab" aria-selected="true">Toplantı Odası Detay Bilgisi</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="profile-tab2" data-toggle="tab" href="#notgonder" role="tab" aria-selected="false">Toplantıya Not Gönder</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="profile-tab3" data-toggle="tab" href="#sonuc" role="tab" aria-selected="false">Toplantı Sonuç Bildirgesi</a>
-			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" id="profile-tab4" data-toggle="tab" href="#gozlemle" role="tab" aria-selected="false">Toplantıyı Gözlemle</a>
+				<a class="nav-link" id="profile-tab3" data-toggle="tab" href="#sonuc" role="tab" aria-selected="false">Toplantı Sonucu ve Alınan Kararlar</a>
 			</li>
-
 		</ul>
 		<div class="tab-content tab-bordered" id="myTab3Content">
 			<div class="tab-pane fade active show" id="about" role="tabpanel" aria-labelledby="home-tab2">
@@ -36,7 +30,7 @@
 					<div class="col-md-3 col-6 b-r">
 						<strong>Email</strong>
 						<br>
-						<p class="text-muted">johndeo@example.com</p>
+						<p class="text-muted">samikaya@vedas.com.tr</p>
 					</div>
 
 				</div>
@@ -65,125 +59,51 @@
 
 				</ul>
 			</div>
-			<div class="tab-pane fade" id="notgonder" role="tabpanel" aria-labelledby="profile-tab2">
-				<form method="post" class="needs-validation">
-
-					<div class="card-body">
-						<div class="row">
-							<div class="form-group col-md-6 col-12">
-								<label>Adınız</label>
-								<input type="text" class="form-control" value="John">
-								<div class="invalid-feedback">
-									Lutfen isim giriniz
-								</div>
-							</div>
-							<div class="form-group col-md-6 col-12">
-								<label>Soyadiniz</label>
-								<input type="text" class="form-control" value="Deo">
-								<div class="invalid-feedback">
-									Soyisminizi giriniz
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-md-7 col-12">
-								<label>Email</label>
-								<input type="email" class="form-control" value="test@example.com">
-								<div class="invalid-feedback">
-									Email giriniz
-								</div>
-							</div>
-							<div class="form-group col-md-5 col-12">
-								<label>Telefon No</label>
-								<input type="tel" class="form-control" value="">
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-12">
-								<label>Notunuz</label>
-								<textarea class="form-control" placeholder="Notunuzu buraya yazın..." data-height="150" style="height: 150px; "></textarea>
-							</div>
-						</div>
-
-					</div>
-					<div class="card-footer text-right">
-						<button class="btn btn-primary">Gönder</button>
-					</div>
-				</form>
-			</div>
 
 			<div class="tab-pane fade" id="sonuc" role="tabpanel" aria-labelledby="profile-tab3">
 				<form method="post" class="needs-validation">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
 
-					<div class="card-body">
-						<div class="row">
-							<div class="form-group col-md-6 col-12">
-								<label>Adınız</label>
-								<input type="text" class="form-control" value="John">
-								<div class="invalid-feedback">
-									Lutfen isim giriniz
-								</div>
-							</div>
-							<div class="form-group col-md-6 col-12">
-								<label>Soyadiniz</label>
-								<input type="text" class="form-control" value="Deo">
-								<div class="invalid-feedback">
-									Soyisminizi giriniz
+								<div class="card-body">
+									<div class="form-group row mb-4">
+										<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Toplantı Teması</label>
+										<div class="col-sm-12 col-md-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="form-group row mb-4">
+										<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Görecek Birimler</label>
+										<div class="col-sm-12 col-md-7">
+											<select class="form-control selectric">
+												<option>Seçiniz...</option>
+												<option>Tüm Birimler</option>
+												<option>Bilgi İşlem</option>
+												<option>Scada Birimi</option>
+												<option>İnsan Kaynakları</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group row mb-4">
+										<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Konu İçeriği ve Alınan Kararlar</label>
+										<div class="col-sm-12 col-md-7">
+											<textarea class="summernote"></textarea>
+										</div>
+									</div>
+									<div class="form-group row mb-4">
+										<label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+										<div class="col-sm-12 col-md-7">
+											<button class="btn btn-primary">Gönder ve Yayınla</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group col-md-7 col-12">
-								<label>Email</label>
-								<input type="email" class="form-control" value="test@example.com">
-								<div class="invalid-feedback">
-									Email giriniz
-								</div>
-							</div>
-							<div class="form-group col-md-5 col-12">
-								<label>Telefon No</label>
-								<input type="tel" class="form-control" value="">
-							</div>
-						</div>
-
-						<div class="form-group col-md-6 col-12">
-								<label>Toplantı Ana Teması</label>
-								<input type="text" class="form-control" value="Toplantı Ana Teması">
-								<div class="invalid-feedback">
-									Lutfen Toplantı Ana Temasını Yazınız...
-								</div>
-							</div>
-
-
-						<div class="row">
-							<div class="form-group col-12">
-								<label>Sonuç ve Alınan Kararlar</label>
-								<textarea class="form-control" placeholder="Sonuç ve alınan kararları buraya yazın..." data-height="150" style="height: 150px; "></textarea>
-							</div>
-						</div>
-
 					</div>
-					<div class="card-footer text-right">
-						<button class="btn btn-primary">Kaydet</button>
-					</div>
+
 				</form>
 			</div>
-
-			<div class="tab-pane fade" id="gozlemle" role="tabpanel" aria-labelledby="profile-tab4">
-				<form method="post" class="needs-validation">
-
-					<div class="card-body">
-						
-						Kamera ve Mikrofonu aç 
-						<br />
-						Ayarlar 
-
-					</div>
-					
-				</form>
-			</div>
-
-
 		</div>
 	</div>
 </div>
@@ -199,3 +119,6 @@
 @code {
 
 }
+
+
+
