@@ -1,3 +1,5 @@
-"use strict";
+window.authRegister = function () {
+    "use strict";
 
-$(".pwstrength").pwstrength();
+    $(".pwstrength").pwstrength();
+}
