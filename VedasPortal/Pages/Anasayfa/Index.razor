@@ -1,26 +1,11 @@
 ﻿@page "/"
 @page "/index"
 
-
-<div class="row">
-	<div class="col-4">
-		<iframe src="https://www.genelpara.com/embed/?symbol=doviz&doviz=USD,EUR,GBP&stil=stil-1&renk=beyaz"
-				frameborder="0" width="550" height="70" style="width:550px; height:70px;">
-		</iframe>
-	</div>
-	<div class="col-8">
-		<iframe src="https://www.genelpara.com/embed/?symbol=altin&altin=GA,C,Y,T,CMR&stil=stil-1&renk=beyaz"
-				frameborder="0" width="1000" height="70">
-		</iframe>
-	</div>
-</div>
-<br />
-
 <section class="section">
 	<div class="section-body">
 		<div class="row">
-			<div  class="col-12 col-sm-6 col-lg-9">
-				<div  class="card">
+			<div class="col-12 col-sm-6 col-lg-9">
+				<div class="card">
 					<div class="card-header">
 						<h4>Duyurular ve Haberler</h4>
 					</div>
@@ -65,7 +50,7 @@
 									<div class="slider-title">Image 4</div>
 									<div class="slider-description">
 										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-										eiusmod
+topiusmod
 										tempor incididunt ut labore et dolore magna aliqua.
 									</div>
 								</div>
@@ -74,17 +59,65 @@
 					</div>
 				</div>
 			</div>
-			<div  class="col-12 col-sm-6 col-lg-3">
+			<div class="col-12 col-sm-6 col-lg-3">
 				<div style="margin-left:-24px; margin-right:1px" class="card">
 					<div class="card-header">
 						<h4>Hava Durumu ve Döviz Kurları</h4>
 					</div>
 					<div class="card-body">
-						
+						<div style="margin-top:-15px"  class="input-group rounded mb-3">
+							<input type="search" class="form-control rounded" placeholder="Şehir" aria-label="Search"
+								   aria-describedby="search-addon" />
+							<a href="#!" type="button">
+								<span class="input-group-text border-0 fw-bold btn btn-primary" id="search-addon">
+									Ara!
+								</span>
+							</a>
+						</div>
+						<div style="margin-top:-15px" class="mb-4 pb-2">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input"
+									   type="radio"
+									   name="inlineRadioOptions"
+									   id="inlineRadio1"
+									   value="option1"
+									   checked />
+								<label class="form-check-label" for="inlineRadio1">Celsius</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input"
+									   type="radio"
+									   name="inlineRadioOptions"
+									   id="inlineRadio2"
+									   value="option2" />
+								<label class="form-check-label" for="inlineRadio2">Farenheit</label>
+							</div>
+						</div>
+						<div style="margin-top:-20px" class="card shadow-0 border">
+							<div class="card-body p-4">
+								<h4 class="mb-1 sfw-normal">Van, Türkiye</h4>
+								<p class="mb-2">Şu Anki Sıcaklık: <strong>5.42°C</strong></p>
+								<p>Hissedilen Sıcaklık: <strong>4.37°C</strong></p>
+								<p>En Yüksek: <strong>6.11°C</strong>, En Düşük: <strong>3.89°C</strong></p>
+								<div class="d-flex flex-row align-items-center">
+									<p class="mb-0 me-4">Gökyüzü Durumu</p>
+									<i class="fas fa-cloud fa-9x text-dark" style="color: #eee;"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top:-50px" class="card-body">
+						<div style="width:100%;display:flex;justify-content:left;text-align:-webkit-center;">
+							<iframe title="beterbocekler2.tr.gg" sandbox="allow-modals allow-same-origin allow-scripts allow-popups allow-pointer-lock" height="575" id="piyasa_paratic_liste"
+									src="https://piyasa.paratic.com/MOBILE/widget/toolapi.php?toolName=liste&background=mavi&header=Doviz
+							Altin&ins=USD/TRL,EUR/TRL,GBP/TRL,SAED,SAUD,SCAD,SCHF,SCNY,SILS,SJPY,SRUB,SSAR,XGLD,SCUM,SG14BIL,SG18BIL,SG22BIL,SGCEYREK"
+									frameborder="1" style="border-radius:5px;width:300px; height:575px;">
+							</iframe>
+						</div>
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </section>
