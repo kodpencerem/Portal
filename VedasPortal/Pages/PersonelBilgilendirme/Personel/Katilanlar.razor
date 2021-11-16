@@ -1,25 +1,12 @@
 ﻿@page "/Katilanlar"
 
-<h4 class="text-center">Aramıza Yeni Katılan Personel </h4>
+<h4 class="text-center">Aramıza Yeni Katılan Personeller </h4>
 <hr />
-<div class="row">
-
-	<div class="input-group col-md-4 offset-md-4">
-		<input type="text" class="form-control" placeholder="Personel adı ile arama yapın..."
-			   @bind:event="oninput" />
-		<div class="input-group-append">
-			<button class="btn btn-info">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</div>
-</div>
-<br />
 
 <section class="section">
 	<div class="section-body">
 		<div class="row">
-			<div class="col-3">
+			<div class="col-4">
 				<div class="card author-box card-primary">
 					<div class="card-body">
 						<div class="author-box-left">
@@ -28,14 +15,21 @@
 
 						</div>
 						<div class="author-box-details">
-							<div class="author-box-name">
-								<a>Personel Adı</a>
-							</div>
-							<div class="author-box-job">Web Developer</div>
+							<h3 style="color:darkblue" class="text-center">
+								<strong>
+									VEDAŞ AİLESİNE HOŞ GELDİNİZ
+								</strong>
+							</h3>
 							<div class="author-box-description">
-								<p>
-									Personel Kısa bilgi
-								</p>
+								<h6 style="color:darkblue" class="text-center">
+									Sayın <strong style="color:blue">
+										Personel Adı, İşe Giriş Tarihi
+									</strong> Tarihinde <strong style="color:blue">
+										Temsilcilik Adı, Birim Adı'
+									</strong>nde <strong style="color:blue">
+										Başladığı Görev
+									</strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
+								</h6>
 							</div>
 
 							<div class="float-right mt-sm-0 mt-3">
@@ -45,84 +39,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3">
-				<div class="card author-box card-primary">
-					<div class="card-body">
-						<div class="author-box-left">
-							<img alt="image" src="assets/img/users/user-2.png" class="rounded-circle author-box-picture">
-							<div class="clearfix"></div>
-
-						</div>
-						<div class="author-box-details">
-							<div class="author-box-name">
-								<a>Personel Adı</a>
-							</div>
-							<div class="author-box-job">Web Developer</div>
-							<div class="author-box-description">
-								<p>
-									Personel Kısa bilgi
-								</p>
-							</div>
-
-							<div class="float-right mt-sm-0 mt-3">
-								<a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="card author-box card-primary">
-					<div class="card-body">
-						<div class="author-box-left">
-							<img alt="image" src="assets/img/users/user-3.png" class="rounded-circle author-box-picture">
-							<div class="clearfix"></div>
-
-						</div>
-						<div class="author-box-details">
-							<div class="author-box-name">
-								<a>Personel Adı</a>
-							</div>
-							<div class="author-box-job">Web Developer</div>
-							<div class="author-box-description">
-								<p>
-									Personel Kısa bilgi
-								</p>
-							</div>
-
-							<div class="float-right mt-sm-0 mt-3">
-								<a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="card author-box card-primary">
-					<div class="card-body">
-						<div class="author-box-left">
-							<img alt="image" src="assets/img/users/user-4.png" class="rounded-circle author-box-picture">
-							<div class="clearfix"></div>
-
-						</div>
-						<div class="author-box-details">
-							<div class="author-box-name">
-								<a>Personel Adı</a>
-							</div>
-							<div class="author-box-job">Web Developer</div>
-							<div class="author-box-description">
-								<p>
-									Personel Kısa bilgi
-								</p>
-							</div>
-
-							<div class="float-right mt-sm-0 mt-3">
-								<a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </section>
