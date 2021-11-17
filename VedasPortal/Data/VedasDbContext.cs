@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using VedasPortal.Models;
 
 namespace VedasPortal.Data
 {
@@ -9,5 +10,13 @@ namespace VedasPortal.Data
             : base(options)
         {
         }
+
+		public DbSet<Duyuru> Duyurular { get; set; }
+
+        public DbSet<DosyaKategori> DosyaKategorileri { get; set; }
+
+        public DbSet<Rehber> PersonelRehber { get; set; }
+
+
     }
 }
