@@ -663,4 +663,8 @@
     <None Include="wwwroot\css\open-iconic\README.md" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\WebAPI\" />
+  </ItemGroup>
+
 </Project>
