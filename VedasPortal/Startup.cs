@@ -10,8 +10,7 @@ using Syncfusion.Blazor;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
-using VedasPortal.Models.OpenWeatherMapApi;
-using VedasPortal.Repository.Interface;
+using VedasPortal.Services.HavaDurumuService;
 
 namespace VedasPortal
 {
@@ -38,7 +37,8 @@ namespace VedasPortal
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSyncfusionBlazor();
-            services.AddSingleton<IHavaTahmin, OpenWeatherMapApiService>();
+            services.AddScoped<HavaDurumuService>();
+            //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
         }
 

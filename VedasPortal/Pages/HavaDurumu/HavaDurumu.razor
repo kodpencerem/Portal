@@ -2,11 +2,8 @@
 
 @using System.Linq
 @using VedasPortal.Models
-@using VedasPortal.Models.OpenWeatherMapApi
-@using VedasPortal.Repository.Interface
 
 
-@inject IHavaTahmin TahminServisi
 
 <h4 class="text-center">Hava Tahmin Değerleri</h4>
 <hr />
@@ -76,22 +73,22 @@ else
 }
 
 @code {
-    private HavaTahmini[] forecasts { get; set; }
+    //private HavaTahmini[] forecasts { get; set; }
 
-    private HavaTahminAramaModeli sehirAra { get; set; } = new HavaTahminAramaModeli();
+    //private HavaTahminAramaModeli sehirAra { get; set; } = new HavaTahminAramaModeli();
 
-    private HavaTahmini secilmisIlHavaTahmini { get; set; }
+    //private HavaTahmini secilmisIlHavaTahmini { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        var secilenIllerHavaTahminDegerleri = new[] { "Van", "Hakkari", "Muş", "Bitlis", "Ankara" };
-        forecasts = await TahminServisi.HavaTahminiGetir(secilenIllerHavaTahminDegerleri);
-    }
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var secilenIllerHavaTahminDegerleri = new[] { "Van", "Hakkari", "Muş", "Bitlis", "Ankara" };
+    //    forecasts = await TahminServisi.HavaTahminiGetir(secilenIllerHavaTahminDegerleri);
+    //}
 
-    private async Task havaTahminAra()
-    {
-        secilmisIlHavaTahmini = (await TahminServisi.HavaTahminiGetir(sehirAra.SehirAdi)).First();
-    }
+    //private async Task havaTahminAra()
+    //{
+    //    secilmisIlHavaTahmini = (await TahminServisi.HavaTahminiGetir(sehirAra.SehirAdi)).First();
+    //}
 
     
 }

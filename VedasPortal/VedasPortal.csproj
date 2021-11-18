@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\Anasayfa\Doviz.razor" />
+    <Content Remove="Pages\HavaDurumu\HavaDurumu.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -664,7 +665,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\WebAPI\" />
+    <Folder Include="Pages\HavaDurumu\" />
   </ItemGroup>
 
 </Project>
