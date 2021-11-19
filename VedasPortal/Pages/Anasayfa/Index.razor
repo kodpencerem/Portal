@@ -1,5 +1,7 @@
 ﻿@page "/"
 @page "/index"
+
+
 @inject Services.HavaDurumuService.HavaDurumuService service
 <section class="section">
 	<div class="row ">
@@ -105,12 +107,12 @@
 				</div>
 			</div>
 		</div>
-		<VedasPortal.Components.IndexComponents.DovizKarti></VedasPortal.Components.IndexComponents.DovizKarti>
-		<VedasPortal.Components.IndexComponents.HavaDurumKarti></VedasPortal.Components.IndexComponents.HavaDurumKarti>
+		<DovizKarti></DovizKarti>
+		<HavaDurumKarti></HavaDurumKarti>
 	</div>
 	<div class="row">
-		<VedasPortal.Components.IndexComponents.DuyuruSlider></VedasPortal.Components.IndexComponents.DuyuruSlider>
-		<VedasPortal.Components.IndexComponents.IndexSagTaraf></VedasPortal.Components.IndexComponents.IndexSagTaraf>
+		<DuyuruSlider></DuyuruSlider>
+		<IndexSagTaraf></IndexSagTaraf>
 
 	</div>
 </section>
