@@ -16,5 +16,7 @@ namespace VedasPortal
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+
     }
 }

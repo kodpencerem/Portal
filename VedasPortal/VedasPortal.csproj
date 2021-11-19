@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\slider\**" />
+    <Content Remove="wwwroot\slider\**" />
+    <EmbeddedResource Remove="wwwroot\slider\**" />
+    <None Remove="wwwroot\slider\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Anasayfa\Doviz.razor" />
     <Content Remove="Pages\HavaDurumu\HavaDurumu.razor" />
   </ItemGroup>
