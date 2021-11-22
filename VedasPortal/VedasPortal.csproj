@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\onerisistemi\**" />
     <Compile Remove="wwwroot\slider\**" />
+    <Content Remove="wwwroot\assets\onerisistemi\**" />
     <Content Remove="wwwroot\slider\**" />
+    <EmbeddedResource Remove="wwwroot\assets\onerisistemi\**" />
     <EmbeddedResource Remove="wwwroot\slider\**" />
+    <None Remove="wwwroot\assets\onerisistemi\**" />
     <None Remove="wwwroot\slider\**" />
   </ItemGroup>
 
