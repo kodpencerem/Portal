@@ -45,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Components\Tabs\TabItem.razor" />
+    <None Include="Components\Tabs\Tabs.razor" />
     <None Include="Components\ModalComponents\BaseModal.razor" />
     <None Include="Components\ModalComponents\ConfirmationPopup.razor" />
     <None Include="Components\ModalComponents\ShowMessagePopup.razor" />

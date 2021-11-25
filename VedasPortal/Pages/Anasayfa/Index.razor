@@ -12,7 +12,23 @@
 						<div class="row ">
 							<AlertPrimary></AlertPrimary>
 							<AlertSecondary></AlertSecondary>
-							<ConfirmationPopup></ConfirmationPopup>
+
+
+
+							<Tabs @ref="_tabs">
+								<TabItem Title="First Step" Id="step1">
+									<h3>First Tab</h3>
+									<p>Awesome text existing overhere</p>
+								</TabItem>
+								<TabItem Title="Second Step" Id="step2">
+									<h3>Second Tab</h3>
+									<p>Awesome text existing overhere</p>
+								</TabItem>
+								<TabItem Title="Third Step" Id="step3">
+									<h3>Third Tab</h3>
+									<p>Awesome text existing overhere</p>
+								</TabItem>
+							</Tabs>
 						</div>
 					</div>
 				</div>
@@ -25,7 +41,7 @@
 						<div class="row ">
 							<AlertDismissablePrimary></AlertDismissablePrimary>
 							<AlertSecondaryIcon></AlertSecondaryIcon>
-							<AddNewButton></AddNewButton>
+							<RefreshButton></RefreshButton>
 						</div>
 					</div>
 				</div>
@@ -49,4 +65,14 @@
 		service.HavaDurumuGetir("Van", null);
 
 	}
+
+
+
+	protected Tabs _tabs;
+
+	protected void SwitchTab() => _tabs.ActivateItem("step2");
+
+
+
+
 }
