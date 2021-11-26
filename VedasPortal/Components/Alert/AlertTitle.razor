@@ -1,0 +1,30 @@
+﻿
+<div class="@("alert alert-"+alertStyle.ToString())">
+	<div class="alert-title">
+		@AlertTitleName
+	</div>
+	@Description
+</div>
+
+
+@code {
+	[Parameter]
+	public AlertStyle alertStyle { get; set; }
+	[Parameter]
+	public RenderFragment Description { get; set; }
+
+	[Parameter]
+	public RenderFragment AlertTitleName { get; set; }
+
+	public enum AlertStyle
+	{
+		success,
+		danger,
+		secondary,
+		primary,
+		warning,
+		dark,
+		light,
+		info
+	}
+}

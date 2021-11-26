@@ -1,11 +1,10 @@
-﻿
-@inherits BaseButton
-
+﻿@inherits BaseButton
 
 <button class="btn@(IsSmall ? " btn-sm":"") btn@(IsOutline ? "-outline":"")-@Color"
-        type="submit"
+        type="@buttonType"
         disabled="@IsBusy"
         onclick="@OnClick"
+		aligment= "@alignment"
         title="@ToolTipStr">
     <span class="fa fa-@Icon fa-fw"></span>
 
@@ -16,3 +15,18 @@
 
     @Caption
 </button>
+
+
+
+@code {
+	[Parameter]
+	public ButtonStyle buttonStyle { get; set; }
+	[Parameter]
+	public ButtonSize buttonSize { get; set; }
+	[Parameter]
+	public ButtonType buttonType { get; set; }
+
+	[Parameter]
+	public Alignment alignment { get; set; }
+
+}
