@@ -31,8 +31,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Smart.Blazor" Version="10.2.2" />
-    <PackageReference Include="Syncfusion.Blazor" Version="19.3.0.53" />
-    <PackageReference Include="Syncfusion.Licensing" Version="19.3.0.53" />
   </ItemGroup>
 
   <ItemGroup>

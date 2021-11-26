@@ -1,55 +1,61 @@
-﻿<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	<div class="card">
-		<div class="card-statistic-4">
-			<div class="align-items-center justify-content-between">
-				<div class="row ">
-					<div style="margin-top:-15px" class="input-group rounded mb-3">
-						<input type="search" class="form-control rounded" placeholder="Şehir Adı Giriniz..." aria-label="Search"
-							   aria-describedby="search-addon" />
-						<a href="#!" type="button">
-							<span class="input-group-text border-0 fw-bold btn btn-primary" id="search-addon">
-								Ara!
-							</span>
-						</a>
-					</div>
-					<div style="margin-top:-18px ; margin-left:15px" class="mb-4 pb-2">
-						<div class="form-check form-check-inline">
-							<input class="form-check-input"
-								   type="radio"
-								   name="inlineRadioOptions"
-								   id="inlineRadio1"
-								   value="option1"
-								   checked />
-							<label class="form-check-label" for="inlineRadio1">Celsius</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input"
-								   type="radio"
-								   name="inlineRadioOptions"
-								   id="inlineRadio2"
-								   value="option2" />
-							<label class="form-check-label" for="inlineRadio2">Farenheit</label>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-						<div style="margin-top:-50px" class="card-content">
-							<h5 class="font-15">Hava Durumu</h5>
-							<h2 class="mb-3 font-18">25 C°</h2>
-							<p class="mb-0"><span class="col-red">30 %</span> Güneşli</p>
-							<p class="mb-0"><span class="col-red">40 %</span> Nem Oranı</p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-						<div style="margin-top:-40px" class="banner-img">
-							<img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" alt="" width="120">
-						</div>
+﻿@inject Services.HavaDurumuService.HavaDurumuService havaTahminiService
+@using Services.HavaDurumuService
 
+@if (listHavaTahmini != null)
+{
+	<div class="col-lg-6 col-sm-12 col-md-6 col-xs-12" @attributes="attributes">
+		<div class="@("card "+cardBackground)" style="height:130px">
+			<div class="card-body">
+				<div class="text-white">
+					<h4>@Sehir </h4>
+					<div class="row">
+						<span class="font-20">6 C°</span>
+						<span class="font-20" style="margin-left:5px">40 %</span>
+						<img style="margin-left:20px" src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" width="60">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+}
 @code {
 
+	[Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> attributes { get; set; }
+
+	[Parameter]
+	public string Sehir { get; set; }
+	[Parameter]
+	public DateTime? Tarih { get; set; }
+	[Parameter]
+	public HavaDurumuBackground HavadurumuBackground { get; set; } = HavaDurumuBackground.orange;
+
+	public string cardBackground
+	{
+		get
+		{
+			if (HavadurumuBackground == HavaDurumuBackground.orange)
+				return "l-bg-orange";
+			else if (HavadurumuBackground == HavaDurumuBackground.cyan)
+				return "l-bg-cyan";
+			else return "l-bg-cyan";
+		}
+	}
+
+	public HavaTahminiResult listHavaTahmini { get; set; }
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		await base.OnAfterRenderAsync(firstRender);
+
+		listHavaTahmini = await havaTahminiService.HavaDurumuGetir(Sehir, Tarih);
+
+		await InvokeAsync(StateHasChanged);
+	}
+
+	public enum HavaDurumuBackground
+	{
+		orange,
+		cyan
+	}
 }
