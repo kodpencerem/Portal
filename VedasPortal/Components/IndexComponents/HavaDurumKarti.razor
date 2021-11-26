@@ -29,15 +29,15 @@
 	[Parameter]
 	public DateTime? Tarih { get; set; }
 	[Parameter]
-	public HavaDurumuBackground HavadurumuBackground { get; set; } = HavaDurumuBackground.orange;
+	public BackgroundColor HavadurumuBackground { get; set; } = BackgroundColor.orange;
 
 	public string cardBackground
 	{
 		get
 		{
-			if (HavadurumuBackground == HavaDurumuBackground.orange)
+			if (HavadurumuBackground == BackgroundColor.orange)
 				return "l-bg-orange";
-			else if (HavadurumuBackground == HavaDurumuBackground.cyan)
+			else if (HavadurumuBackground == BackgroundColor.cyan)
 				return "l-bg-cyan";
 			else return "l-bg-cyan";
 		}
@@ -53,33 +53,5 @@
 		await InvokeAsync(StateHasChanged);
 	}
 
-	public enum HavaDurumuBackground
-	{
-		orange,
-		cyan,
-		coral,
-		Olive,
-		Red,
-		Blue,
-		DarkBlue,
-		LightBlue,
-		Purple,
-		Yellow,
-		Lime,
-		Magenta,
-		Pink,
-		Orange,
-		White,
-		Silver,
-		Grey,
-		Black,
-		Brown,
-		DarkBrown,
-		LightBrown,
-		Maroon,
-		Green,
-		Aquamarine,
-		Aqua,
-		Puce
-	}
+	
 }

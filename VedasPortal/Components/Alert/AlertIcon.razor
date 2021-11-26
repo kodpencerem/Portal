@@ -15,7 +15,7 @@
 
 @code {
 	[Parameter]
-	public AlertIconStyle alertIconStyle { get; set; }
+	public Style alertIconStyle { get; set; }
 	[Parameter]
 	public RenderFragment Description { get; set; }
 
@@ -25,15 +25,5 @@
 	[Parameter]
 	public RenderFragment AlertTitle { get; set; }
 
-	public enum AlertIconStyle
-	{
-		success,
-		danger,
-		secondary,
-		primary,
-		warning,
-		dark,
-		light,
-		info
-	}
+	
 }

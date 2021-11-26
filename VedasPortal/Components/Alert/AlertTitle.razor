@@ -9,22 +9,12 @@
 
 @code {
 	[Parameter]
-	public AlertStyle alertStyle { get; set; }
+	public Style alertStyle { get; set; }
 	[Parameter]
 	public RenderFragment Description { get; set; }
 
 	[Parameter]
 	public RenderFragment AlertTitleName { get; set; }
 
-	public enum AlertStyle
-	{
-		success,
-		danger,
-		secondary,
-		primary,
-		warning,
-		dark,
-		light,
-		info
-	}
+	
 }

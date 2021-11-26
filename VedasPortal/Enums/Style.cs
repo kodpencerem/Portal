@@ -1,7 +1,7 @@
 ﻿namespace VedasPortal.Enums
 {
-	public enum ButtonStyle
-	{
+    public enum Style
+    {
 		success,
 		danger,
 		secondary,
