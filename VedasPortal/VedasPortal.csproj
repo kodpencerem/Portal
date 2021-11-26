@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\onerisistemi\**" />
     <Compile Remove="wwwroot\slider\**" />
+    <Content Remove="wwwroot\assets\onerisistemi\**" />
     <Content Remove="wwwroot\slider\**" />
+    <EmbeddedResource Remove="wwwroot\assets\onerisistemi\**" />
     <EmbeddedResource Remove="wwwroot\slider\**" />
+    <None Remove="wwwroot\assets\onerisistemi\**" />
     <None Remove="wwwroot\slider\**" />
   </ItemGroup>
 
@@ -19,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+    <PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.11" />
@@ -30,6 +37,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Smart.Blazor" Version="10.2.2" />
   </ItemGroup>
 
@@ -38,6 +46,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Components\Tabs\TabItem.razor" />
+    <None Include="Components\Tabs\Tabs.razor" />
+    <None Include="Components\ModalComponents\BaseModal.razor" />
+    <None Include="Components\ModalComponents\ConfirmationPopup.razor" />
+    <None Include="Components\ModalComponents\ShowMessagePopup.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />

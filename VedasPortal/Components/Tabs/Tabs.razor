@@ -1,0 +1,18 @@
+﻿<CascadingValue Value="this" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+
+<div class="flex-row">
+    @foreach (var item in _items)
+    {
+        <button class="btn btn-success ml-1 " @onclick="() => ActivateItem(item.Id)" disabled="@item.IsActive">@item.Title</button> 
+    }
+</div>
+
+@foreach(var item in _items)
+{
+    <div style="@(item.IsActive ? "" : "display:none")">
+        @item.ChildContent
+    </div>
+}
+
