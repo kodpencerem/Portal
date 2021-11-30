@@ -1,4 +1,3 @@
-using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -39,14 +38,14 @@ namespace VedasPortal
             services.AddScoped<HavaDurumuService>();
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
-            services.AddBlazoredToast();
+            
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
