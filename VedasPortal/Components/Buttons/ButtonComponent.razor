@@ -3,14 +3,16 @@
 <button class="btn@(IsSmall ? " btn-sm":"") btn@(IsOutline ? "-outline":"")-@Color"
         type="@buttonType"
         disabled="@IsBusy"
-        onclick="@OnClick"
+      
 		aligment= "@alignment"
         title="@ToolTipStr">
     <span class="fa fa-@Icon fa-fw"></span>
 
+
     @if (IsBusy)
     {
         <span class="spinner-border spinner-border-sm mr-1"></span>
+      
     }
 
     @Caption
@@ -19,14 +21,19 @@
 
 
 @code {
-	[Parameter]
-	public Style buttonStyle { get; set; }
-	[Parameter]
-	public Size buttonSize { get; set; }
-	[Parameter]
-	public ButtonType buttonType { get; set; }
+    [Parameter]
+    public Style buttonStyle { get; set; }
+    [Parameter]
+    public Size buttonSize { get; set; }
+    [Parameter]
+    public ButtonType buttonType { get; set; }
 
-	[Parameter]
-	public Alignment alignment { get; set; }
+    [Parameter]
+    public Alignment alignment { get; set; }
+    void IsOnClick()
+    {
+       
+
+    }
 
 }
