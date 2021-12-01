@@ -1,8 +1,209 @@
 ﻿@page "/Kisayollar"
 
 
-<ToastComponent toastStyle="Style.danger">
-	<Header>
-		Selam
-	</Header>
-</ToastComponent>
+
+@inject IVedasToaster _toaster
+
+<div class="form-row mb-3">
+    <div class="form-group col-6">
+        <label for="title">Başlık Bilgisi</label>
+        <input id="title" class="form-control" @bind="title" />
+    </div>
+    <div class="form-group col-6">
+        <label for="message">Mesaj/Açıklama</label>
+        <input id="message" class="form-control" @bind="message" />
+    </div>
+</div>
+<div class="form-row">
+    <h3>Butonlar</h3>
+    <div class="form-group pl-3">
+        <button class="btn btn-primary" @onclick="@(() => Show(ToastType.Info))">Info</button>
+        <button class="btn btn-success" @onclick="@(() => Show(ToastType.Success))">Success</button>
+        <button class="btn btn-warning" @onclick="@(() => Show(ToastType.Warning))">Warning</button>
+        <button class="btn btn-danger" @onclick="@(() => Show(ToastType.Error))">Error</button>
+        <button class="btn btn-dark" @onclick="@(() => _toaster.Clear())">Clear</button>
+    </div>
+</div>
+<div class="form-row mt-3 configuration">
+    <div class="col-4">
+        <div class="form-group">
+            <h5>Ayarlama Örnekleri</h5>
+        </div>
+        <div class="form-group row">
+            <label for="position" class="col-sm-6 col-form-label">Konumlar</label>
+            <div class="col-sm-5">
+                <select id="position" class="form-control form-control-sm" @bind="_toaster.Configuration.PositionClass">
+                    <option value="toast-top-left">Top left</option>
+                    <option value="toast-top-center">Top center</option>
+                    <option value="toast-top-right">Top right</option>
+                    <option value="toast-top-full-width">Top full width</option>
+                    <option value="toast-bottom-right">Bottom right</option>
+                    <option value="toast-bottom-center">Bottom center</option>
+                    <option value="toast-bottom-left">Bottom left</option>
+                    <option value="toast-bottom-full-width">Bottom full width</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="escapeHtml" @bind="escapeHtml" />
+            <label class="form-check-label" for="escapeHtml">
+                Escape Html
+            </label>
+        </div>
+        <div class="form-group row">
+            <label for="position" class="col-sm-6 col-form-label">Yazı ya da Metin Konumu</label>
+            <div class="col-sm-5">
+                <select id="position" class="form-control form-control-sm" @bind="_toaster.Configuration.ToastTitleClass">
+                    <option value="toast-title text-left">Left</option>
+                    <option value="toast-title text-center">Center</option>
+                    <option value="toast-title text-right">Right</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="position" class="col-sm-6 col-form-label"> Mesaj İçerik Konumları</label>
+            <div class="col-sm-5">
+                <select id="position" class="form-control form-control-sm" @bind="_toaster.Configuration.ToastMessageClass">
+                    <option value="toast-message text-left">Left</option>
+                    <option value="toast-message text-center">Center</option>
+                    <option value="toast-message text-right">Right</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="maxDisplayedToasts" class="col-sm-6 col-form-label">Max Gösterme </label>
+            <div class="col-sm-5">
+                <input type="number" class="form-control form-control-sm" id="maxDisplayedToasts" @bind="_toaster.Configuration.MaxDisplayedToasts" />
+            </div>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="NewestOnTop" @bind="_toaster.Configuration.NewestOnTop" />
+            <label class="form-check-label" for="NewestOnTop">
+                En Üst
+            </label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="PreventDuplicates" @bind="_toaster.Configuration.PreventDuplicates" />
+            <label class="form-check-label" for="PreventDuplicates">
+                Prevent duplicates
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <h5>Toast Ayarları</h5>
+        <div class="form-group row">
+            <label for="maximumOpacity" class="col-sm-7 col-form-label">Max opacity (%)</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control form-control-sm" id="maximumOpacity" @bind="maximumOpacity" />
+            </div>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="requireInteraction" @bind="requireInteraction" />
+            <label class="form-check-label" for="requireInteraction">
+                Require interaction
+            </label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="showProgressbar" @bind="showProgressBar" />
+            <label class="form-check-label" for="showProgressbar">
+                Progress bar
+            </label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="showCloseIcon" @bind="showCloseIcon" />
+            <label class="form-check-label" for="showCloseIcon">
+                Close icon
+            </label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="actionOnClick" @bind="actionOnClick" />
+            <label class="form-check-label" for="actionOnClick">
+                Action on click (server output message)
+            </label>
+        </div>
+    </div>
+    <div class="col-4">
+        <h5>Transitions</h5>
+        <div class="form-group row">
+            <label for="showTransitionDuration" class="col-sm-7 col-form-label">Show duration</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control form-control-sm" id="showTransitionDuration" @bind="showTransitionDuration" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="visibleStateDuration" class="col-sm-7 col-form-label">Visible duration</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control form-control-sm" id="visibleStateDuration" @bind="visibleStateDuration" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="hideTransitionDuration" class="col-sm-7 col-form-label">Hide duration</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control form-control-sm" id="hideTransitionDuration" @bind="hideTransitionDuration" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    string title = "Test Title";
+    string message = "Test Message";
+
+    //toast options
+    int maximumOpacity;
+    bool escapeHtml;
+    bool requireInteraction;
+    bool showProgressBar;
+    bool showCloseIcon;
+    bool actionOnClick;
+
+    //transitions
+    int showTransitionDuration;
+    int visibleStateDuration;
+    int hideTransitionDuration;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        maximumOpacity = _toaster.Configuration.MaximumOpacity;
+        escapeHtml = _toaster.Configuration.EscapeHtml;
+        requireInteraction = _toaster.Configuration.RequireInteraction;
+        showProgressBar = _toaster.Configuration.ShowProgressBar;
+        showCloseIcon = _toaster.Configuration.ShowCloseIcon;
+
+        showTransitionDuration = _toaster.Configuration.ShowTransitionDuration;
+        visibleStateDuration = _toaster.Configuration.VisibleStateDuration;
+        hideTransitionDuration = _toaster.Configuration.HideTransitionDuration;
+
+    }
+
+    void Show(ToastType type)
+    {
+        _toaster.Add(type, message, title, config =>
+        {
+            config.MaximumOpacity = maximumOpacity;
+            config.EscapeHtml = escapeHtml;
+            config.RequireInteraction = requireInteraction;
+            config.ShowProgressBar = showProgressBar;
+            config.ShowCloseIcon = showCloseIcon;
+
+            if (actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+
+            config.ShowTransitionDuration = showTransitionDuration;
+            config.VisibleStateDuration = visibleStateDuration;
+            config.HideTransitionDuration = hideTransitionDuration;
+
+        });
+    }
+
+}
+

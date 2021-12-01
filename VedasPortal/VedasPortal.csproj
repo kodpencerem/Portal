@@ -52,6 +52,7 @@
     <None Include="Components\ModalComponents\BaseModal.razor" />
     <None Include="Components\ModalComponents\ConfirmationPopup.razor" />
     <None Include="Components\ModalComponents\ShowMessagePopup.razor" />
+    <None Include="Components\VedasToastComponent\Core\ToastElement.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />
@@ -681,6 +682,7 @@
     <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
     <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
     <None Include="wwwroot\css\open-iconic\README.md" />
+    <None Include="wwwroot\toaster\toastr.min.css" />
   </ItemGroup>
 
   <ItemGroup>

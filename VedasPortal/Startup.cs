@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
+using VedasPortal.Components.VedasToastComponent;
+using VedasPortal.Components.VedasToastComponent.Core.Models;
 using VedasPortal.Data;
 using VedasPortal.Services.HavaDurumuService;
 
@@ -40,6 +42,16 @@ namespace VedasPortal
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddBlazoredToast();
+
+            services.AddToaster(config =>
+            {
+                config.PositionClass = Defaults.Classes.Position.TopRight;
+                config.ToastTitleClass = $"{Defaults.Classes.ToastTitle} {Defaults.Classes.TextPosition.Left}";
+                config.ToastMessageClass = $"{Defaults.Classes.ToastMessage} {Defaults.Classes.TextPosition.Left}";
+
+                config.PreventDuplicates = true;
+                config.NewestOnTop = false;
+            });
 
         }
 

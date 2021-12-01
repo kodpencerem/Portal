@@ -1,19 +1,16 @@
-// Copyright (c) Alessandro Ghidini. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Components;
-using VedasPortal.Components.Toaster.Core;
+using VedasPortal.Components.VedasToastComponent.Core;
 
-namespace Sotsera.Blazor.Toaster
+namespace VedasPortal.Components.VedasToastComponent
 {
     public class ToastContainerModel : ComponentBase, IDisposable
     {
-        [Inject] private IToaster Toaster { get; set; }
+        [Inject] private IVedasToaster Toaster { get; set; }
 
-        protected IEnumerable<Toast> Toasts => Toaster.Configuration.NewestOnTop
+        protected IEnumerable<VedasToast> Toasts => Toaster.Configuration.NewestOnTop
                 ? Toaster.ShownToasts.Reverse()
                 : Toaster.ShownToasts;
 
