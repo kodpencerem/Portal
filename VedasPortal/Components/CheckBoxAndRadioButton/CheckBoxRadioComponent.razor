@@ -1,5 +1,31 @@
-﻿<h3>CheckBoxRadioComponent</h3>
+﻿
+<div class="@(objectClasses.ToString())">
+	@ButtonBody
+	<input type="@(inputType.ToString())" />
+	<div class="state">
+		<label>@ButtonHeader</label>
+	</div>
+</div>
+
 
 @code {
+	
+	[Parameter]
+	public ObjectClasses objectClasses { get; set; }
+
+	[Parameter]
+	public InputType inputType { get; set; }
+
+	[Parameter]
+	public Alignment alignment { get; set; }
+
+	[Parameter]
+	public RenderFragment ButtonHeader { get; set; }
+
+	[Parameter]
+	public RenderFragment ButtonBody { get; set; }
 
 }
+
+
+

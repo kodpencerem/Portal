@@ -22,7 +22,7 @@
 @code {
 
 	[Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> attributes { get; set; }
+	public Dictionary<string, object> attributes { get; set; }
 
 	[Parameter]
 	public string Sehir { get; set; }
@@ -53,5 +53,5 @@
 		await InvokeAsync(StateHasChanged);
 	}
 
-	
+
 }

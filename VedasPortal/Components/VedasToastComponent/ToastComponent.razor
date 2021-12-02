@@ -3,10 +3,10 @@
 <div class="@("btn btn"+toastStyle.ToString())" style="margin-top:10px" @onclick="ShowSuccess">
 
 	<h4 class="@("btn btn"+toastStyle.ToString())">
-		@Header
+		@ToastHeader
 	</h4>
 	<h6 class="@("btn btn"+toastStyle.ToString())">
-		@Body
+		@ToastBody
 	</h6>
 
 </div>
@@ -15,9 +15,9 @@
 	[Parameter]
 	public Style toastStyle { get; set; }
 	[Parameter]
-	public RenderFragment Body { get; set; }
+	public RenderFragment ToastBody { get; set; }
 	[Parameter]
-	public RenderFragment Header { get; set; }
+	public RenderFragment ToastHeader { get; set; }
 
 	protected void ShowSuccess()
 	{

@@ -1,12 +1,11 @@
-﻿
-namespace VedasPortal.Components.VedasToastComponent.Core.Models
+﻿namespace VedasPortal.Components.VedasToastComponent.Core.Models
 {
     public abstract class CommonToastOptions
     {
         /// <summary>
-        /// Toast sınıfı. Default sınıfından bir nesne referans alır.  <see cref="Defaults.Classes.Toast"/>
+        /// Toast sınıfı. Default sınıfından bir nesne referans alır.  <see cref="CheckBoxRadioBase.Classes.Toast"/>
         /// </summary>
-        public string ToastClass { get; set; } = Defaults.Classes.Toast;
+        public string ToastClass { get; set; } = CheckBoxRadioBase.Classes.Toast;
 
         /// <summary>
         /// Bu değişken başlık ve mesaj için geçerlidir. false ise, oluşturulan HTML gösterilecektir, aksi takdirde, kaçan HTML işaretlemesi gösterilecektir.
@@ -14,14 +13,14 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
         public bool EscapeHtml { get; set; } = true;
 
         /// <summary>
-        /// Nesne başlık bilgisini döndürür. Defaults sınıfından referans alır. <see cref="Defaults.Classes.ToastTitle"/>.
+        /// Nesne başlık bilgisini döndürür. Defaults sınıfından referans alır. <see cref="CheckBoxRadioBase.Classes.ToastTitle"/>.
         /// </summary>
-        public string ToastTitleClass { get; set; } = Defaults.Classes.ToastTitle;
+        public string ToastTitleClass { get; set; } = CheckBoxRadioBase.Classes.ToastTitle;
 
         /// <summary>
-        /// Nesne mesaj içeriğini döndürür. Defaults sınıfından referans alır. <see cref="Defaults.Classes.ToastMessage"/>.
+        /// Nesne mesaj içeriğini döndürür. Defaults sınıfından referans alır. <see cref="CheckBoxRadioBase.Classes.ToastMessage"/>.
         /// </summary>
-        public string ToastMessageClass { get; set; } = Defaults.Classes.ToastMessage;
+        public string ToastMessageClass { get; set; } = CheckBoxRadioBase.Classes.ToastMessage;
 
         /// <summary>
         /// Görünür durumda bir toast için tamsayı yüzdesi olarak ifade edilen maksimum opaklık. 0'ın tamamen gizli ve 100'ün düz renk anlamına geldiği durumlarda, varsayılan değer %80'dir.
@@ -49,9 +48,9 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
         public bool ShowProgressBar { get; set; } = true;
 
         /// <summary>
-        ///ProgressBarClass için Defaults sınından bir referans alır . <see cref="Defaults.Classes.ProgressBarClass"/>.
+        ///ProgressBarClass için Defaults sınından bir referans alır . <see cref="CheckBoxRadioBase.Classes.ProgressBarClass"/>.
         /// </summary>
-        public string ProgressBarClass { get; set; } = Defaults.Classes.ProgressBarClass;
+        public string ProgressBarClass { get; set; } = CheckBoxRadioBase.Classes.ProgressBarClass;
 
         /// <summary>
         /// Bir nesneyi gizlemek için kapat simgesinin kullanılması gerekip gerekmediğini belirtir. Simge varlığı, varsayılan "tıklamada gizle" davranışını devre dışı bırakır. Varsayılan olarak true olur.
@@ -59,9 +58,9 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
         public bool ShowCloseIcon { get; set; } = true;
 
         /// <summary>
-        /// Defaults sınıfından örnek alır. <see cref="Defaults.Classes.CloseIconClass"/>.
+        /// Defaults sınıfından örnek alır. <see cref="CheckBoxRadioBase.Classes.CloseIconClass"/>.
         /// </summary>
-        public string CloseIconClass { get; set; } = Defaults.Classes.CloseIconClass;
+        public string CloseIconClass { get; set; } = CheckBoxRadioBase.Classes.CloseIconClass;
 
         /// <summary>
         ///Doğru olduğunda, otomatik gizlemeyi devre dışı bırakır ve kullanıcıyı kapatmak için RequireInteraction ile etkileşime girmeye zorlar.Varsayılan olarak false olur.

@@ -1,5 +1,11 @@
-﻿<h3>SectionComponent</h3>
+﻿<section class="section">
+	<div class="section-body">
+		@SectionBody
+	</div>
+</section>
 
 @code {
 
+	[Parameter]
+	public RenderFragment SectionBody { get; set; }
 }

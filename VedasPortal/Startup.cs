@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
+using VedasPortal.Components.CheckBoxAndRadioButton;
 using VedasPortal.Components.VedasToastComponent;
 using VedasPortal.Components.VedasToastComponent.Core.Models;
 using VedasPortal.Data;
@@ -45,9 +46,9 @@ namespace VedasPortal
 
             services.AddToaster(config =>
             {
-                config.PositionClass = Defaults.Classes.Position.TopRight;
-                config.ToastTitleClass = $"{Defaults.Classes.ToastTitle} {Defaults.Classes.TextPosition.Left}";
-                config.ToastMessageClass = $"{Defaults.Classes.ToastMessage} {Defaults.Classes.TextPosition.Left}";
+                config.PositionClass = CheckBoxRadioBase.Classes.Position.TopRight;
+                config.ToastTitleClass = $"{CheckBoxRadioBase.Classes.ToastTitle} {CheckBoxRadioBase.Classes.TextPosition.Left}";
+                config.ToastMessageClass = $"{CheckBoxRadioBase.Classes.ToastMessage} {CheckBoxRadioBase.Classes.TextPosition.Left}";
 
                 config.PreventDuplicates = true;
                 config.NewestOnTop = false;

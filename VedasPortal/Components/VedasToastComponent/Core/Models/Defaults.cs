@@ -1,9 +1,7 @@
-﻿// Copyright (c) Alessandro Ghidini. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
+﻿
 namespace VedasPortal.Components.VedasToastComponent.Core.Models
 {
-    public static class Defaults
+    public static class CheckBoxRadioBase
     {
         public static class Classes
         {

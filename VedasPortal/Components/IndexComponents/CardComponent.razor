@@ -1,11 +1,11 @@
 ﻿<div class="@("card card-"+cardStyle.ToString())" style="margin-top:10px">
 	<div class="card-header">
 		<h4>
-			@Header
+			@CardHeader
 		</h4>
 	</div>
 	<div class="card-body">
-		@Body
+		@CardBody
 	</div>
 </div>
 
@@ -13,9 +13,9 @@
 	[Parameter]
 	public Style cardStyle { get; set; }
 	[Parameter]
-	public RenderFragment Body { get; set; }
+	public RenderFragment CardBody { get; set; }
 	[Parameter]
-	public RenderFragment Header { get; set; }
+	public RenderFragment CardHeader { get; set; }
 
-	
+
 }

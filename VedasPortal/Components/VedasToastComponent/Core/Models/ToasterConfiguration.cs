@@ -56,7 +56,7 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
         }
 
         /// <summary>
-        /// Ekranda toast konumunu süren css sınıfı. Önceden tanımlanmış konumlar <see cref="Defaults.Classes.Position"/> içinde bulunur. Varsayılan olarak <see cref="Defaults.Classes.Position.TopRight"/>
+        /// Ekranda toast konumunu süren css sınıfı. Önceden tanımlanmış konumlar <see cref="CheckBoxRadioBase.Classes.Position"/> içinde bulunur. Varsayılan olarak <see cref="CheckBoxRadioBase.Classes.Position.TopRight"/>
         /// </summary>
         public string PositionClass
         {
@@ -75,7 +75,7 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
 
         public ToasterConfiguration()
         {
-            PositionClass = Defaults.Classes.Position.TopRight;
+            PositionClass = CheckBoxRadioBase.Classes.Position.TopRight;
             NewestOnTop = false;
             PreventDuplicates = true;
             MaxDisplayedToasts = 5;

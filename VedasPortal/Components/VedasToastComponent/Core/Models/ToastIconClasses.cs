@@ -1,5 +1,4 @@
-﻿
-namespace VedasPortal.Components.VedasToastComponent.Core.Models
+﻿namespace VedasPortal.Components.VedasToastComponent.Core.Models
 {
     /// <summary>
     /// <see cref="ToastState"/> için kullanılacak css sınıflarını tanımlar
@@ -7,23 +6,23 @@ namespace VedasPortal.Components.VedasToastComponent.Core.Models
     public class ToastIconClasses
     {
         /// <summary>
-        /// Bilgi için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="Defaults.Classes.Icons.Info"/>
+        /// Bilgi için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="CheckBoxRadioBase.Classes.Icons.Info"/>
         /// </summary>
-        public string Info { get; set; } = Defaults.Classes.Icons.Info;
+        public string Info { get; set; } = CheckBoxRadioBase.Classes.Icons.Info;
 
         /// <summary>
-        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="Defaults.Classes.Icons.Success"/>
+        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="CheckBoxRadioBase.Classes.Icons.Success"/>
         /// </summary>
-        public string Success { get; set; } = Defaults.Classes.Icons.Success;
+        public string Success { get; set; } = CheckBoxRadioBase.Classes.Icons.Success;
 
         /// <summary>
-        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="Defaults.Classes.Icons.Warning"/>
+        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="CheckBoxRadioBase.Classes.Icons.Warning"/>
         /// </summary>
-        public string Warning { get; set; } = Defaults.Classes.Icons.Warning;
+        public string Warning { get; set; } = CheckBoxRadioBase.Classes.Icons.Warning;
 
         /// <summary>
-        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="Defaults.Classes.Icons.Error"/>
+        /// Success için css sınıfı <see cref="ToastState"/>. Varsayılan olarak <see cref="CheckBoxRadioBase.Classes.Icons.Error"/>
         /// </summary>
-        public string Error { get; set; } = Defaults.Classes.Icons.Error;
+        public string Error { get; set; } = CheckBoxRadioBase.Classes.Icons.Error;
     }
 }
