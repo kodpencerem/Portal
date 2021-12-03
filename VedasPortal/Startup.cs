@@ -1,4 +1,3 @@
-using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -9,15 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
-using VedasPortal.Components.CheckBoxAndRadioButton;
-using VedasPortal.Components.VedasToastComponent;
-using VedasPortal.Components.VedasToastComponent.Core.Models;
 using VedasPortal.Data;
 using VedasPortal.Services.HavaDurumuService;
 
 namespace VedasPortal
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -42,18 +38,7 @@ namespace VedasPortal
             services.AddScoped<HavaDurumuService>();
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
-            services.AddBlazoredToast();
-
-            services.AddToaster(config =>
-            {
-                config.PositionClass = CheckBoxRadioBase.Classes.Position.TopRight;
-                config.ToastTitleClass = $"{CheckBoxRadioBase.Classes.ToastTitle} {CheckBoxRadioBase.Classes.TextPosition.Left}";
-                config.ToastMessageClass = $"{CheckBoxRadioBase.Classes.ToastMessage} {CheckBoxRadioBase.Classes.TextPosition.Left}";
-
-                config.PreventDuplicates = true;
-                config.NewestOnTop = false;
-            });
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

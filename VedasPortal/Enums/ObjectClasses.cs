@@ -6,14 +6,15 @@ namespace VedasPortal.Enums
     {
         [Description("pretty")]
         Pretty,
-        [Description("p-default")]
-        PrettyPDefault,
+        [Description("default")]
+        Default,
 
         [Description("pretty p-default")]
         PDefault,
 
         [Description("pretty p-default p-fill")]
         PrettyPDefaultPFill,
+
         [Description("p-fill")]
         PFill,
 
@@ -330,7 +331,6 @@ namespace VedasPortal.Enums
         PRoundPPlainPSmooth,
 
         [Description("p-plain p-smooth")]
-        PPlainPSmooth,
-
+        PPlainPSmooth
     }
 }
