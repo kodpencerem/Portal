@@ -18,6 +18,8 @@ namespace VedasPortal.Shared
                 await jsRun.InvokeVoidAsync("scriptsInit");
                 await jsRun.InvokeVoidAsync("owlCarousel");
                 await jsRun.InvokeVoidAsync("lightGallery");
+                await jsRun.InvokeVoidAsync("formWizard");
+                
                 //await jsRun.InvokeVoidAsync("jssor_1_slider_init");
 
             }

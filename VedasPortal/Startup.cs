@@ -6,9 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Smart.Blazor;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
+using VedasPortal.Services;
 using VedasPortal.Services.HavaDurumuService;
 
 namespace VedasPortal
@@ -38,7 +40,9 @@ namespace VedasPortal
             services.AddScoped<HavaDurumuService>();
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
-            
+            services.AddSmart();
+            services.AddSingleton<RandomDataService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

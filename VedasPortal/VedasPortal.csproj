@@ -674,6 +674,18 @@
     <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
     <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
     <None Include="wwwroot\css\open-iconic\README.md" />
+    <None Include="wwwroot\js\formula-parser.min.js" />
+    <None Include="wwwroot\js\highlight.min.js" />
+    <None Include="wwwroot\js\highlight.pack.js" />
+    <None Include="wwwroot\js\html2canvas.min.js" />
+    <None Include="wwwroot\js\jszip.min.js" />
+    <None Include="wwwroot\js\pdfmake.min.js" />
+    <None Include="wwwroot\js\rrule.import.js" />
+    <None Include="wwwroot\js\rrule.min.js" />
+    <None Include="wwwroot\js\smart.blazor.js" />
+    <None Include="wwwroot\js\vfs_fonts.js" />
+    <None Include="wwwroot\js\webcomponents-lite.js" />
+    <None Include="wwwroot\js\webfont.js" />
   </ItemGroup>
 
   <ItemGroup>
