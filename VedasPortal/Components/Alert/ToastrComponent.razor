@@ -1,0 +1,26 @@
+﻿
+<div class="col-12 col-sm-6 col-lg-3">
+	<CardComponent>
+		<div class="card-body text-center">
+			<div class="mb-2">Info Message</div>
+			<button class="@("btn btn-"+toastrStyle.ToString())" id="@(toastrId.ToString())">Launch</button>
+		</div>
+	</CardComponent>
+</div>
+
+
+
+
+@code {
+
+	[Parameter]
+	public Style toastrStyle { get; set; }
+
+	[Parameter]
+	public ToastrId toastrId { get; set; }
+	
+	[Parameter]
+	public RenderFragment CardBody { get; set; }
+	[Parameter]
+	public RenderFragment CardHeader { get; set; }
+}
