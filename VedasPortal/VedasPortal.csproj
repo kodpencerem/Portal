@@ -663,8 +663,6 @@
     <None Include="wwwroot\assets\js\page\portfolio.js" />
     <None Include="wwwroot\assets\js\page\posts.js" />
     <None Include="wwwroot\assets\js\page\sparkline.js" />
-    <None Include="wwwroot\assets\js\page\sweetalert.js" />
-    <None Include="wwwroot\assets\js\page\toastr.js" />
     <None Include="wwwroot\assets\js\page\vector-map.js" />
     <None Include="wwwroot\assets\js\page\widget-chart.js" />
     <None Include="wwwroot\assets\js\page\widget-data.js" />

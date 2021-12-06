@@ -9,6 +9,7 @@
 		warning,
 		dark,
 		light,
-		info
+		info,
+		error
 	}
 }
