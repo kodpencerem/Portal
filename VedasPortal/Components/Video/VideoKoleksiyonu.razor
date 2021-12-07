@@ -1,0 +1,28 @@
+﻿<div class="component-box">
+    <h3>Video Koleksiyonum</h3>
+
+    @foreach (var item in Videolar)
+    {
+        <div class="box-card" @onclick="() => VideoSec.InvokeAsync(item)">
+            <div class="row">
+                <div class="col-4">
+                    <iframe style="width:100%" height="150"
+                            src="@item.UrlAdres"
+                            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <div class="col-8">
+                    <h4>@item.VideoBasligi</h4>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<VideoDetay> Videolar { get; set; }
+
+    [Parameter]
+    public EventCallback<VideoDetay> VideoSec { get; set; }
+}
