@@ -10,12 +10,12 @@ using Smart.Blazor;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
-using VedasPortal.Services;
 using VedasPortal.Services.HavaDurumuService;
+using VedasPortal.Services.VideoService;
 
 namespace VedasPortal
 {
-	public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -41,7 +41,7 @@ namespace VedasPortal
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddSmart();
-            services.AddSingleton<RandomDataService>();
+            services.AddScoped<IVideoService, StaticVideoService>();
 
         }
 

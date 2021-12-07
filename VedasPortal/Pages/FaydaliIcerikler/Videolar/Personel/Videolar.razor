@@ -1,73 +1,31 @@
 ﻿@page "/Videolar"
+@inject VedasPortal.Services.VideoService.IVideoService videoServisi 
 
-<h6 class="text-center">Video İçerikler </h6>
+<h4 style="margin-top:5px" class="text-center">Vedaş Video İçerikleri</h4>
 <hr />
-<div class="row">
-
-	<div class="input-group col-md-4 offset-md-4">
-		<input type="text" class="form-control" placeholder="Video adı ile arama yapın..."
-			   @bind:event="oninput" />
-		<div class="input-group-append">
-			<button class="btn btn-info">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</div>
-</div>
-<br />
-
 
 <div class="row">
-
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-
-	<div class="col-4">
-		<video width="500" height="360" controls loop autoplay poster="image.jpg">
-			<source src="ilk_acilan.mp4" type="video/mp4">
-			<source src="diger_desteklenen.ogg" type="video/ogg">
-			Tarayıcınızda HTML5 özelliği yoktur.
-		</video>
-	</div>
-
+    <div class="col-7">
+        <VideoBoxComponent SecilenVideo="secilenVideo"/>
+    </div>
+    <div class="col-5">
+        <VideoKoleksiyonu Videolar="videolar" VideoSec="SecilenVideo"/> 
+    </div>
 </div>
 
+@code {
 
+    List<VideoDetay> videolar = new List<VideoDetay>();
+    VideoDetay secilenVideo = new VideoDetay();
 
+    protected override void OnInitialized()
+    {
+        videolar = videoServisi.VideoGetir();
+        secilenVideo = videolar.FirstOrDefault();
+    }
 
+    void SecilenVideo(VideoDetay videoDetay)
+    {
+        secilenVideo = videoDetay;
+    }
+}
