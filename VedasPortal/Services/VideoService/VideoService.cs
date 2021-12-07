@@ -18,26 +18,26 @@ namespace VedasPortal.Services.VideoService
                 new VideoDetay
                 {
                     UrlAdres = "https://www.youtube.com/watch?v=KrStu87QRXI",
-                    VideoBasligi = "Blazor WebAssembly CI/CD with Azure DevOps Pipelines [Blazor Topics] | AK Academy",
-                    KayitTarihi = new DateTime(2020, 4, 1)
+                    VideoBasligi = "Blazor WebAssembly CI/CD with Azure DevOps Pipelines [Blazor Topics] | Vedaş Akademi",
+                    KayitTarihi = new DateTime(2021, 12, 4)
                 },
                  new VideoDetay
                 {
                     UrlAdres = "https://www.youtube.com/watch?v=KrStu87QRXI",
-                    VideoBasligi = "Localization and Multi Languages UI in Blazor WebAssembly [Blazor Topics] | AK Academy",
-                    KayitTarihi = new DateTime(2020, 4, 13)
+                    VideoBasligi = "Localization and Multi Languages UI in Blazor WebAssembly [Blazor Topics] | Vedaş Akademi",
+                    KayitTarihi = new DateTime(2021, 12, 3)
                 },
                  new VideoDetay
                 {
                     UrlAdres = "https://www.youtube.com/watch?v=KrStu87QRXI",
-                    VideoBasligi = "SignalR & Real-Time in Blazor Webassembly & ASP.NET Core API [Blazor Topics] | AK Academy",
-                    KayitTarihi = new DateTime(2020, 2, 11)
+                    VideoBasligi = "SignalR & Real-Time in Blazor Webassembly & ASP.NET Core API [Blazor Topics] | Vedaş Akademi",
+                    KayitTarihi = new DateTime(2021, 12, 2)
                 },
                  new VideoDetay
                 {
                     UrlAdres = "https://www.youtube.com/watch?v=KrStu87QRXI",
-                    VideoBasligi = "Uploading Files in Blazor Web Assembly & ASP.NET Core Web API [Blazor Topics] | AK Academy",
-                    KayitTarihi = new DateTime(2020, 3, 23)
+                    VideoBasligi = "Uploading Files in Blazor Web Assembly & ASP.NET Core Web API [Blazor Topics] | Vedaş Akademi",
+                    KayitTarihi = new DateTime(2021, 12, 1)
                 },
             };
         }
