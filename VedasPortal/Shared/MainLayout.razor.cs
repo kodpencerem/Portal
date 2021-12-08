@@ -16,16 +16,19 @@ namespace VedasPortal.Shared
             await jsRun.InvokeVoidAsync("scriptsInit");
             await jsRun.InvokeVoidAsync("toastrVedas");
             await jsRun.InvokeVoidAsync("sweetAlert");
+            
+
             if (firstRender)
             {
 
                 await jsRun.InvokeVoidAsync("owlCarousel");
                 await jsRun.InvokeVoidAsync("lightGallery");
-                await jsRun.InvokeVoidAsync("formWizard");
+                await jsRun.InvokeVoidAsync("formWizard");               
+
+            }
+            else
+            {
                 await jsRun.InvokeVoidAsync("multipleUpload");
-
-                //await jsRun.InvokeVoidAsync("jssor_1_slider_init");
-
             }
 
         }
