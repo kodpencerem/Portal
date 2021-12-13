@@ -5,64 +5,64 @@ window.toastrVedas = function(){
 
     $("#toastr-1").click(function () {
         iziToast.info({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made iziToast toastr',
+            title: 'Bilgi!',
+            message: 'Bu alanda iþlem yapmak için yetkiliniz ile görüþün.',
             position: 'topRight'
         });
     });
 
     $("#toastr-2").click(function () {
         iziToast.success({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Tamamlandý',
+            message: 'Ýþleminiz baþarýlý bir þekilde tamamlandý.',
             position: 'topRight'
         });
     });
 
     $("#toastr-3").click(function () {
         iziToast.warning({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Uyarý!',
+            message: 'Bu alana girme yetkiniz yoktur!',
             position: 'topRight'
         });
     });
 
     $("#toastr-4").click(function () {
         iziToast.error({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Hata!',
+            message: 'Ýþlem sýrasýnda bir hata ile karþýlaþýldý!',
             position: 'topRight'
         });
     });
 
     $("#toastr-5").click(function () {
         iziToast.show({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Bilgi!',
+            message: 'Bu alanda iþlem yapmak için yetkiliniz ile görüþün.',
             position: 'bottomRight'
         });
     });
 
     $("#toastr-6").click(function () {
         iziToast.show({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Tamamlandý',
+            message: 'Ýþleminiz baþarýlý bir þekilde tamamlandý.',
             position: 'bottomCenter'
         });
     });
 
     $("#toastr-7").click(function () {
         iziToast.show({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Uyarý!',
+            message: 'Bu alana girme yetkiniz yoktur!',
             position: 'bottomLeft'
         });
     });
 
     $("#toastr-8").click(function () {
         iziToast.show({
-            title: 'Hello, world!',
-            message: 'This awesome plugin is made by iziToast',
+            title: 'Hata!',
+            message: 'Ýþlem sýrasýnda bir hata ile karþýlaþýldý!',
             position: 'topCenter'
         });
     });

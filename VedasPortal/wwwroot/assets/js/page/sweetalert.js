@@ -2,61 +2,61 @@ window.sweetAlert = function () {
 "use strict";
 
 $("#swal-1").click(function () {
-  swal('Hello');
+  swal('Merhaba');
 });
 
 $("#swal-2").click(function () {
-  swal('Good Job', 'You clicked the button!', 'success');
+  swal('Baþarýlý', 'Ýþleminiz Baþarýlý Bir Þekilde Gerçekleþti...', 'success');
 });
 
 $("#swal-3").click(function () {
-  swal('Good Job', 'You clicked the button!', 'warning');
+  swal('Uyarý', 'Bu Alana Girmeye Yetkiniz Yok', 'warning');
 });
 
 $("#swal-4").click(function () {
-  swal('Good Job', 'You clicked the button!', 'info');
+  swal('Bilgi', 'Bu Ýþlem Ýçin Yöneticinize Baþvurunuz...', 'info');
 });
 
 $("#swal-5").click(function () {
-  swal('Good Job', 'You clicked the button!', 'error');
+  swal('Hata', 'Ýþleminiz Gerçekleþtirilirken Bir Hata Ýle Karþýlaþýldý...', 'error');
 });
 
 $("#swal-6").click(function () {
   swal({
-    title: 'Are you sure?',
-    text: 'Once deleted, you will not be able to recover this imaginary file!',
+    title: 'Bu Ýþlemi Yapmak Ýstediðinize Emin Misiniz?',
+    text: 'Bu Dosya Geri Alýnamayacak Biçimde Silinecektir!',
     icon: 'warning',
     buttons: true,
     dangerMode: true,
   })
     .then((willDelete) => {
       if (willDelete) {
-        swal('Poof! Your imaginary file has been deleted!', {
+        swal('Poof! Silme Ýþlemi Baþarýlý Bir Þekilde Gerçekleþtirildi!', {
           icon: 'success',
         });
       } else {
-        swal('Your imaginary file is safe!');
+        swal('Dosya Silme Ýþleminden Vazgeçildi. Dosya Güvende!');
       }
     });
 });
 
 $("#swal-7").click(function () {
   swal({
-    title: 'What is your name?',
+    title: 'Adýnýz Nedir?',
     content: {
       element: 'input',
       attributes: {
-        placeholder: 'Type your name',
+        placeholder: 'Adýnýzý Yazýn',
         type: 'text',
       },
     },
   }).then((data) => {
-    swal('Hello, ' + data + '!');
+    swal('Merhaba, ' + data + '!');
   });
 });
 
 $("#swal-8").click(function () {
-  swal('This modal will disappear soon!', {
+  swal('Zaman bazlý uyarý!', {
     buttons: false,
     timer: 3000,
   });

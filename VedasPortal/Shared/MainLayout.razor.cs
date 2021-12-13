@@ -14,8 +14,9 @@ namespace VedasPortal.Shared
             base.OnAfterRender(firstRender);
             await jsRun.InvokeVoidAsync("indexInit");
             await jsRun.InvokeVoidAsync("scriptsInit");
+            await jsRun.InvokeVoidAsync("sweetAlert");
             await jsRun.InvokeVoidAsync("toastrVedas");
-            await jsRun.InvokeVoidAsync("sweetAlert");          
+            
 
             if (firstRender)
             {
