@@ -15,8 +15,7 @@ namespace VedasPortal.Shared
             await jsRun.InvokeVoidAsync("indexInit");
             await jsRun.InvokeVoidAsync("scriptsInit");
             await jsRun.InvokeVoidAsync("toastrVedas");
-            await jsRun.InvokeVoidAsync("sweetAlert");
-            
+            await jsRun.InvokeVoidAsync("sweetAlert");          
 
             if (firstRender)
             {
@@ -25,7 +24,10 @@ namespace VedasPortal.Shared
                 await jsRun.InvokeVoidAsync("lightGallery");
                 await jsRun.InvokeVoidAsync("formWizard");
                 await jsRun.InvokeVoidAsync("calendar");
+               
+               
 
+                
             }
             else
             {
