@@ -75593,21 +75593,21 @@
     Calendar.getDimensionsInfo = Calendar.prototype.getDimensionsInfo;
 
     Calendar.create = function (ecModel, api) {
-        var calendarList = [];
+        var takvimlerListesi = [];
 
         ecModel.eachComponent('calendar', function (calendarModel) {
             var calendar = new Calendar(calendarModel, ecModel, api);
-            calendarList.push(calendar);
+            takvimlerListesi.push(calendar);
             calendarModel.coordinateSystem = calendar;
         });
 
         ecModel.eachSeries(function (calendarSeries) {
             if (calendarSeries.get('coordinateSystem') === 'calendar') {
                 // Inject coordinate system
-                calendarSeries.coordinateSystem = calendarList[calendarSeries.get('calendarIndex') || 0];
+                calendarSeries.coordinateSystem = takvimlerListesi[calendarSeries.get('calendarIndex') || 0];
             }
         });
-        return calendarList;
+        return takvimlerListesi;
     };
 
     function doConvert$2(methodName, ecModel, finder, value) {

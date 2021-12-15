@@ -18,21 +18,23 @@ namespace VedasPortal.Shared
             await jsRun.InvokeVoidAsync("toastrVedas");
             
 
+
             if (firstRender)
             {
 
                 await jsRun.InvokeVoidAsync("owlCarousel");
                 await jsRun.InvokeVoidAsync("lightGallery");
                 await jsRun.InvokeVoidAsync("formWizard");
-                await jsRun.InvokeVoidAsync("calendar");
-               
-               
-
+                await jsRun.InvokeVoidAsync("tuiApp");
                 
+                
+
             }
             else
             {
                 await jsRun.InvokeVoidAsync("multipleUpload");
+                
+
             }
 
         }
