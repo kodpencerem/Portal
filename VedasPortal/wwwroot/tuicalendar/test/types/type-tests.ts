@@ -17,19 +17,19 @@ const calendar = new Calendar(querySelectorEl, {
     scheduleView: ['allday', 'time'],
     template: {
         milestoneTitle() {
-            return 'Milestone';
+            return 'Tekrarli Toplantilar';
         },
         milestone(schedule: ISchedule) {
             return `<span style="color: red;">${schedule.title}</span>`;
         },
         taskTitle() {
-            return 'Task';
+            return 'Gorevler';
         },
         task(schedule: ISchedule) {
             return `$nbsp;#${schedule.title}`;
         },
         alldayTitle() {
-            return 'All Day';
+            return 'Tum Gun';
         },
         allday(schedule: ISchedule) {
             return `<span style="color: blue;">${schedule.title}</span>`;

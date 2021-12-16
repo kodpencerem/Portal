@@ -6,20 +6,26 @@
 			Yeni Bir Takvim Ekle
 		</button>
 	</div>
-	<div id="lnb-calendars" class="lnb-calendars">
-		<div>
-			<div class="lnb-calendars-item">
-				<label>
-					<input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked>
-					<span></span>
-					<strong>Tümünü Seç</strong>
-				</label>
+	<CardComponent cardStyle="Style.primary">
+		<CardBody>
+			<div id="lnb-calendars" class="lnb-calendars">
+				<div>
+					<div class="lnb-calendars-item">
+						<label>
+							<input class="tui-full-calendar-checkbox-square" type="checkbox" value="all" checked>
+							<span></span>
+							<strong>Tümünü Seç</strong>
+						</label>
+					</div>
+				</div>
+				<div id="takvimListesi" class="lnb-calendars-d1">
+				</div>
 			</div>
-		</div>
-		<div id="takvimListesi" class="lnb-calendars-d1">
-		</div>
-	</div>
+		</CardBody>
+	</CardComponent>
 </div>
+
+
 <div id="right">
 	<div id="menu">
 		<span class="dropdown">
@@ -76,6 +82,7 @@
 				</li>
 			</ul>
 		</span>
+
 		<span id="menu-navi">
 			<button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Bugün</button>
 			<button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
@@ -85,9 +92,10 @@
 				<i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
 			</button>
 		</span>
+
 		<span id="aralikSecimi" class="render-range"></span>
+
+
+		<div id="calendar"></div>
 	</div>
-	<div id="calendar"></div>
 </div>
-
-

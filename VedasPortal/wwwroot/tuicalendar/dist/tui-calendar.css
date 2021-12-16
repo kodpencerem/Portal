@@ -651,7 +651,7 @@
 .tui-full-calendar-popup {
   position: absolute;
   font-weight: 2.5;
-  margin-top:300px;
+  margin-top:20px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
   clear: both;
 }

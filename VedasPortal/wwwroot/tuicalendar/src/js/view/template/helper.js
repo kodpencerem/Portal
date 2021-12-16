@@ -224,7 +224,7 @@ var helpers = {
     'milestoneTitle-tmpl': function() {
         var className = config.classname('left-content');
 
-        return '<span class="' + className + '">Milestone</span>';
+        return '<span class="' + className + '">Tekrarli Toplantilar</span>';
     },
 
     'task-tmpl': function(model) {
@@ -234,13 +234,13 @@ var helpers = {
     'taskTitle-tmpl': function() {
         var className = config.classname('left-content');
 
-        return '<span class="' + className + '">Task</span>';
+        return '<span class="' + className + '">Gorevler</span>';
     },
 
     'alldayTitle-tmpl': function() {
         var className = config.classname('left-content');
 
-        return '<span class="' + className + '">All Day</span>';
+        return '<span class="' + className + '">Tum Gun</span>';
     },
 
     'allday-tmpl': function(model) {
