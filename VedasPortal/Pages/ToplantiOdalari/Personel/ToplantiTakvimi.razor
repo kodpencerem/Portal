@@ -1,5 +1,5 @@
 ﻿@page "/toplantitakvimi"
-
+@inject IJSRuntime jsRun
 <div>
 	<div class="lnb-new-schedule">
 		<button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" data-toggle="modal">
@@ -99,3 +99,14 @@
 		<div id="calendar"></div>
 	</div>
 </div>
+@code{ 
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await jsRun.InvokeVoidAsync("tuiApp");
+
+        }
+    }
+}

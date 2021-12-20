@@ -31,7 +31,7 @@ $("#swal-6").click(function () {
   })
     .then((willDelete) => {
       if (willDelete) {
-        swal('Poof! Silme Ýþlemi Baþarýlý Bir Þekilde Gerçekleþtirildi!', {
+        swal('Silme Ýþlemi Baþarýlý Bir Þekilde Gerçekleþtirildi!', {
           icon: 'success',
         });
       } else {

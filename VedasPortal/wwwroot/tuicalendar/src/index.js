@@ -1,7 +1,8 @@
+
 /**
- * @fileoverview The entry file of fullcalendar
- * @author NHN FE Development Lab
- */
+* @fileoverview The entry file of fullcalendar
+* @author NHN FE Development Lab
+*/
 
 'use strict';
 
@@ -13,7 +14,7 @@ require('./js/view/template/helper');
 
 // for jquery
 if (global.jQuery) {
-    global.jQuery.fn.tuiCalendar = function() {
+    global.jQuery.fn.tuiCalendar = function () {
         var options, instance;
 
         var el = this.get(0);
@@ -39,3 +40,4 @@ if (global.jQuery) {
 }
 
 module.exports = Calendar;
+

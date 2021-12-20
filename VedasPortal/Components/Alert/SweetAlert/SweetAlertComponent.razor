@@ -1,14 +1,14 @@
-﻿
+﻿@inject IJSRuntime jsRun
 @inherits BaseButton
 <div class="card">
-	<div class="card-body text-center">
-		<div class="mb-2">
-			@Description
-			</div>
-		<button class="@("btn btn-"+SweetAlertStyle)" id="@("swal-"+(int)SweetAlertEnum)"  >
-			@ButtonCaption
-			</button>
-	</div>
+    <div class="card-body text-center">
+        <div class="mb-2">
+            @Description
+        </div>
+        <button class="@("btn btn-"+SweetAlertStyle)" id="@("swal-"+(int)SweetAlertEnum)">
+            @ButtonCaption
+        </button>
+    </div>
 </div>
 
 
@@ -16,20 +16,28 @@
 @code {
 
 
-	[Parameter]
-	public Style SweetAlertStyle{ get; set; }
+    [Parameter]
+    public Style SweetAlertStyle { get; set; }
 
-	[Parameter]
-	public string ButtonCaption { get; set; }
+    [Parameter]
+    public string ButtonCaption { get; set; }
 
-	[Parameter]
-	public string Description { get; set; }
+    [Parameter]
+    public string Description { get; set; }
 
-	[Parameter]
-	public int  Sayi { get; set; }
-	[Parameter]
-	public SweetAlert SweetAlertEnum  { get; set; }
+    [Parameter]
+    public int Sayi { get; set; }
+    [Parameter]
+    public SweetAlert SweetAlertEnum { get; set; }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await jsRun.InvokeVoidAsync("multipleUpload");
 
+        }
+    }
 
 }
