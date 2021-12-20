@@ -1,8 +1,8 @@
-﻿<CardComponent cardStyle="CardComponent.CardStyle.danger">
-	<Header>
-		 <i class="fas fa-user-friends"></i> İşe Giriş - Ayrılış
-	</Header>
-	<Body>
+﻿<CardComponent cardStyle="Style.danger">
+	<CardHeader>
+		<i class="fas fa-user-friends"></i> İşe Giriş - Ayrılış
+	</CardHeader>
+	<CardBody>
 		<ul id="personelDurumDiv" class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
 			<li class="media">
 				<img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/users/user-1.png">
@@ -73,14 +73,15 @@
 				</div>
 			</li>
 		</ul>
-	</Body>
+	</CardBody>
 </CardComponent>
 <style>
 	#duyuruDiv {
 		font-size: 10px
 	}
-	#personelDurumDiv .media-item{
-		width:100px;
+
+	#personelDurumDiv .media-item {
+		width: 100px;
 	}
 </style>
 

@@ -1,0 +1,32 @@
+﻿namespace VedasPortal.Enums
+{
+    public enum BackgroundColor
+    {
+		orange,
+		cyan,
+		coral,
+		Olive,
+		Red,
+		Blue,
+		DarkBlue,
+		LightBlue,
+		Purple,
+		Yellow,
+		Lime,
+		Magenta,
+		Pink,
+		Orange,
+		White,
+		Silver,
+		Grey,
+		Black,
+		Brown,
+		DarkBrown,
+		LightBrown,
+		Maroon,
+		Green,
+		Aquamarine,
+		Aqua,
+		Puce
+	}
+}

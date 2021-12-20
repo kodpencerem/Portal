@@ -23,22 +23,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
-    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
-    <PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.11" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.5.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="Smart.Blazor" Version="10.2.2" />
+    <PackageReference Include="Smart.Blazor" Version="11.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,9 +50,6 @@
   <ItemGroup>
     <None Include="Components\Tabs\TabItem.razor" />
     <None Include="Components\Tabs\Tabs.razor" />
-    <None Include="Components\ModalComponents\BaseModal.razor" />
-    <None Include="Components\ModalComponents\ConfirmationPopup.razor" />
-    <None Include="Components\ModalComponents\ShowMessagePopup.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />
@@ -669,8 +668,6 @@
     <None Include="wwwroot\assets\js\page\portfolio.js" />
     <None Include="wwwroot\assets\js\page\posts.js" />
     <None Include="wwwroot\assets\js\page\sparkline.js" />
-    <None Include="wwwroot\assets\js\page\sweetalert.js" />
-    <None Include="wwwroot\assets\js\page\toastr.js" />
     <None Include="wwwroot\assets\js\page\vector-map.js" />
     <None Include="wwwroot\assets\js\page\widget-chart.js" />
     <None Include="wwwroot\assets\js\page\widget-data.js" />
@@ -680,6 +677,189 @@
     <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
     <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
     <None Include="wwwroot\css\open-iconic\README.md" />
+    <None Include="wwwroot\js\formula-parser.min.js" />
+    <None Include="wwwroot\js\highlight.min.js" />
+    <None Include="wwwroot\js\highlight.pack.js" />
+    <None Include="wwwroot\js\html2canvas.min.js" />
+    <None Include="wwwroot\js\jszip.min.js" />
+    <None Include="wwwroot\js\pdfmake.min.js" />
+    <None Include="wwwroot\js\rrule.import.js" />
+    <None Include="wwwroot\js\rrule.min.js" />
+    <None Include="wwwroot\js\smart.blazor.js" />
+    <None Include="wwwroot\js\vfs_fonts.js" />
+    <None Include="wwwroot\js\webcomponents-lite.js" />
+    <None Include="wwwroot\js\webfont.js" />
+    <None Include="wwwroot\tuicalendar\createConfigVariable.js" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.css.map" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.js" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.js.map" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.min.css.map" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.min.js" />
+    <None Include="wwwroot\tuicalendar\dist\tui-calendar.min.js.map" />
+    <None Include="wwwroot\tuicalendar\examples\fonts\icon.svg" />
+    <None Include="wwwroot\tuicalendar\examples\js\app.js" />
+    <None Include="wwwroot\tuicalendar\examples\js\data\calendars.js" />
+    <None Include="wwwroot\tuicalendar\examples\js\data\schedules.js" />
+    <None Include="wwwroot\tuicalendar\examples\js\default.js" />
+    <None Include="wwwroot\tuicalendar\examples\js\theme\dooray.js" />
+    <None Include="wwwroot\tuicalendar\karma.conf.js" />
+    <None Include="wwwroot\tuicalendar\scripts\publishToCDN.js" />
+    <None Include="wwwroot\tuicalendar\src\css\common.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\icons.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\main.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\month.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\monthweek.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\popup.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\variables.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\vlayout.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\weekday.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\week\daygrid.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\week\dayname.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\week\layout.styl" />
+    <None Include="wwwroot\tuicalendar\src\css\week\time.styl" />
+    <None Include="wwwroot\tuicalendar\src\index.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\array.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\autoScroll.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\collection.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\common.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\datetime.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\dirty.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\domevent.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\domutil.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\dw.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\floatingLayer.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\intlUtil.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\model.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\point.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\reqAnimFrame.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\sanitizer.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\timezone.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\vlayout.js" />
+    <None Include="wwwroot\tuicalendar\src\js\common\vpanel.js" />
+    <None Include="wwwroot\tuicalendar\src\js\config.js" />
+    <None Include="wwwroot\tuicalendar\src\js\controller\base.js" />
+    <None Include="wwwroot\tuicalendar\src\js\controller\viewMixin\core.js" />
+    <None Include="wwwroot\tuicalendar\src\js\controller\viewMixin\month.js" />
+    <None Include="wwwroot\tuicalendar\src\js\controller\viewMixin\week.js" />
+    <None Include="wwwroot\tuicalendar\src\js\factory\calendar.js" />
+    <None Include="wwwroot\tuicalendar\src\js\factory\controller.js" />
+    <None Include="wwwroot\tuicalendar\src\js\factory\monthView.js" />
+    <None Include="wwwroot\tuicalendar\src\js\factory\weekView.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\click.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\core.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\creation.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\creationGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\move.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\moveGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\resize.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\daygrid\resizeGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\drag.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\click.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\core.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\creation.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\creationGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\guide.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\guide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\move.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\moveGuide.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\moveGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\resize.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\month\resizeGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\click.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\clickDayname.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\core.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\creation.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\creationGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\move.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\moveGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\resize.js" />
+    <None Include="wwwroot\tuicalendar\src\js\handler\time\resizeGuide.js" />
+    <None Include="wwwroot\tuicalendar\src\js\model\schedule.js" />
+    <None Include="wwwroot\tuicalendar\src\js\model\viewModel\scheduleViewModel.js" />
+    <None Include="wwwroot\tuicalendar\src\js\theme\standard.js" />
+    <None Include="wwwroot\tuicalendar\src\js\theme\theme.js" />
+    <None Include="wwwroot\tuicalendar\src\js\theme\themeConfig.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\layout.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\month\month.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\month\more.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\month\weekdayInMonth.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\popup\scheduleCreationPopup.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\popup\scheduleDetailPopup.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\helper.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\month\month.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\month\more.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\month\weekdayInMonth.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\month\weekdayInMonthSchedule.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\popup\scheduleCreationPopup.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\popup\scheduleDetailPopup.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\dayGrid.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\dayGridSchedule.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\daynames.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\time.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\timeGrid.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\timeGridCurrentTime.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\timeMoveGuide.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\template\week\timezoneSticky.hbs" />
+    <None Include="wwwroot\tuicalendar\src\js\view\view.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\weekday.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\dayGrid.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\dayGridSchedule.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\dayname.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\time.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\timeGrid.js" />
+    <None Include="wwwroot\tuicalendar\src\js\view\week\week.js" />
+    <None Include="wwwroot\tuicalendar\test\.eslintrc" />
+    <None Include="wwwroot\tuicalendar\test\app\common\array.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\collection.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\common.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\dirty.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\domevent.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\domutil.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\dw.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\floatingLayer.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\intlUtil.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\model.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\point.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\sanitizer.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\timezone.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\vlayout.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\common\vpanel.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\controller\base.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\controller\viewMixin\core.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\controller\viewMixin\month.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\controller\viewMixin\week.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\datetime.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\factory\calendar.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\drag.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\month\core.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\month\creation.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\month\guide.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\month\move.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\month\resize.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\click.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\core.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\creation.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\creationGuide.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\move.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\moveGuide.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\resize.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\handler\time\resizeGuide.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\model\event.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\model\viewModel\event.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\theme\theme.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\dayname.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\scheduleCreationPopup.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\time.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\timeGrid.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\view.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\week.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\weekday.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\app\view\weekdayInMonth.spec.js" />
+    <None Include="wwwroot\tuicalendar\test\index.js" />
+    <None Include="wwwroot\tuicalendar\test\matcher\matrices.js" />
+    <None Include="wwwroot\tuicalendar\test\matcher\timezone.js" />
+    <None Include="wwwroot\tuicalendar\tsBannerGenerator.js" />
+    <None Include="wwwroot\tuicalendar\webpack.config.js" />
   </ItemGroup>
 
   <ItemGroup>

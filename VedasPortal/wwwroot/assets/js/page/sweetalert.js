@@ -1,65 +1,64 @@
 window.sweetAlert = function () {
+"use strict";
 
-    "use strict";
+$("#swal-1").click(function () {
+  swal('Merhaba');
+});
 
-    $("#swal-1").click(function () {
-        swal('Hello');
-    });
+$("#swal-2").click(function () {
+  swal('Baþarýlý', 'Ýþleminiz Baþarýlý Bir Þekilde Gerçekleþti...', 'success');
+});
 
-    $("#swal-2").click(function () {
-        swal('Good Job', 'You clicked the button!', 'success');
-    });
+$("#swal-3").click(function () {
+  swal('Uyarý', 'Bu Alana Girmeye Yetkiniz Yok', 'warning');
+});
 
-    $("#swal-3").click(function () {
-        swal('Good Job', 'You clicked the button!', 'warning');
-    });
+$("#swal-4").click(function () {
+  swal('Bilgi', 'Bu Ýþlem Ýçin Yöneticinize Baþvurunuz...', 'info');
+});
 
-    $("#swal-4").click(function () {
-        swal('Good Job', 'You clicked the button!', 'info');
-    });
+$("#swal-5").click(function () {
+  swal('Hata', 'Ýþleminiz Gerçekleþtirilirken Bir Hata Ýle Karþýlaþýldý...', 'error');
+});
 
-    $("#swal-5").click(function () {
-        swal('Good Job', 'You clicked the button!', 'error');
-    });
-
-    $("#swal-6").click(function () {
-        swal({
-            title: 'Are you sure?',
-            text: 'Once deleted, you will not be able to recover this imaginary file!',
-            icon: 'warning',
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal('Poof! Your imaginary file has been deleted!', {
-                        icon: 'success',
-                    });
-                } else {
-                    swal('Your imaginary file is safe!');
-                }
-            });
-    });
-
-    $("#swal-7").click(function () {
-        swal({
-            title: 'What is your name?',
-            content: {
-                element: 'input',
-                attributes: {
-                    placeholder: 'Type your name',
-                    type: 'text',
-                },
-            },
-        }).then((data) => {
-            swal('Hello, ' + data + '!');
+$("#swal-6").click(function () {
+  swal({
+    title: 'Bu Ýþlemi Yapmak Ýstediðinize Emin Misiniz?',
+    text: 'Bu Dosya Geri Alýnamayacak Biçimde Silinecektir!',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal('Poof! Silme Ýþlemi Baþarýlý Bir Þekilde Gerçekleþtirildi!', {
+          icon: 'success',
         });
+      } else {
+        swal('Dosya Silme Ýþleminden Vazgeçildi. Dosya Güvende!');
+      }
     });
+});
 
-    $("#swal-8").click(function () {
-        swal('This modal will disappear soon!', {
-            buttons: false,
-            timer: 3000,
-        });
-    });
+$("#swal-7").click(function () {
+  swal({
+    title: 'Adýnýz Nedir?',
+    content: {
+      element: 'input',
+      attributes: {
+        placeholder: 'Adýnýzý Yazýn',
+        type: 'text',
+      },
+    },
+  }).then((data) => {
+    swal('Merhaba, ' + data + '!');
+  });
+});
+
+$("#swal-8").click(function () {
+  swal('Zaman bazlý uyarý!', {
+    buttons: false,
+    timer: 3000,
+  });
+});
 }

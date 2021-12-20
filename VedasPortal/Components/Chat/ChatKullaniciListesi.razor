@@ -1,0 +1,23 @@
+﻿
+<CardComponent>
+    <CardBody>
+        <div id="plist" class="people-list">
+            <div class="chat-search">
+                @SearchButtonBody
+            </div>
+            @ChatUserListBody
+
+
+        </div>
+    </CardBody>
+</CardComponent>
+
+
+@code{
+
+    [Parameter]
+    public RenderFragment SearchButtonBody { get; set; }
+    [Parameter]
+    public RenderFragment ChatUserListBody { get; set; }
+
+}
