@@ -1,4 +1,52 @@
 ﻿@page "/tumdovizler"
+@using System.Data
+
+<div class="col-12">
+	<CardComponent cardStyle="Style.info">
+		<CardHeader >
+			<h4>Döviz Değişimleri Tablosu</h4>
+		</CardHeader>
+		<CardBody>
+			<div class="table-responsive">
+				<table class="table table-striped" id="table-1">
+					<thead>
+						<tr>
+							<th class="text-center">
+								#
+							</th>
+							<th>Döviz Kodu</th>
+							<th>Döviz Adı</th>
+							<th>Döviz Alış</th>
+							<th>Döviz Satış</th>
+							<th>Efektif Alış</th>
+							<th>Efektif Satış</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						@*@foreach (var item in dovizKurlariListesi)
+						{
+							<tr>
+								<td>
+									@item.DovizKodu
+								</td>
+								<td>@item.DovizAdi</td>
+								<td>@item.DovizAlis</td>
+								<td>@item.DovizSatis</td>
+								<td>@item.EfektifAlis</td>
+								<td>@item.EfektifSatis</td>
+
+							</tr>
+
+						}*@
+
+					</tbody>
+				</table>
+			</div>
+		</CardBody>
+	</CardComponent>
+</div>
+
 @code {
 
 }

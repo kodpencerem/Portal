@@ -7,7 +7,7 @@ namespace VedasPortal.Shared
     {
         [Inject]
         public IJSRuntime jsRun { get; set; }
-
+        
 
         protected override async void OnAfterRender(bool firstRender)
         {
@@ -16,8 +16,8 @@ namespace VedasPortal.Shared
             await jsRun.InvokeVoidAsync("scriptsInit");
             await jsRun.InvokeVoidAsync("sweetAlert");
             await jsRun.InvokeVoidAsync("toastrVedas");
-            
 
+            
 
             if (firstRender)
             {
@@ -26,9 +26,6 @@ namespace VedasPortal.Shared
                 await jsRun.InvokeVoidAsync("lightGallery");
                 await jsRun.InvokeVoidAsync("formWizard");
                 await jsRun.InvokeVoidAsync("tuiApp");
-                
-                
-
             }
             else
             {

@@ -711,11 +711,9 @@
     <None Include="wwwroot\tuicalendar\src\css\monthweek.styl" />
     <None Include="wwwroot\tuicalendar\src\css\popup.styl" />
     <None Include="wwwroot\tuicalendar\src\css\variables.styl" />
-    <None Include="wwwroot\tuicalendar\src\css\vlayout.styl" />
     <None Include="wwwroot\tuicalendar\src\css\weekday.styl" />
     <None Include="wwwroot\tuicalendar\src\css\week\daygrid.styl" />
     <None Include="wwwroot\tuicalendar\src\css\week\dayname.styl" />
-    <None Include="wwwroot\tuicalendar\src\css\week\layout.styl" />
     <None Include="wwwroot\tuicalendar\src\css\week\time.styl" />
     <None Include="wwwroot\tuicalendar\src\index.js" />
     <None Include="wwwroot\tuicalendar\src\js\common\array.js" />
@@ -779,7 +777,6 @@
     <None Include="wwwroot\tuicalendar\src\js\theme\standard.js" />
     <None Include="wwwroot\tuicalendar\src\js\theme\theme.js" />
     <None Include="wwwroot\tuicalendar\src\js\theme\themeConfig.js" />
-    <None Include="wwwroot\tuicalendar\src\js\view\layout.js" />
     <None Include="wwwroot\tuicalendar\src\js\view\month\month.js" />
     <None Include="wwwroot\tuicalendar\src\js\view\month\more.js" />
     <None Include="wwwroot\tuicalendar\src\js\view\month\weekdayInMonth.js" />

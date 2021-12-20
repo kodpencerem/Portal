@@ -38,7 +38,7 @@ function FloatingLayer(options, container) {
     layerContainer = document.createElement('div');
     layerContainer.style.display = 'none';
     layerContainer.style.position = 'absolute';
-    domutil.addClass(layerContainer, config.classname('floating-layer'));
+    //domutil.addClass(layerContainer, config.classname('floating-layer'));
     container.appendChild(layerContainer);
 
     View.call(this, layerContainer);
