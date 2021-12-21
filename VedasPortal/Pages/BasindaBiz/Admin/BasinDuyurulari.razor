@@ -1,70 +1,71 @@
 ﻿@page "/basinduyurulari"
 
 
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4>Basın Duyuruları</h4>|
-				<div class="col-md-4">
-					<a href='/basinduyurusu/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Basın Duyurusu Ekle</a>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-striped" id="table-2">
-						<thead>
-							<tr>
-								<th class="text-center pt-3">
-									<div class="custom-checkbox custom-checkbox-table custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-											   class="custom-control-input" id="checkbox-all">
-										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-									</div>
-								</th>
-								<th>Resim</th>
-								<th>Basın DuyuruAdi</th>
-								<th>DuyuruAciklama</th>
-								<th>EkleyenYetkiliUnvani</th>
-								<th>EkleyenYetkiliAdSoyad</th>
-								<th>Yayın Tarihi</th>
-								<th>İşlemler</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center pt-2">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-											   id="checkbox-1">
-										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-									</div>
-								</td>
-								<td>Resim</td>
-								<td>Basın DuyuruAdi</td>
-								<td>DuyuruAciklama</td>
-								<td>EkleyenYetkiliUnvani</td>
-								<td>EkleyenYetkiliAdSoyad</td>
-								<td>Yayın Tarihi</td>
-								<td>
-									<a href="/basinduyurusu/duzenle/" class="btn btn-info">
-										Düzenle
-									</a>
-									|
-									<a href="basinduyurudetay" class="btn btn-primary">
-										Detay Bilgi
-									</a>
-									|
-									<a href="#" class="btn btn-danger">
-										Sil
-									</a>
-								</td>
-							</tr>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader >
+            
+            <div class="col-md-12">
+                Basın Duyuruları |
+                <a href='/basinduyurusu/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Basın Duyurusu Ekle</a>
+            </div>
+        </CardHeader>
+        <CardBody >
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Resim/Video</th>
+                            <th>Basın DuyuruAdi</th>
+                            <th>DuyuruAciklama</th>
+                            <th>Ekleyen Birim</th>
+                            
+                            <th>Yayın Tarihi</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center pt-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>Kişisel Gelişim</td>
+                            <td>Basın DuyuruAdi</td>
+                            <td>DuyuruAciklama</td>
+                            <td>Bilgi İşlem</td>
+                            
+                            <td>21.12.2021</td>
+                            <td>
+                                <a href="/basinduyurusu/duzenle/" class="btn btn-info">
+                                    Düzenle
+                                </a>
+                                |
+                                <a href="basinduyurudetay" class="btn btn-primary">
+                                    Detay Bilgi
+                                </a>
+                                |
+                                <a href="#" class="btn btn-danger">
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
 </div>
+

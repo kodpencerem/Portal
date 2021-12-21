@@ -1,52 +1,59 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/"
 
-<h4 style ="margin:10px">Duyuru Ekle Duzenle</h4>
-<hr />
 
-<section style="margin-left:5px" class= "container">
+<div class="col-12 col-md-12 col-lg-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Duyuru Ekle/Düzenle
+        </CardHeader>
+        <CardBody>
+            <div class="form-group">
+                <label>Duyuru Adı</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Duyuruyu Görecek Birimler</label>
+                <select class="form-control">
+                    <option>Tüm Birimler</option>
+                    <option>İnsan Kaynakları</option>
+                    <option>Bilgi İşlem</option>
+                    <option>Hukuk</option>
+                </select>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Resim</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Duyuru Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Açıklama</label>
-		<Summernote></Summernote>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Ekleyen Yetkili Unvanı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Ekleyen Yetkili Ad Soyad</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
+            <div class="form-group">
+                <label>Açıklama Metni</label>
+                <Summernote></Summernote>
+            </div>
 
 
-</section>
+            <div class="form-group">
+                <label>Yayınlama Tarihi</label>
+                <input type="datetime-local" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Duyuruyu Ekleyen Birim</label>
+                <select class="form-control">
+                    <option>Scada</option>
+                    <option>İnsan Kaynakları</option>
+                    <option>Bilgi İşlem</option>
+                    <option>Hukuk</option>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label>Destekleyici Dosya/Döküman Yükle</label>
+                <MultipleUpload></MultipleUpload>
+            </div>
 
-	
+            <div class="card-footer text-right">
+                <button class="btn btn-primary mr-1" type="submit">Kaydet</button>
+                <button class="btn btn-secondary" type="reset">Vazgeç</button>
+            </div>
+        </CardBody>
+
+    </CardComponent>
+</div>
+
 
