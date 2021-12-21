@@ -1,0 +1,44 @@
+﻿@inject IJSRuntime jsRun
+
+<div class="col-12 col-sm-6 col-lg-3">
+
+
+    <div class="card">
+        <div class="card-body text-center">
+            @ToastrBody
+            <div class="mb-2">@ToastrHeader</div>
+            <button class="@("btn btn-"+toastrStyle.ToString())" id="@("toastr-" +(int)toastrId)">Launch</button>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+@code {
+
+    [Parameter]
+    public Style toastrStyle { get; set; }
+
+    [Parameter]
+    public ToastrMessageId toastrId { get; set; }
+
+    [Parameter]
+    public RenderFragment ToastrBody { get; set; }
+    [Parameter]
+    public RenderFragment ToastrHeader { get; set; }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+
+            await jsRun.InvokeVoidAsync("toastrVedas");
+        }
+    }
+
+}

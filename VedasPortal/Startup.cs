@@ -1,4 +1,3 @@
-using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -7,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Smart.Blazor;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
 using VedasPortal.Services.HavaDurumuService;
+using VedasPortal.Services.VideoService;
 
 namespace VedasPortal
 {
@@ -39,14 +40,15 @@ namespace VedasPortal
             services.AddScoped<HavaDurumuService>();
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
-            services.AddBlazoredToast();
+            services.AddSmart();
+            services.AddScoped<IVideoService, StaticVideoService>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          
+        
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

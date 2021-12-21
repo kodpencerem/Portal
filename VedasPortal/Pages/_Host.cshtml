@@ -8,88 +8,102 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-	<meta charset="UTF-8">
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 	<title>Vedaş Portal</title>
 	<base href="~/" />
 	<!-- Index CSS -->
-	<link rel="stylesheet" href="assets/css/app.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/components.css">
-	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="assets/css/app.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/components.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
 	<link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap">
-
 	<!-- Bootstrap Social Media CSS -->
-	<link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css">
+	<link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css" type="text/css">
 
-	<link href="_content/Blazored.Toast/blazored-toast.css" rel="stylesheet" />
-	<link href="_content/Blazored.Toast/blazored-toast.css" rel="stylesheet" />
-	<link href="css/blazored-toast.css" rel="stylesheet"/>
+	<!-- TuiCalendar CSS -->
 
+	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
+	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+	<link rel="stylesheet" type="text/css" href="tuicalendar/dist/tui-calendar.css">
+	<link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/default.css">
+	<link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/icons.css">
 
 	<!-- JQuery Selectric CSS -->
-	<link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
+	<link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css" type="text/css">
 
 	<!-- JsSlider CSS -->
-	<link rel="stylesheet" href="assets/slider/css/jsslider.css">
+	<link rel="stylesheet" href="assets/slider/css/jsslider.css" type="text/css">
 
 	<!-- FullCalendar CSS -->
-	<link rel="stylesheet" href="assets/bundles/fullcalendar/fullcalendar.min.css">
+	<link rel="stylesheet" href="assets/bundles/fullcalendar/fullcalendar.min.css" type="text/css">
 
 	<!-- Card Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/chocolat/dist/css/chocolat.css">
+	<link rel="stylesheet" href="assets/bundles/chocolat/dist/css/chocolat.css" type="text/css">
 
 	<!-- ChartMorris Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/morris/morris.css">
+	<link rel="stylesheet" href="assets/bundles/morris/morris.css" type="text/css">
 
 	<!-- Checkbox Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css">
+	<link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css" type="text/css">
 
 	<!-- Weather Icon Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons-wind.min.css">
-	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons.min.css">
+	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons-wind.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons.min.css" type="text/css">
 
 	<!-- Create Post CSS -->
-	<link rel="stylesheet" href="assets/bundles/summernote/summernote-bs4.css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+	<link rel="stylesheet" href="assets/bundles/summernote/summernote-bs4.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" type="text/css">
 
 	<!-- DataTable CSS -->
-	<link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css">
-	<link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+	<link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css" type="text/css">
 
 	<!-- FormAdvanced CSS -->
-	<link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
-	<link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+	<link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css" type="text/css">
 
-	<link rel="stylesheet" href="assets/bundles/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="assets/bundles/ionicons/css/ionicons.min.css" type="text/css">
 
 	<!-- Light Galery CSS -->
-	<link rel="stylesheet" href="assets/bundles/lightgallery/dist/css/lightgallery.css">
+	<link rel="stylesheet" href="assets/bundles/lightgallery/dist/css/lightgallery.css" type="text/css">
 
 	<!-- Owl-Carousel Galery CSS -->
-	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css" type="text/css">
 
-	<link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css">
-	<link rel="stylesheet" href="assets/bundles/prism/prism.css">
-	<link rel="stylesheet" href="assets/bundles/dropzonejs/dropzone.css">
-	<link rel="stylesheet" href="assets/bundles/codemirror/lib/codemirror.css">
-	<link rel="stylesheet" href="assets/bundles/codemirror/theme/duotone-dark.css">
-	<link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css">
-	<link rel="stylesheet" href="assets/bundles/jqvmap/dist/jqvmap.min.css">
-	<link rel="stylesheet" href="assets/bundles/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/prism/prism.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/dropzonejs/dropzone.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/codemirror/lib/codemirror.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/codemirror/theme/duotone-dark.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/jqvmap/dist/jqvmap.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/bundles/flag-icon-css/css/flag-icon.min.css" type="text/css">
 
-	<link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
-	<link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
-
+	<!-- Smart Blazor -->
+	<link href="_content/Smart.Blazor/css/smart.default.css" rel="stylesheet" />
 </head>
 <body>
 	<component type="typeof(App)" render-mode="ServerPrerendered" />
 
+	<!-- TuCalendar Js -->
+
+	<script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
+	<script src="https://uicdn.toast.com/tui.time-picker/v2.0.3/tui-time-picker.min.js"></script>
+	<script src="https://uicdn.toast.com/tui.date-picker/v4.0.3/tui-date-picker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
+	<script src="~/tuicalendar/dist/tui-calendar.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="~/tuicalendar/examples/js/data/calendars.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="~/tuicalendar/examples/js/data/schedules.js" charset="windows-1254" type="text/javascript"></script>
+	<!-- <script src="./js/theme/dooray.js"></script> -->
+	<script src="~/tuicalendar/examples/js/app.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="~/tuicalendar/examples/js/default.js" charset="windows-1254" type="text/javascript"></script>
+
+	
 	@*	<div id="blazor-error-ui">
 		<environment include="Staging,Production">
 		An error has occurred. This application may no longer respond until reloaded.
@@ -102,168 +116,170 @@
 		</div>*@
 
 	<!-- Index JS Scripts -->
-	<script src="assets/js/app.min.js"></script>
-	<script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
-	<script src="assets/js/page/index.js"></script>
-	<script src="assets/js/scripts.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/app.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/apexcharts/apexcharts.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/index.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/scripts.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/custom.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Advanced Table JS File -->
-	<script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-	<script src="assets/js/page/advance-table.js"></script>
+	<script src="assets/js/page/advance-table.js" charset="windows-1254" type="text/javascript"></script>
 
 
 	<!-- GoogleTagManager JS File -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 
 	<!-- Page Register JS File -->
-	<script src="assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-	<script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
-	<script src="assets/js/page/auth-register.js"></script>
+	<script src="assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/jquery-selectric/jquery.selectric.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/auth-register.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page FullCalendar JS File -->
-	<script src="assets/bundles/fullcalendar/fullcalendar.min.js"></script>
-	<script src="assets/js/page/calendar.js"></script>
+	<script src="assets/bundles/fullcalendar/fullcalendar.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/calendar.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page Card JS File -->
-	<script src="assets/bundles/chocolat/dist/js/jquery.chocolat.min.js"></script>
-	<script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+	<script src="assets/bundles/chocolat/dist/js/jquery.chocolat.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/jquery-ui/jquery-ui.min.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page Char-Amcart JS File -->
-	<script src="assets/bundles/amcharts4/core.js"></script>
-	<script src="assets/bundles/amcharts4/charts.js"></script>
-	<script src="assets/bundles/amcharts4/animated.js"></script>
-	<script src="assets/bundles/amcharts4/worldLow.js"></script>
-	<script src="assets/bundles/amcharts4/maps.js"></script>
-	<script src="assets/js/page/chart-amchart.js"></script>
+	<script src="assets/bundles/amcharts4/core.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/amcharts4/charts.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/amcharts4/animated.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/amcharts4/worldLow.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/amcharts4/maps.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/chart-amchart.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page ApexChart JS File -->
-	<script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
-	<script src="assets/js/page/chart-apexcharts.js"></script>
+	<script src="assets/bundles/apexcharts/apexcharts.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/chart-apexcharts.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page ChartChart JS File -->
-	<script src="assets/bundles/chartjs/chart.min.js"></script>
-	<script src="assets/js/page/chart-chartjs.js"></script>
+	<script src="assets/bundles/chartjs/chart.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/chart-chartjs.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page ChartECart Js File -->
-	<script src="assets/bundles/echart/echarts.js"></script>
-	<script src="assets/js/page/chart-echarts.js"></script>
+	<script src="assets/bundles/echart/echarts.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/chart-echarts.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page ChartMorris Js File -->
-	<script src="assets/bundles/morris/morris.min.js"></script>
-	<script src="assets/bundles/morris/raphael-min.js"></script>
-	<script src="assets/js/page/chart-morris.js"></script>
+	<script src="assets/bundles/morris/morris.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/morris/raphael-min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/chart-morris.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page SparkLine Js File -->
-	<script src="assets/bundles/jquery.sparkline.min.js"></script>
-	<script src="assets/js/page/sparkline.js"></script>
+	<script src="assets/bundles/jquery.sparkline.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/sparkline.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page Chat JS File -->
-	<script src="assets/js/page/chat.js"></script>
+	<script src="assets/js/page/chat.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page Contact and Map JS File -->
 	<script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>
-	<script src="assets/bundles/gmaps.js"></script>
-	<script src="assets/js/page/contact.js"></script>
-	<script src="assets/js/page/gmaps-advanced-route.js"></script>
-	<script src="assets/js/page/gmaps-draggable-marker.js"></script>
-	<script src="assets/js/page/gmaps-geocoding.js"></script>
-	<script src="assets/js/page/gmaps-geolocation.js"></script>
-	<script src="assets/js/page/gmaps-multiple-marker.js"></script>
-	<script src="assets/js/page/gmaps-route.js"></script>
-	<script src="assets/js/page/gmaps-simple.js"></script>
+	<script src="assets/bundles/gmaps.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/contact.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-advanced-route.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-draggable-marker.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-geocoding.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-geolocation.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-multiple-marker.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-route.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/gmaps-simple.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Create Post JS Libraies -->
-	<script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
-	<script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
-	<script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-	<script src="assets/js/page/create-post.js"></script>
+	<script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/create-post.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- DataTable JS Libraies -->
-	<script src="assets/bundles/datatables/datatables.min.js"></script>
-	<script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
-	<script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-	<script src="assets/js/page/datatables.js"></script>
+	<script src="assets/bundles/datatables/datatables.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/datatables.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Export DataTable JS Libraies -->
-	<script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
-	<script src="assets/bundles/datatables/export-tables/buttons.flash.min.js"></script>
-	<script src="assets/bundles/datatables/export-tables/jszip.min.js"></script>
-	<script src="assets/bundles/datatables/export-tables/pdfmake.min.js"></script>
-	<script src="assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
-	<script src="assets/bundles/datatables/export-tables/buttons.print.min.js"></script>
-	<script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
+	<script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/buttons.flash.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/jszip.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/pdfmake.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/vfs_fonts.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/buttons.print.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--EditTable JS Libraies -->
-	<script src="assets/bundles/editable-table/mindmup-editabletable.js"></script>
-	<script src="assets/js/page/editable-table.js"></script>
+	<script src="assets/bundles/editable-table/mindmup-editabletable.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/editable-table.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--FormWizard JS Libraies -->
-	<script src="assets/bundles/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script src="assets/bundles/jquery-steps/jquery.steps.min.js"></script>
-	<script src="assets/js/page/form-wizard.js"></script>
+	<script src="assets/bundles/jquery-validation/dist/jquery.validate.min.js" charset="windows-1254" type="text/javascript"> </script>
+	<script src="assets/bundles/jquery-steps/jquery.steps.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/form-wizard.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Form Advanced JS Libraies -->
-	<script src="assets/bundles/cleave-js/dist/cleave.min.js"></script>
-	<script src="assets/bundles/cleave-js/dist/addons/cleave-phone.us.js"></script>
-	<script src="assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-	<script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
-	<script src="assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-	<script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-	<script src="assets/bundles/select2/dist/js/select2.full.min.js"></script>
-	<script src="assets/js/page/forms-advanced-forms.js"></script>
+	<script src="assets/bundles/cleave-js/dist/cleave.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/cleave-js/dist/addons/cleave-phone.us.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/select2/dist/js/select2.full.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/forms-advanced-forms.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Gallery1 JS Libraies -->
-	<script src="assets/js/page/gallery1.js"></script>
+	<script src="assets/js/page/gallery1.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- Page IonIcon JS File -->
-	<script src="assets/js/page/ion-icons.js"></script>
+	<script src="assets/js/page/ion-icons.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Upload JS Libraies -->
-	<script src="assets/bundles/dropzonejs/min/dropzone.min.js"></script>
-	<script src="assets/js/page/multiple-upload.js"></script>
+	<script src="assets/bundles/dropzonejs/min/dropzone.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/multiple-upload.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- JS Libraies -->
-	<script src="assets/bundles/owlcarousel2/dist/owl.carousel.min.js"></script>
-	<script src="assets/js/page/owl-carousel.js"></script>
+	<script src="assets/bundles/owlcarousel2/dist/owl.carousel.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/owl-carousel.js" charset="windows-1254" type="text/javascript"></script>
 
-	<script src="assets/js/page/posts.js"></script>
-	<script src="assets/bundles/chartjs/chart.min.js"></script>
-	<script src="assets/js/page/widget-data.js"></script>
-	<script src="assets/js/page/portfolio.js"></script>
+	<script src="assets/js/page/posts.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/chartjs/chart.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/widget-data.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/portfolio.js" charset="windows-1254" type="text/javascript"></script>
 
 
 	<!--JsSor Slider editor -->
-	<script src="assets/slider/js/jssor.slider-28.1.0.min.js"></script>
-	<script src="assets/slider/js/slider.conf.js"></script>
+	<script src="assets/slider/js/jssor.slider-28.1.0.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/slider/js/slider.conf.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--summernote editor -->
-	<script src="assets/bundles/summernote/summernote-bs4.js"></script>
-	<script src="assets/bundles/codemirror/lib/codemirror.js"></script>
-	<script src="assets/bundles/codemirror/mode/javascript/javascript.js"></script>
-
+	<script src="assets/bundles/summernote/summernote-bs4.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/codemirror/lib/codemirror.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/codemirror/mode/javascript/javascript.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!-- CkEditor Js -->
-	<script src="assets/js/page/ckeditor.js"></script>
-	<script src="assets/bundles/ckeditor/ckeditor.js"></script>
+	<script src="assets/js/page/ckeditor.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/ckeditor/ckeditor.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Gallery Js -->
-	<script src="assets/bundles/lightgallery/dist/js/lightgallery-all.js"></script>
-	<script src="assets/js/page/light-gallery.js"></script>
+	<script src="assets/bundles/lightgallery/dist/js/lightgallery-all.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/light-gallery.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Blazor Server Js -->
-	<script src="_framework/blazor.server.js"></script>
+	<script src="_framework/blazor.server.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Prism JS Libraies -->
-	<script src="assets/bundles/prism/prism.js"></script>
+	<script src="assets/bundles/prism/prism.js" charset="windows-1254" type="text/javascript"></script>
 
 	<!--Sweetalert ve Toast JS Libraies -->
-	<script src="assets/bundles/sweetalert/sweetalert.min.js"></script>
-	<script src="assets/js/page/sweetalert.js"></script>
-	<script src="assets/bundles/izitoast/js/iziToast.min.js"></script>
-	<script src="assets/js/page/toastr.js"></script>
+	<script src="assets/bundles/sweetalert/sweetalert.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/sweetalert.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/bundles/izitoast/js/iziToast.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/toastr.js" charset="windows-1254" type="text/javascript"></script>
 
-	<script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+	<!--Smart Blazor JS Libraies -->
+	<script src="_content/Smart.Blazor/js/smart.blazor.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="_content/Smart.Blazor/js/smart.elements.js" charset="windows-1254" type="text/javascript"></script>
+	<script type="module" src="_content/Smart.Blazor/js/modules/smart.table.js" charset="windows-1254" type="text/javascript"></script>
+
+	<!-- Page Form Wizar JS File -->
+	<script src="assets/bundles/jquery-validation/dist/jquery.validate.min.js" charset="windows-1254" type="text/javascript"></script>
+	<script src="assets/js/page/form-wizard.js" charset="windows-1254" type="text/javascript"></script>
 
 </body>
 </html>

@@ -1,9 +1,11 @@
-﻿<CardComponent cardStyle="Style.secondary">
-	<Header>
+﻿@using System.Data
+
+<CardComponent cardStyle="Style.secondary">
+	<CardHeader>
 
 		<i class="fas fa-money-check-alt"></i> Döviz Kurları
-	</Header>
-	<Body>
+	</CardHeader>
+	<CardBody>
 		<table class="table table-sm">
 			<thead>
 				<tr>
@@ -33,11 +35,11 @@
 				</tr>
 				<tr>
 					<td>
-						Dolar
+						@dolar.DovizAdi
 					</td>
-					<td>10,70₺</td>
+					<td>@dolar.DovizAlis</td>
 					<td>
-						10,75₺
+						@dolar.DovizSatis
 					</td>
 
 					<td>
@@ -50,11 +52,11 @@
 				</tr>
 				<tr>
 					<td>
-						Euro
+						@euro.DovizAdi
 					</td>
-					<td>12,20₺</td>
+					<td>@euro.DovizAlis</td>
 					<td>
-						12,40₺
+						@euro.DovizSatis
 					</td>
 
 					<td>
@@ -66,10 +68,16 @@
 
 				</tr>
 			</tbody>
+
 		</table>
-	</Body>
+
+		<a href="tumdovizler" class="nav-link"><span>Tüm Dövizler</span></a>
+
+	</CardBody>
 </CardComponent>
 
 @code {
 
+	DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
+	DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
 }
