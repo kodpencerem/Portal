@@ -684,6 +684,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\OneriComponent\" />
     <Folder Include="Pages\HavaDurumu\" />
   </ItemGroup>
 
