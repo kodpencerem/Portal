@@ -13,13 +13,14 @@ namespace VedasPortal.Shared
         {
             base.OnAfterRender(firstRender);
 
-            
+            await jsRun.InvokeVoidAsync("scriptsInit");
             if (firstRender)
             {
                 await jsRun.InvokeVoidAsync("indexInit");
-                await jsRun.InvokeVoidAsync("scriptsInit");
+                
                 
             }
+            
             
 
 
