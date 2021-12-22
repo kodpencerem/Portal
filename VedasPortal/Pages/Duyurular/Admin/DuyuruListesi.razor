@@ -4,13 +4,19 @@
 
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
+        
         <CardHeader>
-            <div class="col-md-12">
-                Duyuru Listesi|
-                <a href='/duyuru/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Duyuru Ekle</a>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Duyuru Listesi|
+                    <a href='/duyuru/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Duyuru Ekle</a>
+                </div>
+            </div>
+            <div style="margin-left:1000px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
             </div>
         </CardHeader>
-        <CardBody >
+        <CardBody>
             <div class="table-responsive">
                 <table class="table table-striped" id="table-2">
                     <thead>

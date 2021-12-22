@@ -1,63 +1,68 @@
 ﻿@page "/katilimcilar"
 
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Katılımcılar|
+                    <a href='/etkinlikkategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Katılımcı Ekle</a>
+                </div>
+            </div>
+            <div style="margin-left:1000px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
+            </div>
+        </CardHeader>
 
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4>Katılımcılar</h4>|
-				<div class="col-md-4">
-					<a href='/etkinlikkategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Katılımcı Ekle</a>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-striped" id="table-2">
-						<thead>
-							<tr>
-								<th class="text-center pt-3">
-									<div class="custom-checkbox custom-checkbox-table custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-											   class="custom-control-input" id="checkbox-all">
-										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-									</div>
-								</th>
-								<th>Katılımcı Unvan Bilgisi</th>
-								<th>Katılımcı Adı</th>
-								<th>İşlemler</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center pt-2">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-											   id="checkbox-1">
-										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-									</div>
-								</td>
-								<td>
-									<img alt="image" src="assets/img/users/user-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
-									KatilimciUnvani
-								</td>
+        <CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Katılımcı Unvan Bilgisi</th>
+                            <th>Katılımcı Adı</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center pt-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
+                                KatilimciUnvani
+                            </td>
 
-								<td>KatilimciAdSoyad</td>
+                            <td>KatilimciAdSoyad</td>
 
-								<td>
-									<a href='/katilimci/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-									<button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal">
-										Sil
-									</button>
-								</td>
-							</tr>
+                            <td>
+                                <a href='/katilimci/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal">
+                                    Sil
+                                </button>
+                            </td>
+                        </tr>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </tbody>
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
 </div>
+
 
 
 

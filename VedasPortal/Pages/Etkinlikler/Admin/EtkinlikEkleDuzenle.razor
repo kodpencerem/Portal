@@ -1,69 +1,65 @@
 ﻿@page "/etkinlik/ekle"
 @page "/etkinlik/duzenle"
 
+<div class="col-12 col-md-12 col-lg-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Etkinlik Ekle/Düzenle
+        </CardHeader>
+        <CardBody>
 
-<h4 style="margin:10px">Etkinlik Ekle Duzenle</h4>
-<hr />
+            <div class="form-group row">
+                <label class="control-label col-md-12">Resim/Video Ekle</label>
+                <div class="col-md-12">
+                    <MultipleUpload></MultipleUpload>
+                </div>
+            </div>
 
-<section style="margin-left:5px" class="container">
-
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Resim</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Etkinlik Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Açıklama</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label>Etkinlik Adı</label>
+                <input type="text" class="form-control">
+            </div>
 
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Katılım Yeri</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label>Açıklama Metni</label>
+                <Summernote></Summernote>
+            </div>
+
+            <div class="form-group row">
+                <label class="control-label col-md-12">Katılım Yeri</label>
+                <div class="col-md-4">
+                    <text class="form-control" />
+                </div>
+            </div>
 
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Etkinlik Başlangıç Tarihi</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label>Etkinlik Durumu</label>
+                <input type="text" class="form-control">
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Etkinlik Bitiş Tarihi</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label class="control-label col-md-12">Etkinlik Başlangıç Tarihi</label>
+                <input type="datetime-local" class="form-control">
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Etkinlik Durumu</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label class="control-label col-md-12">Etkinlik Bitiş Tarihi</label>
+                <input type="datetime-local" class="form-control">
+            </div>
 
 
+            <div class="form-group">
+                <label>Eklenme Tarihi</label>
+                <input type="datetime-local" class="form-control">
+            </div>
 
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
+            <div class="card-footer text-right">
+                <SaveButton></SaveButton>
+                <CancelButton ></CancelButton>
+            </div>
+        </CardBody>
 
-</section>
+    </CardComponent>
+</div>

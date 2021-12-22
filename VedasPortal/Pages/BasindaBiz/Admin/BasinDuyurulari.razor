@@ -4,14 +4,19 @@
 
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
-        <CardHeader >
-            
-            <div class="col-md-12">
-                Basın Duyuruları |
-                <a href='/basinduyurusu/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Basın Duyurusu Ekle</a>
+        
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Basın Duyuruları |
+                    <a href='/basinduyurusu/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Basın Duyurusu Ekle</a>
+                </div>
+            </div>
+            <div style="margin-left:935px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
             </div>
         </CardHeader>
-        <CardBody >
+        <CardBody>
             <div class="table-responsive">
                 <table class="table table-striped" id="table-2">
                     <thead>
@@ -27,7 +32,7 @@
                             <th>Basın DuyuruAdi</th>
                             <th>DuyuruAciklama</th>
                             <th>Ekleyen Birim</th>
-                            
+
                             <th>Yayın Tarihi</th>
                             <th>İşlemler</th>
                         </tr>
@@ -45,7 +50,7 @@
                             <td>Basın DuyuruAdi</td>
                             <td>DuyuruAciklama</td>
                             <td>Bilgi İşlem</td>
-                            
+
                             <td>21.12.2021</td>
                             <td>
                                 <a href="/basinduyurusu/duzenle/" class="btn btn-info">

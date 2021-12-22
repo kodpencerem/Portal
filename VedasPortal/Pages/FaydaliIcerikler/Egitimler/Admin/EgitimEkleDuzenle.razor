@@ -1,65 +1,61 @@
 ﻿@page "/egitim/ekle"
 @page "/egitim/duzenle/"
 
-<h4 style="margin:10px">Eğitim Ekle Duzenle</h4>
-<hr />
+<div class="col-12 col-md-12 col-lg-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Eğitim Ekle/Düzenle
+        </CardHeader>
+        <CardBody>
+            <div class="form-group">
+                <label class="control-label col-md-12">Resim/Video</label>
+                <MultipleUpload></MultipleUpload>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitim Adı</label>
+                <input type="text" class="form-control">
+            </div>
 
-<section style="margin-left:5px" class="container">
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitim Hakkında Detaylı Bilgi</label>
+                <Summernote></Summernote>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Resim</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitim İçin Gereksinimler</label>
+                <Summernote></Summernote>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Eğitim Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitmen Adı</label>
+                <input type="text" class="form-control">
+            </div>
 
+            <div class="form-group">
+                <label>Eğitimi Görecek Birimler</label>
+                <select class="form-control">
+                    <option>Tüm Birimler</option>
+                    <option>İnsan Kaynakları</option>
+                    <option>Bilgi İşlem</option>
+                    <option>Hukuk</option>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label>Eğitimi Ekleyen Birim</label>
+                <select class="form-control">
+                    <option>Scada</option>
+                    <option>İnsan Kaynakları</option>
+                    <option>Bilgi İşlem</option>
+                    <option>Hukuk</option>
+                </select>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Eğitim Hakkında Detaylı Bilgi</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="card-footer text-right">
+                <SaveButton></SaveButton>
+                <CancelButton></CancelButton>
+            </div>
+        </CardBody>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Eğitim İçin Gereksinimler</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Oynatma Listesi</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Ekleyen Yetkili Unvanı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Ekleyen Yetkili Ad Soyad</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
-
-</section>
+    </CardComponent>
+</div>

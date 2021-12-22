@@ -1,146 +1,146 @@
 ﻿@page "/admindosyalistesi"
 
-<br />
-<section class="section">
-	<div class="section-body">
-		<div class="row">
-			<div class="col-12">
-				<div class="card mb-0">
-					<div class="card-body">
-						<ul class="nav nav-pills">
-							<li class="nav-item">
-								<a class="nav-link active" href="#">Tüm Dosyalar <span class="badge badge-white">10</span></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Taslak <span class="badge badge-primary">2</span></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Gönderilen <span class="badge badge-primary">3</span></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Silinen <span class="badge badge-primary">0</span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-4">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-header">
-						<h4>Tüm Dosyalar</h4>
-					</div>
-					<div class="card-body">
-						<div class="float-left">
-							<select class="form-control selectric">
-								<option>Seçiniz</option>
-								<option>Taslak Dosyalara Taşı</option>
-								<option>Gönderilene Taşı</option>
-								<option>Kalıcı Olarak Sil</option>
-							</select>
-						</div>
-						<div class="float-right">
-							<form>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Arama">
-									<div class="input-group-append">
-										<button class="btn btn-primary"><i class="fas fa-search"></i></button>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="clearfix mb-3"></div>
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<tr>
-									<th class="pt-2">
-										<div class="custom-checkbox custom-checkbox-table custom-control">
-											<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-												   class="custom-control-input" id="checkbox-all">
-											<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-										</div>
-									</th>
-									<th>Ekleyen Kullanıcı </th>
-									<th>Dosya Adı</th>
-									<th>Dosya Boyutu</th>
-									<th>Dosya Yolu</th>
-									<th>Dosya Kategorisi</th>
-									<th>Eklenme Tarihi</th>
-									<th>Dosya Durumu</th>
-								</tr>
-								<tr>
-									<td>
-										<div class="custom-checkbox custom-control">
-											<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-												   id="checkbox-2">
-											<label for="checkbox-2" class="custom-control-label">&nbsp;</label>
-										</div>
-									</td>
-									<td>
-										<a href="#">
-											<img alt="image" src="assets/img/users/user-1.png" class="rounded-circle" width="35"
-												 data-toggle="title" title="">
-											<span class="d-inline-block ml-1">Cara Stevens</span>
-										</a>
-									</td>
-									<td>
-										Ticari Kalite
-										<div class="table-links">
-											<a href="#">Görüntüle</a>
-											<div class="bullet"></div>
-											<a href="#">Düzenle</a>
-											<div class="bullet"></div>
-											<a href="#" class="text-danger">Sil</a>
-										</div>
-									</td>
-									<td>
-										<a>6 Mb</a>
-									</td>
-									<td>
-										C:
-									</td>
-									<td>
-										Şirket Dosyaları
-									</td>
-									<td>10-02-2019</td>
-									
-									<td>
-										<div class="badge badge-warning">Yayın Süresi Bitmek Üzere</div>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="float-right">
-							<nav>
-								<ul class="pagination">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-											<span class="sr-only">Geri</span>
-										</a>
-									</li>
-									<li class="page-item active">
-										<a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-											<span class="sr-only">İleri</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Tüm Dosyalar ve Dökümanlar |
+                </div>
+            </div>
+            <div style="margin-left:1000px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
+            </div>
+        </CardHeader>
+        <CardBody>
+
+
+            <div class="row">
+                <div class="float-left">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Tüm Dosyalar <span class="badge badge-white">10</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Taslak <span class="badge badge-primary">2</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Gönderilen <span class="badge badge-primary">3</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Silinen <span class="badge badge-primary">0</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="float-right">
+                    <select class="form-control selectric">
+                        <option>Seçiniz</option>
+                        <option>Taslak Dosyalara Taşı</option>
+                        <option>Gönderilene Taşı</option>
+                        <option>Kalıcı Olarak Sil</option>
+                    </select>
+
+                </div>
+                
+            </div>
+
+            <div class="row">
+
+
+                <div class="clearfix mb-3"></div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="pt-2">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Ekleyen Kullanıcı </th>
+                            <th>Dosya Adı</th>
+                            <th>Dosya Boyutu</th>
+                            <th>Dosya Yolu</th>
+                            <th>Dosya Kategorisi</th>
+                            <th>Eklenme Tarihi</th>
+                            <th>Dosya Durumu</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-2">
+                                    <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle" width="35"
+                                         data-toggle="title" title="">
+                                    <span class="d-inline-block ml-1">Cara Stevens</span>
+                                </a>
+                            </td>
+                            <td>
+                                Ticari Kalite
+                                <div class="table-links">
+                                    <a href="#">Görüntüle</a>
+                                    <div class="bullet"></div>
+                                    <a href="#">Düzenle</a>
+                                    <div class="bullet"></div>
+                                    <a href="#" class="text-danger">Sil</a>
+                                </div>
+                            </td>
+                            <td>
+                                <a>6 Mb</a>
+                            </td>
+                            <td>
+                                C:
+                            </td>
+                            <td>
+                                Şirket Dosyaları
+                            </td>
+                            <td>10-02-2019</td>
+
+                            <td>
+                                <div class="badge badge-warning">Yayın Süresi Bitmek Üzere</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="float-right">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Geri</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">İleri</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </CardBody>
+    </CardComponent>
+</div>
+
+
+
