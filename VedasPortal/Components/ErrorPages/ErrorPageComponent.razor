@@ -1,0 +1,29 @@
+﻿
+<div class="container mt-5">
+    <div class="page-error">
+        <div class="page-inner">
+            <h1>@ErrorName</h1>
+            <div class="page-description">
+                @ErrorDescription
+            </div>
+            <div class="page-search">
+                @PageSearch
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code{
+
+    [Parameter]
+    public RenderFragment ErrorName { get; set; }
+
+
+    [Parameter]
+    public RenderFragment PageSearch { get; set; }
+    
+    [Parameter]
+    public RenderFragment ErrorDescription { get; set; }
+}
+
