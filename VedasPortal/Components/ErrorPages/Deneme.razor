@@ -1,0 +1,118 @@
+﻿@page "/deneme"
+
+<Page404 ErrorText="Bu sayfaya ulaşılamıyor"
+		 ErrorDescription="Whoopps, yanlış giden birşeyler var. ">
+
+	<ChildContext>
+
+		<form>
+			<div class="form-group floating-addon floating-addon-not-append">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+
+					<input type="text" class="form-control" placeholder="Ara">
+					<div class="input-group-append">
+						<button class="btn btn-primary btn-lg">
+							Ara
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ChildContext>
+
+</Page404>
+
+<Page403 ErrorDescription="Http Durum kodu aldınız. "
+		 ErrorText="Bu sayfaya ulaşılamıyor. ">
+
+	<ChildContext>
+		<form>
+			<div class="form-group floating-addon floating-addon-not-append">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+					<input type="text" class="form-control" placeholder="Ara">
+					<div class="input-group-append">
+						<button class="btn btn-primary btn-lg">
+							Ara
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ChildContext>
+</Page403>
+
+<Page500 ErrorDescription="Veri  Tabanına bağlanmadı .">
+	<ChildContext>
+		<form>
+			<div class="form-group floating-addon floating-addon-not-append">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+					<input type="text" class="form-control" placeholder="Arama Yapın">
+					<div class="input-group-append">
+						<button class="btn btn-primary btn-lg">
+							Ara
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</ChildContext>
+</Page500>
+
+
+<Page503 ErrorDescription="Bir süre sonra burdayız tekrar. Hata için özür dileriz...">
+	<ChildContext>
+
+
+		<form>
+			<div class="form-group floating-addon floating-addon-not-append">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+					<input type="text" class="form-control" placeholder="Arama Yapın">
+					<div class="input-group-append">
+						<button class="btn btn-primary btn-lg">
+							Ara
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ChildContext>
+</Page503>
+
+<EmptyPage ErrorText="Hiç Bir Data  Bulunamadı."
+		   ErrorDescription="Üzgünüz, herhangi bir veri bulamıyoruz, bu mesajdan kurtulmak için ana sayfaya dönebilirsiniz...">
+
+</EmptyPage>
+
+<RequestFailed ErrorText="Hatalı HTTP/S İsteği"
+			   ErrorDescription="Denedik, ancak sunucuya veri isterken başarısız oldu, üzgünüz.">
+	<ChildContext>
+		<div class="empty-state-icon bg-danger">
+			<i class="fas fa-times"></i>
+		</div>
+
+	</ChildContext>
+
+
+
+</RequestFailed>
