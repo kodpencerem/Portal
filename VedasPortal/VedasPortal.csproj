@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\OneriComponent\**" />
     <Compile Remove="wwwroot\assets\onerisistemi\**" />
     <Compile Remove="wwwroot\slider\**" />
+    <Content Remove="Components\OneriComponent\**" />
     <Content Remove="wwwroot\assets\onerisistemi\**" />
     <Content Remove="wwwroot\slider\**" />
+    <EmbeddedResource Remove="Components\OneriComponent\**" />
     <EmbeddedResource Remove="wwwroot\assets\onerisistemi\**" />
     <EmbeddedResource Remove="wwwroot\slider\**" />
+    <None Remove="Components\OneriComponent\**" />
     <None Remove="wwwroot\assets\onerisistemi\**" />
     <None Remove="wwwroot\slider\**" />
+    <TypeScriptCompile Remove="Components\OneriComponent\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -694,7 +699,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\OneriComponent\" />
     <Folder Include="Pages\HavaDurumu\" />
   </ItemGroup>
 

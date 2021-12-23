@@ -1,5 +1,21 @@
-﻿<h3>RequestFailed</h3>
+﻿@page "/EmptyPage"
 
-@code {
+<RequestCompoment>
+    <RequestHeader>
+        Hata İstekte Bulundunuz
+    </RequestHeader>
+    <EmptyState>
 
-}
+        <div class="empty-state-icon bg-danger">
+            <i class="fas fa-times"></i>
+        </div>
+        <h2>Hatalı HTTP isteği</h2>
+        <p class="lead">
+            Denedik, ancak sunucuya veri isterken başarısız oldu, üzgünüm. (Kod: <a href="#"
+                                                                                    class="bb">14045</a>)
+        </p>
+        <a href="#" class="btn btn-warning mt-4">Tekrar Deneyin</a>
+        <CancelButton></CancelButton>
+
+    </EmptyState>
+</RequestCompoment>
