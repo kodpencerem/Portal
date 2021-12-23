@@ -1,79 +1,80 @@
 ﻿@page "/MevzuatKategoriBilgisi"
 
 
+<CardComponent cardStyle="Style.primary">
 
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4>Mevzuat Kategorileri</h4>|
-				<div class="col-md-4">
-					<a href='/mevzuatkategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Mevzuat Kategorisi Ekle</a>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-striped" id="table-2">
-						<thead>
-							<tr>
-								<th class="text-center pt-3">
-									<div class="custom-checkbox custom-checkbox-table custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-											   class="custom-control-input" id="checkbox-all">
-										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-									</div>
-								</th>
-								<th>Kategori Adı</th>
-								<th>Açıklama</th>
-								<th>Mevzuat Kategori Durumu</th>
-								<th>İşlemler</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center pt-2">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-											   id="checkbox-1">
-										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-									</div>
-								</td>
-								<td>Eğitim Kalite</td>
+    <CardHeader>
+        <div class="float-left">
+            <div class="col-md-12">
+                Mevzuat Kategorileri|
+                <a href='/mevzuatkategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Mevzuat Kategorisi Ekle</a>
+            </div>
+        </div>
+        <div style="margin-left:920px" class="float-right">
+            <AraButton btnStyle="Style.primary"></AraButton>
+        </div>
+    </CardHeader>
+    <CardBody>
+        <div class="table-responsive">
+            <table class="table table-striped" id="table-2">
+                <thead>
+                    <tr>
+                        <th class="text-center pt-3">
+                            <div class="custom-checkbox custom-checkbox-table custom-control">
+                                <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                       class="custom-control-input" id="checkbox-all">
+                                <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                            </div>
+                        </th>
+                        <th>Kategori Adı</th>
+                        <th>Açıklama</th>
+                        <th>Mevzuat Kategori Durumu</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center pt-2">
+                            <div class="custom-checkbox custom-control">
+                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                       id="checkbox-1">
+                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                            </div>
+                        </td>
+                        <td>Eğitim Kalite</td>
 
-								<td>Açıklama</td>
-								<td>
-									<div class="badge badge-success">Aktif</div>
-								</td>
-								<td>
-									<a href="/mevzuatkategori/duzenle/" class="btn btn-info">
-										Düzenle
-									</a>
-									|
-									<a href="mevzuatkategoridetay" class="btn btn-primary">
-										Detay Bilgi
-									</a>
-									|
-									<a href="#" class="btn btn-danger">
-										Sil
-									</a>
-								</td>
-							</tr>
+                        <td>Açıklama</td>
+                        <td>
+                            <div class="badge badge-success">Aktif</div>
+                        </td>
+                        <td>
+                            <a href="/mevzuatkategori/duzenle/" class="btn btn-info">
+                                Düzenle
+                            </a>
+                            |
+                            <a href="mevzuatkategoridetay" class="btn btn-primary">
+                                Detay Bilgi
+                            </a>
+                            |
+                            <a href="#" class="btn btn-danger">
+                                Sil
+                            </a>
+                        </td>
+                    </tr>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
+                </tbody>
+            </table>
+        </div>
+    </CardBody>
+</CardComponent>
 
 
 
 
 
-@code {
 
-}
+
+
+
+
+@code { }
