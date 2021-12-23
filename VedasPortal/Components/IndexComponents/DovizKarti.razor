@@ -1,10 +1,10 @@
 ﻿@using System.Data
 
 <CardComponent cardStyle="Style.secondary">
-	<CardHeader>
-
-		<i class="fas fa-money-check-alt"></i> Döviz Kurları
-	</CardHeader>
+    <CardHeader>
+        <i class="fas fa-money-check-alt"></i>Döviz Kurları |
+        <a class="text-danger">TCMB hergün 15.30'da güncelleme yapmaktadır!</a>
+    </CardHeader>
 	<CardBody>
 		<table class="table table-sm">
 			<thead>
@@ -78,6 +78,6 @@
 
 @code {
 
-	DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
-	DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
+	DovizKurlari dolar = HavaDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
+	DovizKurlari euro = HavaDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
 }

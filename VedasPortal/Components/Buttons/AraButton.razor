@@ -1,11 +1,15 @@
-﻿<div class="chat-search">
-    @SearchButtonBody
-    <input type="text" class="form-control" placeholder="Ara..." />
+﻿<div class="float-right">
+    <form>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Bu alanda arama yapın...">
+            <div class="input-group-btn">
+                <button class="@("btn btn-"+btnStyle.ToString())"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
 </div>
+@code { [Parameter]
+            public RenderFragment SearchButtonBody { get; set; }
 
-@code {
-    
-    [Parameter]
-    public RenderFragment SearchButtonBody { get; set; }
-
-}
+            [Parameter]
+            public Style btnStyle { get; set; } }
