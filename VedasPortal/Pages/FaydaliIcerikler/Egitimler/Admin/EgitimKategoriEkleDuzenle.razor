@@ -1,33 +1,62 @@
 ﻿@page "/egitimkategori/ekle"
 @page "/egitimkategori/duzenle/"
 
-<h4 style="margin:10px">Eğitim Kategori Ekle Duzenle</h4>
-<hr />
 
-<section style="margin-left:5px" class="container">
-	<div class="form-group row">
-		<label class="control-label col-md-12">Eğitim Kategori Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Eğitim Kategori Ekle Duzenle
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Açıklama</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+                </div>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Eğitim Kategori Durumu</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
+        </CardHeader>
 
-</section>
+        <CardBody>
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitim Kategori Adı</label>
+                <div class="col-md-12">
+                    <input class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-12">Açıklama</label>
+                <div class="col-md-12">
+                    <input class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-12">Eğitim Kategori Durumu</label>
+                <div class="col-md-12">
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <SaveButton Caption="Kaydet"></SaveButton>
+                <CancelButton Caption="Vazgeç"></CancelButton>
+            </div>
+        </CardBody>
+
+    </CardComponent>
+
+</div>
+
+
+
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

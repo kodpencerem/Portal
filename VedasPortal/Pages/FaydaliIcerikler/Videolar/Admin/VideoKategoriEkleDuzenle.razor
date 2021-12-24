@@ -1,34 +1,45 @@
 ﻿@page "/videokategori/ekle"
 @page "/videokategori/duzenle/"
 
-<h4 style="margin:10px">Video Kategorisi Ekle Duzenle</h4>
-<hr />
+<div class="col-12 col-md-12 col-lg-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Video Kategorisi Ekle/Düzenle
+        </CardHeader>
+        <CardBody>
+            <div class="form-group">
+                <label>Video Kategorisi Adı</label>
+                <input type="text" class="form-control">
+            </div>
 
-<section style="margin-left:5px" class="container">
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Video Kategori Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label>Açıklama Metni</label>
+                <Summernote></Summernote>
+            </div>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Açıklama</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
+            <div class="form-group">
+                <label>Video Kategorisi Durumu</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="card-footer text-right">
+                <SaveButton></SaveButton>
+                <CancelButton></CancelButton>
+            </div>
+        </CardBody>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Video Kategori Durumu</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
+    </CardComponent>
+</div>
 
-</section>
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

@@ -1,56 +1,130 @@
 ﻿@page "/Ayrilanlar"
 
+<div class="col-12">
+    <CardComponent cardStyle="Style.danger">
 
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Aramızdan Ayrılan Personellerimiz
+                </div>
+            </div>
+            <div style="margin-left:980px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
+            </div>
+        </CardHeader>
 
-<h4 class="text-center">Aramızdan Ayrılan Personellerimiz </h4>
-<hr />
-<div class="row">
-	<div class="input-group col-md-4 offset-md-4">
-		<input type="text" class="form-control" placeholder="Personel adı ile arama yapın..."
-			   @bind:event="oninput" />
-		<div class="input-group-append">
-			<button class="btn btn-info">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</div>
+        <CardBody>
+            <div class="row">
+                <div style="margin-top:-15px" class="col-4">
+                    <CardComponent cardStyle="Style.danger">
+                        <CardBody>
+                            <div class="author-box-center align-center">
+                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="author-box-details">
+                                <br />
+                                <div class="author-box-description">
+                                    <p style="color:blue" class="text-center">
+                                        Şirketimiz <strong style="color:darkblue">
+                                            Temsilcilik Adı Personel Görevi
+                                        </strong> Olarak Görev Yapan
+                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden
+                                        <strong style="color:darkblue">
+                                            Ayrılış Tarihi
+                                        </strong> Tarihi İtibariyle Ayrılmıştır.
+                                    </p> <p style="color:blue" class="text-center">
+                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
+                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
+                                    </p>
+                                </div>
+
+                                <div class="float-right mt-sm-0 mt-3">
+                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </CardComponent>
+                </div>
+                <div style="margin-top:-15px" class="col-4">
+                    <CardComponent cardStyle="Style.danger">
+                        <CardBody>
+                            <div class="author-box-center align-center">
+                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="author-box-details">
+                                <br />
+                                <div class="author-box-description">
+                                    <p style="color:blue" class="text-center">
+                                        Şirketimiz <strong style="color:darkblue">
+                                            Temsilcilik Adı Personel Görevi
+                                        </strong> Olarak Görev Yapan
+                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden <strong style="color:darkblue">
+                                            Ayrılış Tarihi
+                                        </strong> Tarihi İtibariyle Ayrılmıştır.
+                                    </p> <p style="color:blue" class="text-center">
+                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
+                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
+                                    </p>
+                                </div>
+
+                                <div class="float-right mt-sm-0 mt-3">
+                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </CardComponent>
+                </div>
+
+                <div style="margin-top:-15px" class="col-4">
+                    <CardComponent cardStyle="Style.danger">
+                        <CardBody>
+                            <div class="author-box-center align-center">
+                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="author-box-details">
+                                <br />
+                                <div class="author-box-description">
+                                    <p style="color:blue" class="text-center">
+                                        Şirketimiz <strong style="color:darkblue">
+                                            Temsilcilik Adı Personel Görevi
+                                        </strong> Olarak Görev Yapan
+                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden <strong style="color:darkblue">
+                                            Ayrılış Tarihi
+                                        </strong> Tarihi İtibariyle Ayrılmıştır.
+                                    </p> <p style="color:blue" class="text-center">
+                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
+                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
+                                    </p>
+                                </div>
+
+                                <div class="float-right mt-sm-0 mt-3">
+                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </CardComponent>
+                </div>
+
+            </div>
+        </CardBody>
+    </CardComponent>
+
 </div>
-<br />
 
-<section class="section">
-	<div class="section-body">
-		<div class="row">
-			<div class="col-4">
-				<div class="card author-box card-primary">
-					<div class="card-body">
-						<div class="author-box-left">
-							<img alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-							<div class="clearfix"></div>
-						</div>
-						<div class="author-box-details">
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
 
-							<div  class="author-box-description">
-								<p style="color:blue" class="text-center">
-									Şirketimiz <strong style="color:darkblue">
-										Temsilcilik Adı Personel Görevi
-									</strong> Olarak Görev Yapan
-									<strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden <strong style="color:darkblue" >
-										Ayrılış Tarihi
-									</strong> Tarihi İtibariyle Ayrılmıştır.
-								</p> <p style="color:blue" class="text-center" >
-									Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
-									Bundan Sonraki İş Hayatında Başarılar Dileriz.
-								</p>
-							</div>
-
-							<div class="float-right mt-sm-0 mt-3">
-								<a  href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
