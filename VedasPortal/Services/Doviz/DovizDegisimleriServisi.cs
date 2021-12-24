@@ -24,7 +24,7 @@ namespace VedasPortal.Services.Doviz
         TRY,
     }
 
-    public static class HavaDegisimleriServisi
+    public static class DovizDegisimleriServisi
     {
 
         /// <summary>
