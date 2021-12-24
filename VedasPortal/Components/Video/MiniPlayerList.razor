@@ -1,0 +1,24 @@
+﻿@inject VedasPortal.Services.VideoService.IVideoService videoServisi
+
+<div class="row">
+    <div class="col-7">
+        <MiniVideoBox SecilenVideo="secilenVideo" />
+    </div>
+    <div class="col-5">
+        <VideoKoleksiyonu Videolar="videolar" VideoSec="SecilenVideo" />
+    </div>
+</div>
+
+@code { List<VideoDetay> videolar = new List<VideoDetay>();
+    VideoDetay secilenVideo = new VideoDetay();
+
+    protected override void OnInitialized()
+    {
+        videolar = videoServisi.VideoGetir();
+        secilenVideo = videolar.FirstOrDefault();
+    }
+
+    void SecilenVideo(VideoDetay videoDetay)
+    {
+        secilenVideo = videoDetay;
+    } }
