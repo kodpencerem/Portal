@@ -1,17 +1,21 @@
 ﻿@page "/ikuygulamalistesi"
 
-
-
 <div class="row">
 	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4>İnsan Kaynakları Uygulamaları</h4>|
-				<div class="col-md-4">
-					<a href='/ikuygulama/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Ik Uygulaması Ekle</a>
+		<CardComponent>
+			<CardHeader>
+
+				<div class="float-left">
+					<div class="col-md-12">
+						İnsan Kaynakları Uygulamaları
+						<a href='ikuygulama/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i>IK Kategori Ekle</a>
+					</div>
 				</div>
-			</div>
-			<div class="card-body">
+				<div style="margin-left:920px" class="float-right">
+					<AraButton btnStyle="Style.primary"></AraButton>
+				</div>
+			</CardHeader>
+			<CardBody>
 				<div class="table-responsive">
 					<table class="table table-striped" id="table-2">
 						<thead>
@@ -42,18 +46,17 @@
 								<td>Açıklama</td>
 								<td>Bağlantı Url</td>
 								<td>
-									<a href='/ikuygulama/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-									<button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal" )">
-										Sil
-									</button>
+
+									<CustomEditButton Color="info"></CustomEditButton>
+									<DeleteButton></DeleteButton>
 								</td>
 							</tr>
 
 						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
+			</CardBody>
+		</CardComponent>
 	</div>
 </div>
 

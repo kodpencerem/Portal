@@ -1,39 +1,47 @@
 ﻿@page "/ikuygulama/ekle"
 @page "/ikuygulama/duzenle/"
 
-<h4 style="margin:10px">Ik Uygulama Ekle Duzenle</h4>
-<hr />
 
-<section style="margin-left:5px" class="container">
+<div class="col-12 col-md-12 col-lg-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Ik Uygulama Ekle Duzenle
+        </CardHeader>
+        <CardBody>
+            <div class="form-group">
+                <label class="control-label col-md-12">Resim/Video/Döküman Ekle</label>
+                <MultipleUpload></MultipleUpload>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-12"> Uygulama Adı </label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-12"> IK Uygulama Detaylı  Açıklama</label>
+                <Summernote></Summernote>
+            </div>
+            <div class="form-group">
+                <label>Başlangıç Tarihi</label>
+                <input type="datetime-local" class="form-control col-md-4">
+            </div>
+            <div class="form-group">
+                <label>Bitiş Tarihi</label>
+                <input type="datetime-local" class="form-control col-md-4">
+            </div>
+            <div class="form-group col-md-4">
+                <label>IK Uygulamasını Görecek Birimler</label>
+                <select class="form-control">
+                    <option>Tüm Birimler</option>
+                    <option>İnsan Kaynakları</option>
+                    <option>Bilgi İşlem</option>
+                    <option>Hukuk</option>
+                </select>
+            </div>
+            <div class="card-footer text-right">
+                <SaveButton></SaveButton>
+                <CancelButton></CancelButton>
+            </div>
+        </CardBody>
 
-	<div class="form-group row">
-		<label class="control-label col-md-12">Uygulama Adı</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Açıklama</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-
-
-	<div class="form-group row">
-		<label class="control-label col-md-12">Bağlantı Url</label>
-		<div class="col-md-4">
-			<text class="form-control" />
-		</div>
-	</div>
-
-
-
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Kaydet</button>
-		<button class="btn btn-light">Vazgeç</button>
-	</div>
-
-</section>
+    </CardComponent>
+</div>
