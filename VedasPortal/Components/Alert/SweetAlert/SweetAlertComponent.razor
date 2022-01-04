@@ -1,5 +1,5 @@
 ﻿@inject IJSRuntime jsRun
-@inherits BaseButton
+
 <div class="card">
     <div class="card-body text-center">
         <div class="mb-2">
@@ -27,6 +27,7 @@
 
     [Parameter]
     public int Sayi { get; set; }
+
     [Parameter]
     public SweetAlert SweetAlertEnum { get; set; }
 
@@ -35,7 +36,7 @@
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            await jsRun.InvokeVoidAsync("multipleUpload");
+            await jsRun.InvokeVoidAsync("sweetAlert");
 
         }
     }

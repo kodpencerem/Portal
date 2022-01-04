@@ -55,8 +55,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Tabs\TabItem.razor" />
-    <None Include="Components\Tabs\Tabs.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />

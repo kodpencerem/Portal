@@ -7,11 +7,9 @@
         <div class="card-body text-center">
             @ToastrBody
             <div class="mb-2">@ToastrHeader</div>
-            <button class="@("btn btn-"+toastrStyle.ToString())" id="@("toastr-" +(int)toastrId)">Launch</button>
+            <button class="@("btn btn-"+toastrStyle.ToString())" id="@("toastr-" +(int)toastrId)">ElementName</button>
         </div>
     </div>
-
-
 </div>
 
 
@@ -29,6 +27,9 @@
     public RenderFragment ToastrBody { get; set; }
     [Parameter]
     public RenderFragment ToastrHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment ElementName { get; set; }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
