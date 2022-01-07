@@ -1,83 +1,78 @@
 ﻿@page "/rezervasyonyonetim"
 
 
-<div class="row">
-	<div class="col-12">
-		<CardComponent cardStyle=Style.primary>
-			<CardHeader>
-				<div class="float-left">
-					<div class="col-6">
-						<h4>Toplantı Odaları Rezervasyon Durumları</h4> 
+<div class="col-12">
+    <CardComponent cardStyle=Style.primary>
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-12">
+                    Toplantı Odaları Rezervasyon Durumları| <p class="fontsize"> Rezerv  durumunu  düzenle menüsünden değiştirirek iptal edebilir veya aktif edebilirsiniz!!</p>
+                </div>
+         
+            </div>
 
-						
-					</div>
-					 <div  style="margin-right:960px" class="float-right">
-					 <p class="fontsize" >Rezerv  durumunu  düzenle menüsünden değiştirirek iptal edebilir veya aktif edebilirsiniz!!</p>
+        </CardHeader>
+        <CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Toplantı Odası Adı</th>
+                            <th>Rezerv Tarihi</th>
+                            <th>Rezerv Durumu</th>
+                            <th>Rezerv Eden Personel</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center pt-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>Toplantı Odas Adı</td>
+                            <td>Rezerv Tarihi</td>
+                            <td>Rezerv Durumu</td>
+                            <td>Rezerv Eden Personel</td>
+                            <td>
+                                <button class="btn btn-warning" type="submit">Düzenle</button>
+                                <button class="btn btn-danger" type="reset">Sil</button>
+                            </td>
+                        </tr>
 
-				</div>
-				</div>
-
-			</CardHeader>
-			<CardBody>
-				<div class="table-responsive">
-					<table class="table table-striped" id="table-2">
-						<thead>
-							<tr>
-								<th class="text-center pt-3">
-									<div class="custom-checkbox custom-checkbox-table custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-											   class="custom-control-input" id="checkbox-all">
-										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-									</div>
-								</th>
-								<th>Toplantı Odası Adı</th>
-								<th>Rezerv Tarihi</th>
-								<th>Rezerv Durumu</th>
-								<th>Rezerv Eden Personel</th>
-								<th>İşlemler</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center pt-2">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-											   id="checkbox-1">
-										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-									</div>
-								</td>
-								<td>Toplantı Odas Adı</td>
-								<td>Rezerv Tarihi</td>
-								<td>Rezerv Durumu</td>
-								<td>Rezerv Eden Personel</td>
-                                <td>
-                                    <button class="btn btn-warning" type="submit">Düzenle</button>
-                                    <button class="btn btn-danger" type="reset">Sil</button>
-                                </td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-			</CardBody>
-		</CardComponent>
-	</div>
+                    </tbody>
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
 </div>
 
 
+
 <style>
-	.row {
-		display: -ms-flexbox;
-		display: -webkit-box;
-		display: flex;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
-		margin-top: -15px;
-		margin-right: -15px;
-		margin-left: -15px;
-	}
-	.fontsize{
-		font-size:12px;
-		color:red;
-	}
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .fontsize {
+        font-size: 12px;
+        color: red;
+    }
 </style>

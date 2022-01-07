@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Smart.Blazor;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
@@ -40,7 +39,6 @@ namespace VedasPortal
             services.AddScoped<HavaDurumuService>();
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
-            services.AddSmart();
             services.AddScoped<IVideoService, StaticVideoService>();
 
         }

@@ -1,61 +1,61 @@
 ﻿@page "/toplantiodalarilistesi"
 
-<div class="row">
-	<div class="col-12">
-		<CardComponent>
-			<CardHeader>
-				<div class="float-left">
-					<div class="col-md-12">
-						Toplantı Odaları
-						<a href='/oda/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i>Toplantı Odası Ekle</a>
-					</div>
-				</div>
-				<div style="margin-left:900px" class="float-right">
-					<AraButton btnStyle="Style.primary"></AraButton>
-				</div>
-			</CardHeader>
-			<CardBody>
-				<div class="table-responsive">
-					<table class="table table-striped" id="table-2">
-						<thead>
-							<tr>
-								<th class="text-center pt-3">
-									<div class="custom-checkbox custom-checkbox-table custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-											   class="custom-control-input" id="checkbox-all">
-										<label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-									</div>
-								</th>
-								<th>Kategori Adı</th>
-								<th>Açıklama</th>
-								<th>Lokasyon</th>
-								<th>İşlemler</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="text-center pt-2">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-											   id="checkbox-1">
-										<label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-									</div>
-								</td>
-								<td>Toplantı Odası Adı</td>
-								<td>Kapasitesi</td>
-								<td>Lokasyon Bilgisi</td>
-                                <td>
-                                    <button class="btn btn-warning" type="submit">Düzenle</button>
-                                    <button class="btn btn-danger" type="reset">Sil</button>
-                                </td>
-							</tr>
 
-						</tbody>
-					</table>
-				</div>
-			</CardBody>
-		</CardComponent>
-	</div>
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Toplantı Odaları
+                    <a href='/oda/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i>Toplantı Odası Ekle</a>
+                </div>
+            </div>
+            <div style="margin-left:900px" class="float-right">
+                <input style="border-radius: 5px; border-color: #6777ef" placeholder="Aramanızı bu alanda yapın..." />
+                <button class="btn btn-primary">Ara</button>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Kategori Adı</th>
+                            <th>Açıklama</th>
+                            <th>Lokasyon</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center pt-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>Toplantı Odası Adı</td>
+                            <td>Kapasitesi</td>
+                            <td>Lokasyon Bilgisi</td>
+                            <td>
+                                <button class="btn btn-warning" type="submit">Düzenle</button>
+                                <button class="btn btn-danger" type="reset">Sil</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
 </div>
 
 <style>
