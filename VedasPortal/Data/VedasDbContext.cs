@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VedasPortal.Models;
+using VedasPortal.Models.Dokuman;
+using VedasPortal.Models.YayinDurumlari;
 
 namespace VedasPortal.Data
 {
@@ -11,7 +13,10 @@ namespace VedasPortal.Data
         {
         }
 
-		public DbSet<Duyuru> Duyurular { get; set; }
+		public DbSet<Yayin> Yayinlar { get; set; }
+
+        public DbSet<DosyaYukle> DosyaYuklemeleri { get; set; }
+
 
         public DbSet<DosyaKategori> DosyaKategorileri { get; set; }
 

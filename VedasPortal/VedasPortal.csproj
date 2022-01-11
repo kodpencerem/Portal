@@ -45,6 +45,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
   </ItemGroup>
 
@@ -696,6 +697,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\HavaDurumu\" />
+    <Folder Include="wwwroot\img\uploded\" />
   </ItemGroup>
 
 </Project>
