@@ -1,0 +1,180 @@
+﻿@page "/duyurulistele"
+@inherits DuyuruModel
+
+<h1>Duyurular Listesi</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <a href='/duyuru/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Duyuru Ekle</a>
+    </div>
+    <div class="input-group col-md-4 offset-md-4">
+        <input type="text" class="form-control" placeholder="Duyuru adı ile arama yapın..." @bind="SearchString"
+               @bind:event="oninput" @onkeyup="DuyuruFilterelemeYap" />
+        <div class="input-group-append">
+            <button class="btn btn-info" @onclick="DuyuruFilterelemeYap">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<br />
+@if (duyuruListesi == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="tableExport_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                    <div class="dt-buttons btn-group">
+                                        <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="tableExport">
+                                            <span>Copy</span>
+                                        </button>
+                                        <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="tableExport">
+                                            <span>CSV</span>
+                                        </button>
+                                        <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="tableExport">
+                                            <span>Excel</span>
+                                        </button>
+                                        <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="tableExport">
+                                            <span>PDF</span>
+                                        </button>
+                                        <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="tableExport">
+                                            <span>Print</span>
+                                        </button>
+                                    </div>
+                                    <br /> <br /> 
+                                    <table class="table table-striped table-hover dataTable no-footer" id="tableExport" style="width: 100%;" role="grid" aria-describedby="tableExport_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Resim: activate to sort column descending" style="width: 151px;">Resim</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Duyuru Adı: activate to sort column ascending" style="width: 228px;">Duyuru Adı</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Açıklama: activate to sort column ascending" style="width: 109px;">Açıklama</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Ekleyen Yetkili Unvanı: activate to sort column ascending" style="width: 54px;">Ekleyen Yetkili Unvanı</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Ekleyen Yetkili Ad Soyad: activate to sort column ascending" style="width: 106px;"> Ekleyen Yetkili Ad Soyad</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Oluşturulma Tarihi: activate to sort column ascending" style="width: 91px;">Oluşturulma Tarihi</th>
+                                                <th class="sorting" tabindex="0" aria-controls="tableExport" rowspan="1" colspan="1" aria-label="Operasyonlar: activate to sort column ascending" style="width: 91px;">Operasyonlar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var duyuru in duyuruListesi)
+
+                                            {
+                                                <tr role="row" class="odd">
+                                                    <td>@duyuru.DosyaYolu</td>
+                                                    <td>@duyuru.Adi</td>
+                                                    <td>@duyuru.Aciklama</td>
+                                                    
+                                                    <td>
+                                                        <a href='/duyuru/duzenle/@duyuru.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuru.Id);})">
+                                                            Sil
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                            }
+
+
+
+                                        </tbody>
+                                    </table><div class="dataTables_info" id="tableExport_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                    <div class="dataTables_paginate paging_simple_numbers" id="tableExport_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item previous disabled" id="tableExport_previous">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="0" tabindex="0" class="page-link">Geri</a>
+                                            </li>
+                                            <li class="paginate_button page-item active">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                                            </li>
+                                            <li class="paginate_button page-item ">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                                            </li>
+                                            <li class="paginate_button page-item next" id="tableExport_next">
+                                                <a href="#" aria-controls="tableExport" data-dt-idx="7" tabindex="0" class="page-link">İleri</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h3 class="modal-title">Duyuru Silme</h3>
+        </ModalHeader>
+        <ModalBody>
+            <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
+            <table class="table">
+                <tr>
+                    <td>Resim</td>
+                    <td>@duyuru.Resim</td>
+                </tr>
+                <tr>
+                    <td>Duyuru Adı</td>
+                    <td>@duyuru.DuyuruAdi</td>
+                </tr>
+                <tr>
+                    <td>Açıklama</td>
+                    <td>@duyuru.DuyuruAciklama</td>
+                </tr>
+                <tr>
+                    <td>Ekleyen Yetkili Unvanı</td>
+                    <td>@duyuru.EkleyenYetkiliUnvani</td>
+                </tr>
+
+                <tr>
+                    <td>Ekleyen Yetkili Ad Soyad</td>
+                    <td>@duyuru.EkleyenYetkiliAdSoyad</td>
+                </tr>
+
+                <tr>
+                    <td>Oluşturulma Tarihi</td>
+                    <td>@duyuru.OlusturulmaTarihi.ToString("d")</td>
+                </tr>
+
+
+            </table>
+        </ModalBody>
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+}
