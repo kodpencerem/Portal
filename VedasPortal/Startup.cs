@@ -9,6 +9,10 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
+using VedasPortal.Repository.DataAccess;
+using VedasPortal.Repository.Interface;
+using VedasPortal.Services.DuyuruHaber;
+using VedasPortal.Services.EtkinlikServisi;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
 
@@ -23,8 +27,6 @@ namespace VedasPortal
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<VedasDbContext>(options =>
@@ -40,9 +42,10 @@ namespace VedasPortal
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
-
-           
-
+            services.AddScoped<IDuyuru, DuyuruDataAccess>();
+            services.AddScoped<IEtkinlik, EtkinlikDataAccess>();
+            services.AddScoped<DuyuruHaberService>();
+            services.AddScoped<EtkinlikService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

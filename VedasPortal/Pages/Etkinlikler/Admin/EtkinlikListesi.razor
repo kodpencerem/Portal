@@ -1,22 +1,31 @@
-﻿@page "/etkinliklerlistesi"
+﻿@page "/Etkinliklerlistem"
+@inject EtkinlikService etkinlikService
 
-<div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Etkinlikler|
-                    <a href='/etkinlik/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Etkinlik Ekle</a>
+
+
+@if (EtkinlikleriGetir is null)
+{
+    <p><em>Yükleniyor... !</em></p>
+}
+else
+{
+    <div class="col-12">
+        <CardComponent>
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Etkinlikler |
+                        <a href='/etkinlik/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Etkinlik Ekle</a>
+                    </div>
                 </div>
-            </div>
-            <div style="margin-left:1000px" class="float-right">
-                <AraButton btnStyle="Style.primary"></AraButton>
-            </div>
-        </CardHeader>
-
-        <CardBody>
-            <div class="table-responsive">
-                <table class="table table-striped" id="table-2">
+                <div style="margin-left:1080px" class="float-right">
+                    <div class="chat-search">
+                        <input type="text" class="form-control" placeholder="Etkinlik Ara..." />
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <table class="table">
                     <thead>
                         <tr>
                             <th class="text-center pt-3">
@@ -26,52 +35,90 @@
                                     <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                 </div>
                             </th>
+                            <th>Etkinlik ID</th>
                             <th>Etkinlik Adı</th>
-                            <th>Katılımcılar</th>
-                            <th>Başlangıç Tarihi </th>
-                            <th>Bitiş Tarihi</th>
-                            <th>Etkinlik Durumu</th>
+                            <th>Açıklama</th>
                             <th>İşlemler</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center pt-2">
-                                <div class="custom-checkbox custom-control">
-                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                           id="checkbox-1">
-                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                </div>
-                            </td>
-                            <td>EtkinlikAd</td>
+                        @foreach (var etkinlik in EtkinlikleriGetir)
+                        {
+                            <tr>
+                                <td class="text-center pt-2">
+                                    <div class="custom-checkbox custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                               id="checkbox-1">
+                                        <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>@etkinlik.Id</td>
+                                <td>@etkinlik.EtkinlikAdi</td>
+                                <td>@etkinlik.EtkinlikAciklama</td>
 
-                            <td>
-                                <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
-                            </td>
-
-                            <td>EtkinlikBaslangicTarihi</td>
-                            <td>EtkinlikBitisTarihi</td>
-                            <td>
-                                <div class="badge badge-success">EtkinlikDurum</div>
-                            </td>
-                            <td>
-                                <a href="etkinlikdetayi" class="btn btn-primary">Detay</a>
-
-                                <a href='/etkinlik/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal">
-                                    Sil
-                                </button>
-                            </td>
-                        </tr>
-
+                                <td>
+                                    <a href="@($"etkinlik/detay/{etkinlik.Id}")" class="btn btn-primary">Detay</a>
+                                    <a href='/etkinlik/duzenle/@etkinlik.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(etkinlik.Id);})">
+                                        Sil
+                                    </button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
-            </div>
-        </CardBody>
-    </CardComponent>
-</div>
+            </CardBody>
+        </CardComponent>
+
+    </div>
+}
 
 
+@code {
+
+    public ModalComponent ModalDialog { get; set; }
+
+    protected string SearchString { get; set; }
+
+    protected string DialogGorunur { get; set; } = "none";
+
+    protected List<EtkinlikDurum> etkinlikDurumlari = new List<EtkinlikDurum>();
+
+    protected List<EtkinlikDurum> etkinlikAra = new List<EtkinlikDurum>();
+
+    protected EtkinlikDurum etkinlik = new EtkinlikDurum();
+
+    protected void SilmeyiOnayla(int etkinlikId)
+    {
+        ModalDialog.Open();
+        etkinlik = etkinlikDurumlari.FirstOrDefault(x => x.Id == etkinlikId);
+    }
+
+    List<EtkinlikDurum> EtkinlikleriGetir;
+    protected override async Task OnInitializedAsync()
+    {
+        EtkinlikleriGetir = await Task.Run(() => etkinlikService.TumEtkinlikleriGetir());
+    }
+
+
+    protected void DuyuruFilterelemeYap()
+    {
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            etkinlikDurumlari = etkinlikAra.Where(
+            x => x.EtkinlikAdi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        }
+        else
+        {
+            etkinlikDurumlari = etkinlikAra;
+        }
+    }
+
+
+
+}
 
 
 <style>

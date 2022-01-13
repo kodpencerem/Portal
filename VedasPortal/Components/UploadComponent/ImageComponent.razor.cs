@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace BlazorImageCropper.Shared
+namespace VedasPortal.Components.UploadComponent
 {
     public partial class ImageComponent
     {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VedasPortal.Models;
 using VedasPortal.Models.Dokuman;
+using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.YayinDurumlari;
 
 namespace VedasPortal.Data
@@ -17,6 +18,7 @@ namespace VedasPortal.Data
 
         public DbSet<DosyaYukle> DosyaYuklemeleri { get; set; }
 
+        public DbSet<EtkinlikDurum> EtkinlikDurumlari { get; set; }
 
         public DbSet<DosyaKategori> DosyaKategorileri { get; set; }
 

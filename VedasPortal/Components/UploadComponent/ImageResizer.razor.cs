@@ -65,7 +65,7 @@ namespace VedasPortal.Components.UploadComponent
             CropCurrentHeight = cropSize.Item2;
         }
 
-        [Obsolete]
+        
         private async Task DoneCrop()
         {
             ImageCroppedResult args = await cropper.GetCropedResult();

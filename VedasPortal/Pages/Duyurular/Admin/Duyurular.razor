@@ -18,7 +18,7 @@
     </div>
 </div>
 <br />
-@if (duyuruListesi == null)
+@if (duyurularListesi == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -71,7 +71,7 @@ else
                                         </thead>
                                         <tbody>
 
-                                            @foreach (var duyuru in duyuruListesi)
+                                            @foreach (var duyuru in duyurularListesi)
 
                                             {
                                                 <tr role="row" class="odd">
@@ -144,29 +144,21 @@ else
             <table class="table">
                 <tr>
                     <td>Resim</td>
-                    <td>@duyuru.Resim</td>
+                    <td>@duyuru.DosyaYolu</td>
                 </tr>
                 <tr>
                     <td>Duyuru Adı</td>
-                    <td>@duyuru.DuyuruAdi</td>
+                    <td>@duyuru.Adi</td>
                 </tr>
                 <tr>
                     <td>Açıklama</td>
-                    <td>@duyuru.DuyuruAciklama</td>
+                    <td>@duyuru.Aciklama</td>
                 </tr>
-                <tr>
-                    <td>Ekleyen Yetkili Unvanı</td>
-                    <td>@duyuru.EkleyenYetkiliUnvani</td>
-                </tr>
-
-                <tr>
-                    <td>Ekleyen Yetkili Ad Soyad</td>
-                    <td>@duyuru.EkleyenYetkiliAdSoyad</td>
-                </tr>
+                
 
                 <tr>
                     <td>Oluşturulma Tarihi</td>
-                    <td>@duyuru.OlusturulmaTarihi.ToString("d")</td>
+                    <td>@duyuru.KayitTarihi.ToString("d")</td>
                 </tr>
 
 

@@ -1,122 +1,28 @@
-﻿@page "/Etkinlikler"
+﻿@page "/etkinlikler"
 
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @{ if (EtkinlikDurum != null)
+        {
+            foreach (var etkinlikDurum in EtkinlikDurum)
+            {
+<div class="col">
+    <div class="card h-100">
+        <ImageComponent CssClass="card-img-top" Src="@etkinlikDurum.EtkinlikResmi" AltText="etkinlikDurum.EtkinlikAdi" />
+        <div class="card-body">
+            <h5 class="card-title">@etkinlikDurum.EtkinlikAdi</h5>
+            <p class="card-text">@etkinlikDurum.EtkinlikAciklama</p>
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-info" href="@($"etkinlik/detay/{etkinlikDurum.Id}")">
+                    <i class="fas fa-info-circle"></i> Detayları Gör
+                </a>
 
-<div class="col-12 col-md-12 col-lg-12">
-
-    <CardComponent cardStyle="Style.primary">
-        
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Etkinlikler
-                    
-                </div>
             </div>
-            <div style="margin-left:1170px" class="float-right">
-                <AraButton btnStyle="Style.primary"></AraButton>
-            </div>
-        </CardHeader>
-        <CardBody>
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                    <article class="article article-style-b">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img07.png" style="background-image: url(&quot;assets/img/blog/img07.png&quot;);">
-                            </div>
-                            <div class="article-badge">
-                                <div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> En çok oy alan etkinlik</div>
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-title">
-                                <h2><a>EtkinlikAd</a></h2>
-                            </div>
-                            <p>
-                                Aciklama
-                            </p>
-                            <div class="article-cta">
-                                <a href="etkinlikdetayi"> Etkinlik Detayına Bak <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">3 Dakika Önce Eklendi</small>
+        </div>
+    </div>
+</div> }
 
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                    <article class="article article-style-b">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img15.png" style="background-image: url(&quot;assets/img/blog/img15.png&quot;);">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-title">
-                                <h2><a>EtkinlikAd</a></h2>
-                            </div>
-                            <p>
-                                Aciklama
-                            </p>
-                            <div class="article-cta">
-                                <a href="etkinlikdetayi"> Etkinlik Detayına Bak <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                    <article class="article article-style-b">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img12.png" style="background-image: url(&quot;assets/img/blog/img12.png&quot;);">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-title">
-                                <h2><a>EtkinlikAd</a></h2>
-                            </div>
-                            <p>
-                                Aciklama
-                            </p>
-                            <div class="article-cta">
-                                <a href="etkinlikdetayi"> Etkinlik Detayına Bak <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                    <article class="article article-style-b">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img01.png" style="background-image: url(&quot;assets/img/blog/img01.png&quot;);">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-title">
-                                <h2><a>EtkinlikAd</a></h2>
-                            </div>
-                            <p>
-                                Aciklama
-                            </p>
-                            <div class="article-cta">
-                                <a href="etkinlikdetayi"> Etkinlik Detayına Bak <i class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </CardBody>
-    </CardComponent>
-
-
+            } }
 </div>
-
-<style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-</style>
