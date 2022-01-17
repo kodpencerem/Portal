@@ -66,8 +66,6 @@ namespace VedasPortal.Repository.MainRepository
             }
             context.SaveChanges();
             return item.Id;
-
-
         }
 
         public void AddRange(IEnumerable<T> items)

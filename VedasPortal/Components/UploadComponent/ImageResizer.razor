@@ -1,5 +1,5 @@
 ﻿
-@inject IJSRuntime JSRuntime;
+@inject IJSRuntime JSRuntime
 
 <div class="mb-3">
     <InputFile class="form-control form-control-lg" id="input1" multiple OnChange="OnInputFileChange"></InputFile>
@@ -31,7 +31,7 @@
                  @ref="cropper"
                  AspectRatio="AspectRatio"
                  RequireAspectRatio="@IsAspectRatioEnabled"
-                 PureCSharpProcessing="purecs"
+                 PureCSharpProcessing="true"
                  InputId="input1"
                  ImageFile="file"
                  @bind-Ratio="ratio"
@@ -71,4 +71,5 @@
         <button class="btn btn-danger" @onclick="CancelCropAsync">Vazgeç</button>
     </div>
 
-</div>}
+</div>
+}

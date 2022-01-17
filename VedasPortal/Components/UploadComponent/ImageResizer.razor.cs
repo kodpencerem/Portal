@@ -2,9 +2,13 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -19,14 +23,14 @@ namespace VedasPortal.Components.UploadComponent
         private readonly string prompt = "Resim Başarıyla Kırpıldı...";
         private bool parsing = false;
 
-        bool purecs = true;
         private bool ShowCroper { get; set; } = false;
+
 
         private bool IsAspectRatioEnabled { get; set; }
 
         private double AspectRatio { get; set; } = 1d;
 
-        private double ratio = 1;
+        public double ratio { get; set; } = 1;
 
         private double AspectWidth { get; set; } = 1;
 
@@ -65,7 +69,6 @@ namespace VedasPortal.Components.UploadComponent
             CropCurrentHeight = cropSize.Item2;
         }
 
-        
         private async Task DoneCrop()
         {
             ImageCroppedResult args = await cropper.GetCropedResult();
@@ -75,7 +78,12 @@ namespace VedasPortal.Components.UploadComponent
             await Task.Delay(10);// a hack, otherwise prompt won't show
             await JSRuntime.InvokeVoidAsync("console.log", "converted!");
 
+
+
             string base64String = await args.GetBase64Async();
+            var fileName= SaveFileToUploaded.RandomFileName+ file.Name;
+            File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath,fileName), Convert.FromBase64String(base64String));
+            
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
