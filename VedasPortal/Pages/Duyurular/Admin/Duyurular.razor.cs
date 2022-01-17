@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.YayinDurumlari;
-using VedasPortal.Services.DuyuruHaber;
+using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Admin
 {
@@ -13,20 +13,22 @@ namespace VedasPortal.Pages.Duyurular.Admin
     {
         
         [Inject]
-        protected DuyuruHaberService DuyuruService { get; set; }
-        protected List<Yayin> duyurularListesi = new List<Yayin>();
+        protected IBaseRepository<Yayin> DuyuruServisi { get; set; }
+        protected IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
         protected List<Yayin> duyuruAra = new List<Yayin>();
         protected Yayin duyuru = new Yayin();
         protected string SearchString { get; set; }
-        protected override async Task OnInitializedAsync()
+        protected override Task OnInitializedAsync()
         {
-            await TumDuyurulariGetir();
+            TumDuyurulariGetir();
+            return Task.CompletedTask;
         }
 
-        protected async Task TumDuyurulariGetir()
+        protected IEnumerable<Yayin> TumDuyurulariGetir()
         {
-            duyurularListesi = await DuyuruService.TumunuGetir();
-            duyuruAra = duyurularListesi;
+            duyurularListesi = DuyuruServisi.GetAll();
+            return duyurularListesi;
+            
         }
 
         protected void DuyuruFilterelemeYap()
@@ -53,9 +55,9 @@ namespace VedasPortal.Pages.Duyurular.Admin
             if (duyuru.Id == 0)
                 return;
 
-            DuyuruService.Sil(duyuru.Id);
+            DuyuruServisi.Remove(duyuru.Id);
             duyuru = new Yayin();
-            TumDuyurulariGetir().Wait();
+            TumDuyurulariGetir();
         }
 
        

@@ -1,20 +1,7 @@
 ﻿@page "/duyurular"
 @inherits DuyuruIndexModel
 
-<h1>Duyurular</h1>
 
-<div class="row">
-    <div class="input-group col-md-4 offset-md-4">
-        <input type="text" class="form-control" placeholder="Duyuru adı ile arama yapın..." @bind="SearchString"
-               @bind:event="oninput" @onkeyup="DuyuruFilterelemeYap" />
-        <div class="input-group-append">
-            <button class="btn btn-info" @onclick="DuyuruFilterelemeYap">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<br />
 @if (duyuruListesi == null)
 
 {
@@ -24,47 +11,47 @@
 else
 
 {
-    <section class="section">
-        <div class="section-body">
-            <div class="row">
-                @foreach (var duyuru in duyuruListesi)
-                {
-                    <div class="col-12 col-md-4 col-lg-4">
-                        <article class="article article-style-c">
-                            <div class="article-header">
-                                <div class="article-image" data-background="assets/img/blog/img02.png" style="background-image: url(&quot;assets/img/blog/img02.png&quot;);">
-                                </div>
+    <div class="col-12">
+        <div class="row">
+            @foreach (var duyuru in duyuruListesi)
+            {
+
+                <div class="col-12 col-md-4 col-lg-4">
+                    <article class="article article-style-c">
+                        <div class="article-header">
+                            <div class="article-image" data-background="assets/img/blog/img02.png" style="background-image: url(&quot;assets/img/blog/img02.png&quot;);">
                             </div>
-                            <div class="article-details">
-                                <div class="article-category">
-                                    <a href="#">Duyuru</a>
-                                    <div class="bullet"></div> <a href="#">@duyuru.KayitTarihi</a>
-                                </div>
-                                <div class="article-title">
-                                    <h2><a href="#">@duyuru.Adi</a></h2>
-                                </div>
-                                <p>
-                                    @duyuru.Aciklama
-                                </p>
-                                <div class="article-user">
-                                    <img alt="image" src="assets/img/users/user-1.png">
-                                    <div class="article-user-details">
-                                        <div class="user-detail-name">
-                                            <a href="#">Ekleyen Birim</a>
-                                        </div>
-                                        <div class="text-job">Ekleyen Kullanıcı</div>
+                        </div>
+                        <div class="article-details">
+                            <div class="article-category">
+                                <a href="#">Duyuru</a>
+                                <div class="bullet"></div> <a href="#">@duyuru.KayitTarihi</a>
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="#">@duyuru.Adi</a></h2>
+                            </div>
+                            <p>
+                                @duyuru.Aciklama
+                            </p>
+                            <div class="article-user">
+                                <img alt="image" src="assets/img/users/user-1.png">
+                                <div class="article-user-details">
+                                    <div class="user-detail-name">
+                                        <a href="#">Ekleyen Birim</a>
                                     </div>
+                                    <div class="text-job">Ekleyen Kullanıcı</div>
                                 </div>
-                                <div class="article-cta">
-                                    <a href="#" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
-                                </div>
-
                             </div>
-                        </article>
-                    </div>
+                            <div class="article-cta">
+                                <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
+                            </div>
 
-                }
-            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+
         </div>
-    </section>
+    </div>
+
 }

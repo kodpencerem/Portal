@@ -56,8 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Etkinlikler\Personel\EtkinlikDetaylari.razor" />
-    <None Include="Pages\Etkinlikler\Personel\Etkinlikler.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />
@@ -700,6 +698,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Etkinlikler\Personel\" />
     <Folder Include="Pages\HavaDurumu\" />
     <Folder Include="wwwroot\img\uploded\" />
   </ItemGroup>

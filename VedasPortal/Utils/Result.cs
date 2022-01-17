@@ -1,6 +1,6 @@
 ﻿using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Repository
+namespace VedasPortal.Utils
 {
     public class Result<T> : IResult
     {

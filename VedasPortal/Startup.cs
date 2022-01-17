@@ -9,10 +9,9 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
-using VedasPortal.Repository.DataAccess;
+using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.DuyuruHaber;
-using VedasPortal.Services.EtkinlikServisi;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
 
@@ -42,11 +41,8 @@ namespace VedasPortal
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
-            services.AddScoped<IDuyuru, DuyuruDataAccess>();
-            services.AddScoped<IEtkinlik, EtkinlikDataAccess>();
-            services.AddScoped<DuyuruHaberService>();
-            services.AddScoped<EtkinlikService>();
-            services.AddScoped<HaberService>();
+            services.AddScoped<IBaseRepository<Yayin>, BaseRepository<Yayin> >();
+   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

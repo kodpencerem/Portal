@@ -66,7 +66,7 @@ else
                                     </td>
 
                                     <td>
-                                        <a href="duyurudetay/@duyuru.Id" class="btn btn-info">Duyuru Detayı</a>
+                                        <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary">Duyuru Detayı</a>
                                         <a href='/duyuru/duzenle/@duyuru.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
                                                 @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuru.Id);})">
@@ -84,7 +84,6 @@ else
         </CardComponent>
 
     </div>
-
 
 
     <ModalComponent @ref="ModalDialog">
@@ -112,8 +111,6 @@ else
                     <td>Oluşturulma Tarihi</td>
                     <td>@duyuru.KayitTarihi.ToString("d")</td>
                 </tr>
-
-
             </table>
         </ModalBody>
         <ModalFooter>

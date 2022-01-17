@@ -1,5 +1,4 @@
-﻿using System;
-using VedasPortal.Models.Base;
+﻿using VedasPortal.Models.Base;
 
 namespace VedasPortal.Models.Etkinlik
 {

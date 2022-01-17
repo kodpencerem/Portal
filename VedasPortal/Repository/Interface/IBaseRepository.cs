@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using VedasPortal.Models.Base;
 
-namespace VedasPortal.Repository.MainRepository
+namespace VedasPortal.Repository.Interface
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        int Add(T item);
+        int AddUpdate(T item);
+       
         void AddRange(IEnumerable<T> items);
         int Count();
         T Get(int Id);

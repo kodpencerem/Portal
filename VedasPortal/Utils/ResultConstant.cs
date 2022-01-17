@@ -1,4 +1,4 @@
-﻿namespace VedasPortal.Repository
+﻿namespace VedasPortal.Utils
 {
     public static class ResultConstant
     {
@@ -13,7 +13,7 @@
         public const string IdNotNull = "Id Değeri Boş Olamaz!";
         public const string InvalidAuthentication = "Giriş İşlemi Başarısız!";
         public const string TokenResponseMessage = "Token Oluşturma İşlemi Başarıyla Tamamlandı.";
-        
+
 
 
         //---------------------------------------------------------------------------------------//

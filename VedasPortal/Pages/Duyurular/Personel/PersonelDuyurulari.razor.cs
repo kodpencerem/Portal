@@ -5,27 +5,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.YayinDurumlari;
-using VedasPortal.Services.DuyuruHaber;
+using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Personel
 {
     public class DuyuruIndexModel : ComponentBase
     {
         [Inject]
-        protected DuyuruHaberService DuyuruService { get; set; }
-        protected List<Yayin> duyuruListesi = new List<Yayin>();
+        protected IBaseRepository<Yayin> DuyuruServisi { get; set; }
+        protected IEnumerable<Yayin> duyuruListesi;
         protected List<Yayin> duyuruAra = new List<Yayin>();
         protected Yayin duyuru = new Yayin();
+        
         protected string SearchString { get; set; }
-        protected override async Task OnInitializedAsync()
+        protected override Task OnInitializedAsync()
         {
-            await TumDuyurulariGetir();
+            TumDuyurulariGetir();
+            return Task.CompletedTask;
         }
 
-        protected async Task TumDuyurulariGetir()
+        protected IEnumerable<Yayin> TumDuyurulariGetir()
         {
-            duyuruListesi = await DuyuruService.TumunuGetir();
-            duyuruAra = duyuruListesi;
+            duyuruListesi = DuyuruServisi.GetAll();
+            return duyuruListesi;
+
         }
 
         protected void DuyuruFilterelemeYap()

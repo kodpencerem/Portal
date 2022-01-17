@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Models.Base;
+using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Repository.MainRepository
+namespace VedasPortal.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
@@ -54,7 +54,7 @@ namespace VedasPortal.Repository.MainRepository
             context.SaveChanges();
         }
 
-        public int Add(T item)
+        public int AddUpdate(T item)
         {
             if (item.Id == 0)
             {
