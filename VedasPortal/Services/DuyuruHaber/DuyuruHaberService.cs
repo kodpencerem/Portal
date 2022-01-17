@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using VedasPortal.Data;
 using VedasPortal.Models.YayinDurumlari;
 using VedasPortal.Repository.Interface;
 
@@ -7,35 +9,41 @@ namespace VedasPortal.Services.DuyuruHaber
 {
     public class DuyuruHaberService
     {
-        private readonly IDuyuru _objDuyuru;
+        private readonly VedasDbContext _objDuyuru;
 
-        public DuyuruHaberService(IDuyuru objDuyuru)
+        public DuyuruHaberService(VedasDbContext objDuyuru)
         {
             _objDuyuru = objDuyuru;
         }
 
-        public Task<List<Yayin>> TumunuGetir()
+        public async Task<List<Yayin>> TumunuGetir()
         {
-            return Task.FromResult(_objDuyuru.TumDuyurulariGetir());
+            return await _objDuyuru.Yayinlar.ToListAsync();
         }
 
-        public void Ekle(Yayin duyuru)
+        public async Task<bool> Ekle(Yayin duyuru)
         {
-            _objDuyuru.DuyuruEkle(duyuru);
+            await _objDuyuru.Yayinlar.AddAsync(duyuru);
+            await _objDuyuru.SaveChangesAsync();
+            return true;
         }
-        public Task<Yayin> DetayGetir(int id)
+        public async Task<Yayin> DetayGetir(int id)
         {
-            return Task.FromResult(_objDuyuru.DuyuruGetir(id));
+            Yayin yayin = await _objDuyuru.Yayinlar.FirstOrDefaultAsync(c => c.Id.Equals(id));
+            return yayin;
         }
 
-        public void Duzenle(Yayin duyuru)
+        public async Task<bool> Duzenle(Yayin yayin)
         {
-            _objDuyuru.DuyuruDuzenle(duyuru);
+            _objDuyuru.Yayinlar.Update(yayin);
+            await _objDuyuru.SaveChangesAsync();
+            return true;
         }
+
 
         public void Sil(int id)
         {
-            _objDuyuru.DuyuruSil(id);
+            _objDuyuru.Remove(id);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
 {
     public class DuyuruModel : ComponentBase
     {
+        
         [Inject]
         protected DuyuruHaberService DuyuruService { get; set; }
         protected List<Yayin> duyurularListesi = new List<Yayin>();
@@ -56,5 +57,8 @@ namespace VedasPortal.Pages.Duyurular.Admin
             duyuru = new Yayin();
             TumDuyurulariGetir().Wait();
         }
+
+       
     }
+    
 }

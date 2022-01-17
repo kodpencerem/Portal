@@ -15,7 +15,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Etkinlik Resmi</label>
-                        <InputFile id="inputFile" @bind-Value="EtkinlikModeli.EtkinlikAdi" OnChange="@HandleInputFileChange" class="form-control form-control-lg" />
+                        <InputFile  id="inputFile" @bind-Value="EtkinlikModeli.EtkinlikAdi"  OnChange="(e) => HandleInputFileChange(e)" class="form-control form-control-lg" />
                         <ValidationMessage For="@(() => EtkinlikModeli.EtkinlikResmi)" />
                     </div>
                     @if (ImageBase64String != null)
@@ -37,27 +37,28 @@
 
                     }
 
+                    @*<img src="@etkinlikDurum.EtkinlikResmi" style="height:56px;width:56px" />*@
 
                     <div class="form-group">
                         <label for="EtkinlikAdi" class="control-label">Etkinlik Adı</label>
                         <input form="EtkinlikAdi" class="form-control" @bind="@etkinlikDurum.EtkinlikAdi" />
                     </div>
                     @*<div class="form-group">
-                            <label for="Gender" class="control-label"></label>
-                            <select @bind="@etkinlikDurum.Gender" class="form-control">
-                                <option value="">-Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>*@
+            <label for="Gender" class="control-label"></label>
+            <select @bind="@etkinlikDurum.Gender" class="form-control">
+                <option value="">-Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>*@
                     <div class="form-group">
                         <label for="EtkinlikAciklama" class="control-label">Açıklama</label>
                         <input form="EtkinlikAciklama" class="form-control" @bind="@etkinlikDurum.EtkinlikAciklama" />
                     </div>
                     @*<div class="form-group">
-                            <label for="EtkinlikResmi" class="control-label">Resim</label>
-                            <input form="EtkinlikResmi" class="form-control" @bind="@etkinlikDurum.EtkinlikResmi" />
-                        </div>*@
+            <label for="EtkinlikResmi" class="control-label">Resim</label>
+            <input form="EtkinlikResmi" class="form-control" @bind="@etkinlikDurum.EtkinlikResmi" />
+        </div>*@
 
                 </div>
             </div>

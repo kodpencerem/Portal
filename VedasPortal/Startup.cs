@@ -46,6 +46,7 @@ namespace VedasPortal
             services.AddScoped<IEtkinlik, EtkinlikDataAccess>();
             services.AddScoped<DuyuruHaberService>();
             services.AddScoped<EtkinlikService>();
+            services.AddScoped<HaberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

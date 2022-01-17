@@ -23,6 +23,8 @@ namespace VedasPortal.Models.YayinDurumlari
 
         public string DosyaYolu { get; set; }
 
+        public bool YayinDurumu { get; set; }
+
         //public int DosyaId { get; set; }
         //[ForeignKey("DosyaId")]
         //public DosyaYukle DosyaYukle { get; set; }

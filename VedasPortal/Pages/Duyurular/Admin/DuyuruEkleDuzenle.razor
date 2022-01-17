@@ -6,16 +6,38 @@
 <h1>Duyuru @Title</h1>
 <hr />
 
-<EditForm Model="@duyuru" OnValidSubmit="DuyuruKayit">
+<EditForm  Model="@duyuru" OnValidSubmit="DuyuruKayit">
     <DataAnnotationsValidator />
-    
-    <div class="form-group row">
-        <label class="control-label col-md-12">Resim</label>
-        <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="duyuru.DosyaYolu" />
-        </div>
-        <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
+
+    @*<div class="form-group row">
+            <label class="control-label col-md-12">Resim</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="duyuru.DosyaYolu" />
+            </div>
+            <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
+        </div>*@
+
+    <div class="mb-3">
+        <label class="form-label">Duyuru Resmi</label>
+        <InputFile id="inputFile" @bind-Value="DuyuruModeli.DuyuruAdi" OnChange="@HandleInputFileChange" class="form-control form-control-lg" />
+        <ValidationMessage For="@(() => DuyuruModeli.DuyuruResmi)" />
     </div>
+    @if (ImageBase64String != null)
+    {
+        <div class="mb-3">
+            <img src="@PreviewImagePath" />
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Resim Değerleri:</span>
+            <input @bind="Width" type="text" class="form-control" placeholder="Genişlik:">
+            <span class="input-group-text"><i class="fas fa-times"></i></span>
+            <input @bind="Height" type="text" class="form-control" placeholder="Yükseklik:">
+            <button class="btn btn-success" type="button" @onclick="ResizeImageAsync">
+                Onayla
+            </button>
+        </div>
+    }
 
     <div class="form-group row">
         <label class="control-label col-md-12">Duyuru Adı</label>

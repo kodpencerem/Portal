@@ -1,8 +1,17 @@
 ﻿@page "/basinduyurulari"
 
-<div class="col-12">
+@using VedasPortal.Models.YayinDurumlari
+@inject HaberService haberService
+
+
+
+@if (HaberleriGetir is null)
+{
+<p><em>Yükleniyor... !</em></p> }
+else
+{ <div class="col-12">
     <CardComponent cardStyle="Style.primary">
-        
+
         <CardHeader>
             <div class="float-left">
                 <div class="col-md-12">
@@ -11,7 +20,9 @@
                 </div>
             </div>
             <div style="margin-left:935px" class="float-right">
-                <AraButton btnStyle="Style.primary"></AraButton>
+                <div class="chat-search">
+                    <input type="text" class="form-control" placeholder="Haber Ara..." />
+                </div>
             </div>
         </CardHeader>
         <CardBody>
@@ -36,41 +47,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center pt-2">
-                                <div class="custom-checkbox custom-control">
-                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                           id="checkbox-1">
-                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                </div>
-                            </td>
-                            <td>Kişisel Gelişim</td>
-                            <td>Basın DuyuruAdi</td>
-                            <td>DuyuruAciklama</td>
-                            <td>Bilgi İşlem</td>
+                        @foreach (var haber in HaberleriGetir)
+                        {
+    <tr>
+        <td class="text-center pt-2">
+            <div class="custom-checkbox custom-control">
+                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                       id="checkbox-1">
+                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+            </div>
+        </td>
+        <td>Kişisel Gelişim</td>
+        <td>Basın DuyuruAdi</td>
+        <td>DuyuruAciklama</td>
+        <td>Bilgi İşlem</td>
 
-                            <td>21.12.2021</td>
-                            <td>
-                                <a href="/basinduyurusu/duzenle/" class="btn btn-info">
-                                    Düzenle
-                                </a>
-                                |
-                                <a href="basinduyurudetay" class="btn btn-primary">
-                                    Detay Bilgi
-                                </a>
-                                |
-                                <a href="#" class="btn btn-danger">
-                                    Sil
-                                </a>
-                            </td>
-                        </tr>
-
+        <td>21.12.2021</td>
+        <td>
+            <a href="/basinduyurusu/duzenle/@haber.Id" class="btn btn-info">
+                Düzenle
+            </a>
+            |
+            <a href="basinduyurudetay/@haber.Id" class="btn btn-primary">
+                Detay Bilgi
+            </a>
+            |
+            <a href="#" class="btn btn-danger">
+                Sil
+            </a>
+        </td>
+    </tr>}
                     </tbody>
                 </table>
             </div>
         </CardBody>
     </CardComponent>
-</div>
+</div>}
+
+
+
+@code { List<Yayin> HaberleriGetir;
+    protected override async Task OnInitializedAsync()
+    {
+        HaberleriGetir = await Task.Run(() => haberService.TumHaberleriGetir());
+    } }
+
 
 <style>
     .row {
