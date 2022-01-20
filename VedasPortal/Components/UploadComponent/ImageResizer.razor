@@ -2,7 +2,7 @@
 @inject IJSRuntime JSRuntime
 
 <div class="mb-3">
-    <InputFile class="form-control form-control-lg" id="input1" multiple OnChange="OnInputFileChange" value="@Value" @oninput="ValueChanged" ></InputFile>
+    <InputFile  class="form-control form-control-lg" id="input1" multiple OnChange="OnInputFileChange" @oninput="ValueChanged" ></InputFile>
 </div>
 @if (parsing)
 {
@@ -67,7 +67,7 @@
     </div>
 
     <div class="card-footer">
-        <button class="btn btn-success me-1" @onclick="DoneCrop">Değişiklikleri Onayla</button>
+        <button class="btn btn-success me-1" @onclick="DoneCrop" >Değişiklikleri Onayla</button>
         <button class="btn btn-danger" @onclick="CancelCropAsync">Vazgeç</button>
     </div>
 

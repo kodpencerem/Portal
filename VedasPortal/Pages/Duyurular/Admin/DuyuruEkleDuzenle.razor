@@ -23,7 +23,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer Value="duyuru.DosyaYolu" />
+                                <ImageResizer @bind-ValuePath="@duyuru.DosyaYolu" />
                             </div>
                             <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
                         </div>

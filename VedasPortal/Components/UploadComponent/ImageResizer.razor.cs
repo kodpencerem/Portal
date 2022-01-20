@@ -22,7 +22,10 @@ namespace VedasPortal.Components.UploadComponent
         private bool ShowCroper { get; set; } = false;
 
         [Parameter]
-        public string Value { get; set; }
+        public string ValuePath { get; set; }
+
+        [Parameter]
+        public EventCallback<string> ValuePathChanged { get; set; }
 
         [Parameter]
         public EventCallback<ChangeEventArgs> ValueChanged { get; set; }
@@ -87,11 +90,13 @@ namespace VedasPortal.Components.UploadComponent
 
             string base64String = await args.GetBase64Async();
             var fileName= SaveFileToUploaded.RandomFileName+ browserFileResizer.Name;
-            File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath,fileName), Convert.FromBase64String(base64String));
-            
+            File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
+            ValuePath = fileName;
+            await ValuePathChanged.InvokeAsync(ValuePath);
+
         }
 
         private async Task CancelCropAsync()
