@@ -2,7 +2,7 @@
 @inject IJSRuntime JSRuntime
 
 <div class="mb-3">
-    <InputFile class="form-control form-control-lg" id="input1" multiple OnChange="OnInputFileChange"></InputFile>
+    <InputFile class="form-control form-control-lg" id="input1" multiple OnChange="OnInputFileChange" value="@Value" @oninput="ValueChanged" ></InputFile>
 </div>
 @if (parsing)
 {
@@ -33,7 +33,7 @@
                  RequireAspectRatio="@IsAspectRatioEnabled"
                  PureCSharpProcessing="true"
                  InputId="input1"
-                 ImageFile="file"
+                 ImageFile="browserFileResizer"
                  @bind-Ratio="ratio"
                  OnSizeChanged="HandleCropSizeChanged"
                  AnimeGifEnable="true"></Cropper>
@@ -73,3 +73,4 @@
 
 </div>
 }
+

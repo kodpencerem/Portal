@@ -16,5 +16,7 @@ namespace VedasPortal.Repository.Interface
         void Remove(int Id);
         void Remove(T item);
         void RemoveRange(IEnumerable<T> items);
+
+        
     }
 }

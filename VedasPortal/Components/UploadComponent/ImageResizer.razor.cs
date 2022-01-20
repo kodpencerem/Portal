@@ -2,13 +2,9 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -16,7 +12,7 @@ namespace VedasPortal.Components.UploadComponent
     {
         private Cropper cropper;
 
-        private IBrowserFile file;
+        private IBrowserFile browserFileResizer;
         private string PreviewImagePath { get; set; }
         private string ImageBase64String { get; set; }
 
@@ -25,6 +21,11 @@ namespace VedasPortal.Components.UploadComponent
 
         private bool ShowCroper { get; set; } = false;
 
+        [Parameter]
+        public string Value { get; set; }
+
+        [Parameter]
+        public EventCallback<ChangeEventArgs> ValueChanged { get; set; }
 
         private bool IsAspectRatioEnabled { get; set; }
 
@@ -34,6 +35,9 @@ namespace VedasPortal.Components.UploadComponent
 
         private double AspectWidth { get; set; } = 1;
 
+       
+     
+      
         private void OnAspectWidthChanged(ChangeEventArgs eventArgs)
         {
             AspectWidth = double.Parse((string)eventArgs.Value);
@@ -58,8 +62,9 @@ namespace VedasPortal.Components.UploadComponent
         private void OnInputFileChange(InputFileChangeEventArgs args)
         {
             PreviewImagePath = null;
-            file = args.File;
+            browserFileResizer = args.File;
             ShowCroper = true;
+            
         }
         private double CropCurrentWidth { get; set; }
         private double CropCurrentHeight { get; set; }
@@ -75,13 +80,13 @@ namespace VedasPortal.Components.UploadComponent
             ShowCroper = false;
             parsing = true;
             StateHasChanged();
-            await Task.Delay(10);// a hack, otherwise prompt won't show
+            await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "converted!");
 
 
 
             string base64String = await args.GetBase64Async();
-            var fileName= SaveFileToUploaded.RandomFileName+ file.Name;
+            var fileName= SaveFileToUploaded.RandomFileName+ browserFileResizer.Name;
             File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath,fileName), Convert.FromBase64String(base64String));
             
             PreviewImagePath = $"data:image/png;base64,{base64String}";
@@ -92,7 +97,7 @@ namespace VedasPortal.Components.UploadComponent
         private async Task CancelCropAsync()
         {
             ShowCroper = false;
-            await UpdatePreviewASync(file);
+            await UpdatePreviewASync(browserFileResizer);
         }
 
         private readonly int MaxAllowedFileSize = 10 * 1024 * 1024;
@@ -106,5 +111,32 @@ namespace VedasPortal.Components.UploadComponent
             ImageBase64String = Convert.ToBase64String(imageBytes);
             PreviewImagePath = $"data:image/png;base64,{ImageBase64String}";
         }
+
+
+        //[Inject]
+        //public IBaseRepository<DosyaYukle> DosyaServisi { get; set; }
+
+        //DosyaYukle dosyaYukle = new DosyaYukle();
+
+        //public byte[] ImageUpladed { get; set; }
+
+        //void ValidSubmit()
+        //{
+        //    dosyaYukle.Id = 0;
+        //    dosyaYukle.DosyaBoyutu = ImageUpladed;
+        //    DosyaServisi.UploadImage(dosyaYukle);
+        //}
+
+        //async Task HandleFileSelected(IFileListEntry[] files)
+        //{
+        //    var file = files.FirstOrDefault();
+        //    if (file != null)
+        //    {
+
+        //        var ms = new MemoryStream();
+        //        await file.Data.CopyToAsync(ms);
+        //        ImageUpladed = ms.ToArray();
+        //    }
+        //}
     }
 }

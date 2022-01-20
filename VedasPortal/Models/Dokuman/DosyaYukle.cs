@@ -11,9 +11,7 @@ namespace VedasPortal.Models.Dokuman
         public string DosyaAdi { get; set; }
         public string DosyaYolu { get; set; }
 
-        public bool DuyurudaOlsunMu { get; set; }
-
-        public bool HaberdeOlsunMu { get; set; }
+        public byte[] DosyaBoyutu { get; set; }
 
         public int DosyaKategoriId { get; set; }
         [ForeignKey("DosyaKategoriId")]

@@ -14,8 +14,8 @@ namespace VedasPortal.Data
         {
         }
 
-		public DbSet<Yayin> Yayinlar { get; set; }
-
+        public DbSet<Yayin> Yayinlar { get; set; }
+        public DbSet<YayinKategori> YayinKategorileri { get; set; }
         public DbSet<DosyaYukle> DosyaYuklemeleri { get; set; }
 
         public DbSet<EtkinlikDurum> EtkinlikDurumlari { get; set; }

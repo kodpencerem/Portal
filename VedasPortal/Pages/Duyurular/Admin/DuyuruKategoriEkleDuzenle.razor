@@ -1,43 +1,195 @@
-﻿@page "/duyurukategori/ekle"
-@page "/duyurukategori/duzenle/"
+﻿@page "/duyuru/kategori/ekle"
+@page "/duyuru/kategori/duzenle/{kategoriId:int}"
+@page "/DuyuruKategoriBilgisi"
 
-<div class="col-12 col-md-12 col-lg-12">
+@inject IJSRuntime jsRun
+@inherits DKategoriEkleDuzenle
+
+
+<div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            Duyuru Kategorisi Ekle/Düzenle
+            Duyuru Kategorisi @Title
         </CardHeader>
         <CardBody>
-            <div class="form-group">
-                <label>Duyuru Kategorisi Adı</label>
-                <input type="text" class="form-control">
-            </div>
+            <EditForm Model="@duyuruKategori" OnValidSubmit="KategoriKayit">
+                <DataAnnotationsValidator />
 
+                <div class="col-12">
+                    <div class="col-md-8 float-left">
+                        <div class="form-group row">
+                            <label class="control-label col-md-12">Duyuru Kategori Adı</label>
+                            <div class="col-md-8">
+                                <InputText class="form-control" @bind-Value="duyuruKategori.YayinKategoriAdi" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuruKategori.YayinKategoriAdi)" />
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label>Açıklama Metni</label>
-                <Summernote></Summernote>
-            </div>
+                    <div class="col-md-4 float-right">
+                        <div class="form-group row">
+                            <label class="control-label col-md-12">Duyuru Kategori Durumu</label>
+                            <div class="col-md-4">
+                                <InputCheckbox class="form-control" @bind-Value="duyuruKategori.YayinKategoriDurumu" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuruKategori.YayinKategoriDurumu)" />
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label>Duyuru Kategorisi Durumu</label>
-                <input type="text" class="form-control">
-            </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                </div>
+            </EditForm>
 
-            <div class="form-group">
-                <label>Eklenme Tarihi</label>
-                <input type="datetime-local" class="form-control">
-            </div>
-
-            <div class="card-footer text-right">
-                <button class="btn btn-success" type="submit">Kaydet</button>
-                <button class="btn btn-warning" type="reset">Vazgeç</button>
-            </div>
         </CardBody>
-
     </CardComponent>
+
 </div>
 
+
+
+
+@if (yayinKategorileri == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Duyuru Kategorileri
+                    </div>
+                </div>
+
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Duyuru Kategori Adı</th>
+                                <th>Duyuru Kategori Durumu</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach (var duyuruKategorisi in yayinKategorileri)
+
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@duyuruKategorisi.YayinKategoriAdi</td>
+
+                                    <td>
+                                        @if (duyuruKategorisi.YayinKategoriDurumu == true)
+                                        {
+                                            <div class="badge badge-success badge-shadow">Aktif</div>
+                                        }
+                                        else 
+                                        {
+                                            <div class="badge badge-danger badge-shadow">Pasif</div>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        <a href="@($"duyuru/kategori/detay/{duyuruKategorisi.Id}")" class="btn btn-primary">Duyuru Detayı</a>
+                                        <a href='/duyuru/kategori/duzenle/@duyuruKategorisi.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuruKategorisi.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h3 class="modal-title">Duyuru Silme</h3>
+        </ModalHeader>
+        <ModalBody>
+            <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
+            <table class="table">
+                <tr>
+                    <td>Duyuru Kategori Adı</td>
+                    <td>@duyuruKategori.YayinKategoriAdi</td>
+                </tr>
+                <tr>
+                    <td>Duyuru Kategori Durumu</td>
+                    <td>@duyuruKategori.YayinKategoriDurumu</td>
+                </tr>
+
+            </table>
+        </ModalBody>
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+}
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+
+            await jsRun.InvokeVoidAsync("dataTables");
+        }
+    }
+}
+
+
+
+
+
 <style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

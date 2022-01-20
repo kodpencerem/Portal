@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120084101_UpdateDosyaYukle")]
+    partial class UpdateDosyaYukle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,11 +243,17 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DosyaYolu")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("DuyurudaOlsunMu")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HaberdeOlsunMu")
+                        .HasColumnType("bit");
 
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -297,12 +305,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("DosyaBoyutu")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DosyaYolu")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -333,12 +335,7 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("YayinKategoriId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("YayinKategoriId");
 
                     b.ToTable("EtkinlikDurumlari");
                 });
@@ -398,14 +395,8 @@ namespace VedasPortal.Migrations
                     b.Property<string>("AltBaslik")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("DosyaBoyutu")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("DosyaYolu")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("DuyuruKutusundaOlsunMu")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -421,9 +412,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<int>("No")
                         .HasColumnType("int");
-
-                    b.Property<bool>("SlideraEklensinMi")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("YayinDurumu")
                         .HasColumnType("bit");
@@ -528,17 +516,6 @@ namespace VedasPortal.Migrations
                         .IsRequired();
 
                     b.Navigation("DosyaKategori");
-                });
-
-            modelBuilder.Entity("VedasPortal.Models.Etkinlik.EtkinlikDurum", b =>
-                {
-                    b.HasOne("VedasPortal.Models.YayinDurumlari.YayinKategori", "YayinKategori")
-                        .WithMany()
-                        .HasForeignKey("YayinKategoriId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("YayinKategori");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.YayinDurumlari.Yayin", b =>

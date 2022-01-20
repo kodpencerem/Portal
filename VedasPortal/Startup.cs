@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
+using VedasPortal.Models.Dokuman;
 using VedasPortal.Models.YayinDurumlari;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
@@ -33,6 +34,7 @@ namespace VedasPortal
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<VedasDbContext>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
@@ -42,7 +44,9 @@ namespace VedasPortal
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
             services.AddScoped<IBaseRepository<Yayin>, BaseRepository<Yayin> >();
-   
+            services.AddScoped<IBaseRepository<YayinKategori>, BaseRepository<YayinKategori>>();
+            services.AddScoped<IBaseRepository<DosyaYukle>, BaseRepository<DosyaYukle>>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

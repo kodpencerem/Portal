@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120095730_UpdateDbTableYayinlar")]
+    partial class UpdateDbTableYayinlar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,11 +299,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("DosyaBoyutu")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DosyaYolu")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DosyaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -337,6 +336,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DosyaId");
 
                     b.HasIndex("YayinKategoriId");
 
@@ -398,11 +399,8 @@ namespace VedasPortal.Migrations
                     b.Property<string>("AltBaslik")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("DosyaBoyutu")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DosyaYolu")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DosyaId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("DuyuruKutusundaOlsunMu")
                         .HasColumnType("bit");
@@ -432,6 +430,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DosyaId");
 
                     b.HasIndex("YayinKategoriId");
 
@@ -532,22 +532,38 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.EtkinlikDurum", b =>
                 {
+                    b.HasOne("VedasPortal.Models.Dokuman.DosyaYukle", "DosyaYukle")
+                        .WithMany()
+                        .HasForeignKey("DosyaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VedasPortal.Models.YayinDurumlari.YayinKategori", "YayinKategori")
                         .WithMany()
                         .HasForeignKey("YayinKategoriId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DosyaYukle");
 
                     b.Navigation("YayinKategori");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.YayinDurumlari.Yayin", b =>
                 {
+                    b.HasOne("VedasPortal.Models.Dokuman.DosyaYukle", "DosyaYukle")
+                        .WithMany()
+                        .HasForeignKey("DosyaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VedasPortal.Models.YayinDurumlari.YayinKategori", "YayinKategori")
                         .WithMany()
                         .HasForeignKey("YayinKategoriId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DosyaYukle");
 
                     b.Navigation("YayinKategori");
                 });

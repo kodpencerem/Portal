@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120101534_UpdateDbTable2")]
+    partial class UpdateDbTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,11 +299,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("DosyaBoyutu")
+                    b.Property<byte[]>("DosyaYolu")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DosyaYolu")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -398,11 +397,8 @@ namespace VedasPortal.Migrations
                     b.Property<string>("AltBaslik")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("DosyaBoyutu")
+                    b.Property<byte[]>("DosyaYolu")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("DosyaYolu")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("DuyuruKutusundaOlsunMu")
                         .HasColumnType("bit");
