@@ -3,21 +3,21 @@ using System.Threading.Tasks;
 using VedasPortal.Models.YayinDurumlari;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Duyurular.Personel
+namespace VedasPortal.Pages.BasindaBiz.Personel
 {
-    public partial class DuyuruDetay
+    public partial class HaberDetay
     {
         [Inject]
-        private IBaseRepository<Yayin> DuyuruServisi { get; set; }
+        private IBaseRepository<Yayin> HaberServisi { get; set; }
 
         [Parameter]
-        public int DuyuruId { get; set; }
+        public int HaberId { get; set; }
 
         private Yayin yayinDurum { get; set; }
 
         protected override Task OnInitializedAsync()
         {
-            yayinDurum = DuyuruServisi.Get(DuyuruId);
+            yayinDurum = HaberServisi.Get(HaberId);
             return Task.CompletedTask;
         }
     }

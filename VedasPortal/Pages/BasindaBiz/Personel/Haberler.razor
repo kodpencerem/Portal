@@ -13,32 +13,32 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var duyuru in haberler)
+            @foreach (var haber in haberler)
             {
 
                 <div class="col-12 col-md-4 col-lg-4">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="510" height="400" alt="@duyuru.Adi" src="/img/uploded/@duyuru.DosyaYolu" class="author-box-picture">
+                            <img width="510" height="400" alt="@haber.Adi" src="/img/uploaded/@haber.DosyaYolu" class="author-box-picture">
                             <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
                             <div class="article-category">
-                                <a href="@($"haber/detay/{duyuru.Id}")">Duyuru</a>
-                                <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
+                                <a href="@($"haber/detay/{haber.Id}")">Haber</a>
+                                <div class="bullet"></div> <a>@haber.KayitTarihi</a>
                             </div>
                             <div class="article-title">
-                                <h2><a href="@($"duyuru/detay/{duyuru.Id}")">@duyuru.Adi</a></h2>
+                                <h2><a href="@($"haber/detay/{haber.Id}")">@haber.Adi</a></h2>
                             </div>
                             <div class="article-title">
-                                <h2><a>@duyuru.AltBaslik</a></h2>
+                                <h2><a>@haber.AltBaslik</a></h2>
                             </div>
                             <p>
-                                @duyuru.Aciklama
+                                @haber.Aciklama
                             </p>
 
                             <div class="article-cta">
-                                <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
+                                <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
                             </div>
 
                         </div>

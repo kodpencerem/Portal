@@ -1,8 +1,8 @@
 ﻿@page "/duyurular"
-@inherits DuyuruIndexModel
+@inherits DuyuruModeli
 
 
-@if (duyuruListesi == null)
+@if (duyurular == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -13,35 +13,30 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var duyuru in duyuruListesi)
+            @foreach (var duyuru in duyurular)
             {
 
                 <div class="col-12 col-md-4 col-lg-4">
                     <article class="article article-style-c">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img02.png" style="background-image: url(&quot;assets/img/blog/img02.png&quot;);">
-                            </div>
+                        <div class="author-box-center align-center">
+                            <img width="510" height="400" alt="@duyuru.Adi" src="/img/uploaded/@duyuru.DosyaYolu" class="author-box-picture">
+                            <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
                             <div class="article-category">
-                                <a href="#">Duyuru</a>
-                                <div class="bullet"></div> <a href="#">@duyuru.KayitTarihi</a>
+                                <a href="@($"duyuru/detay/{duyuru.Id}")">Duyuru</a>
+                                <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
                             </div>
                             <div class="article-title">
-                                <h2><a href="#">@duyuru.Adi</a></h2>
+                                <h2><a href="@($"duyuru/detay/{duyuru.Id}")">@duyuru.Adi</a></h2>
+                            </div>
+                            <div class="article-title">
+                                <h2><a>@duyuru.AltBaslik</a></h2>
                             </div>
                             <p>
                                 @duyuru.Aciklama
                             </p>
-                            <div class="article-user">
-                                <img alt="image" src="assets/img/users/user-1.png">
-                                <div class="article-user-details">
-                                    <div class="user-detail-name">
-                                        <a href="#">Ekleyen Birim</a>
-                                    </div>
-                                    <div class="text-job">Ekleyen Kullanıcı</div>
-                                </div>
-                            </div>
+
                             <div class="article-cta">
                                 <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
                             </div>

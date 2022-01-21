@@ -6,9 +6,9 @@ using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.YayinDurumlari;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Duyurular.Admin
+namespace VedasPortal.Pages.BasindaBiz.Admin
 {
-    public class DKategoriEkleDuzenle : ComponentBase
+    public class HKategoriEkleDuzenle : ComponentBase
     {
         [Inject]
         public IBaseRepository<YayinKategori> YayinKategorisi { get; set; }
@@ -20,29 +20,29 @@ namespace VedasPortal.Pages.Duyurular.Admin
         [Parameter]
         public int kategoriId { get; set; }
         protected string Title = "Ekle";
-        public YayinKategori duyuruKategori = new YayinKategori();       
+        public YayinKategori haberKategori = new YayinKategori();
         protected override void OnParametersSet()
         {
             if (kategoriId != 0)
             {
                 Title = "Duzenle";
-                duyuruKategori = YayinKategorisi.Get(kategoriId);
-                
+                haberKategori = YayinKategorisi.Get(kategoriId);
+
             }
         }
 
         protected void KategoriKayit()
         {
-            YayinKategorisi.AddUpdate(duyuruKategori);
+            YayinKategorisi.AddUpdate(haberKategori);
         }
 
         protected override Task OnInitializedAsync()
         {
-            TumDuyurulariGetir();
+            TumHaberleriGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<YayinKategori> TumDuyurulariGetir()
+        protected IEnumerable<YayinKategori> TumHaberleriGetir()
         {
             yayinKategorileri = YayinKategorisi.GetAll();
             return yayinKategorileri;
@@ -50,30 +50,30 @@ namespace VedasPortal.Pages.Duyurular.Admin
         }
 
         protected string DialogGorunur { get; set; } = "none";
-        protected void SilmeyiOnayla(int duyuruId)
+        protected void SilmeyiOnayla(int haberId)
         {
             ModalDialog.Open();
-            duyuruKategori = yayinKategorileri.FirstOrDefault(x => x.Id == duyuruId);
+            haberKategori = yayinKategorileri.FirstOrDefault(x => x.Id == haberId);
         }
         public ModalComponent ModalDialog { get; set; }
-        protected void DuyuruSil()
+        protected void HaberSil()
         {
-            if (duyuruKategori.Id == 0)
+            if (haberKategori.Id == 0)
                 return;
 
-            YayinKategorisi.Remove(duyuruKategori.Id);
-            duyuruKategori = new YayinKategori();
-            TumDuyurulariGetir();
+            YayinKategorisi.Remove(haberKategori.Id);
+            haberKategori = new YayinKategori();
+            TumHaberleriGetir();
         }
 
         public void Cancel()
         {
-            UrlNavigationManager.NavigateTo("/DuyuruKategoriBilgisi");
+            UrlNavigationManager.NavigateTo("/HaberKategoriBilgisi");
         }
 
         public void Temizle()
         {
-            this.duyuruKategori = null;
+            haberKategori = null;
             Cancel();
         }
     }

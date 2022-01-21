@@ -69,7 +69,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             }
         }
 
-        protected string DialogGorunur { get; set; } = "none";
+        
 
         protected void SilmeyiOnayla(int duyuruId)
         {
@@ -77,7 +77,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             duyuru = DuyurularListesi.FirstOrDefault(x => x.Id == duyuruId);
         }
         public ModalComponent ModalDialog { get; set; }
-        
+        protected string DialogGorunur { get; set; } = "none";
 
         protected void DuyuruSil()
         {
@@ -99,7 +99,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         public void Cancel()
         {
-            UrlNavigationManager.NavigateTo("/duyurulistele");
+            UrlNavigationManager.NavigateTo("/duyuru/ekle");
         }
 
         public void Temizle()
@@ -107,10 +107,5 @@ namespace VedasPortal.Pages.Duyurular.Admin
             this.duyuru = null;
             Cancel();
         }
-
-        
-
-
-
     }
 }

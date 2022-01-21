@@ -1,6 +1,5 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/{duyuruId:int}"
-@page "/duyurulistele"
 
 @using Microsoft.AspNetCore.Hosting
 @inject IWebHostEnvironment Environment
@@ -24,6 +23,10 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValuePath="@duyuru.DosyaYolu" />
+                                @if (!string.IsNullOrEmpty(duyuru.DosyaYolu))
+                                {
+                                    <img src="@("img/uploaded/"+duyuru.DosyaYolu)" height="150" />
+                                }
                             </div>
                             <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
                         </div>
@@ -43,6 +46,8 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.AltBaslik)" />
                         </div>
+
+
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
@@ -63,7 +68,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-2">Açıklama</label>
                             <div class="col-md-10">
-                                <InputTextArea class="form-control" @bind-Value="duyuru.Aciklama" />
+                                <InputTextArea class="form-control" @bind-Value="@duyuru.Aciklama" />
                             </div>
                             <ValidationMessage For="@(() => duyuru.Aciklama)" />
                         </div>
@@ -75,6 +80,23 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.YayinDurumu)" />
                         </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Duyuru Kutusuna Eklensin Mi?</label>
+                            <div class="col-md-10">
+                                <InputCheckbox class="form-control" @bind-Value="duyuru.DuyuruKutusundaOlsunMu" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuru.DuyuruKutusundaOlsunMu)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Slidera Eklensin Mi?</label>
+                            <div class="col-md-10">
+                                <InputCheckbox class="form-control" @bind-Value="duyuru.SlideraEklensinMi" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuru.SlideraEklensinMi)" />
+                        </div>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -106,7 +128,8 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Duyurular
+                        Duyurular |
+                        <a href='/duyuru/kategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Duyuru Kategorisi Ekle</a>
                     </div>
                 </div>
 
@@ -213,18 +236,7 @@ else
 
 @code {
 
-    //protected string ImgUrl;
 
-    //public static string ImageUploadedPath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "img", "uploded");
-
-    //protected async Task UploadFile(InputFileChangeEventArgs e)
-    //{
-    //    var path = Path.Combine(Environment.ContentRootPath, "wwwroot", "upload", e.File.Name);
-
-    //    await using FileStream fs = new(path, FileMode.Create);
-    //    await e.File.OpenReadStream().CopyToAsync(fs);
-    //    ImgUrl = ImageUploadedPath;
-    //}
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

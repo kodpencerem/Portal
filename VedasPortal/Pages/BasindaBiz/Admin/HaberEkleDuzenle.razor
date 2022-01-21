@@ -1,20 +1,20 @@
-﻿@page "/duyuru/ekle"
-@page "/duyuru/duzenle/{duyuruId:int}"
+﻿@page "/haber/ekle"
+@page "/haber/duzenle/{haberId:int}"
 
 @using Microsoft.AspNetCore.Hosting
 @inject IWebHostEnvironment Environment
 
-@inherits DuyuruEkleDuzenleModel
+@inherits HaberEkleDuzenleModel
 @inject IJSRuntime jsRun
 
 
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            Duyuru @Title
+            Haber @Title
         </CardHeader>
         <CardBody>
-            <EditForm Model="@duyuru" OnValidSubmit="DuyuruKayit">
+            <EditForm Model="@haber" OnValidSubmit="HaberKayit">
                 <DataAnnotationsValidator />
 
                 <div class="col-12">
@@ -22,30 +22,30 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValuePath="@duyuru.DosyaYolu" />
+                                <ImageResizer @bind-ValuePath="@haber.DosyaYolu" />
                             </div>
-                            <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
+                            <ValidationMessage For="@(() => haber.DosyaYolu)" />
                         </div>
 
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Adı</label>
+                            <label class="control-label col-md-2">Haber Adı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="duyuru.Adi" />
+                                <InputText class="form-control" @bind-Value="haber.Adi" />
                             </div>
-                            <ValidationMessage For="@(() => duyuru.Adi)" />
+                            <ValidationMessage For="@(() => haber.Adi)" />
                         </div>
 
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Alt Başlığı</label>
+                            <label class="control-label col-md-2">Haber Alt Başlığı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="duyuru.AltBaslik" />
+                                <InputText class="form-control" @bind-Value="haber.AltBaslik" />
                             </div>
-                            <ValidationMessage For="@(() => duyuru.AltBaslik)" />
+                            <ValidationMessage For="@(() => haber.AltBaslik)" />
                         </div>
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@duyuru.YayinKategoriId" class="form-control">
+                                <InputSelect @bind-Value="@haber.YayinKategoriId" class="form-control">
                                     <option></option>
                                     @foreach (var kategori in Kategoriler)
                                     {
@@ -54,7 +54,7 @@
 
                                 </InputSelect>
                             </div>
-                            <ValidationMessage For="@(() => duyuru.YayinKategoriId)" />
+                            <ValidationMessage For="@(() => haber.YayinKategoriId)" />
                         </div>
                     </div>
 
@@ -62,22 +62,38 @@
                         <div class="form-group row">
                             <label class="control-label col-md-2">Açıklama</label>
                             <div class="col-md-10">
-                                <InputTextArea class="form-control" @bind-Value="duyuru.Aciklama" />
+                                <InputTextArea class="form-control" @bind-Value="@haber.Aciklama" />
                             </div>
-                            <ValidationMessage For="@(() => duyuru.Aciklama)" />
+                            <ValidationMessage For="@(() => haber.Aciklama)" />
                         </div>
 
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Şimdi Yayınlasın Mı?</label>
+                            <label class="control-label col-md-2">Haber Şimdi Yayınlasın Mı?</label>
                             <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="duyuru.YayinDurumu" />
+                                <InputCheckbox class="form-control" @bind-Value="haber.YayinDurumu" />
                             </div>
-                            <ValidationMessage For="@(() => duyuru.YayinDurumu)" />
+                            <ValidationMessage For="@(() => haber.YayinDurumu)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Duyuru Kutusuna Eklensin Mi?</label>
+                            <div class="col-md-10">
+                                <InputCheckbox class="form-control" @bind-Value="haber.DuyuruKutusundaOlsunMu" />
+                            </div>
+                            <ValidationMessage For="@(() => haber.DuyuruKutusundaOlsunMu)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Slidera Eklensin Mi?</label>
+                            <div class="col-md-10">
+                                <InputCheckbox class="form-control" @bind-Value="haber.SlideraEklensinMi" />
+                            </div>
+                            <ValidationMessage For="@(() => haber.SlideraEklensinMi)" />
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="DuyuruKayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </EditForm>
@@ -88,7 +104,7 @@
 </div>
 
 
-@if (DuyurularListesi == null)
+@if (Haberler == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -105,7 +121,8 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Duyurular
+                        Haberler |
+                        <a href='/haber/kategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Haber Kategorisi Ekle</a>
                     </div>
                 </div>
 
@@ -124,8 +141,8 @@ else
                                 </th>
                                 <th>Resim</th>
 
-                                <th>Duyuru Adı</th>
-                                <th>Duyuru Durumu</th>
+                                <th>Haber Adı</th>
+                                <th>Haber Durumu</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -133,41 +150,45 @@ else
 
 
 
-                            @foreach (var duyuru in DuyurularListesi)
+                            @foreach (var haber in Haberler)
 
                             {
-                                <tr>
-                                    <td class="text-center pt-2">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                   id="checkbox-1">
-                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                        </div>
-                                    </td>
-                                    <td>@duyuru.DosyaYolu</td>
 
-                                    <td>@duyuru.Adi</td>
-                                    <td>
-                                        @if (duyuru.YayinDurumu == true)
-                                        {
+                                
+                                    <tr>
+                                        <td class="text-center pt-2">
+                                            <div class="custom-checkbox custom-control">
+                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                       id="checkbox-1">
+                                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>@haber.DosyaYolu</td>
+
+                                        <td>@haber.Adi</td>
+                                        <td>
+                                            @if (haber.YayinDurumu == true)
+                                            {
 
 
-                                            <div class="badge badge-success badge-shadow">Yayında</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
-                                    </td>
+                                                <div class="badge badge-success badge-shadow">Yayında</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
+                                        </td>
 
-                                    <td>
-                                        <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary">Duyuru Detayı</a>
-                                        <a href='/duyuru/duzenle/@duyuru.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuru.Id);})">
-                                            Sil
-                                        </button>
-                                    </td>
-                                </tr>
+                                        <td>
+                                            <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary">Haber Detayı</a>
+                                            <a href='/haber/duzenle/@haber.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(haber.Id);})">
+                                                Sil
+                                            </button>
+                                        </td>
+                                    </tr>
+                                
+
 
                             }
                         </tbody>
@@ -182,28 +203,28 @@ else
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
-            <h3 class="modal-title">Duyuru Silme</h3>
+            <h3 class="modal-title">Haber Silme</h3>
         </ModalHeader>
         <ModalBody>
             <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
             <table class="table">
                 <tr>
                     <td>Resim</td>
-                    <td>@duyuru.DosyaYolu</td>
+                    <td>@haber.DosyaYolu</td>
                 </tr>
                 <tr>
-                    <td>Duyuru Adı</td>
-                    <td>@duyuru.Adi</td>
+                    <td>Haber Adı</td>
+                    <td>@haber.Adi</td>
                 </tr>
 
                 <tr>
                     <td>Oluşturulma Tarihi</td>
-                    <td>@duyuru.KayitTarihi.ToString("d")</td>
+                    <td>@haber.KayitTarihi.ToString("d")</td>
                 </tr>
             </table>
         </ModalBody>
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-danger" @onclick="@(()=>{HaberSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
@@ -212,7 +233,7 @@ else
 
 @code {
 
-  
+
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

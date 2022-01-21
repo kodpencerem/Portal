@@ -43,7 +43,7 @@
 
     public void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
     {
-        filePath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "img", "uploded");
+        filePath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "img", "uploaded");
         DirectoryInfo info = new DirectoryInfo(filePath);
         if (!info.Exists)
         {

@@ -5,6 +5,7 @@ using Microsoft.JSInterop;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using VedasPortal.Components.ModalComponents;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -34,13 +35,20 @@ namespace VedasPortal.Components.UploadComponent
 
         private double AspectRatio { get; set; } = 1d;
 
+        bool isOpened = false;
+
+        void OpenModal()
+        {
+            isOpened = true;
+        }
+
+        public ShowModalComponent ModalShow { get; set; }
+        protected string DialogPreView { get; set; } = "none";
+
         public double ratio { get; set; } = 1;
 
         private double AspectWidth { get; set; } = 1;
 
-       
-     
-      
         private void OnAspectWidthChanged(ChangeEventArgs eventArgs)
         {
             AspectWidth = double.Parse((string)eventArgs.Value);
@@ -77,7 +85,7 @@ namespace VedasPortal.Components.UploadComponent
             CropCurrentHeight = cropSize.Item2;
         }
 
-        private async Task DoneCrop()
+        protected async Task DoneCrop()
         {
             ImageCroppedResult args = await cropper.GetCropedResult();
             ShowCroper = false;
@@ -85,11 +93,8 @@ namespace VedasPortal.Components.UploadComponent
             StateHasChanged();
             await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "converted!");
-
-
-
             string base64String = await args.GetBase64Async();
-            var fileName= SaveFileToUploaded.RandomFileName+ browserFileResizer.Name;
+            var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
             File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
@@ -103,6 +108,8 @@ namespace VedasPortal.Components.UploadComponent
         {
             ShowCroper = false;
             await UpdatePreviewASync(browserFileResizer);
+            PreviewImagePath = null;
+
         }
 
         private readonly int MaxAllowedFileSize = 10 * 1024 * 1024;
@@ -116,32 +123,5 @@ namespace VedasPortal.Components.UploadComponent
             ImageBase64String = Convert.ToBase64String(imageBytes);
             PreviewImagePath = $"data:image/png;base64,{ImageBase64String}";
         }
-
-
-        //[Inject]
-        //public IBaseRepository<DosyaYukle> DosyaServisi { get; set; }
-
-        //DosyaYukle dosyaYukle = new DosyaYukle();
-
-        //public byte[] ImageUpladed { get; set; }
-
-        //void ValidSubmit()
-        //{
-        //    dosyaYukle.Id = 0;
-        //    dosyaYukle.DosyaBoyutu = ImageUpladed;
-        //    DosyaServisi.UploadImage(dosyaYukle);
-        //}
-
-        //async Task HandleFileSelected(IFileListEntry[] files)
-        //{
-        //    var file = files.FirstOrDefault();
-        //    if (file != null)
-        //    {
-
-        //        var ms = new MemoryStream();
-        //        await file.Data.CopyToAsync(ms);
-        //        ImageUpladed = ms.ToArray();
-        //    }
-        //}
     }
 }

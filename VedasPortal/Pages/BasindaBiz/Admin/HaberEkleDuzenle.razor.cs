@@ -6,34 +6,34 @@ using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.YayinDurumlari;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Duyurular.Admin
+namespace VedasPortal.Pages.BasindaBiz.Admin
 {
-    public class DuyuruEkleDuzenleModel : ComponentBase
+    public class HaberEkleDuzenleModel : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<Yayin> DuyuruServisi { get; set; }
+        public IBaseRepository<Yayin> HaberServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<YayinKategori> DuyuruKategoriServisi { get; set; }
+        public IBaseRepository<YayinKategori> HaberKategoriServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int duyuruId { get; set; }
+        public int haberId { get; set; }
 
         protected string Title = "Ekle";
-        public Yayin duyuru = new Yayin();
-        
-        private IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
-        protected IEnumerable<Yayin> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
+        public Yayin haber = new Yayin();
 
-        protected IEnumerable<Yayin> TumDuyurulariGetir()
+        private IEnumerable<Yayin> haberler = new List<Yayin>();
+        protected IEnumerable<Yayin> Haberler { get => haberler; set => haberler = value; }
+
+        protected IEnumerable<Yayin> TumHaberleriGetir()
         {
-            DuyurularListesi = DuyuruServisi.GetAll();
+            Haberler = HaberServisi.GetAll();
 
-            return DuyurularListesi;
+            return Haberler;
 
         }
 
@@ -43,17 +43,17 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected IEnumerable<YayinKategori> TumKategorileriGetir()
         {
-            Kategoriler = DuyuruKategoriServisi.GetAll();
-
+            Kategoriler = HaberKategoriServisi.GetAll();
+            
             return Kategoriler;
 
         }
 
-        protected void DuyuruKayit()
+        protected void HaberKayit()
         {
-            
-            DuyuruServisi.AddUpdate(duyuru);
- 
+
+            HaberServisi.AddUpdate(haber);
+
         }
 
         protected string ImageBase64String { get; set; }
@@ -61,50 +61,50 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected override void OnParametersSet()
         {
-            if (duyuruId != 0)
+            if (haberId != 0)
             {
                 Title = "Duzenle";
-                duyuru = DuyuruServisi.Get(duyuruId);
+                haber = HaberServisi.Get(haberId);
 
             }
         }
 
-        
 
-        protected void SilmeyiOnayla(int duyuruId)
+
+        protected void SilmeyiOnayla(int haberId)
         {
             ModalDialog.Open();
-            duyuru = DuyurularListesi.FirstOrDefault(x => x.Id == duyuruId);
+            haber = Haberler.FirstOrDefault(x => x.Id == haberId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void DuyuruSil()
+        protected void HaberSil()
         {
-            if (duyuru.Id == 0)
+            if (haber.Id == 0)
                 return;
 
-            DuyuruServisi.Remove(duyuru.Id);
-            duyuru = new Yayin();
-            TumDuyurulariGetir();
+            HaberServisi.Remove(haber.Id);
+            haber = new Yayin();
+            TumHaberleriGetir();
         }
 
-        
+
         protected override Task OnInitializedAsync()
         {
-            TumDuyurulariGetir();
+            TumHaberleriGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
 
         public void Cancel()
         {
-            UrlNavigationManager.NavigateTo("/duyuru/ekle");
+            UrlNavigationManager.NavigateTo("/haber/ekle");
         }
 
         public void Temizle()
         {
-            this.duyuru = null;
+            haber = null;
             Cancel();
         }
     }

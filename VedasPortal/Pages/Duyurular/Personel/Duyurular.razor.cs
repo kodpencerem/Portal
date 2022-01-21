@@ -9,11 +9,11 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Personel
 {
-    public class DuyuruIndexModel : ComponentBase
+    public class DuyuruModeli : ComponentBase
     {
         [Inject]
         protected IBaseRepository<Yayin> DuyuruServisi { get; set; }
-        protected IEnumerable<Yayin> duyuruListesi;
+        protected IEnumerable<Yayin> duyurular;
         protected List<Yayin> duyuruAra = new List<Yayin>();
         protected Yayin duyuru = new Yayin();
         
@@ -26,8 +26,8 @@ namespace VedasPortal.Pages.Duyurular.Personel
 
         protected IEnumerable<Yayin> TumDuyurulariGetir()
         {
-            duyuruListesi = DuyuruServisi.GetAll();
-            return duyuruListesi;
+            duyurular = DuyuruServisi.GetAll();
+            return duyurular;
 
         }
 
@@ -35,11 +35,11 @@ namespace VedasPortal.Pages.Duyurular.Personel
         {
             if (!string.IsNullOrEmpty(SearchString))
             {
-                duyuruListesi = duyuruAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+                duyurular = duyuruAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
             }
             else
             {
-                duyuruListesi = duyuruAra;
+                duyurular = duyuruAra;
             }
         }
         protected string dialogGorunur { get; set; } = "none";

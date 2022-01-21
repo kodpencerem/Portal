@@ -698,7 +698,7 @@
   <ItemGroup>
     <Folder Include="Pages\Etkinlikler\Personel\" />
     <Folder Include="Pages\HavaDurumu\" />
-    <Folder Include="wwwroot\img\uploded\" />
+    <Folder Include="wwwroot\img\uploaded\" />
   </ItemGroup>
 
 </Project>

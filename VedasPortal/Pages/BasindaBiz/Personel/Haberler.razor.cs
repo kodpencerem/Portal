@@ -12,34 +12,34 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
     public class HaberModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Yayin> DuyuruServisi { get; set; }
+        protected IBaseRepository<Yayin> HaberServisi { get; set; }
         protected IEnumerable<Yayin> haberler;
-        protected List<Yayin> duyuruAra = new List<Yayin>();
-        protected Yayin duyuru = new Yayin();
+        protected List<Yayin> haberAra = new List<Yayin>();
+        protected Yayin haber = new Yayin();
 
         protected string SearchString { get; set; }
         protected override Task OnInitializedAsync()
         {
-            TumDuyurulariGetir();
+            TumHeberleriGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Yayin> TumDuyurulariGetir()
+        protected IEnumerable<Yayin> TumHeberleriGetir()
         {
-            haberler = DuyuruServisi.GetAll();
+            haberler = HaberServisi.GetAll();
             return haberler;
 
         }
 
-        protected void DuyuruFilterelemeYap()
+        protected void HaberFilterelemeYap()
         {
             if (!string.IsNullOrEmpty(SearchString))
             {
-                haberler = duyuruAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+                haberler = haberAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
             }
             else
             {
-                haberler = duyuruAra;
+                haberler = haberAra;
             }
         }
         protected string dialogGorunur { get; set; } = "none";

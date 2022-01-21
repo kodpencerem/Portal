@@ -34,6 +34,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         protected void KategoriKayit()
         {
             YayinKategorisi.AddUpdate(duyuruKategori);
+            Cancel();
         }
 
         protected override Task OnInitializedAsync()
@@ -68,7 +69,8 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         public void Cancel()
         {
-            UrlNavigationManager.NavigateTo("/DuyuruKategoriBilgisi");
+            UrlNavigationManager.NavigateTo("/duyuru/kategori/ekle");
+            
         }
 
         public void Temizle()

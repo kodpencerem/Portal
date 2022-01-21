@@ -1,38 +1,38 @@
-﻿@page "/duyuru/kategori/ekle"
-@page "/duyuru/kategori/duzenle/{kategoriId:int}"
-@page "/DuyuruKategoriBilgisi"
+﻿@page "/haber/kategori/ekle"
+@page "/haber/kategori/duzenle/{kategoriId:int}"
+@page "/HaberKategoriBilgisi"
 
 @inject IJSRuntime jsRun
-@inherits DKategoriEkleDuzenle
+@inherits HKategoriEkleDuzenle
 
 
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            Duyuru Kategorisi @Title
+            Haber Kategorisi @Title
         </CardHeader>
         <CardBody>
-            <EditForm Model="@duyuruKategori" OnValidSubmit="KategoriKayit">
+            <EditForm Model="@haberKategori" OnValidSubmit="KategoriKayit">
                 <DataAnnotationsValidator />
 
                 <div class="col-12">
                     <div class="col-md-8 float-left">
                         <div class="form-group row">
-                            <label class="control-label col-md-12">Duyuru Kategori Adı</label>
+                            <label class="control-label col-md-12">Haber Kategori Adı</label>
                             <div class="col-md-8">
-                                <InputText class="form-control" @bind-Value="duyuruKategori.YayinKategoriAdi" />
+                                <InputText class="form-control" @bind-Value="haberKategori.YayinKategoriAdi" />
                             </div>
-                            <ValidationMessage For="@(() => duyuruKategori.YayinKategoriAdi)" />
+                            <ValidationMessage For="@(() => haberKategori.YayinKategoriAdi)" />
                         </div>
                     </div>
 
                     <div class="col-md-4 float-right">
                         <div class="form-group row">
-                            <label class="control-label col-md-12">Duyuru Kategori Durumu</label>
+                            <label class="control-label col-md-12">Haber Kategori Durumu</label>
                             <div class="col-md-4">
-                                <InputCheckbox class="form-control" @bind-Value="duyuruKategori.YayinKategoriDurumu" />
+                                <InputCheckbox class="form-control" @bind-Value="haberKategori.YayinKategoriDurumu" />
                             </div>
-                            <ValidationMessage For="@(() => duyuruKategori.YayinKategoriDurumu)" />
+                            <ValidationMessage For="@(() => haberKategori.YayinKategoriDurumu)" />
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Duyuru Kategorileri
+                        Haber Kategorileri
                     </div>
                 </div>
 
@@ -85,14 +85,12 @@ else
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
-                                <th>Duyuru Kategori Adı</th>
-                                <th>Duyuru Kategori Durumu</th>
+                                <th>Haber Kategori Adı</th>
+                                <th>Haber Kategori Durumu</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
-
-
 
                             @foreach (var duyuruKategorisi in yayinKategorileri)
 
@@ -118,11 +116,10 @@ else
                                         }
                                     </td>
 
-                                    <td>
-                                        <a href="@($"duyuru/kategori/detay/{duyuruKategorisi.Id}")" class="btn btn-primary">Duyuru Detayı</a>
-                                        <a href='/duyuru/kategori/duzenle/@duyuruKategorisi.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <td>                                       
+                                        <a href='/haber/kategori/duzenle/@duyuruKategorisi.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuruKategorisi.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block";Temizle(); SilmeyiOnayla(duyuruKategorisi.Id);})">
                                             Sil
                                         </button>
                                     </td>
@@ -141,24 +138,24 @@ else
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
-            <h3 class="modal-title">Duyuru Silme</h3>
+            <h3 class="modal-title">Haber Silme</h3>
         </ModalHeader>
         <ModalBody>
             <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
             <table class="table">
                 <tr>
-                    <td>Duyuru Kategori Adı</td>
-                    <td>@duyuruKategori.YayinKategoriAdi</td>
+                    <td>Haber Kategori Adı</td>
+                    <td>@haberKategori.YayinKategoriAdi</td>
                 </tr>
                 <tr>
-                    <td>Duyuru Kategori Durumu</td>
-                    <td>@duyuruKategori.YayinKategoriDurumu</td>
+                    <td>Haber Kategori Durumu</td>
+                    <td>@haberKategori.YayinKategoriDurumu</td>
                 </tr>
 
             </table>
         </ModalBody>
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-danger" @onclick="@(()=>{HaberSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
