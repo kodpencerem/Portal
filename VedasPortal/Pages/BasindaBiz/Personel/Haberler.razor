@@ -1,0 +1,52 @@
+﻿@page "/haberler"
+@inherits HaberModeli
+
+
+@if (haberler == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+    <div class="col-12">
+        <div class="row">
+            @foreach (var duyuru in haberler)
+            {
+
+                <div class="col-12 col-md-4 col-lg-4">
+                    <article class="article article-style-c">
+                        <div class="author-box-center align-center">
+                            <img width="510" height="400" alt="@duyuru.Adi" src="/img/uploded/@duyuru.DosyaYolu" class="author-box-picture">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="article-details">
+                            <div class="article-category">
+                                <a href="@($"haber/detay/{duyuru.Id}")">Duyuru</a>
+                                <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="@($"duyuru/detay/{duyuru.Id}")">@duyuru.Adi</a></h2>
+                            </div>
+                            <div class="article-title">
+                                <h2><a>@duyuru.AltBaslik</a></h2>
+                            </div>
+                            <p>
+                                @duyuru.Aciklama
+                            </p>
+
+                            <div class="article-cta">
+                                <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+            }
+
+        </div>
+    </div>
+
+}
