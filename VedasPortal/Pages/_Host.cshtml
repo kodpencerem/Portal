@@ -8,74 +8,76 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
-	<title>Vedaş Portal</title>
-	<base href="~/" />
-	<!-- Index CSS -->
-	<link rel="stylesheet" href="assets/css/app.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
-	<link rel="stylesheet" href="assets/css/components.css" type="text/css">
-	<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-	<link rel='shortcut icon' type='image/x-icon' href='~/img/logo.png' />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap">
-	<!-- Bootstrap Social Media CSS -->
-	<link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>Vedaş Portal</title>
+    <base href="~/" />
+    <!-- Index CSS -->
+    <link rel="stylesheet" href="assets/css/app.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/components.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <link rel='shortcut icon' type='image/x-icon' href='~/img/logo.png' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Social Media CSS -->
+    <link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css" type="text/css">
 
-	<!-- TuiCalendar CSS -->
+    <!-- TuiCalendar CSS -->
 
-	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
-	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
-	<link rel="stylesheet" type="text/css" href="tuicalendar/dist/tui-calendar.css">
-	<link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/default.css">
-	<link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/icons.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+    <link rel="stylesheet" type="text/css" href="tuicalendar/dist/tui-calendar.css">
+    <link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/default.css">
+    <link rel="stylesheet" type="text/css" href="tuicalendar/examples/css/icons.css">
 
-	<!-- JQuery Selectric CSS -->
-	<link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css" type="text/css">
+    <!-- JQuery Selectric CSS -->
+    <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css" type="text/css">
 
-	<!-- FullCalendar CSS -->
-	<link rel="stylesheet" href="assets/bundles/fullcalendar/fullcalendar.min.css" type="text/css">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="assets/bundles/fullcalendar/fullcalendar.min.css" type="text/css">
 
-	<!-- Card Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/chocolat/dist/css/chocolat.css" type="text/css">
+    <!-- Card Page CSS -->
+    <link rel="stylesheet" href="assets/bundles/chocolat/dist/css/chocolat.css" type="text/css">
 
-	<!-- Checkbox Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css" type="text/css">
+    <!-- Checkbox Page CSS -->
+    <link rel="stylesheet" href="assets/bundles/pretty-checkbox/pretty-checkbox.min.css" type="text/css">
 
-	<!-- Weather Icon Page CSS -->
-	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons-wind.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons.min.css" type="text/css">
+    <!-- Weather Icon Page CSS -->
+    <link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons-wind.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/weather-icon/css/weather-icons.min.css" type="text/css">
 
-	<!-- Create Post CSS -->
-	<link rel="stylesheet" href="assets/bundles/summernote/summernote-bs4.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" type="text/css">
+    <!-- Create Post CSS -->
+    <link rel="stylesheet" href="assets/bundles/summernote/summernote-bs4.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" type="text/css">
 
-	<!-- DataTable CSS -->
-	<link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css" type="text/css">
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/datatables/Select-1.2.4/css/select.bootstrap4.min.css" type="text/css">
 
-	<!-- FormAdvanced CSS -->
-	<link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css" type="text/css">
+    <!-- FormAdvanced CSS -->
+    <link rel="stylesheet" href="assets/bundles/bootstrap-daterangepicker/daterangepicker.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css" type="text/css">
 
-	<link rel="stylesheet" href="assets/bundles/ionicons/css/ionicons.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/ionicons/css/ionicons.min.css" type="text/css">
 
-	<!-- Light Galery CSS -->
-	<link rel="stylesheet" href="assets/bundles/lightgallery/dist/css/lightgallery.css" type="text/css">
+    <!-- Light Galery CSS -->
+    <link rel="stylesheet" href="assets/bundles/lightgallery/dist/css/lightgallery.css" type="text/css">
 
-	<!-- Owl-Carousel Galery CSS -->
-	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css" type="text/css">
+    <!-- Owl-Carousel Galery CSS -->
+    <link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css" type="text/css">
 
-	<link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/prism/prism.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/dropzonejs/dropzone.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/codemirror/lib/codemirror.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/codemirror/theme/duotone-dark.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/jqvmap/dist/jqvmap.min.css" type="text/css">
-	<link rel="stylesheet" href="assets/bundles/flag-icon-css/css/flag-icon.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/izitoast/css/iziToast.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/prism/prism.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/dropzonejs/dropzone.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/codemirror/lib/codemirror.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/codemirror/theme/duotone-dark.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/jqvmap/dist/jqvmap.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/bundles/flag-icon-css/css/flag-icon.min.css" type="text/css">
 
 </head>
 <body>
@@ -88,12 +90,12 @@
     <script src="https://uicdn.toast.com/tui.date-picker/v4.0.3/tui-date-picker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
-    <script src="~/tuicalendar/dist/tui-calendar.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="~/tuicalendar/examples/js/data/calendars.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="~/tuicalendar/examples/js/data/schedules.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="tuicalendar/dist/tui-calendar.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="tuicalendar/examples/js/data/calendars.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="tuicalendar/examples/js/data/schedules.js" charset="windows-1254" type="text/javascript"></script>
     <!-- <script src="./js/theme/dooray.js"></script> -->
-    <script src="~/tuicalendar/examples/js/app.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="~/tuicalendar/examples/js/default.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="tuicalendar/examples/js/app.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="tuicalendar/examples/js/default.js" charset="windows-1254" type="text/javascript"></script>
 
 
     @*	<div id="blazor-error-ui">
@@ -109,7 +111,7 @@
 
     <!-- Index JS Scripts -->
     <script src="assets/js/app.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/apexcharts/apexcharts.min.js" charset="windows-1254" type="text/javascript"></script>
+    <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
     <script src="assets/js/page/index.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/scripts.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/custom.js" charset="windows-1254" type="text/javascript"></script>
@@ -134,31 +136,6 @@
     <script src="assets/bundles/chocolat/dist/js/jquery.chocolat.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/jquery-ui/jquery-ui.min.js" charset="windows-1254" type="text/javascript"></script>
 
-    <!-- Page Char-Amcart JS File -->
-    <script src="assets/bundles/amcharts4/core.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/amcharts4/charts.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/amcharts4/animated.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/amcharts4/worldLow.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/amcharts4/maps.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/chart-amchart.js" charset="windows-1254" type="text/javascript"></script>
-
-    <!-- Page ApexChart JS File -->
-    <script src="assets/bundles/apexcharts/apexcharts.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/chart-apexcharts.js" charset="windows-1254" type="text/javascript"></script>
-
-    <!-- Page ChartChart JS File -->
-    <script src="assets/bundles/chartjs/chart.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/chart-chartjs.js" charset="windows-1254" type="text/javascript"></script>
-
-    <!-- Page ChartECart Js File -->
-    <script src="assets/bundles/echart/echarts.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/chart-echarts.js" charset="windows-1254" type="text/javascript"></script>
-
-    <!-- Page ChartMorris Js File -->
-    <script src="assets/bundles/morris/morris.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/morris/raphael-min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/chart-morris.js" charset="windows-1254" type="text/javascript"></script>
-
     <!-- Page SparkLine Js File -->
     <script src="assets/bundles/jquery.sparkline.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/sparkline.js" charset="windows-1254" type="text/javascript"></script>
@@ -167,16 +144,10 @@
     <script src="assets/js/page/chat.js" charset="windows-1254" type="text/javascript"></script>
 
     <!-- Page Contact and Map JS File -->
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>
-    <script src="assets/bundles/gmaps.js" charset="windows-1254" type="text/javascript"></script>
+
+
     <script src="assets/js/page/contact.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-advanced-route.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-draggable-marker.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-geocoding.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-geolocation.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-multiple-marker.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-route.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/gmaps-simple.js" charset="windows-1254" type="text/javascript"></script>
+
 
     <!--Create Post JS Libraies -->
     <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js" charset="windows-1254" type="text/javascript"></script>
@@ -197,23 +168,13 @@
     <script src="assets/bundles/datatables/export-tables/buttons.print.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js" charset="windows-1254" type="text/javascript"></script>
 
-    <!--EditTable JS Libraies -->
-    <script src="assets/bundles/editable-table/mindmup-editabletable.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/editable-table.js" charset="windows-1254" type="text/javascript"></script>
+
 
     <!--FormWizard JS Libraies -->
     <script src="assets/bundles/jquery-validation/dist/jquery.validate.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/jquery-steps/jquery.steps.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/form-wizard.js" charset="windows-1254" type="text/javascript"></script>
 
-    <!-- Form Advanced JS Libraies -->
-    <script src="assets/bundles/cleave-js/dist/cleave.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/cleave-js/dist/addons/cleave-phone.us.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/bootstrap-daterangepicker/daterangepicker.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/select2/dist/js/select2.full.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/js/page/forms-advanced-forms.js" charset="windows-1254" type="text/javascript"></script>
 
     <!-- Gallery1 JS Libraies -->
     <script src="assets/js/page/gallery1.js" charset="windows-1254" type="text/javascript"></script>
@@ -233,11 +194,6 @@
     <script src="assets/bundles/chartjs/chart.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/widget-data.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/portfolio.js" charset="windows-1254" type="text/javascript"></script>
-
-
-    <!--JsSor Slider editor -->
-    <script src="assets/slider/js/jssor.slider-28.1.0.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/slider/js/slider.conf.js" charset="windows-1254" type="text/javascript"></script>
 
     <!--summernote editor -->
     <script src="assets/bundles/summernote/summernote-bs4.js" charset="windows-1254" type="text/javascript"></script>
