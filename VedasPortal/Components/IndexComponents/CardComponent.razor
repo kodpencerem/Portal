@@ -7,14 +7,20 @@
 	<div class="card-body">
 		@CardBody
 	</div>
+	<div class="card-footer">
+		@CardFotter
+	</div>
 </div>
 
 @code {
-	[Parameter]
-	public Style cardStyle { get; set; }
-	[Parameter]
-	public RenderFragment CardBody { get; set; }
-	[Parameter]
-	public RenderFragment CardHeader { get; set; }
+    [Parameter]
+    public Style cardStyle { get; set; }
+    [Parameter]
+    public RenderFragment CardBody { get; set; }
+    [Parameter]
+    public RenderFragment CardHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment CardFotter { get; set; }
 
 }

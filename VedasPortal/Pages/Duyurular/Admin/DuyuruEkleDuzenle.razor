@@ -62,50 +62,58 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.YayinKategoriId)" />
                         </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Şimdi Yayınlasın Mı?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.YayinDurumu" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.YayinDurumu)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Kutusuna Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.DuyuruKutusundaOlsunMu" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.DuyuruKutusundaOlsunMu)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.SlideraEklensinMi" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.SlideraEklensinMi)" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-6 float-right">
                         <div class="form-group row">
                             <label class="control-label col-md-2">Açıklama</label>
-                            <div class="col-md-10">
-                                <InputTextArea class="form-control" @bind-Value="@duyuru.Aciklama" />
+                            <div class="col-md-12">
+                                <TextEditor  @bind-ValuePath="@duyuru.Aciklama" ></TextEditor>
                             </div>
                             <ValidationMessage For="@(() => duyuru.Aciklama)" />
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Şimdi Yayınlasın Mı?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="duyuru.YayinDurumu" />
-                            </div>
-                            <ValidationMessage For="@(() => duyuru.YayinDurumu)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Kutusuna Eklensin Mi?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="duyuru.DuyuruKutusundaOlsunMu" />
-                            </div>
-                            <ValidationMessage For="@(() => duyuru.DuyuruKutusundaOlsunMu)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Slidera Eklensin Mi?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="duyuru.SlideraEklensinMi" />
-                            </div>
-                            <ValidationMessage For="@(() => duyuru.SlideraEklensinMi)" />
-                        </div>
+                        
 
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="DuyuruKayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
-                </div>
+
             </EditForm>
 
         </CardBody>
+
+        <CardFotter>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" @onclick="DuyuruKayit">Kaydet</button>
+                <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+            </div>
+        </CardFotter>
     </CardComponent>
 
 </div>
