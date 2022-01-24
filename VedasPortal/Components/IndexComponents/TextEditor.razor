@@ -1,0 +1,24 @@
+﻿<div class="form-group row">
+    <label class="control-label col-md-2">@İcerikAdi</label>
+    <div class="col-sm-12 col-md-12">
+        <textarea class=" form-control summernote" @oninput="ValueChanged"></textarea>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public string İcerikAdi { get; set; }
+
+    [Parameter]
+    public string ValuePath { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValuePathChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> ValueChanged { get; set; }
+
+
+}
