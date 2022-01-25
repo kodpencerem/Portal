@@ -23,6 +23,10 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValuePath="@haber.DosyaYolu" />
+                                @if (!string.IsNullOrEmpty(haber.DosyaYolu))
+                                {
+                                    <img src="@("img/uploaded/"+haber.DosyaYolu)" height="150" />
+                                }
                             </div>
                             <ValidationMessage For="@(() => haber.DosyaYolu)" />
                         </div>
@@ -56,49 +60,55 @@
                             </div>
                             <ValidationMessage For="@(() => haber.YayinKategoriId)" />
                         </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Şimdi Yayınlasın Mı?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="haber.YayinDurumu" />
+                                </div>
+                                <ValidationMessage For="@(() => haber.YayinDurumu)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Kutusuna Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="haber.DuyuruKutusundaOlsunMu" />
+                                </div>
+                                <ValidationMessage For="@(() => haber.DuyuruKutusundaOlsunMu)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="haber.SlideraEklensinMi" />
+                                </div>
+                                <ValidationMessage For="@(() => haber.SlideraEklensinMi)" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-6 float-right">
                         <div class="form-group row">
                             <label class="control-label col-md-2">Açıklama</label>
-                            <div class="col-md-10">
-                                <InputTextArea class="form-control" @bind-Value="@haber.Aciklama" />
+                            <div class="col-md-12">
+                                <TextEditor @bind-ValuePath="@haber.Aciklama"></TextEditor>
                             </div>
                             <ValidationMessage For="@(() => haber.Aciklama)" />
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Haber Şimdi Yayınlasın Mı?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="haber.YayinDurumu" />
-                            </div>
-                            <ValidationMessage For="@(() => haber.YayinDurumu)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Duyuru Kutusuna Eklensin Mi?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="haber.DuyuruKutusundaOlsunMu" />
-                            </div>
-                            <ValidationMessage For="@(() => haber.DuyuruKutusundaOlsunMu)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Slidera Eklensin Mi?</label>
-                            <div class="col-md-10">
-                                <InputCheckbox class="form-control" @bind-Value="haber.SlideraEklensinMi" />
-                            </div>
-                            <ValidationMessage For="@(() => haber.SlideraEklensinMi)" />
-                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
-                </div>
+                
             </EditForm>
-
+            
         </CardBody>
+        <CardFotter>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
+                <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+            </div>
+        </CardFotter>
     </CardComponent>
 
 </div>
@@ -154,40 +164,40 @@ else
 
                             {
 
-                                
-                                    <tr>
-                                        <td class="text-center pt-2">
-                                            <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                       id="checkbox-1">
-                                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                            </div>
-                                        </td>
-                                        <td>@haber.DosyaYolu</td>
 
-                                        <td>@haber.Adi</td>
-                                        <td>
-                                            @if (haber.YayinDurumu == true)
-                                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@haber.DosyaYolu</td>
+
+                                    <td>@haber.Adi</td>
+                                    <td>
+                                        @if (haber.YayinDurumu == true)
+                                        {
 
 
-                                                <div class="badge badge-success badge-shadow">Yayında</div>
-                                            }
-                                            else
-                                            {
-                                                <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
-                                        </td>
+                                            <div class="badge badge-success badge-shadow">Yayında</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
+                                    </td>
 
-                                        <td>
-                                            <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary">Haber Detayı</a>
-                                            <a href='/haber/duzenle/@haber.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(haber.Id);})">
-                                                Sil
-                                            </button>
-                                        </td>
-                                    </tr>
-                                
+                                    <td>
+                                        <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary">Haber Detayı</a>
+                                        <a href='/haber/duzenle/@haber.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(haber.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+
 
 
                             }
@@ -207,20 +217,11 @@ else
         </ModalHeader>
         <ModalBody>
             <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
-            <table class="table">
-                <tr>
-                    <td>Resim</td>
-                    <td>@haber.DosyaYolu</td>
-                </tr>
+            <table class="table">               
                 <tr>
                     <td>Haber Adı</td>
                     <td>@haber.Adi</td>
-                </tr>
-
-                <tr>
-                    <td>Oluşturulma Tarihi</td>
-                    <td>@haber.KayitTarihi.ToString("d")</td>
-                </tr>
+                </tr>               
             </table>
         </ModalBody>
         <ModalFooter>

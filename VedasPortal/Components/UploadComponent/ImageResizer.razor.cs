@@ -85,6 +85,7 @@ namespace VedasPortal.Components.UploadComponent
             CropCurrentHeight = cropSize.Item2;
         }
 
+        
         protected async Task DoneCrop()
         {
             ImageCroppedResult args = await cropper.GetCropedResult();
@@ -93,7 +94,9 @@ namespace VedasPortal.Components.UploadComponent
             StateHasChanged();
             await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "converted!");
+#pragma warning disable CS0618 // Type or member is obsolete
             string base64String = await args.GetBase64Async();
+#pragma warning restore CS0618 // Type or member is obsolete
             var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
             File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";

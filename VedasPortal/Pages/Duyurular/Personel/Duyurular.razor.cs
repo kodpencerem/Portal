@@ -27,6 +27,7 @@ namespace VedasPortal.Pages.Duyurular.Personel
         protected IEnumerable<Yayin> TumDuyurulariGetir()
         {
             duyurular = DuyuruServisi.GetAll();
+            
             return duyurular;
 
         }
