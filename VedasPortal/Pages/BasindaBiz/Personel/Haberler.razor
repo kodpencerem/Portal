@@ -33,7 +33,7 @@ else
                             <div class="article-title">
                                 <h2><a>@haber.AltBaslik</a></h2>
                             </div>
-                            <p class="description-cell"><div class="ellipsis">@haber.Aciklama</div></p>
+                            <p class="description-cell"><div class="ellipsis">@((MarkupString) haber.Aciklama)</div></p>
 
                             <div class="article-cta">
                                 <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>

@@ -1,5 +1,8 @@
 ﻿@page "/tumdovizler"
-@using System.Data
+@using System.Data;
+
+@using VedasPortal.Services.Doviz;
+
 
 <div class="col-12">
     <CardComponent cardStyle="Style.info">
@@ -24,7 +27,7 @@
                     </thead>
                     <tbody>
 
-                        @*@foreach (var item in Models.DovizKurlari.DovizKurlari)
+                        @*@foreach (var item in DovizDegisimleri.AsEnumerable())
                             {
                                 <tr>
                                     <td>

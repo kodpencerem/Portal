@@ -93,9 +93,12 @@
 
                     <div class="col-md-6 float-right">
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Açıklama</label>
                             <div class="col-md-12">
-                                <TextEditor  @bind-ValuePath="@duyuru.Aciklama" ></TextEditor>
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value="@duyuru.Aciklama"
+                                                Label="Açıklama"
+                                                UrlToPostImage="img/uploaded/">
+                                </CKEditorBlazor>
                             </div>
                             <ValidationMessage For="@(() => duyuru.Aciklama)" />
                         </div>
@@ -165,7 +168,7 @@ else
 
 
 
-                            @foreach (var duyuru in DuyurularListesi)
+                            @foreach (var duyuru in DuyurularListesi.Where(d=>d.YayinKategoriId!=5).ToList())
 
                             {
                                 <tr>
@@ -214,17 +217,9 @@ else
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
-            <h3 class="modal-title">Duyuru Silme</h3>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
         </ModalHeader>
-        <ModalBody>
-            <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
-            <table class="table">                
-                <tr>
-                    <td>Duyuru Adı</td>
-                    <td>@duyuru.Adi</td>
-                </tr>               
-            </table>
-        </ModalBody>
+        
         <ModalFooter>
             <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>

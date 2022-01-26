@@ -140,22 +140,9 @@ else
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
-            <h3 class="modal-title">Duyuru Silme</h3>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
         </ModalHeader>
-        <ModalBody>
-            <h4>Bu veriyi silmek istediğinize emin misiniz ??</h4>
-            <table class="table">
-                <tr>
-                    <td>Duyuru Kategori Adı</td>
-                    <td>@duyuruKategori.YayinKategoriAdi</td>
-                </tr>
-                <tr>
-                    <td>Duyuru Kategori Durumu</td>
-                    <td>@duyuruKategori.YayinKategoriDurumu</td>
-                </tr>
-
-            </table>
-        </ModalBody>
+        
         <ModalFooter>
             <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>

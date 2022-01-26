@@ -27,6 +27,8 @@ namespace VedasPortal.Models.YayinDurumlari
 
         public bool DuyuruKutusundaOlsunMu { get; set; }
 
+        public bool HaberKutusundaOlsunMu { get; set; }
+
         public bool SlideraEklensinMi { get; set; }
 
         public int YayinKategoriId { get; set; }

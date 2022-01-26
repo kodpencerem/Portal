@@ -1,13 +1,23 @@
 ﻿@inherits InputTextArea
 @inject IJSRuntime JSRuntime
 
+
+<label class="control-label">@Label</label>
 <textarea @attributes="AdditionalAttributes"
           id="@Id"
           class="@CssClass"
-          value="@CurrentValue"></textarea>
+          value="@CurrentValue" onchange="EditorDataChanged">
+</textarea>
+
 
 @code {
     string _id;
+
+    [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
+    public string ValuePath { get; set; }
 
     [Parameter]
     public string Id
@@ -43,3 +53,21 @@
         base.Dispose(disposing);
     }
 }
+
+<style>
+    .ck.ck-editor {
+        position: relative;
+        height: 250px;
+        width: 740px;
+        min-height:250px;
+    }
+
+    .ck.ck-editor__editable_inline {
+        overflow: auto;
+        padding: 0 var(--ck-spacing-standard);
+        border: 1px solid transparent;
+        height: 210px;
+        min-height: 210px;
+        scrollbar-darkshadow-color:dodgerblue;
+    }
+</style>

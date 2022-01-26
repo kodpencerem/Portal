@@ -1,48 +1,67 @@
-﻿<CardComponent cardStyle="Style.info">
-	<CardHeader>
-		<i class="far fa-list-alt"></i> Duyurlar
-	</CardHeader>
-	<CardBody>
-		<div class="list-group" id="duyuruDiv">
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">Tam kapanma süreci</h6>
-					<small>3 gün önce</small>
-				</div>
-				<p class="mb-1">
-					Değerli Müşterilerimiz,
-					29 Nisan -17 Mayıs 2021 tarihleri arasında gerçekleşecek Koronavürüs'üne karşı tedbirler kapsamında...
-				</p>
-			</a>
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">Tazminat ödemeleri</h6>
-					<small>4 gün önce</small>
-				</div>
-				<p class="mb-1">
-					EPDK tarafından; yapılan incelemelerde bazı kullanıcılarımıza tedarik sürekliliğine uyulmaması nedeniyle tazminat alma hakkı doğduğu...
-				</p>
-			</a>
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">
-						Komisyon toplantılarının kurumumuzca..
-					</h6>
-					<small>5 gün önce</small>
-				</div>
-				<p class="mb-1">
-					EPDK’ nın 13.12.2018 tarih ve 8255-10 sayılı Kurul Kararı doğrultusunda siz tüketicilerimize yapılacak Ticari Kalite Tazminatz....
-				</p>
-			</a>
-		</div>
-	</CardBody>
-</CardComponent>
+﻿
+@using VedasPortal.Repository.Interface;
+
+@if (DuyurularListesi == null)
+
+{
+<p><em>Yükleniyor...</em></p> }
+
+else
+
+{
+
+<CardComponent cardStyle="Style.info">
+    <CardHeader>
+        <i class="far fa-list-alt"></i> Duyurlar
+    </CardHeader>
+    <CardBody>
+        <div class="list-group" id="duyuruDiv">
+            @foreach (var duyuru in DuyurularListesi.Where(d => d.DuyuruKutusundaOlsunMu == true).Take(3).ToList())
+            {
+
+<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">@duyuru.Adi</h6>
+        <small>@duyuru.KayitTarihi.ToLongDateString()</small>
+    </div>
+    <p class="mb-1">
+        @((MarkupString) duyuru.Aciklama)
+
+    </p>
+</a>}
+
+        </div>
+    </CardBody>
+</CardComponent>}
+
+
 <style>
-	#duyuruDiv {
-		font-size: 10px
-	}
+    #duyuruDiv {
+        font-size: 10px
+    }
 </style>
 
-@code {
+@code { 
+    
+    
+    [Inject]
+    public IBaseRepository<Yayin> DuyuruServisi { get; set; }
 
-}
+
+    private IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
+    protected IEnumerable<Yayin> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
+
+    protected IEnumerable<Yayin> TumDuyurulariGetir()
+    {
+        DuyurularListesi = DuyuruServisi.GetAll();
+
+        return DuyurularListesi;
+
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumDuyurulariGetir();
+
+        return Task.CompletedTask;
+    } }

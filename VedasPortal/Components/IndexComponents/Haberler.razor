@@ -1,47 +1,58 @@
-﻿<CardComponent cardStyle="Style.primary">
-	<CardHeader>
-		<i class="fas fa-newspaper"></i> Haberler
-	</CardHeader>
-	<CardBody>
-		<div class="list-group" id="duyuruDiv">
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">VEDAŞ'ın Yatırımları Devam Ediyor</h6>
-					<small>3 gün önce</small>
-				</div>
-				<p class="mb-1">
-					Vangölü Elektrik Dağıtım A.Ş. (VEDAŞ) Van İl Müdürlüğü, tüketicilerine sunduğu hizmetin kalitesini iyileştirmek amacıyla...
-				</p>
-			</a>
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">Personelimiz Kışa Hazır</h6>
-					<small>4 gün önce</small>
-				</div>
-				<p class="mb-1">
-					VEDAŞ Muş İl Müdürlüğü, elektrik şebekesinin bakım ve onarım çalışmalarını yaparak kışa hazırlarken, hizmet içi eğitimlerle de...
-				</p>
-			</a>
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				<div class="d-flex w-100 justify-content-between">
-					<h6 class="mb-1">
-						VEDAŞ'ın Yatırımları Devam Ediyor
-					</h6>
-					<small>5 gün önce</small>
-				</div>
-				<p class="mb-1">
-					Vangölü Elektrik Dağıtım A.Ş. (VEDAŞ), Bitlis’te gerçekleştirdiği yatırımlarla şehrin enerji altyapısını...
-				</p>
-			</a>
-		</div>
-	</CardBody>
-</CardComponent>
+﻿@using VedasPortal.Repository.Interface;
+
+@if (HaberlerListesi == null)
+
+{
+<p><em>Yükleniyor...</em></p>}
+
+else
+
+{ <CardComponent cardStyle="Style.primary">
+    <CardHeader>
+        <i class="fas fa-newspaper"></i> Haberler
+    </CardHeader>
+    <CardBody>
+        <div class="list-group" id="duyuruDiv">
+            @foreach (var haber in HaberlerListesi.Where(h => h.HaberKutusundaOlsunMu == true).Take(3).ToList())
+            {
+<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">@haber.Adi</h6>
+        <small>@haber.KayitTarihi.ToLongDateString()</small>
+    </div>
+    <p class="mb-1">
+        @((MarkupString) haber.Aciklama)
+    </p>
+</a>}
+
+        </div>
+    </CardBody>
+</CardComponent>}
+
 <style>
-	#duyuruDiv {
-		font-size: 10px
-	}
+    #duyuruDiv {
+        font-size: 10px
+    }
 </style>
 
-@code {
+@code { [Inject]
+    public IBaseRepository<Yayin> HaberServisi { get; set; }
 
-}
+
+    private IEnumerable<Yayin> haberlerListesi = new List<Yayin>();
+    protected IEnumerable<Yayin> HaberlerListesi { get => haberlerListesi; set => haberlerListesi = value; }
+
+    protected IEnumerable<Yayin> TumHaberleriGetir()
+    {
+        HaberlerListesi = HaberServisi.GetAll();
+
+        return HaberlerListesi;
+
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumHaberleriGetir();
+
+        return Task.CompletedTask;
+    } }
