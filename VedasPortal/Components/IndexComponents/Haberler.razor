@@ -3,31 +3,42 @@
 @if (HaberlerListesi == null)
 
 {
-<p><em>Yükleniyor...</em></p>}
+    <p><em>Yükleniyor...</em></p>}
 
 else
 
 { <CardComponent cardStyle="Style.primary">
-    <CardHeader>
-        <i class="fas fa-newspaper"></i> Haberler
-    </CardHeader>
-    <CardBody>
-        <div class="list-group" id="duyuruDiv">
-            @foreach (var haber in HaberlerListesi.Where(h => h.HaberKutusundaOlsunMu == true).Take(3).ToList())
-            {
-<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">@haber.Adi</h6>
-        <small>@haber.KayitTarihi.ToLongDateString()</small>
-    </div>
-    <p class="mb-1">
-        @((MarkupString) haber.Aciklama)
-    </p>
-</a>}
+        <CardHeader>
+            <i class="fas fa-newspaper"></i> Haberler
+        </CardHeader>
+        <CardBody>
+            <div class="list-group" id="duyuruDiv">
+                @foreach (var haber in HaberlerListesi.Where(h => h.HaberKutusundaOlsunMu == true).Take(3).ToList())
+                {
+                    <a href="haber/detay/@haber.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">
 
-        </div>
-    </CardBody>
-</CardComponent>}
+
+                                @if (haber.Adi != null)
+                                {
+                                    haber.Adi = haber.Adi.Length > 60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi;@((MarkupString) haber.Adi)}
+
+
+                            </h6>
+                            <small>@haber.KayitTarihi.ToLongDateString()</small>
+                        </div>
+                        <p id="haberKutusu" class="mb-1">
+                            @if (haber.Aciklama != null)
+                            {
+                                haber.Aciklama = haber.Aciklama.Length > 200 ? haber.Aciklama.Substring(0, 150) + "..." : haber.Aciklama;@((MarkupString) haber.Aciklama)}
+
+                        </p>
+                    </a>}
+
+            </div>
+        </CardBody>
+    </CardComponent>}
 
 <style>
     #duyuruDiv {
@@ -55,4 +66,11 @@ else
         TumHaberleriGetir();
 
         return Task.CompletedTask;
-    } }
+    }
+
+
+
+
+
+}
+

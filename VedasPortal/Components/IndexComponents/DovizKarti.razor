@@ -71,9 +71,12 @@
 
 		</table>
 
-		<a href="tumdovizler" class="nav-link"><span>Tüm Dövizler</span></a>
+		
 
 	</CardBody>
+    <CardFotter>
+        <a href="tumdovizler" class="nav-link"><span>Tüm Dövizler</span></a>
+    </CardFotter>
 </CardComponent>
 
 @code {
@@ -96,7 +99,7 @@
 
     .card .card-body {
         padding-top: 0px;
-        padding-bottom: 20px;
+        padding-bottom: 0px;
     }
 
     .nav-link {
@@ -108,6 +111,13 @@
         width: 100%;
         margin-bottom: 0rem;
         color: #212529;
+    }
+
+    .card .card-footer {
+        background-color: transparent;
+        border: none;
+        padding-top: 1px;
+        padding-bottom: 10px;
     }
 
 </style>

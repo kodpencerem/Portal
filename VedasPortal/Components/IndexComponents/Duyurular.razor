@@ -1,10 +1,12 @@
-﻿
-@using VedasPortal.Repository.Interface;
+﻿@using VedasPortal.Repository.Interface;
 
 @if (DuyurularListesi == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+
+<p>
+    <em>Yükleniyor...</em>
+</p> }
 
 else
 
@@ -19,13 +21,23 @@ else
             @foreach (var duyuru in DuyurularListesi.Where(d => d.DuyuruKutusundaOlsunMu == true).Take(3).ToList())
             {
 
-<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+<a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">@duyuru.Adi</h6>
+        <h6 class="mb-1">
+
+
+            @if (duyuru.Adi != null)
+            {
+                duyuru.Adi = duyuru.Adi.Length > 60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi;@((MarkupString) duyuru.Adi)}
+
+
+        </h6>
         <small>@duyuru.KayitTarihi.ToLongDateString()</small>
     </div>
-    <p class="mb-1">
-        @((MarkupString) duyuru.Aciklama)
+    <p id="haberKutusu" class="mb-1">
+        @if (duyuru.Aciklama != null)
+        {
+            duyuru.Aciklama = duyuru.Aciklama.Length > 200 ? duyuru.Aciklama.Substring(0, 150) + "..." : duyuru.Aciklama;@((MarkupString) duyuru.Aciklama)}
 
     </p>
 </a>}
@@ -41,10 +53,7 @@ else
     }
 </style>
 
-@code { 
-    
-    
-    [Inject]
+@code { [Inject]
     public IBaseRepository<Yayin> DuyuruServisi { get; set; }
 
 

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.YayinDurumlari;
@@ -31,17 +29,17 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
 
         }
 
-        protected void HaberFilterelemeYap()
-        {
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                haberler = haberAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
-            }
-            else
-            {
-                haberler = haberAra;
-            }
-        }
+        //protected void HaberFilterelemeYap()
+        //{
+        //    if (!string.IsNullOrEmpty(SearchString))
+        //    {
+        //        haberler = haberAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        //    }
+        //    else
+        //    {
+        //        haberler = haberAra;
+        //    }
+        //}
         protected string dialogGorunur { get; set; } = "none";
 
         public ModalComponent modalDialog { get; set; }

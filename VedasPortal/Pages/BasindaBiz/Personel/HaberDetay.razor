@@ -8,10 +8,10 @@
                 @{ if (yayinDurum != null)
                     {
     <div class="wrapper row">
-        <div class="preview col-md-4">
+        <div class="preview col-lg-4 col-sm-12 col-md-6 col-xs-12">
 
-            <div class="preview-pic tab-content">
-                <div class="tab-pane active" id="pic-1"><img src="/img/uploaded/@yayinDurum.DosyaYolu" width="500" alt="@yayinDurum.Adi" /></div>
+            <div class="preview-pic tab-content ">
+                <div class="tab-pane active col-lg-4 col-sm-12 col-md-6 col-xs-12" id="pic-1"><img src="/img/uploaded/@yayinDurum.DosyaYolu" width="500" alt="@yayinDurum.Adi" /></div>
                 <div class="tab-pane" id="pic-2"><img src="/img/uploaded/@yayinDurum.DosyaYolu" width="500" alt="@yayinDurum.Adi" /></div>
                 <div class="tab-pane" id="pic-3"><img src="/img/uploaded/@yayinDurum.DosyaYolu" width="500" alt="@yayinDurum.Adi" /></div>
                 <div class="tab-pane" id="pic-4"><img src="/img/uploaded/@yayinDurum.DosyaYolu" width="500" alt="@yayinDurum.Adi" /></div>
@@ -30,7 +30,7 @@
             </ul>
 
         </div>
-        <div class="details col-md-8">
+        <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
             <h3 class="product-title">@yayinDurum.Adi</h3>
             <div class="rating">
                 <div class="stars">
@@ -42,7 +42,7 @@
                 </div>
                 <span class="review-no">41 Personel Gördü</span>
             </div>
-            <p class="product-description">@((MarkupString) yayinDurum.Aciklama)</p>
+            <p  class="haber-detay">@((MarkupString) yayinDurum.Aciklama)</p>
 
             <p class="vote"><strong>91%</strong> personel bu yayını beğendi <strong>(87 Beğeni)</strong></p>
 
@@ -81,4 +81,5 @@
         margin-right: -15px;
         margin-left: -15px;
     }
+
 </style>

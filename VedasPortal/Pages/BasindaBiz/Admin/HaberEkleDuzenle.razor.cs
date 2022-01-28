@@ -54,6 +54,8 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
             HaberServisi.AddUpdate(haber);
 
+            
+
         }
 
         protected string ImageBase64String { get; set; }

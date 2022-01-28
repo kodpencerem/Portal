@@ -3,50 +3,54 @@
 @if (DuyurularListesi == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p> }
 
 else
 
 { <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel" style="box-shadow:0px 0px 3px #808080">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
-    </ol>
-    @foreach (var duyuru in DuyurularListesi.Where(d=>d.SlideraEklensinMi).Take(5).ToList())
-    {
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+        </ol>
+
         <div class="carousel-inner" style="outline:1px #808080">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="img/uploaded/Vedas1.png"  alt="First slide">
+            <div class="carousel-item active" style="max-height:600px;max-width:1203px">
+                <img class="d-block w-100" src="img/uploaded/Vedas1.png" alt="First slide" width="1203" height="600">
                 <div class="carousel-caption d-none d-md-block">
                     @*<h5></h5>*@
-                    <h3 style="-webkit-text-stroke: 0.3px black;">
+                    <h5 style="-webkit-text-stroke: 0.3px black;">
                         Hedefimiz daima en iyisi
-                    </h3>
+                    </h5>
                 </div>
             </div>
-            <div class="carousel-item" style="max-height:600px;max-width:1203px">
-                
-                <img class="d-block w-100" src="img/uploaded/@duyuru.DosyaYolu" width="1203" height="600" alt="@duyuru.Adi">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>@duyuru.Adi</h5>
-                    <h4 class="text-white" style="-webkit-text-stroke: 0.5px black;">
-                        @((MarkupString) duyuru.Aciklama)
-                    </h4>
-                </div>
-            </div>
+            @foreach (var duyuru in DuyurularListesi.Where(d => d.SlideraEklensinMi).Take(5).ToList())
+            {
+                <div class="carousel-item" style="max-height:600px;max-width:1203px">
+
+                    <img class="d-block w-100" src="img/uploaded/@duyuru.DosyaYolu" width="1203" height="600" alt="@duyuru.Adi">
+                    <div class="carousel-caption d-none d-md-block">
+
+                        <h5 class="text-white" style="-webkit-text-stroke: 0.2px black;">
+                            <a href="duyuru/detay/@duyuru.Id" class="text-white" style="-webkit-text-stroke: 0.2px black;">
+                                @duyuru.Adi
+                            </a>
+
+                        </h5>
+                    </div>
+                </div>}
         </div>
-    }
-    <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
-       data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Önceki</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
-       data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Sonraki</span>
-    </a>
-</div>}
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
+           data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Önceki</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
+           data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Sonraki</span>
+        </a>
+    </div>}
 
 
 

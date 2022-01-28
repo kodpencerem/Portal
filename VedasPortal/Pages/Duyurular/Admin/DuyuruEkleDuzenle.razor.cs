@@ -50,10 +50,9 @@ namespace VedasPortal.Pages.Duyurular.Admin
         }
 
         protected void DuyuruKayit()
-        {
-            
+        {        
             DuyuruServisi.AddUpdate(duyuru);
- 
+            
         }
 
         protected string ImageBase64String { get; set; }
