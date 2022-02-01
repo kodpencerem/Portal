@@ -1,62 +1,24 @@
-﻿@using System.IO
-<div class="input-group">
-    <div class="custom-file">
-        <InputFile class="custom-file-input" multiple OnChange="OnChange" accept="image/png, image/jpeg, image/gif, video/mp4, video/mkv" id="inputFile" />
-        <label class="custom-file-label" for="inputFile">Dosya Seç</label>
+﻿<div>
+    <InputFile OnChange="@OnFileSelection" multiple></InputFile>
+    <div class="row">
+        @foreach (var imgUrl in imgUrls)
+        {
+            <img src="@imgUrl">
+        }
     </div>
-    @*<div class="input-group-append">
-        <button class="btn btn-success" disabled="@isDisabled">Dosya Yükle</button>
-    </div>*@
 </div>
-@if (!string.IsNullOrEmpty(file))
-{
-    <img src="@("data:base64 "+ file)" />
 
-}
-
-
-@code {
-    List<DosyaYukle> dosyaYukle = new List<DosyaYukle>();
-    bool isDisabled = false;
-    public string file { get; set; }
-    async Task OnChange(InputFileChangeEventArgs e)
+@code{
+    List<string> imgUrls = new List<string>();
+    private async Task OnFileSelection(InputFileChangeEventArgs e)
     {
-        var dosyalar = e.GetMultipleFiles();
-
-        foreach (var dosya in dosyalar)
+        foreach (IBrowserFile imgFile in e.GetMultipleFiles(5))
         {
-            //var yenidenBoyutla = await dosya.RequestImageFileAsync(new FileInfo(dosya.Name).Extension, 640, 480);
-
-            //var buyukluk = new byte[yenidenBoyutla.Size];
-            using (var stream = dosya.OpenReadStream())
-            {
-                //await stream.ReadAsync(buyukluk);
-                 
-                SaveStreamAsFile("uploaded", stream, e.File.Name);
-
-            }
-            //dosyaYukle.Add(new DosyaYukle { VarsayilanDosyaDegeri = Convert.ToBase64String(buyukluk), DosyaTipi = dosya.ContentType, DosyaAdi = dosya.Name });
-
+            var buffers = new byte[imgFile.Size];
+            await imgFile.OpenReadStream().ReadAsync(buffers);
+            string imageType = imgFile.ContentType;
+            string imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
+            imgUrls.Add(imgUrl);
         }
-
     }
-
-    public void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
-    {
-        filePath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "img", "uploaded");
-        DirectoryInfo info = new DirectoryInfo(filePath);
-        if (!info.Exists)
-        {
-            info.Create();
-        }
-
-        string path = Path.Combine(filePath, fileName);
-        using (FileStream outputFileStream = new FileStream(path, FileMode.Create))
-        {
-            inputStream.CopyTo(outputFileStream);
-        }
-
-    }
-
-
 }

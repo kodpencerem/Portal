@@ -1,11 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿ using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Models.Base;
+using VedasPortal.Models.Dokuman;
 
 namespace VedasPortal.Models.YayinDurumlari
 {
     public class Yayin : BaseEntity
     {
+
+        public Yayin()
+        {
+            DosyaKoleksiyon = new HashSet<DosyaYukle>();
+        }
+
         public int No { get; set; }
 
         [Required(ErrorMessage = "Bu alan gereklidir. Boş geçemezsiniz!"),
@@ -21,8 +29,6 @@ namespace VedasPortal.Models.YayinDurumlari
 
         public bool YayinDurumu { get; set; }
 
-        public byte[] DosyaBoyutu { get; set; }
-
         public string DosyaYolu { get; set; }
 
         public bool DuyuruKutusundaOlsunMu { get; set; }
@@ -34,5 +40,7 @@ namespace VedasPortal.Models.YayinDurumlari
         public int YayinKategoriId { get; set; }
         [ForeignKey("YayinKategoriId")]
         public YayinKategori YayinKategori { get; set; }
+
+        public virtual ICollection<DosyaYukle> DosyaKoleksiyon { get; set; }
     }
 }

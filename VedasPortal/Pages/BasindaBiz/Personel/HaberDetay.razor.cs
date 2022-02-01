@@ -13,11 +13,11 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
         [Parameter]
         public int HaberId { get; set; }
 
-        private Yayin yayinDurum { get; set; }
+        private Yayin HaberDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()
         {
-            yayinDurum = HaberServisi.Get(HaberId);
+            HaberDetayGetir = HaberServisi.Get(HaberId);
             return Task.CompletedTask;
         }
     }

@@ -21,7 +21,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int haberId { get; set; }
+        public int HaberId { get; set; }
 
         protected string Title = "Ekle";
         public Yayin haber = new Yayin();
@@ -37,7 +37,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         }
 
-
         private IEnumerable<YayinKategori> kategoriler = new List<YayinKategori>();
         protected IEnumerable<YayinKategori> Kategoriler { get => kategoriler; set => kategoriler = value; }
 
@@ -51,11 +50,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
-
-            HaberServisi.AddUpdate(haber);
-
-            
-
+            HaberServisi.AddUpdate(haber);           
         }
 
         protected string ImageBase64String { get; set; }
@@ -63,10 +58,10 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected override void OnParametersSet()
         {
-            if (haberId != 0)
+            if (HaberId != 0)
             {
                 Title = "Duzenle";
-                haber = HaberServisi.Get(haberId);
+                haber = HaberServisi.Get(HaberId);
 
             }
         }

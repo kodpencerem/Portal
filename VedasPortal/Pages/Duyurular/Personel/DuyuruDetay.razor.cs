@@ -13,11 +13,11 @@ namespace VedasPortal.Pages.Duyurular.Personel
         [Parameter]
         public int DuyuruId { get; set; }
 
-        private Yayin yayinDurum { get; set; }
+        private Yayin DuyuruDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()
         {
-            yayinDurum = DuyuruServisi.Get(DuyuruId);
+            DuyuruDetayGetir = DuyuruServisi.Get(DuyuruId);
             return Task.CompletedTask;
         }
     }

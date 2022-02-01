@@ -12,10 +12,7 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
         [Inject]
         protected IBaseRepository<Yayin> HaberServisi { get; set; }
         protected IEnumerable<Yayin> haberler;
-        protected List<Yayin> haberAra = new List<Yayin>();
-        protected Yayin haber = new Yayin();
-
-        protected string SearchString { get; set; }
+              
         protected override Task OnInitializedAsync()
         {
             TumHeberleriGetir();
@@ -26,23 +23,10 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
         {
             haberler = HaberServisi.GetAll();
             return haberler;
-
         }
 
-        //protected void HaberFilterelemeYap()
-        //{
-        //    if (!string.IsNullOrEmpty(SearchString))
-        //    {
-        //        haberler = haberAra.Where(x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1).ToList();
-        //    }
-        //    else
-        //    {
-        //        haberler = haberAra;
-        //    }
-        //}
-        protected string dialogGorunur { get; set; } = "none";
+        protected string DialogGorunur { get; set; } = "none";
 
-        public ModalComponent modalDialog { get; set; }
-
+        public ModalComponent ModalDialog { get; set; }      
     }
 }
