@@ -13,7 +13,7 @@ else
         </CardHeader>
         <CardBody>
             <div class="list-group" id="duyuruDiv">
-                @foreach (var haber in HaberlerListesi.Where(h => h.HaberKutusundaOlsunMu == true).Take(3).ToList())
+                @foreach (var haber in HaberlerListesi.Where(h => h.AnasayfadaGoster == true).Take(3).ToList())
                 {
                     <a href="haber/detay/@haber.Id" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
@@ -46,14 +46,14 @@ else
     }
 </style>
 
-@code { [Inject]
-    public IBaseRepository<Yayin> HaberServisi { get; set; }
+@code {
+    [Inject]
+    public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
 
 
-    private IEnumerable<Yayin> haberlerListesi = new List<Yayin>();
-    protected IEnumerable<Yayin> HaberlerListesi { get => haberlerListesi; set => haberlerListesi = value; }
+    protected IEnumerable<HaberDuyuru> HaberlerListesi { get; set; }
 
-    protected IEnumerable<Yayin> TumHaberleriGetir()
+    protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
     {
         HaberlerListesi = HaberServisi.GetAll();
 

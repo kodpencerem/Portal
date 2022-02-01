@@ -32,7 +32,8 @@ else
                                     <a>
                                         @if (haber.Adi != null)
                                         {
-                                            haber.Adi = haber.Adi.Length > 60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi;@((MarkupString) haber.Adi)}
+                                         ((MarkupString)haber.Adi.Length > 60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)
+                                        }
                                     </a>
                                 </h1>
                             </div>
@@ -40,8 +41,8 @@ else
                                 <p class="alert-title">
                                     @if (haber.AltBaslik != null)
                                     {
-                                        haber.AltBaslik = haber.AltBaslik.Length > 200 ? haber.AltBaslik.Substring(0, 85) + "..." : haber.AltBaslik;@((MarkupString) haber.AltBaslik)}
-
+                                        ((MarkupString)haber.AltBaslik.Length > 200 ? haber.AltBaslik.Substring(0, 27) + "..." : haber.AltBaslik)
+                                                    }
                                 </p>
                             </div>
                             <p name="HaberAciklama" class="accordion-header">

@@ -22,13 +22,13 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValuePath="@haber.DosyaYolu" />
+                                <ImageResizer @bind-ValuePath="@haber.Dosya.FirstOrDefault()?.Yolu" />
                                 @if (!string.IsNullOrEmpty(haber.DosyaYolu))
                                 {
-                                    <img src="@("img/uploaded/"+haber.DosyaYolu)" height="150" />
+                                    <img src="@("img/uploaded/"+haber.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
-                            <ValidationMessage For="@(() => haber.DosyaYolu)" />
+                            <ValidationMessage For="@(() => haber.Dosya.FirstOrDefault()?.Yolu)" />
                         </div>
 
                         <div class="form-group row">

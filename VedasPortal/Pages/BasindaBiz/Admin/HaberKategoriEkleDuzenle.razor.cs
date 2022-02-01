@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Admin
@@ -11,16 +11,16 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
     public class HKategoriEkleDuzenle : ComponentBase
     {
         [Inject]
-        public IBaseRepository<YayinKategori> YayinKategorisi { get; set; }
+        public IBaseRepository<HaberDuyuruKategori> YayinKategorisi { get; set; }
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
-        protected IEnumerable<YayinKategori> yayinKategorileri = new List<YayinKategori>();
+        protected IEnumerable<HaberDuyuruKategori> yayinKategorileri = new List<HaberDuyuruKategori>();
 
         [Parameter]
         public int kategoriId { get; set; }
         protected string Title = "Ekle";
-        public YayinKategori haberKategori = new YayinKategori();
+        public HaberDuyuruKategori haberKategori = new HaberDuyuruKategori();
         protected override void OnParametersSet()
         {
             if (kategoriId != 0)
@@ -42,7 +42,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<YayinKategori> TumHaberleriGetir()
+        protected IEnumerable<HaberDuyuruKategori> TumHaberleriGetir()
         {
             yayinKategorileri = YayinKategorisi.GetAll();
             return yayinKategorileri;
@@ -62,7 +62,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 return;
 
             YayinKategorisi.Remove(haberKategori.Id);
-            haberKategori = new YayinKategori();
+            haberKategori = new HaberDuyuruKategori();
             TumHaberleriGetir();
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Personel
@@ -10,8 +10,8 @@ namespace VedasPortal.Pages.Duyurular.Personel
     public class DuyuruModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Yayin> DuyuruServisi { get; set; }
-        protected IEnumerable<Yayin> duyurular;
+        protected IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
+        protected IEnumerable<HaberDuyuru> duyurular;
         
         
         
@@ -22,7 +22,7 @@ namespace VedasPortal.Pages.Duyurular.Personel
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Yayin> TumDuyurulariGetir()
+        protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
         {
             duyurular = DuyuruServisi.GetAll();
             

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Admin
@@ -12,10 +12,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
     {
 
         [Inject]
-        public IBaseRepository<Yayin> HaberServisi { get; set; }
-
-        [Inject]
-        public IBaseRepository<YayinKategori> HaberKategoriServisi { get; set; }
+        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; } 
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -24,23 +21,20 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public int HaberId { get; set; }
 
         protected string Title = "Ekle";
-        public Yayin haber = new Yayin();
+        public HaberDuyuru haber = new HaberDuyuru();
+         
+        protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
 
-        private IEnumerable<Yayin> haberler = new List<Yayin>();
-        protected IEnumerable<Yayin> Haberler { get => haberler; set => haberler = value; }
-
-        protected IEnumerable<Yayin> TumHaberleriGetir()
+        protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
         {
             Haberler = HaberServisi.GetAll();
 
             return Haberler;
 
-        }
+        } 
+        protected IEnumerable<HaberDuyuruKategori> Kategoriler { get ; set ; }
 
-        private IEnumerable<YayinKategori> kategoriler = new List<YayinKategori>();
-        protected IEnumerable<YayinKategori> Kategoriler { get => kategoriler; set => kategoriler = value; }
-
-        protected IEnumerable<YayinKategori> TumKategorileriGetir()
+        protected IEnumerable<HaberDuyuruKategori> TumKategorileriGetir()
         {
             Kategoriler = HaberKategoriServisi.GetAll();
             
@@ -82,7 +76,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 return;
 
             HaberServisi.Remove(haber.Id);
-            haber = new Yayin();
+            haber = new HaberDuyuru();
             TumHaberleriGetir();
         }
 

@@ -18,7 +18,7 @@ else
     </CardHeader>
     <CardBody>
         <div class="list-group" id="duyuruDiv">
-            @foreach (var duyuru in DuyurularListesi.Where(d => d.DuyuruKutusundaOlsunMu == true).Take(3).ToList())
+            @foreach (var duyuru in DuyurularListesi.Where(d => d.AnasayfadaGoster == true).Take(3).ToList())
             {
 
 <a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -53,14 +53,14 @@ else
     }
 </style>
 
-@code { [Inject]
-    public IBaseRepository<Yayin> DuyuruServisi { get; set; }
+@code {
+    [Inject]
+    public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
 
-    private IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
-    protected IEnumerable<Yayin> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
+    protected IEnumerable<HaberDuyuru> DuyurularListesi { get; set; }
 
-    protected IEnumerable<Yayin> TumDuyurulariGetir()
+    protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
     {
         DuyurularListesi = DuyuruServisi.GetAll();
 
@@ -73,4 +73,5 @@ else
         TumDuyurulariGetir();
 
         return Task.CompletedTask;
-    } }
+    } 
+}

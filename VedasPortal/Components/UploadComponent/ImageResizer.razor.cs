@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
+using VedasPortal.Models.Dosya;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -23,13 +25,10 @@ namespace VedasPortal.Components.UploadComponent
         private bool ShowCroper { get; set; } = false;
 
         [Parameter]
-        public string ValuePath { get; set; }
+        public Dosya Value { get; set; }
 
         [Parameter]
-        public EventCallback<string> ValuePathChanged { get; set; }
-
-        [Parameter]
-        public EventCallback<ChangeEventArgs> ValueChanged { get; set; }
+        public EventCallback<Dosya> ValueChanged { get; set; } 
 
         private bool IsAspectRatioEnabled { get; set; }
 
@@ -76,6 +75,7 @@ namespace VedasPortal.Components.UploadComponent
             browserFileResizer = args.File;
             ShowCroper = true;
             
+            
         }
         private double CropCurrentWidth { get; set; }
         private double CropCurrentHeight { get; set; }
@@ -102,8 +102,12 @@ namespace VedasPortal.Components.UploadComponent
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
-            ValuePath = fileName;
-            await ValuePathChanged.InvokeAsync(ValuePath);
+            var newFile = new Dosya();
+            newFile.Adi = fileName;
+            newFile.Boyutu = browserFileResizer.Size.ToString();
+            newFile.Uzanti = fileName.Substring('.');
+            Value = newFile;
+            await ValueChanged.InvokeAsync(Value);
 
         }
 

@@ -9,8 +9,8 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
-using VedasPortal.Models.Dokuman;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.Dosya;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
 using VedasPortal.Services.HavaDurumuService;
@@ -43,9 +43,9 @@ namespace VedasPortal
             //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
-            services.AddScoped<IBaseRepository<Yayin>, BaseRepository<Yayin> >();
-            services.AddScoped<IBaseRepository<YayinKategori>, BaseRepository<YayinKategori>>();
-            services.AddScoped<IBaseRepository<DosyaYukle>, BaseRepository<DosyaYukle>>();
+            services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
+            services.AddScoped<IBaseRepository<HaberDuyuruKategori>, BaseRepository<HaberDuyuruKategori>>();
+            services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
 
         }
 

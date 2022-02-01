@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Personel
@@ -8,12 +8,12 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
     public partial class HaberDetay
     {
         [Inject]
-        private IBaseRepository<Yayin> HaberServisi { get; set; }
+        private IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
 
         [Parameter]
         public int HaberId { get; set; }
 
-        private Yayin HaberDetayGetir { get; set; }
+        private HaberDuyuru HaberDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()
         {

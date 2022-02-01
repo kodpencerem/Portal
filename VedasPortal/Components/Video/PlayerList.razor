@@ -9,8 +9,8 @@
     </div>
 </div>
 
-@code { List<VideoDetay> videolar = new List<VideoDetay>();
-    VideoDetay secilenVideo = new VideoDetay();
+@code { List<Video> videolar = new List<Video>();
+    Video secilenVideo = new Video();
 
     protected override void OnInitialized()
     {
@@ -18,7 +18,7 @@
         secilenVideo = videolar.FirstOrDefault();
     }
 
-    void SecilenVideo(VideoDetay videoDetay)
+    void SecilenVideo(Video videoDetay)
     {
         secilenVideo = videoDetay;
     } }

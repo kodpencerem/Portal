@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Admin
@@ -12,10 +14,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
     {
 
         [Inject]
-        public IBaseRepository<Yayin> DuyuruServisi { get; set; }
-
-        [Inject]
-        public IBaseRepository<YayinKategori> DuyuruKategoriServisi { get; set; }
+        public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -24,35 +23,33 @@ namespace VedasPortal.Pages.Duyurular.Admin
         public int duyuruId { get; set; }
 
         protected string Title = "Ekle";
-        public Yayin duyuru = new Yayin();
-        
-        private IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
-        protected IEnumerable<Yayin> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
+        public HaberDuyuru duyuru = new HaberDuyuru();
 
-        protected IEnumerable<Yayin> TumDuyurulariGetir()
+        protected IEnumerable<HaberDuyuru> DuyurularListesi { get; set; }
+
+        protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
         {
             DuyurularListesi = DuyuruServisi.GetAll();
 
             return DuyurularListesi;
 
         }
-
-
-        private IEnumerable<YayinKategori> kategoriler = new List<YayinKategori>();
-        protected IEnumerable<YayinKategori> Kategoriler { get => kategoriler; set => kategoriler = value; }
-
-        protected IEnumerable<YayinKategori> TumKategorileriGetir()
+         
+        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
+        protected  void TumKategorileriGetir()
         {
-            Kategoriler = DuyuruKategoriServisi.GetAll();
-
-            return Kategoriler;
-
+            var list = new Dictionary<HaberDuyuruKategori, string>();
+            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
+            {
+                list.Add(item, item.TextHaberDuyuru());
+            }
+            Kategoriler= list; 
         }
 
         protected void DuyuruKayit()
-        {        
+        {
             DuyuruServisi.AddUpdate(duyuru);
-            
+
         }
 
         protected string ImageBase64String { get; set; }
@@ -68,12 +65,12 @@ namespace VedasPortal.Pages.Duyurular.Admin
             }
         }
 
-        
+
 
         protected void SilmeyiOnayla(int duyuruId)
         {
             ModalDialog.Open();
-            duyuru = DuyurularListesi.FirstOrDefault(x => x.Id == duyuruId);
+            duyuru = DuyurularListesi.Where(x => x.Id == duyuruId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
@@ -84,18 +81,25 @@ namespace VedasPortal.Pages.Duyurular.Admin
                 return;
 
             DuyuruServisi.Remove(duyuru.Id);
-            duyuru = new Yayin();
+            duyuru = new HaberDuyuru();
             TumDuyurulariGetir();
         }
 
-        
-        protected override Task OnInitializedAsync()
+
+        [Inject]
+        public IJSRuntime jsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
         {
-            TumDuyurulariGetir();
-            TumKategorileriGetir();
-            return Task.CompletedTask;
-        }
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
 
+                TumDuyurulariGetir();
+                TumKategorileriGetir();
+                await jsRun.InvokeVoidAsync("dataTables");
+
+            }
+        }
         public void Cancel()
         {
             UrlNavigationManager.NavigateTo("/duyuru/ekle");

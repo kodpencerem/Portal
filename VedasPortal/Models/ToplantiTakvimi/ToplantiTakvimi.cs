@@ -7,8 +7,8 @@ namespace VedasPortal.Models.ToplantiTakvimi
     {
         public DateTime BaslamaTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
-        public string ToplantiBasligi { get; set; }
-        public string RenkBilgisi { get; set; }
+        public string Baslik { get; set; }
+        public string Renk { get; set; }
 
     }
 }

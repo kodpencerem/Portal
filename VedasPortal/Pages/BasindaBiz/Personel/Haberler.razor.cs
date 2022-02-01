@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Personel
@@ -10,8 +10,8 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
     public class HaberModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Yayin> HaberServisi { get; set; }
-        protected IEnumerable<Yayin> haberler;
+        protected IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+        protected IEnumerable<HaberDuyuru> haberler;
               
         protected override Task OnInitializedAsync()
         {
@@ -19,7 +19,7 @@ namespace VedasPortal.Pages.BasindaBiz.Personel
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Yayin> TumHeberleriGetir()
+        protected IEnumerable<HaberDuyuru> TumHeberleriGetir()
         {
             haberler = HaberServisi.GetAll();
             return haberler;

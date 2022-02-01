@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VedasPortal.Models;
-using VedasPortal.Models.Dokuman;
+using VedasPortal.Models.Dosya;
 using VedasPortal.Models.Etkinlik;
-using VedasPortal.Models.YayinDurumlari;
+using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.Video;
 
 namespace VedasPortal.Data
 {
@@ -14,15 +15,11 @@ namespace VedasPortal.Data
         {
         }
 
-        public DbSet<Yayin> Yayinlar { get; set; }
-        public DbSet<YayinKategori> YayinKategorileri { get; set; }
-        public DbSet<DosyaYukle> DosyaYuklemeleri { get; set; }
-
-        public DbSet<EtkinlikDurum> EtkinlikDurumlari { get; set; }
-
-        public DbSet<DosyaKategori> DosyaKategorileri { get; set; }
-
-        public DbSet<Rehber> PersonelRehber { get; set; }
+        public DbSet<HaberDuyuru> Yayin { get; set; }
+        public DbSet<Dosya> Dosya { get; set; }
+        public DbSet<Etkinlik> Etkinlik { get; set; }
+        public DbSet<Rehber> Rehber { get; set; }
+        public DbSet<Video> Video { get; set; }
 
 
     }

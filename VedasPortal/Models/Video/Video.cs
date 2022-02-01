@@ -3,10 +3,10 @@ using VedasPortal.Models.Base;
 
 namespace VedasPortal.Models.Video
 {
-    public class VideoDetay: BaseEntity
+    public class Video: BaseEntity
     {
-        public string UrlAdres { get; set; }
-        public string VideoBasligi { get; set; }
+        public virtual Dosya.Dosya Dosya { get; set; }
+        public string Baslik { get; set; }
         public List<string> Yorumlar { get; set; } = new List<string>();
     }
 }

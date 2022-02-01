@@ -5,7 +5,6 @@
 @inject IWebHostEnvironment Environment
 
 @inherits DuyuruEkleDuzenleModel
-@inject IJSRuntime jsRun
 
 
 <div class="col-12">
@@ -22,13 +21,13 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValuePath="@duyuru.DosyaYolu" />
-                                @if (!string.IsNullOrEmpty(duyuru.DosyaYolu))
+                                <ImageResizer @bind-ValuePath="@duyuru.Dosya" />
+                                @if (!string.IsNullOrEmpty(duyuru.Dosya.FirstOrDefault()?.Yolu))
                                 {
-                                    <img src="@("img/uploaded/"+duyuru.DosyaYolu)" height="150" />
+                                    <img src="@("img/uploaded/"+duyuru.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
-                            <ValidationMessage For="@(() => duyuru.DosyaYolu)" />
+                            <ValidationMessage For="@(() => duyuru.Dosya.FirstOrDefault()?.Yolu)" />
                         </div>
 
                         <div class="form-group row">
@@ -51,16 +50,15 @@
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@duyuru.YayinKategoriId" class="form-control">
+                                <InputSelect @bind-Value="@duyuru.Kategori" class="form-control">
                                     <option></option>
                                     @foreach (var kategori in Kategoriler)
                                     {
-                                        <option value="@kategori.Id"> @kategori.YayinKategoriAdi </option>
+                                        <option value="@kategori.Key"> @kategori.Value </option>
                                     }
 
                                 </InputSelect>
-                            </div>
-                            <ValidationMessage For="@(() => duyuru.YayinKategoriId)" />
+                            </div> 
                         </div>
 
                         <br />
@@ -68,25 +66,25 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Duyuru Şimdi Yayınlasın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="duyuru.YayinDurumu" />
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.AktifPasif" />
                                 </div>
-                                <ValidationMessage For="@(() => duyuru.YayinDurumu)" />
+                                <ValidationMessage For="@(() => duyuru.AktifPasif)" />
                             </div>
 
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Duyuru Kutusuna Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="duyuru.DuyuruKutusundaOlsunMu" />
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.AnasayfadaGoster" />
                                 </div>
-                                <ValidationMessage For="@(() => duyuru.DuyuruKutusundaOlsunMu)" />
+                                <ValidationMessage For="@(() => duyuru.AnasayfadaGoster)" />
                             </div>
 
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="duyuru.SlideraEklensinMi" />
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.SliderdaGoster" />
                                 </div>
-                                <ValidationMessage For="@(() => duyuru.SlideraEklensinMi)" />
+                                <ValidationMessage For="@(() => duyuru.SliderdaGoster)" />
                             </div>
                         </div>
                     </div>
@@ -168,7 +166,7 @@ else
 
 
 
-                            @foreach (var duyuru in DuyurularListesi.Where(d=>d.YayinKategoriId!=5).ToList())
+                            @foreach (var duyuru in DuyurularListesi.Where(d=>d.Kategori==HaberDuyuruKategori.Duyuru).ToList())
 
                             {
                                 <tr>
@@ -183,7 +181,7 @@ else
 
                                     <td>@duyuru.Adi</td>
                                     <td>
-                                        @if (duyuru.YayinDurumu == true)
+                                        @if (duyuru.AktifPasif == true)
                                         {
 
 
@@ -227,25 +225,7 @@ else
     </ModalComponent>
 
 }
-
-@code {
-
-
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-
-            await jsRun.InvokeVoidAsync("dataTables");
-        }
-    }
-
-
-}
-
+ 
 
 <style>
     .modal-content {
