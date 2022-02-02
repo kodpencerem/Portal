@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Models.Base;
-using VedasPortal.Models.Dosya;
 
 namespace VedasPortal.Models.HaberDuyuru
 

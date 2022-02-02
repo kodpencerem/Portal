@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,15 +32,16 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
             return Haberler;
 
-        } 
-        protected IEnumerable<HaberDuyuruKategori> Kategoriler { get ; set ; }
-
-        protected IEnumerable<HaberDuyuruKategori> TumKategorileriGetir()
+        }
+        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
+        protected void TumKategorileriGetir()
         {
-            Kategoriler = HaberKategoriServisi.GetAll();
-            
-            return Kategoriler;
-
+            var list = new Dictionary<HaberDuyuruKategori, string>();
+            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
+            {
+                list.Add(item, item.TextHaberDuyuru());
+            }
+            Kategoriler = list;
         }
 
         protected void HaberKayit()

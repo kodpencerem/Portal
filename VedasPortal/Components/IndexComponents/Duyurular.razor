@@ -4,47 +4,52 @@
 
 {
 
-<p>
-    <em>Yükleniyor...</em>
-</p> }
+    <p>
+        <em>Yükleniyor...</em>
+    </p> }
 
 else
 
 {
 
-<CardComponent cardStyle="Style.info">
-    <CardHeader>
-        <i class="far fa-list-alt"></i> Duyurlar
-    </CardHeader>
-    <CardBody>
-        <div class="list-group" id="duyuruDiv">
-            @foreach (var duyuru in DuyurularListesi.Where(d => d.AnasayfadaGoster == true).Take(3).ToList())
-            {
+    <CardComponent cardStyle="Style.info">
+        <CardHeader>
+            <i class="far fa-list-alt"></i> Duyurlar
+        </CardHeader>
+        <CardBody>
+            <div class="list-group" id="duyuruDiv">
+                @foreach (var duyuru in DuyurularListesi.Where(d => d.AnasayfadaGoster == true && d.Kategori.TextHaberDuyuru() == "Duyuru").Take(3).ToList())
+                {
 
-<a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">
-
-
-            @if (duyuru.Adi != null)
-            {
-                duyuru.Adi = duyuru.Adi.Length > 60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi;@((MarkupString) duyuru.Adi)}
+                    <a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">
 
 
-        </h6>
-        <small>@duyuru.KayitTarihi.ToLongDateString()</small>
-    </div>
-    <p id="haberKutusu" class="mb-1">
-        @if (duyuru.Aciklama != null)
-        {
-            duyuru.Aciklama = duyuru.Aciklama.Length > 200 ? duyuru.Aciklama.Substring(0, 150) + "..." : duyuru.Aciklama;@((MarkupString) duyuru.Aciklama)}
 
-    </p>
-</a>}
 
-        </div>
-    </CardBody>
-</CardComponent>}
+                                @if (duyuru.Adi != null)
+                                {
+                                    <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi)" />
+                                }
+
+                            </h6>
+                            <small>@duyuru.KayitTarihi.ToLongDateString()</small>
+                        </div>
+                        <p id="haberKutusu" class="mb-1">
+                            
+
+
+                            @if (duyuru.Aciklama != null)
+                            {
+                                <MarkDownComponent Content="@(duyuru.Aciklama.Length>200 ? duyuru.Aciklama.Substring(0, 150) + "..." : duyuru.Aciklama)" />
+                            }
+                        </p>
+                    </a>}
+
+            </div>
+        </CardBody>
+    </CardComponent>}
 
 
 <style>
@@ -73,5 +78,5 @@ else
         TumDuyurulariGetir();
 
         return Task.CompletedTask;
-    } 
+    }
 }

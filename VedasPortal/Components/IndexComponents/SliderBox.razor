@@ -23,11 +23,11 @@ else
                     </h5>
                 </div>
             </div>
-            @foreach (var duyuru in DuyurularListesi.Where(d => d.SlideraEklensinMi).Take(5).ToList())
+            @foreach (var duyuru in DuyurularListesi.Where(d => d.SliderdaGoster).ToList())
             {
                 <div class="carousel-item" style="max-height:600px;max-width:1203px">
 
-                    <img class="d-block w-100" src="img/uploaded/@duyuru.DosyaYolu" width="1203" height="600" alt="@duyuru.Adi">
+                    <img class="d-block w-100" src="img/uploaded/@duyuru.Dosya" width="1203" height="600" alt="@duyuru.Adi">
                     <div class="carousel-caption d-none d-md-block">
 
                         <h5 class="text-white" style="-webkit-text-stroke: 0.2px black;">
@@ -55,13 +55,13 @@ else
 
 
 @code { [Inject]
-    public IBaseRepository<Yayin> DuyuruServisi { get; set; }
+    public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
 
-    private IEnumerable<Yayin> duyurularListesi = new List<Yayin>();
-    protected IEnumerable<Yayin> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
+    private IEnumerable<HaberDuyuru> duyurularListesi = new List<HaberDuyuru>();
+    protected IEnumerable<HaberDuyuru> DuyurularListesi { get => duyurularListesi; set => duyurularListesi = value; }
 
-    protected IEnumerable<Yayin> TumDuyurulariGetir()
+    protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
     {
         DuyurularListesi = DuyuruServisi.GetAll();
 

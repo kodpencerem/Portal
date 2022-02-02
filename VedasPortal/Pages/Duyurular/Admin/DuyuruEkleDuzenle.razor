@@ -18,17 +18,18 @@
 
                 <div class="col-12">
                     <div class="col-md-6 float-left">
-                        <div class="form-group row">
+                        @*<div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValuePath="@duyuru.Dosya" />
-                                @if (!string.IsNullOrEmpty(duyuru.Dosya.FirstOrDefault()?.Yolu))
+                                <ImageResizer @bind-Value="@duyuru.Dosya.FirstOrDefault()?.Yolu" />
+                                @if (!string.IsNullOrEmpty(duyuru.Dosya.ToString()))
                                 {
                                     <img src="@("img/uploaded/"+duyuru.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
                             <ValidationMessage For="@(() => duyuru.Dosya.FirstOrDefault()?.Yolu)" />
-                        </div>
+                            
+                        </div>*@
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Duyuru Adı</label>
@@ -52,9 +53,12 @@
                             <div class="col-md-10">
                                 <InputSelect @bind-Value="@duyuru.Kategori" class="form-control">
                                     <option></option>
-                                    @foreach (var kategori in Kategoriler)
+                                    @if (Kategoriler != null)
                                     {
-                                        <option value="@kategori.Key"> @kategori.Value </option>
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
                                     }
 
                                 </InputSelect>
@@ -177,7 +181,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@duyuru.DosyaYolu</td>
+                                    <td>@duyuru.Dosya</td>
 
                                     <td>@duyuru.Adi</td>
                                     <td>

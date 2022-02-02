@@ -13,7 +13,7 @@ else
         </CardHeader>
         <CardBody>
             <div class="list-group" id="duyuruDiv">
-                @foreach (var haber in HaberlerListesi.Where(h => h.AnasayfadaGoster == true).Take(3).ToList())
+                @foreach (var haber in HaberlerListesi.Where(h => h.AnasayfadaGoster == true && h.Kategori.TextHaberDuyuru()=="Haber").Take(3).ToList())
                 {
                     <a href="haber/detay/@haber.Id" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
@@ -22,8 +22,8 @@ else
 
                                 @if (haber.Adi != null)
                                 {
-                                    haber.Adi = haber.Adi.Length > 60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi;@((MarkupString) haber.Adi)}
-
+                                    <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
+                                }
 
                             </h6>
                             <small>@haber.KayitTarihi.ToLongDateString()</small>
@@ -31,7 +31,8 @@ else
                         <p id="haberKutusu" class="mb-1">
                             @if (haber.Aciklama != null)
                             {
-                                haber.Aciklama = haber.Aciklama.Length > 200 ? haber.Aciklama.Substring(0, 150) + "..." : haber.Aciklama;@((MarkupString) haber.Aciklama)}
+                                <MarkDownComponent Content="@(haber.Aciklama.Length>200 ? haber.Aciklama.Substring(0, 150) + "..." : haber.Aciklama)" />
+                            }
 
                         </p>
                     </a>}

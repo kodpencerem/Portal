@@ -44,7 +44,6 @@ namespace VedasPortal
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
-            services.AddScoped<IBaseRepository<HaberDuyuruKategori>, BaseRepository<HaberDuyuruKategori>>();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
 
         }

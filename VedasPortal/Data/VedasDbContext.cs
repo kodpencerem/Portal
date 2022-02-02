@@ -15,7 +15,7 @@ namespace VedasPortal.Data
         {
         }
 
-        public DbSet<HaberDuyuru> Yayin { get; set; }
+        public DbSet<HaberDuyuru> HaberDuyuru { get; set; }
         public DbSet<Dosya> Dosya { get; set; }
         public DbSet<Etkinlik> Etkinlik { get; set; }
         public DbSet<Rehber> Rehber { get; set; }

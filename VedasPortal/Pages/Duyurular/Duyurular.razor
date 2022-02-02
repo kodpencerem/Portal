@@ -13,7 +13,7 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var duyuru in duyurular)
+            @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
             {
 
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
@@ -24,39 +24,41 @@ else
                         </div>
                         <div class="article-details">
                             <div class="article-category">
-                                <a href="">Haber</a>
+                                <a href="duyuru/detay/@duyuru.Id">Duyuru</a>
                                 <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
                             </div>
                             <div class="article-title">
                                 <h1 class="article-style-b">
-                                    <a>
+                                    <a href="duyuru/detay/@duyuru.Id">
+
+
                                         @if (duyuru.Adi != null)
                                         {
-                                            duyuru.Adi = duyuru.Adi.Length > 60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi;@((MarkupString)duyuru.Adi)}
+                                            <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi)" />
+                                        }
                                     </a>
                                 </h1>
                             </div>
                             <div name="HaberAltBaslik" class="article-title">
                                 <p class="alert-title">
+
                                     @if (duyuru.AltBaslik != null)
                                     {
-                                        duyuru.AltBaslik = duyuru.AltBaslik.Length > 200 ? duyuru.AltBaslik.Substring(0, 85) + "..." : duyuru.AltBaslik;@((MarkupString)duyuru.AltBaslik)}
-
+                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? duyuru.AltBaslik.Substring(0, 27) + "..." : duyuru.AltBaslik)" />
+                                    }
                                 </p>
                             </div>
                             <p name="HaberAciklama" class="accordion-header">
 
-                                @*@if (duyuru.Aciklama != null)
+                                @if (duyuru.Aciklama != null)
                                 {
-                                    duyuru.Aciklama = duyuru.Aciklama.Length > 30 ? duyuru.Aciklama.Substring(0, 60) + "..." : duyuru.Aciklama;
-                                }*@
+                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>60 ? duyuru.Aciklama.Substring(0, 27) + "..." : duyuru.Aciklama)" />
+                                }
                             </p>
 
 
                         </div>
-                        <div class="article-cta centered">
-                            <a href="duyuru/detay/@duyuru.Id" class="btn btn-primary fas fa-chevron-right">Duyuru Detayı</a>
-                        </div>
+
                     </article>
                 </div>
             }

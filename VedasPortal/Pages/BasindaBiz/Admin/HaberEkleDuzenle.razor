@@ -19,17 +19,17 @@
 
                 <div class="col-12">
                     <div class="col-md-6 float-left">
-                        <div class="form-group row">
+                        @*<div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValuePath="@haber.Dosya.FirstOrDefault()?.Yolu" />
-                                @if (!string.IsNullOrEmpty(haber.DosyaYolu))
+                                <ImageResizer @bind-Value="@haber.Dosya.FirstOrDefault()?.Yolu" />
+                                @if (!string.IsNullOrEmpty(haber.Dosya.ToString()))
                                 {
                                     <img src="@("img/uploaded/"+haber.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
                             <ValidationMessage For="@(() => haber.Dosya.FirstOrDefault()?.Yolu)" />
-                        </div>
+                        </div>*@
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Haber Adı</label>
@@ -49,16 +49,18 @@
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@haber.YayinKategoriId" class="form-control">
+                                <InputSelect @bind-Value="@haber.Kategori" class="form-control">
                                     <option></option>
-                                    @foreach (var kategori in Kategoriler)
+                                    @if (Kategoriler != null)
                                     {
-                                        <option value="@kategori.Id"> @kategori.YayinKategoriAdi </option>
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
                                     }
 
                                 </InputSelect>
                             </div>
-                            <ValidationMessage For="@(() => haber.YayinKategoriId)" />
                         </div>
 
                         <br />
@@ -66,25 +68,25 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Haber Şimdi Yayınlasın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.YayinDurumu" />
+                                    <InputCheckbox class="form-control" @bind-Value="haber.AktifPasif" />
                                 </div>
-                                <ValidationMessage For="@(() => haber.YayinDurumu)" />
+                                <ValidationMessage For="@(() => haber.AktifPasif)" />
                             </div>
 
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Haber Kutusuna Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.HaberKutusundaOlsunMu" />
+                                    <InputCheckbox class="form-control" @bind-Value="haber.AnasayfadaGoster" />
                                 </div>
-                                <ValidationMessage For="@(() => haber.DuyuruKutusundaOlsunMu)" />
+                                <ValidationMessage For="@(() => haber.AnasayfadaGoster)" />
                             </div>
 
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.SlideraEklensinMi" />
+                                    <InputCheckbox class="form-control" @bind-Value="haber.SliderdaGoster" />
                                 </div>
-                                <ValidationMessage For="@(() => haber.SlideraEklensinMi)" />
+                                <ValidationMessage For="@(() => haber.SliderdaGoster)" />
                                 
                             </div>
                         </div>
@@ -158,7 +160,7 @@ else
                                 <th>Resim</th>
 
                                 <th>Haber Adı</th>
-                                <th>Haber Durumu</th>
+                                
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -166,7 +168,7 @@ else
 
 
 
-                            @foreach (var haber in Haberler.Where(h=>h.YayinKategoriId==5).ToList())
+                            @foreach (var haber in Haberler.Where(h => h.Kategori == HaberDuyuruKategori.Haber).ToList())
 
                             {
 
@@ -179,20 +181,10 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@haber.DosyaYolu</td>
+                                    <td>@haber.Dosya</td>
 
                                     <td>@haber.Adi</td>
-                                    <td>
-                                        @if (haber.YayinDurumu == true)
-                                        {
-
-
-                                            <div class="badge badge-success badge-shadow">Yayında</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
-                                    </td>
+                                    
 
                                     <td>
                                         <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary">Haber Detayı</a>

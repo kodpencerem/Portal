@@ -3,7 +3,6 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
@@ -20,7 +19,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int duyuruId { get; set; }
+        public int DuyuruId { get; set; }
 
         protected string Title = "Ekle";
         public HaberDuyuru duyuru = new HaberDuyuru();
@@ -57,10 +56,10 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected override void OnParametersSet()
         {
-            if (duyuruId != 0)
+            if (DuyuruId != 0)
             {
                 Title = "Duzenle";
-                duyuru = DuyuruServisi.Get(duyuruId);
+                duyuru = DuyuruServisi.Get(DuyuruId);
 
             }
         }
@@ -70,7 +69,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         protected void SilmeyiOnayla(int duyuruId)
         {
             ModalDialog.Open();
-            duyuru = DuyurularListesi.Where(x => x.Id == duyuruId);
+            duyuru = (HaberDuyuru)DuyurularListesi.Where(x => x.Id == duyuruId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
