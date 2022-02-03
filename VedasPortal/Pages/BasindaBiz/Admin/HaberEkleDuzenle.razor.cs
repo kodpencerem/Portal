@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
+using VedasPortal.Models.Dosya;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
@@ -48,13 +49,13 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
             HaberServisi.AddUpdate(haber);           
         }
-        
         protected override void OnParametersSet()
         {
             if (HaberId != 0)
             {
                 Title = "Duzenle";
                 haber = HaberServisi.Get(HaberId);
+                HaberDosya = haber.Dosya.FirstOrDefault();
 
             }
         }
@@ -80,6 +81,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         }
 
 
+        public Dosya HaberDosya { get; set; } = new Dosya();
         protected override Task OnInitializedAsync()
         {
             TumHaberleriGetir();
