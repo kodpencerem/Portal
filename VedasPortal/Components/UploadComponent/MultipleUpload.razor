@@ -1,24 +1,86 @@
-﻿<div>
-    <InputFile OnChange="@OnFileSelection" multiple></InputFile>
-    <div class="row">
-        @foreach (var imgUrl in imgUrls)
-        {
-            <img src="@imgUrl">
-        }
-    </div>
-</div>
+﻿@using System
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Logging
+@inject ILogger<Dosya> Logger
+@inject IWebHostEnvironment Environment
 
-@code{
-    List<string> imgUrls = new List<string>();
-    private async Task OnFileSelection(InputFileChangeEventArgs e)
-    {
-        foreach (IBrowserFile imgFile in e.GetMultipleFiles(5))
+<h3>Upload Files</h3>
+
+<p>
+    <label>
+        Max file size:
+        <input type="number" @bind="maxFileSize" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Max allowed files:
+        <input type="number" @bind="maxAllowedFiles" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
+        <InputFile OnChange="@LoadFiles" multiple />
+    </label>
+</p>
+
+@if (isLoading)
+{
+    <p>Uploading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var file in loadedFiles)
         {
-            var buffers = new byte[imgFile.Size];
-            await imgFile.OpenReadStream().ReadAsync(buffers);
-            string imageType = imgFile.ContentType;
-            string imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
-            imgUrls.Add(imgUrl);
+            <li>
+                <ul>
+                    <li>Name: @file.Name</li>
+                    <li>Last modified: @file.LastModified.ToString()</li>
+                    <li>Size (bytes): @file.Size</li>
+                    <li>Content type: @file.ContentType</li>
+                </ul>
+            </li>
         }
+    </ul>
+}
+
+@code {
+    private List<IBrowserFile> loadedFiles = new();
+    private long maxFileSize = 1024 * 15;
+    private int maxAllowedFiles = 3;
+    private bool isLoading;
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+        loadedFiles.Clear();
+
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            try
+            {
+                loadedFiles.Add(file);
+
+                var trustedFileNameForFileStorage = Path.GetRandomFileName();
+                var path = Path.Combine(Environment.ContentRootPath,
+                        Environment.EnvironmentName, "unsafe_uploads",
+                        trustedFileNameForFileStorage);
+
+                await using FileStream fs = new(path, FileMode.Create);
+                await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("File: {Filename} Error: {Error}",
+                    file.Name, ex.Message);
+            }
+        }
+
+        isLoading = false;
     }
 }

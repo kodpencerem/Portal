@@ -1,17 +1,22 @@
 ﻿using Blazor.Cropper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
 
+
 namespace VedasPortal.Components.UploadComponent
 {
     public partial class ImageResizer
     {
+        
+       
         /// <summary>
         /// Cropper kütüphaneden bir nesne örneği oluşturur. Resim kırpma ve boyutlandırma özelliklerine erişim verir.
         /// </summary>
@@ -21,7 +26,7 @@ namespace VedasPortal.Components.UploadComponent
         /// <summary>
         /// Dosya seçilmesi için bir pencere açar
         /// </summary>
-        private IBrowserFile browserFileResizer;
+        private readonly IBrowserFile browserFileResizer;
 
         /// <summary>
         /// Resim öngörünümü için bir yol belirler
@@ -49,6 +54,7 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         private bool ShowCroper { get; set; } = false;
 
+        
         [Parameter]
         public Dosya Value { get; set; }
 
@@ -123,28 +129,41 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-       
+        private readonly IWebHostEnvironment env;
+        private string Message = "Herhangi bir dosya seçilemedi!!";
+
         /// <summary>
-        /// Ön yüklemeden gelebilecek değişiklikleri algılar.
+        /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
         private void OnInputFileChange(InputFileChangeEventArgs args)
         {
+            IReadOnlyList<IBrowserFile> files =args.GetMultipleFiles(args.FileCount);
 
+            foreach (var file in files)
+            {
+                Stream stream = file.OpenReadStream();
+                var path = $"{env.WebRootPath}\\{file.Name}";
+                FileStream fs = File.Create(path);
+                stream.CopyToAsync(fs);
+                stream.Close();
+                fs.Close();
+            }
+            Message = $"{files.Count} adet dosya yüklendi.";
+            this.StateHasChanged();
 
             PreviewImagePath = null;
-            browserFileResizer = args.File;
+            
             ShowCroper = true;
-
-
         }
+
         private double CropCurrentWidth { get; set; }
         private double CropCurrentHeight { get; set; }
 
         /// <summary>
         /// Resim boyutunda olabilecek genişlik ve yükseklik değerlerini tutar
         /// </summary>
-        /// <param name="cropSize"></param>
+        /// <param name="cropSize">Kırpma boyutu</param>
         private void HandleCropSizeChanged((double, double) cropSize)
         {
             CropCurrentWidth = cropSize.Item1;
@@ -210,6 +229,6 @@ namespace VedasPortal.Components.UploadComponent
             byte[] imageBytes = memoryStream.ToArray();
             ImageBase64String = Convert.ToBase64String(imageBytes);
             PreviewImagePath = $"data:image/png;base64,{ImageBase64String}";
-        }
+        }  
     }
 }

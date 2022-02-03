@@ -1,7 +1,7 @@
 ﻿@page "/haber/ekle"
 @page "/haber/duzenle/{haberId:int}"
-
 @using Microsoft.AspNetCore.Hosting
+
 @inject IWebHostEnvironment Environment
 
 @inherits HaberEkleDuzenleModel
@@ -19,17 +19,17 @@
 
                 <div class="col-12">
                     <div class="col-md-6 float-left">
-                        @*<div class="form-group row">
+                        <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-Value="@haber.Dosya.FirstOrDefault()?.Yolu" />
+                                <ImageResizer @bind-Value="@(() => haber.Dosya.FirstOrDefault()?.Yolu)" />
                                 @if (!string.IsNullOrEmpty(haber.Dosya.ToString()))
                                 {
                                     <img src="@("img/uploaded/"+haber.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
                             <ValidationMessage For="@(() => haber.Dosya.FirstOrDefault()?.Yolu)" />
-                        </div>*@
+                        </div>
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Haber Adı</label>
@@ -87,7 +87,7 @@
                                     <InputCheckbox class="form-control" @bind-Value="haber.SliderdaGoster" />
                                 </div>
                                 <ValidationMessage For="@(() => haber.SliderdaGoster)" />
-                                
+
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value=@haber.Aciklama                                                                            
+                                                @bind-Value=@haber.Aciklama
                                                 Label="Açıklama"
                                                 UrlToPostImage="img/uploaded/">
                                 </CKEditorBlazor>
@@ -107,9 +107,9 @@
                         </div>
                     </div>
                 </div>
-                
+
             </EditForm>
-            
+
         </CardBody>
         <CardFotter>
             <div class="form-group">
@@ -160,7 +160,7 @@ else
                                 <th>Resim</th>
 
                                 <th>Haber Adı</th>
-                                
+
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
@@ -184,7 +184,7 @@ else
                                     <td>@haber.Dosya</td>
 
                                     <td>@haber.Adi</td>
-                                    
+
 
                                     <td>
                                         <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary">Haber Detayı</a>
@@ -213,7 +213,7 @@ else
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
         </ModalHeader>
-        
+
         <ModalFooter>
             <button class="btn btn-danger" @onclick="@(()=>{HaberSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>

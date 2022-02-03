@@ -26,11 +26,19 @@
         set => _id = value;
     }
 
+    /// <summary>
+    /// Editor alanına resim gönderme işlemi için bir yol belirler
+    /// </summary>
     [Parameter]
     public string UrlToPostImage { get; set; }
 
+
+    /// <summary>
+    /// Benzersiz bir id oluşturur.
+    /// </summary>
     readonly string uid = Guid.NewGuid().ToString().ToLower().Replace("-", "");
 
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -39,6 +47,13 @@
         await base.OnAfterRenderAsync(firstRender);
     }
 
+
+    /// <summary>
+    /// Editor alanında yapılan değişiklikleri yakalar. 
+    /// Değişiklikleri 'data' değerine gönderir
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     [JSInvokable]
     public Task EditorDataChanged(string data)
     {
