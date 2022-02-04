@@ -1,86 +1,109 @@
-﻿@using System
-@using System.IO
-@using Microsoft.AspNetCore.Hosting
-@using Microsoft.Extensions.Logging
-@inject ILogger<Dosya> Logger
-@inject IWebHostEnvironment Environment
+﻿
+@using VedasPortal.Services.FileUploadDownload;
+@inject IFileUpload fileUpload;
 
-<h3>Upload Files</h3>
+<div class="col-6">
+    <div class="form-group">
+        <InputFile OnChange="OnInputFileChange" multiple />
+        <button class="btn btn-sm btn-success" type="button" @onclick="UploadFiles">Yükle</button>
+        <br />
+        @{ // Görüntüleme ilerlemesinin ayarlanıp ayarlanmadığına bağlı olarak ilerleme oluşturmak için bir  css sınıfı oluşturur.
 
-<p>
-    <label>
-        Max file size:
-        <input type="number" @bind="maxFileSize" />
-    </label>
-</p>
+            var progressCss = "progress" + (displayProgress ? "" : "d-none");
+            // ilerleme çubuğu genişliği, yükleme ilerlemesinin yüzdesidir
+            var progressWidthStyle = progressPercent + "%"; }
+        <div class="@progressCss">
+            <div class="progress-bar" role="progressbar" style="width:@progressWidthStyle" area-valuenow="@progressPercent"
+                 aria-minvalue="0" area-maxvalue="100">
 
-<p>
-    <label>
-        Max allowed files:
-        <input type="number" @bind="maxAllowedFiles" />
-    </label>
-</p>
-
-<p>
-    <label>
-        Upload up to @maxAllowedFiles of up to @maxFileSize bytes:
-        <InputFile OnChange="@LoadFiles" multiple />
-    </label>
-</p>
-
-@if (isLoading)
+            </div>
+        </div>
+    </div>
+    <br />
+    <label>@labelText</label>
+    <br />
+</div>
+@if (previewImages.Count > 0)
 {
-    <p>Uploading...</p>
-}
-else
-{
-    <ul>
-        @foreach (var file in loadedFiles)
-        {
-            <li>
-                <ul>
-                    <li>Name: @file.Name</li>
-                    <li>Last modified: @file.LastModified.ToString()</li>
-                    <li>Size (bytes): @file.Size</li>
-                    <li>Content type: @file.ContentType</li>
-                </ul>
-            </li>
-        }
-    </ul>
-}
+    <h3>Selected files</h3>
+    <div class="card">
+        <div class="row align-items-start">
 
-@code {
-    private List<IBrowserFile> loadedFiles = new();
-    private long maxFileSize = 1024 * 15;
-    private int maxAllowedFiles = 3;
-    private bool isLoading;
+            @foreach (var item in previewImages)
+            {
+                <div class="col-2">
+                    <img class="rounded float-left" src="@item" width="100" height="100" />
+                </div>}
+        </div>
+    </div>}
 
-    private async Task LoadFiles(InputFileChangeEventArgs e)
+@code{ 
+
+    // yalnızca yükleme sırasında ilerlemenin görüntülenmesini değiştirmek için kullanılır
+    private bool displayProgress;
+    // ilerlemeyi yüzde olarak yüklemek için
+    private int progressPercent;
+    // Yüklemenin sonuçlarını göstermek için bir yazı gösterir
+    private string labelText = "";
+
+    // yüklenecek seçili dosyaların listesi
+    IReadOnlyList<IBrowserFile> selectedFiles;
+    // dosyalar için önizleme URL'lerinin listesi
+    private IList<string> previewImages = new List<string>();
+
+    // yüklenecek dosyalarda yeni bir seçim olduğunda yöntem otomatik olarak yürütülür
+    // yüklenecek dosyaları al
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
-        isLoading = true;
-        loadedFiles.Clear();
-
-        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        // Dosya seçicide seçilen tüm dosyaları al
+        var files = e.GetMultipleFiles();
+        selectedFiles = files;
+        foreach (var file in files)
         {
-            try
-            {
-                loadedFiles.Add(file);
+            // resim dosyası için önizleme url'si oluştur
+            var imageUrl = await fileUpload.GeneratePreviewUrl(file);
 
-                var trustedFileNameForFileStorage = Path.GetRandomFileName();
-                var path = Path.Combine(Environment.ContentRootPath,
-                        Environment.EnvironmentName, "unsafe_uploads",
-                        trustedFileNameForFileStorage);
+            // resim url'sini önizleme url listesine ekler
+            previewImages.Add(imageUrl);
 
-                await using FileStream fs = new(path, FileMode.Create);
-                await file.OpenReadStream(maxFileSize).CopyToAsync(fs);
-            }
-            catch (Exception ex)
+        }
+    }
+
+    private async Task UploadFiles()
+    {
+        try
+        {
+            //Yüklenecek dosyalarımız olduğundan emin olmak için bir  kontrol oluşturur.
+            if (selectedFiles is not null && selectedFiles.Count > 0)
             {
-                Logger.LogError("File: {Filename} Error: {Error}",
-                    file.Name, ex.Message);
+                // yüklenen dosyaları takip eder
+                var uploaded = 0;
+                // dosya yükleme esnasında bir ilerleme çubuğu açar
+                displayProgress = true;
+
+                foreach (var file in selectedFiles)
+                {
+                    // dosyaları eşzamansız olarak yükler
+                    await fileUpload.UploadFile(file);
+
+                    // Her başarılı yüklemeden sonra yüklenen sayıyı artır
+                    uploaded++;
+
+                    // yükleme ilerlemesini günceller
+                    progressPercent = (int)((uploaded / selectedFiles.Count) * 100);
+                }
+
+                // Yükleme bittiğinde progresbarı kapatır
+                displayProgress = false;
+
+                // Başarılı yükleme sonucu kullanıcıya gösterir
+                labelText = $"{selectedFiles.Count} adet dosya başarılı bir şekilde yüklenmiştir";
             }
         }
+        catch (Exception ex)
+        {
+            //Yükleme herhangi bir nedenle başarısız olduğunda, kullanıcıyı bilgilendirir
+            labelText = $"{ex.Message} nedeniyle yükleme başarısız oldu";
+        }
 
-        isLoading = false;
-    }
-}
+    } }

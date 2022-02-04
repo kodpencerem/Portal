@@ -13,6 +13,7 @@ using VedasPortal.Models.Dosya;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
 
@@ -45,6 +46,11 @@ namespace VedasPortal
             services.AddScoped<IVideoService, StaticVideoService>();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
+
+            // register our scoped service to upload
+            services.AddScoped<IFileUpload, FileUpload>();
+            // register our scoped service to download
+            services.AddScoped<IFileDownload, FileDownload>();
 
         }
 
