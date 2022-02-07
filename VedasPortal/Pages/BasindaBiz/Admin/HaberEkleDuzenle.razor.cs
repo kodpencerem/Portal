@@ -97,6 +97,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public void Temizle()
         {
             haber = null;
+            
             Cancel();
         }
     }

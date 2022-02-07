@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace VedasPortal.Services.FileUploadDownload
 {
-    // interface to define what the upload service will do
+    // İndirme arayüzünün ne yapacağını tanımlayan arayüz
     public interface IFileDownload
     {
-        // method to get all files in our uploads folder and return a base64 url for each
+        // tüm dosyaları yükleme klasörümüze alma ve her biri için bir base64 url ​​döndürme yöntemi
         Task<List<string>> GetUploadedFiles();
-        // method to download a file from the server
+        // sunucudan dosya indirme yöntemi
         Task DownloadFile(string url);
     }
     public class FileDownload : IFileDownload
@@ -22,67 +22,73 @@ namespace VedasPortal.Services.FileUploadDownload
         private readonly IJSRuntime _js;
         public FileDownload(IWebHostEnvironment webHostEnvironment, IJSRuntime js)
         {
-            // On creation of the FileDownload class, we shall inject the web host environment 
-            // the web host environment contains information about the environment the app is running in like file location
+            
             _webHostEnvironment = webHostEnvironment;
-            // javascript runtime that enables executing js functions in .NET
+            // .NET'te js işlevlerinin yürütülmesini sağlayan javascript çalışma zamanı
             _js = js;
         }
 
         public async Task DownloadFile(string url)
         {
-            // invoke the javascript method to download the file
+            // dosyayı indirmek için javascript yöntemini çağırın
             await _js.InvokeVoidAsync("downloadFile", url);
         }
 
-        // implementation of GetUploadedFiles method from the interface
+        /// <summary>
+        /// arayüzden GetUploadedFiles yönteminin uygulanması
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<string>> GetUploadedFiles()
         {
-            // initialise an empty list that will hold base64 urls of files read from the server
+            //sunucudan okunan dosyaların base64 url'lerini tutacak boş bir liste başlat
             var base64Urls = new List<string>();
-            // Create upload path for the file using its name
+            // Adını kullanarak dosya için yükleme yolu oluşturur
             var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
 
-            //Get all files from this uploads folder
+            // Bu yükleme klasöründeki tüm dosyaları alın
             var files = Directory.GetFiles(uploadPath);
 
-            // make sure the upload path has a file in it 
+            // yükleme yolunun içinde bir dosya olduğunun kontrolü sağlanır
             if (files is not null && files.Length > 0)
             {
-                // loop through all files in the upload folder read the file and get its base64 url
+                // yükleme klasöründeki tüm dosyalar arasında dolaşın dosyayı okuyun ve base64 url'sini alın
                 foreach (var filepath in files)
                 {
-                    // read each file in the uploads folder
+                    // yüklemeler klasöründeki her dosyayı oku
                     using (var fileInput = new FileStream(filepath, FileMode.Open, FileAccess.Read))
                     {
-                        // create a memory stream 
+                        // bir bellek akışı oluştur
                         var memorystream = new MemoryStream();
-                        // copy the file to a memory stream
+                        // dosyayı bir bellek akışına kopyalayın
                         await fileInput.CopyToAsync(memorystream);
 
-                        // convert our memory stream to bytes 
+                        // bellek akışımızı baytlara dönüştürür
                         var buffer = memorystream.ToArray();
 
-                        // get the MIME file Extension
+                        // dosya uzantısı alır.
                         var fileType = GetMimeTypeForFileExtension(filepath);
 
-                        // create a base64 url string from the byte array and add it to our list of urls
+                        // bayt dizisinden bir base64 url ​​dizesi oluşturup ve onu url listesine ekler
                         base64Urls.Add($"data:{fileType};base64,{Convert.ToBase64String(buffer)}");
                     }
                 }
             }
-            // return our base64 urls
+            // base64 url'lerimizi döndür
             return base64Urls;
         }
 
-        // Helper method to get the MIME Type for the file
+        /// <summary>
+        /// Dosya için MIME Türünü almak için yardımcı yöntem
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         private string GetMimeTypeForFileExtension(string filePath)
         {
-            // define a default content type 
+            // varsayılan bir içerik türü tanımlar
             const string DefaultContentType = "application/octet-stream";
 
             var provider = new FileExtensionContentTypeProvider();
-            // Given path, get the MIME type or use the default
+            // Dosya tipini ve geçerli yolu alır.
             if (!provider.TryGetContentType(filePath, out string contentType))
             {
                 contentType = DefaultContentType;

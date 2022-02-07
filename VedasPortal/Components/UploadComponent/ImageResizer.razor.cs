@@ -1,6 +1,8 @@
 ﻿using Blazor.Cropper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,12 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
 
-
 namespace VedasPortal.Components.UploadComponent
 {
     public partial class ImageResizer
     {
-
-
+        protected IWebHostEnvironment Environment;
+        ILogger<Dosya> Logger;
         /// <summary>
         /// Cropper kütüphaneden bir nesne örneği oluşturur. Resim kırpma ve boyutlandırma özelliklerine erişim verir.
         /// </summary>
@@ -75,6 +76,9 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         bool isOpened = false;
 
+        /// <summary>
+        /// Bir popup açar ve modeli gösterir
+        /// </summary>
         void OpenModal()
         {
             isOpened = true;
@@ -128,39 +132,50 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-        // yalnızca yükleme sırasında ilerlemenin görüntülenmesini değiştirmek için kullanılır
-        private bool displayProgress;
-        // ilerlemeyi yüzde olarak yüklemek için
-        private int progressPercent;
-        // Yüklemenin sonuçlarını göstermek için bir yazı gösterir
-        private string labelText = "";
+        protected List<IBrowserFile> loadedFiles = new();
+        protected long maxFileSize = 1024 * 15;
+        protected int maxAllowedFiles = 10;
+        protected bool isLoading;
 
         // yüklenecek seçili dosyaların listesi
-        IReadOnlyList<IBrowserFile> selectedFiles;
-        // dosyalar için önizleme URL'lerinin listesi
-        private IList<string> previewImages = new List<string>();
+        protected IReadOnlyList<IBrowserFile> selectedFiles;
 
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
-        protected async void OnInputFileChange(InputFileChangeEventArgs args)
+        protected void OnInputFileChange(InputFileChangeEventArgs args)
         {
 
+            isLoading = true;
+            loadedFiles.Clear();
+            PreviewImagePath = null;
+
             // Dosya seçicide seçilen tüm dosyaları al
-            var files = e.GetMultipleFiles();
+            var files = args.GetMultipleFiles(maxAllowedFiles);
             selectedFiles = files;
+
             foreach (var file in files)
             {
-                // resim dosyası için önizleme url'si oluştur
-                var imageUrl = await fileUpload.GeneratePreviewUrl(file);
+                try
+                {
+                    if (file != null)
+                    {
+                        loadedFiles.Add(file);
+                        ShowCroper = true;
+                    }
 
-                // resim url'sini önizleme url listesine ekler
-                previewImages.Add(imageUrl);
-
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError("Dosya: {Filename} Hata: {Error}", file.Name, ex.Message);
+                }
             }
 
+            isLoading = false;
+
         }
+
 
         private double CropCurrentWidth { get; set; }
         private double CropCurrentHeight { get; set; }
@@ -228,12 +243,15 @@ namespace VedasPortal.Components.UploadComponent
         /// <returns></returns>
         private async Task UpdatePreviewASync(IBrowserFile browserFile)
         {
-            Stream inputFileStream = browserFile.OpenReadStream(MaxAllowedFileSize);
-            using MemoryStream memoryStream = new MemoryStream();
-            await inputFileStream.CopyToAsync(memoryStream);
-            byte[] imageBytes = memoryStream.ToArray();
-            ImageBase64String = Convert.ToBase64String(imageBytes);
-            PreviewImagePath = $"data:image/png;base64,{ImageBase64String}";
+            if (browserFile != null)
+            {
+                Stream inputFileStream = browserFile.OpenReadStream(MaxAllowedFileSize);
+                using MemoryStream memoryStream = new MemoryStream();
+                await inputFileStream?.CopyToAsync(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+                ImageBase64String = Convert.ToBase64String(imageBytes);
+                PreviewImagePath = $"data:image/png;base64,{ImageBase64String}";
+            }
         }
     }
 }

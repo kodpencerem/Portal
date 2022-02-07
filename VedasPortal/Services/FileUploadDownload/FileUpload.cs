@@ -9,9 +9,17 @@ namespace VedasPortal.Services.FileUploadDownload
 {
     public interface IFileUpload
     {
-        // method to upload file
+        /// <summary>
+        /// dosya yükleme yöntemi
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         Task UploadFile(IBrowserFile file);
-        // method to generate preview url
+        /// <summary>
+        /// önizleme url'si oluşturma yöntemi
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         Task<string> GeneratePreviewUrl(IBrowserFile file);
     }
 
@@ -21,64 +29,71 @@ namespace VedasPortal.Services.FileUploadDownload
         private IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FileUpload> _logger;
 
-        // On creation of the FileUpload class, we shall inject the web host environment and logger object
-        // the web host environment contains information about the environment the app is running in like file location
-        // the logger object will be used to log info, errors, warnings e.t.c
+        /// <summary>
+        /// web barındırma ortamı, uygulamanın benzer dosya konumunda çalıştığı ortam hakkında bilgi içerir
+        /// </summary>
+        /// <param name="webHostEnvironment"></param>
+        /// <param name="logger"></param>
         public FileUpload(IWebHostEnvironment webHostEnvironment, ILogger<FileUpload> logger)
         {
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
         }
 
+        /// <summary>
+        /// Diğer dosya türleri için yalnızca görüntüleri önizleyebiliriz, görseller klasöründe içerik türü logo olan görselleri kullanabiliriz 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public async Task<string> GeneratePreviewUrl(IBrowserFile file)
         {
-            // We can only preview images so for other file types,
-            // we shall use the content type logos in the images folder
+            
             if (!file.ContentType.Contains("image"))
             {
-                // For example, for pdf, we are going to use a logo of a pdf file in the preview
+                // Örneğin, pdf için önizlemede bir pdf dosyasının logosunu kullanacağız.
                 if (file.ContentType.Contains("pdf"))
                 {
                     return "img/pdf_logo.png";
                 }
             }
 
-            // resize the image to a preview
+            // resmi önizlemede yeniden boyutlandır
             var resizedImage = await file.RequestImageFileAsync(file.ContentType, 100, 100);
 
-            // set buffer size to new resized image size
+            // arabellek boyutunu yeniden boyutlandırılımış görüntü boyutuna ayarlar
             var buffer = new byte[resizedImage.Size];
 
-            // read the resized image
+            // boyutlandırılmış dosyayı oku
             await resizedImage.OpenReadStream().ReadAsync(buffer);
 
-            //generate url and add it to preview list
+            // url oluşturup, önizleme listesine ekleme yapar
             return $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
         }
 
         public async Task UploadFile(IBrowserFile file)
         {
-            // make sure the file is valid
+            // dosya geçerli ise 
             if (file is not null)
             {
                 try
                 {
-                    // Create upload path for the file using its name
-                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "img/uploaded", file.Name);
-                    // create and open a stream to upload the file
+                    var fileName = SaveFileToUploaded.RandomFileName + file.Name;
+                    // Bir dosya yolu oluşturup kendi ismi ile kaydet
+                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "img/uploaded", fileName);
+                    // dosyayı yüklemek için akış açar ve dosya yükleme gerçekleştirir
                     using (var stream = file.OpenReadStream())
                     {
-                        // create write access to the upload path
+                        // yükleme yoluna yazma erişimi oluşturur.
                         var fileStream = File.Create(uploadPath);
-                        // read from the local path and writes to upload path 
+                        // erişim olan yola kopyalama gerçekleştirir
                         await stream.CopyToAsync(fileStream);
-                        // close stream and release resources
+                        // akışı kapatıp kaynakları serbest bırakır
                         fileStream.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log and handle the exception
+                    // Özel durumları günlüğe kaydeder. Ve hata durumlarını işler
                     _logger.LogError(ex.ToString());
                 }
 
