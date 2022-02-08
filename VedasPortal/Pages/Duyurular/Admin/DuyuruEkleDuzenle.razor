@@ -8,28 +8,29 @@
 
 
 <div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Duyuru @Title
-        </CardHeader>
-        <CardBody>
-            <EditForm Model="@duyuru" OnValidSubmit="DuyuruKayit">
-                <DataAnnotationsValidator />
+    <EditForm Model="@duyuru" OnValidSubmit="HaberKayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Duyuru @Title
+            </CardHeader>
+            <CardBody>
+
+
 
                 <div class="col-12">
                     <div class="col-md-6 float-left">
-                        @*<div class="form-group row">
+                        <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-Value="@duyuru.Dosya.FirstOrDefault()?.Yolu" />
+                                <ImageResizer @bind-Value="@DuyuruDosya" />
                                 @if (!string.IsNullOrEmpty(duyuru.Dosya.ToString()))
                                 {
                                     <img src="@("img/uploaded/"+duyuru.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
-                            <ValidationMessage For="@(() => duyuru.Dosya.FirstOrDefault()?.Yolu)" />
-                            
-                        </div>*@
+                            @*<ValidationMessage For="@(() => haber.Dosya)" />*@
+                        </div>
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Duyuru Adı</label>
@@ -62,7 +63,7 @@
                                     }
 
                                 </InputSelect>
-                            </div> 
+                            </div>
                         </div>
 
                         <br />
@@ -104,27 +105,27 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.Aciklama)" />
                         </div>
-                        
+
 
                     </div>
                 </div>
 
-            </EditForm>
 
-        </CardBody>
 
-        <CardFotter>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" @onclick="DuyuruKayit">Kaydet</button>
-                <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
-            </div>
-        </CardFotter>
-    </CardComponent>
+            </CardBody>
 
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
 </div>
 
 
-@if (DuyurularListesi == null)
+@if (Duyurular == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -170,7 +171,7 @@ else
 
 
 
-                            @foreach (var duyuru in DuyurularListesi.Where(d=>d.Kategori==HaberDuyuruKategori.Duyuru).ToList())
+                            @foreach (var duyuru in Duyurular.Where(d => d.Kategori == HaberDuyuruKategori.Duyuru).ToList())
 
                             {
                                 <tr>
@@ -221,7 +222,7 @@ else
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
         </ModalHeader>
-        
+
         <ModalFooter>
             <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
@@ -229,7 +230,7 @@ else
     </ModalComponent>
 
 }
- 
+
 
 <style>
     .modal-content {

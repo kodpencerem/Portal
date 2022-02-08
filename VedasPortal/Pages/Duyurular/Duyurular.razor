@@ -44,7 +44,7 @@ else
 
                                     @if (duyuru.AltBaslik != null)
                                     {
-                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? duyuru.AltBaslik.Substring(0, 27) + "..." : duyuru.AltBaslik)" />
+                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? duyuru.AltBaslik.Substring(0, 45) + "..." : duyuru.AltBaslik)" />
                                     }
                                 </p>
                             </div>
@@ -52,7 +52,7 @@ else
 
                                 @if (duyuru.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>60 ? duyuru.Aciklama.Substring(0, 27) + "..." : duyuru.Aciklama)" />
+                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? duyuru.Aciklama.Substring(0, 280) + "..." : duyuru.Aciklama)" />
                                 }
                             </p>
 
@@ -70,8 +70,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 180px;
-        max-height: 180px;
+        min-height: 230px;
+        max-height: 230px;
     }
 
     .theme-white .btn-primary {

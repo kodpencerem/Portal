@@ -1,36 +1,21 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div class="mb-3">
-    <InputFile @onclick="OpenModal" class="form-control form-control-lg" id="input1"  OnChange="OnInputFileChange" multiple></InputFile>
+    <InputFile @onclick="OpenModal" class="form-control form-control-lg" id="input1" OnChange="OnInputFileChange" multiple></InputFile>
 </div>
 
-@if (parsing)
-{
-    <center>
-        <h2>@prompt</h2>
-    </center>}
-@if (!string.IsNullOrEmpty(PreviewImagePath) && !parsing)
-{
-    <ShowModalComponent Title="Resim Görünümü">
-        <ModalBody>
-            @if (loadedFiles.Count > 0)
-            {
-                <div class="card">
-                    <div class="row align-items-start">
+<ShowModalComponent Title="Resim Görünümü">
+    <ModalBody>
+        @if (!string.IsNullOrEmpty(PreviewImagePath) && !parsing)
+        {
 
-                        @foreach (var item in loadedFiles)
-                        {
-                            <div class="col-2">
-                                <img class="rounded float-left" src="@item" width="100" height="100" />
-                            </div>}
-                        
-                    </div>
-                </div>}
-        </ModalBody>
+            <img src="@PreviewImagePath" style="height:300px;width:300px" />
+        }
+    </ModalBody>
 
-    </ShowModalComponent>
+</ShowModalComponent>
 
-}
+
 @if (ShowCroper)
 {
     <ShowModalComponent Title="Kırpma İşlemleri" IsOpened="isOpened">
@@ -76,7 +61,7 @@
 
                 </div>
 
-               
+
 
             </div>
 

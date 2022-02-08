@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,8 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
-            HaberServisi.AddUpdate(haber);           
+            HaberServisi.AddUpdate(haber);
+            
         }
         protected override void OnParametersSet()
         {
@@ -89,16 +91,23 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             return Task.CompletedTask;
         }
 
-        public void Cancel()
-        {
-            UrlNavigationManager.NavigateTo("/haber/ekle");
-        }
-
         public void Temizle()
         {
             haber = null;
-            
-            Cancel();
+
+            UrlNavigationManager.NavigateTo("/haber/ekle");
+        }
+
+
+        [Inject]
+        public IJSRuntime jsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
+                await jsRun.InvokeVoidAsync("dataTables");
+            }
         }
     }
 }

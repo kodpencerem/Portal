@@ -1,11 +1,8 @@
 ﻿using Blazor.Cropper;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
@@ -15,8 +12,7 @@ namespace VedasPortal.Components.UploadComponent
 {
     public partial class ImageResizer
     {
-        protected IWebHostEnvironment Environment;
-        ILogger<Dosya> Logger;
+
         /// <summary>
         /// Cropper kütüphaneden bir nesne örneği oluşturur. Resim kırpma ve boyutlandırma özelliklerine erişim verir.
         /// </summary>
@@ -38,14 +34,8 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         private string ImageBase64String { get; set; }
 
-
         /// <summary>
-        /// Kullanıcıya bir mesaj döndürür
-        /// </summary>
-        private readonly string prompt = "Resim Başarıyla Kırpıldı...";
-
-        /// <summary>
-        /// Nesneyi ayrıştırma işlemlerini bool döndürür
+        /// Nesneyi ayrıştırma işlemlerini döndürür
         /// </summary>
         private bool parsing = false;
 
@@ -132,48 +122,15 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-        protected List<IBrowserFile> loadedFiles = new();
-        protected long maxFileSize = 1024 * 15;
-        protected int maxAllowedFiles = 10;
-        protected bool isLoading;
-
-        // yüklenecek seçili dosyaların listesi
-        protected IReadOnlyList<IBrowserFile> selectedFiles;
-
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
         protected void OnInputFileChange(InputFileChangeEventArgs args)
         {
-
-            isLoading = true;
-            loadedFiles.Clear();
             PreviewImagePath = null;
-
-            // Dosya seçicide seçilen tüm dosyaları al
-            var files = args.GetMultipleFiles(maxAllowedFiles);
-            selectedFiles = files;
-
-            foreach (var file in files)
-            {
-                try
-                {
-                    if (file != null)
-                    {
-                        loadedFiles.Add(file);
-                        ShowCroper = true;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogError("Dosya: {Filename} Hata: {Error}", file.Name, ex.Message);
-                }
-            }
-
-            isLoading = false;
-
+            browserFileResizer = args.File;
+            ShowCroper = true;
         }
 
 
@@ -235,7 +192,6 @@ namespace VedasPortal.Components.UploadComponent
         }
 
         private readonly int MaxAllowedFileSize = 10 * 1024 * 1024;
-
         /// <summary>
         /// Resim üzerinden gerçekleşen güncellemeleri tutar.
         /// </summary>

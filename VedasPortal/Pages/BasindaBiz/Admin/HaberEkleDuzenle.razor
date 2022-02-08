@@ -9,13 +9,15 @@
 
 
 <div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Haber @Title
-        </CardHeader>
-        <CardBody>
-            <EditForm Model="@haber" OnValidSubmit="HaberKayit">
-                <DataAnnotationsValidator />
+    <EditForm Model="@haber" OnValidSubmit="HaberKayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Haber @Title
+            </CardHeader>
+            <CardBody>
+
+
 
                 <div class="col-12">
                     <div class="col-md-6 float-left">
@@ -108,17 +110,17 @@
                     </div>
                 </div>
 
-            </EditForm>
 
-        </CardBody>
-        <CardFotter>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
-                <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
-            </div>
-        </CardFotter>
-    </CardComponent>
 
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
 </div>
 
 
@@ -219,24 +221,6 @@ else
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
-
-}
-
-@code {
-
-
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-
-            await jsRun.InvokeVoidAsync("dataTables");
-        }
-    }
-
 
 }
 

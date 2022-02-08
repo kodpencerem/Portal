@@ -41,7 +41,7 @@ else
                                 <p class="alert-title">
                                     @if (haber.AltBaslik != null)
                                     {
-                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? haber.AltBaslik.Substring(0, 27) + "..." : haber.AltBaslik)" />
+                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? haber.AltBaslik.Substring(0, 45) + "..." : haber.AltBaslik)" />
                                     }
                                 </p>
                             </div>
@@ -50,7 +50,7 @@ else
                                
                                 @if (haber.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(haber.Aciklama.Length>30 ? haber.Aciklama.Substring(0, 45) + "..." : haber.Aciklama)" />
+                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
                                 }
                             </p>
 
@@ -70,8 +70,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 180px;
-        max-height: 180px;
+        min-height: 230px;
+        max-height: 230px;
     }
 
     .theme-white .btn-primary {
