@@ -27,7 +27,7 @@
                                 <ImageResizer @bind-Value="@HaberDosya" />
                                 @if (!string.IsNullOrEmpty(haber.Dosya.ToString()))
                                 {
-                                    <img src="@("img/uploaded/"+haber.Dosya.FirstOrDefault()?.Yolu)" height="150" />
+                                    <img src="@("img/uploaded/"+@haber.Dosya.FirstOrDefault()?.Yolu)" height="150" />
                                 }
                             </div>
                             @*<ValidationMessage For="@(() => haber.Dosya)" />*@
@@ -183,7 +183,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@haber.Dosya</td>
+                                    <td>@haber.Dosya.FirstOrDefault()?.Yolu</td>
 
                                     <td>@haber.Adi</td>
 

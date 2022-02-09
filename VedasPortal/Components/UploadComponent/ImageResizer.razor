@@ -9,7 +9,10 @@
         @if (!string.IsNullOrEmpty(PreviewImagePath) && !parsing)
         {
 
-            <img src="@PreviewImagePath" style="height:300px;width:300px" />
+            foreach (var dosya in PreviewImagePath)
+            {
+                <img src="@dosya style="height:300px;width:300px" />
+            }
         }
     </ModalBody>
 

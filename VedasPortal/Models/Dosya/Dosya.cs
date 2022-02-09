@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Models.Base;
 
 namespace VedasPortal.Models.Dosya
