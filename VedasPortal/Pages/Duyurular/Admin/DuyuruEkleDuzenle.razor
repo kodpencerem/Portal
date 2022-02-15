@@ -24,10 +24,10 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-Value="@DuyuruDosya" />
-                                @if (!string.IsNullOrEmpty(duyuru.Dosya.ToString()))
+                                @*@if (!string.IsNullOrEmpty(duyuru.Dosya.ToString()))
                                 {
-                                    <img src="@("img/uploaded/"+duyuru.Dosya.FirstOrDefault()?.Yolu)" height="150" />
-                                }
+                                    <img src="@("img/uploaded/"+duyuru.Dosya.Yolu)" height="150" />
+                                }*@
                             </div>
                             @*<ValidationMessage For="@(() => haber.Dosya)" />*@
                         </div>
@@ -142,8 +142,7 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Duyurular |
-                        <a href='/duyuru/kategori/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Duyuru Kategorisi Ekle</a>
+                        Duyurular
                     </div>
                 </div>
 

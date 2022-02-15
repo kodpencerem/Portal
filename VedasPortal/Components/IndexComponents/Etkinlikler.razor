@@ -1,6 +1,6 @@
 ﻿@using VedasPortal.Repository.Interface;
 
-@if (HaberlerListesi == null)
+@if (EtkinlikDuyurulari == null)
 
 {
 
@@ -14,35 +14,35 @@ else
 
     <CardComponent cardStyle="Style.info">
         <CardHeader>
-            <i class="far fa-list-alt"></i> Haberler
+            <i class="far fa-list-alt"></i> Etkinlikler
         </CardHeader>
         <CardBody>
             <div class="list-group" id="duyuruDiv">
-                @foreach (var haber in HaberlerListesi.Where(d => d.AnasayfadaGoster == true && d.Kategori.TextHaberDuyuru() == "Haber").Take(3).ToList())
+                @foreach (var etkinlik in EtkinlikDuyurulari.Where(d => d.AnasayfadaGoster == true).Take(3).ToList())
                 {
 
-                    <a href="haber/detay/@haber.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="etkinlik/detay/@etkinlik.Id" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">
 
 
 
 
-                                @if (haber.Adi != null)
+                                @if (etkinlik.Adi != null)
                                 {
-                                    <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
+                                    <MarkDownComponent Content="@(etkinlik.Adi.Length>60 ? etkinlik.Adi.Substring(0, 27) + "..." : etkinlik.Adi)" />
                                 }
 
                             </h6>
-                            <small>@haber.KayitTarihi.ToLongDateString()</small>
+                            <small>@etkinlik.KayitTarihi.ToLongDateString()</small>
                         </div>
-                        <p id="haberKutusu" class="mb-1">
+                        <p id="etkinlikKutusu" class="mb-1">
 
 
 
-                            @if (haber.Aciklama != null)
+                            @if (etkinlik.Aciklama != null)
                             {
-                                <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
+                                <MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ? etkinlik.Aciklama.Substring(0, 280) + "..." : etkinlik.Aciklama)" />
                             }
                         </p>
                     </a>}
@@ -60,22 +60,22 @@ else
 
 @code {
     [Inject]
-    public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+    public IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
 
 
-    protected IEnumerable<HaberDuyuru> HaberlerListesi { get; set; }
+    protected IEnumerable<Etkinlik> EtkinlikDuyurulari { get; set; }
 
-    protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
+    protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
     {
-        HaberlerListesi = HaberServisi.GetAll();
+        EtkinlikDuyurulari = EtkinlikServisi.GetAll();
 
-        return HaberlerListesi;
+        return EtkinlikDuyurulari;
 
     }
 
     protected override Task OnInitializedAsync()
     {
-        TumHaberleriGetir();
+        TumEtkinlikleriGetir();
 
         return Task.CompletedTask;
     }

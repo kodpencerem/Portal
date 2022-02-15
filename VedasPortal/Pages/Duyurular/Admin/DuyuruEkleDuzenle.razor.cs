@@ -57,7 +57,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             {
                 Title = "Duzenle";
                 duyuru = DuyuruServisi.Get(DuyuruId);
-                DuyuruDosya = duyuru.Dosya.FirstOrDefault();
+                //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
 
             }
         }

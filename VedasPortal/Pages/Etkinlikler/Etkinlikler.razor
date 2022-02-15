@@ -1,8 +1,8 @@
-﻿@page "/haberler"
-@inherits HaberModeli
+﻿@page "/etkinlikler"
+@inherits EtkinlikModeli
 
 
-@if (haberler == null)
+@if (Etkinlikler == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -13,51 +13,44 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var haber in haberler.Where(h=>h.Kategori.TextHaberDuyuru()=="Haber" && h.AktifPasif==true))
+            @foreach (var etkinlik in Etkinlikler.Where(e => e.AktifPasif == true))
             {
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" height="200" alt="@haber.Adi" src="/img/uploaded/@haber.Dosya.FirstOrDefault()?.Yolu" class="rounded-circle author-box-picture">
+                            <img width="200" height="200" alt="@etkinlik.Adi" src="/img/uploaded/@etkinlik.Kapak" class="rounded-circle author-box-picture">
                             <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
                             <div class="article-category">
-                                <a href="haber/detay/@haber.Id">Haber</a>
-                                <div class="bullet"></div> <a>@haber.KayitTarihi</a>
+                                <a href="etkinlik/detay/@etkinlik.Id">Etkinlik</a>
+                                <div class="bullet"></div> <a>@etkinlik.KayitTarihi</a>
                             </div>
                             <div class="article-title">
                                 <h1 class="article-style-b">
-                                    <a href="haber/detay/@haber.Id">
-                                        @if (haber.Adi != null)
-                                            {
-                                                <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)"/>                                              
-                                            }
+                                    <a href="etkinlik/detay/@etkinlik.Id">
+                                        @if (etkinlik.Adi != null)
+                                        {
+                                            <MarkDownComponent Content="@(etkinlik.Adi.Length>60 ? etkinlik.Adi.Substring(0, 27) + "..." : etkinlik.Adi)" />
+                                        }
                                     </a>
                                 </h1>
                             </div>
-                            <div name="HaberAltBaslik" class="article-title">
-                                <p class="alert-title">
-                                    @if (haber.AltBaslik != null)
-                                    {
-                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? haber.AltBaslik.Substring(0, 45) + "..." : haber.AltBaslik)" />
-                                    }
-                                </p>
-                            </div>
-                            <p name="HaberAciklama" class="accordion-header">
 
-                               
-                                @if (haber.Aciklama != null)
+                            <p name="EtkinlikAciklama" class="accordion-header">
+
+
+                                @if (etkinlik.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
+                                    <MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ? etkinlik.Aciklama.Substring(0, 280) + "..." : etkinlik.Aciklama)" />
                                 }
                             </p>
 
 
                         </div>
                         @*<div class="article-cta centered">
-                            <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
-                        </div>*@
+                                <a href="@($"etkinlik/detay/{etkinlik.Id}")" class="btn btn-primary fas fa-chevron-right">Etkinlik Detayı</a>
+                            </div>*@
                     </article>
                 </div>
             }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220215053058_addEtkinlikKatilimci")]
+    partial class addEtkinlikKatilimci
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,15 +361,10 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ResimId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TelefonNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResimId");
 
                     b.ToTable("Katilimci");
                 });
@@ -567,22 +564,11 @@ namespace VedasPortal.Migrations
                     b.Navigation("Kapak");
                 });
 
-            modelBuilder.Entity("VedasPortal.Models.Etkinlik.Katilimci", b =>
-                {
-                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Resim")
-                        .WithMany()
-                        .HasForeignKey("ResimId");
-
-                    b.Navigation("Resim");
-                });
-
             modelBuilder.Entity("VedasPortal.Models.HaberDuyuru.HaberDuyuru", b =>
                 {
-                    b.HasOne("VedasPortal.Models.Video.Video", "Video")
+                    b.HasOne("VedasPortal.Models.Video.Video", null)
                         .WithMany("HaberDuyuru")
                         .HasForeignKey("VideoId");
-
-                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>

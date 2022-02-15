@@ -1,38 +1,218 @@
 ﻿@page "/katilimci/ekle"
-@page "/katilimci/duzenle"
+@page "/katilimci/duzenle/{katilimciId:int}"
+@using Microsoft.AspNetCore.Hosting
+
+@inject IWebHostEnvironment Environment
+
+@inherits KatilimciModel
+@inject IJSRuntime jsRun
 
 
-<div style="align-content:center" class="col-12 col-md-12 col-lg-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Katılımcı Ekle/Düzenle
-        </CardHeader>
-        <CardBody>
-            <div class="form-group col-md-4">
-                <label>Resim Yükle</label>
-                <MultipleUpload></MultipleUpload>
-            </div>
-            <div class="form-group row">
-                <label class="control-label col-md-12">Katılımcı Unvan Bilgisi</label>
-                <div class="col-md-4">
-                    <text class="form-control" i" />
+<div class="col-12">
+    <EditForm Model="@katilimci" OnValidSubmit="KatilimciKayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Katılımcı @Title
+            </CardHeader>
+            <CardBody>
+
+
+
+                <div class="col-12">
+                    <div class="col-md-6 float-left">
+                        <div class="form-group row">
+                            <label class="form-label col-md-2">Resim Seçin</label>
+                            <div class="col-md-10">
+                                <InputFile @bind-Value="@KatilimciDosya.Yolu" />
+                                @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
+                                    {
+                                        <img src="@("img/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
+                                    }*@
+                            </div>
+                            @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Katılımcı Adı Soyadı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="katilimci.AdSoyad" />
+                            </div>
+                            <ValidationMessage For="@(() => katilimci.AdSoyad)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Katılacağı Etkinliği Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@katilimci.Etkinlikler" class="form-control">
+                                    <option></option>
+                                    @foreach (var kategori in EtkinlikGetir)
+                                    {
+                                        <option value="@kategori.Id"> @kategori.Adi </option>}
+
+                                </InputSelect>
+                            </div>
+                            <ValidationMessage For="@(() => katilimci.Etkinlikler)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Etkinlik Konusu Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@katilimci.Etkinlikler" class="form-control">
+                                    <option></option>
+                                    @if (Kategoriler != null)
+                                    {
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+
+                    <div class="col-md-6 float-right">
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value=@katilimci.KatilisNedeni
+                                                Label="Açıklama"
+                                                UrlToPostImage="img/uploaded/">
+                                </CKEditorBlazor>
+
+                            </div>
+                            <ValidationMessage For="@(() => katilimci.KatilisNedeni)" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="control-label col-md-12">Katılımcı Adı ve Soyadı</label>
-                <div class="col-md-4">
-                    <text class="form-control" />
+
+
+
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="KatilimciKayit">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
-            </div>
-            <div class="card-footer text-right">
-                <button class="btn btn-success" type="submit">Kaydet</button>
-                <button class="btn btn-warning" type="reset">Vazgeç</button>
-            </div>
-        </CardBody>
-    </CardComponent>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
 </div>
 
+
+@if (Katilimcilar == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Etkinlikler
+                    </div>
+                </div>
+
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Katılımcı Adı-Soyadı</th>
+
+                                <th>Etkinliğe Katılma Durumu</th>
+
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach (var katilimci in Katilimcilar)
+
+                            {
+
+
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@katilimci.AdSoyad</td>
+
+                                    <td>@katilimci.KatilisDurumu</td>
+
+
+                                    <td>
+                                        @*<a href="@($"katilimci/detay/{katilimci.Id}")" class="btn btn-primary">Etkinlik Detayı</a>*@
+                                        <a href='/katilimci/duzenle/@katilimci.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(katilimci.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{KatilimciSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+}
+
+
 <style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

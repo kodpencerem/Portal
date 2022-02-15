@@ -1,33 +1,33 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
-using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.Etkinlik;
 using VedasPortal.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
-namespace VedasPortal.Pages.BasindaBiz
+namespace VedasPortal.Pages.Etkinlikler
 {
-    public class HaberModeli : ComponentBase
+    public class EtkinlikModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
-        protected IEnumerable<HaberDuyuru> haberler;
+        protected IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
+        protected IEnumerable<Etkinlik> Etkinlikler;
 
-        public Dosya HaberDosya { get; set; } = new Dosya();
+        public Dosya EtkinlikDosya { get; set; } = new Dosya();
 
         protected override Task OnInitializedAsync()
         {
-            TumHeberleriGetir();
+            TumEtkinlikleriGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<HaberDuyuru> TumHeberleriGetir()
+        protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
-            haberler = HaberServisi.GetAll().AsQueryable().Include(s=>s.Dosya).ToList();
-            return haberler;
+            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.Kapak).ToList();
+            return Etkinlikler;
         }
 
         protected string DialogGorunur { get; set; } = "none";

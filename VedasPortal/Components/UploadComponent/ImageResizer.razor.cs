@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
@@ -47,10 +46,10 @@ namespace VedasPortal.Components.UploadComponent
 
 
         [Parameter]
-        public Dosya Value { get; set; }
+        public Dosya ValuePath { get; set; } = new Dosya();
 
         [Parameter]
-        public EventCallback<Dosya> ValueChanged { get; set; }
+        public EventCallback<Dosya> ValuePathChanged { get; set; } = new EventCallback<Dosya>();
 
         /// <summary>
         /// Resmin üzerinde kırpma ve boyutlandırma işlemleri için bir araç açar
@@ -123,10 +122,6 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-        IList<IBrowserFile> files = new List<IBrowserFile>();
-
-
-
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
@@ -137,6 +132,7 @@ namespace VedasPortal.Components.UploadComponent
             PreviewImagePath = null;
             browserFileResizer = args.File;
             ShowCroper = true;
+            
         }
 
 
@@ -178,10 +174,10 @@ namespace VedasPortal.Components.UploadComponent
             {
                 Adi = fileName,
                 Boyutu = browserFileResizer.Size.ToString(),
-                Uzanti = fileName.Substring('.')
+                Uzanti = fileName.Substring('.'),
             };
-            Value = newFile;
-            await ValueChanged.InvokeAsync(Value);
+            ValuePath.Yolu = newFile.Yolu;
+            await ValuePathChanged.InvokeAsync(ValuePath);
 
         }
 
@@ -194,7 +190,6 @@ namespace VedasPortal.Components.UploadComponent
             ShowCroper = false;
             await UpdatePreviewASync(browserFileResizer);
             PreviewImagePath = null;
-
         }
 
         private readonly int MaxAllowedFileSize = 10 * 1024 * 1024;

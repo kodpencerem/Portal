@@ -8,11 +8,16 @@
     <ModalBody>
         @if (!string.IsNullOrEmpty(PreviewImagePath) && !parsing)
         {
+        <div class="card">
+            
+            <div class="card-body">
+                <center>
+                    <img class="img-fluid" src="@PreviewImagePath" />
+                </center>
+            </div>
+        </div>
 
-            foreach (var dosya in PreviewImagePath)
-            {
-                <img src="@dosya style="height:300px;width:300px" />
-            }
+
         }
     </ModalBody>
 

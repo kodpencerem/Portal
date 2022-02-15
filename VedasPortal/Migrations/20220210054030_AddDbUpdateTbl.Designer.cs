@@ -3,20 +3,22 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220210054030_AddDbUpdateTbl")]
+    partial class AddDbUpdateTbl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -242,9 +244,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("HaberDuyuruId")
-                        .HasColumnType("int");
-
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
 
@@ -258,8 +257,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("HaberDuyuruId");
 
                     b.ToTable("Dosya");
                 });
@@ -277,12 +274,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Adi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("AktifPasif")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("AnasayfadaGoster")
-                        .HasColumnType("bit");
-
                     b.Property<string>("BaslangicTarihi")
                         .HasColumnType("nvarchar(max)");
 
@@ -295,16 +286,10 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("KKategori")
-                        .HasColumnType("int");
-
                     b.Property<int?>("KapakId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Kategori")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("KatilimciId")
+                    b.Property<int>("KatilimciId")
                         .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
@@ -315,9 +300,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<int>("No")
                         .HasColumnType("int");
-
-                    b.Property<bool>("SliderdaGoster")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -359,15 +341,10 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ResimId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TelefonNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResimId");
 
                     b.ToTable("Katilimci");
                 });
@@ -397,6 +374,9 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("AnasayfadaGoster")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DosyaId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -422,6 +402,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DosyaId");
 
                     b.HasIndex("VideoId");
 
@@ -547,40 +529,34 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
-                {
-                    b.HasOne("VedasPortal.Models.HaberDuyuru.HaberDuyuru", null)
-                        .WithMany("Dosya")
-                        .HasForeignKey("HaberDuyuruId");
-                });
-
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.Etkinlik", b =>
                 {
                     b.HasOne("VedasPortal.Models.Dosya.Dosya", "Kapak")
                         .WithMany()
                         .HasForeignKey("KapakId");
 
-                    b.HasOne("VedasPortal.Models.Etkinlik.Katilimci", null)
+                    b.HasOne("VedasPortal.Models.Etkinlik.Katilimci", "Katilimci")
                         .WithMany("Etkinlikler")
-                        .HasForeignKey("KatilimciId");
+                        .HasForeignKey("KatilimciId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Kapak");
-                });
 
-            modelBuilder.Entity("VedasPortal.Models.Etkinlik.Katilimci", b =>
-                {
-                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Resim")
-                        .WithMany()
-                        .HasForeignKey("ResimId");
-
-                    b.Navigation("Resim");
+                    b.Navigation("Katilimci");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.HaberDuyuru.HaberDuyuru", b =>
                 {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Dosya")
+                        .WithMany("HaberDuyuru")
+                        .HasForeignKey("DosyaId");
+
                     b.HasOne("VedasPortal.Models.Video.Video", "Video")
                         .WithMany("HaberDuyuru")
                         .HasForeignKey("VideoId");
+
+                    b.Navigation("Dosya");
 
                     b.Navigation("Video");
                 });
@@ -588,20 +564,22 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>
                 {
                     b.HasOne("VedasPortal.Models.Dosya.Dosya", "Dosya")
-                        .WithMany()
+                        .WithMany("Video")
                         .HasForeignKey("DosyaId");
 
                     b.Navigation("Dosya");
                 });
 
+            modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
+                {
+                    b.Navigation("HaberDuyuru");
+
+                    b.Navigation("Video");
+                });
+
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.Katilimci", b =>
                 {
                     b.Navigation("Etkinlikler");
-                });
-
-            modelBuilder.Entity("VedasPortal.Models.HaberDuyuru.HaberDuyuru", b =>
-                {
-                    b.Navigation("Dosya");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>

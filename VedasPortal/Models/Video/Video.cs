@@ -11,5 +11,7 @@ namespace VedasPortal.Models.Video
 
         [NotMapped]
         public List<string> Yorumlar { get; set; } = new List<string>();
+
+        public ICollection<HaberDuyuru.HaberDuyuru> HaberDuyuru { get; set; }
     }
 }

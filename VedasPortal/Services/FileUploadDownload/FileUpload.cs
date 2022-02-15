@@ -14,13 +14,15 @@ namespace VedasPortal.Services.FileUploadDownload
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        Task UploadFile(IBrowserFile file);
+        Task<string> UploadFile(IBrowserFile file);
         /// <summary>
         /// önizleme url'si oluşturma yöntemi
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
         Task<string> GeneratePreviewUrl(IBrowserFile file);
+
+        bool DeleteFile(string fileName);
     }
 
     public class FileUpload : IFileUpload
@@ -99,6 +101,29 @@ namespace VedasPortal.Services.FileUploadDownload
 
             }
 
+        }
+
+        Task<string> IFileUpload.UploadFile(IBrowserFile file)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteFile(string fileName)
+        {
+            try
+            {
+                var path = $"{_webHostEnvironment.WebRootPath}\\img\\uploaded\\{fileName}";
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

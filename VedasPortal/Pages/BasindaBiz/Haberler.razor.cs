@@ -5,6 +5,8 @@ using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace VedasPortal.Pages.BasindaBiz
 {
@@ -24,7 +26,7 @@ namespace VedasPortal.Pages.BasindaBiz
 
         protected IEnumerable<HaberDuyuru> TumHeberleriGetir()
         {
-            haberler = HaberServisi.GetAll();
+            haberler = HaberServisi.GetAll().AsQueryable().Include(s=>s.Dosya).ToList();
             return haberler;
         }
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.HaberDuyuru;
@@ -24,7 +26,7 @@ namespace VedasPortal.Pages.Duyurular
 
         protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
         {
-            duyurular = DuyuruServisi.GetAll();
+            duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); 
 
             return duyurular;
 

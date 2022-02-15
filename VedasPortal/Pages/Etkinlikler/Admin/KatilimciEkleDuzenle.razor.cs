@@ -11,8 +11,11 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Etkinlikler.Admin
 {
-    public class EtkinlikModeli : ComponentBase
+    public class KatilimciModel : ComponentBase
     {
+
+        [Inject]
+        public IBaseRepository<Katilimci> KatilimciServisi { get; set; }
 
         [Inject]
         public IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
@@ -21,19 +24,19 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int EtkinlikId { get; set; }
+        public int KatilimciId { get; set; }
 
         protected string Title = "Ekle";
-        public Etkinlik etkinlik = new Etkinlik();
+        public Katilimci katilimci = new Katilimci();
 
-        public Dosya EtkinlikDosya = new Dosya();
+        public Dosya KatilimciDosya = new Dosya();
 
-        protected IEnumerable<Etkinlik> Etkinlikler { get; set; }
+        protected IEnumerable<Katilimci> Katilimcilar { get; set; }
 
-        protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
+        protected IEnumerable<Katilimci> TumKatilimcilariGetir()
         {
-            Etkinlikler = EtkinlikServisi.GetAll();
-            return Etkinlikler;
+            Katilimcilar = KatilimciServisi.GetAll();
+            return Katilimcilar;
 
         }
         public Dictionary<EtkinlikKategori, string> Kategoriler { get; set; }
@@ -47,49 +50,49 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             Kategoriler = list;
         }
 
-        public Dictionary<KatilimciKategori, string> KatilacakPersonel { get; set; }
-        protected void TumKatilimcilariGetir()
+        protected IEnumerable<Etkinlik> EtkinlikGetir { get; set; } = new List<Etkinlik>();
+      
+        protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
-            var list = new Dictionary<KatilimciKategori, string>();
-            foreach (KatilimciKategori item in Enum.GetValues(typeof(KatilimciKategori)))
-            {
-                list.Add(item, item.TextKatilimci());
-            }
-            KatilacakPersonel = list;
+            EtkinlikGetir = EtkinlikServisi.GetAll();
+
+            return EtkinlikGetir;
+
         }
 
-        protected void EtkinlikKayit()
+        protected void KatilimciKayit()
         {
-            EtkinlikServisi.AddUpdate(etkinlik);
+            KatilimciServisi.AddUpdate(katilimci);
 
         }
         protected override void OnParametersSet()
         {
-            if (EtkinlikId != 0)
+            if (KatilimciId != 0)
             {
                 Title = "Duzenle";
-                etkinlik = EtkinlikServisi.Get(EtkinlikId);
-                
+                katilimci = KatilimciServisi.Get(KatilimciId);
+
             }
         }
 
 
 
-        protected void SilmeyiOnayla(int etkinlikId)
+        protected void SilmeyiOnayla(int katilimciId)
         {
             ModalDialog.Open();
-            etkinlik = Etkinlikler.FirstOrDefault(x => x.Id == etkinlikId);
+            katilimci = Katilimcilar.FirstOrDefault(x => x.Id == katilimciId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void EtkinlikSil()
+        protected void KatilimciSil()
         {
-            if (etkinlik.Id == 0)
+            if (katilimci.Id == 0)
                 return;
 
-            EtkinlikServisi.Remove(etkinlik.Id);
-            etkinlik = new Etkinlik();
+            KatilimciServisi.Remove(katilimci.Id);
+            katilimci = new Katilimci();
+            TumKatilimcilariGetir();
             TumEtkinlikleriGetir();
         }
 
@@ -97,17 +100,17 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         protected override Task OnInitializedAsync()
         {
-            TumEtkinlikleriGetir();
-            TumKategorileriGetir();
             TumKatilimcilariGetir();
+            TumKategorileriGetir();
+            TumEtkinlikleriGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            etkinlik = null;
+            katilimci = null;
 
-            UrlNavigationManager.NavigateTo("/etkinlik/ekle");
+            UrlNavigationManager.NavigateTo("/katilimci/ekle");
         }
 
 
