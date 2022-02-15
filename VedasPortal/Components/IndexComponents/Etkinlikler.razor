@@ -1,0 +1,82 @@
+﻿@using VedasPortal.Repository.Interface;
+
+@if (HaberlerListesi == null)
+
+{
+
+    <p>
+        <em>Yükleniyor...</em>
+    </p> }
+
+else
+
+{
+
+    <CardComponent cardStyle="Style.info">
+        <CardHeader>
+            <i class="far fa-list-alt"></i> Haberler
+        </CardHeader>
+        <CardBody>
+            <div class="list-group" id="duyuruDiv">
+                @foreach (var haber in HaberlerListesi.Where(d => d.AnasayfadaGoster == true && d.Kategori.TextHaberDuyuru() == "Haber").Take(3).ToList())
+                {
+
+                    <a href="haber/detay/@haber.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">
+
+
+
+
+                                @if (haber.Adi != null)
+                                {
+                                    <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
+                                }
+
+                            </h6>
+                            <small>@haber.KayitTarihi.ToLongDateString()</small>
+                        </div>
+                        <p id="haberKutusu" class="mb-1">
+
+
+
+                            @if (haber.Aciklama != null)
+                            {
+                                <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
+                            }
+                        </p>
+                    </a>}
+
+            </div>
+        </CardBody>
+    </CardComponent>}
+
+
+<style>
+    #duyuruDiv {
+        font-size: 10px
+    }
+</style>
+
+@code {
+    [Inject]
+    public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+
+
+    protected IEnumerable<HaberDuyuru> HaberlerListesi { get; set; }
+
+    protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
+    {
+        HaberlerListesi = HaberServisi.GetAll();
+
+        return HaberlerListesi;
+
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumHaberleriGetir();
+
+        return Task.CompletedTask;
+    }
+}

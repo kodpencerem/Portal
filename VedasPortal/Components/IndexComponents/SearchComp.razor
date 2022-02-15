@@ -1,0 +1,18 @@
+﻿<div>
+    Ara:
+    <input type="text" @bind-value="filter" />
+    <button @onclick="HandleSearch">Arama Yap</button>
+</div>
+
+@code {
+    private string filter;
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    private void HandleSearch()
+    {
+        OnSearch.InvokeAsync(filter);
+    }
+
+}
