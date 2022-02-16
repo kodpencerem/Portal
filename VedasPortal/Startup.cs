@@ -10,6 +10,7 @@ using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
 using VedasPortal.Models.Dosya;
+using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository;
@@ -49,7 +50,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
             services.AddScoped<IBaseRepository<Katilimci>, BaseRepository<Katilimci>>();
-
+            services.AddScoped<IBaseRepository<DuzelticiFaaliyet>, BaseRepository<DuzelticiFaaliyet>>();
             // register our scoped service to upload
             services.AddScoped<IFileUpload, FileUpload>();
             // register our scoped service to download

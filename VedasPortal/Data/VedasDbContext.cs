@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using VedasPortal.Models;
 using VedasPortal.Models.Dosya;
+using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.Video;
@@ -22,6 +23,7 @@ namespace VedasPortal.Data
         public DbSet<Rehber> Rehber { get; set; }
         public DbSet<Video> Video { get; set; }
         public DbSet<Katilimci> Katilimci { get; set; }
+        public DbSet<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; }
 
     }
 }

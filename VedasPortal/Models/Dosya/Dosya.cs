@@ -14,7 +14,22 @@ namespace VedasPortal.Models.Dosya
         public string Aciklama { get; set; }
         [StringLength(30)]
         public string Boyutu { get; set; }
+
+        [DataType(DataType.Text)]
+        public DosyaKategori Kategori { get; set; }
+        public bool AktifPasif { get; set; } = true;
     }
 
-
+    public enum DosyaKategori
+    {
+        Docx,
+        Xlsx,
+        Pdf,
+        Zip,
+        Rar,
+        Mp4,
+        Mkv,
+        Pub,
+        Pptx,
+    }
 }

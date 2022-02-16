@@ -1,4 +1,4 @@
-﻿@page "/dokumanlar"
+﻿@page "/dosyalar"
 
 @inherits DosyaModeli
 
@@ -30,12 +30,12 @@ else
         <CardBody>
 
             <div class="row">
-                @foreach (var dokuman in Dokumanlar)
+                @foreach (var dokuman in Dokumanlar.Where(d => d.AktifPasif == true).ToList())
                 {
 <div class="col-12 col-sm-6 col-md-6 col-lg-3">
     <article class="article article-style-b">
         <div class="article-header">
-            <div class="article-image" data-background="assets/img/blog/img10.png">
+            <div class="article-image" data-background="img/uploaded/@dokuman.Yolu">
             </div>
             <div class="article-badge">
                 <div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> En çok okunan</div>
@@ -43,13 +43,24 @@ else
         </div>
         <div class="article-details">
             <div class="article-title">
-                <h2><a>Dosya Adı </a></h2>
+                <h2>
+                    <a href="dosya/detay/@dokuman.Id">
+
+                        @if (dokuman.Adi != null)
+                        {
+<MarkDownComponent Content="@(dokuman.Adi.Length>60 ? dokuman.Adi.Substring(0, 27) + "..." : dokuman.Adi)" />}
+
+
+                    </a>
+                </h2>
             </div>
             <p>
-                Açıklama
+                @if (dokuman.Aciklama != null)
+                {
+<MarkDownComponent Content="@(dokuman.Aciklama.Length>500 ? dokuman.Aciklama.Substring(0, 280) + "..." : dokuman.Aciklama)" />}
             </p>
             <div class="article-cta">
-                <a href="dokumandetay">Detayına Bak <i class="fas fa-chevron-right"></i></a>
+                <a href="dosya/detay/@dokuman.Id">Detayına Bak <i class="fas fa-chevron-right"></i></a>
             </div>
         </div>
     </article>

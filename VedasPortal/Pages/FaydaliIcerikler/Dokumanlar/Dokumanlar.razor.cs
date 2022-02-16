@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
-using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
-namespace VedasPortal.Pages.BasindaBiz
+namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
 {
-    public class HaberModeli : ComponentBase
+    public class DosyaModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<HaberDuyuru>
-    HaberServisi
+        protected IBaseRepository<Dosya> HaberServisi
         { get; set; }
-        protected IEnumerable<HaberDuyuru>
-            haberler;
+        protected IEnumerable<Dosya> Dokumanlar;
 
         public Dosya HaberDosya { get; set; } = new Dosya();
 
@@ -27,11 +22,11 @@ namespace VedasPortal.Pages.BasindaBiz
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<HaberDuyuru>
+        protected IEnumerable<Dosya>
             TumHeberleriGetir()
         {
-            haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
-            return haberler;
+            Dokumanlar = HaberServisi.GetAll();
+            return Dokumanlar;
         }
 
         protected string DialogGorunur { get; set; } = "none";

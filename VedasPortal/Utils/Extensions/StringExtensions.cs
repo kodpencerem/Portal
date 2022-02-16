@@ -1,4 +1,6 @@
-﻿using VedasPortal.Models.Etkinlik;
+﻿using VedasPortal.Models.Dosya;
+using VedasPortal.Models.DuzelticiFaaliyet;
+using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 
 namespace VedasPortal
@@ -17,6 +19,62 @@ namespace VedasPortal
                     return "";
             }
         }
+
+        public static string TextDosya(this DosyaKategori kategori)
+        {
+            switch (kategori)
+            {
+                case DosyaKategori.Docx:
+                    return "Word Dökümanı";
+                case DosyaKategori.Mkv:
+                    return "Matroska Video";
+
+                case DosyaKategori.Mp4:
+                    return "MPEG-4 Video";
+
+
+                case DosyaKategori.Pdf:
+                    return "Pdf Dökümanı";
+
+                case DosyaKategori.Pptx:
+                    return "PowerPoint Sunu";
+
+
+                case DosyaKategori.Pub:
+                    return "Microsoft Publiser";
+
+                case DosyaKategori.Rar:
+                    return "Arşiv Dosya";
+
+                case DosyaKategori.Xlsx:
+                    return "Excel Döküman";
+
+                case DosyaKategori.Zip:
+                    return "Sıkıştırılmış Dosya";
+
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextDuzelticiFaaliyet(this DuzelticiFaaliyetKategori kategori)
+        {
+            switch (kategori)
+            {
+                case DuzelticiFaaliyetKategori.CevreAydinlatma:
+                    return "Çevre Aydınlatma";
+                case DuzelticiFaaliyetKategori.KopruKavsakAydinlatma:
+                    return "Köprü ve Kavşak Işıkları";
+
+                case DuzelticiFaaliyetKategori.ProsedurVePolitikalar:
+                    return "Prosedür ve Politikalar";
+
+                default:
+                    return "";
+            }
+        }
+
+
 
         public static string TextEtkinlik(this EtkinlikKategori kategori)
         {

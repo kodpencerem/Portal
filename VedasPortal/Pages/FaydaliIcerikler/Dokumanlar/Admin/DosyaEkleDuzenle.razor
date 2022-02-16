@@ -1,66 +1,222 @@
 ﻿@page "/dosya/ekle"
-@page "/dosya/duzenle"
+@page "/dosya/duzenle/{dosyaId:int}"
+@using Microsoft.AspNetCore.Hosting
+
+@inject IWebHostEnvironment Environment
+
+@inherits DosyaModel
+@inject IJSRuntime jsRun
 
 
 <div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Dosya Döküman Ekleme Düzenleme Formu
-        </CardHeader>
-        <CardBody >
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Dosya Adı</label>
-                <div class="col-sm-12 col-md-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategorisi</label>
-                <div class="col-sm-12 col-md-7">
-                    <select class="form-control selectric">
-                        <option>Ticari Kalite</option>
-                        <option>Mevzuat</option>
-                        <option>Şirket Politikası</option>
-                    </select>
-                </div>
-            </div>
-            <Summernote></Summernote>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Resim/Döküman</label>
-                <div class="col-sm-12 col-md-7">
-                    <div id="image-preview" class="image-preview">
-                        <label for="image-upload" id="image-label">Dosya Seçin</label>
-                        <input type="file" name="image" id="image-upload" />
+    <EditForm Model="@dosya" OnValidSubmit="Kayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Haber @Title
+            </CardHeader>
+            <CardBody>
+
+
+
+                <div class="col-12">
+                    <div class="col-md-6 float-left">
+                        <div class="form-group row">
+                            <label class="form-label col-md-2">Dosya Seçin</label>
+                            <div class="col-md-10">
+                                <InputFile @bind-Value="@dosya.Yolu" />
+                                @*@if (!string.IsNullOrEmpty(haber.Dosya.Yolu?.ToString()))
+                                {
+                                    <img src="@("img/uploaded/"+@haber.Dosya.Yolu)" height="150" />
+                                }*@
+                            </div>
+                            @*<ValidationMessage For="@(() => haber.Dosya.Yolu)" />*@
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Dosya Adı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="dosya.Adi" />
+                            </div>
+                            <ValidationMessage For="@(() => dosya.Adi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Dosya Boyutu</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="dosya.Boyutu" />
+                            </div>
+                            <ValidationMessage For="@(() => dosya.Boyutu)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@dosya.Kategori" class="form-control">
+                                    <option></option>
+                                    @if (Kategoriler != null)
+                                    {
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Dosya Şimdi Yayınlasın Mı?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="dosya.AktifPasif" />
+                                </div>
+                                <ValidationMessage For="@(() => dosya.AktifPasif)" />
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 float-right">
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value=@dosya.Aciklama
+                                                Label="Açıklama"
+                                                UrlToPostImage="img/uploaded/">
+                                </CKEditorBlazor>
+
+                            </div>
+                            <ValidationMessage For="@(() => dosya.Aciklama)" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Dosya Boyutu</label>
-                <div class="col-sm-12 col-md-7">
-                    <input type="text" class="form-control inputtags">
+
+
+
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
-            </div>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Görecek Birim Ya da Yönetici</label>
-                <div class="col-sm-12 col-md-7">
-                    <select class="form-control selectric">
-                        <option>Genel Müdürler</option>
-                        <option>Tüm Birimler</option>
-                        <option>Saha Birimleri</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                <div class="col-sm-12 col-md-7">
-                    <button class="btn btn-success" type="submit">Kaydet</button>
-                    <button class="btn btn-warning" type="reset">Vazgeç</button>
-                </div>
-            </div>
-        </CardBody>
-    </CardComponent>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
 </div>
+
+
+@if (Dosyalar == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Dosyalar
+                    </div>
+                </div>
+
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Dosya</th>
+
+                                <th>Dosya Adı</th>
+
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach (var dosya in Dosyalar)
+
+                            {
+
+
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@dosya.Yolu</td>
+
+                                    <td>@dosya.Adi</td>
+
+
+                                    <td>
+                                        <a href="@($"dosya/detay/{dosya.Id}")" class="btn btn-primary">Dosya Detayı</a>
+                                        <a href='/dosya/duzenle/@dosya.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(dosya.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+}
+
+
 <style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

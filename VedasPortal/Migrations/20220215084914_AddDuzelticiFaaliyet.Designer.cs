@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220215084914_AddDuzelticiFaaliyet")]
+    partial class AddDuzelticiFaaliyet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,9 +234,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Adi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("AktifPasif")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Boyutu")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -246,9 +245,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HaberDuyuruId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Kategori")
                         .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
@@ -282,9 +278,6 @@ namespace VedasPortal.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("AktifPasif")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("BildirimTarihi")
                         .HasColumnType("datetime2");
 
@@ -303,9 +296,6 @@ namespace VedasPortal.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("Kategori")
-                        .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");

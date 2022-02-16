@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\FaydaliIcerikler\Dokumanlar\Dokumanlar.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Chronos.Blazor.Cropper" Version="1.2.0" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.475" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.14" />

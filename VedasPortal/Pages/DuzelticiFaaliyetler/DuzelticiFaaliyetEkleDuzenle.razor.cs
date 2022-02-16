@@ -6,52 +6,52 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
-using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.BasindaBiz.Admin
+namespace VedasPortal.Pages.DuzelticiFaaliyetler
 {
-    public class HaberEkleDuzenleModel : ComponentBase
+    public class DuzelticiFaaliyetModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; } 
+        public IBaseRepository<DuzelticiFaaliyet> DuzelticiFaaliyetlerServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int HaberId { get; set; }
+        public int DFaaliyetId { get; set; }
 
         protected string Title = "Ekle";
-        public HaberDuyuru haber = new HaberDuyuru();
+        public DuzelticiFaaliyet duzelticiFaaliyet = new DuzelticiFaaliyet();
 
-        public Dosya HaberDosya = new Dosya();
+        public Dosya DFaaliyetDosya = new Dosya();
 
-        protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
+        protected IEnumerable<DuzelticiFaaliyet> DuzelticiFaaliyetler { get; set; }
 
-        protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
+        protected IEnumerable<DuzelticiFaaliyet> TumFaaliyetleriGetir()
         {
-            Haberler = HaberServisi.GetAll();
-            return Haberler;
+            DuzelticiFaaliyetler = DuzelticiFaaliyetlerServisi.GetAll();
+            return DuzelticiFaaliyetler;
 
         }
-        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
+        public Dictionary<DuzelticiFaaliyetKategori, string> Kategoriler { get; set; }
         protected void TumKategorileriGetir()
         {
-            var list = new Dictionary<HaberDuyuruKategori, string>();
-            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
+            var list = new Dictionary<DuzelticiFaaliyetKategori, string>();
+            foreach (DuzelticiFaaliyetKategori item in Enum.GetValues(typeof(DuzelticiFaaliyetKategori)))
             {
-                list.Add(item, item.TextHaberDuyuru());
+                list.Add(item, item.TextDuzelticiFaaliyet());
             }
             Kategoriler = list;
         }
 
-        protected void HaberKayit()
+        protected void DuzelticiFaaliyetKaydet()
         {
-            HaberServisi.AddUpdate(haber);
+            DuzelticiFaaliyetlerServisi.AddUpdate(duzelticiFaaliyet);
 
-            HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
+            DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim.Yolu;
 
             //var dosya = haber.Dosya.Select(x => new Dosya {
             //    Id= x.Id,
@@ -71,48 +71,48 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         }
         protected override void OnParametersSet()
         {
-            if (HaberId != 0)
+            if (DFaaliyetId != 0)
             {
                 Title = "Duzenle";
-                haber = HaberServisi.Get(HaberId);
-                HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
+                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
+                DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim.Yolu;
             }
         }
 
 
 
-        protected void SilmeyiOnayla(int haberId)
+        protected void SilmeyiOnayla(int dFaaliyetId)
         {
             ModalDialog.Open();
-            haber = Haberler.FirstOrDefault(x => x.Id == haberId);
+            duzelticiFaaliyet = DuzelticiFaaliyetler.FirstOrDefault(x => x.Id == dFaaliyetId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void HaberSil()
+        protected void Sil()
         {
-            if (haber.Id == 0)
+            if (duzelticiFaaliyet.Id == 0)
                 return;
 
-            HaberServisi.Remove(haber.Id);
-            haber = new HaberDuyuru();
-            TumHaberleriGetir();
+            DuzelticiFaaliyetlerServisi.Remove(duzelticiFaaliyet.Id);
+            duzelticiFaaliyet = new DuzelticiFaaliyet();
+            TumFaaliyetleriGetir();
         }
 
 
-        
+
         protected override Task OnInitializedAsync()
         {
-            TumHaberleriGetir();
+            TumFaaliyetleriGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            haber = null;
+            duzelticiFaaliyet = null;
 
-            UrlNavigationManager.NavigateTo("/haber/ekle");
+            UrlNavigationManager.NavigateTo("/duzelticifaaliyet/ekle");
         }
 
 
