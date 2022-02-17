@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using VedasPortal.Models.Base;
-using VedasPortal.Models.Etkinlik;
 
 namespace VedasPortal.Models.Video
 {

@@ -2,6 +2,7 @@
 using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Video;
 
 namespace VedasPortal
@@ -12,7 +13,7 @@ namespace VedasPortal
         {
             switch (kategori)
             {
-                
+
                 case EgitimKategori.Elektrik:
                     return "Elektrik";
                 case EgitimKategori.ElektrikElektronik:
@@ -59,6 +60,31 @@ namespace VedasPortal
                     return "Duyuru";
                 case HaberDuyuruKategori.Haber:
                     return "Haber";
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextMevzuat(this MevzuatKategori kategori)
+        {
+            switch (kategori)
+            {
+                case MevzuatKategori.CumhurBaskanligiKararname:
+                    return "Cumurbaşkanlığı Kararnamesi";
+                case MevzuatKategori.Genelge:
+                    return "Genelge";
+                case MevzuatKategori.Kanun:
+                    return "Kanun";
+                case MevzuatKategori.KanunHukmundeKararname:
+                    return "Kanun Hükmünde Kararname";
+                case MevzuatKategori.Kararname:
+                    return "Kararname";
+                case MevzuatKategori.Teblig:
+                    return "Tebliğ";
+                case MevzuatKategori.Tuzuk:
+                    return "Tüzük";
+                case MevzuatKategori.Yonetmelik:
+                    return "Yönetmelik";
                 default:
                     return "";
             }

@@ -1,50 +1,245 @@
 ﻿@page "/mevzuat/ekle"
-@page "/mevzuat/duzenle/"
+@page "/mevzuat/duzenle/{mevzuatId:int}"
 
-<div class="col-12 col-md-12 col-lg-12">
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment Environment
+
+@inherits MevzuatModel
+
+
+<div class="col-12">
+    <EditForm Model="@mevzuat" OnValidSubmit="Kayit">
+        <DataAnnotationsValidator />
+
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Mevzuat @Title
+            </CardHeader>
+            <CardBody>
+                <div class="col-md-6 float-left">
+                    <div class="form-group row">
+                        <label class="form-label col-md-2">İçerik Ekleyin</label>
+                        <div class="col-md-10">
+                            <MultipleUpload ValuePath="@MevzuatDosya" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Mevzuat Adı</label>
+                        <div class="col-md-10">
+                            <InputText class="form-control" @bind-Value="mevzuat.Adi" />
+                        </div>
+                        <ValidationMessage For="@(() => mevzuat.Adi)" />
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
+                        <div class="col-md-10">
+                            <InputSelect @bind-Value="@mevzuat.Kategori" class="form-control">
+                                <option></option>
+                                @if (Kategoriler != null)
+                                {
+                                    @foreach (var kategori in Kategoriler)
+                                    {
+                                        <option value="@kategori.Key"> @kategori.Value </option>
+                                    }
+                                }
+
+                            </InputSelect>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="Kategori" class="control-label col-md-2">Görecek Birimi Seçin</label>
+                        <div class="col-md-10">
+                            <InputSelect @bind-Value="@mevzuat.Birimler" class="form-control">
+                                <option></option>
+                                @if (Birimler != null)
+                                {
+                @foreach (var kategori in Birimler)
+                {
+                <option value="@kategori.Key"> @kategori.Value </option>}}
+
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group row">
+                                <label class="control-label col-md-4">Başlangıç Tarihi</label>
+                                <div  class="col-md-8">
+                                    <InputDate class="form-control" @bind-Value="mevzuat.BaslangicTarihi" />
+                                </div>
+                                <ValidationMessage For="@(() => mevzuat.BaslangicTarihi)" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="control-label col-md-4">Bitiş Tarihi</label>
+                                <div class="col-md-8">
+                                    <InputDate DisplayName="Bitiş Tarihi" class="form-control" @bind-Value="mevzuat.BitisTarihi" />
+                                </div>
+                                <ValidationMessage For="@(() => mevzuat.BitisTarihi)" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group row">
+                                <label class="control-label col-md-8">Şimdi Yayınlansın Mı?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="mevzuat.AktifPasif" />
+                                </div>
+                                <ValidationMessage For="@(() => mevzuat.AktifPasif)" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-md-6 float-right">
+
+                    <div class="form-group activity-detail">
+
+                        <CKEditorBlazor Id="MyEditor1"
+                                        @bind-Value=@mevzuat.Aciklama
+                                        Label="Eğitim Hakkında Detaylı Bilgi"
+                                        UrlToPostImage="img/uploaded/">
+                        </CKEditorBlazor>
+                    </div>
+
+                </div>
+
+            </CardBody>
+
+            <CardFotter>
+                <div class="card-footer text-left">
+                    <button class="btn btn-primary" type="submit" @onclick="Kayit">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                </div>
+            </CardFotter>
+
+        </CardComponent>
+
+
+
+
+    </EditForm>
+</div>
+
+
+@if (Mevzuatlar == null)
+
+{
+<p><em>Yükleniyor...</em></p> }
+
+else
+
+{
+
+<div class="col-12">
+
     <CardComponent cardStyle="Style.primary">
+
         <CardHeader>
-            Mevzuat Ekle/Düzenle
+            <div class="float-left">
+                <div class="col-md-12">
+                    Mevzuatlar
+                </div>
+            </div>
+
         </CardHeader>
         <CardBody>
-            <div class="form-group">
-                <label class="control-label col-md-12">Resim/Video/Döküman Ekle</label>
-                <MultipleUpload></MultipleUpload>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-12">Mevzuat Adı</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-12">Detaylı Açıklama</label>
-                <Summernote></Summernote>
-            </div>
-            <div class="form-group">
-                <label>Başlangıç Tarihi</label>
-                <input type="datetime-local" class="form-control col-md-4">
-            </div>
-            <div class="form-group">
-                <label>Bitiş Tarihi</label>
-                <input type="datetime-local" class="form-control col-md-4">
-            </div>
-            <div class="form-group col-md-4">
-                <label>Mevzuatı Görecek Birimler</label>
-                <select class="form-control">
-                    <option>Tüm Birimler</option>
-                    <option>İnsan Kaynakları</option>
-                    <option>Bilgi İşlem</option>
-                    <option>Hukuk</option>
-                </select>
-            </div>
-            <div class="card-footer text-right">
-                <button class="btn btn-success" type="submit">Kaydet</button>
-                <button class="btn btn-warning" type="reset">Vazgeç</button>
-            </div>
-        </CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Dosya</th>
 
+                            <th>Mevzuat Adı</th>
+                            <th>Mevzuat Durumu</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @foreach (var mevzuat in Mevzuatlar)
+
+                        {
+    <tr>
+        <td class="text-center pt-2">
+            <div class="custom-checkbox custom-control">
+                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                       id="checkbox-1">
+                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+            </div>
+        </td>
+        <td>@mevzuat.Dosya.Yolu</td>
+
+        <td>@mevzuat.Adi</td>
+        <td>
+            @if (mevzuat.AktifPasif == true)
+            {
+
+
+<div class="badge badge-success badge-shadow">Yayında</div> }
+else
+{
+<div class="badge badge-warning badge-shadow">Yayında Değil</div>}
+        </td>
+
+        <td>
+            <a href="@($"mevzuat/detay/{mevzuat.Id}")" class="btn btn-primary">Mevzuat Detayı</a>
+            <a href='/mevzuat/duzenle/@mevzuat.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mevzuat.Id);})">
+                Sil
+            </button>
+        </td>
+    </tr>}
+                    </tbody>
+                </table>
+            </div>
+
+        </CardBody>
     </CardComponent>
+
 </div>
+
+
+                <ModalComponent @ref="ModalDialog">
+                    <ModalHeader>
+                        <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+                    </ModalHeader>
+
+                    <ModalFooter>
+                        <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+                        <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+                    </ModalFooter>
+                </ModalComponent>}
+
+
 <style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;
