@@ -1,0 +1,79 @@
+﻿@page "/mevzuatlar"
+
+
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+       
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Mevzuat Kategorileri
+                    <a href='/mevzuat/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i>Mevzuat Kategori Ekle</a>
+                </div>
+            </div>
+            <div style="margin-left:920px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped" id="table-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center pt-3">
+                                <div class="custom-checkbox custom-checkbox-table custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                           class="custom-control-input" id="checkbox-all">
+                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </th>
+                            <th>Mevzuat Başlığı</th>
+                            <th>Açıklama</th>
+                            <th>Başlangıç Tarihi</th>
+                            <th>Bitiş Tarihi</th>
+                            <th>Ekleyen Personel</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center pt-2">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                </div>
+                            </td>
+                            <td>Mevzuat Başlığı</td>
+                            <td>Açıklama</td>
+                            <td>Başlangıç Tarihi</td>
+                            <td>Bitiş Tarihi</td>
+                            <td>Ekleyen Personel</td>
+                            <td>
+                                <a href='/mevzuat/duzenle' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal" )">
+                                    Sil
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
+</div>
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

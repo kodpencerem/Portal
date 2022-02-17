@@ -1,0 +1,69 @@
+﻿@page "/GuncelMevzuatTakibi"
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Güncel Mevzuat Takibi ve Regülasyonlar
+
+                </div>
+            </div>
+            <div style="margin-left:920px" class="float-right">
+                <AraButton btnStyle="Style.primary"></AraButton>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="card single_post">
+                        <div class="header">
+                            <h6 style="margin:10px"><strong>Son</strong> Gönderi</h6>
+
+                        </div>
+
+                        <div class="body">
+                            <ul class="meta">
+                                <li><a href="personeldetaybilgileri"><i class="zmdi zmdi-account col-blue"></i>Ekleyen Personel</a></li>
+                                <li><a href="MevzuatKategoriBilgisi"><i class="zmdi zmdi-label col-amber"></i>Kategorisi</a></li>
+                            </ul>
+                            <h6 style="margin:10px" class="m-t-0">Mevzuat Adı</h6>
+                            <p style="margin:10px">Mevzuat içerik bilgisi</p>
+                            <a style="margin:10px" href="mevzuatdetay" title="read more" class="btn btn-round btn-primary">Tümünü Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card single_post">
+                        <div class="header">
+                            <h6 style="margin:10px"><strong>Popüler</strong> Gönderi</h6>
+
+                        </div>
+                        <div class="body m-b-10">
+                            <ul class="meta">
+                                <li><a href="personeldetaybilgileri"><i class="zmdi zmdi-account col-blue"></i>Ekleyen Personel</a></li>
+                                <li><a href="MevzuatKategoriBilgisi"><i class="zmdi zmdi-label col-amber"></i>Kategorisi</a></li>
+                            </ul>
+                            <h6 style="margin:10px" class="m-t-0">Mevzuat Adı</h6>
+                            <p style="margin:10px">Mevzuat içerik bilgisi</p>
+                            <a style="margin:10px" href="mevzuatdetay" title="read more" class="btn btn-round btn-primary">Tümünü Görüntüle</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </CardBody>
+    </CardComponent>
+</div>
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
