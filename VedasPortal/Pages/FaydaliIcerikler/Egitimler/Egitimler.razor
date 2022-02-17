@@ -1,124 +1,103 @@
 ﻿@page "/Egitimler"
 
-<div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-       
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Eğitim Portalı
-                </div>
-            </div>
-            <div style="margin-left:1130px" class="float-right">
-                <AraButton btnStyle="Style.primary"></AraButton>
-            </div>
-        </CardHeader>
+@inherits EgitimlerModeli
 
 
-        <CardBody>
-            <div class="row">
-                <div class="col-12 col-md-4 col-lg-4">
-                    <article class="article article-style-c">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img11.png">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="EgitimKategorileri">Eğitim Kategorisi</a>
-                                <div class="bullet"></div> <a>Eklenme Tarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h2><a href="egitimdetayi">Eğtim Adı</a></h2>
-                            </div>
-                            <p>
-                                Açıklama
-                            </p>
-                            <div class="article-user">
-                                <img alt="image" src="assets/img/users/user-1.png">
-                                <div class="article-user-details">
-                                    <div class="user-detail-name">
-                                        <a href="profil">Ekleyen Kullanıcı</a>
-                                    </div>
-                                    <div class="text-job">Kullanıcı Görev Bilgisi</div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4">
-                    <article class="article article-style-c">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img12.png">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="EgitimKategorileri">Eğitim Kategorisi</a>
-                                <div class="bullet"></div> <a>Eklenme Tarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h2><a href="egitimdetayi">Eğtim Adı</a></h2>
-                            </div>
-                            <p>
-                                Açıklama
-                            </p>
-                            <div class="article-user">
-                                <img alt="image" src="assets/img/users/user-3.png">
-                                <div class="article-user-details">
-                                    <div class="user-detail-name">
-                                        <a href="profil">Ekleyen Kullanıcı</a>
-                                    </div>
-                                    <div class="text-job">Kullanıcı Görev Bilgisi</div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4">
-                    <article class="article article-style-c">
-                        <div class="article-header">
-                            <div class="article-image" data-background="assets/img/blog/img13.png">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="EgitimKategorileri">Eğitim Kategorisi</a>
-                                <div class="bullet"></div> <a>Eklenme Tarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h2><a href="egitimdetayi">Eğtim Adı</a></h2>
-                            </div>
-                            <p>
-                                Açıklama
-                            </p>
-                            <div class="article-user">
-                                <img alt="image" src="assets/img/users/user-5.png">
-                                <div class="article-user-details">
-                                    <div class="user-detail-name">
-                                        <a href="profil">Ekleyen Kullanıcı</a>
-                                    </div>
-                                    <div class="text-job">Kullanıcı Görev Bilgisi</div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </CardBody>
-    </CardComponent>
-</div>
+@if (EgitimleriGetir == null)
 
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+
+    <div class="col-12">
+        <CardComponent cardStyle="Style.primary">
+
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Eğitim Portalı
+                    </div>
+                </div>
+                <div style="margin-left:980px" class="float-right">
+                    <SearchComp />
+                </div>
+            </CardHeader>
+
+
+            <CardBody>
+                <div class="row">
+                    @foreach (var egitim in EgitimleriGetir.Where(e => e.AktifPasif == true).ToList())
+                    {
+                        <div class="col-12 col-md-4 col-lg-4">
+                            <article class="article article-style-c">
+                                <a href="egitimdetayi/@egitim.Id">
+                                    <div class="article-header">
+                                        <div class="article-image" data-background="img/uploaded/@egitim.Kapak.Yolu.ToString()">
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="article-details">
+                                    <div class="article-category">
+                                        <a>@egitim.Kategori</a>
+                                        <div class="bullet"></div> <a>@egitim.KayitTarihi</a>
+                                    </div>
+                                    <div class="article-title">
+                                        <h2>
+                                            <a href="egitimdetayi/@egitim.Id">
+                                                @if (egitim.Adi != null)
+                                                {
+                                                    <MarkDownComponent Content="@(egitim.Adi.Length>60 ? egitim.Adi.Substring(0, 27) + "..." : egitim.Adi)" />
+                                                }
+                                            </a>
+                                        </h2>
+
+
+                                    </div>
+                                    <p>
+                                        @if (egitim.Aciklama != null)
+                                        {
+                                            <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ? egitim.Aciklama.Substring(0, 280) + "..." : egitim.Aciklama)" />
+                                        }
+                                    </p>
+                                    <div class="article-user">
+                                        <img alt="image" src="img/uploaded/@egitim.Kapak.Yolu">
+                                        <div class="article-user-details">
+                                            <div class="user-detail-name">
+                                                <a href="profil">@egitim.KaydedenKullanici</a>
+                                            </div>
+                                            <div class="text-job">Kullanıcı Görev Bilgisi</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    }
+
+                </div>
+            </CardBody>
+        </CardComponent>
+    </div>
+
+
+
+}
 
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 310px;
+        max-height: 310px;
+    }
+
+    .theme-white .btn-primary {
+        margin-left: 8rem;
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
     }
 </style>
+

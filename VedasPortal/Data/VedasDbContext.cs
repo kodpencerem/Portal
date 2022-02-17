@@ -25,5 +25,7 @@ namespace VedasPortal.Data
         public DbSet<Katilimci> Katilimci { get; set; }
         public DbSet<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; }
 
+        public DbSet<Egitim> Egitim { get; set; }
+
     }
 }

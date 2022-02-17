@@ -4,8 +4,14 @@
 
 <div class="col-6">
     <div class="form-group">
-        <InputFile OnChange="OnInputFileChange" multiple />
-        <button class="btn btn-sm btn-success" type="button" @onclick="UploadFiles">Yükle</button>
+        <div class="row" style="margin-top:2px">
+            <div class="col-md-8">
+                <InputFile OnChange="OnInputFileChange" multiple />
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-sm btn-success" type="button" @onclick="UploadFiles">Yükle</button>
+            </div>
+        </div>
         <br />
         @{ // Görüntüleme ilerlemesinin ayarlanıp ayarlanmadığına bağlı olarak ilerleme oluşturmak için bir  css sınıfı oluşturur.
 
@@ -25,7 +31,7 @@
 </div>
 @if (previewImages.Count > 0)
 {
-    <h3>Seçilen Dosyalar</h3>
+    <h5>Seçilen Dosyalar</h5>
     <div class="card">
         <div class="row align-items-start">
 
@@ -38,6 +44,15 @@
     </div>}
 
 @code{ 
+
+
+
+    [Parameter]
+    public Dosya ValuePath { get; set; } 
+
+    [Parameter]
+    public EventCallback<Dosya> ValuePathChanged { get; set; }
+
 
     // yalnızca yükleme sırasında ilerlemenin görüntülenmesini değiştirmek için kullanılır
     private bool displayProgress;
@@ -68,6 +83,8 @@
 
         }
     }
+
+
 
     private async Task UploadFiles()
     {

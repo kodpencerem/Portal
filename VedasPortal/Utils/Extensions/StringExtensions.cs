@@ -2,11 +2,55 @@
 using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.Video;
 
 namespace VedasPortal
 {
     public static class StringExtensions
     {
+        public static string TextEgitim(this EgitimKategori kategori)
+        {
+            switch (kategori)
+            {
+                
+                case EgitimKategori.Elektrik:
+                    return "Elektrik";
+                case EgitimKategori.ElektrikElektronik:
+                    return "Elektrik ve Elektronik";
+                case EgitimKategori.FotografVeVideo:
+                    return "Fotoğraf-Video Çekim Ve Tasarım";
+
+                case EgitimKategori.Isletme:
+                    return "İşletme Eğitimi";
+                case EgitimKategori.KisiselGelisim:
+                    return "Kişisel Gelişim Ve Stres Eğitimi";
+
+                case EgitimKategori.Muhasebe:
+                    return "Muhasebe Eğitimi";
+
+                case EgitimKategori.OfisUygulamalari:
+                    return "Ofis Uygulamalarının Kullanımı";
+
+                case EgitimKategori.Pazarlama:
+                    return "Satış Ve Pazarlama";
+
+                case EgitimKategori.SaglikVeFitnes:
+                    return "Sağlıklı Yaşam ve Fitness";
+
+                case EgitimKategori.Tasarim:
+                    return "Tasarım Yapma ve Geliştirme";
+                case EgitimKategori.YasamTarzi:
+                    return "Yaşam Tarzı";
+
+                case EgitimKategori.Yazilim:
+                    return "Yazılım Geliştirme Teknolojileri";
+
+                default:
+                    return "";
+            }
+        }
+
+
         public static string TextHaberDuyuru(this HaberDuyuruKategori kategori)
         {
             switch (kategori)
@@ -15,6 +59,43 @@ namespace VedasPortal
                     return "Duyuru";
                 case HaberDuyuruKategori.Haber:
                     return "Haber";
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextBirimler(this Birimler kategori)
+        {
+            switch (kategori)
+            {
+                case Birimler.TumBirimler:
+                    return "Tüm Birimler";
+
+                case Birimler.BilgiIslem:
+                    return "Bilgi İşlem Müdürlüğü";
+                case Birimler.CagriMerkezi:
+                    return "Çağrı Merkezi Müdürlüğü";
+                case Birimler.Hukuk:
+                    return "Hukuk İşleri Müdürlüğü";
+                case Birimler.Icra:
+                    return "İcra Müdürlüğü";
+                case Birimler.InsanKaynaklari:
+                    return "İnsan Kaynakları";
+
+                case Birimler.KacakVeTahakkuk:
+                    return "Kaçakla Mücadele ve Tahakkuk";
+
+                case Birimler.KaliteMudurlugu:
+                    return "Kalite Ve Eğitim Planlama Müdürlüğü";
+
+                case Birimler.KurumsalIletisim:
+                    return "Kurumsal İletişim Müdürlüğü";
+                case Birimler.Sayac:
+                    return "Sayaç Okumaları Müdürlüğü";
+
+                case Birimler.Scada:
+                    return "Elektrik ve Arıza Takip Sistemleri Müdürlüğü";
+
                 default:
                     return "";
             }

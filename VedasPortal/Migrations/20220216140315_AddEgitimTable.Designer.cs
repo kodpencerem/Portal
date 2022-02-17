@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220216140315_AddEgitimTable")]
+    partial class AddEgitimTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -547,6 +549,9 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Basliklar")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Birimler")
                         .HasColumnType("int");
 
@@ -565,6 +570,9 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("IzlenmeDurumu")
                         .HasColumnType("bit");
 
+                    b.Property<int>("KKategori")
+                        .HasColumnType("int");
+
                     b.Property<int?>("KapakId")
                         .HasColumnType("int");
 
@@ -578,9 +586,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("KimlereUygun")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KonuBasligi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sertifika")

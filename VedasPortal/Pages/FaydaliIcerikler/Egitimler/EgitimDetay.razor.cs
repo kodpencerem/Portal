@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.Video;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.BasindaBiz
+namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
 {
-    public partial class HaberDetay
+    public partial class EgitimDetay
     {
         [Inject]
-        private IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+        private IBaseRepository<Egitim> EgitimServisi { get; set; }
 
         [Parameter]
-        public int HaberId { get; set; }
+        public int EgitimId { get; set; }
 
-        private HaberDuyuru HaberDetayGetir { get; set; }
+        protected Egitim EgitimDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()
         {
-            HaberDetayGetir = HaberServisi.Get(HaberId);
+            EgitimDetayGetir = EgitimServisi.Get(EgitimId);
             return Task.CompletedTask;
         }
     }
