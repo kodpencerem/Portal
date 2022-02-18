@@ -7,6 +7,7 @@ using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.Mevzuat;
+using VedasPortal.Models.Oneri;
 using VedasPortal.Models.Video;
 
 namespace VedasPortal.Data
@@ -27,6 +28,7 @@ namespace VedasPortal.Data
         public DbSet<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; }
         public DbSet<Mevzuat> Mevzuat { get; set; }
         public DbSet<Egitim> Egitim { get; set; }
+        public DbSet<Oneri> Oneri { get; set; }
 
     }
 }

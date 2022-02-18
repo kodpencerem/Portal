@@ -18,9 +18,7 @@ namespace VedasPortal.Models.Video
         public string Egitmen { get; set; }
 
         public bool AktifPasif { get; set; }
-
-        public bool IzlenmeDurumu { get; set; }
-
+        
         public decimal ToplamIzlenme { get; set; }
 
         public bool TamamlandiMi { get; set; }

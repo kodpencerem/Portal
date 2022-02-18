@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Dosya;
-using VedasPortal.Models.Etkinlik;
+using VedasPortal.Models.Oneri;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.OneriSistemi.Admin
@@ -15,99 +15,116 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
     {
 
         [Inject]
-        public IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
+        public IBaseRepository<Oneri> OneriServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int EtkinlikId { get; set; }
+        public int OneriId { get; set; }
 
         protected string Title = "Ekle";
-        public Etkinlik etkinlik = new Etkinlik();
+        public Oneri oneri = new Oneri();
 
-        public Dosya EtkinlikDosya = new Dosya();
+        public Dosya OneriDosya = new Dosya();
 
-        protected IEnumerable<Etkinlik> Etkinlikler { get; set; }
+        protected IEnumerable<Oneri> Oneriler { get; set; }
 
-        protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
+        protected IEnumerable<Oneri> TumOnerileriGetir()
         {
-            Etkinlikler = EtkinlikServisi.GetAll();
-            return Etkinlikler;
+            Oneriler = OneriServisi.GetAll();
+            return Oneriler;
 
         }
-        public Dictionary<EtkinlikKategori, string> Kategoriler { get; set; }
+        public Dictionary<OnemDerecesi, string> OnemDereceleri { get; set; }
+        protected void TumDereceleriGetir()
+        {
+            var list = new Dictionary<OnemDerecesi, string>();
+            foreach (OnemDerecesi item in Enum.GetValues(typeof(OnemDerecesi)))
+            {
+                list.Add(item, item.TextOnemDerecesi());
+            }
+            OnemDereceleri = list;
+        }
+
+
+        public Dictionary<Odul, string> Oduller { get; set; }
+        protected void TumOdulleriGetir()
+        {
+            var list = new Dictionary<Odul, string>();
+            foreach (Odul item in Enum.GetValues(typeof(Odul)))
+            {
+                list.Add(item, item.TextOdul());
+            }
+            Oduller = list;
+        }
+
+
+        public Dictionary<OneriKategori, string> OneriKategorileri { get; set; }
         protected void TumKategorileriGetir()
         {
-            var list = new Dictionary<EtkinlikKategori, string>();
-            foreach (EtkinlikKategori item in Enum.GetValues(typeof(EtkinlikKategori)))
+            var list = new Dictionary<OneriKategori, string>();
+            foreach (OneriKategori item in Enum.GetValues(typeof(OneriKategori)))
             {
-                list.Add(item, item.TextEtkinlik());
+                list.Add(item, item.TextOneriKategori());
             }
-            Kategoriler = list;
+            OneriKategorileri = list;
         }
 
-        public Dictionary<KatilimciKategori, string> KatilacakPersonel { get; set; }
-        protected void TumKatilimcilariGetir()
+        protected void Kayit()
         {
-            var list = new Dictionary<KatilimciKategori, string>();
-            foreach (KatilimciKategori item in Enum.GetValues(typeof(KatilimciKategori)))
-            {
-                list.Add(item, item.TextKatilimci());
-            }
-            KatilacakPersonel = list;
-        }
-
-        protected void EtkinlikKayit()
-        {
-            EtkinlikServisi.AddUpdate(etkinlik);
+            OneriServisi.AddUpdate(oneri);
 
         }
         protected override void OnParametersSet()
         {
-            if (EtkinlikId != 0)
+            if (OneriId != 0)
             {
                 Title = "Duzenle";
-                etkinlik = EtkinlikServisi.Get(EtkinlikId);
+                oneri = OneriServisi.Get(OneriId);
                 
             }
         }
 
 
 
-        protected void SilmeyiOnayla(int etkinlikId)
+        protected void SilmeyiOnayla(int oneriId)
         {
             ModalDialog.Open();
-            etkinlik = Etkinlikler.FirstOrDefault(x => x.Id == etkinlikId);
+            oneri = Oneriler.FirstOrDefault(x => x.Id == oneriId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void EtkinlikSil()
+        protected void Sil()
         {
-            if (etkinlik.Id == 0)
+            if (oneri.Id == 0)
                 return;
 
-            EtkinlikServisi.Remove(etkinlik.Id);
-            etkinlik = new Etkinlik();
-            TumEtkinlikleriGetir();
+            OneriServisi.Remove(oneri.Id);
+            oneri = new Oneri();
+            TumKategorileriGetir();
+            TumOnerileriGetir();
+            TumDereceleriGetir();
+            TumOdulleriGetir();
         }
 
 
 
         protected override Task OnInitializedAsync()
         {
-            TumEtkinlikleriGetir();
             TumKategorileriGetir();
-            TumKatilimcilariGetir();
+            TumOnerileriGetir();
+            TumDereceleriGetir();
+            TumOdulleriGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            etkinlik = null;
+            oneri = null;
 
-            UrlNavigationManager.NavigateTo("/etkinlik/ekle");
+            UrlNavigationManager.NavigateTo("/oneri/ekle");
         }
 
 

@@ -1,71 +1,60 @@
-﻿@page "/haberler"
-@inherits HaberModeli
+﻿@page "/vedasrehber"
+@inherits VedasRehberModel
 
 
-@if (haberler == null)
-
-{
-    <p><em>Yükleniyor...</em></p>
-}
-
-else
+@if (rehber == null)
 
 {
-    <div class="col-12">
-        <div class="row">
-            @foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" && h.AktifPasif == true))
+<p><em>Yükleniyor...</em></p> }
+
+            else
+
             {
-                <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                    <article class="article article-style-c">
-                        <div class="author-box-center align-center">
-                            <img width="200" height="200" alt="@haber.Adi" src="/img/uploaded/@haber.Dosya.FirstOrDefault()?.Yolu" class="rounded-circle author-box-picture">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="haber/detay/@haber.Id">Haber</a>
-                                <div class="bullet"></div> <a>@haber.KayitTarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h1 class="article-style-b">
-                                    <a href="haber/detay/@haber.Id">
-                                        @if (haber.Adi != null)
-                                        {
-                                            <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
-                                        }
-                                    </a>
-                                </h1>
-                            </div>
-                            <div name="HaberAltBaslik" class="article-title">
-                                <p class="alert-title">
-                                    @if (haber.AltBaslik != null)
-                                    {
-                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? haber.AltBaslik.Substring(0, 45) + "..." : haber.AltBaslik)" />
-                                    }
-                                </p>
-                            </div>
-                            <p name="HaberAciklama" class="accordion-header">
-
-
-                                @if (haber.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
-                                }
-                            </p>
-
-
-                        </div>
-                        @*<div class="article-cta centered">
-                                <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
-                            </div>*@
-                    </article>
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Vedaş Rehber
                 </div>
-            }
-
+            </div>
+            <div style="margin-left:1100px;" class="float-right">
+                <input type="text" class="form-control" placeholder="Personel adı veya soyadı ile arama yapın..." @bind="SearchString"
+                       @bind:event="oninput" @onkeyup="FilterelemeYap" />
+                <div class="input-group-append">
+                    <button class="btn btn-info" @onclick="FilterelemeYap">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <div class="row">
+                @foreach (var personel in rehber)
+                {
+<div class="card-statistic-4">
+    <div class="align-items-center justify-content-between">
+        <div class="row ">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                <div class="card-content">
+                    <h5 class="font-15">@personel.Adi @personel.Soyadi</h5>
+                    <h2 class="font-18">@personel.TelefonNo</h2>
+                    <h2 class="font-18">@personel.Email</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                <div class="banner-img">
+                    <img src="img/uploaded/@personel.ProfilResmi.Yolu" alt="@personel.Adi">
+                </div>
+            </div>
         </div>
     </div>
+</div>                    }
+            </div>
 
-}
+        </CardBody>
+    </CardComponent>
+</div>}
 
 
 <style>

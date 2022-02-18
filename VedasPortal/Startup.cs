@@ -14,6 +14,7 @@ using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.Mevzuat;
+using VedasPortal.Models.Oneri;
 using VedasPortal.Models.Video;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
@@ -55,6 +56,8 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<DuzelticiFaaliyet>, BaseRepository<DuzelticiFaaliyet>>();
             services.AddScoped<IBaseRepository<Egitim>, BaseRepository<Egitim>>();
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
+            services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
+            services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
             // register our scoped service to upload
             services.AddScoped<IFileUpload, FileUpload>();
             // register our scoped service to download

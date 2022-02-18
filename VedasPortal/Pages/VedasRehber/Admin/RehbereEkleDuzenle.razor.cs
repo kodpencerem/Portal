@@ -1,101 +1,89 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
+using VedasPortal.Models;
 using VedasPortal.Models.Dosya;
-using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Duyurular.Admin
+namespace VedasPortal.Pages.VedasRehber.Admin
 {
-    public class DuyuruEkleDuzenleModel : ComponentBase
+    public class RehberModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
+        public IBaseRepository<Rehber> RehberServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int DuyuruId { get; set; }
+        public int RehberId { get; set; }
 
         protected string Title = "Ekle";
-        public HaberDuyuru duyuru = new HaberDuyuru();
+        public Rehber rehber = new Rehber();
 
-        protected IEnumerable<HaberDuyuru> Duyurular { get; set; }
+        protected IEnumerable<Rehber> Rehber { get; set; }
 
-        protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
+        protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            Duyurular = DuyuruServisi.GetAll();
+            Rehber = RehberServisi.GetAll();
 
-            return Duyurular;
+            return Rehber;
 
         }
-        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
-        protected void TumKategorileriGetir()
-        {
-            var list = new Dictionary<HaberDuyuruKategori, string>();
-            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
-            {
-                list.Add(item, item.TextHaberDuyuru());
-            }
-            Kategoriler = list;
-        }
 
-        protected void HaberKayit()
+
+        protected void Kayit()
         {
-            DuyuruServisi.AddUpdate(duyuru);
-            
+            RehberServisi.AddUpdate(rehber);
+
         }
         protected override void OnParametersSet()
         {
-            if (DuyuruId != 0)
+            if (RehberId != 0)
             {
                 Title = "Duzenle";
-                duyuru = DuyuruServisi.Get(DuyuruId);
-                //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
-
+                rehber = RehberServisi.Get(RehberId);
             }
         }
 
 
 
-        protected void SilmeyiOnayla(int duyuruId)
+        protected void SilmeyiOnayla(int rehberId)
         {
             ModalDialog.Open();
-            duyuru = Duyurular.FirstOrDefault(x => x.Id == duyuruId);
+            rehber = Rehber.FirstOrDefault(x => x.Id == rehberId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void DuyuruSil()
+        protected void Sil()
         {
-            if (duyuru.Id == 0)
+            if (rehber.Id == 0)
                 return;
 
-            DuyuruServisi.Remove(duyuru.Id);
-            duyuru = new HaberDuyuru();
-            TumDuyurulariGetir();
+            RehberServisi.Remove(rehber.Id);
+            rehber = new Rehber();
+            TumRehberiGetir();
         }
 
 
-        public Dosya DuyuruDosya { get; set; } = new Dosya();
+        public Dosya RehberDosya { get; set; } = new Dosya();
         protected override Task OnInitializedAsync()
         {
-            TumDuyurulariGetir();
-            TumKategorileriGetir();
+            TumRehberiGetir();
+
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            duyuru = null;
+            rehber = null;
 
-            UrlNavigationManager.NavigateTo("/duyuru/ekle");
+            UrlNavigationManager.NavigateTo("/rehber/ekle");
         }
 
 

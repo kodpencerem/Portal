@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,9 @@ namespace VedasPortal.Pages.VedasRehber
         protected IBaseRepository<Rehber> HaberServisi { get; set; }
         protected IEnumerable<Rehber> rehber;
 
+        protected List<Rehber> GetRehber = new List<Rehber>();
+        protected List<Rehber> SearchRehber = new List<Rehber>();
+
         public Dosya RehberDosya { get; set; } = new Dosya();
 
         protected override Task OnInitializedAsync()
@@ -27,6 +31,21 @@ namespace VedasPortal.Pages.VedasRehber
         {
             rehber = HaberServisi.GetAll().AsQueryable().Include(s => s.ProfilResmi).ToList();
             return rehber;
+        }
+
+
+        protected string SearchString { get; set; }
+        protected void FilterelemeYap()
+        {
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                GetRehber = SearchRehber.Where(
+                    x => x.Adi.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1 || x.Soyadi.IndexOf(SearchString,StringComparison.OrdinalIgnoreCase)!=-1).ToList();
+            }
+            else
+            {
+                GetRehber = SearchRehber;
+            }
         }
     }
 }

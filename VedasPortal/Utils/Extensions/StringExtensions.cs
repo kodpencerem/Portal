@@ -3,6 +3,7 @@ using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.Mevzuat;
+using VedasPortal.Models.Oneri;
 using VedasPortal.Models.Video;
 
 namespace VedasPortal
@@ -64,6 +65,103 @@ namespace VedasPortal
                     return "";
             }
         }
+
+        public static string TextOneriKategori(this OneriKategori kategori)
+        {
+            switch (kategori)
+            {
+                case OneriKategori.Bilgilendirme:
+                    return "Bilgilendirme ve Klavuzlar";
+                case OneriKategori.CalisanHaklari:
+                    return "Çalışan Hakları";
+                case OneriKategori.CalismaKosullari:
+                    return "Çalışma Koşulları";
+                case OneriKategori.CevreAydinlatma:
+                    return "Çevre Aydınlatma";
+                case OneriKategori.Diger:
+                    return "Diğer";
+                case OneriKategori.ElektrikUretim:
+                    return "Elektrik Üretim";
+                case OneriKategori.Gelirler:
+                    return "Gelir Kalemleri";
+                case OneriKategori.Giderler:
+                    return "Gider Kalemleri";
+                case OneriKategori.HizmetKalitesi:
+                    return "Hizmet Kalitesi";
+                case OneriKategori.IsGuvenligi:
+                    return "İş Güvenliği";
+                case OneriKategori.IsVerenHaklari:
+                    return "İş Veren Hakları";
+                case OneriKategori.KopruVeKavsakAydinlatma:
+                    return "Köprü ve Kavşak Aydınlatma";
+                case OneriKategori.Maliyet:
+                    return "Maliyet";
+                case OneriKategori.Motivasyon:
+                    return "İşçi Motivasyonu Artırma";
+                case OneriKategori.Proje:
+                    return "Proje ve Ürün";
+                case OneriKategori.ProsedurVePolitikalar:
+                    return "Prosedür ve Politikalar";
+                case OneriKategori.Rekabet:
+                    return "Rekabeti Artırma";
+                case OneriKategori.TesisVeyaKurum:
+                    return "Tesis veya Kurum";
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextOnemDerecesi(this OnemDerecesi kategori)
+        {
+            switch (kategori)
+            {
+                case OnemDerecesi.Dusuk:
+                    return "Düşük";
+                case OnemDerecesi.Orta:
+                    return "Orta";
+                case OnemDerecesi.Yuksek:
+                    return "Yüksek";
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextOdul(this Odul kategori)
+        {
+            switch (kategori)
+            {
+                case Odul.IndirimKuponu:
+                    return "İndirim Kuponu";
+                case Odul.Izin:
+                    return "İzin";
+                case Odul.Para:
+                    return "Para";
+                default:
+                    return "";
+            }
+        }
+
+
+        public static string TextVideo(this VideoKategori kategori)
+        {
+            switch (kategori)
+            {
+                case VideoKategori.Belgesel:
+                    return "Belgesel";
+                case VideoKategori.Egitim:
+                    return "Eğitim";
+
+                case VideoKategori.Genel:
+                    return "Genel";
+                case VideoKategori.Roportaj:
+                    return "Röportaj";
+
+                default:
+                    return "";
+            }
+        }
+
+
 
         public static string TextMevzuat(this MevzuatKategori kategori)
         {

@@ -16,60 +16,51 @@
                 Öneri @Title
             </CardHeader>
             <CardBody>
-                <div class="form-group row">
-                    <label class="control-label col-md-12">Resim/Video Ekle</label>
-                    <div class="col-md-12">
-                        <MultipleUpload></MultipleUpload>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Öneri Adı</label>
-                    <input type="text" class="form-control">
-                </div>
-
-
-                <div class="form-group">
-                    <label>Açıklama Metni</label>
-                    <Summernote></Summernote>
-                </div>
-                <div class="form-group">
-                    <label>Öneri Durumu</label>
-                    <input type="text" class="form-control">
-                </div>
-
-
+                
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
-                            <label class="form-label col-md-2">Resim Seçin</label>
+                            <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
-                                <InputFile @bind-Value="@EtkinlikDosya.Yolu" />
-                                @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
-                                    {
-                                        <img src="@("img/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
-                                    }*@
+                                <MultipleUpload @bind-Value="@OneriDosya.Yolu" />
+
                             </div>
-                            @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
+
                         </div>
 
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Etkinlik Adı</label>
+                            <label class="control-label col-md-2">Öneri Adı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="etkinlik.Adi" />
+                                <InputText class="form-control" @bind-Value="oneri.Adi" />
                             </div>
-                            <ValidationMessage For="@(() => etkinlik.Adi)" />
+                            <ValidationMessage For="@(() => oneri.Adi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Öneri Yapan Personel</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="oneri.YapanAdiSoyadı" />
+                            </div>
+                            <ValidationMessage For="@(() => oneri.YapanAdiSoyadı)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Öneri Yapan Per. TelNo</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="oneri.TelefonNo" />
+                            </div>
+                            <ValidationMessage For="@(() => oneri.TelefonNo)" />
                         </div>
 
 
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@etkinlik.Kategori" class="form-control">
+                                <InputSelect @bind-Value="@oneri.Kategori" class="form-control">
                                     <option></option>
-                                    @if (Kategoriler != null)
+                                    @if (OneriKategorileri != null)
                                     {
-                                        @foreach (var kategori in Kategoriler)
+                                        @foreach (var kategori in OneriKategorileri)
                                         {
                                             <option value="@kategori.Key"> @kategori.Value </option>
                                         }
@@ -80,13 +71,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="Kategori" class="control-label col-md-2">Katılacak Personel/Birim Seçin</label>
+                            <label for="Kategori" class="control-label col-md-2">Önerinizin Önem Derecesi</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@etkinlik.KKategori" class="form-control">
+                                <InputSelect @bind-Value="@oneri.Derece" class="form-control">
                                     <option></option>
-                                    @if (KatilacakPersonel != null)
+                                    @if (OnemDereceleri != null)
                                     {
-                                        @foreach (var kategori in KatilacakPersonel)
+                                        @foreach (var kategori in OnemDereceleri)
                                         {
                                             <option value="@kategori.Key"> @kategori.Value </option>
                                         }
@@ -99,22 +90,11 @@
                         <br />
                         <div class="row">
                             <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8">Etkinlik Şimdi Yayınlasın Mı?</label>
+                                <label class="control-label col-md-8">Öneri Şimdi Yayınlasın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="etkinlik.AktifPasif" />
+                                    <InputCheckbox class="form-control" @bind-Value="oneri.AktifPasif" />
                                 </div>
-                                <ValidationMessage For="@(() => etkinlik.AktifPasif)" />
-                            </div>
-
-
-
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="etkinlik.SliderdaGoster" />
-                                </div>
-                                <ValidationMessage For="@(() => etkinlik.SliderdaGoster)" />
-
+                                <ValidationMessage For="@(() => oneri.AktifPasif)" />
                             </div>
                         </div>
                     </div>
@@ -124,13 +104,13 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value=@etkinlik.Aciklama
+                                                @bind-Value=@oneri.Aciklama
                                                 Label="Açıklama"
                                                 UrlToPostImage="img/uploaded/">
                                 </CKEditorBlazor>
 
                             </div>
-                            <ValidationMessage For="@(() => etkinlik.Aciklama)" />
+                            <ValidationMessage For="@(() => oneri.Aciklama)" />
                         </div>
                     </div>
                 </div>
@@ -140,7 +120,7 @@
             </CardBody>
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="EtkinlikKayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>
@@ -149,7 +129,7 @@
 </div>
 
 
-@if (Etkinlikler == null)
+@if (Oneriler == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -166,7 +146,7 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Etkinlikler
+                        Öneriler
                     </div>
                 </div>
 
@@ -185,9 +165,9 @@ else
                                 </th>
                                 <th>Resim</th>
 
-                                <th>Etkinlik Adı</th>
+                                <th>Öneri Adı</th>
 
-                                <th>Katılacak Birim</th>
+                                <th>Öneri Durum</th>
 
                                 <th>İşlemler</th>
                             </tr>
@@ -196,36 +176,44 @@ else
 
 
 
-                            @foreach (var etkinlik in Etkinlikler)
+                            @foreach (var oneri in Oneriler)
 
                             {
 
 
-                                <tr>
-                                    <td class="text-center pt-2">
-                                        <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                   id="checkbox-1">
-                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                        </div>
-                                    </td>
-                                    <td>@EtkinlikDosya.Yolu</td>
+                            <tr>
+                                <td class="text-center pt-2">
+                                    <div class="custom-checkbox custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                               id="checkbox-1">
+                                        <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </td>
+                                <td>@OneriDosya.Yolu</td>
 
-                                    <td>@etkinlik.Adi</td>
+                                <td>@oneri.Adi</td>
 
-                                    <td>
-                                        @etkinlik.KKategori
-                                    </td>
+                                <td>
+                                    @if (oneri.KabulDurum == true)
+                                    {
 
-                                    <td>
-                                        <a href="@($"etkinlik/detay/{etkinlik.Id}")" class="btn btn-primary">Etkinlik Detayı</a>
-                                        <a href='/etkinlik/duzenle/@etkinlik.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(etkinlik.Id);})">
-                                            Sil
-                                        </button>
-                                    </td>
-                                </tr>
+
+                            <div class="badge badge-success badge-shadow">Kabul Edildi</div> }
+                        else
+                        {
+                            <div class="badge badge-warning badge-shadow">Red Edildi</div>}
+                                </td>
+
+
+                                <td>
+                                    <a href="@($"oneri/detay/{oneri.Id}")" class="btn btn-primary">Öneri Detayı</a>
+                                    <a href='/etkinlik/duzenle/@oneri.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(oneri.Id);})">
+                                        Sil
+                                    </button>
+                                </td>
+                            </tr>
 
 
 
@@ -246,7 +234,7 @@ else
         </ModalHeader>
 
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(()=>{EtkinlikSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-danger" @onclick="@(()=>{ Sil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>

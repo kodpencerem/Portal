@@ -13,7 +13,7 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var haber in haberler.Where(h=>h.Kategori.TextHaberDuyuru()=="Haber" && h.AktifPasif==true))
+            @foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" && h.AktifPasif == true))
             {
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
@@ -30,9 +30,9 @@ else
                                 <h1 class="article-style-b">
                                     <a href="haber/detay/@haber.Id">
                                         @if (haber.Adi != null)
-                                            {
-                                                <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)"/>                                              
-                                            }
+                                        {
+                                            <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
+                                        }
                                     </a>
                                 </h1>
                             </div>
@@ -46,7 +46,7 @@ else
                             </div>
                             <p name="HaberAciklama" class="accordion-header">
 
-                               
+
                                 @if (haber.Aciklama != null)
                                 {
                                     <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
@@ -56,8 +56,8 @@ else
 
                         </div>
                         @*<div class="article-cta centered">
-                            <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
-                        </div>*@
+                                <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
+                            </div>*@
                     </article>
                 </div>
             }
@@ -66,6 +66,7 @@ else
     </div>
 
 }
+
 
 <style>
     .article .article-details {
