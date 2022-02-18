@@ -1,0 +1,81 @@
+﻿@page "/OneriSistemi"
+
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Önerinizi Bize Yazın ve Karlı Çıkın
+                </div>
+            </div>
+        </CardHeader>
+        <CardBody >
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Öneri Başlığı</label>
+                <div class="col-sm-12 col-md-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategorisi</label>
+                <div class="col-sm-12 col-md-7">
+                    <select class="form-control selectric">
+                        <option>Eğitim</option>
+                        <option>Etkinlikler</option>
+                        <option>Faaliyetler</option>
+                    </select>
+                </div>
+            </div>
+            <Summernote></Summernote>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Varsa Resim veya Döküman Ekleyin</label>
+                <div class="col-sm-12 col-md-7">
+                    <div id="image-preview" class="image-preview">
+                        <label for="image-upload" id="image-label">Dosya/Döküman/Resim Seç</label>
+                        <input type="file" name="image" id="image-upload" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Öneriyi Yapan Personel</label>
+                <div class="col-sm-12 col-md-7">
+                    <input type="text" class="form-control inputtags">
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Önem Derecesi</label>
+                <div class="col-sm-12 col-md-7">
+                    <select class="form-control selectric">
+                        <option>Yüksek</option>
+                        <option>Orta</option>
+                        <option>Düşük</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                <div class="col-sm-12 col-md-7">
+                    <button class="btn btn-success" type="submit">Gönder</button>
+                    <button class="btn btn-warning" type="reset">Vazgeç</button>
+                </div>
+            </div>
+        </CardBody>
+    </CardComponent>
+</div>
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
+
+
+
