@@ -85,13 +85,13 @@ namespace VedasPortal.Components.Anket
         private async Task AddOption()
         {
             var maxId = model.GetMaxId();
-            var formModal = Modal.Show<NewSurveyOption>("Bir seçenek ekleyin");
-
-            var result = await formModal.Result;
-
+            var formModal = Modal?.Show<NewSurveyOption>("Bir seçenek ekleyin");
+            
+            var result = await formModal?.Result;
+            
             if (!result.Cancelled)
             {
-                var results = result.Data;
+                var results = result?.Data;
                 model.AddSurveyOption((SurveyOptionDTO)result.Data, maxId);
                 model.SurveyOptionsToAdd.Add((SurveyOptionDTO)result.Data);
 
