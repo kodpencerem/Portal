@@ -100,8 +100,6 @@ namespace VedasPortal.Repository
         {
             return dbSet.Count();
         }
-
-        
     }
 
 

@@ -1,3 +1,5 @@
+using Blazored.Modal;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -9,10 +11,13 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
+using VedasPortal.Models.Anket;
+using VedasPortal.Models.Anket.Contracts;
 using VedasPortal.Models.Dosya;
 using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
 using VedasPortal.Models.Video;
@@ -21,6 +26,7 @@ using VedasPortal.Repository.Interface;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
+using VedasPortal.Utils.Anket;
 
 namespace VedasPortal
 {
@@ -37,7 +43,7 @@ namespace VedasPortal
         {
             services.AddDbContext<VedasDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<VedasDbContext>();
 
@@ -58,10 +64,16 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
             services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
+            services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
             // register our scoped service to upload
             services.AddScoped<IFileUpload, FileUpload>();
             // register our scoped service to download
             services.AddScoped<IFileDownload, FileDownload>();
+
+            services.AddBlazoredModal();
+            services.AddScoped<Mapper>();
+            services.AddBlazoredToast();
+            services.AddScoped<ISurveyManager, SurveyManager>();
 
         }
 

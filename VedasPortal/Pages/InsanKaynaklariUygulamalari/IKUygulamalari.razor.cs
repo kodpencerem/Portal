@@ -3,39 +3,30 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.IKUygulama;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Duyurular
+namespace VedasPortal.Pages.InsanKaynaklariUygulamalari
 {
-    public class DuyuruModeli : ComponentBase
+    public class IKUygulamalariModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
-        protected IEnumerable<HaberDuyuru> duyurular;
+        protected IBaseRepository<IkUygulama> IkUygulamaServisi { get; set; }
+        protected IEnumerable<IkUygulama> IkUygulamalari;
 
-
-
-        protected string SearchString { get; set; }
         protected override Task OnInitializedAsync()
         {
-            TumDuyurulariGetir();
+            TumIkUygulamalariniGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
+        protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
-            duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); 
+            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Resim).ToList();
 
-            return duyurular;
+            return IkUygulamalari;
 
         }
-
-
-        protected string DialogGorunur { get; set; } = "none";
-
-        public ModalComponent ModalDialog { get; set; }
 
     }
 }

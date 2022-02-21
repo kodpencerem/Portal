@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220221070546_AddIkUygulamaTable")]
+    partial class AddIkUygulamaTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,98 +219,6 @@ namespace VedasPortal.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("VedasPortal.Models.Anket.Models.Survey", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DuzenlemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DuzenleyenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("FeaturedSurvey")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("KaydedenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SurveyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SurveyQuestion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TotalTimesTaken")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalVotes")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Surveys");
-                });
-
-            modelBuilder.Entity("VedasPortal.Models.Anket.Models.SurveyOption", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DuzenlemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DuzenleyenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Fk_SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KaydedenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SurveyOptionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalVotes")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SurveyId");
-
-                    b.ToTable("SurveyOptions");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
@@ -967,15 +877,6 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VedasPortal.Models.Anket.Models.SurveyOption", b =>
-                {
-                    b.HasOne("VedasPortal.Models.Anket.Models.Survey", "Survey")
-                        .WithMany("SurveyOptions")
-                        .HasForeignKey("SurveyId");
-
-                    b.Navigation("Survey");
-                });
-
             modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
                 {
                     b.HasOne("VedasPortal.Models.HaberDuyuru.HaberDuyuru", null)
@@ -1081,11 +982,6 @@ namespace VedasPortal.Migrations
                         .HasForeignKey("DosyaId");
 
                     b.Navigation("Dosya");
-                });
-
-            modelBuilder.Entity("VedasPortal.Models.Anket.Models.Survey", b =>
-                {
-                    b.Navigation("SurveyOptions");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.Katilimci", b =>

@@ -2,6 +2,7 @@
 using VedasPortal.Models.DuzelticiFaaliyet;
 using VedasPortal.Models.Etkinlik;
 using VedasPortal.Models.HaberDuyuru;
+using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
 using VedasPortal.Models.Video;
@@ -51,7 +52,6 @@ namespace VedasPortal
                     return "";
             }
         }
-
 
         public static string TextHaberDuyuru(this HaberDuyuruKategori kategori)
         {
@@ -125,7 +125,6 @@ namespace VedasPortal
                     return "";
             }
         }
-
         public static string TextOdul(this Odul kategori)
         {
             switch (kategori)
@@ -140,7 +139,6 @@ namespace VedasPortal
                     return "";
             }
         }
-
 
         public static string TextVideo(this VideoKategori kategori)
         {
@@ -160,8 +158,6 @@ namespace VedasPortal
                     return "";
             }
         }
-
-
 
         public static string TextMevzuat(this MevzuatKategori kategori)
         {
@@ -279,8 +275,6 @@ namespace VedasPortal
             }
         }
 
-
-
         public static string TextEtkinlik(this EtkinlikKategori kategori)
         {
             switch (kategori)
@@ -341,6 +335,25 @@ namespace VedasPortal
                 case KatilimciKategori.Davetli:
                     return "Davetli veya Misafir";
 
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextIkUygulama(this IkUygulamaKategori kategori)
+        {
+            switch (kategori)
+            {
+                case IkUygulamaKategori.Bordro:
+                    return "Bordro Görüntüleme";
+                case IkUygulamaKategori.EgitimYonetimi:
+                    return "Eğitim Yönetimi ve Planlama";
+                case IkUygulamaKategori.IseAlmaCikarma:
+                    return "İşe Alma ve İşten Çıkarma";
+                case IkUygulamaKategori.IzinGoruntulemVeBasvuru:
+                    return "İzin Görüntüleme ve Başvuru";
+                case IkUygulamaKategori.PerformansDegerlendirme:
+                    return "Kariyer Planlama ve Performans Değerlendirme";
                 default:
                     return "";
             }

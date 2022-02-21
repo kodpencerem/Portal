@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Ardalis.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using VedasPortal.Models.Anket.DTO;
 using VedasPortal.Models.Base;
 
 namespace VedasPortal.Repository.Interface
@@ -15,8 +18,6 @@ namespace VedasPortal.Repository.Interface
         IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate = null);
         void Remove(int Id);
         void Remove(T item);
-        void RemoveRange(IEnumerable<T> items);
-
-        
+        void RemoveRange(IEnumerable<T> items);      
     }
 }

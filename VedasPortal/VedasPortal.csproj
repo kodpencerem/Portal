@@ -32,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Result.AspNetCore" Version="3.1.2" />
+    <PackageReference Include="Blazored.Modal" Version="6.0.1" />
+    <PackageReference Include="Blazored.Toast" Version="3.2.2" />
     <PackageReference Include="Chronos.Blazor.Cropper" Version="1.2.0" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.475" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.14" />
@@ -59,6 +62,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Components\Anket\AddSurvey.razor" />
+    <None Include="Components\Anket\EditSurvey.razor" />
+    <None Include="Components\Anket\FeaturedSurvey.razor" />
+    <None Include="Components\Anket\Modals\AddOption.razor" />
+    <None Include="Components\Anket\Modals\Confirm.razor" />
+    <None Include="Components\Anket\Modals\NewSurveyOption.razor" />
+    <None Include="Components\Anket\MostPopularSurvey.razor" />
+    <None Include="Components\Anket\SurveyCount.razor" />
+    <None Include="Components\Anket\SurveyOptionItem.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />
@@ -689,6 +701,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Anket\" />
     <Folder Include="Pages\HavaDurumu\" />
   </ItemGroup>
 

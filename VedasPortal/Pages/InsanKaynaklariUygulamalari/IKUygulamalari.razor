@@ -1,8 +1,9 @@
-﻿@page "/duyurular"
-@inherits DuyuruModeli
+﻿@page "/IKUygulamalari"
+
+@inherits IKUygulamalariModeli
 
 
-@if (duyurular == null)
+@if (IkUygulamalari == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -13,55 +14,54 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
-            {
-
-                <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                    <article class="article article-style-c">
-                        <div class="author-box-center align-center">
-                            <img width="200" height="200" alt="@duyuru.Adi" src="/img/uploaded/@duyuru.Dosya.FirstOrDefault()?.Yolu" class="rounded-circle author-box-picture">
-                            <div class="clearfix"></div>
+            <CardComponent cardStyle="Style.primary">
+                <CardHeader>
+                    <div class="float-left">
+                        <div class="col-md-12">
+                            İnsan Kaynakları Uygulamaları
                         </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="duyuru/detay/@duyuru.Id">Duyuru</a>
-                                <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h1 class="article-style-b">
-                                    <a href="duyuru/detay/@duyuru.Id">
+                    </div>
+
+                </CardHeader>
+                <CardBody>
+                    <div class="row">
+
+                        @foreach (var ikUygulama in IkUygulamalari)
+                        {
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <CardComponent cardStyle=Style.primary>
+                                    <CardHeader>
+                                        <h4 class="font-15">@ikUygulama.Adi</h4>
+                                    </CardHeader>
+                                    <CardBody>
+
+                                        <div class="align-items-center justify-content-between">
+                                            <div class="row ">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                                    <div class="card-content">
+                                                        <h2 class="mb-3 font-18"></h2>
+                                                        <h2 class="mb-3 font-18"></h2>
+                                                        <a class="btn btn-primary uygulamayagit">Uygulamaya Git</a>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                                    <div class="banner-img">
+                                                        <img src="img/uploaded/@ikUygulama.Resim" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </CardBody>
+                                </CardComponent>
+                            </div>              }
 
 
-                                        @if (duyuru.Adi != null)
-                                        {
-                                            <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi)" />
-                                        }
-                                    </a>
-                                </h1>
-                            </div>
-                            <div name="HaberAltBaslik" class="article-title">
-                                <p class="alert-title">
+                    </div>
 
-                                    @if (duyuru.AltBaslik != null)
-                                    {
-                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? duyuru.AltBaslik.Substring(0, 45) + "..." : duyuru.AltBaslik)" />
-                                    }
-                                </p>
-                            </div>
-                            <p name="HaberAciklama" class="accordion-header">
-
-                                @if (duyuru.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? duyuru.Aciklama.Substring(0, 280) + "..." : duyuru.Aciklama)" />
-                                }
-                            </p>
-
-
-                        </div>
-
-                    </article>
-                </div>
-            }
+                </CardBody>
+            </CardComponent>
 
         </div>
     </div>
