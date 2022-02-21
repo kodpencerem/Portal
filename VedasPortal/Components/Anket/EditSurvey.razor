@@ -1,0 +1,102 @@
+﻿<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+            Anketi Düzenleme Formu
+        </div>
+        <div class="card-body">
+
+            @if (!isReady)
+            {
+                <p>Yükleniyor...</p>
+            }
+            else
+            {
+                <div class="row h-100 justify-content-center align-items-center">
+                    <div class="col-10 col-md-8 col-lg-6">
+                        <EditForm Model="SurveyToUpdate" OnValidSubmit="UpdateSurvey">
+                            <DataAnnotationsValidator />
+                        
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="bs-form-label" for="surveyName">Anket Adı</label>
+                                    <InputText id="surveyName" class="form-control" @bind-Value="@SurveyToUpdate.SurveyName" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.SurveyName)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="bs-form-label" for="surveyDescription">Açıklama</label>
+                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@SurveyToUpdate.Description" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.Description)" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label class="bs-form-label" for="surveyQuestion">Anket Sorusu</label>
+                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@SurveyToUpdate.SurveyQuestion" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.SurveyQuestion)" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col"><button type="button" class="btn btn-sm btn-primary" @onclick="AddOption">Seçenek Ekle</button></th>
+                                            <th scope="col">Seçenekler</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @if (SurveyToUpdate.SurveyOptions.Count == 0)
+                                        {
+                                            <tr>
+                                                <td colspan="2">Lütfen en az iki seçenek ekleyin!</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var option in SurveyToUpdate.SurveyOptions)
+                                            {
+                                                <tr>
+                                                    <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> DeleteOption(Int32.Parse(option.Value)))">Sil</button></td>
+                                                    <td>@option.Text</td>
+                                                </tr>
+                                            }
+                                        }
+                                        </tbody>
+                                    </table>
+                                    <div class="justify-content-center">
+                                        <ValidationMessage For="@(() => SurveyToUpdate.SurveyOptions)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-check row">
+                                <div class="d-flex align-items-start">
+                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@SurveyToUpdate.FeaturedSurvey" /> <label class="form-check-label">Öne Çıkarılsın Mı??</label>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row my-3 ml-3">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-success" value="Değişiklikleri Onayla" />
+                                    <input type="button" class="btn btn-danger" value="Vazgeç" @onclick="CancelUpdate" />
+                                </div>
+
+                            </div>
+
+                        </EditForm>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="card-footer text-muted">
+            <p></p>
+        </div>
+    </div>
+
+
+</div>
+
