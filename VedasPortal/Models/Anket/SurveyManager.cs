@@ -23,7 +23,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = _context.Surveys.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefault();
+                var survey = _context.Anket.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefault();
 
                 if (survey == null)
                 {
@@ -46,7 +46,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = await _context.Surveys.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefaultAsync();
+                var survey = await _context.Anket.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefaultAsync();
 
                 if (survey == null)
                 {
@@ -68,7 +68,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var surveys = _context.Surveys.Include(x => x.SurveyOptions).ToList();
+                var surveys = _context.Anket.Include(x => x.SurveyOptions).ToList();
 
                 var result = Mapper.ToSurveyDTOList(surveys);
 
@@ -85,7 +85,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var surveys = await _context.Surveys.Include(x => x.SurveyOptions).ToListAsync();
+                var surveys = await _context.Anket.Include(x => x.SurveyOptions).ToListAsync();
 
                 var result = Mapper.ToSurveyDTOList(surveys);
 
@@ -102,7 +102,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = _context.Surveys.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefault();
+                var survey = _context.Anket.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefault();
 
                 if (survey == null)
                 {
@@ -130,7 +130,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = await _context.Surveys.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefaultAsync();
+                var survey = await _context.Anket.Where(x => x.SurveyId == id).Include(x => x.SurveyOptions).FirstOrDefaultAsync();
 
                 if (survey == null)
                 {
@@ -157,7 +157,7 @@ namespace VedasPortal.Models.Anket
             {
                 Random rnd = new Random();
                 var result = new SurveyDTO();
-                var surveys = _context.Surveys.Where(x => x.FeaturedSurvey == true).Include(x => x.SurveyOptions).ToList();
+                var surveys = _context.Anket.Where(x => x.FeaturedSurvey == true).Include(x => x.SurveyOptions).ToList();
 
                 result = Mapper.ToSurveyDTO(surveys.OrderBy(x => rnd.Next()).Take(1).FirstOrDefault());
 
@@ -176,7 +176,7 @@ namespace VedasPortal.Models.Anket
             {
                 Random rnd = new Random();
                 var result = new SurveyDTO();
-                var surveys = await _context.Surveys.Where(x => x.FeaturedSurvey == true).Include(x => x.SurveyOptions).ToListAsync();
+                var surveys = await _context.Anket.Where(x => x.FeaturedSurvey == true).Include(x => x.SurveyOptions).ToListAsync();
 
                 if (surveys.Count == 0)
                 {
@@ -200,7 +200,7 @@ namespace VedasPortal.Models.Anket
             {
                 var surveyToAdd = Mapper.FromSurveyDTO(survey);
                 survey.CreatedOn = DateTime.Now;
-                _context.Surveys.Add(surveyToAdd);
+                _context.Anket.Add(surveyToAdd);
                 _context.SaveChanges();
 
                 survey = Mapper.ToSurveyDTO(surveyToAdd);
@@ -220,7 +220,7 @@ namespace VedasPortal.Models.Anket
             {
                 var surveyToAdd = Mapper.FromSurveyDTO(survey);
                 survey.CreatedOn = DateTime.Now;
-                await _context.Surveys.AddAsync(surveyToAdd);
+                await _context.Anket.AddAsync(surveyToAdd);
                 await _context.SaveChangesAsync();
 
                 survey = Mapper.ToSurveyDTO(surveyToAdd);
@@ -247,7 +247,7 @@ namespace VedasPortal.Models.Anket
                 }
 
                 var updatedSurvey = Mapper.FromSurveyDTO(survey);
-                var surveyToUpdate = _context.Surveys.FirstOrDefault(x => x.SurveyId == survey.SurveyId);
+                var surveyToUpdate = _context.Anket.FirstOrDefault(x => x.SurveyId == survey.SurveyId);
                 surveyToUpdate.TotalTimesTaken = updateVoteCount;
                 surveyToUpdate.TotalVotes = updateVoteCount;
                 surveyToUpdate.SurveyOptions = updatedSurvey.SurveyOptions;
@@ -276,7 +276,7 @@ namespace VedasPortal.Models.Anket
                 }
 
                 var updatedSurvey = Mapper.FromSurveyDTO(survey);
-                var surveyToUpdate = await _context.Surveys.FirstOrDefaultAsync(x => x.SurveyId == survey.SurveyId);
+                var surveyToUpdate = await _context.Anket.FirstOrDefaultAsync(x => x.SurveyId == survey.SurveyId);
                 surveyToUpdate.TotalTimesTaken = updateVoteCount;
                 surveyToUpdate.TotalVotes = updateVoteCount;
                 surveyToUpdate.SurveyOptions = updatedSurvey.SurveyOptions;
@@ -296,7 +296,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = _context.Surveys.Include(x => x.SurveyOptions).OrderByDescending(x => x.TotalTimesTaken).FirstOrDefault();
+                var survey = _context.Anket.Include(x => x.SurveyOptions).OrderByDescending(x => x.TotalTimesTaken).FirstOrDefault();
 
                 if (survey != null)
                 {
@@ -319,7 +319,7 @@ namespace VedasPortal.Models.Anket
         {
             try
             {
-                var survey = await _context.Surveys.Include(x => x.SurveyOptions).OrderByDescending(x => x.TotalTimesTaken).FirstOrDefaultAsync();
+                var survey = await _context.Anket.Include(x => x.SurveyOptions).OrderByDescending(x => x.TotalTimesTaken).FirstOrDefaultAsync();
 
                 if (survey != null)
                 {

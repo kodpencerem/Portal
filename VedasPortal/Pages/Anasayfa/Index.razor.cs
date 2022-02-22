@@ -30,7 +30,7 @@ namespace VedasPortal.Pages.Anasayfa
 
             if (result.IsSuccess)
             {
-                NavigationManager.NavigateTo($"survey/{result.Value.SurveyId}");
+                NavigationManager.NavigateTo($"anket/{result.Value.SurveyId}");
             }
             else if (result.Status == ResultStatus.NotFound)
             {
@@ -45,7 +45,7 @@ namespace VedasPortal.Pages.Anasayfa
 
         public void ViewSurveys()
         {
-            NavigationManager.NavigateTo("surveys");
+            NavigationManager.NavigateTo("Anketler");
         }
 
         protected override async Task OnInitializedAsync()

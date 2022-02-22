@@ -1,14 +1,14 @@
-﻿@page "/survey/add"
-@page "/survey/edit/{id:int}"
+﻿@page "/anket/ekle"
+@page "/anket/duzenle/{id:int}"
 
 @if (Id == 0)
 {
-    <AddSurvey />
+    <AnketEkleComponent />
 }
 else
 {
     <CascadingValue Value="@Id">
-        <EditSurvey />
+        <AnketDuzenleComponent />
     </CascadingValue>
 
 }

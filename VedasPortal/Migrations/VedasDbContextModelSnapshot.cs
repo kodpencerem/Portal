@@ -221,37 +221,27 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Models.Anket.Models.Survey", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SurveyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DuzenlemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DuzenleyenKullanici")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("FeaturedSurvey")
                         .HasColumnType("bit");
 
-                    b.Property<string>("KaydedenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SurveyName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("SurveyQuestion")
                         .HasColumnType("nvarchar(max)");
@@ -262,51 +252,36 @@ namespace VedasPortal.Migrations
                     b.Property<int>("TotalVotes")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("SurveyId");
 
                     b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Anket.Models.SurveyOption", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SurveyOptionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DuzenlemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DuzenleyenKullanici")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("Fk_SurveyId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KaydedenKullanici")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SurveyOptionId")
-                        .HasColumnType("int");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("TotalVotes")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("SurveyOptionId");
 
-                    b.HasIndex("SurveyId");
+                    b.HasIndex("Fk_SurveyId");
 
                     b.ToTable("SurveyOptions");
                 });
@@ -971,7 +946,9 @@ namespace VedasPortal.Migrations
                 {
                     b.HasOne("VedasPortal.Models.Anket.Models.Survey", "Survey")
                         .WithMany("SurveyOptions")
-                        .HasForeignKey("SurveyId");
+                        .HasForeignKey("Fk_SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Survey");
                 });

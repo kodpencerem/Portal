@@ -1,12 +1,12 @@
 ﻿@page "/anket/{id:int}"
 
 
-<div class="container mt-5">
-    <div class="card text-center">
-        <div class="card-header">
+<div class="col-lg-12 col-sm-12 col-md-6 col-xs-12">
+    <CardComponent class="card text-center">
+        <CardHeader>
             @SurveyVM.SurveyName
-        </div>
-        <div class="card-body">
+        </CardHeader>
+        <CardBody>
 
             @if (!isReady)
             {
@@ -49,11 +49,30 @@
                 </EditForm>
             }
 
-        </div>
-        <div class="card-footer text-muted">
+        </CardBody>
+        <CardFotter>
             @(SurveyVM == null ?  "" : SurveyVM.CreatedOn.ToShortDateString()) tarihinde oluşturuldu.
-        </div>
-    </div>
+        </CardFotter>
+    </CardComponent>
 </div>
 
 
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

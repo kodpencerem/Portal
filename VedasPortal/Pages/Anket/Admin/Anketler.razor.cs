@@ -10,9 +10,9 @@ using VedasPortal.Data;
 using VedasPortal.Models.Anket.Contracts;
 using VedasPortal.Models.Anket.DTO;
 
-namespace VedasPortal.Pages.Anket
+namespace VedasPortal.Pages.Anket.Admin
 {
-    public partial class AdminSurveyList : ComponentBase
+    public partial class Anketler : ComponentBase
     {
 
         [Inject]
@@ -51,14 +51,14 @@ namespace VedasPortal.Pages.Anket
 
         private void EditSurvey(int id)
         {
-            NavigationManager.NavigateTo($"survey/edit/{id}");
+            NavigationManager.NavigateTo($"anket/duzenle/{id}");
         }
 
         private async Task DeleteSurvey(int id)
         {
             ModalParameters parameters = new ModalParameters();
             parameters.Add("Message", "Silmek istediğinize emin misiniz?");
-            var formModal = Modal.Show<Confirm>("Anketi Sil", parameters);
+            var formModal = Modal.Show<OnayComponent>("Anketi Sil", parameters);
 
             var result = await formModal.Result;
 
@@ -87,7 +87,7 @@ namespace VedasPortal.Pages.Anket
             }
 
 
-            NavigationManager.NavigateTo($"surveylist/edit");
+            NavigationManager.NavigateTo($"anketlerlistesi");
         }
 
     }

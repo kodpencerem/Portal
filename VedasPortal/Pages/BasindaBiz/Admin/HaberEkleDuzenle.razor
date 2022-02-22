@@ -26,9 +26,9 @@
                             <div class="col-md-10">
                                 <InputFile @bind-ValuePath="@HaberDosya" />
                                 @*@if (!string.IsNullOrEmpty(haber.Dosya.Yolu?.ToString()))
-                                {
-                                    <img src="@("img/uploaded/"+@haber.Dosya.Yolu)" height="150" />
-                                }*@
+                                    {
+                                        <img src="@("images/uploaded/"+@haber.Dosya.Yolu)" height="150" />
+                                    }*@
                             </div>
                             @*<ValidationMessage For="@(() => haber.Dosya.Yolu)" />*@
                         </div>
@@ -101,7 +101,7 @@
                                 <CKEditorBlazor Id="MyEditor1"
                                                 @bind-Value=@haber.Aciklama
                                                 Label="Açıklama"
-                                                UrlToPostImage="img/uploaded/">
+                                                UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
 
                             </div>

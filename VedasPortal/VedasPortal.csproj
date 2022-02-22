@@ -28,6 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Data\Images\default.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Images\default.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Pages\FaydaliIcerikler\Dokumanlar\Dokumanlar.razor.cs" />
   </ItemGroup>
 
@@ -62,15 +70,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Anket\AddSurvey.razor" />
-    <None Include="Components\Anket\EditSurvey.razor" />
-    <None Include="Components\Anket\FeaturedSurvey.razor" />
-    <None Include="Components\Anket\Modals\AddOption.razor" />
-    <None Include="Components\Anket\Modals\Confirm.razor" />
-    <None Include="Components\Anket\Modals\NewSurveyOption.razor" />
-    <None Include="Components\Anket\MostPopularSurvey.razor" />
-    <None Include="Components\Anket\SurveyCount.razor" />
-    <None Include="Components\Anket\SurveyOptionItem.razor" />
+    <None Include="Components\Anket\AnketEkleComponent.razor" />
+    <None Include="Components\Anket\AnketDuzenleComponent.razor" />
+    <None Include="Components\Anket\SecilmisAnket.razor" />
+    <None Include="Components\Anket\Modals\AnketSecenekEkle.razor" />
+    <None Include="Components\Anket\Modals\OnayComponent.razor" />
+    <None Include="Components\Anket\Modals\YeniAnketSecenekEkle.razor" />
+    <None Include="Components\Anket\EnPopulerAnket.razor" />
+    <None Include="Components\Anket\AnketKatilimSayisi.razor" />
+    <None Include="Components\Anket\AnketSecenekItem.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />

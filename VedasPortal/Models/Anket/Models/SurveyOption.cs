@@ -3,7 +3,7 @@
 namespace VedasPortal.Models.Anket.Models
 {
     [Table("SurveyOptions")]
-    public class SurveyOption : Base.BaseEntity
+    public class SurveyOption 
     {
         public int SurveyOptionId { get; set; }
 

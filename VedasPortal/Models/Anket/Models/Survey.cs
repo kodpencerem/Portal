@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace VedasPortal.Models.Anket.Models
 {
     [Table("Surveys")]
-    public class Survey:Base.BaseEntity
+    public class Survey
     {
         public int SurveyId { get; set; }
         public string SurveyName { get; set; }

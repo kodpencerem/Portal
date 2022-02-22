@@ -32,32 +32,36 @@ namespace VedasPortal.Data
         public DbSet<Oneri> Oneri { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
 
-        public DbSet<Models.Anket.Models.Survey> Surveys { get; set; }
-        public DbSet<SurveyOption> SurveyOptions { get; set; }
+        public DbSet<Models.Anket.Models.Survey> Anket { get; set; }
+        public DbSet<SurveyOption> AnketSecenek { get; set; }
 
 
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Survey>(e => {
-        //        e.Property(p => p.SurveyId).IsRequired().ValueGeneratedOnAdd();
-        //        e.HasKey(p => p.SurveyId);
-        //        e.Property(p => p.Description).HasMaxLength(255);
-        //        e.Property(p => p.SurveyName).HasMaxLength(50).IsRequired();
-        //        e.Property(p => p.CreatedOn).IsRequired().HasDefaultValueSql("getdate()");
-        //    });
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<Survey>().HasMany(e => e.SurveyOptions).WithOne(e => e.Survey).HasForeignKey(e => e.Fk_SurveyId);
+            modelBuilder.Entity<Survey>(e =>
+            {
+                e.Property(p => p.SurveyId).IsRequired().ValueGeneratedOnAdd();
+                e.HasKey(p => p.SurveyId);
+                e.Property(p => p.Description).HasMaxLength(255);
+                e.Property(p => p.SurveyName).HasMaxLength(50).IsRequired();
+                e.Property(p => p.CreatedOn).IsRequired().HasDefaultValueSql("getdate()");
+            });
 
-        //    modelBuilder.Entity<SurveyOption>(e => {
-        //        e.Property(p => p.SurveyOptionId).IsRequired().ValueGeneratedOnAdd();
-        //        e.HasKey(p => p.SurveyOptionId);
-        //        e.Property(p => p.TotalVotes).IsRequired();
-        //        e.Property(p => p.ImagePath).HasMaxLength(255);
-        //        e.Property(p => p.Description).HasMaxLength(255).IsRequired();
+            modelBuilder.Entity<Survey>().HasMany(e => e.SurveyOptions).WithOne(e => e.Survey).HasForeignKey(e => e.Fk_SurveyId);
 
-        //    });
-        //}
+            modelBuilder.Entity<SurveyOption>(e =>
+            {
+                e.Property(p => p.SurveyOptionId).IsRequired().ValueGeneratedOnAdd();
+                e.HasKey(p => p.SurveyOptionId);
+                e.Property(p => p.TotalVotes).IsRequired();
+                e.Property(p => p.ImagePath).HasMaxLength(255);
+                e.Property(p => p.Description).HasMaxLength(255).IsRequired();
+
+            });
+        }
 
     }
 }
