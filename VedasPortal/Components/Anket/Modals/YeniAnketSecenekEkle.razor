@@ -1,0 +1,21 @@
+﻿
+<EditForm Model="@optionModel" OnValidSubmit="SaveOption">
+    <DataAnnotationsValidator />
+    <ShowModalComponent  IsOpened="true">
+        
+        <ModalBody>
+            <div class="form-group m-3">
+                <label class="bs-form-label">Açıklama</label>
+                <InputText class="form-control" @bind-Value="@optionModel.Description" />
+                <ValidationMessage For="@(() => optionModel.Description)" />
+            </div>
+        </ModalBody>
+        <ModalFooter>
+            <button type="submit" class="btn btn-primary">Ekle</button>
+            <button @onclick="Cancel" class="btn btn-secondary">Vazgeç</button>
+        </ModalFooter>
+    </ShowModalComponent>
+    
+</EditForm>
+
+
