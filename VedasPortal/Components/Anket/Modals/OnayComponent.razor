@@ -1,8 +1,13 @@
 ﻿
-<div>
-    <p>@Message</p>
+<ShowModalComponent IsOpened="true">
 
-    <button @onclick="Accept" class="btn btn-primary">Evet</button>
-    <button @onclick="Cancel" class="btn btn-secondary">Hayır</button>
-</div>
-
+    <ModalBody>
+        <div class="form-group m-3">
+            <p>@Message</p>
+        </div>
+    </ModalBody>
+    <ModalFooter>
+        <button @onclick="Accept" class="btn btn-primary">Evet</button>
+        <button @onclick="Cancel" class="btn btn-secondary">Hayır</button>
+    </ModalFooter>
+</ShowModalComponent>

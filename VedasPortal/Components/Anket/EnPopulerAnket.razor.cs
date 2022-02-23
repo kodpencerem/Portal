@@ -13,7 +13,7 @@ namespace VedasPortal.Components.Anket
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public VedasDbContext Context { get; set; }
@@ -22,7 +22,7 @@ namespace VedasPortal.Components.Anket
 
         private string MostPopularSurveyName { get; set; }
 
-        private SurveyDTO Survey { get; set; }
+        private AnketDTO Survey { get; set; }
 
 
         protected override async Task OnParametersSetAsync()

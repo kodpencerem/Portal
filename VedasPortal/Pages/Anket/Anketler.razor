@@ -36,11 +36,11 @@
                         @foreach (var survey in SurveyList)
                         {
                             <tr>
-                                <td><button class="btn btn-sm btn-primary" @onclick="() => TakeSurvey(survey.SurveyId)">Ankete Katıl</button></td>
-                                <td><button class="btn btn-sm btn-info" @onclick="() => ViewSurveyResults(survey.SurveyId)">Sonuçları Gör</button></td>
-                                <td>@survey.SurveyName</td>
-                                <td>@survey.Description</td>
-                                <td>@survey.TotalTimesTaken</td>
+                                <td><button class="btn btn-sm btn-primary" @onclick="() => TakeSurvey(survey.AnketId)">Ankete Katıl</button></td>
+                                <td><button class="btn btn-sm btn-info" @onclick="() => ViewSurveyResults(survey.AnketId)">Sonuçları Gör</button></td>
+                                <td>@survey.Adi</td>
+                                <td>@survey.Aciklama</td>
+                                <td>@survey.ToplamAlinanSure</td>
                             </tr>
                         }
                     }

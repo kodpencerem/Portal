@@ -709,7 +709,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Anket\" />
     <Folder Include="Pages\HavaDurumu\" />
   </ItemGroup>
 

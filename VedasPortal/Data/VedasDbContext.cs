@@ -32,8 +32,8 @@ namespace VedasPortal.Data
         public DbSet<Oneri> Oneri { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
 
-        public DbSet<Models.Anket.Models.Survey> Anket { get; set; }
-        public DbSet<SurveyOption> AnketSecenek { get; set; }
+        public DbSet<Models.Anket.Models.Anket> Anket { get; set; }
+        public DbSet<AnketSecenek> AnketSecenek { get; set; }
 
 
 
@@ -41,24 +41,24 @@ namespace VedasPortal.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Survey>(e =>
+            modelBuilder.Entity<Anket>(e =>
             {
-                e.Property(p => p.SurveyId).IsRequired().ValueGeneratedOnAdd();
-                e.HasKey(p => p.SurveyId);
-                e.Property(p => p.Description).HasMaxLength(255);
-                e.Property(p => p.SurveyName).HasMaxLength(50).IsRequired();
-                e.Property(p => p.CreatedOn).IsRequired().HasDefaultValueSql("getdate()");
+                e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+                e.HasKey(p => p.Id);
+                e.Property(p => p.Aciklama).HasMaxLength(255);
+                e.Property(p => p.Adi).HasMaxLength(50).IsRequired();
+                e.Property(p => p.KayitTarihi).IsRequired().HasDefaultValueSql("getdate()");
             });
 
-            modelBuilder.Entity<Survey>().HasMany(e => e.SurveyOptions).WithOne(e => e.Survey).HasForeignKey(e => e.Fk_SurveyId);
+            modelBuilder.Entity<Anket>().HasMany(e => e.AnketSecenek).WithOne(e => e.Anket).HasForeignKey(e => e.Fk_AnketId);
 
-            modelBuilder.Entity<SurveyOption>(e =>
+            modelBuilder.Entity<AnketSecenek>(e =>
             {
-                e.Property(p => p.SurveyOptionId).IsRequired().ValueGeneratedOnAdd();
-                e.HasKey(p => p.SurveyOptionId);
-                e.Property(p => p.TotalVotes).IsRequired();
-                e.Property(p => p.ImagePath).HasMaxLength(255);
-                e.Property(p => p.Description).HasMaxLength(255).IsRequired();
+                e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+                e.HasKey(p => p.Id);
+                e.Property(p => p.ToplamKatilim).IsRequired();
+                e.Property(p => p.Resim).HasMaxLength(255);
+                e.Property(p => p.Aciklama).HasMaxLength(255).IsRequired();
 
             });
         }

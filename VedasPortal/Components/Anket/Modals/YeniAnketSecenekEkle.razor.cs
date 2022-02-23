@@ -16,8 +16,8 @@ namespace VedasPortal.Components.Anket.Modals
        
         private EditContext editContext { get; set; }
 
-        private OptionViewModel optionModel { get; set; } = new OptionViewModel();
-        private SurveyOptionDTO model = new SurveyOptionDTO();
+        private AnketSecenekVm optionModel { get; set; } = new AnketSecenekVm();
+        private AnketSecenekDTO model = new AnketSecenekDTO();
 
         protected override void OnInitialized()
         {
@@ -27,9 +27,9 @@ namespace VedasPortal.Components.Anket.Modals
         private Task SaveOption()
         {
 
-            model.Description = optionModel.Description;
-            model.ImagePath = optionModel.ImagePath;
-            model.TotalVotes = 0;
+            model.Aciklama = optionModel.Aciklama;
+            model.Resim = optionModel.Resim;
+            model.ToplamKatilim = 0;
 
             return Modal.CloseAsync(ModalResult.Ok(model));
         }

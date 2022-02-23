@@ -17,7 +17,7 @@ namespace VedasPortal.Pages.Anasayfa
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
@@ -30,7 +30,7 @@ namespace VedasPortal.Pages.Anasayfa
 
             if (result.IsSuccess)
             {
-                NavigationManager.NavigateTo($"anket/{result.Value.SurveyId}");
+                NavigationManager.NavigateTo($"anket/{result.Value.AnketId}");
             }
             else if (result.Status == ResultStatus.NotFound)
             {

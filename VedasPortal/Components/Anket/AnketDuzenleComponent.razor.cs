@@ -4,6 +4,7 @@ using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
+using VedasPortal.Components.Anket.Modals;
 using VedasPortal.Data;
 using VedasPortal.Models.Anket.Contracts;
 using VedasPortal.Models.Anket.DTO;
@@ -33,7 +34,7 @@ namespace VedasPortal.Components.Anket
         IModalService Modal { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
@@ -43,9 +44,9 @@ namespace VedasPortal.Components.Anket
 
         private bool isReady = false;
 
-        private SurveyDTO Survey;
+        private AnketDTO Survey;
 
-        private EditSurveyViewModel SurveyToUpdate { get; set; }
+        private AnketDuzenleVm SurveyToUpdate { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -66,11 +67,11 @@ namespace VedasPortal.Components.Anket
         {
             var updatedSurvey = SurveyToUpdate;
 
-            Survey.SurveyName = SurveyToUpdate.SurveyName;
-            Survey.SurveyQuestion = SurveyToUpdate.SurveyQuestion;
-            Survey.FeaturedSurvey = SurveyToUpdate.FeaturedSurvey;
-            Survey.Description = SurveyToUpdate.Description;
-            Survey.SurveyOptions = SurveyToUpdate.SurveyOptionsToAdd;
+            Survey.Adi = SurveyToUpdate.Adi;
+            Survey.AnketSorusu = SurveyToUpdate.AnketSorusu;
+            Survey.SecilenAnketMi = SurveyToUpdate.SecilenAnketMi;
+            Survey.Aciklama = SurveyToUpdate.Aciklama;
+            Survey.AnketSecenekleri = SurveyToUpdate.AnketSecenekEkle;
 
             var result = await SurveyManager.UpdateSurveyAsync(Survey);
 
@@ -94,7 +95,7 @@ namespace VedasPortal.Components.Anket
         private async Task DeleteOption(int id)
         {
             var parameters = new ModalParameters();
-            parameters.Add("SurveyOptionId", id);
+            parameters.Add("AnketSecenekId", id);
             parameters.Add("Message", "Silmek istediğinize emin misiniz?");
             var formModal = Modal.Show<Confirm>("Silme İşlemi", parameters);
             var result = await formModal.Result;
@@ -108,16 +109,16 @@ namespace VedasPortal.Components.Anket
         private async Task AddOption()
         {
             var parameters = new ModalParameters();
-            parameters.Add("SurveyId", SurveyToUpdate.SurveyId);
+            parameters.Add("AnketId", SurveyToUpdate.AnketId);
 
-            var formModal = Modal.Show<AnketEkleComponent>("Seçenek Ekle", parameters);
+            var formModal = Modal.Show<AnketSecenekEkle>("Seçenek Ekle", parameters);
 
             var result = await formModal.Result;
 
             if (!result.Cancelled)
             {
                 var results = result.Data;
-                SurveyToUpdate.AddSurveyOption((SurveyOptionDTO)result.Data);
+                SurveyToUpdate.AddSurveyOption((AnketSecenekDTO)result.Data);
             }
         }
 

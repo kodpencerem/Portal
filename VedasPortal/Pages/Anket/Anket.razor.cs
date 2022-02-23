@@ -30,14 +30,14 @@ namespace VedasPortal.Pages.Anket
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
 
-        private SurveyViewModel SurveyVM = new SurveyViewModel();
+        private AnketVm SurveyVM = new AnketVm();
 
-        private SurveyDTO survey;
+        private AnketDTO survey;
 
         private bool isReady = false;
 
@@ -61,9 +61,9 @@ namespace VedasPortal.Pages.Anket
             SurveyVM.SurveyTaken();
             SurveyVM.TallyVote();
 
-            survey.TotalTimesTaken = SurveyVM.TotalTimesTaken;
-            survey.SurveyOptions = SurveyVM.SurveyOptions;
-            survey.TotalVotes = SurveyVM.TotalVotes;
+            survey.ToplamAlinanSure = SurveyVM.ToplamAlinanSure;
+            survey.AnketSecenekleri = SurveyVM.AnketSecenekleri;
+            survey.ToplamKatilim = SurveyVM.ToplamKatilim;
 
             var result = await SurveyManager.UpdateSurveyAsync(survey);
 
@@ -82,7 +82,7 @@ namespace VedasPortal.Pages.Anket
 
         private void UpdateSelectedValue(string selectedOptionId)
         {
-            SurveyVM.SelectedOption = selectedOptionId;
+            SurveyVM.SecilenSecenek = selectedOptionId;
         }
 
 

@@ -6,7 +6,7 @@ namespace VedasPortal.Pages.Anket.Admin
     {
 
         [Parameter]
-        public int SurveyId { get; set; }
+        public int AnketId { get; set; }
 
     }
 

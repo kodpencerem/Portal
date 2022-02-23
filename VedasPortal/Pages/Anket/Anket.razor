@@ -2,56 +2,56 @@
 
 
 <div class="col-lg-12 col-sm-12 col-md-6 col-xs-12">
-    <CardComponent class="card text-center">
+    <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            @SurveyVM.SurveyName
+            @SurveyVM.Adi
         </CardHeader>
         <CardBody>
 
             @if (!isReady)
             {
-                <p>Yükleniyor...</p>
-            }
-            else
+<p>Yükleniyor...</p> }
+                else
+                {
+<EditForm Model="SurveyVM" OnValidSubmit="SubmitSurvey">
+    <DataAnnotationsValidator />
+    <div class="row justify-content-center">
+        <ValidationSummary />
+    </div>
+<br />
+    <div class="row justify-content-center">@(SurveyVM.AnketSorusu)?</div>
+            <br />
+    <div class="row justify-content-center mt-3">
+
+
+
+        <div class="form-group">
+
+            @foreach (var option in SurveyVM.AnketSecenekleri)
             {
-                <EditForm Model="SurveyVM" OnValidSubmit="SubmitSurvey">
-                    <DataAnnotationsValidator />
-                    <div class="row justify-content-center">
-                        <ValidationSummary />
-                    </div>
+<div class="row">
+    <input style="margin-bottom:10px" class="form-check-input" type="radio"
+           name="SurveyOption"
+           value="@option.AnketSecenekId"
+           checked="@(SurveyVM.SecilenSecenek == option.AnketSecenekId.ToString())"
+           @onchange="@(() => UpdateSelectedValue(option.AnketSecenekId.ToString()))" />
+            
+    <label class="form-check-label">@option.Aciklama</label>
+    <br /><br />
+</div>}
+        </div>
 
-                    <div class="row justify-content-center">@(SurveyVM.SurveyQuestion)?</div>
-                    <div class="row justify-content-center mt-3">
+    </div>
 
+    <div class="row justify-content-center my-3">
+        <input type="submit" class="btn btn-primary" value="Gönder" />
+    </div>
 
-
-                        <div class="form-group">
-                            <div>
-                              @foreach (var option in SurveyVM.SurveyOptions)
-                                {
-                                    <div class="row">
-                                        <input class="form-check-input" type="radio"
-                                               name="SurveyOption"
-                                               value="@option.SurveyOptionId"
-                                               checked="@(SurveyVM.SelectedOption == option.SurveyOptionId.ToString())"
-                                               @onchange="@(() => UpdateSelectedValue(option.SurveyOptionId.ToString()))" />
-                                        <label class="form-check-label">@option.Description</label>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center my-3">
-                        <input type="submit" class="btn btn-primary" value="Gönder" />
-                    </div>
-
-                </EditForm>
-            }
+</EditForm>}
 
         </CardBody>
         <CardFotter>
-            @(SurveyVM == null ?  "" : SurveyVM.CreatedOn.ToShortDateString()) tarihinde oluşturuldu.
+            @(SurveyVM == null ?  "" : SurveyVM.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.
         </CardFotter>
     </CardComponent>
 </div>

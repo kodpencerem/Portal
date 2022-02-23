@@ -73,7 +73,7 @@ namespace VedasPortal
             services.AddBlazoredModal();
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();
-            services.AddScoped<ISurveyManager, SurveyManager>();
+            services.AddScoped<IAnketYonetim, AnketYonetim>();
 
         }
 

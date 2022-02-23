@@ -25,12 +25,12 @@ namespace VedasPortal.Pages.Anket.Admin
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public List<SurveyDTO> SurveyList { get; set; }
+        public List<AnketDTO> SurveyList { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }

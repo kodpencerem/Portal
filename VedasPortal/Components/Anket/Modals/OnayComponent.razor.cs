@@ -1,6 +1,7 @@
 ﻿using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using VedasPortal.Components.ModalComponents;
 
 namespace VedasPortal.Components.Anket.Modals
 {
@@ -11,14 +12,13 @@ namespace VedasPortal.Components.Anket.Modals
         BlazoredModalInstance Modal { get; set; }
 
         [Parameter]
-        public int SurveyOptionId { get; set; }
+        public int AnketSecenekId { get; set; }
 
         [Parameter]
         public string Message { get; set; }
 
-        void Accept() => Modal.CloseAsync(ModalResult.Ok(SurveyOptionId));
+        void Accept() => Modal.CloseAsync(ModalResult.Ok(AnketSecenekId));
         void Cancel() => Modal.CancelAsync();
-
-
+        public ShowModalComponent ModalShow { get; set; }
     }
 }

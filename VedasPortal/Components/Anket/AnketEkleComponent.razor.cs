@@ -29,7 +29,7 @@ namespace VedasPortal.Components.Anket
         public VedasDbContext Context { get; set; }
 
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         [Inject]
         public Mapper mapper { get; set; }
@@ -40,7 +40,7 @@ namespace VedasPortal.Components.Anket
         [CascadingParameter]
         IModalService Modal { get; set; }
 
-        private AddSurveyViewModel model = new AddSurveyViewModel();
+        private AnketEkleVm model = new AnketEkleVm();
 
         private async Task SaveSurvey()
         {
@@ -69,7 +69,7 @@ namespace VedasPortal.Components.Anket
         private async Task DeleteOption(int id)
         {
             var parameters = new ModalParameters();
-            parameters.Add("SurveyOptionId", id);
+            parameters.Add("Id", id);
             parameters.Add("Message", "Silmek istediğinize emin misiniz??");
             var formModal = Modal.Show<OnayComponent>("Silme İşlemi", parameters);
             var result = await formModal.Result;
@@ -92,8 +92,8 @@ namespace VedasPortal.Components.Anket
             if (!result.Cancelled)
             {
                 var results = result?.Data;
-                model.AddSurveyOption((SurveyOptionDTO)result.Data, maxId);
-                model.SurveyOptionsToAdd.Add((SurveyOptionDTO)result.Data);
+                model.AddSurveyOption((AnketSecenekDTO)result.Data, maxId);
+                model.AnketSecenekEkle.Add((AnketSecenekDTO)result.Data);
 
             }
         }

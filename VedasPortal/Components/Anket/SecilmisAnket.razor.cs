@@ -17,14 +17,14 @@ namespace VedasPortal.Components.Anket
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        ISurveyManager SurveyManager { get; set; }
+        IAnketYonetim SurveyManager { get; set; }
 
-        private ISurveyDTO Survey = null;
+        private IAnketDTO Survey = null;
 
         private bool isReady = false;
 
         [Parameter]
-        public int SurveyId { get; set; }
+        public int AnketId { get; set; }
 
 
         private void TakeSurvey(int surveyId)
@@ -34,10 +34,10 @@ namespace VedasPortal.Components.Anket
 
         protected override async Task OnInitializedAsync()
         {
-            if (SurveyId != 0)
+            if (AnketId != 0)
             {
 
-                var result = await SurveyManager.GetSurveyAsync(SurveyId);
+                var result = await SurveyManager.GetSurveyAsync(AnketId);
 
                 if (result.IsSuccess)
                 {

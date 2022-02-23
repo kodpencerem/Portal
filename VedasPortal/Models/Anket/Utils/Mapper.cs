@@ -7,43 +7,43 @@ namespace VedasPortal.Models.Anket.Utils
 {
     public static class Mapper
     {
-        public static SurveyDTO ToSurveyDTO(Survey survey)
+        public static AnketDTO ToSurveyDTO(Models.Anket survey)
         {
 
-            var result = new SurveyDTO()
+            var result = new AnketDTO()
             {
-                SurveyId = survey.SurveyId,
-                SurveyName = survey.SurveyName,
-                Description = survey.Description,
-                SurveyQuestion = survey.SurveyQuestion,
-                FeaturedSurvey = survey.FeaturedSurvey,
-                TotalVotes = survey.TotalVotes,
-                TotalTimesTaken = survey.TotalTimesTaken,
-                CreatedOn = survey.CreatedOn,
-                SurveyOptions = ToSurveyOptionList(survey.SurveyOptions)
+                AnketId = survey.Id,
+                Adi = survey.Adi,
+                Aciklama = survey.Aciklama,
+                AnketSorusu = survey.AnketSorusu,
+                SecilenAnketMi = survey.SecilenAnketMi,
+                ToplamKatilim = survey.ToplamKatilim,
+                ToplamAlinanSure = survey.ToplamAlinanSure,
+                OlusturulmaTarihi = survey.KayitTarihi,
+                AnketSecenekleri = ToSurveyOptionList(survey.AnketSecenek)
             };
 
             return result;
         }
 
 
-        public static SurveyOptionDTO ToSurveyOptionDTO(SurveyOption option)
+        public static AnketSecenekDTO ToSurveyOptionDTO(AnketSecenek option)
         {
-            var result = new SurveyOptionDTO()
+            var result = new AnketSecenekDTO()
             {
-                SurveyOptionId = option.SurveyOptionId,
-                Description = option.Description,
-                ImagePath = option.ImagePath,
-                Fk_SurveyId = option.Fk_SurveyId,
-                TotalVotes = option.TotalVotes
+                AnketSecenekId = option.Id,
+                Aciklama = option.Aciklama,
+                Resim = option.Resim,
+                Fk_AnketId = option.Fk_AnketId,
+                ToplamKatilim = option.ToplamKatilim
             };
 
             return result;
         }
 
-        public static List<SurveyOptionDTO> ToSurveyOptionList(ICollection<SurveyOption> options)
+        public static List<AnketSecenekDTO> ToSurveyOptionList(ICollection<AnketSecenek> options)
         {
-            var result = new List<SurveyOptionDTO>();
+            var result = new List<AnketSecenekDTO>();
 
             foreach (var option in options.ToList())
             {
@@ -53,42 +53,42 @@ namespace VedasPortal.Models.Anket.Utils
             return result;
         }
 
-        public static Survey FromSurveyDTO(SurveyDTO survey)
+        public static Models.Anket FromSurveyDTO(AnketDTO survey)
         {
-            var result = new Survey()
+            var result = new Models.Anket()
             {
-                SurveyId = survey.SurveyId,
-                SurveyName = survey.SurveyName,
-                Description = survey.Description,
-                SurveyQuestion = survey.SurveyQuestion,
-                FeaturedSurvey = survey.FeaturedSurvey,
-                TotalVotes = survey.TotalVotes,
-                TotalTimesTaken = survey.TotalTimesTaken,
-                CreatedOn = survey.CreatedOn,
-                SurveyOptions = FromSurveyOptionList(survey.SurveyOptions)
+                Id = survey.AnketId,
+                Adi = survey.Adi,
+                Aciklama = survey.Aciklama,
+                AnketSorusu = survey.AnketSorusu,
+                SecilenAnketMi = survey.SecilenAnketMi,
+                ToplamKatilim = survey.ToplamKatilim,
+                ToplamAlinanSure = survey.ToplamAlinanSure,
+                KayitTarihi = survey.OlusturulmaTarihi,
+                AnketSecenek = FromSurveyOptionList(survey.AnketSecenekleri)
             };
 
             return result;
         }
 
 
-        public static SurveyOption FromSurveyOptionDTO(SurveyOptionDTO option)
+        public static AnketSecenek FromSurveyOptionDTO(AnketSecenekDTO option)
         {
-            var result = new SurveyOption()
+            var result = new AnketSecenek()
             {
-                SurveyOptionId = option.SurveyOptionId,
-                Description = option.Description,
-                ImagePath = option.ImagePath,
-                Fk_SurveyId = option.Fk_SurveyId,
-                TotalVotes = option.TotalVotes
+                Id = option.AnketSecenekId,
+                Aciklama = option.Aciklama,
+                Resim = option.Resim,
+                Fk_AnketId = option.Fk_AnketId,
+                ToplamKatilim = option.ToplamKatilim
             };
 
             return result;
         }
 
-        public static List<SurveyOption> FromSurveyOptionList(List<SurveyOptionDTO> options)
+        public static List<AnketSecenek> FromSurveyOptionList(List<AnketSecenekDTO> options)
         {
-            var result = new List<SurveyOption>();
+            var result = new List<AnketSecenek>();
 
             foreach (var option in options.ToList())
             {
@@ -98,9 +98,9 @@ namespace VedasPortal.Models.Anket.Utils
             return result;
         }
 
-        public static List<SurveyDTO> ToSurveyDTOList(ICollection<Survey> surveys)
+        public static List<AnketDTO> ToSurveyDTOList(ICollection<Models.Anket> surveys)
         {
-            var result = new List<SurveyDTO>();
+            var result = new List<AnketDTO>();
 
             foreach (var survey in surveys)
             {

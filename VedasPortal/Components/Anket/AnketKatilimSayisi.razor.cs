@@ -14,7 +14,7 @@ namespace VedasPortal.Components.Anket
 
    
         [Inject]
-        public ISurveyManager SurveyManager { get; set; }
+        public IAnketYonetim SurveyManager { get; set; }
 
         private int? NumberOfSurveys { get; set; }
 

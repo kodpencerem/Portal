@@ -19,23 +19,23 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyName">Anket Adı</label>
-                                    <InputText id="surveyName" class="form-control" @bind-Value="@SurveyToUpdate.SurveyName" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.SurveyName)" />
+                                    <InputText id="surveyName" class="form-control" @bind-Value="@SurveyToUpdate.Adi" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.Adi)" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyDescription">Açıklama</label>
-                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@SurveyToUpdate.Description" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.Description)" />
+                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@SurveyToUpdate.Aciklama" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.Aciklama)" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyQuestion">Anket Sorusu</label>
-                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@SurveyToUpdate.SurveyQuestion" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.SurveyQuestion)" />
+                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@SurveyToUpdate.AnketSorusu" />
+                                    <ValidationMessage For="@(() => SurveyToUpdate.AnketSorusu)" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -48,7 +48,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if (SurveyToUpdate.SurveyOptions.Count == 0)
+                                        @if (SurveyToUpdate.AnketSecenekleri.Count == 0)
                                         {
                                             <tr>
                                                 <td colspan="2">Lütfen en az iki seçenek ekleyin!</td>
@@ -56,7 +56,7 @@
                                         }
                                         else
                                         {
-                                            @foreach (var option in SurveyToUpdate.SurveyOptions)
+                                            @foreach (var option in SurveyToUpdate.AnketSecenekleri)
                                             {
                                                 <tr>
                                                     <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> DeleteOption(Int32.Parse(option.Value)))">Sil</button></td>
@@ -67,13 +67,13 @@
                                         </tbody>
                                     </table>
                                     <div class="justify-content-center">
-                                        <ValidationMessage For="@(() => SurveyToUpdate.SurveyOptions)" />
+                                        <ValidationMessage For="@(() => SurveyToUpdate.AnketSecenekleri)" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-check row">
                                 <div class="d-flex align-items-start">
-                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@SurveyToUpdate.FeaturedSurvey" /> <label class="form-check-label">Öne Çıkarılsın Mı??</label>
+                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@SurveyToUpdate.SecilenAnketMi" /> <label class="form-check-label">Öne Çıkarılsın Mı??</label>
                                 </div>
 
                             </div>

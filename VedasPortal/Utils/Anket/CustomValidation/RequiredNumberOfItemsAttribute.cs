@@ -13,7 +13,7 @@ namespace VedasPortal.Utils.Anket.CustomValidation
         {
 
 
-            var numberOfItemsInList = ((List<SurveyOptionDTO>)value).Count();
+            var numberOfItemsInList = ((List<AnketSecenekDTO>)value).Count();
 
             if (numberOfItemsInList < RequiredNumberOfRecords)
             {

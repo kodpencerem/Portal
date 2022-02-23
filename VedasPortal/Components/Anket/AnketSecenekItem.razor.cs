@@ -8,7 +8,7 @@ namespace VedasPortal.Components.Anket
     {
 
         [Parameter]
-        public SurveyOptionDTO Item { get; set; }
+        public AnketSecenekDTO Item { get; set; }
 
         [Parameter]
         public int TotalSurveyVotes { get; set; }
@@ -19,11 +19,11 @@ namespace VedasPortal.Components.Anket
 
         protected override void OnInitialized()
         {
-            imageSrc = $"images/{Item.ImagePath}";
+            imageSrc = $"images/{Item.Resim}";
             double calculatedPercentage = 0;
-            if (Item.TotalVotes != 0)
+            if (Item.ToplamKatilim != 0)
             {
-                calculatedPercentage = (double)Item.TotalVotes / TotalSurveyVotes * 100;
+                calculatedPercentage = (double)Item.ToplamKatilim / TotalSurveyVotes * 100;
             }
 
             totalPercentage = (int)Math.Floor(calculatedPercentage);
