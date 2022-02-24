@@ -19,18 +19,18 @@ namespace VedasPortal.Models.Anket
         {
             _context = context;
         }
-        public Result<AnketDTO> GetSurvey(int id)
+        public Result<AnketDTO> AnketGetir(int id)
         {
             try
             {
-                var survey = _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefault();
+                var anketDTO = _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefault();
 
-                if (survey == null)
+                if (anketDTO == null)
                 {
                     return Result<AnketDTO>.NotFound();
                 }
 
-                var result = Mapper.ToSurveyDTO(survey);
+                var result = Mapper.ToAnketDTO(anketDTO);
 
                 return Result<AnketDTO>.Success(result);
             }
@@ -42,18 +42,18 @@ namespace VedasPortal.Models.Anket
 
         }
 
-        public async Task<Result<AnketDTO>> GetSurveyAsync(int id)
+        public async Task<Result<AnketDTO>> AnketGetirAsync(int id)
         {
             try
             {
-                var survey = await _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefaultAsync();
+                var anket = await _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefaultAsync();
 
-                if (survey == null)
+                if (anket == null)
                 {
                     return Result<AnketDTO>.NotFound();
                 }
 
-                var result = Mapper.ToSurveyDTO(survey);
+                var result = Mapper.ToAnketDTO(anket);
 
                 return Result<AnketDTO>.Success(result);
             }
@@ -64,13 +64,13 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public Result<List<AnketDTO>> GetAllSurveys()
+        public Result<List<AnketDTO>> TumAnketleriGetir()
         {
             try
             {
-                var surveys = _context.Anket.Include(x => x.AnketSecenek).ToList();
+                var anketler = _context.Anket.Include(x => x.AnketSecenek).ToList();
 
-                var result = Mapper.ToSurveyDTOList(surveys);
+                var result = Mapper.ToAnketDTOList(anketler);
 
                 return Result<List<AnketDTO>>.Success(result);
             }
@@ -81,13 +81,13 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public async Task<Result<List<AnketDTO>>> GetAllSurveysAsync()
+        public async Task<Result<List<AnketDTO>>> TumAnketleriGetirAsync()
         {
             try
             {
-                var surveys = await _context.Anket.Include(x => x.AnketSecenek).ToListAsync();
+                var anketler = await _context.Anket.Include(x => x.AnketSecenek).ToListAsync();
 
-                var result = Mapper.ToSurveyDTOList(surveys);
+                var result = Mapper.ToAnketDTOList(anketler);
 
                 return Result<List<AnketDTO>>.Success(result);
             }
@@ -98,19 +98,19 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public Result<bool> DeleteSurvey(int id)
+        public Result<bool> AnketSil(int id)
         {
             try
             {
-                var survey = _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefault();
+                var anket = _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefault();
 
-                if (survey == null)
+                if (anket == null)
                 {
                     return Result<bool>.NotFound();
                 }
 
-                _context.Attach(survey);
-                _context.Entry(survey).State = EntityState.Deleted;
+                _context.Attach(anket);
+                _context.Entry(anket).State = EntityState.Deleted;
 
                 _context.SaveChanges();
 
@@ -126,19 +126,19 @@ namespace VedasPortal.Models.Anket
 
         }
 
-        public async Task<Result<bool>> DeleteSurveyAsync(int id)
+        public async Task<Result<bool>> AnketSilAsync(int id)
         {
             try
             {
-                var survey = await _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefaultAsync();
+                var anket = await _context.Anket.Where(x => x.Id == id).Include(x => x.AnketSecenek).FirstOrDefaultAsync();
 
-                if (survey == null)
+                if (anket == null)
                 {
                     return Result<bool>.NotFound();
                 }
 
-                _context.Attach(survey);
-                _context.Entry(survey).State = EntityState.Deleted;
+                _context.Attach(anket);
+                _context.Entry(anket).State = EntityState.Deleted;
 
                 await _context.SaveChangesAsync();
 
@@ -151,15 +151,15 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public Result<AnketDTO> GetRandomSurvey()
+        public Result<AnketDTO> RastGeleAnketGetir()
         {
             try
             {
                 Random rnd = new Random();
                 var result = new AnketDTO();
-                var surveys = _context.Anket.Where(x => x.SecilenAnketMi == true).Include(x => x.AnketSecenek).ToList();
+                var anketler = _context.Anket.Where(x => x.SecilenAnketMi == true).Include(x => x.AnketSecenek).ToList();
 
-                result = Mapper.ToSurveyDTO(surveys.OrderBy(x => rnd.Next()).Take(1).FirstOrDefault());
+                result = Mapper.ToAnketDTO(anketler.OrderBy(x => rnd.Next()).Take(1).FirstOrDefault());
 
                 return Result<AnketDTO>.Success(result);
             }
@@ -170,20 +170,20 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public async Task<Result<AnketDTO>> GetRandomSurveyAsync()
+        public async Task<Result<AnketDTO>> RastGeleAnketGetirAsync()
         {
             try
             {
                 Random rnd = new Random();
                 var result = new AnketDTO();
-                var surveys = await _context.Anket.Where(x => x.SecilenAnketMi == true).Include(x => x.AnketSecenek).ToListAsync();
+                var anketler = await _context.Anket.Where(x => x.SecilenAnketMi == true).Include(x => x.AnketSecenek).ToListAsync();
 
-                if (surveys.Count == 0)
+                if (anketler.Count == 0)
                 {
                     return Result<AnketDTO>.NotFound();
                 }
 
-                result = Mapper.ToSurveyDTO(surveys.OrderBy(x => rnd.Next()).Take(1).FirstOrDefault());
+                result = Mapper.ToAnketDTO(anketler.OrderBy(x => rnd.Next()).Take(1).FirstOrDefault());
 
                 return Result<AnketDTO>.Success(result);
             }
@@ -194,18 +194,18 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public Result<AnketDTO> AddSurvey(AnketDTO survey)
+        public Result<AnketDTO> AnketEkle(AnketDTO anketDTO)
         {
             try
             {
-                var surveyToAdd = Mapper.FromSurveyDTO(survey);
-                survey.OlusturulmaTarihi = DateTime.Now;
-                _context.Anket.Add(surveyToAdd);
+                var anketEkle = Mapper.FromAnketDTO(anketDTO);
+                anketDTO.OlusturulmaTarihi = DateTime.Now;
+                _context.Anket.Add(anketEkle);
                 _context.SaveChanges();
 
-                survey = Mapper.ToSurveyDTO(surveyToAdd);
+                anketDTO = Mapper.ToAnketDTO(anketEkle);
 
-                return Result<AnketDTO>.Success(survey);
+                return Result<AnketDTO>.Success(anketDTO);
             }
             catch (Exception)
             {
@@ -214,18 +214,18 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public async Task<Result<AnketDTO>> AddSurveyAsync(AnketDTO survey)
+        public async Task<Result<AnketDTO>> AnketEkleAsync(AnketDTO anketDTO)
         {
             try
             {
-                var surveyToAdd = Mapper.FromSurveyDTO(survey);
-                survey.OlusturulmaTarihi = DateTime.Now;
-                await _context.Anket.AddAsync(surveyToAdd);
+                var anketEkle = Mapper.FromAnketDTO(anketDTO);
+                anketDTO.OlusturulmaTarihi = DateTime.Now;
+                await _context.Anket.AddAsync(anketEkle);
                 await _context.SaveChangesAsync();
 
-                survey = Mapper.ToSurveyDTO(surveyToAdd);
+                anketDTO = Mapper.ToAnketDTO(anketEkle);
 
-                return Result<AnketDTO>.Success(survey);
+                return Result<AnketDTO>.Success(anketDTO);
             }
             catch (Exception)
             {
@@ -234,23 +234,23 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public Result<bool> UpdateSurvey(AnketDTO survey)
+        public Result<bool> AnketDuzenle(AnketDTO anketDTO)
         {
             try
             {
 
-                var updateVoteCount = 0;
+                var guncelOySayisi = 0;
 
-                foreach (var option in survey.AnketSecenekleri)
+                foreach (var secenekDTO in anketDTO.AnketSecenekleri)
                 {
-                    updateVoteCount += option.ToplamKatilim;
+                    guncelOySayisi += secenekDTO.ToplamKatilim;
                 }
 
-                var updatedSurvey = Mapper.FromSurveyDTO(survey);
-                var surveyToUpdate = _context.Anket.FirstOrDefault(x => x.Id == survey.AnketId);
-                surveyToUpdate.ToplamAlinanSure = updateVoteCount;
-                surveyToUpdate.ToplamKatilim = updateVoteCount;
-                surveyToUpdate.AnketSecenek = updatedSurvey.AnketSecenek;
+                var guncelAnket = Mapper.FromAnketDTO(anketDTO);
+                var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
+                anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
+                anketiGuncelle.ToplamKatilim = guncelOySayisi;
+                anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
 
 
                 _context.SaveChanges();
@@ -264,43 +264,43 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public async Task<Result<bool>> UpdateSurveyAsync(AnketDTO survey)
+        public async Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO)
         {
             try
             {
-                var updateVoteCount = 0;
+                var guncelOySayisi = 0;
 
-                foreach (var option in survey.AnketSecenekleri)
+                foreach (var option in anketDTO.AnketSecenekleri)
                 {
-                    updateVoteCount += option.ToplamKatilim;
+                    guncelOySayisi += option.ToplamKatilim;
                 }
 
-                var updatedSurvey = Mapper.FromSurveyDTO(survey);
-                var surveyToUpdate = await _context.Anket.FirstOrDefaultAsync(x => x.Id == survey.AnketId);
-                surveyToUpdate.ToplamAlinanSure = updateVoteCount;
-                surveyToUpdate.ToplamKatilim = updateVoteCount;
-                surveyToUpdate.AnketSecenek = updatedSurvey.AnketSecenek;
+                var guncelAnket = Mapper.FromAnketDTO(anketDTO);
+                var anketiGuncelle = await _context.Anket.FirstOrDefaultAsync(x => x.Id == anketDTO.AnketId);
+                anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
+                anketiGuncelle.ToplamKatilim = guncelOySayisi;
+                anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
 
                 await _context.SaveChangesAsync();
 
                 return Result<bool>.Success(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return Result<bool>.Error("Anket güncellenirken bir hatayla karşılaşıldı.");
             }
         }
 
-        public Result<AnketDTO> GetMostPopularSurvey()
+        public Result<AnketDTO> EnPopulerAnket()
         {
             try
             {
-                var survey = _context.Anket.Include(x => x.AnketSecenek).OrderByDescending(x => x.ToplamAlinanSure).FirstOrDefault();
+                var anket = _context.Anket.Include(x => x.AnketSecenek).OrderByDescending(x => x.ToplamAlinanSure).FirstOrDefault();
 
-                if (survey != null)
+                if (anket != null)
                 {
-                    var result = Mapper.ToSurveyDTO(survey);
+                    var result = Mapper.ToAnketDTO(anket);
                     return Result<AnketDTO>.Success(result);
                 }
                 else
@@ -315,15 +315,15 @@ namespace VedasPortal.Models.Anket
             }
         }
 
-        public async Task<Result<AnketDTO>> GetMostPopularSurveyAsync()
+        public async Task<Result<AnketDTO>> EnPopulerAnketAsync()
         {
             try
             {
-                var survey = await _context.Anket.Include(x => x.AnketSecenek).OrderByDescending(x => x.ToplamAlinanSure).FirstOrDefaultAsync();
+                var anket = await _context.Anket.Include(x => x.AnketSecenek).OrderByDescending(x => x.ToplamAlinanSure).FirstOrDefaultAsync();
 
-                if (survey != null)
+                if (anket != null)
                 {
-                    var result = Mapper.ToSurveyDTO(survey);
+                    var result = Mapper.ToAnketDTO(anket);
                     return Result<AnketDTO>.Success(result);
                 }
                 else
@@ -331,7 +331,7 @@ namespace VedasPortal.Models.Anket
                     return Result<AnketDTO>.NotFound();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return Result<AnketDTO>.Error("En popüler anket getirildiği esnada bir hata meydana geldi!");

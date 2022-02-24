@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Models.Base;
 
 namespace VedasPortal.Models.Dosya
@@ -18,6 +19,9 @@ namespace VedasPortal.Models.Dosya
         [DataType(DataType.Text)]
         public DosyaKategori Kategori { get; set; }
         public bool AktifPasif { get; set; } = true;
+
+        public ICollection<Etkinlik.Etkinlik> Etkinlik { get; set; }
+        public ICollection<Video.Video> Video { get; set; }
     }
 
     public enum DosyaKategori

@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.Anasayfa
 
         public async Task TakeRandomSurvey()
         {
-            var result = await SurveyManager.GetRandomSurveyAsync();
+            var result = await SurveyManager.RastGeleAnketGetirAsync();
 
 
             if (result.IsSuccess)

@@ -16,13 +16,9 @@
                 </center>
             </div>
         </div>
-
-
         }
     </ModalBody>
-
 </ShowModalComponent>
-
 
 @if (ShowCroper)
 {
@@ -66,21 +62,14 @@
                         <span class="input-group-text fw-bold">:</span>
                         <input @onchange="OnAspectHeightChanged" value="@AspectHeight" type="number" class="form-control" placeholder="Yükseklik Değeri Girin">
                     </div>
-
                 </div>
-
-
-
             </div>
-
         </ModalBody>
-
         <ModalFooter>
             <div class="card-footer">
                 <button class="btn btn-success me-1" @onclick="@(async () => { isOpened = true;  await DoneCrop(); })">Değişiklikleri Onayla</button>
                 <button class="btn btn-danger" @onclick="@(async () => { isOpened=false; await CancelCropAsync(); })">Vazgeç</button>
             </div>
         </ModalFooter>
-
     </ShowModalComponent>
 }

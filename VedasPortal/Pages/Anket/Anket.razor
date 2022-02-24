@@ -4,7 +4,7 @@
 <div class="col-lg-12 col-sm-12 col-md-6 col-xs-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            @SurveyVM.Adi
+            @AnketVm.Adi
         </CardHeader>
         <CardBody>
 
@@ -13,13 +13,13 @@
 <p>Yükleniyor...</p> }
                 else
                 {
-<EditForm Model="SurveyVM" OnValidSubmit="SubmitSurvey">
+<EditForm Model="AnketVm" OnValidSubmit="AnketGonder">
     <DataAnnotationsValidator />
     <div class="row justify-content-center">
         <ValidationSummary />
     </div>
 <br />
-    <div class="row justify-content-center">@(SurveyVM.AnketSorusu)?</div>
+    <div class="row justify-content-center">@(AnketVm.AnketSorusu)?</div>
             <br />
     <div class="row justify-content-center mt-3">
 
@@ -27,16 +27,16 @@
 
         <div class="form-group">
 
-            @foreach (var option in SurveyVM.AnketSecenekleri)
+            @foreach (var anket in AnketVm.AnketSecenekleri)
             {
 <div class="row">
     <input style="margin-bottom:10px" class="form-check-input" type="radio"
            name="SurveyOption"
-           value="@option.AnketSecenekId"
-           checked="@(SurveyVM.SecilenSecenek == option.AnketSecenekId.ToString())"
-           @onchange="@(() => UpdateSelectedValue(option.AnketSecenekId.ToString()))" />
+           value="@anket.AnketSecenekId"
+           checked="@(AnketVm.SecilenSecenek == anket.AnketSecenekId.ToString())"
+           @onchange="@(() => SecilenDegeriGuncelle(anket.AnketSecenekId.ToString()))" />
             
-    <label class="form-check-label">@option.Aciklama</label>
+    <label class="form-check-label">@anket.Aciklama</label>
     <br /><br />
 </div>}
         </div>
@@ -51,7 +51,7 @@
 
         </CardBody>
         <CardFotter>
-            @(SurveyVM == null ?  "" : SurveyVM.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.
+            @(AnketVm == null ?  "" : AnketVm.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.
         </CardFotter>
     </CardComponent>
 </div>

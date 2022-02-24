@@ -13,25 +13,21 @@ namespace VedasPortal.Components.Anket
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public VedasDbContext Context { get; set; }
 
-        private int? TotalTimesTaken { get; set; }
-
-        private string MostPopularSurveyName { get; set; }
-
-        private AnketDTO Survey { get; set; }
+        private AnketDTO Anket { get; set; }
 
 
         protected override async Task OnParametersSetAsync()
         {
-            var result = await SurveyManager.GetMostPopularSurveyAsync();
+            var result = await AnketYonetim.EnPopulerAnketAsync();
 
             if (result.IsSuccess)
             {
-                Survey = result.Value;
+                Anket = result.Value;
             }
 
         }

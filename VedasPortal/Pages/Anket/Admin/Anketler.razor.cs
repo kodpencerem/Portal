@@ -25,12 +25,12 @@ namespace VedasPortal.Pages.Anket.Admin
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public List<AnketDTO> SurveyList { get; set; }
+        public List<AnketDTO> AnketListe { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
@@ -39,22 +39,22 @@ namespace VedasPortal.Pages.Anket.Admin
 
         protected override async Task OnInitializedAsync()
         {
-            var result = await SurveyManager.GetAllSurveysAsync();
+            var result = await AnketYonetim.TumAnketleriGetirAsync();
 
             if (result.IsSuccess)
             {
-                SurveyList = result.Value;
+                AnketListe = result.Value;
             }
 
             isReady = true;
         }
 
-        private void EditSurvey(int id)
+        private void Duzenle(int id)
         {
             NavigationManager.NavigateTo($"anket/duzenle/{id}");
         }
 
-        private async Task DeleteSurvey(int id)
+        private async Task Sil(int id)
         {
             ModalParameters parameters = new ModalParameters();
             parameters.Add("Message", "Silmek istediğinize emin misiniz?");
@@ -66,16 +66,16 @@ namespace VedasPortal.Pages.Anket.Admin
             {
 
 
-                var deleteResult = await SurveyManager.DeleteSurveyAsync(id);
+                var deleteResult = await AnketYonetim.AnketSilAsync(id);
 
                 if (deleteResult.IsSuccess)
                 {
 
-                    var newSurveyList = await SurveyManager.GetAllSurveysAsync();
+                    var yeniAnketListe = await AnketYonetim.TumAnketleriGetirAsync();
 
-                    if (newSurveyList.IsSuccess)
+                    if (yeniAnketListe.IsSuccess)
                     {
-                        SurveyList = newSurveyList.Value;
+                        AnketListe = yeniAnketListe.Value;
                         ToastService.ShowSuccess("", "Anket silindi!");
                     }
                     else

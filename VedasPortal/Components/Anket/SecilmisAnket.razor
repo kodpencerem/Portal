@@ -7,29 +7,33 @@
         @if (!isReady)
         {
 <p>Yükleniyor...</p> }
-else if (Survey != null)
+else if (Anket != null)
 {
-<h5 class="card-title">@Survey.Adi</h5> {
+<h5 class="card-title">@Anket.Adi</h5>
+        
+        <h6 class="card-description">@Anket.AnketSorusu</h6>
+        <p>@((MarkupString) Anket.Aciklama)</p>
+        {
 <table class="table-borderless">
     <tbody>
 
-        @foreach (var option in Survey.AnketSecenekleri)
+        @foreach (var anket in Anket.AnketSecenekleri)
         {
-<AnketSecenekItem Item="@option" TotalSurveyVotes="@Survey.ToplamKatilim" />}
+<AnketSecenekItem Item="@anket" TotalSurveyVotes="@Anket.ToplamKatilim" />}
 
     </tbody>
 </table> }
 <div class="mt-3">
-    <button href="#" class="btn btn-outline-dark" @onclick="()=> TakeSurvey(Survey.AnketId)">Ankete Katıl</button>
+    <button href="#" class="btn btn-outline-dark" @onclick="()=> AnketiGetir(Anket.AnketId)">Ankete Katıl</button>
 </div> }
 else
 {
 <p class="text-center text-danger">Şu anda mevcut anket yok</p>}
     </CardBody>
     <CardFotter>
-        @if (Survey != null)
+        @if (Anket != null)
         {
-<p>@(Survey == null ? "" : Survey.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p> }
+<p>@(Anket == null ? "" : Anket.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p> }
 else
 {
 <p></p>}

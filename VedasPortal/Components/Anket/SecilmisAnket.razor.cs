@@ -17,9 +17,9 @@ namespace VedasPortal.Components.Anket
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        IAnketYonetim SurveyManager { get; set; }
+        IAnketYonetim AnketYonetim { get; set; }
 
-        private IAnketDTO Survey = null;
+        private IAnketDTO Anket = null;
 
         private bool isReady = false;
 
@@ -27,9 +27,9 @@ namespace VedasPortal.Components.Anket
         public int AnketId { get; set; }
 
 
-        private void TakeSurvey(int surveyId)
+        private void AnketiGetir(int anketId)
         {
-            NavigationManager.NavigateTo($"anket/{surveyId}");
+            NavigationManager.NavigateTo($"anket/{anketId}");
         }
 
         protected override async Task OnInitializedAsync()
@@ -37,26 +37,26 @@ namespace VedasPortal.Components.Anket
             if (AnketId != 0)
             {
 
-                var result = await SurveyManager.GetSurveyAsync(AnketId);
+                var result = await AnketYonetim.AnketGetirAsync(AnketId);
 
                 if (result.IsSuccess)
                 {
-                    Survey = result.Value;
+                    Anket = result.Value;
                 }
             }
             else
             {
 
-                var result = await SurveyManager.GetRandomSurveyAsync();
+                var result = await AnketYonetim.RastGeleAnketGetirAsync();
 
                 if (result.IsSuccess)
                 {
-                    Survey = result.Value;
+                    Anket = result.Value;
                 }
 
                 if (result.Status == ResultStatus.NotFound)
                 {
-                    Survey = null;
+                    Anket = null;
                 }
 
             }

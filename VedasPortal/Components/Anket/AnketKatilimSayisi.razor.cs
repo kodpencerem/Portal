@@ -11,26 +11,23 @@ namespace VedasPortal.Components.Anket
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
-
    
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
-        private int? NumberOfSurveys { get; set; }
-
-
+        private int? AnketlerSayisi { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
-            var surveys = await SurveyManager.GetAllSurveysAsync();
+            var anketler = await AnketYonetim.TumAnketleriGetirAsync();
 
-            if (surveys.IsSuccess)
+            if (anketler.IsSuccess)
             {
-                NumberOfSurveys = surveys.Value.Count();
+                AnketlerSayisi = anketler.Value.Count();
             }
             else
             {
-                NumberOfSurveys = 0;
+                AnketlerSayisi = 0;
             }
 
         }

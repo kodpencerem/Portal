@@ -7,107 +7,106 @@ namespace VedasPortal.Models.Anket.Utils
 {
     public static class Mapper
     {
-        public static AnketDTO ToSurveyDTO(Models.Anket survey)
+        public static AnketDTO ToAnketDTO(Models.Anket anket)
         {
 
-            var result = new AnketDTO()
+            var anketDTO = new AnketDTO()
             {
-                AnketId = survey.Id,
-                Adi = survey.Adi,
-                Aciklama = survey.Aciklama,
-                AnketSorusu = survey.AnketSorusu,
-                SecilenAnketMi = survey.SecilenAnketMi,
-                ToplamKatilim = survey.ToplamKatilim,
-                ToplamAlinanSure = survey.ToplamAlinanSure,
-                OlusturulmaTarihi = survey.KayitTarihi,
-                AnketSecenekleri = ToSurveyOptionList(survey.AnketSecenek)
+                AnketId = anket.Id,
+                Adi = anket.Adi,
+                Aciklama = anket.Aciklama,
+                AnketSorusu = anket.AnketSorusu,
+                SecilenAnketMi = anket.SecilenAnketMi,
+                ToplamKatilim = anket.ToplamKatilim,
+                ToplamAlinanSure = anket.ToplamAlinanSure,
+                OlusturulmaTarihi = anket.KayitTarihi,
+                AnketSecenekleri = ToAnketSecenekList(anket.AnketSecenek)
             };
 
-            return result;
+            return anketDTO;
         }
 
 
-        public static AnketSecenekDTO ToSurveyOptionDTO(AnketSecenek option)
+        public static AnketSecenekDTO ToAnketSecenekDTO(AnketSecenek anketSecenek)
         {
-            var result = new AnketSecenekDTO()
+            var secenekDTO = new AnketSecenekDTO()
             {
-                AnketSecenekId = option.Id,
-                Aciklama = option.Aciklama,
-                Resim = option.Resim,
-                Fk_AnketId = option.Fk_AnketId,
-                ToplamKatilim = option.ToplamKatilim
+                AnketSecenekId = anketSecenek.Id,
+                Aciklama = anketSecenek.Aciklama,
+                Resim = anketSecenek.Resim,
+                Fk_AnketId = anketSecenek.Fk_AnketId,
+                ToplamKatilim = anketSecenek.ToplamKatilim
             };
 
-            return result;
+            return secenekDTO;
         }
 
-        public static List<AnketSecenekDTO> ToSurveyOptionList(ICollection<AnketSecenek> options)
+        public static List<AnketSecenekDTO> ToAnketSecenekList(ICollection<AnketSecenek> Secenekler)
         {
-            var result = new List<AnketSecenekDTO>();
+            var secenekDTOs = new List<AnketSecenekDTO>();
 
-            foreach (var option in options.ToList())
+            foreach (var secenek in Secenekler.ToList())
             {
-                result.Add(ToSurveyOptionDTO(option));
+                secenekDTOs.Add(ToAnketSecenekDTO(secenek));
+            }
+            return secenekDTOs;
+        }
+
+        public static Models.Anket FromAnketDTO(AnketDTO anketDTO)
+        {
+            var anket = new Models.Anket()
+            {
+                Id = anketDTO.AnketId,
+                Adi = anketDTO.Adi,
+                Aciklama = anketDTO.Aciklama,
+                AnketSorusu = anketDTO.AnketSorusu,
+                SecilenAnketMi = anketDTO.SecilenAnketMi,
+                ToplamKatilim = anketDTO.ToplamKatilim,
+                ToplamAlinanSure = anketDTO.ToplamAlinanSure,
+                KayitTarihi = anketDTO.OlusturulmaTarihi,
+                AnketSecenek = FromAnketSecenekList(anketDTO.AnketSecenekleri)
+            };
+
+            return anket;
+        }
+
+
+        public static AnketSecenek FromAnketSecenekDTO(AnketSecenekDTO secenekDTO)
+        {
+            var anketSecenek = new AnketSecenek()
+            {
+                Id = secenekDTO.AnketSecenekId,
+                Aciklama = secenekDTO.Aciklama,
+                Resim = secenekDTO.Resim,
+                Fk_AnketId = secenekDTO.Fk_AnketId,
+                ToplamKatilim = secenekDTO.ToplamKatilim
+            };
+
+            return anketSecenek;
+        }
+
+        public static List<AnketSecenek> FromAnketSecenekList(List<AnketSecenekDTO> AnketSecenekDTOs)
+        {
+            var anketSecenekleri = new List<AnketSecenek>();
+
+            foreach (var anketSecenekDTO in AnketSecenekDTOs.ToList())
+            {
+                anketSecenekleri.Add(FromAnketSecenekDTO(anketSecenekDTO));
             }
 
-            return result;
+            return anketSecenekleri;
         }
 
-        public static Models.Anket FromSurveyDTO(AnketDTO survey)
+        public static List<AnketDTO> ToAnketDTOList(ICollection<Models.Anket> Anketler)
         {
-            var result = new Models.Anket()
+            var anketDTOs = new List<AnketDTO>();
+
+            foreach (var anket in Anketler)
             {
-                Id = survey.AnketId,
-                Adi = survey.Adi,
-                Aciklama = survey.Aciklama,
-                AnketSorusu = survey.AnketSorusu,
-                SecilenAnketMi = survey.SecilenAnketMi,
-                ToplamKatilim = survey.ToplamKatilim,
-                ToplamAlinanSure = survey.ToplamAlinanSure,
-                KayitTarihi = survey.OlusturulmaTarihi,
-                AnketSecenek = FromSurveyOptionList(survey.AnketSecenekleri)
-            };
-
-            return result;
-        }
-
-
-        public static AnketSecenek FromSurveyOptionDTO(AnketSecenekDTO option)
-        {
-            var result = new AnketSecenek()
-            {
-                Id = option.AnketSecenekId,
-                Aciklama = option.Aciklama,
-                Resim = option.Resim,
-                Fk_AnketId = option.Fk_AnketId,
-                ToplamKatilim = option.ToplamKatilim
-            };
-
-            return result;
-        }
-
-        public static List<AnketSecenek> FromSurveyOptionList(List<AnketSecenekDTO> options)
-        {
-            var result = new List<AnketSecenek>();
-
-            foreach (var option in options.ToList())
-            {
-                result.Add(FromSurveyOptionDTO(option));
+                anketDTOs.Add(ToAnketDTO(anket));
             }
 
-            return result;
-        }
-
-        public static List<AnketDTO> ToSurveyDTOList(ICollection<Models.Anket> surveys)
-        {
-            var result = new List<AnketDTO>();
-
-            foreach (var survey in surveys)
-            {
-                result.Add(ToSurveyDTO(survey));
-            }
-
-            return result;
+            return anketDTOs;
         }
 
     }

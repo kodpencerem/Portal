@@ -51,23 +51,23 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
             HaberServisi.AddUpdate(haber);
 
-            HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
+            HaberDosya = (Dosya)haber.Dosya;
 
-            //var dosya = haber.Dosya.Select(x => new Dosya {
-            //    Id= x.Id,
-            //    Adi=x.Adi,
-            //    Aciklama= x.Aciklama,
+            //var dosya = haber.Dosya.Select(x => new Dosya
+            //{
+            //    Id = x.Id,
+            //    Adi = x.Adi,
+            //    Aciklama = x.Aciklama,
             //    Boyutu = x.Boyutu,
             //    Yolu = x.Yolu,
-            //    DuzenlemeTarihi= x.DuzenlemeTarihi,
+            //    DuzenlemeTarihi = x.DuzenlemeTarihi,
             //    DuzenleyenKullanici = x.DuzenleyenKullanici,
             //    KaydedenKullanici = x.KaydedenKullanici,
             //    KayitTarihi = x.KayitTarihi,
-            //    Uzanti= x.Uzanti
+            //    Uzanti = x.Uzanti
 
             //});
             //haber.Dosya = dosya.ToArray();
-
         }
         protected override void OnParametersSet()
         {
@@ -75,7 +75,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             {
                 Title = "Duzenle";
                 haber = HaberServisi.Get(HaberId);
-                HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
+                HaberDosya = (Dosya)haber.Dosya;
             }
         }
 

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/components.css" type="text/css">
     <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
-    <link rel='shortcut icon' type='image/x-icon' href='~/img/logo.png' />
+    <link rel='shortcut icon' type='image/x-icon' href='~/images/logo.png' />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -86,6 +86,17 @@
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            Bir hata oluştu. Bu uygulama yeniden yüklenene kadar yanıt vermeyebilir.
+        </environment>
+        <environment include="Development">
+            Çözülemeyen bir istisna oldu. Ayrıntılar için tarayıcı geliştirme araçlarına bakın.
+        </environment>
+        <a href="" class="reload">Sayfayı Yeniden Yükle</a>
+        <a class="dismiss">X</a>
+    </div>
+
     <!-- TuCalendar Js -->
 
     <script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
@@ -101,16 +112,7 @@
     <script src="tuicalendar/examples/js/default.js" charset="windows-1254" type="text/javascript"></script>
 
 
-    <div id="blazor-error-ui">
-        <environment include="Staging,Production">
-            Bir hata oluştu. Bu uygulama yeniden yüklenene kadar yanıt vermeyebilir.
-        </environment>
-        <environment include="Development">
-            Çözülemeyen bir istisna oldu. Ayrıntılar için tarayıcı geliştirme araçlarına bakın.
-        </environment>
-        <a href="" class="reload">Sayfayı Yeniden Yükle</a>
-        <a class="dismiss">X</a>
-    </div>
+
 
     <!-- Index JS Scripts -->
     <script src="assets/js/app.min.js" charset="windows-1254" type="text/javascript"></script>
@@ -126,7 +128,7 @@
     <script src="assets/js/CKEditorInterop.js"></script>
 
     <script src="assets/js/CustomScripts.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="_content/BlazorInputFile/inputfile.js" charset="windows-1254" type="text/javascript"></script>
+    
     <script src="_content/Blazored.Modal/blazored.modal.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/customjs.js" charset="windows-1254" type="text/javascript"></script>
 
@@ -147,15 +149,6 @@
     <script src="assets/bundles/jquery.sparkline.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/sparkline.js" charset="windows-1254" type="text/javascript"></script>
 
-    <!-- Page Chat JS File -->
-    <script src="assets/js/page/chat.js" charset="windows-1254" type="text/javascript"></script>
-
-    <!-- Page Contact and Map JS File -->
-
-
-    <script src="assets/js/page/contact.js" charset="windows-1254" type="text/javascript"></script>
-
-
     <!--Create Post JS Libraies -->
     <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" charset="windows-1254" type="text/javascript"></script>
@@ -170,7 +163,7 @@
     <script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/datatables/export-tables/buttons.flash.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/datatables/export-tables/jszip.min.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/datatables/export-tables/pdfmake.min.js" charset="windows-1254" type="text/javascript"></script>
+
     <script src="assets/bundles/datatables/export-tables/vfs_fonts.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/datatables/export-tables/buttons.print.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js" charset="windows-1254" type="text/javascript"></script>
@@ -198,7 +191,6 @@
     <script src="assets/js/page/owl-carousel.js" charset="windows-1254" type="text/javascript"></script>
 
     <script src="assets/js/page/posts.js" charset="windows-1254" type="text/javascript"></script>
-    <script src="assets/bundles/chartjs/chart.min.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/widget-data.js" charset="windows-1254" type="text/javascript"></script>
     <script src="assets/js/page/portfolio.js" charset="windows-1254" type="text/javascript"></script>
 

@@ -7,20 +7,20 @@ namespace VedasPortal.Models.Anket.Contracts
 {
     public interface IAnketYonetim
     {
-        Result<AnketDTO> GetSurvey(int id);
-        Task<Result<AnketDTO>> GetSurveyAsync(int id);
-        Result<List<AnketDTO>> GetAllSurveys();
-        Task<Result<List<AnketDTO>>> GetAllSurveysAsync();
-        Result<bool> DeleteSurvey(int id);
-        Task<Result<bool>> DeleteSurveyAsync(int id);
-        Result<AnketDTO> GetRandomSurvey();
-        Task<Result<AnketDTO>> GetRandomSurveyAsync();
-        Result<AnketDTO> AddSurvey(AnketDTO survey);
-        Task<Result<AnketDTO>> AddSurveyAsync(AnketDTO survey);
-        Result<bool> UpdateSurvey(AnketDTO survey);
-        Task<Result<bool>> UpdateSurveyAsync(AnketDTO survey);
-        Result<AnketDTO> GetMostPopularSurvey();
-        Task<Result<AnketDTO>> GetMostPopularSurveyAsync();
+        Result<AnketDTO> AnketGetir(int id);
+        Task<Result<AnketDTO>> AnketGetirAsync(int id);
+        Result<List<AnketDTO>> TumAnketleriGetir();
+        Task<Result<List<AnketDTO>>> TumAnketleriGetirAsync();
+        Result<bool> AnketSil(int id);
+        Task<Result<bool>> AnketSilAsync(int id);
+        Result<AnketDTO> RastGeleAnketGetir();
+        Task<Result<AnketDTO>> RastGeleAnketGetirAsync();
+        Result<AnketDTO> AnketEkle(AnketDTO survey);
+        Task<Result<AnketDTO>> AnketEkleAsync(AnketDTO survey);
+        Result<bool> AnketDuzenle(AnketDTO survey);
+        Task<Result<bool>> AnketDuzenleAsync(AnketDTO survey);
+        Result<AnketDTO> EnPopulerAnket();
+        Task<Result<AnketDTO>> EnPopulerAnketAsync();
 
     }
 }

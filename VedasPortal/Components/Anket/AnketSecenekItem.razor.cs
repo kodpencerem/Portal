@@ -15,7 +15,7 @@ namespace VedasPortal.Components.Anket
 
         private string imageSrc { get; set; }
 
-        private int totalPercentage { get; set; }
+        private int TotalPercentage { get; set; }
 
         protected override void OnInitialized()
         {
@@ -26,7 +26,7 @@ namespace VedasPortal.Components.Anket
                 calculatedPercentage = (double)Item.ToplamKatilim / TotalSurveyVotes * 100;
             }
 
-            totalPercentage = (int)Math.Floor(calculatedPercentage);
+            TotalPercentage = (int)Math.Floor(calculatedPercentage);
         }
     }
 }

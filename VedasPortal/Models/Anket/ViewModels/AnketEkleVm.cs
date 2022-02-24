@@ -24,7 +24,7 @@ namespace VedasPortal.Models.Anket.ViewModels
 
         public List<SelectListItem> AnketSecenekleri { get; set; } = new List<SelectListItem>() { };
 
-        [RequiredNumberOfItems(RequiredNumberOfRecords = 2, ErrorMessage = "En az 2 seçenek gereklidir!")]
+        [GerekliOgeSayisi(GerekliKayitSayisi  = 2, ErrorMessage = "En az 2 seçenek gereklidir!")]
         public List<AnketSecenekDTO> AnketSecenekEkle { get; set; } = new List<AnketSecenekDTO>();
 
         public VedasDbContext Context { get; }
@@ -38,7 +38,7 @@ namespace VedasPortal.Models.Anket.ViewModels
 
         #region Methods
 
-        public AnketDTO GenerateSurveyToSave()
+        public AnketDTO AnketOlustur()
         {
             return new AnketDTO()
             {
@@ -52,7 +52,7 @@ namespace VedasPortal.Models.Anket.ViewModels
                 AnketSecenekleri = AnketSecenekEkle
             };
         }
-        public void AddSurveyOption(AnketSecenekDTO option, int maxId)
+        public void AnketSorusuEkle(AnketSecenekDTO option, int maxId)
         {
             SelectListItem optionToAdd = new SelectListItem { Selected = false, Text = option.Aciklama, Value = maxId.ToString() };
             AnketSecenekleri.Add(optionToAdd);
@@ -60,7 +60,7 @@ namespace VedasPortal.Models.Anket.ViewModels
 
         }
 
-        public void RemoveSurveyOption(int optionId)
+        public void AnketSecenekSil(int optionId)
         {
             string description = AnketSecenekleri.FirstOrDefault(x => x.Value == optionId.ToString()).Text;
 
@@ -71,7 +71,7 @@ namespace VedasPortal.Models.Anket.ViewModels
 
         }
 
-        public int GetMaxId()
+        public int MaxIdGetir()
         {
             var maxId = AnketSecenekleri.Count == 0 ? 0 : int.Parse(AnketSecenekleri.OrderByDescending(x => x.Value).FirstOrDefault().Value);
             maxId = maxId += 1;

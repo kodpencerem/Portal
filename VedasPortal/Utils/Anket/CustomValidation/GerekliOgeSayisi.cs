@@ -5,9 +5,9 @@ using VedasPortal.Models.Anket.DTO;
 
 namespace VedasPortal.Utils.Anket.CustomValidation
 {
-    public class RequiredNumberOfItemsAttribute : ValidationAttribute
+    public class GerekliOgeSayisi : ValidationAttribute
     {
-        public int RequiredNumberOfRecords { get; set; }
+        public int GerekliKayitSayisi { get; set; }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -15,9 +15,9 @@ namespace VedasPortal.Utils.Anket.CustomValidation
 
             var numberOfItemsInList = ((List<AnketSecenekDTO>)value).Count();
 
-            if (numberOfItemsInList < RequiredNumberOfRecords)
+            if (numberOfItemsInList < GerekliKayitSayisi)
             {
-                ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? $"{validationContext.MemberName} must have a minimum of {RequiredNumberOfRecords} items" : ErrorMessage;
+                ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? $"{validationContext.MemberName} en az {GerekliKayitSayisi} öğeye sahip olmalıdır" : ErrorMessage;
 
                 return new ValidationResult(ErrorMessage, new[] { validationContext.MemberName });
 

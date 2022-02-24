@@ -29,7 +29,7 @@ namespace VedasPortal.Components.Anket
         public VedasDbContext Context { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public Mapper mapper { get; set; }
@@ -40,11 +40,11 @@ namespace VedasPortal.Components.Anket
         [CascadingParameter]
         IModalService Modal { get; set; }
 
-        private AnketEkleVm model = new AnketEkleVm();
+        private AnketEkleVm AnketEkle = new();
 
-        private async Task SaveSurvey()
+        private async Task AnketKayit()
         {
-            var result = await SurveyManager.AddSurveyAsync(model.GenerateSurveyToSave());
+            var result = await AnketYonetim.AnketEkleAsync(AnketEkle.AnketOlustur());
 
             if (result.IsSuccess)
             {
@@ -59,17 +59,17 @@ namespace VedasPortal.Components.Anket
 
         }
 
-        private void CancelAdd()
+        private void Vazgec()
         {
             NavigationManager.NavigateTo("/");
         }
 
 
 
-        private async Task DeleteOption(int id)
+        private async Task SecenekSil(int id)
         {
             var parameters = new ModalParameters();
-            parameters.Add("Id", id);
+            parameters.Add("AnketSecenekId", id);
             parameters.Add("Message", "Silmek istediğinize emin misiniz??");
             var formModal = Modal.Show<OnayComponent>("Silme İşlemi", parameters);
             var result = await formModal.Result;
@@ -77,14 +77,14 @@ namespace VedasPortal.Components.Anket
             if (!result.Cancelled)
             {
 
-                model.RemoveSurveyOption(id);
+                AnketEkle.AnketSecenekSil(id);
                 ToastService.ShowSuccess("", "Silindi");
             }
         }
 
-        private async Task AddOption()
+        private async Task SecenekEkle()
         {
-            var maxId = model.GetMaxId();
+            var maxId = AnketEkle.MaxIdGetir();
             var formModal = Modal.Show<YeniAnketSecenekEkle>("Bir seçenek ekleyin");
             
             var result = await formModal.Result;
@@ -92,8 +92,8 @@ namespace VedasPortal.Components.Anket
             if (!result.Cancelled)
             {
                 var results = result?.Data;
-                model.AddSurveyOption((AnketSecenekDTO)result.Data, maxId);
-                model.AnketSecenekEkle.Add((AnketSecenekDTO)result.Data);
+                AnketEkle.AnketSorusuEkle((AnketSecenekDTO)result.Data, maxId);
+                AnketEkle.AnketSecenekEkle.Add((AnketSecenekDTO)result.Data);
 
             }
         }

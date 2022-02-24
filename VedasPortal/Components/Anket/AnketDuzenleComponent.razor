@@ -13,29 +13,29 @@
             {
                 <div class="row h-100 justify-content-center align-items-center">
                     <div class="col-10 col-md-8 col-lg-6">
-                        <EditForm Model="SurveyToUpdate" OnValidSubmit="UpdateSurvey">
+                        <EditForm Model="AnketGuncelle" OnValidSubmit="AnketiDuzenle">
                             <DataAnnotationsValidator />
                         
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyName">Anket Adı</label>
-                                    <InputText id="surveyName" class="form-control" @bind-Value="@SurveyToUpdate.Adi" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.Adi)" />
+                                    <InputText id="surveyName" class="form-control" @bind-Value="@AnketGuncelle.Adi" />
+                                    <ValidationMessage For="@(() => AnketGuncelle.Adi)" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyDescription">Açıklama</label>
-                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@SurveyToUpdate.Aciklama" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.Aciklama)" />
+                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@AnketGuncelle.Aciklama" />
+                                    <ValidationMessage For="@(() => AnketGuncelle.Aciklama)" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-12">
                                     <label class="bs-form-label" for="surveyQuestion">Anket Sorusu</label>
-                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@SurveyToUpdate.AnketSorusu" />
-                                    <ValidationMessage For="@(() => SurveyToUpdate.AnketSorusu)" />
+                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@AnketGuncelle.AnketSorusu" />
+                                    <ValidationMessage For="@(() => AnketGuncelle.AnketSorusu)" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -43,12 +43,12 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th scope="col"><button type="button" class="btn btn-sm btn-primary" @onclick="AddOption">Seçenek Ekle</button></th>
+                                            <th scope="col"><button type="button" class="btn btn-sm btn-primary" @onclick="SecenekEkle">Seçenek Ekle</button></th>
                                             <th scope="col">Seçenekler</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if (SurveyToUpdate.AnketSecenekleri.Count == 0)
+                                        @if (AnketGuncelle.AnketSecenekleri.Count == 0)
                                         {
                                             <tr>
                                                 <td colspan="2">Lütfen en az iki seçenek ekleyin!</td>
@@ -56,10 +56,10 @@
                                         }
                                         else
                                         {
-                                            @foreach (var option in SurveyToUpdate.AnketSecenekleri)
+                                            @foreach (var option in AnketGuncelle.AnketSecenekleri)
                                             {
                                                 <tr>
-                                                    <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> DeleteOption(Int32.Parse(option.Value)))">Sil</button></td>
+                                                    <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> SecenekSil(Int32.Parse(option.Value)))">Sil</button></td>
                                                     <td>@option.Text</td>
                                                 </tr>
                                             }
@@ -67,13 +67,13 @@
                                         </tbody>
                                     </table>
                                     <div class="justify-content-center">
-                                        <ValidationMessage For="@(() => SurveyToUpdate.AnketSecenekleri)" />
+                                        <ValidationMessage For="@(() => AnketGuncelle.AnketSecenekleri)" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-check row">
                                 <div class="d-flex align-items-start">
-                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@SurveyToUpdate.SecilenAnketMi" /> <label class="form-check-label">Öne Çıkarılsın Mı??</label>
+                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@AnketGuncelle.SecilenAnketMi" /> <label class="form-check-label">Öne Çıkarılsın Mı??</label>
                                 </div>
 
                             </div>

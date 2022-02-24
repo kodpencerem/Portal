@@ -28,41 +28,41 @@ namespace VedasPortal.Models.Anket.ViewModels
 
         public bool SecilenAnketMi { get; set; }
 
-        [RequiredNumberOfSelectItems(RequiredNumberOfRecords = 2, ErrorMessage = "En az 2 seçenek gereklidir!!")]
+        [SecilmisGerekliOgelerSayisi(GerekliKayitSayisi  = 2, ErrorMessage = "En az 2 seçenek gereklidir!!")]
         public List<SelectListItem> AnketSecenekleri { get; set; } = new List<SelectListItem>();
 
         public List<AnketSecenekDTO> AnketSecenekEkle { get; set; } = new List<AnketSecenekDTO>();
 
         public VedasDbContext Context { get; }
 
-        public void AddSurveyOption(AnketSecenekDTO option)
+        public void AnketSecenekleriEkle(AnketSecenekDTO secenekDTO)
         {
-            SelectListItem optionToAdd = new SelectListItem { Selected = false, Text = option.Aciklama, Value = option.AnketSecenekId.ToString() };
-            AnketSecenekleri.Add(optionToAdd);
+            SelectListItem SecenekEkle = new SelectListItem { Selected = false, Text = secenekDTO.Aciklama, Value = secenekDTO.AnketSecenekId.ToString() };
+            AnketSecenekleri.Add(SecenekEkle);
             AnketSecenekEkle.Add(new AnketSecenekDTO()
             {
                 Fk_AnketId = AnketId,
-                Aciklama = option.Aciklama,
-                Resim = option.Resim,
+                Aciklama = secenekDTO.Aciklama,
+                Resim = secenekDTO.Resim,
                 ToplamKatilim = 0
             });
 
         }
 
-        public void RemoveSurveyOption(int optionId)
+        public void AnketSecenekSil(int secenekId)
         {
 
-            string description = AnketSecenekleri.FirstOrDefault(x => x.Value == optionId.ToString()).Text;
+            string Aciklama = AnketSecenekleri.FirstOrDefault(x => x.Value == secenekId.ToString()).Text;
 
-            AnketSecenekleri.Remove(AnketSecenekleri.FirstOrDefault(x => x.Value == optionId.ToString()));
+            AnketSecenekleri.Remove(AnketSecenekleri.FirstOrDefault(x => x.Value == secenekId.ToString()));
 
-            if (AnketSecenekEkle.Any(x => x.AnketSecenekId == optionId))
+            if (AnketSecenekEkle.Any(x => x.AnketSecenekId == secenekId))
             {
-                AnketSecenekEkle.Remove(AnketSecenekEkle.FirstOrDefault(x => x.AnketSecenekId == optionId));
+                AnketSecenekEkle.Remove(AnketSecenekEkle.FirstOrDefault(x => x.AnketSecenekId == secenekId));
             }
             else
             {
-                AnketSecenekEkle.Remove(AnketSecenekEkle.FirstOrDefault(x => x.Aciklama == description && x.AnketSecenekId == 0));
+                AnketSecenekEkle.Remove(AnketSecenekEkle.FirstOrDefault(x => x.Aciklama == Aciklama && x.AnketSecenekId == 0));
             }
 
         }

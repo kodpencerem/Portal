@@ -96,7 +96,6 @@ namespace VedasPortal.Components.UploadComponent
         private void OnAspectWidthChanged(ChangeEventArgs eventArgs)
         {
             AspectWidth = double.Parse((string)eventArgs.Value);
-
             AspectRatio = AspectHeight / AspectWidth;
         }
 
@@ -128,11 +127,9 @@ namespace VedasPortal.Components.UploadComponent
         /// <param name="args"></param>
         protected void OnInputFileChange(InputFileChangeEventArgs args)
         {
-
             PreviewImagePath = null;
             browserFileResizer = args.File;
-            ShowCroper = true;
-            
+            ShowCroper = true;  
         }
 
 

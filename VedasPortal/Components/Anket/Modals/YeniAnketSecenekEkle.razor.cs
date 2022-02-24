@@ -16,22 +16,22 @@ namespace VedasPortal.Components.Anket.Modals
        
         private EditContext editContext { get; set; }
 
-        private AnketSecenekVm optionModel { get; set; } = new AnketSecenekVm();
-        private AnketSecenekDTO model = new AnketSecenekDTO();
+        private AnketSecenekVm AnketSecenekVm { get; set; } = new AnketSecenekVm();
+        private AnketSecenekDTO AnketSecenekDTO = new AnketSecenekDTO();
 
         protected override void OnInitialized()
         {
-            editContext = new EditContext(optionModel);
+            editContext = new EditContext(AnketSecenekVm);
         }
 
-        private Task SaveOption()
+        private Task SecenekKayit()
         {
 
-            model.Aciklama = optionModel.Aciklama;
-            model.Resim = optionModel.Resim;
-            model.ToplamKatilim = 0;
+            AnketSecenekDTO.Aciklama = AnketSecenekVm.Aciklama;
+            AnketSecenekDTO.Resim = AnketSecenekVm.Resim;
+            AnketSecenekDTO.ToplamKatilim = 0;
 
-            return Modal.CloseAsync(ModalResult.Ok(model));
+            return Modal.CloseAsync(ModalResult.Ok(AnketSecenekDTO));
         }
 
         void Cancel() => Modal.CancelAsync();

@@ -16,67 +16,67 @@ namespace VedasPortal.Utils.Anket
 
         public VedasDbContext Context { get; }
 
-        public Models.Anket.Models.Anket EditSurveyToSurvey(AnketDuzenleVm survey)
+        public Models.Anket.Models.Anket AnketDuzenleToAnket(AnketDuzenleVm duzenleVm)
         {
-            Models.Anket.Models.Anket result = new Models.Anket.Models.Anket()
+            Models.Anket.Models.Anket anket = new Models.Anket.Models.Anket()
             {
-                Id = survey.AnketId,
-                Adi = survey.Adi,
-                Aciklama = survey.Aciklama,
-                AnketSorusu = survey.AnketSorusu,
-                SecilenAnketMi = survey.SecilenAnketMi
+                Id = duzenleVm.AnketId,
+                Adi = duzenleVm.Adi,
+                Aciklama = duzenleVm.Aciklama,
+                AnketSorusu = duzenleVm.AnketSorusu,
+                SecilenAnketMi = duzenleVm.SecilenAnketMi
             };
 
-            return result;
+            return anket;
         }
 
-        public AnketDuzenleVm SurveyToEditSurveyModel(AnketDTO survey)
+        public AnketDuzenleVm AnketToAnketDuzenlemeModeli(AnketDTO anketDTO)
         {
-            AnketDuzenleVm results = new AnketDuzenleVm(Context)
+            AnketDuzenleVm anketDuzenle = new AnketDuzenleVm(Context)
             {
-                AnketId = survey.AnketId,
-                Adi = survey.Adi,
-                AnketSecenekleri = GenerateEditViewModelOptionSelectList(survey.AnketSecenekleri.ToList()),
-                AnketSorusu = survey.AnketSorusu,
-                SecilenAnketMi = survey.SecilenAnketMi,
-                Aciklama = survey.Aciklama,
-                AnketSecenekEkle = survey.AnketSecenekleri
+                AnketId = anketDTO.AnketId,
+                Adi = anketDTO.Adi,
+                AnketSecenekleri = DuzenlemeModeliOlusturmaVeListeleme(anketDTO.AnketSecenekleri.ToList()),
+                AnketSorusu = anketDTO.AnketSorusu,
+                SecilenAnketMi = anketDTO.SecilenAnketMi,
+                Aciklama = anketDTO.Aciklama,
+                AnketSecenekEkle = anketDTO.AnketSecenekleri
             };
 
-            return results;
+            return anketDuzenle;
         }
 
-        public AnketVm SurveyToSurveyViewModel(AnketDTO survey)
+        public AnketVm AnketToAnketVm(AnketDTO anketDTO)
         {
             var results = new AnketVm()
             {
-                AnketId = survey.AnketId,
-                Adi = survey.Adi,
-                AnketSecenekleri = survey.AnketSecenekleri.ToList(),
-                AnketSorusu = survey.AnketSorusu,
-                OlusturulmaTarihi = survey.OlusturulmaTarihi,
-                ToplamAlinanSure = survey.ToplamAlinanSure,
-                ToplamKatilim = survey.ToplamKatilim,
-                Aciklama = survey.Aciklama,
-                SecilenAnketMi = survey.SecilenAnketMi
+                AnketId = anketDTO.AnketId,
+                Adi = anketDTO.Adi,
+                AnketSecenekleri = anketDTO.AnketSecenekleri.ToList(),
+                AnketSorusu = anketDTO.AnketSorusu,
+                OlusturulmaTarihi = anketDTO.OlusturulmaTarihi,
+                ToplamAlinanSure = anketDTO.ToplamAlinanSure,
+                ToplamKatilim = anketDTO.ToplamKatilim,
+                Aciklama = anketDTO.Aciklama,
+                SecilenAnketMi = anketDTO.SecilenAnketMi
 
             };
 
             return results;
         }
 
-        private List<SelectListItem> GenerateEditViewModelOptionSelectList(List<AnketSecenekDTO> options)
+        private List<SelectListItem> DuzenlemeModeliOlusturmaVeListeleme(List<AnketSecenekDTO> AnketSecenekDTO)
         {
-            List<SelectListItem> selectList = new List<SelectListItem>();
+            List<SelectListItem> secilenListe = new List<SelectListItem>();
 
 
-            foreach (var surveyOption in options)
+            foreach (var anketSecenek in AnketSecenekDTO)
             {
-                selectList.Add(new SelectListItem { Text = surveyOption.Aciklama, Selected = false, Value = surveyOption.AnketSecenekId.ToString() });
+                secilenListe.Add(new SelectListItem { Text = anketSecenek.Aciklama, Selected = false, Value = anketSecenek.AnketSecenekId.ToString() });
 
             }
 
-            return selectList;
+            return secilenListe;
         }
     }
 }

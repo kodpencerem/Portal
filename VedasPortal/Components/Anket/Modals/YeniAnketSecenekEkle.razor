@@ -1,13 +1,13 @@
 ﻿
-<EditForm Model="@optionModel" OnValidSubmit="SaveOption">
+<EditForm Model="@AnketSecenekVm" OnValidSubmit="SecenekKayit">
     <DataAnnotationsValidator />
     <ShowModalComponent  IsOpened="true">
         
         <ModalBody>
             <div class="form-group m-3">
                 <label class="bs-form-label">Açıklama</label>
-                <InputText class="form-control" @bind-Value="@optionModel.Aciklama" />
-                <ValidationMessage For="@(() => optionModel.Aciklama)" />
+                <InputText class="form-control" @bind-Value="@AnketSecenekVm.Aciklama" />
+                <ValidationMessage For="@(() => AnketSecenekVm.Aciklama)" />
             </div>
         </ModalBody>
         <ModalFooter>

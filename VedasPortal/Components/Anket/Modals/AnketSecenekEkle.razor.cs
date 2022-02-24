@@ -20,32 +20,32 @@ namespace VedasPortal.Components.Anket.Modals
         [Parameter]
         public int AnketId { get; set; }
 
-        [Inject]
-        private VedasDbContext Context { get; set; }
+        //[Inject]
+        //private VedasDbContext Context { get; set; }
 
-        [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        //[Inject]
+        //public IAnketYonetim AnketYonetim { get; set; }
 
         private EditContext editContext { get; set; }
 
-        private AnketSecenekVm optionModel { get; set; } = new AnketSecenekVm();
-        private AnketSecenekDTO model = new AnketSecenekDTO();
+        private AnketSecenekVm AnketSecenekVm { get; set; } = new AnketSecenekVm();
+        private AnketSecenekDTO AnketSecenekDTO = new();
 
         protected override void OnInitialized()
         {
 
-            editContext = new EditContext(optionModel);
-            optionModel.Fk_AnketId = AnketId;
+            editContext = new EditContext(AnketSecenekVm);
+            AnketSecenekVm.Fk_AnketId = AnketId;
         }
 
-        private async Task SaveOption()
+        private async Task SecenekKayit()
         {
-            model.Fk_AnketId = optionModel.Fk_AnketId;
-            model.Aciklama = optionModel.Aciklama;
-            model.Resim = optionModel.Resim;
-            model.ToplamKatilim = 0;
+            AnketSecenekDTO.Fk_AnketId = AnketSecenekVm.Fk_AnketId;
+            AnketSecenekDTO.Aciklama = AnketSecenekVm.Aciklama;
+            AnketSecenekDTO.Resim = AnketSecenekVm.Resim;
+            AnketSecenekDTO.ToplamKatilim = 0;
 
-            await Modal.CloseAsync(ModalResult.Ok(model));
+            await Modal.CloseAsync(ModalResult.Ok(AnketSecenekDTO));
         }
 
         void Cancel() => Modal.CancelAsync();

@@ -18,33 +18,33 @@ namespace VedasPortal.Pages.Anket
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public List<AnketDTO> SurveyList { get; set; }
+        public List<AnketDTO> AnketListe { get; set; }
 
         private bool isReady = false;
 
         protected override async Task OnInitializedAsync()
         {
-            var result = await SurveyManager.GetAllSurveysAsync();
+            var result = await AnketYonetim.TumAnketleriGetirAsync();
 
             if (result.IsSuccess)
             {
-                SurveyList = result.Value;
+                AnketListe = result.Value;
             }
 
             isReady = true;
         }
 
-        private void TakeSurvey(int id)
+        private void AnketiGetir(int id)
         {
             NavigationManager.NavigateTo($"anket/{id}");
         }
 
-        private void ViewSurveyResults(int id)
+        private void SonuclariGoster(int id)
         {
             NavigationManager.NavigateTo($"anket/sonuc/{id}");
         }

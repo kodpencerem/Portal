@@ -30,42 +30,42 @@ namespace VedasPortal.Pages.Anket
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
 
-        private AnketVm SurveyVM = new AnketVm();
+        private AnketVm AnketVm = new AnketVm();
 
-        private AnketDTO survey;
+        private AnketDTO AnketDTO;
 
         private bool isReady = false;
 
         protected override async Task OnInitializedAsync()
         {
-            var result = await SurveyManager.GetSurveyAsync(Id);
+            var result = await AnketYonetim.AnketGetirAsync(Id);
 
             if (result.IsSuccess)
             {
-                survey = result.Value;
-                SurveyVM = mapper.SurveyToSurveyViewModel(survey);
+                AnketDTO = result.Value;
+                AnketVm = mapper.AnketToAnketVm(AnketDTO);
             }
 
             isReady = true;
         }
 
-        private async Task SubmitSurvey()
+        private async Task AnketGonder()
         {
-            var model = SurveyVM;
+            var model = AnketVm;
 
-            SurveyVM.SurveyTaken();
-            SurveyVM.TallyVote();
+            AnketVm.YapilanAnket();
+            AnketVm.SonucAl();
 
-            survey.ToplamAlinanSure = SurveyVM.ToplamAlinanSure;
-            survey.AnketSecenekleri = SurveyVM.AnketSecenekleri;
-            survey.ToplamKatilim = SurveyVM.ToplamKatilim;
+            AnketDTO.ToplamAlinanSure = AnketVm.ToplamAlinanSure;
+            AnketDTO.AnketSecenekleri = AnketVm.AnketSecenekleri;
+            AnketDTO.ToplamKatilim = AnketVm.ToplamKatilim;
 
-            var result = await SurveyManager.UpdateSurveyAsync(survey);
+            var result = await AnketYonetim.AnketDuzenleAsync(AnketDTO);
 
             if (result.IsSuccess)
             {
@@ -80,9 +80,9 @@ namespace VedasPortal.Pages.Anket
 
         }
 
-        private void UpdateSelectedValue(string selectedOptionId)
+        private void SecilenDegeriGuncelle(string secilmisSecenekId)
         {
-            SurveyVM.SecilenSecenek = selectedOptionId;
+            AnketVm.SecilenSecenek = secilmisSecenekId;
         }
 
 

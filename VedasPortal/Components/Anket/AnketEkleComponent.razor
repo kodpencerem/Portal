@@ -1,6 +1,5 @@
 ﻿<div class="col-lg-12 col-sm-12 col-md-6 col-xs-12">
 
-
     <CardComponent cardStyle="Style.success">
         <CardHeader>
             Anket Ekle
@@ -9,97 +8,90 @@
 
             @if (!isReady)
             {
-                <p>Yükleniyor...</p>
-            }
-            else
-            {
-                <div class="row h-100 justify-content-center align-items-center">
-                    <div class="col-10 col-md-8 col-lg-6">
-                        <EditForm Model="model" OnValidSubmit="SaveSurvey">
-                            <DataAnnotationsValidator />
+<p>Yükleniyor...</p> }
+                else
+                {
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-10 col-md-8 col-lg-6">
+        <EditForm Model="AnketEkle" OnValidSubmit="AnketKayit">
+            <DataAnnotationsValidator />
 
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <label class="bs-form-label" for="surveyName">Anket Adı</label>
-                                    <InputText id="surveyName" class="form-control" @bind-Value="@model.Adi" />
-                                    <ValidationMessage For="@(() => model.Adi)" />
-                                </div>
-                            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <label class="bs-form-label" for="surveyName">Anket Adı</label>
+                    <InputText id="surveyName" class="form-control" @bind-Value="@AnketEkle.Adi" />
+                    <ValidationMessage For="@(() => AnketEkle.Adi)" />
+                </div>
+            </div>
 
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <label class="bs-form-label" for="surveyDescription">Açıklama</label>
-                                    <InputText id="surveyDescription" class="form-control" @bind-Value="@model.Aciklama" />
-                                    <ValidationMessage For="@(() => model.Aciklama)" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <label class="bs-form-label" for="surveyQuestion">Anket Sorusu</label>
-                                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@model.AnketSorusu" />
-                                    <ValidationMessage For="@(() => model.AnketSorusu)" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col"><button type="button" class="btn btn-sm btn-primary" @onclick="AddOption">Seçenek Ekle</button></th>
-                                            <th scope="col">Seçenekler</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @if (model.AnketSecenekleri.Count == 0)
-                                        {
-                                            <tr>
-                                                <td colspan="2">Lütfen en az iki seçenek ekleyin!</td>
-                                            </tr>
-                                        }
-                                        else
-                                        {
-                                            @foreach (var option in model.AnketSecenekleri)
-                                            {
-                                                <tr>
-                                                    <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> DeleteOption(Int32.Parse(option.Value)))">Sil</button></td>
-                                                    <td>@option.Text</td>
-                                                </tr>
-                                            }
-                                        }
-                                        </tbody>
-                                    </table>
-                                    <div class="justify-content-center">
-                                        <ValidationMessage For="@(() => model.MaxAnketSecenekId)" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group form-check row">
-                                <div class="d-flex align-items-start">
-                                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@model.SecilenAnketMi" /> <label class="form-check-label">Öne Çıkarılsın mı??</label>
-                                </div>
-
-                            </div>
-                            <br />
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <input type="submit" class="btn btn-success" value="Kaydet" />
-                                    <input type="button" class="btn btn-danger" value="Vazgeç" @onclick="CancelAdd" />
-                                </div>
-
-                            </div>
-
-                        </EditForm>
+            <div class="form-group row">
+                <div class="col-12">
+                    <label class="bs-form-label" for="surveyDescription">Açıklama</label>
+                    <InputText id="surveyDescription" class="form-control" @bind-Value="@AnketEkle.Aciklama" />
+                    <ValidationMessage For="@(() => AnketEkle.Aciklama)" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <label class="bs-form-label" for="surveyQuestion">Anket Sorusu</label>
+                    <InputTextArea rows="10" id="surveyQuestion" class="form-control" @bind-Value="@AnketEkle.AnketSorusu" />
+                    <ValidationMessage For="@(() => AnketEkle.AnketSorusu)" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"><button type="button" class="btn btn-sm btn-primary" @onclick="SecenekEkle">Seçenek Ekle</button></th>
+                                <th scope="col">Seçenekler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (AnketEkle.AnketSecenekleri.Count == 0)
+                            {
+    <tr>
+        <td colspan="2">Lütfen en az iki seçenek ekleyin!</td>
+    </tr> }
+                            else
+                            {
+    @foreach (var option in AnketEkle.AnketSecenekleri)
+    {
+<tr>
+    <td><button type="button" class="btn btn-danger btn-sm" @onclick="(()=> SecenekSil(Int32.Parse(option.Value)))">Sil</button></td>
+    <td>@option.Text</td>
+</tr>}}
+                        </tbody>
+                    </table>
+                    <div class="justify-content-center">
+                        <ValidationMessage For="@(() => AnketEkle.MaxAnketSecenekId)" />
                     </div>
                 </div>
-            }
+            </div>
+            <div class="form-group form-check row">
+                <div class="d-flex align-items-start">
+                    <InputCheckbox class="mr-3 align-self-center mb-1" @bind-Value="@AnketEkle.SecilenAnketMi" /> <label class="form-check-label">Öne Çıkarılsın mı??</label>
+                </div>
+
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-12">
+                    <input type="submit" class="btn btn-success" value="Kaydet" />
+                    <input type="button" class="btn btn-danger" value="Vazgeç" @onclick="Vazgec" />
+                </div>
+
+            </div>
+
+        </EditForm>
+    </div>
+</div>}
 
         </CardBody>
         <CardFotter>
             <p></p>
         </CardFotter>
     </CardComponent>
-
-
 </div>
 
 <style>

@@ -16,21 +16,13 @@
                 Haber @Title
             </CardHeader>
             <CardBody>
-
-
-
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <InputFile @bind-ValuePath="@HaberDosya" />
-                                @*@if (!string.IsNullOrEmpty(haber.Dosya.Yolu?.ToString()))
-                                    {
-                                        <img src="@("images/uploaded/"+@haber.Dosya.Yolu)" height="150" />
-                                    }*@
+                                <ImageResizer @bind-ValuePath="@HaberDosya" />
                             </div>
-                            @*<ValidationMessage For="@(() => haber.Dosya.Yolu)" />*@
                         </div>
 
                         <div class="form-group row">
@@ -109,9 +101,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </CardBody>
             <CardFotter>
                 <div class="form-group">
@@ -123,7 +112,6 @@
     </EditForm>
 </div>
 
-
 @if (Haberler == null)
 
 {
@@ -133,18 +121,15 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
-
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
                         Haberler
                     </div>
                 </div>
-
             </CardHeader>
             <CardBody>
                 <div class="table-responsive">
@@ -166,14 +151,9 @@ else
                             </tr>
                         </thead>
                         <tbody>
-
-
-
                             @foreach (var haber in Haberler.Where(h => h.Kategori == HaberDuyuruKategori.Haber).ToList())
 
                             {
-
-
                                 <tr>
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
@@ -196,9 +176,6 @@ else
                                         </button>
                                     </td>
                                 </tr>
-
-
-
                             }
                         </tbody>
                     </table>
@@ -206,10 +183,7 @@ else
 
             </CardBody>
         </CardComponent>
-
     </div>
-
-
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
@@ -220,9 +194,7 @@ else
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
-
 }
-
 
 <style>
     .modal-content {

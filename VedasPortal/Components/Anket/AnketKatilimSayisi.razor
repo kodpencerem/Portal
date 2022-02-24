@@ -1,23 +1,21 @@
 ﻿
-<div class="card text-center h-100">
-    <div class="card-header">       
+<CardComponent cardStyle="Style.dark">
+    <CardHeader>
         Toplam Anket Sayısı
-    </div>
-    <div class="card-body d-flex align-items-center">
-        @if (NumberOfSurveys == null)
+    </CardHeader>
+    <CardBody>
+        @if (AnketlerSayisi == null)
         {
-            <p>Yükleniyor...</p>
-        }
-        else
-        {
-            <p class="display-4 w-100">@NumberOfSurveys</p>
-        }
+<p>Yükleniyor...</p> }
+                else
+                {
+<p class="display-4 w-100">@AnketlerSayisi</p>}
 
 
-    </div>
-    <div class="card-footer text-muted">
+    </CardBody>
+    <CardFotter>
         <p></p>
-    </div>
-</div>
+    </CardFotter>
+</CardComponent>
 
 

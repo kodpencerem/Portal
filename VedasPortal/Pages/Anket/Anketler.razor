@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if (SurveyList.Count == 0)
+                    @if (AnketListe.Count == 0)
                     {
                         <tr>
                             <td colspan="5">Görüntülenecek anket yok!!</td>
@@ -33,14 +33,14 @@
                     }
                     else
                     {
-                        @foreach (var survey in SurveyList)
+                        @foreach (var anket in AnketListe)
                         {
                             <tr>
-                                <td><button class="btn btn-sm btn-primary" @onclick="() => TakeSurvey(survey.AnketId)">Ankete Katıl</button></td>
-                                <td><button class="btn btn-sm btn-info" @onclick="() => ViewSurveyResults(survey.AnketId)">Sonuçları Gör</button></td>
-                                <td>@survey.Adi</td>
-                                <td>@survey.Aciklama</td>
-                                <td>@survey.ToplamAlinanSure</td>
+                                <td><button class="btn btn-sm btn-primary" @onclick="() => AnketiGetir(anket.AnketId)">Ankete Katıl</button></td>
+                                <td><button class="btn btn-sm btn-info" @onclick="() => SonuclariGoster(anket.AnketId)">Sonuçları Gör</button></td>
+                                <td>@anket.Adi</td>
+                                <td>@anket.Aciklama</td>
+                                <td>@anket.ToplamAlinanSure</td>
                             </tr>
                         }
                     }

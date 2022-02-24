@@ -31,18 +31,20 @@ namespace VedasPortal.Models.Anket.ViewModels
         public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>();
 
 
-        public void SurveyTaken()
+        public void YapilanAnket()
         {
             ToplamKatilim += 1;
             ToplamAlinanSure += 1;
         }
-
-        public void TallyVote()
+        /// <summary>
+        /// Parça parça gelen anket katılım sayısı alır ve ekler
+        /// </summary>
+        public void SonucAl()
         {
-            var selectedValue = int.Parse(SecilenSecenek);
-            var optionSelected = AnketSecenekleri.Where(x => x.AnketSecenekId == selectedValue).FirstOrDefault();
+            var secilenDeger = int.Parse(SecilenSecenek);
+            var secilenSecenek = AnketSecenekleri.Where(x => x.AnketSecenekId == secilenDeger).FirstOrDefault();
 
-            optionSelected.ToplamKatilim += 1;
+            secilenSecenek.ToplamKatilim += 1;
         }
 
 

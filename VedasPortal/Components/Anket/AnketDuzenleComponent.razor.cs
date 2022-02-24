@@ -34,7 +34,7 @@ namespace VedasPortal.Components.Anket
         IModalService Modal { get; set; }
 
         [Inject]
-        public IAnketYonetim SurveyManager { get; set; }
+        public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]
         public IToastService ToastService { get; set; }
@@ -44,18 +44,18 @@ namespace VedasPortal.Components.Anket
 
         private bool isReady = false;
 
-        private AnketDTO Survey;
+        private AnketDTO AnketDTO;
 
-        private AnketDuzenleVm SurveyToUpdate { get; set; }
+        private AnketDuzenleVm AnketGuncelle { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            var result = await SurveyManager.GetSurveyAsync(Id);
+            var result = await AnketYonetim.AnketGetirAsync(Id);
 
             if (result.IsSuccess)
             {
-                Survey = result.Value;
-                SurveyToUpdate = mapper.SurveyToEditSurveyModel(Survey);
+                AnketDTO = result.Value;
+                AnketGuncelle = mapper.AnketToAnketDuzenlemeModeli(AnketDTO);
             }
 
 
@@ -63,17 +63,17 @@ namespace VedasPortal.Components.Anket
         }
 
 
-        private async Task UpdateSurvey()
+        private async Task AnketiDuzenle()
         {
-            var updatedSurvey = SurveyToUpdate;
+            var updatedSurvey = AnketGuncelle;
 
-            Survey.Adi = SurveyToUpdate.Adi;
-            Survey.AnketSorusu = SurveyToUpdate.AnketSorusu;
-            Survey.SecilenAnketMi = SurveyToUpdate.SecilenAnketMi;
-            Survey.Aciklama = SurveyToUpdate.Aciklama;
-            Survey.AnketSecenekleri = SurveyToUpdate.AnketSecenekEkle;
+            AnketDTO.Adi = AnketGuncelle.Adi;
+            AnketDTO.AnketSorusu = AnketGuncelle.AnketSorusu;
+            AnketDTO.SecilenAnketMi = AnketGuncelle.SecilenAnketMi;
+            AnketDTO.Aciklama = AnketGuncelle.Aciklama;
+            AnketDTO.AnketSecenekleri = AnketGuncelle.AnketSecenekEkle;
 
-            var result = await SurveyManager.UpdateSurveyAsync(Survey);
+            var result = await AnketYonetim.AnketDuzenleAsync(AnketDTO);
 
             if (result.IsSuccess)
             {
@@ -92,7 +92,7 @@ namespace VedasPortal.Components.Anket
             NavigationManager.NavigateTo("anketlerlistesi");
         }
 
-        private async Task DeleteOption(int id)
+        private async Task SecenekSil(int id)
         {
             var parameters = new ModalParameters();
             parameters.Add("AnketSecenekId", id);
@@ -102,14 +102,14 @@ namespace VedasPortal.Components.Anket
 
             if (!result.Cancelled)
             {
-                SurveyToUpdate.RemoveSurveyOption(id);
+                AnketGuncelle.AnketSecenekSil(id);
             }
         }
 
-        private async Task AddOption()
+        private async Task SecenekEkle()
         {
             var parameters = new ModalParameters();
-            parameters.Add("AnketId", SurveyToUpdate.AnketId);
+            parameters.Add("AnketId", AnketGuncelle.AnketId);
 
             var formModal = Modal.Show<AnketSecenekEkle>("Seçenek Ekle", parameters);
 
@@ -118,7 +118,7 @@ namespace VedasPortal.Components.Anket
             if (!result.Cancelled)
             {
                 var results = result.Data;
-                SurveyToUpdate.AddSurveyOption((AnketSecenekDTO)result.Data);
+                AnketGuncelle.AnketSecenekleriEkle((AnketSecenekDTO)result.Data);
             }
         }
 
