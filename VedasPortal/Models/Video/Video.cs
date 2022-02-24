@@ -13,7 +13,7 @@ namespace VedasPortal.Models.Video
 
         public string Aciklama { get; set; }
 
-        public decimal Uzunluk { get; set; }
+        public long Uzunluk { get; set; }
 
         public bool AktifPasif { get; set; }
 

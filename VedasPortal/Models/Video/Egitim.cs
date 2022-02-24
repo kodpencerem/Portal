@@ -19,7 +19,7 @@ namespace VedasPortal.Models.Video
 
         public bool AktifPasif { get; set; }
         
-        public decimal ToplamIzlenme { get; set; }
+        public long ToplamIzlenme { get; set; }
 
         public bool TamamlandiMi { get; set; }
 
@@ -27,7 +27,7 @@ namespace VedasPortal.Models.Video
 
         public string KonuBasligi { get; set; }
 
-        public decimal ToplamUzunluk { get; set; }
+        public long ToplamUzunluk { get; set; }
 
         public string KimlereUygun { get; set; }
         

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220224080409_AddToplantiTakvimi")]
+    partial class AddToplantiTakvimi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -796,9 +798,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Adres")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
 
@@ -892,11 +891,11 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("TamamlandiMi")
                         .HasColumnType("bit");
 
-                    b.Property<long>("ToplamIzlenme")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("ToplamIzlenme")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("ToplamUzunluk")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("ToplamUzunluk")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("VideoId")
                         .HasColumnType("int");
@@ -953,8 +952,8 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("Uzunluk")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("Uzunluk")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

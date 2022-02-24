@@ -9,6 +9,7 @@ using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
+using VedasPortal.Models.ToplantiTakvimi;
 using VedasPortal.Models.Video;
 
 namespace VedasPortal.Data
@@ -34,6 +35,7 @@ namespace VedasPortal.Data
 
         public DbSet<Models.Anket.Models.Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
+        public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
 
 
 

@@ -28,14 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Data\Images\default.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Data\Images\default.jpg">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="Pages\FaydaliIcerikler\Dokumanlar\Dokumanlar.razor.cs" />
   </ItemGroup>
 
