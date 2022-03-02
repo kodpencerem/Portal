@@ -1,0 +1,225 @@
+﻿@using VedasPortal.Models.ToplantiTakvimi
+
+
+<style type="text/css">
+
+    #tblParent tbody tr td{
+        width:200px;
+        height:200px;
+    }
+    #divParent{
+        position: relative;
+    }
+    #divModal{
+        z-index:10;
+        position:absolute;
+        border: 1px solid #000000;
+        border-radius:3px;
+        background-color:#ffffff;
+        left:40%;
+        top:20%;
+        width:400px;
+        min-height: 300px;
+    }
+
+    .modalHeading{
+        text-align:center;
+        font-size:50px;
+        text-decoration:underline;
+        margin-bottom:36px;
+
+    }
+
+</style>
+
+@if (displayModal)
+{
+    <div id="divModal">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading modalHeading">
+                    Toplantı Planla
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>
+                                Başlangıç Tarihi
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" style="width:100%" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>
+                                Bitiş Tarihi
+                            </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" style="width:100%" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" style="text-align:right">
+
+                        <buton class="btn btn-succes" style="float:left;margin-right:5px">Kaydet</buton>
+                        <button class="btn btn-danger" @onclick="CloseModal" style="float:left">Vazgeç</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<select @onchange="AylariGoster">
+    @foreach (string ayAdi in Aylar)
+    {
+        <option>@ayAdi</option>
+    }
+</select>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            @for (var gunuGoster = 0; gunuGoster < Gunler.Count(); gunuGoster++)
+            {
+                <th>
+                    @Gunler[gunuGoster]
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (var takvimGovde = 0; takvimGovde < HaftalikToplanti.Count(); takvimGovde++)
+        {
+
+
+            <tr>
+                @for (var gunuGoster = 0; gunuGoster < HaftalikToplanti[takvimGovde].Toplanti.Count(); gunuGoster++)
+                {
+                    var tGovde = takvimGovde;
+                    var gGoster = gunuGoster;
+
+                    <td @ondblclick="@(()=> OpenModal(tGovde,gGoster))">
+                        @HaftalikToplanti[takvimGovde].Toplanti[gunuGoster].TarihDegeri
+
+                        <br /><br />
+                        <label style="color:#c00; font-weight:bold">
+                            @HaftalikToplanti[takvimGovde].Toplanti[gunuGoster].Konu
+                        </label>
+                        <br /><br />
+                        Hücre Değeri : [@takvimGovde, @gunuGoster]
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@code {
+
+    public ShowModalComponent ModalShow { get; set; }
+
+    bool displayModal = false;
+    List<string> Aylar = new();
+
+    List<string> Gunler = new();
+
+    List<HaftalikToplanti> HaftalikToplanti = new();
+
+    DateTime baslangicTarihi = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+    DateTime bitisTarihi = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
+
+    protected override void OnInitialized()
+    {
+        Aylar = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames.ToList();
+        TakvimBasKisimOlustur();
+        TakvimGovdesiOlustur();
+    }
+
+    protected void AylariGoster(ChangeEventArgs eventArgs)
+    {
+        var ayadi = eventArgs.Value.ToString();
+
+        int ayAdForm = DateTime.ParseExact(ayadi, "MMMM", System.Globalization.CultureInfo.CreateSpecificCulture("tr-TR")).Month;
+
+        baslangicTarihi = new DateTime(DateTime.Now.Year, ayAdForm, 1);
+        bitisTarihi = (new DateTime(DateTime.Now.Year, ayAdForm, 1)).AddMonths(1).AddDays(-1);
+        TakvimBasKisimOlustur();
+        TakvimGovdesiOlustur();
+    }
+
+    protected void TakvimBasKisimOlustur()
+    {
+        var gun1 = new List<string>();
+
+        for (var dt = baslangicTarihi; dt <= bitisTarihi; dt = dt.AddDays(1))
+        {
+            gun1.Add(dt.ToString("dddd"));
+        }
+        Gunler = gun1.Distinct().ToList();
+    }
+
+    protected void TakvimGovdesiOlustur()
+    {
+        HaftalikToplanti = new List<HaftalikToplanti>();
+
+        int isaretle = 0;
+
+        HaftalikToplanti haftalik = new();
+
+        List<ToplantiTakvimi> toplantiTakvimi = new();
+
+        var tumGunler = (int)(bitisTarihi - baslangicTarihi).TotalDays;
+        int gunSayisi = 0;
+
+        for (var dt = baslangicTarihi; dt <= bitisTarihi; dt = dt.AddDays(1))
+        {
+            isaretle++;
+            toplantiTakvimi.Add(new ToplantiTakvimi()
+            {
+                TarihDegeri = dt.ToString("dd-MMM-yyyy"),
+                GunAdi = dt.ToString("dddd"),
+            });
+
+            if (isaretle == 7)
+            {
+                haftalik = new HaftalikToplanti();
+                haftalik.Toplanti = toplantiTakvimi;
+                HaftalikToplanti.Add(haftalik);
+
+                toplantiTakvimi = new List<ToplantiTakvimi>();
+                isaretle = 0;
+
+            }
+
+            if (gunSayisi == tumGunler)
+            {
+                haftalik = new HaftalikToplanti();
+                haftalik.Toplanti = toplantiTakvimi;
+                HaftalikToplanti.Add(haftalik);
+                break;
+            }
+            gunSayisi++;
+
+        }
+    }
+
+    protected void CloseModal()
+    {
+        displayModal = false;
+    }
+
+    protected void OpenModal(int tGovde,int gGoster)
+    {
+        displayModal = true;
+    }
+}
