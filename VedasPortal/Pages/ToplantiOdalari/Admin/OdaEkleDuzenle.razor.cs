@@ -9,74 +9,74 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
 {
-    public class ToplantiMerkeziModeli : ComponentBase
+    public class ToplantiOdasiModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<ToplantiMerkezi> ToplantiMerkezi { get; set; }
+        public IBaseRepository<ToplantiOdasi> ToplantiOdasi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int TOdaMerkezId { get; set; }
+        public int OdaId { get; set; }
 
         protected string Title = "Ekle";
-        public ToplantiMerkezi TOdaMerkezi = new();
+        public ToplantiOdasi Oda = new();
 
-        protected IEnumerable<ToplantiMerkezi> ToplantiMerkezleri { get; set; }
+        protected IEnumerable<ToplantiOdasi> Odalar { get; set; }
 
-        protected IEnumerable<ToplantiMerkezi> TumTMerkezleriGetir()
+        protected IEnumerable<ToplantiOdasi> TumOdalariGetir()
         {
-            ToplantiMerkezleri = ToplantiMerkezi.GetAll();
-            return ToplantiMerkezleri;
+            Odalar = ToplantiOdasi.GetAll();
+            return Odalar;
         }
         
         protected void Kayit()
         {
-            ToplantiMerkezi.AddUpdate(TOdaMerkezi);
+            ToplantiOdasi.AddUpdate(Oda);
 
         }
         protected override void OnParametersSet()
         {
-            if (TOdaMerkezId != 0)
+            if (OdaId != 0)
             {
                 Title = "Duzenle";
-                TOdaMerkezi = ToplantiMerkezi.Get(TOdaMerkezId);
+                Oda = ToplantiOdasi.Get(OdaId);
                 //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
 
             }
         }
 
-        protected void SilmeyiOnayla(int TOdaMerkezId)
+        protected void SilmeyiOnayla(int OdaId)
         {
             ModalDialog.Open();
-            TOdaMerkezi = ToplantiMerkezleri.FirstOrDefault(x => x.Id == TOdaMerkezId);
+            Oda = Odalar.FirstOrDefault(x => x.Id == OdaId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
         protected void Sil()
         {
-            if (TOdaMerkezi.Id == 0)
+            if (Oda.Id == 0)
                 return;
 
-            ToplantiMerkezi.Remove(TOdaMerkezi.Id);
-            TOdaMerkezi = new ToplantiMerkezi();
-            TumTMerkezleriGetir();
+            ToplantiOdasi.Remove(Oda.Id);
+            Oda = new ToplantiOdasi();
+            TumOdalariGetir();
         }
 
         protected override Task OnInitializedAsync()
         {
-            TumTMerkezleriGetir();
+            TumOdalariGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            TOdaMerkezi = null;
+            Oda = null;
 
-            UrlNavigationManager.NavigateTo("/toplantimerkezi/ekle");
+            UrlNavigationManager.NavigateTo("/oda/ekle");
         }
 
 

@@ -1,4 +1,6 @@
+#region Usings
 using Blazored.Modal;
+using Blazored.Modal.Services;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -20,6 +22,7 @@ using VedasPortal.Models.HaberDuyuru;
 using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
+using VedasPortal.Models.ToplantiTakvimi;
 using VedasPortal.Models.Video;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
@@ -27,6 +30,8 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
 using VedasPortal.Utils.Anket;
+
+# endregion
 
 namespace VedasPortal
 {
@@ -64,16 +69,21 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
             services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
+            services.AddScoped<IBaseRepository<ToplantiTakvimi>, BaseRepository<ToplantiTakvimi>>();
+            services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
+            services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
             // register our scoped service to upload
             services.AddScoped<IFileUpload, FileUpload>();
             // register our scoped service to download
             services.AddScoped<IFileDownload, FileDownload>();
+            services.AddScoped<IModalService, ModalService>();
 
             services.AddBlazoredModal();
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
+            
 
         }
 

@@ -10,8 +10,8 @@ using VedasPortal.Data;
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    [Migration("20220215092818_AddDuzelticiFaaliyetMdf")]
-    partial class AddDuzelticiFaaliyetMdf
+    [Migration("20220301130451_AddInitialCreate")]
+    partial class AddInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,6 +221,97 @@ namespace VedasPortal.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VedasPortal.Models.Anket.Models.Anket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Adi")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AnketSorusu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<bool>("SecilenAnketMi")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ToplamAlinanSure")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToplamKatilim")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Anket");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Anket.Models.AnketSecenek", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Fk_AnketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Resim")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("ToplamKatilim")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Fk_AnketId");
+
+                    b.ToTable("AnketSecenek");
+                });
+
             modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
                 {
                     b.Property<int>("Id")
@@ -234,6 +325,9 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Adi")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Boyutu")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -245,6 +339,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HaberDuyuruId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kategori")
                         .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
@@ -491,6 +588,165 @@ namespace VedasPortal.Migrations
                     b.ToTable("HaberDuyuru");
                 });
 
+            modelBuilder.Entity("VedasPortal.Models.IKUygulama.IkUygulama", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Birimler")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Kategori")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ResimId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResimId");
+
+                    b.ToTable("IkUygulama");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Mevzuat.Mevzuat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("BaslangicTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Birimler")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BitisTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DosyaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Kategori")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("No")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DosyaId");
+
+                    b.ToTable("Mevzuat");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Oneri.Oneri", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Derece")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EPosta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("KabulDurum")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Kategori")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Odul")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OneriDosyaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RedNedeni")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YapanAdiSoyadı")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OneriDosyaId");
+
+                    b.ToTable("Oneri");
+                });
+
             modelBuilder.Entity("VedasPortal.Models.Rehber", b =>
                 {
                     b.Property<int>("Id")
@@ -516,15 +772,141 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ProfilResmiId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Soyadi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("TelefonNo")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Unvani")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ProfilResmiId");
+
                     b.ToTable("Rehber");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.ToplantiTakvimi.DayEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DateValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DayEvent");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Video.Egitim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Birimler")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Egitmen")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gereksinim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("KapakId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kategori")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KimlereUygun")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KonuBasligi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sertifika")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TamamlandiMi")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ToplamIzlenme")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ToplamUzunluk")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("VideoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KapakId");
+
+                    b.HasIndex("VideoId");
+
+                    b.ToTable("Egitim");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>
@@ -534,8 +916,20 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifPasif")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AltBaslik")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Baslik")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Birimler")
+                        .HasColumnType("int");
 
                     b.Property<int?>("DosyaId")
                         .HasColumnType("int");
@@ -546,11 +940,20 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IzlenmeDurumu")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Kategori")
+                        .HasColumnType("int");
+
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("Uzunluk")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -610,6 +1013,17 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VedasPortal.Models.Anket.Models.AnketSecenek", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Anket.Models.Anket", "Anket")
+                        .WithMany("AnketSecenek")
+                        .HasForeignKey("Fk_AnketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anket");
+                });
+
             modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
                 {
                     b.HasOne("VedasPortal.Models.HaberDuyuru.HaberDuyuru", null)
@@ -629,7 +1043,7 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.Etkinlik", b =>
                 {
                     b.HasOne("VedasPortal.Models.Dosya.Dosya", "Kapak")
-                        .WithMany()
+                        .WithMany("Etkinlik")
                         .HasForeignKey("KapakId");
 
                     b.HasOne("VedasPortal.Models.Etkinlik.Katilimci", null)
@@ -657,13 +1071,76 @@ namespace VedasPortal.Migrations
                     b.Navigation("Video");
                 });
 
-            modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>
+            modelBuilder.Entity("VedasPortal.Models.IKUygulama.IkUygulama", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Resim")
+                        .WithMany()
+                        .HasForeignKey("ResimId");
+
+                    b.Navigation("Resim");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Mevzuat.Mevzuat", b =>
                 {
                     b.HasOne("VedasPortal.Models.Dosya.Dosya", "Dosya")
                         .WithMany()
                         .HasForeignKey("DosyaId");
 
                     b.Navigation("Dosya");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Oneri.Oneri", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "OneriDosya")
+                        .WithMany()
+                        .HasForeignKey("OneriDosyaId");
+
+                    b.Navigation("OneriDosya");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Rehber", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "ProfilResmi")
+                        .WithMany()
+                        .HasForeignKey("ProfilResmiId");
+
+                    b.Navigation("ProfilResmi");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Video.Egitim", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Kapak")
+                        .WithMany()
+                        .HasForeignKey("KapakId");
+
+                    b.HasOne("VedasPortal.Models.Video.Video", "Video")
+                        .WithMany()
+                        .HasForeignKey("VideoId");
+
+                    b.Navigation("Kapak");
+
+                    b.Navigation("Video");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Video.Video", b =>
+                {
+                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "Dosya")
+                        .WithMany("Video")
+                        .HasForeignKey("DosyaId");
+
+                    b.Navigation("Dosya");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Anket.Models.Anket", b =>
+                {
+                    b.Navigation("AnketSecenek");
+                });
+
+            modelBuilder.Entity("VedasPortal.Models.Dosya.Dosya", b =>
+                {
+                    b.Navigation("Etkinlik");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Models.Etkinlik.Katilimci", b =>

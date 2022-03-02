@@ -24,7 +24,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         public int DuyuruId { get; set; }
 
         protected string Title = "Ekle";
-        public HaberDuyuru duyuru = new HaberDuyuru();
+        public HaberDuyuru duyuru = new();
 
         protected IEnumerable<HaberDuyuru> Duyurular { get; set; }
 

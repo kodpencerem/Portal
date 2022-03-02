@@ -8,18 +8,28 @@
 
   <ItemGroup>
     <Compile Remove="Components\OneriComponent\**" />
+    <Compile Remove="Models\ToplantiTakvimi\IService\**" />
+    <Compile Remove="Models\ToplantiTakvimi\Service\**" />
     <Compile Remove="wwwroot\assets\onerisistemi\**" />
     <Compile Remove="wwwroot\slider\**" />
     <Content Remove="Components\OneriComponent\**" />
+    <Content Remove="Models\ToplantiTakvimi\IService\**" />
+    <Content Remove="Models\ToplantiTakvimi\Service\**" />
     <Content Remove="wwwroot\assets\onerisistemi\**" />
     <Content Remove="wwwroot\slider\**" />
     <EmbeddedResource Remove="Components\OneriComponent\**" />
+    <EmbeddedResource Remove="Models\ToplantiTakvimi\IService\**" />
+    <EmbeddedResource Remove="Models\ToplantiTakvimi\Service\**" />
     <EmbeddedResource Remove="wwwroot\assets\onerisistemi\**" />
     <EmbeddedResource Remove="wwwroot\slider\**" />
     <None Remove="Components\OneriComponent\**" />
+    <None Remove="Models\ToplantiTakvimi\IService\**" />
+    <None Remove="Models\ToplantiTakvimi\Service\**" />
     <None Remove="wwwroot\assets\onerisistemi\**" />
     <None Remove="wwwroot\slider\**" />
     <TypeScriptCompile Remove="Components\OneriComponent\**" />
+    <TypeScriptCompile Remove="Models\ToplantiTakvimi\IService\**" />
+    <TypeScriptCompile Remove="Models\ToplantiTakvimi\Service\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,9 +43,11 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Result.AspNetCore" Version="3.1.2" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
     <PackageReference Include="Chronos.Blazor.Cropper" Version="1.2.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.475" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Analyzers" Version="5.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.14" />

@@ -2,34 +2,34 @@
 
 namespace VedasPortal.Migrations
 {
-    public partial class AddDuzelticiFaaliyetMdf : Migration
+    public partial class ModifiedToplatiMerkeziTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
                 name: "AktifPasif",
-                table: "DuzelticiFaaliyet",
+                table: "ToplantiMerkezi",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
 
-            migrationBuilder.AddColumn<int>(
-                name: "Kategori",
-                table: "DuzelticiFaaliyet",
-                type: "int",
+            migrationBuilder.AddColumn<bool>(
+                name: "VideoKonferansMi",
+                table: "ToplantiMerkezi",
+                type: "bit",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
                 name: "AktifPasif",
-                table: "DuzelticiFaaliyet");
+                table: "ToplantiMerkezi");
 
             migrationBuilder.DropColumn(
-                name: "Kategori",
-                table: "DuzelticiFaaliyet");
+                name: "VideoKonferansMi",
+                table: "ToplantiMerkezi");
         }
     }
 }

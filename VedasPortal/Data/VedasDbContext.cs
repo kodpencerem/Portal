@@ -32,17 +32,14 @@ namespace VedasPortal.Data
         public DbSet<Egitim> Egitim { get; set; }
         public DbSet<Oneri> Oneri { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
-
+        public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
         public DbSet<Models.Anket.Models.Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
-        public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            //Model Builder Anket
             modelBuilder.Entity<Anket>(e =>
             {
                 e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -54,6 +51,7 @@ namespace VedasPortal.Data
 
             modelBuilder.Entity<Anket>().HasMany(e => e.AnketSecenek).WithOne(e => e.Anket).HasForeignKey(e => e.Fk_AnketId);
 
+            //Model Builder Anket Soru Şıkları
             modelBuilder.Entity<AnketSecenek>(e =>
             {
                 e.Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();

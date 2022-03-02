@@ -239,6 +239,7 @@ namespace VedasPortal.Services.Doviz
             catch (Exception)
             {
                 throw new Exception("Belirtilen tarih bir hafta sonu veya resmi tatil olabilir!");
+               
             }
         }
 
