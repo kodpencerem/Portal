@@ -1,0 +1,139 @@
+﻿@page "/odadetayformu"
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <div class="float-left">
+                <div class="col-md-12">
+                    Toplantı Odası Detay Formu
+                </div>
+            </div>
+            <div style="margin-left:980px" class="float-right">
+                <input style="border-radius: 5px; border-color: #6777ef" placeholder="Aramanızı bu alanda yapın..." />
+                <button style="border-radius:5px" class="btn btn-primary">Ara</button>
+            </div>
+        </CardHeader>
+        <CardBody>
+            <div class="padding-20">
+                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab" aria-selected="true">Toplantı Odası Detay Bilgisi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#sonuc" role="tab" aria-selected="false">Toplantı Sonucu ve Alınan Kararlar</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-bordered" id="myTab3Content">
+                    <div class="tab-pane fade active show" id="about" role="tabpanel" aria-labelledby="home-tab2">
+                        <div class="row">
+                            <div class="col-md-3 col-6 b-r">
+                                <strong>Toplantı Başkanı</strong>
+                                <br>
+                                <p class="text-muted">Sami Kaya</p>
+                            </div>
+                            <div class="col-md-3 col-6 b-r">
+                                <strong>Telefon No</strong>
+                                <br>
+                                <p class="text-muted">(123) 456 7890</p>
+                            </div>
+                            <div class="col-md-3 col-6 b-r">
+                                <strong>Email</strong>
+                                <br>
+                                <p class="text-muted">samikaya@vedas.com.tr</p>
+                            </div>
+
+                        </div>
+                        <p class="m-t-30">
+                            Toplanti Odası Adı ve Lokasyon Bilgisi
+                        </p>
+                        <p>
+                            Toplantı Konusu
+                        </p>
+                        <p>
+                            Katılımcı Listesi
+                        </p>
+                        <div class="section-title">Toplantı Tarihi</div>
+                        <ul>
+                            <li>Toplantı Başlangıç Tarih ve Saati</li>
+                            <li>Toplantı Bitiş Tarih ve Saati</li>
+                        </ul>
+                        <div class="section-title">Katılım Durumu</div>
+                        <ul>
+                            <li>
+                                Herkese Açık
+                            </li>
+                            <li>
+                                Sadece Davetliler
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane fade" id="sonuc" role="tabpanel" aria-labelledby="profile-tab3">
+                        <form method="post" class="needs-validation">
+                            <div class="row">
+                                <div class="col-12">
+
+
+                                    <div class="card-body">
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Toplantı Teması</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Görecek Birimler</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <select class="form-control selectric">
+                                                    <option>Seçiniz...</option>
+                                                    <option>Tüm Birimler</option>
+                                                    <option>Bilgi İşlem</option>
+                                                    <option>Scada Birimi</option>
+                                                    <option>İnsan Kaynakları</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <Summernote></Summernote>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <button class="btn btn-primary">Gönder ve Yayınla</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </CardBody>
+    </CardComponent>
+
+</div>
+
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
+
+
+
+
+@code { }
+
+
+

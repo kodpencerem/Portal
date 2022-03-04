@@ -1,0 +1,93 @@
+﻿@page "/havatahmindegerleri"
+
+@using System.Linq
+@using VedasPortal.Models.DbModels
+
+
+@inject IHavaTahmin TahminServisi
+
+<h1>Hava Tahmini</h1>
+
+<p>Seçilmiş Şehirlerin Hava Tahmin Raporları</p>
+
+@if (forecasts == null)
+{
+    <p><em>Yükleniyor...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Şehir</th>
+                <th>Derece(C)</th>
+                <th>Derece(F)</th>
+                <th>Bulut Durumu</th>
+                <th>Nem Oranı</th>
+                <th>Rüzgar (m/s)</th>
+                <th>Basınç Değeri (hpa)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Sehir</td>
+                    <td>@forecast.DereceC</td>
+                    <td>@forecast.DereceF</td>
+                    <td>@forecast.BulutOrani</td>
+                    <td>@forecast.NemOrani</td>
+                    <td>@forecast.RuzgarHizi</td>
+                    <td>@forecast.BasincDegeri</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<EditForm Model="sehirAra" OnValidSubmit="havaTahminAra">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label for="sehirAdi">Aramak İstediğiniz Şehir Adını Yazınız.</label>
+        <InputText id="sehirAdi" @bind-Value="sehirAra.SehirAdi" /> |
+        <button type="submit" class="btn btn-primary">Ara</button>
+    </p>
+
+</EditForm>
+
+@if (secilmisIlHavaTahmini != null)
+{
+    <div class="card mx-auto" style="width: 18rem;">
+        <div class="card-header">
+            @secilmisIlHavaTahmini.Sehir
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Şu Anki Sıcaklık: @secilmisIlHavaTahmini.DereceC °C</li>
+            <li class="list-group-item">Bulut Durumu: @secilmisIlHavaTahmini.BulutOrani %</li>
+            <li class="list-group-item">Nem Oranı: @secilmisIlHavaTahmini.NemOrani %</li>
+            <li class="list-group-item">Rüzgar: @secilmisIlHavaTahmini.RuzgarHizi m/s</li>
+            <li class="list-group-item">Basınç Değeri: @secilmisIlHavaTahmini.BasincDegeri hpa</li>
+        </ul>
+    </div>
+}
+
+
+@code {
+    private HavaTahmini[] forecasts { get; set; }
+
+    private HavaTahminAramaModeli sehirAra { get; set; } = new HavaTahminAramaModeli();
+
+    private HavaTahmini secilmisIlHavaTahmini { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var secilenIllerHavaTahminDegerleri = new[] { "Van", "Hakkari", "Muş", "Bitlis", "Ankara" };
+        forecasts = await TahminServisi.HavaTahminiGetir(secilenIllerHavaTahminDegerleri);
+    }
+
+    private async Task havaTahminAra()
+    {
+        secilmisIlHavaTahmini = (await TahminServisi.HavaTahminiGetir(sehirAra.SehirAdi)).First();
+    }
+}
