@@ -10,6 +10,7 @@ using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
 using VedasPortal.Models.ToplantiTakvimi;
+using VedasPortal.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Models.Video;
 
 namespace VedasPortal.Data
@@ -20,7 +21,6 @@ namespace VedasPortal.Data
             : base(options)
         {
         }
-
         public DbSet<HaberDuyuru> HaberDuyuru { get; set; }
         public DbSet<Dosya> Dosya { get; set; }
         public DbSet<Etkinlik> Etkinlik { get; set; }
@@ -31,11 +31,11 @@ namespace VedasPortal.Data
         public DbSet<Mevzuat> Mevzuat { get; set; }
         public DbSet<Egitim> Egitim { get; set; }
         public DbSet<Oneri> Oneri { get; set; }
+        public DbSet<ToplantiNotu> ToplantiNotu { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
         public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
         public DbSet<Models.Anket.Models.Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -62,6 +62,5 @@ namespace VedasPortal.Data
 
             });
         }
-
     }
 }

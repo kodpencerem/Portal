@@ -5,65 +5,75 @@
 @using Microsoft.AspNetCore.Hosting
 @inject IWebHostEnvironment Environment
 
-@inherits ToplantiOdasiModeli
+@inherits ToplantiNotuModeli
 
 
 <div class="col-12">
-    <EditForm Model="@Oda" OnValidSubmit="Kayit">
+    <EditForm Model="@ToplantiNot" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
-                Toplantı Odası @Title
+                Toplantı Notu @Title
             </CardHeader>
             <CardBody>
                 <div class="col-12">
                     <div class="col-md-6 float-left">
+
                         <div class="form-group row">
-                            <label class="control-label col-md-2">Adı</label>
+                            <label class="form-label col-md-2">Dosya Ekle</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="Oda.Adi" />
+                                <MultipleUpload @bind-ValuePath="@GetDosya" />
                             </div>
-                            <ValidationMessage For="@(() => Oda.Adi)" />
                         </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Not Başlığı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="ToplantiNot.Baslik" />
+                            </div>
+                            <ValidationMessage For="@(() => ToplantiNot.Baslik)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Alt Başlık</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="ToplantiNot.AltBaslik" />
+                            </div>
+                            <ValidationMessage For="@(() => ToplantiNot.AltBaslik)" />
+                        </div>
+
                         <div class="form-group row">
                             <label class="control-label col-md-2">Kayıt Tarihi</label>
                             <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="Oda.KayitTarihi" />
+                                <InputDate class="form-control" @bind-Value="ToplantiNot.KayitTarihi" />
                             </div>
-                            <ValidationMessage For="@(() => Oda.KayitTarihi)" />
+                            <ValidationMessage For="@(() => ToplantiNot.KayitTarihi)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Notu Görecek Birimi Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@ToplantiNot.Birimler" class="form-control">
+                                    <option></option>
+                                    @if (Birimler != null)
+                                    {
+                                        @foreach (var kategori in Birimler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Bulunduğu Lokasyon</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="Oda.Adres" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Adres)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Kapasitesi(Kişi)</label>
-                            <div class="col-md-10">
-                                <InputNumber Min="0" ParsingErrorMessage="Belirlenen kapasite durumunu aştınız!" class="form-control" @bind-Value="Oda.Kapasite" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Kapasite)" />
-                        </div>
                         <br />
                         <div class="row">
                             <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Şimdi Aktif Edilsin Mi?</label>
+                                <label class="control-label col-md-8"> Şimdi Yayınlansın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="Oda.AktifPasif" />
+                                    <InputCheckbox class="form-control" @bind-Value="ToplantiNot.AktifPasif" />
                                 </div>
-                                <ValidationMessage For="@(() => Oda.AktifPasif)" />
-                            </div>
-
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Video Konferans Destekliyor Mu?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="Oda.VideoKonferansMi" />
-                                </div>
-                                <ValidationMessage For="@(() => Oda.VideoKonferansMi)" />
+                                <ValidationMessage For="@(() => ToplantiNot.AktifPasif)" />
                             </div>
                         </div>
 
@@ -75,12 +85,12 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value="@Oda.Aciklama"
-                                                Label="Açıklama"
+                                                @bind-Value="@ToplantiNot.Aciklama"
+                                                Label="Açıklama ve Alınan Kararlar"
                                                 UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
                             </div>
-                            <ValidationMessage For="@(() => Oda.Aciklama)" />
+                            <ValidationMessage For="@(() => ToplantiNot.Aciklama)" />
                         </div>
 
 
@@ -100,7 +110,7 @@
 </div>
 
 
-@if (Odalar == null)
+@if (ToplantiNotlari == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -134,7 +144,6 @@ else
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
-                                <th>Kapasite</th>
                                 <th>Oda Adı</th>
                                 <th> Durumu</th>
                                 <th>İşlemler</th>
@@ -144,7 +153,7 @@ else
 
 
 
-                            @foreach (var Oda in Odalar)
+                            @foreach (var toplantiNotu in ToplantiNotlari)
 
                             {
                                 <tr>
@@ -155,10 +164,9 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@Oda.Kapasite</td>
-                                    <td>@Oda.Adi</td>
+                                    <td>@toplantiNotu.Baslik</td>
                                     <td>
-                                        @if (Oda.AktifPasif == true)
+                                        @if (toplantiNotu.AktifPasif == true)
                                         {
 
 
@@ -170,9 +178,10 @@ else
                                     </td>
 
                                     <td>
-                                        <a href='/Oda/duzenle/@Oda.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <a href="@($"toplantinotdetayi/{toplantiNotu.Id}")" class="btn btn-primary">Not Detayı</a>
+                                        <a href='/toplantinotu/duzenle/@toplantiNotu.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(Oda.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(toplantiNotu.Id);})">
                                             Sil
                                         </button>
                                     </td>

@@ -1,5 +1,15 @@
 ﻿@page "/ToplantiOdalari"
+@inherits ToplantiOdalariModeli
 
+
+@if (Odalar == null)
+
+{
+<p><em>Yükleniyor...</em></p> }
+
+else
+
+{
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
@@ -16,223 +26,74 @@
         <CardBody>
             <div class="row">
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                @foreach (var oda in Odalar)
+                {
+<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <CardComponent cardStyle="Style.info">
+        <CardBody>
+            <div class="card-statistic-4">
+                <div class="align-items-center justify-content-between">
+                    <div class="row ">
+                        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div class="card-content">
+                                <h5 class="font-15">Toplantı Odası adı:@oda.Adi</h5>
+                                <h2 class="mb-3 font-18">Kapasitesi(Kişi):@oda.Kapasite</h2>
+                                @if (oda.AktifPasif == true)
+                                {
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="badge badge-danger badge-shadow">Kapalı, Oda Rezerv Edilmiş Durumda</div> }
+else
+{
+<div class="badge badge-success badge-shadow">Açık, Rezerv Edilebilir</div>}
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="card">
-                        <div class="card-statistic-4">
-                            <div class="align-items-center justify-content-between">
-                                <div class="row ">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                                        <div class="card-content">
-                                            <h5 class="font-15">Toplantı Odası adı</h5>
-                                            <h2 class="mb-3 font-18">Kapasitesi(Kişi)</h2>
-                                            <h6 class="text-danger">Oda Durumu</h6>
-                                            <a href="toplantitakvimi" class="btn btn-primary ">Rezerve Et</a> |
-                                            <a href="odadetayformu" class="btn btn-primary ">Detay</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                                        <div class="banner-img">
-                                            <img src="assets/img/banner/3.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 pl-0">
+                            <div class="banner-img">
+                                <img src="assets/img/banner/3.png" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </CardBody>
+        <CardFotter>
+            <a href="oda/ekle/" class="btn btn-primary ">Rezerve Et</a> |
+            <a href=@($"odadetayformu/{oda.Id}") class="btn btn-info ">Detay</a>
+        </CardFotter>
+    </CardComponent>
+</div>}
+
+
+
+            </div>
 
         </CardBody>
     </CardComponent>
-
-</div>
+</div>}
 
 
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 310px;
+        max-height: 310px;
+    }
+
+    .theme-white .btn-primary {
+        margin-left: 8rem;
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
+    }
+
+    .card .card-footer {
+        background-color: transparent;
+        border: none;
+        margin-top: -3rem;
     }
 </style>
 
-
-
-@code { }

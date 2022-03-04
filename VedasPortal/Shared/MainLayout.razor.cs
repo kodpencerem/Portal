@@ -12,18 +12,12 @@ namespace VedasPortal.Shared
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
-
             await jsRun.InvokeVoidAsync("scriptsInit");
             if (firstRender)
             {
+                
                 await jsRun.InvokeVoidAsync("indexInit");
-                
-                
             }
-            
-            
-
-
         }
     }
 }

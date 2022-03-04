@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220303050117_AddToplantiNotu")]
+    partial class AddToplantiNotu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -862,24 +864,16 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GetDosyaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Konu")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("ToplantiMerkeziId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GetDosyaId");
 
                     b.HasIndex("ToplantiMerkeziId");
 
@@ -1292,15 +1286,9 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Models.ToplantiTakvimi.ToplantiNotu.ToplantiNotu", b =>
                 {
-                    b.HasOne("VedasPortal.Models.Dosya.Dosya", "GetDosya")
-                        .WithMany()
-                        .HasForeignKey("GetDosyaId");
-
                     b.HasOne("VedasPortal.Models.ToplantiTakvimi.ToplantiMerkezi", "ToplantiMerkezi")
                         .WithMany("ToplantiNotlari")
                         .HasForeignKey("ToplantiMerkeziId");
-
-                    b.Navigation("GetDosya");
 
                     b.Navigation("ToplantiMerkezi");
                 });

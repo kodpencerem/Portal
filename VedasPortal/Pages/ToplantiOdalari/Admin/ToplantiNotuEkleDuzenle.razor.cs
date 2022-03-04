@@ -1,82 +1,101 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.ToplantiTakvimi;
+using VedasPortal.Models.Dosya;
+using VedasPortal.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Models.Video;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
 {
-    public class ToplantiOdasiModeli : ComponentBase
+    public class ToplantiNotuModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<ToplantiOdasi> ToplantiOdasi { get; set; }
+        public IBaseRepository<ToplantiNotu> ToplantiNotu { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int OdaId { get; set; }
+        public int ToplantiNotId { get; set; }
 
         protected string Title = "Ekle";
-        public ToplantiOdasi Oda = new();
+        public ToplantiNotu ToplantiNot = new();
+        public Dosya GetDosya = new();
 
-        protected IEnumerable<ToplantiOdasi> Odalar { get; set; }
+        protected IEnumerable<ToplantiNotu> ToplantiNotlari { get; set; }
 
-        protected IEnumerable<ToplantiOdasi> TumOdalariGetir()
+        protected IEnumerable<ToplantiNotu> TumNotlarilariGetir()
         {
-            Odalar = ToplantiOdasi.GetAll();
-            return Odalar;
+            ToplantiNotlari = ToplantiNotu.GetAll();
+            return ToplantiNotlari;
         }
-        
+
+        public Dictionary<Birimler, string> Birimler { get; set; }
+        protected void TumBirimleriGetir()
+        {
+            var list = new Dictionary<Birimler, string>();
+            foreach (Birimler item in Enum.GetValues(typeof(Birimler)))
+            {
+                list.Add(item, item.TextBirimler());
+            }
+            Birimler = list;
+        }
+
         protected void Kayit()
         {
-            ToplantiOdasi.AddUpdate(Oda);
+            GetDosya = ToplantiNot.GetDosya;
+            ToplantiNotu.AddUpdate(ToplantiNot);
 
         }
         protected override void OnParametersSet()
         {
-            if (OdaId != 0)
+            if (ToplantiNotId != 0)
             {
                 Title = "Duzenle";
-                Oda = ToplantiOdasi.Get(OdaId);
+                ToplantiNot = ToplantiNotu.Get(ToplantiNotId);
                 //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
+                GetDosya = ToplantiNot.GetDosya;
 
             }
         }
 
-        protected void SilmeyiOnayla(int OdaId)
+        protected void SilmeyiOnayla(int ToplantiNotId)
         {
             ModalDialog.Open();
-            Oda = Odalar.FirstOrDefault(x => x.Id == OdaId);
+            ToplantiNot = ToplantiNotlari.FirstOrDefault(x => x.Id == ToplantiNotId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
         protected void Sil()
         {
-            if (Oda.Id == 0)
+            if (ToplantiNot.Id == 0)
                 return;
 
-            ToplantiOdasi.Remove(Oda.Id);
-            Oda = new ToplantiOdasi();
-            TumOdalariGetir();
+            ToplantiNotu.Remove(ToplantiNot.Id);
+            ToplantiNot = new ToplantiNotu();
+            TumNotlarilariGetir();
+            TumBirimleriGetir();
         }
 
         protected override Task OnInitializedAsync()
         {
-            TumOdalariGetir();
+            TumNotlarilariGetir();
+            TumBirimleriGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            Oda = null;
+            ToplantiNot = null;
 
-            UrlNavigationManager.NavigateTo("/oda/ekle");
+            UrlNavigationManager.NavigateTo("/toplantinotu/ekle");
         }
 
 

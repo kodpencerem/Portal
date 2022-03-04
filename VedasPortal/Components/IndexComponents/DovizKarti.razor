@@ -1,4 +1,6 @@
-﻿@using System.Data
+﻿@using VedasPortal.Services.Doviz; 
+@inject VedasPortal.Services.Doviz.AltinDegisimleriServisi altinDegisimi
+
 
 <CardComponent cardStyle="Style.secondary">
     <CardHeader>
@@ -18,12 +20,12 @@
 			<tbody>
 				<tr>
 					<td>
-						Altın(Gr)
+						@AltinDegisim?.AltinAdi
 					</td>
-					<td>670₺</td>
-					<td>
-						675₺
-					</td>
+					<td>@AltinDegisim?.result.FirstOrDefault()?.Alis</td>
+                    <td>
+                        @AltinDegisim?.result.FirstOrDefault()?.Satis
+                    </td>
 
 					<td>
 						<i data-feather="chevrons-up"></i>
@@ -34,13 +36,13 @@
 					</td>
 				</tr>
 				<tr>
-					@*<td>
-						@dolar.DovizAdi
-					</td>
-					<td>@dolar.DovizAlis</td>
 					<td>
-						@dolar.DovizSatis
-					</td>*@
+						@dolar?.DovizAdi
+					</td>
+					<td>@dolar?.DovizAlis</td>
+					<td>
+						@dolar?.DovizSatis
+					</td>
 
 					<td>
 						<i data-feather="chevrons-up"></i>
@@ -51,13 +53,13 @@
 					</td>
 				</tr>
 				<tr>
-					@*<td>
-						@euro.DovizAdi
-					</td>
-					<td>@euro.DovizAlis</td>
 					<td>
-						@euro.DovizSatis
-					</td>*@
+						@euro?.DovizAdi
+					</td>
+					<td>@euro?.DovizAlis</td>
+					<td>
+						@euro?.DovizSatis
+					</td>
 
 					<td>
 						<i data-feather="chevrons-up"></i>
@@ -81,12 +83,28 @@
 
 @code {
 
-    //DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
-    //DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
+    [Parameter]
+    public string Degisim { get; set; }
+    [Parameter]
+    public string Satis { get; set; }
+
+    [Parameter]
+    public string Alis { get; set; }
+
+    DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
+    DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
+
+    public AltinDegisimleriServisi.AltinDegisim  AltinDegisim { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        AltinDegisim = await altinDegisimi.AltinDegisiminiGetir(Satis,Alis,Degisim);
+
+        await InvokeAsync(StateHasChanged);
+    }
 }
-
-
-
 
 <style>
     .card .card-header h4 {

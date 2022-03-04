@@ -6,7 +6,6 @@
 
 @inherits ToplantiOdasiModeli
 
-
 <div class="col-12">
     <EditForm Model="@Oda" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
@@ -65,9 +64,6 @@
                                 <ValidationMessage For="@(() => Oda.VideoKonferansMi)" />
                             </div>
                         </div>
-
-
-
                     </div>
 
                     <div class="col-md-6 float-right">
@@ -81,11 +77,8 @@
                             </div>
                             <ValidationMessage For="@(() => Oda.Aciklama)" />
                         </div>
-
-
                     </div>
                 </div>
-
             </CardBody>
 
             <CardFotter>
@@ -97,7 +90,6 @@
         </CardComponent>
     </EditForm>
 </div>
-
 
 @if (Odalar == null)
 
@@ -119,7 +111,6 @@ else
                         Toplantı Odaları
                     </div>
                 </div>
-
             </CardHeader>
             <CardBody>
                 <div class="table-responsive">
@@ -141,8 +132,6 @@ else
                         </thead>
                         <tbody>
 
-
-
                             @foreach (var Oda in Odalar)
 
                             {
@@ -159,7 +148,6 @@ else
                                     <td>
                                         @if (Oda.AktifPasif == true)
                                         {
-
 
                                             <div class="badge badge-success badge-shadow">Aktif, Kullanımda</div>
                                         }
@@ -181,12 +169,9 @@ else
                         </tbody>
                     </table>
                 </div>
-
             </CardBody>
         </CardComponent>
-
     </div>
-
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
@@ -200,7 +185,6 @@ else
     </ModalComponent>
 
 }
-
 
 <style>
     .modal-content {

@@ -1,5 +1,6 @@
 ﻿@page "/tumdovizler"
 @using System.Data;
+@using System;
 
 @using VedasPortal.Services.Doviz;
 
@@ -27,21 +28,36 @@
                     </thead>
                     <tbody>
 
-                        @*@foreach (var item in DovizDegisimleri.AsEnumerable())
+                        @foreach (var item in DovizDegisimleri.AsEnumerable())
                             {
-                                <tr>
-                                    <td>
-                                        @item.DovizKodu
-                                    </td>
-                                    <td>@item.DovizAdi</td>
-                                    <td>@item.DovizAlis</td>
-                                    <td>@item.DovizSatis</td>
-                                    <td>@item.EfektifAlis</td>
-                                    <td>@item.EfektifSatis</td>
+                        <tr>
+                            <td>
+                            </td>
+                            <td @key="@item.Key">
+                                @item.Value.DovizKodu
+                            </td>
+                            <td @key="@item.Key">
+                                @item.Value.DovizAdi
+                            </td>
 
-                                </tr>
+                            <td @key="@item.Key">
+                                @item.Value.DovizAlis
+                            </td>
 
-                            }*@
+                            <td @key="@item.Key">
+                                @item.Value.DovizSatis
+                            </td>
+
+                            <td @key="@item.Key">
+                                @item.Value.EfektifAlis
+                            </td>
+                            <td @key="@item.Key">
+                                @item.Value.EfektifSatis
+                            </td>
+                            
+                        </tr>
+
+                            }
 
                     </tbody>
                 </table>
@@ -52,7 +68,7 @@
 
 @code {
 
-
+    Dictionary<string, DovizKurlari> DovizDegisimleri = DovizDegisimleriServisi.TumDovizDegisimleriniGetir();
 
 }
 

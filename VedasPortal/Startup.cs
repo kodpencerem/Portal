@@ -23,9 +23,11 @@ using VedasPortal.Models.IKUygulama;
 using VedasPortal.Models.Mevzuat;
 using VedasPortal.Models.Oneri;
 using VedasPortal.Models.ToplantiTakvimi;
+using VedasPortal.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Models.Video;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
@@ -70,15 +72,16 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
             services.AddScoped<IBaseRepository<ToplantiTakvimi>, BaseRepository<ToplantiTakvimi>>();
+            services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
             services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
-            services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
+            services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();          
             // register our scoped service to upload
             services.AddScoped<IFileUpload, FileUpload>();
             // register our scoped service to download
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();
-
+            services.AddScoped<AltinDegisimleriServisi>();
             services.AddBlazoredModal();
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();
