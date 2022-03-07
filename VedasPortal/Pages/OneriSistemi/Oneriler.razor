@@ -20,9 +20,9 @@ else
                     <a href='/oneri/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Yeni Bir Öneri Ekle</a>
                 </div>
             </div>
-            <div style="margin-left:890px" class="float-right">
+            @*<div style="margin-left:890px" class="float-right">
                 <button btnStyle="Style.primary"></button>
-            </div>
+            </div>*@
         </CardHeader>
         <CardBody>
 
@@ -48,8 +48,16 @@ else
             <p>
                 @if (oneri.Aciklama != null)
                 {
-<MarkDownComponent Content="@(oneri.Aciklama.Length>500 ? oneri.Aciklama.Substring(0, 280) + "..." : oneri.Aciklama)" />}
+                    <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ? oneri.Aciklama.Substring(0, 280) + "..." : oneri.Aciklama)" />}
             </p>
+            <div class="ratting">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <br />
             <button>
                 <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
                 Beğen
@@ -58,7 +66,7 @@ else
                 Yorum Yap
             </button>
             <div class="article-cta">
-                <a href="oneridetay/@oneri.Id"> Öneri Detayına Bak <i class="fas fa-chevron-right"></i></a>
+                <a href="oneri/detay/@oneri.Id"> Öneri Detayına Bak <i class="fas fa-chevron-right"></i></a>
             </div>
         </div>
     </article>
@@ -74,8 +82,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 310px;
-        max-height: 310px;
+        min-height: 200px;
+        max-height: 200px;
     }
 
     .theme-white .btn-primary {
@@ -90,5 +98,7 @@ else
         border: none;
         margin-top: -3rem;
     }
+
+    
 </style>
 
