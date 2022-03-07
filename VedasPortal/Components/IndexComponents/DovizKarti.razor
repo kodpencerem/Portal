@@ -96,14 +96,15 @@
 
     public AltinDegisimleriServisi.AltinDegisim  AltinDegisim { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
 
-        AltinDegisim = await altinDegisimi.AltinDegisiminiGetir(Satis,Alis,Degisim);
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    await base.OnAfterRenderAsync(firstRender);
 
-        await InvokeAsync(StateHasChanged);
-    }
+    //    AltinDegisim = await altinDegisimi.AltinDegisiminiGetir(Satis,Alis,Degisim);
+
+    //    await InvokeAsync(StateHasChanged);
+    //}
 }
 
 <style>

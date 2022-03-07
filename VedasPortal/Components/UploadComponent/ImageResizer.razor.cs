@@ -12,7 +12,6 @@ namespace VedasPortal.Components.UploadComponent
 {
     public partial class ImageResizer
     {
-
         /// <summary>
         /// Cropper kütüphaneden bir nesne örneği oluşturur. Resim kırpma ve boyutlandırma özelliklerine erişim verir.
         /// </summary>
@@ -108,7 +107,6 @@ namespace VedasPortal.Components.UploadComponent
         private void OnAspectHeightChanged(ChangeEventArgs eventArgs)
         {
             AspectHeight = double.Parse((string)eventArgs.Value);
-
             AspectRatio = AspectHeight / AspectWidth;
         }
 
@@ -125,13 +123,13 @@ namespace VedasPortal.Components.UploadComponent
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
-        protected void OnInputFileChange(InputFileChangeEventArgs args)
+        protected Task OnInputFileChange(InputFileChangeEventArgs args)
         {
             PreviewImagePath = null;
             browserFileResizer = args.File;
-            ShowCroper = true;  
+            ShowCroper = true;
+            return Task.CompletedTask;
         }
-
 
         private double CropCurrentWidth { get; set; }
         private double CropCurrentHeight { get; set; }

@@ -13,11 +13,11 @@ namespace VedasPortal.Pages.VedasRehber
     public class VedasRehberModel : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Rehber> HaberServisi { get; set; }
+        protected IBaseRepository<Rehber> Rehber { get; set; }
         protected IEnumerable<Rehber> rehber;
 
-        protected List<Rehber> GetRehber = new List<Rehber>();
-        protected List<Rehber> SearchRehber = new List<Rehber>();
+        protected List<Rehber> GetRehber = new();
+        protected List<Rehber> SearchRehber = new();
 
         public Dosya RehberDosya { get; set; } = new Dosya();
 
@@ -29,7 +29,7 @@ namespace VedasPortal.Pages.VedasRehber
 
         protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            rehber = HaberServisi.GetAll().AsQueryable().Include(s => s.ProfilResmi).ToList();
+            rehber = Rehber.GetAll().AsQueryable().Include(s => s.ProfilResmi).ToList();
             return rehber;
         }
 

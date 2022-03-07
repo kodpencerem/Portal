@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public int HaberId { get; set; }
 
         protected string Title = "Ekle";
-        public HaberDuyuru haber = new HaberDuyuru();
+        public HaberDuyuru haber = new();
 
-        public Dosya HaberDosya = new Dosya();
+        public Dosya HaberDosya = new();
 
         protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
 
@@ -117,13 +117,13 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

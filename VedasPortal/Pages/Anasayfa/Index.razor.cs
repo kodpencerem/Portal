@@ -1,7 +1,6 @@
 ﻿using Ardalis.Result;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Models.Anket.Contracts;
 
@@ -10,8 +9,8 @@ namespace VedasPortal.Pages.Anasayfa
     public partial class Index : ComponentBase
     {
 
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
+        //[Inject]
+        //public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }

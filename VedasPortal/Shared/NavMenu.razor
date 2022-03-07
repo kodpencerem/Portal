@@ -100,20 +100,20 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index">
+            <a href="/">
                 <img alt="image" src="/images/logo.png" class="header-logo" /> <span class="logo-name">Vedaş Portal</span>
             </a>
         </div>
         <ul class="sidebar-menu">
             @*<li class="menu-header">Main</li>*@
             <li class="dropdown @(anasayfaActive)">
-                <a href="" class="nav-link"><i data-feather="home"></i><span>Anasayfa</span></a>
+                <a href="/" class="nav-link"><i data-feather="home"></i><span>Anasayfa</span></a>
             </li>
             <li class="dropdown @(vedasRehberActive)">
-                <a href="/" class="nav-link"><i data-feather="book"></i><span>Vedaş Rehber</span></a>
+                <a href="vedasrehber" class="nav-link"><i data-feather="book"></i><span>Vedaş Rehber</span></a>
             </li>
             <li class="dropdown ">
-                <a href="/" class="nav-link">
+                <a href="ToplantiOdalari" class="nav-link">
                     <i data-feather="clock"></i><span>
                         Toplantı
                         Odaları
@@ -126,17 +126,17 @@
                     <i data-feather="briefcase"></i><span>Faydalı İçerikler</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">Eğitimler</a></li>
-                    <li><a class="nav-link" href="">Videolar</a></li>
-                    <li><a class="nav-link" href="">Dökümanlar</a></li>
-                    <li><a class="nav-link" href="">Güncel Mevzuat Takibi ve Regülasyonlar</a></li>
+                    <li><a class="nav-link" href="Egitimler">Eğitimler</a></li>
+                    <li><a class="nav-link" href="Videolar">Videolar</a></li>
+                    <li><a class="nav-link" href="dosyalar">Dökümanlar</a></li>
+                    <li><a class="nav-link" href="GuncelMevzuatTakibi">Güncel Mevzuat Takibi ve Regülasyonlar</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Öneri Sistemi</span></a>
             </li>
             <li class="dropdown">
-                <a href="" class="nav-link">
+                <a href="DuzelticiFaaliyetOlusturma" class="nav-link">
                     <i data-feather="layers"></i><span>
                         Düzeltici
                         Faaliyet Oluşturma
@@ -144,7 +144,7 @@
                 </a>
             </li>
             <li class="dropdown">
-                <a href="" class="nav-link"><i data-feather="book-open"></i><span>Basında Biz</span></a>
+                <a href="haberler" class="nav-link"><i data-feather="book-open"></i><span>Basında Biz</span></a>
             </li>
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -154,14 +154,14 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">Doğanlar</a></li>
-                    <li><a class="nav-link" href="">Katılanlar</a></li>
-                    <li><a class="nav-link" href="">Ayrılanlar</a></li>
-                    <li><a class="nav-link" href="">Vefatlar</a></li>
+                    <li><a class="nav-link" href="Doganlar">Doğanlar</a></li>
+                    <li><a class="nav-link" href="Katilanlar">Katılanlar</a></li>
+                    <li><a class="nav-link" href="Ayrilanlar">Ayrılanlar</a></li>
+                    <li><a class="nav-link" href="Vefatlar">Vefatlar</a></li>
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="" class="nav-link"><i data-feather="package"></i><span>IK Uygulamaları</span></a>
+                <a href="IKUygulamalari" class="nav-link"><i data-feather="package"></i><span>IK Uygulamaları</span></a>
             </li>
         </ul>
     </aside>
@@ -183,6 +183,5 @@
     protected void LocChanged(object sender, LocationChangedEventArgs e)
     {
         SayfaDegisti("anasayfa", e.Location);
-
         StateHasChanged();
     } }

@@ -6,18 +6,17 @@ namespace VedasPortal.Shared
     public partial class MainLayout
     {
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
 
 
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
-            await jsRun.InvokeVoidAsync("scriptsInit");
+            await JsRun.InvokeVoidAsync("scriptsInit");
             if (firstRender)
-            {
-                
-                await jsRun.InvokeVoidAsync("indexInit");
-            }
+            {             
+                await JsRun.InvokeVoidAsync("indexInit");              
+            }           
         }
     }
 }

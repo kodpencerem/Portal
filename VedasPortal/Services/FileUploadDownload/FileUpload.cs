@@ -81,7 +81,7 @@ namespace VedasPortal.Services.FileUploadDownload
                 {
                     var fileName = SaveFileToUploaded.RandomFileName + file.Name;
                     // Bir dosya yolu oluşturup kendi ismi ile kaydet
-                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "img/uploaded", fileName);
+                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "images/uploaded", fileName);
                     // dosyayı yüklemek için akış açar ve dosya yükleme gerçekleştirir
                     using (var stream = file.OpenReadStream())
                     {
@@ -112,7 +112,7 @@ namespace VedasPortal.Services.FileUploadDownload
         {
             try
             {
-                var path = $"{_webHostEnvironment.WebRootPath}\\img\\uploaded\\{fileName}";
+                var path = $"{_webHostEnvironment.WebRootPath}\\images\\uploaded\\{fileName}";
                 if (File.Exists(path))
                 {
                     File.Delete(path);

@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         public int DFaaliyetId { get; set; }
 
         protected string Title = "Ekle";
-        public DuzelticiFaaliyet duzelticiFaaliyet = new DuzelticiFaaliyet();
+        public DuzelticiFaaliyet duzelticiFaaliyet = new();
 
-        public Dosya DFaaliyetDosya = new Dosya();
+        public Dosya DFaaliyetDosya = new();
 
         protected IEnumerable<DuzelticiFaaliyet> DuzelticiFaaliyetler { get; set; }
 
@@ -117,13 +117,13 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

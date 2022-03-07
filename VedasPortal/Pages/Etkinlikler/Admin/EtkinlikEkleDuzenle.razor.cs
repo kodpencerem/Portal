@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         public int EtkinlikId { get; set; }
 
         protected string Title = "Ekle";
-        public Etkinlik etkinlik = new Etkinlik();
+        public Etkinlik etkinlik = new();
 
-        public Dosya EtkinlikDosya = new Dosya();
+        public Dosya EtkinlikDosya = new();
 
         protected IEnumerable<Etkinlik> Etkinlikler { get; set; }
 
@@ -112,13 +112,13 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

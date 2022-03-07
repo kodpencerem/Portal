@@ -18,13 +18,17 @@
                     Vedaş Rehber
                 </div>
             </div>
-            <div style="margin-left:1100px;" class="float-right">
-                <input type="text" class="form-control" placeholder="Personel adı veya soyadı ile arama yapın..." @bind="SearchString"
-                       @bind:event="oninput" @onkeyup="FilterelemeYap" />
-                <div class="input-group-append">
-                    <button class="btn btn-info" @onclick="FilterelemeYap">
-                        <i class="fa fa-search"></i>
-                    </button>
+            <div style="margin-left:1130px;" class="float-right">
+                <div class="float-left">
+                    <input type="text" class="form-control" placeholder="Personel adı veya soyadı ile arama yapın..." @bind="SearchString"
+                           @bind:event="oninput" @onkeyup="FilterelemeYap" />
+                </div>
+                <div class="float-right">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" @onclick="FilterelemeYap">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </CardHeader>

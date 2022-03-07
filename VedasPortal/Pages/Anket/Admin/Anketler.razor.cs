@@ -56,7 +56,7 @@ namespace VedasPortal.Pages.Anket.Admin
 
         private async Task Sil(int id)
         {
-            ModalParameters parameters = new ModalParameters();
+            ModalParameters parameters = new();
             parameters.Add("Message", "Silmek istediğinize emin misiniz?");
             var formModal = Modal.Show<OnayComponent>("Anketi Sil", parameters);
 

@@ -3,10 +3,7 @@
 @using Microsoft.AspNetCore.Hosting
 
 @inject IWebHostEnvironment Environment
-
 @inherits HaberEkleDuzenleModel
-@inject IJSRuntime jsRun
-
 
 <div class="col-12">
     <EditForm Model="@haber" OnValidSubmit="HaberKayit">

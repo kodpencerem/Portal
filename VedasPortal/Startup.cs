@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
+using VedasPortal.Models;
 using VedasPortal.Models.Anket;
 using VedasPortal.Models.Anket.Contracts;
 using VedasPortal.Models.Dosya;
@@ -41,7 +42,7 @@ namespace VedasPortal
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;            
         }
 
         public IConfiguration Configuration { get; }
@@ -53,13 +54,11 @@ namespace VedasPortal
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<VedasDbContext>();
-
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped<HavaDurumuService>();
-            //services.AddSingleton<IHavaTahmin, HavaTahmini>();
             services.AddScoped<HttpClient>();
             services.AddScoped<IVideoService, StaticVideoService>();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
@@ -75,10 +74,9 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
             services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
-            services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();          
-            // register our scoped service to upload
-            services.AddScoped<IFileUpload, FileUpload>();
-            // register our scoped service to download
+            services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
+            services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
+            services.AddScoped<IFileUpload, FileUpload>();           
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();
             services.AddScoped<AltinDegisimleriServisi>();
@@ -86,8 +84,6 @@ namespace VedasPortal
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
-            
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
