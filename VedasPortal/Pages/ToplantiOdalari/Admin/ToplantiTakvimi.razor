@@ -98,60 +98,7 @@
 
         <span id="aralikSecimi" class="render-range"></span>
         <div id="calendar">
-
-            @*<EditForm Model="@dayEvent" OnValidSubmit="Kayit">
-                <DataAnnotationsValidator />
-                <CardComponent cardStyle="Style.primary">
-                    <CardHeader>
-                        Duyuru @Title
-                    </CardHeader>
-                    <CardBody>
-
-
-
-                        <div class="col-12">
-                            <div class="col-md-6 float-left">
-
-
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2">Konu</label>
-                                    <div class="col-md-10">
-                                        <InputText class="form-control" @bind-Value="dayEvent.Note" />
-                                    </div>
-                                    <ValidationMessage For="@(() => dayEvent.Note)" />
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2">Başlama Tarihi</label>
-                                    <div class="col-md-10">
-                                        <InputDate class="form-control" @bind-Value="dayEvent.FromDate" />
-                                    </div>
-                                    <ValidationMessage For="@(() => dayEvent.FromDate)" />
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="control-label col-md-2">Bitiş Tarihi</label>
-                                    <div class="col-md-10">
-                                        <InputDate class="form-control" @bind-Value="dayEvent.ToDate" />
-                                    </div>
-                                    <ValidationMessage For="@(() => dayEvent.ToDate)" />
-                                </div>                              
-                            </div>
-                        </div>
-
-
-
-                    </CardBody>
-
-                    <CardFotter>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
-                            <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
-                        </div>
-                    </CardFotter>
-                </CardComponent>
-            </EditForm>*@
-
+            
         </div>
     </div>
 </div>

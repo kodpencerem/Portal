@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
@@ -119,15 +120,20 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
+
+        IList<Dosya> imageDataUrls = new List<Dosya>();
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
         protected Task OnInputFileChange(InputFileChangeEventArgs args)
         {
-            PreviewImagePath = null;
-            browserFileResizer = args.File;
-            ShowCroper = true;
+            foreach (var imageFile in args.GetMultipleFiles())
+            {
+                PreviewImagePath = null;
+                browserFileResizer = imageFile;
+                ShowCroper = true;
+            }
             return Task.CompletedTask;
         }
 
