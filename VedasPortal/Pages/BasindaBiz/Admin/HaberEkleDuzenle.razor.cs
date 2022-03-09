@@ -27,6 +27,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public HaberDuyuru haber = new();
 
         public Dosya HaberDosya = new();
+        
 
         protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
 
@@ -49,33 +50,30 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
+     
+            var dosya = haber.Dosya.Select(x => new Dosya
+            {
+                Id = x.Id,
+                Adi = x.Adi,
+                Aciklama = x.Aciklama,
+                Boyutu = x.Boyutu,
+                Yolu = x.Yolu,
+                DuzenlemeTarihi = x.DuzenlemeTarihi,
+                DuzenleyenKullanici = x.DuzenleyenKullanici,
+                KaydedenKullanici = x.KaydedenKullanici,
+                KayitTarihi = x.KayitTarihi,
+                Uzanti = x.Uzanti
+
+            });
+            haber.Dosya = dosya.ToArray();
             HaberServisi.AddUpdate(haber);
-
-            HaberDosya = (Dosya)haber.Dosya;
-
-            //var dosya = haber.Dosya.Select(x => new Dosya
-            //{
-            //    Id = x.Id,
-            //    Adi = x.Adi,
-            //    Aciklama = x.Aciklama,
-            //    Boyutu = x.Boyutu,
-            //    Yolu = x.Yolu,
-            //    DuzenlemeTarihi = x.DuzenlemeTarihi,
-            //    DuzenleyenKullanici = x.DuzenleyenKullanici,
-            //    KaydedenKullanici = x.KaydedenKullanici,
-            //    KayitTarihi = x.KayitTarihi,
-            //    Uzanti = x.Uzanti
-
-            //});
-            //haber.Dosya = dosya.ToArray();
         }
         protected override void OnParametersSet()
         {
             if (HaberId != 0)
             {
                 Title = "Duzenle";
-                haber = HaberServisi.Get(HaberId);
-                HaberDosya = (Dosya)haber.Dosya;
+                haber = HaberServisi.Get(HaberId);               
             }
         }
 

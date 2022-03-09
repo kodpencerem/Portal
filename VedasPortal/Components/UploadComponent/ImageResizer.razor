@@ -7,7 +7,7 @@
 <ShowModalComponent Title="Resim Görünümü">
     <ModalBody>
 
-        @if (imageDataUrls.Count > 0)
+        @if (imageDataUrls.Count > 0 && !parsing)
         {
             <h4>Images</h4>
 

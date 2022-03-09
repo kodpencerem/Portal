@@ -46,10 +46,10 @@ namespace VedasPortal.Components.UploadComponent
 
 
         [Parameter]
-        public Dosya ValuePath { get; set; } = new Dosya();
+        public Dosya Value { get; set; } = new Dosya();
 
         [Parameter]
-        public EventCallback<Dosya> ValuePathChanged { get; set; } = new EventCallback<Dosya>();
+        public EventCallback<Dosya> ValueChanged { get; set; } = new EventCallback<Dosya>();
 
         /// <summary>
         /// Resmin üzerinde kırpma ve boyutlandırma işlemleri için bir araç açar
@@ -177,8 +177,8 @@ namespace VedasPortal.Components.UploadComponent
                 Boyutu = browserFileResizer.Size.ToString(),
                 Uzanti = fileName.Substring('.'),
             };
-            ValuePath.Yolu = newFile.Yolu;
-            await ValuePathChanged.InvokeAsync(ValuePath);
+            Value = newFile;
+            await ValueChanged.InvokeAsync(Value);
 
         }
 
