@@ -1,4 +1,4 @@
-﻿<div class="@("card card-"+cardStyle.ToString())" style="margin-top:10px">
+﻿<div class="@("card card-"+cardStyle.ToString())" style="margin-top: 10px">
 	<div class="card-header">
 		<h4>
 			@CardHeader
@@ -11,8 +11,9 @@
 		@CardFotter
 	</div>
 </div>
-
+						
 @code {
+
     [Parameter]
     public Style cardStyle { get; set; }
     [Parameter]

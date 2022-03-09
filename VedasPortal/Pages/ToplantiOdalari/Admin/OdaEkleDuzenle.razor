@@ -54,7 +54,13 @@
                                 </div>
                                 <ValidationMessage For="@(() => Oda.AktifPasif)" />
                             </div>
-
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8"> Şimdi Rezerv Edilsin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="Oda.RezervDurumu" />
+                                </div>
+                                <ValidationMessage For="@(() => Oda.RezervDurumu)" />
+                            </div>
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8"> Video Konferans Destekliyor Mu?</label>
                                 <div class="col-md-4">

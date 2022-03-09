@@ -18,7 +18,7 @@ else
                     Toplantı Odaları
                 </div>
             </div>
-            <div style="margin-left:1080px" class="float-right">
+            <div style="margin-left:1070px" class="float-right">
                 <input style="border-radius: 5px; border-color: #6777ef" placeholder="Aramanızı bu alanda yapın..." />
                 <button class="btn btn-primary">Ara</button>
             </div>
@@ -60,9 +60,14 @@ else
                     </div>
                 </div>
             </div>
+            <hr style="margin-top:-0.30rem"/>
         </CardBody>
         <CardFotter>
-            <a href="oda/ekle/" class="btn btn-primary ">Rezerve Et</a> |
+            @if (oda.RezervDurumu == true)
+            {
+                <a href="oda/ekle/" class="btn disabled btn-primary" style="margin-left:1rem;">Rezerve Et</a>  }
+            else{ <a href="oda/ekle/" class="btn btn-primary" style="margin-left:1rem;">Rezerve Et</a>}
+            |
             <a href=@($"odadetayformu/{oda.Id}") class="btn btn-info ">Detay</a>
         </CardFotter>
     </CardComponent>
@@ -83,8 +88,7 @@ else
         max-height: 310px;
     }
 
-    .theme-white .btn-primary {
-        margin-left: 8rem;
+    .theme-white .btn-primary {        
         background-color: #6777ef;
         border-color: transparent !important;
         color: #fff;

@@ -23,8 +23,8 @@ namespace VedasPortal.Components.Anket.Modals
         //[Inject]
         //private VedasDbContext Context { get; set; }
 
-        //[Inject]
-        //public IAnketYonetim AnketYonetim { get; set; }
+        [Inject]
+        public IAnketYonetim AnketYonetim { get; set; }
 
         private EditContext editContext { get; set; }
 
@@ -49,8 +49,6 @@ namespace VedasPortal.Components.Anket.Modals
         }
 
         void Cancel() => Modal.CancelAsync();
-
-        public ShowModalComponent ModalShow { get; set; }
-
+  
     }
 }

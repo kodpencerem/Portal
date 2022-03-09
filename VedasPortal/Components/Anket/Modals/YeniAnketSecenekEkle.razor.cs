@@ -3,7 +3,6 @@ using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
 using VedasPortal.Models.Anket.DTO;
 using VedasPortal.Models.Anket.ViewModels;
 
@@ -23,7 +22,6 @@ namespace VedasPortal.Components.Anket.Modals
         {
             editContext = new EditContext(AnketSecenekVm);
         }
-
         private Task SecenekKayit()
         {
 
@@ -34,10 +32,7 @@ namespace VedasPortal.Components.Anket.Modals
             return Modal.CloseAsync(ModalResult.Ok(AnketSecenekDTO));
         }
 
-        void Cancel() => Modal.CancelAsync();
-
-        public ShowModalComponent ModalShow { get; set; }
-
-
+        void Cancel() => Modal.CancelAsync();     
+        
     }
 }

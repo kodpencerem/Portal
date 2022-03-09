@@ -82,6 +82,7 @@ namespace VedasPortal.Components.Anket
             }
         }
 
+   
         private async Task SecenekEkle()
         {
             var maxId = AnketEkle.MaxIdGetir();
