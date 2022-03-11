@@ -10,7 +10,6 @@ namespace VedasPortal.Entities.Models.Anket
         public string Aciklama { get; set; }
         public string Resim { get; set; }
         public int ToplamKatilim { get; set; }
-
         public Anket Anket { get; set; }
     }
 }

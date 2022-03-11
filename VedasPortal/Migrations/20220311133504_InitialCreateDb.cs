@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VedasPortal.Migrations
 {
-    public partial class AddInitialCreate : Migration
+    public partial class InitialCreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,9 +21,11 @@ namespace VedasPortal.Migrations
                     ToplamAlinanSure = table.Column<int>(type: "int", nullable: false),
                     AktifPasif = table.Column<bool>(type: "bit", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,26 +72,28 @@ namespace VedasPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DayEvent",
+                name: "ToplantiMerkezi",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Kod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Adi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Kapasite = table.Column<int>(type: "int", nullable: false),
+                    AktifPasif = table.Column<bool>(type: "bit", nullable: false),
+                    VideoKonferansMi = table.Column<bool>(type: "bit", nullable: false),
+                    RezervDurumu = table.Column<bool>(type: "bit", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DayEvent", x => x.Id);
+                    table.PrimaryKey("PK_ToplantiMerkezi", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,9 +107,11 @@ namespace VedasPortal.Migrations
                     Resim = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ToplamKatilim = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -225,24 +231,101 @@ namespace VedasPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ToplantiOdasi",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Kod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Adi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    AktifPasif = table.Column<bool>(type: "bit", nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Adres = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Kapasite = table.Column<int>(type: "int", maxLength: 100, nullable: false),
+                    VideoKonferansMi = table.Column<bool>(type: "bit", nullable: false),
+                    RezervDurumu = table.Column<bool>(type: "bit", nullable: false),
+                    ToplantiMerkeziId = table.Column<int>(type: "int", nullable: true),
+                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToplantiOdasi", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ToplantiOdasi_ToplantiMerkezi_ToplantiMerkeziId",
+                        column: x => x.ToplantiMerkeziId,
+                        principalTable: "ToplantiMerkezi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToplantiTakvimi",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Kod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Adi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Konu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ToplantiTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BaslangicTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BitisTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TarihDegeri = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BeklenenKatilimSayisi = table.Column<int>(type: "int", nullable: false),
+                    GunAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ToplantiNotu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Mesaj = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Baslik = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoKonferansMi = table.Column<bool>(type: "bit", nullable: false),
+                    Renk = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AktifPasif = table.Column<bool>(type: "bit", nullable: false),
+                    AnaSayfadaGoster = table.Column<bool>(type: "bit", nullable: false),
+                    ToplantiOdasiId = table.Column<int>(type: "int", nullable: true),
+                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToplantiTakvimi", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ToplantiTakvimi_ToplantiOdasi_ToplantiOdasiId",
+                        column: x => x.ToplantiOdasiId,
+                        principalTable: "ToplantiOdasi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DuzelticiFaaliyet",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FaaliyetGurupAdi = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IstekFaaliyetKonusu = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Aciklama = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    FaaliyetGurupAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IstekFaaliyetKonusu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BildirimTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AktifPasif = table.Column<bool>(type: "bit", nullable: false),
                     ResimId = table.Column<int>(type: "int", nullable: true),
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     KonuEtiketi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LokasyonBilgisi = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    LokasyonBilgisi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -271,9 +354,11 @@ namespace VedasPortal.Migrations
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     Birimler = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -299,9 +384,11 @@ namespace VedasPortal.Migrations
                     AnasayfadaGoster = table.Column<bool>(type: "bit", nullable: false),
                     KatilimciId = table.Column<int>(type: "int", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -321,9 +408,11 @@ namespace VedasPortal.Migrations
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     Birimler = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -343,9 +432,11 @@ namespace VedasPortal.Migrations
                     KatilisNedeni = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResimId = table.Column<int>(type: "int", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -368,9 +459,11 @@ namespace VedasPortal.Migrations
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     Birimler = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -396,9 +489,11 @@ namespace VedasPortal.Migrations
                     Odul = table.Column<int>(type: "int", nullable: false),
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -418,13 +513,47 @@ namespace VedasPortal.Migrations
                     TelefonNo = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rehber", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToplantiNotu",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Baslik = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AltBaslik = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Konu = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AktifPasif = table.Column<bool>(type: "bit", nullable: false),
+                    Birimler = table.Column<int>(type: "int", nullable: false),
+                    ToplantiMerkeziId = table.Column<int>(type: "int", nullable: true),
+                    GetDosyaId = table.Column<int>(type: "int", nullable: true),
+                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToplantiNotu", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ToplantiNotu_ToplantiMerkezi_ToplantiMerkeziId",
+                        column: x => x.ToplantiMerkeziId,
+                        principalTable: "ToplantiMerkezi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -443,9 +572,11 @@ namespace VedasPortal.Migrations
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     Birimler = table.Column<int>(type: "int", nullable: false),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -459,18 +590,20 @@ namespace VedasPortal.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     No = table.Column<int>(type: "int", nullable: false),
-                    Adi = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Adi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AltBaslik = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SliderdaGoster = table.Column<bool>(type: "bit", nullable: false),
                     Kategori = table.Column<int>(type: "int", nullable: false),
                     AktifPasif = table.Column<bool>(type: "bit", nullable: false),
                     AnasayfadaGoster = table.Column<bool>(type: "bit", nullable: false),
                     VideoId = table.Column<int>(type: "int", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -498,9 +631,11 @@ namespace VedasPortal.Migrations
                     AktifPasif = table.Column<bool>(type: "bit", nullable: false),
                     HaberDuyuruId = table.Column<int>(type: "int", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -618,6 +753,26 @@ namespace VedasPortal.Migrations
                 column: "ProfilResmiId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ToplantiNotu_GetDosyaId",
+                table: "ToplantiNotu",
+                column: "GetDosyaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToplantiNotu_ToplantiMerkeziId",
+                table: "ToplantiNotu",
+                column: "ToplantiMerkeziId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToplantiOdasi_ToplantiMerkeziId",
+                table: "ToplantiOdasi",
+                column: "ToplantiMerkeziId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToplantiTakvimi_ToplantiOdasiId",
+                table: "ToplantiTakvimi",
+                column: "ToplantiOdasiId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Video_DosyaId",
                 table: "Video",
                 column: "DosyaId");
@@ -703,6 +858,14 @@ namespace VedasPortal.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_ToplantiNotu_Dosya_GetDosyaId",
+                table: "ToplantiNotu",
+                column: "GetDosyaId",
+                principalTable: "Dosya",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Video_Dosya_DosyaId",
                 table: "Video",
                 column: "DosyaId",
@@ -736,9 +899,6 @@ namespace VedasPortal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DayEvent");
-
-            migrationBuilder.DropTable(
                 name: "DuzelticiFaaliyet");
 
             migrationBuilder.DropTable(
@@ -760,6 +920,12 @@ namespace VedasPortal.Migrations
                 name: "Rehber");
 
             migrationBuilder.DropTable(
+                name: "ToplantiNotu");
+
+            migrationBuilder.DropTable(
+                name: "ToplantiTakvimi");
+
+            migrationBuilder.DropTable(
                 name: "Anket");
 
             migrationBuilder.DropTable(
@@ -770,6 +936,12 @@ namespace VedasPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Katilimci");
+
+            migrationBuilder.DropTable(
+                name: "ToplantiOdasi");
+
+            migrationBuilder.DropTable(
+                name: "ToplantiMerkezi");
 
             migrationBuilder.DropTable(
                 name: "HaberDuyuru");

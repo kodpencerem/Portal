@@ -852,10 +852,13 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Adi")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
@@ -876,7 +879,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Kod")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("RezervDurumu")
                         .HasColumnType("bit");
@@ -961,10 +966,13 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Adi")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Adres")
                         .HasColumnType("nvarchar(max)");
@@ -979,6 +987,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Kapasite")
+                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
@@ -988,7 +997,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Kod")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("RezervDurumu")
                         .HasColumnType("bit");
@@ -1020,10 +1031,13 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Adi")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
@@ -1059,7 +1073,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Kod")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Konu")
                         .HasColumnType("nvarchar(max)");

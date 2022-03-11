@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 
-namespace VedasPortal.Entities.Models.ToplantiTakvimi.Konfigurasyon
+namespace VedasPortal.Data.Configurations.ToplantiConfiguration
 {
-    public class ToplantiOdasiKonfigurasyon : IEntityTypeConfiguration<ToplantiOdasi>
+    public class ToplantiMerkeziKonfigurasyon : IEntityTypeConfiguration<ToplantiMerkezi>
     {
-        public void Configure(EntityTypeBuilder<ToplantiOdasi> builder)
+        public void Configure(EntityTypeBuilder<ToplantiMerkezi> builder)
         {
             builder.Property(x => x.Adi)
                 .IsRequired()
@@ -17,10 +18,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.Konfigurasyon
 
             builder.Property(x => x.Aciklama)
                 .HasMaxLength(300);
-            builder.Property(x => x.Kapasite)
-                .HasMaxLength(100);
-
-            builder.HasOne(e => e.ToplantiMerkezi).WithMany(r => r.ToplantiOdalari);
+            builder.HasMany(x => x.ToplantiOdalari).WithOne(x => x.ToplantiMerkezi);
         }
     }
 }

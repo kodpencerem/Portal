@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 
-namespace VedasPortal.Entities.Models.ToplantiTakvimi.Konfigurasyon
+namespace VedasPortal.Data.Configurations.ToplantiConfiguration
 {
     public class ToplantiTakvimKonfigurasyon : IEntityTypeConfiguration<ToplantiTakvimi>
     {
