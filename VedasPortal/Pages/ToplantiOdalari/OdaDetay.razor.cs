@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.ToplantiTakvimi;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari

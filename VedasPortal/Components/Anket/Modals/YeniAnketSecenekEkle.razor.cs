@@ -3,8 +3,8 @@ using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
-using VedasPortal.Models.Anket.DTO;
-using VedasPortal.Models.Anket.ViewModels;
+using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.ViewModels.Anket;
 
 namespace VedasPortal.Components.Anket.Modals
 {

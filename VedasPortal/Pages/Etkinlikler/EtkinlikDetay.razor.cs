@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.Etkinlik;
+using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Etkinlikler

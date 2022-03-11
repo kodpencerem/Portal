@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.Dosya;
+using VedasPortal.Entities.Models.Dosya;
 
 namespace VedasPortal.Components.UploadComponent
 {

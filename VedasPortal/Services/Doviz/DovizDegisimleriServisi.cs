@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Xml;
-using VedasPortal.Models.DovizKurlari;
+using VedasPortal.Entities.Models.DovizKurlari;
 
 namespace VedasPortal.Services.Doviz
 {

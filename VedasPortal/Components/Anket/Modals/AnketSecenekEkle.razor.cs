@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Data;
-using VedasPortal.Models.Anket.Contracts;
-using VedasPortal.Models.Anket.DTO;
-using VedasPortal.Models.Anket.ViewModels;
+using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.ViewModels.Anket;
+using VedasPortal.Repository.Interface.Anket;
 
 namespace VedasPortal.Components.Anket.Modals
 {

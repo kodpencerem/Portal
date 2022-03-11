@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.Dosya;
-using VedasPortal.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.DuzelticiFaaliyetler

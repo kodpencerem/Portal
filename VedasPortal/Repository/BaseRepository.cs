@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using VedasPortal.Data;
-using VedasPortal.Models.Base;
+using VedasPortal.Entities.Models.Base;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Repository

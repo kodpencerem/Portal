@@ -6,10 +6,10 @@ using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Components.Anket.Modals;
 using VedasPortal.Data;
-using VedasPortal.Models.Anket.Contracts;
-using VedasPortal.Models.Anket.DTO;
-using VedasPortal.Models.Anket.ViewModels;
-using VedasPortal.Utils.Anket;
+using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.ViewModels.Anket;
+using VedasPortal.Repository.Interface.Anket;
+using VedasPortal.Utils.Anket.FromMapper;
 
 namespace VedasPortal.Components.Anket
 {

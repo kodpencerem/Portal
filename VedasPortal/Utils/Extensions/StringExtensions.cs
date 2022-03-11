@@ -1,11 +1,11 @@
-﻿using VedasPortal.Models.Dosya;
-using VedasPortal.Models.DuzelticiFaaliyet;
-using VedasPortal.Models.Etkinlik;
-using VedasPortal.Models.HaberDuyuru;
-using VedasPortal.Models.IKUygulama;
-using VedasPortal.Models.Mevzuat;
-using VedasPortal.Models.Oneri;
-using VedasPortal.Models.Video;
+﻿using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Etkinlik;
+using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Entities.Models.IKUygulama;
+using VedasPortal.Entities.Models.Mevzuat;
+using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.Video;
 
 namespace VedasPortal
 {

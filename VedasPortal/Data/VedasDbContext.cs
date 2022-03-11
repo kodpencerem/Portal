@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VedasPortal.Models;
-using VedasPortal.Models.Anket.Models;
-using VedasPortal.Models.Dosya;
-using VedasPortal.Models.DuzelticiFaaliyet;
-using VedasPortal.Models.Etkinlik;
-using VedasPortal.Models.HaberDuyuru;
-using VedasPortal.Models.IKUygulama;
-using VedasPortal.Models.Mevzuat;
-using VedasPortal.Models.Oneri;
-using VedasPortal.Models.ToplantiTakvimi;
-using VedasPortal.Models.ToplantiTakvimi.ToplantiNotu;
-using VedasPortal.Models.Video;
+using VedasPortal.Entities.Models;
+using VedasPortal.Entities.Models.Anket;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Etkinlik;
+using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Entities.Models.IKUygulama;
+using VedasPortal.Entities.Models.Mevzuat;
+using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
+using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Entities.Models.Video;
 
 namespace VedasPortal.Data
 {
@@ -34,7 +34,7 @@ namespace VedasPortal.Data
         public DbSet<ToplantiNotu> ToplantiNotu { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
         public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
-        public DbSet<Models.Anket.Models.Anket> Anket { get; set; }
+        public DbSet<Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

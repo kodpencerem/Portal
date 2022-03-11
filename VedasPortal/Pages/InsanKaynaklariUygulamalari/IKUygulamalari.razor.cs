@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Models.IKUygulama;
+using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.InsanKaynaklariUygulamalari

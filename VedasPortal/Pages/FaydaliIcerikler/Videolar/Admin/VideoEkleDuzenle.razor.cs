@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.Dosya;
-using VedasPortal.Models.Video;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin

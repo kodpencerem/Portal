@@ -1,8 +1,6 @@
 ﻿@page "/toplantitakvimi"
 @inject IJSRuntime jsRun
 
-@using VedasPortal.Models.ToplantiTakvimi
-@using VedasPortal.Repository.Interface
 <div>
     <div class="lnb-new-schedule">
         <button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" data-toggle="modal">
@@ -111,84 +109,5 @@
             await jsRun.InvokeVoidAsync("tuiApp");
 
         }
-    }
-
-
-
-}
-
-
-@code {
-
-
-    [Inject]
-    public IBaseRepository<Models.ToplantiTakvimi.ToplantiTakvimi> ToplantiServisi { get; set; }
-
-    [Parameter]
-    public DateTime ToplantiPlanla { get; set; }
-    protected string Title = "Ekle";
-
-    Models.ToplantiTakvimi.ToplantiTakvimi dayEvent = new Models.ToplantiTakvimi.ToplantiTakvimi()
-    {
-        BaslangicTarihi = DateTime.Now,
-        BitisTarihi = DateTime.Now,
-        Konu = ""
-    };
-    [Parameter]
-    public int ToplantiId { get; set; }
-
-    protected IEnumerable<Models.ToplantiTakvimi.ToplantiTakvimi> Toplantilar { get; set; }
-
-    protected IEnumerable<Models.ToplantiTakvimi.ToplantiTakvimi> TumToplantilariGetir()
-    {
-        Toplantilar = ToplantiServisi.GetAll();
-
-        return Toplantilar;
-
-    }
-
-    protected override Task OnInitializedAsync()
-    {
-        TumToplantilariGetir();
-        return Task.CompletedTask;
-    }
-
-    protected void Kayit()
-    {
-        ToplantiServisi.AddUpdate(dayEvent);
-
-    }
-    protected override void OnParametersSet()
-    {
-        if (ToplantiId != 0)
-        {
-            Title = "Duzenle";
-            dayEvent = ToplantiServisi.Get(ToplantiId);
-            //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
-
-        }
-    }
-
-    protected void SilmeyiOnayla(int toplantiId)
-    {
-        ModalDialog.Open();
-        dayEvent = Toplantilar.FirstOrDefault(x => x.Id == toplantiId);
-    }
-    public ModalComponent ModalDialog { get; set; }
-    protected string DialogGorunur { get; set; } = "none";
-
-    protected void Sil()
-    {
-        if (dayEvent.Id == 0)
-            return;
-
-        ToplantiServisi.Remove(dayEvent.Id);
-        dayEvent = new Models.ToplantiTakvimi.ToplantiTakvimi();
-        TumToplantilariGetir();
-    }
-
-    public void Temizle()
-    {
-        dayEvent = null;
     }
 }

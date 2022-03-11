@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
-using VedasPortal.Models.Anket.Contracts;
+using VedasPortal.Repository.Interface.Anket;
 
 namespace VedasPortal.Components.Anket
 {

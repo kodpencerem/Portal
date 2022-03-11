@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Models.ToplantiTakvimi;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin

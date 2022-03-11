@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.HaberDuyuru;
-using VedasPortal.Models.Oneri;
+using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.OneriSistemi

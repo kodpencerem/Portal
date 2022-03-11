@@ -13,28 +13,28 @@ using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
-using VedasPortal.Models;
-using VedasPortal.Models.Anket;
-using VedasPortal.Models.Anket.Contracts;
-using VedasPortal.Models.Dosya;
-using VedasPortal.Models.DuzelticiFaaliyet;
-using VedasPortal.Models.Etkinlik;
-using VedasPortal.Models.HaberDuyuru;
-using VedasPortal.Models.IKUygulama;
-using VedasPortal.Models.Mevzuat;
-using VedasPortal.Models.Oneri;
-using VedasPortal.Models.ToplantiTakvimi;
-using VedasPortal.Models.ToplantiTakvimi.ToplantiNotu;
-using VedasPortal.Models.Video;
+using VedasPortal.Entities.Models;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Etkinlik;
+using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Entities.Models.IKUygulama;
+using VedasPortal.Entities.Models.Mevzuat;
+using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
+using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Repository.Interface.Anket;
+using VedasPortal.Services.Anket;
 using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.VideoService;
-using VedasPortal.Utils.Anket;
+using VedasPortal.Utils.Anket.FromMapper;
 
-# endregion
+#endregion
 
 namespace VedasPortal
 {

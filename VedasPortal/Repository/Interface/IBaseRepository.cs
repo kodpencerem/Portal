@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using VedasPortal.Models.Base;
+using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Repository.Interface
 {

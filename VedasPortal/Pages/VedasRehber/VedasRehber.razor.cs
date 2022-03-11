@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Models;
-using VedasPortal.Models.Dosya;
+using VedasPortal.Entities.Models;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.VedasRehber

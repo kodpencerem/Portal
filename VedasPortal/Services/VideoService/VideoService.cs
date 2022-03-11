@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using VedasPortal.Models.Video;
+using VedasPortal.Entities.Models.Video;
 
 namespace VedasPortal.Services.VideoService
 {

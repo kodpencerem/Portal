@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Components.Anket.Modals;
 using VedasPortal.Data;
-using VedasPortal.Models.Anket.Contracts;
-using VedasPortal.Models.Anket.DTO;
+using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Repository.Interface.Anket;
 
 namespace VedasPortal.Pages.Anket.Admin
 {

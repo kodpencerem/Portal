@@ -2,7 +2,7 @@
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
-using VedasPortal.Models.Anket.Contracts;
+using VedasPortal.Repository.Interface.Anket;
 
 namespace VedasPortal.Pages.Anasayfa
 {

@@ -8,28 +8,28 @@
 
   <ItemGroup>
     <Compile Remove="Components\OneriComponent\**" />
-    <Compile Remove="Models\ToplantiTakvimi\IService\**" />
-    <Compile Remove="Models\ToplantiTakvimi\Service\**" />
+    <Compile Remove="Entities\Models\ToplantiTakvimi\IService\**" />
+    <Compile Remove="Entities\Models\ToplantiTakvimi\Service\**" />
     <Compile Remove="wwwroot\assets\onerisistemi\**" />
     <Compile Remove="wwwroot\slider\**" />
     <Content Remove="Components\OneriComponent\**" />
-    <Content Remove="Models\ToplantiTakvimi\IService\**" />
-    <Content Remove="Models\ToplantiTakvimi\Service\**" />
+    <Content Remove="Entities\Models\ToplantiTakvimi\IService\**" />
+    <Content Remove="Entities\Models\ToplantiTakvimi\Service\**" />
     <Content Remove="wwwroot\assets\onerisistemi\**" />
     <Content Remove="wwwroot\slider\**" />
     <EmbeddedResource Remove="Components\OneriComponent\**" />
-    <EmbeddedResource Remove="Models\ToplantiTakvimi\IService\**" />
-    <EmbeddedResource Remove="Models\ToplantiTakvimi\Service\**" />
+    <EmbeddedResource Remove="Entities\Models\ToplantiTakvimi\IService\**" />
+    <EmbeddedResource Remove="Entities\Models\ToplantiTakvimi\Service\**" />
     <EmbeddedResource Remove="wwwroot\assets\onerisistemi\**" />
     <EmbeddedResource Remove="wwwroot\slider\**" />
     <None Remove="Components\OneriComponent\**" />
-    <None Remove="Models\ToplantiTakvimi\IService\**" />
-    <None Remove="Models\ToplantiTakvimi\Service\**" />
+    <None Remove="Entities\Models\ToplantiTakvimi\IService\**" />
+    <None Remove="Entities\Models\ToplantiTakvimi\Service\**" />
     <None Remove="wwwroot\assets\onerisistemi\**" />
     <None Remove="wwwroot\slider\**" />
     <TypeScriptCompile Remove="Components\OneriComponent\**" />
-    <TypeScriptCompile Remove="Models\ToplantiTakvimi\IService\**" />
-    <TypeScriptCompile Remove="Models\ToplantiTakvimi\Service\**" />
+    <TypeScriptCompile Remove="Entities\Models\ToplantiTakvimi\IService\**" />
+    <TypeScriptCompile Remove="Entities\Models\ToplantiTakvimi\Service\**" />
   </ItemGroup>
 
   <ItemGroup>

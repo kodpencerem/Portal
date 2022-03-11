@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using VedasPortal.Models.Anket.DTO;
+using VedasPortal.Entities.DTOs.Anket;
 
 namespace VedasPortal.Components.Anket
 {

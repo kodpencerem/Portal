@@ -1,5 +1,17 @@
 ﻿@page "/DuzelticiFaaliyetOlusturma"
-<div class="12">
+@inherits DuzelticiFaaliyetlerModeli
+
+
+@if (DuzelticiFaaliyet == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+<div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
 
@@ -15,161 +27,66 @@
         </CardHeader>
         <CardBody>
             <div class="row">
+                @foreach (var dFaaliyet in DuzelticiFaaliyet)
+                {
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <!-- Support tickets -->
+                        <div class="card">
 
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <!-- Support tickets -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="support-ticket media pb-1 mb-3">
-                                <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
-                                <div class="media-body ml-3">
-                                    <div class="badge badge-pill badge-success mb-1 float-right">
-                                        <a class="text-white" href="FaaliyetKategoriBilgisi">Kategori Bilgisi</a>
+                            <div class="card-body">
+                                <div class="support-ticket media pb-1 mb-3">
+                                    <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
+                                    <div class="media-body ml-3">
+                                        <div class="badge badge-pill badge-success mb-1 float-right">
+                                            <a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
+                                        </div>
+                                        <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
+                                        <a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
+                                        <p class="my-1">
+                                            @if (dFaaliyet.Aciklama != null)
+                                            {
+                                                <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ? dFaaliyet.Aciklama.Substring(0, 280) + "..." : dFaaliyet.Aciklama)" />
+                                            }
+                                         </p>
+                                        <p class="my-1">@dFaaliyet.LokasyonBilgisi</p>
+                                        <small class="text-muted">
+                                            Ekleyen <span class="font-weight-bold font-13">
+                                                @dFaaliyet.KaydedenKullanici
+                                            </span>
+                                            &nbsp;&nbsp; - @dFaaliyet.KayitTarihi
+                                        </small>
                                     </div>
-                                    <span class="font-weight-bold">KonuEtiketi</span>
-                                    <a href="javascript:void(0)">IstekFaaliyetKonusu</a>
-                                    <p class="my-1">Aciklama</p>
-                                    <p class="my-1">LokasyonBilgisi</p>
-                                    <small class="text-muted">
-                                        Ekleyen <span class="font-weight-bold font-13">
-                                            Personel
-                                        </span>
-                                        &nbsp;&nbsp; - BildirimTarihi
-                                    </small>
                                 </div>
+
                             </div>
+                            <a href="javascript:void(0)" class="card-footer card-link text-center small ">
+                                Tümünü Görüntüle
+                            </a>
+                            <a href='duzelticifaaliyet/duzenle' class="btn btn-sm btn-info btn-outline-dark " role="button">Faaliyeti Düzenle</a>
 
                         </div>
-                        <a href="javascript:void(0)" class="card-footer card-link text-center small ">
-                            Tümünü Görüntüle
-                        </a>
-                        <a href='duzelticifaaliyet/duzenle' class="btn btn-sm btn-info btn-outline-dark " role="button">Faaliyeti Düzenle</a>
-
+                        <!-- Support tickets -->
                     </div>
-                    <!-- Support tickets -->
-                </div>
 
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <!-- Support tickets -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="support-ticket media pb-1 mb-3">
-                                <img src="assets/img/users/user-3.png" class="user-img mr-2" alt="">
-                                <div class="media-body ml-3">
-                                    <div class="badge badge-pill badge-warning mb-1 float-right">
-                                        <a class="text-white" href="FaaliyetKategoriBilgisi">Kategori Bilgisi</a>
-                                    </div>
-                                    <span class="font-weight-bold">KonuEtiketi</span>
-                                    <a href="javascript:void(0)">IstekFaaliyetKonusu</a>
-                                    <p class="my-1">Aciklama</p>
-                                    <p class="my-1">LokasyonBilgisi</p>
-                                    <small class="text-muted">
-                                        Ekleyen <span class="font-weight-bold font-13">
-                                            Personel
-                                        </span>
-                                        &nbsp;&nbsp; - BildirimTarihi
-                                    </small>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a href="javascript:void(0)" class="card-footer card-link text-center small ">
-                            Tümünü Görüntüle
-                        </a>
-                        <a href='duzelticifaaliyet/duzenle' class="btn btn-sm btn-info btn-outline-dark " role="button">Faaliyeti Düzenle</a>
-
-                    </div>
-                    <!-- Support tickets -->
-                </div>
-
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <!-- Support tickets -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="support-ticket media pb-1 mb-3">
-                                <img src="assets/img/users/user-5.png" class="user-img mr-2" alt="">
-                                <div class="media-body ml-3">
-                                    <div class="badge badge-pill badge-info mb-1 float-right">
-                                        <a class="text-white" href="FaaliyetKategoriBilgisi">Kategori Bilgisi</a>
-                                    </div>
-                                    <span class="font-weight-bold">KonuEtiketi</span>
-                                    <a href="javascript:void(0)">IstekFaaliyetKonusu</a>
-                                    <p class="my-1">Aciklama</p>
-                                    <p class="my-1">LokasyonBilgisi</p>
-                                    <small class="text-muted">
-                                        Ekleyen <span class="font-weight-bold font-13">
-                                            Personel
-                                        </span>
-                                        &nbsp;&nbsp; - BildirimTarihi
-                                    </small>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a href="javascript:void(0)" class="card-footer card-link text-center small ">
-                            Tümünü Görüntüle
-                        </a>
-                        <a href='duzelticifaaliyet/duzenle' class="btn btn-sm btn-info btn-outline-dark " role="button">Faaliyeti Düzenle</a>
-
-                    </div>
-                    <!-- Support tickets -->
-                </div>
-
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <!-- Support tickets -->
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="support-ticket media pb-1 mb-3">
-                                <img src="assets/img/users/user-6.png" class="user-img mr-2" alt="">
-                                <div class="media-body ml-3">
-                                    <div class="badge badge-pill badge-danger mb-1 float-right">
-                                        <a class="text-white" href="FaaliyetKategoriBilgisi">Kategori Bilgisi</a>
-                                    </div>
-                                    <span class="font-weight-bold">KonuEtiketi</span>
-                                    <a href="javascript:void(0)">IstekFaaliyetKonusu</a>
-                                    <p class="my-1">Aciklama</p>
-                                    <p class="my-1">LokasyonBilgisi</p>
-                                    <small class="text-muted">
-                                        Ekleyen <span class="font-weight-bold font-13">
-                                            Personel
-                                        </span>
-                                        &nbsp;&nbsp; - BildirimTarihi
-                                    </small>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a href="javascript:void(0)" class="card-footer card-link text-center small ">
-                            Tümünü Görüntüle
-                        </a>
-                        <a href='duzelticifaaliyet/duzenle' class="btn btn-sm btn-info btn-outline-dark " role="button">Faaliyeti Düzenle</a>
-
-                    </div>
-                    <!-- Support tickets -->
-                </div>
-
+                }
             </div>
         </CardBody>
     </CardComponent>
-
 </div>
 
-
+}
 
 <style>
-    
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 310px;
+        max-height: 310px;
+    }
+
+    .theme-white .btn-primary {
+        
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
     }
 </style>
+
