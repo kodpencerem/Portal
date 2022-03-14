@@ -19,5 +19,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public bool RezervDurumu { get; set; }
         public ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotlari { get; set; }
         public ICollection<ToplantiOdasi> ToplantiOdalari { get; set; }
+        public ICollection<ToplantiTakvimi> ToplantiTakvimi { get; set; }
     }
 }

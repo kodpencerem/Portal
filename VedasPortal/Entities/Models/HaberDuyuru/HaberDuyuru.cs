@@ -10,6 +10,7 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public HaberDuyuru()
         {
             Dosya = new HashSet<Dosya.Dosya>();
+            Video = new HashSet<Video.Video>();
         }
         public int No { get; set; }
         public string Adi { get; set; }
@@ -21,7 +22,7 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public bool AktifPasif { get; set; } = true;
         public bool AnasayfadaGoster { get; set; } = true;
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
-        public virtual Video.Video Video { get; set; }
+        public virtual ICollection<Video.Video> Video { get; set; }
     }
 
     public enum HaberDuyuruKategori

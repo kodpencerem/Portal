@@ -49,9 +49,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected void Kayit()
         {
-            GetDosya = ToplantiNot.GetDosya;
             ToplantiNotu.AddUpdate(ToplantiNot);
-
         }
         protected override void OnParametersSet()
         {
@@ -60,8 +58,6 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
                 Title = "Duzenle";
                 ToplantiNot = ToplantiNotu.Get(ToplantiNotId);
                 //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
-                GetDosya = ToplantiNot.GetDosya;
-
             }
         }
 

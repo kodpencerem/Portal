@@ -19,6 +19,7 @@ namespace VedasPortal.Data.Configurations.ToplantiConfiguration
             builder.Property(x => x.Aciklama)
                 .HasMaxLength(300);
 
+            builder.HasMany(x => x.ToplantiOdasi).WithOne(x => x.ToplantiTakvimi);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.ToplantiTakvimi
@@ -22,6 +23,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public string Renk { get; set; }
         public bool AktifPasif { get; set; }
         public bool AnaSayfadaGoster { get; set; }
-        public ToplantiOdasi ToplantiOdasi { get; set; }
+        public ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
     }
 }

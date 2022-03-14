@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VedasPortal.Entities.Models.Base;
+﻿using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Etkinlik
 {
@@ -8,9 +7,9 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public string AdSoyad { get; set; }
         public string EMail { get; set; }
         public string TelefonNo { get; set; }
-        public string KatilisDurumu { get; set; }
+        public bool KatilisDurumu { get; set; }
         public string KatilisNedeni { get; set; }
         public virtual Dosya.Dosya Resim { get; set; }
-        public ICollection<Etkinlik> Etkinlikler { get; set; }
+        public Etkinlik Etkinlik { get; set; }
     }
 }

@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Oneri
 {
     public class Oneri : BaseEntity
     {
-        public Dosya.Dosya OneriDosya { get; set; }
+        public virtual ICollection<Dosya.Dosya> OneriDosya { get; set; }
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }

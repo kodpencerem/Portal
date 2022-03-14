@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220314144648_DbModifiedToplantiNotConf")]
+    partial class DbModifiedToplantiNotConf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1062,17 +1064,12 @@ namespace VedasPortal.Migrations
                     b.Property<int?>("ToplantiMerkeziId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ToplantiTakvimiId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("VideoKonferansMi")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ToplantiMerkeziId");
-
-                    b.HasIndex("ToplantiTakvimiId");
 
                     b.ToTable("ToplantiOdasi");
                 });
@@ -1155,6 +1152,9 @@ namespace VedasPortal.Migrations
                     b.Property<string>("ToplantiNotu")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ToplantiOdasiId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ToplantiTarihi")
                         .HasColumnType("datetime2");
 
@@ -1164,6 +1164,8 @@ namespace VedasPortal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ToplantiMerkeziId");
+
+                    b.HasIndex("ToplantiOdasiId");
 
                     b.ToTable("ToplantiTakvimi");
                 });
@@ -1472,13 +1474,7 @@ namespace VedasPortal.Migrations
                         .WithMany("ToplantiOdalari")
                         .HasForeignKey("ToplantiMerkeziId");
 
-                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiTakvimi", "ToplantiTakvimi")
-                        .WithMany("ToplantiOdasi")
-                        .HasForeignKey("ToplantiTakvimiId");
-
                     b.Navigation("ToplantiMerkezi");
-
-                    b.Navigation("ToplantiTakvimi");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiTakvimi", b =>
@@ -1486,6 +1482,12 @@ namespace VedasPortal.Migrations
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", null)
                         .WithMany("ToplantiTakvimi")
                         .HasForeignKey("ToplantiMerkeziId");
+
+                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiOdasi", "ToplantiOdasi")
+                        .WithMany("ToplantiTakvimi")
+                        .HasForeignKey("ToplantiOdasiId");
+
+                    b.Navigation("ToplantiOdasi");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.Egitim", b =>
@@ -1586,9 +1588,9 @@ namespace VedasPortal.Migrations
                     b.Navigation("GetDosya");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiTakvimi", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiOdasi", b =>
                 {
-                    b.Navigation("ToplantiOdasi");
+                    b.Navigation("ToplantiTakvimi");
                 });
 #pragma warning restore 612, 618
         }

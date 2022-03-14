@@ -42,7 +42,7 @@
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Katılacağı Etkinliği Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@katilimci.Etkinlikler" class="form-control">
+                                <InputSelect @bind-Value="@katilimci.Etkinlik" class="form-control">
                                     <option></option>
                                     @foreach (var kategori in EtkinlikGetir)
                                     {
@@ -50,13 +50,13 @@
 
                                 </InputSelect>
                             </div>
-                            <ValidationMessage For="@(() => katilimci.Etkinlikler)" />
+                            <ValidationMessage For="@(() => katilimci.Etkinlik)" />
                         </div>
 
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Etkinlik Konusu Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@katilimci.Etkinlikler" class="form-control">
+                                <InputSelect @bind-Value="@katilimci.Etkinlik" class="form-control">
                                     <option></option>
                                     @if (Kategoriler != null)
                                     {

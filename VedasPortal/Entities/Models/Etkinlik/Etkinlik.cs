@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Etkinlik
@@ -8,15 +10,16 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public int No { get; set; }
         public string Adi { get; set; }
         public string Aciklama { get; set; }
-        public string BaslangicTarihi { get; set; }
-        public string BitisTarihi { get; set; }
-        public virtual Dosya.Dosya Kapak { get; set; }
+        public DateTime BaslangicTarihi { get; set; }
+        public DateTime BitisTarihi { get; set; }
+        public virtual ICollection<Dosya.Dosya> Kapak { get; set; }
         public bool SliderdaGoster { get; set; } = false;
         [DataType(DataType.Text)]
         public EtkinlikKategori Kategori { get; set; }
         public KatilimciKategori KKategori { get; set; }
         public bool AktifPasif { get; set; } = true;
         public bool AnasayfadaGoster { get; set; } = true;
+        public ICollection<Katilimci> Katilimci { get; set; }
     }
 
     public enum EtkinlikKategori
