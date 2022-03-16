@@ -1,0 +1,13 @@
+﻿
+<VidazorVideo @ref="video" OnTimeUpdate="OnTimeUpdate" src="videos/uploaded/sample.mp4" class="video" controls />
+
+@code {
+    VidazorVideo video;
+
+    MediaPlayableStatus? canPlayType;
+
+    void OnTimeUpdate()
+    {
+        Console.WriteLine("Time update: " + video.CurrentTime);
+    }
+}
