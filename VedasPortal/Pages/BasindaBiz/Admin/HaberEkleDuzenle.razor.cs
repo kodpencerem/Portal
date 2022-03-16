@@ -50,22 +50,23 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
-     
-            var dosya = haber.Dosya.Select(x => new Dosya
-            {
-                Id = x.Id,
-                Adi = x.Adi,
-                Aciklama = x.Aciklama,
-                Boyutu = x.Boyutu,
-                Yolu = x.Yolu,
-                DuzenlemeTarihi = x.DuzenlemeTarihi,
-                DuzenleyenKullanici = x.DuzenleyenKullanici,
-                KaydedenKullanici = x.KaydedenKullanici,
-                KayitTarihi = x.KayitTarihi,
-                Uzanti = x.Uzanti
 
-            });
-            haber.Dosya = dosya.ToArray();
+            //var dosya = haber.Dosya.Select(x => new Dosya
+            //{
+            //    Id = x.Id,
+            //    Adi = x.Adi,
+            //    Aciklama = x.Aciklama,
+            //    Boyutu = x.Boyutu,
+            //    Yolu = x.Yolu,
+            //    DuzenlemeTarihi = x.DuzenlemeTarihi,
+            //    DuzenleyenKullanici = x.DuzenleyenKullanici,
+            //    KaydedenKullanici = x.KaydedenKullanici,
+            //    KayitTarihi = x.KayitTarihi,
+            //    Uzanti = x.Uzanti
+
+            //});
+            //haber.Dosya = dosya.ToArray();
+            
             HaberServisi.AddUpdate(haber);
         }
         protected override void OnParametersSet()

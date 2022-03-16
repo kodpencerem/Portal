@@ -1316,6 +1316,47 @@ namespace VedasPortal.Migrations
                     b.ToTable("Video");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("OnaylansınMı")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SilenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SilmeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("VideoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VideoId");
+
+                    b.ToTable("VideoYorum");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1526,6 +1567,15 @@ namespace VedasPortal.Migrations
                     b.Navigation("HaberDuyuru");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
+                        .WithMany("VideoYorumlari")
+                        .HasForeignKey("VideoId");
+
+                    b.Navigation("Video");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
                 {
                     b.Navigation("AnketSecenek");
@@ -1589,6 +1639,11 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiTakvimi", b =>
                 {
                     b.Navigation("ToplantiOdasi");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
+                {
+                    b.Navigation("VideoYorumlari");
                 });
 #pragma warning restore 612, 618
         }

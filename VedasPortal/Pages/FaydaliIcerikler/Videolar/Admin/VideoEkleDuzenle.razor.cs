@@ -11,7 +11,7 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 {
-    public class VideoModeli : ComponentBase
+    public class VideoEklemeModeli : ComponentBase
     {
 
         [Inject]

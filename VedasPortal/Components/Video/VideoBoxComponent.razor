@@ -1,17 +1,15 @@
 ﻿@using VedasPortal.Entities.Models.Video
-<div class="component-box">
-    <iframe width="955" height="480"
-            src="@SecilenVideo.Dosya.Yolu"
-            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
 
+<div class="component-box">
+    <VideoPlayerComponent Width="1150" Heigth="900"/>
     <h3>@SecilenVideo.Baslik</h3>
     <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
     <hr />
-
+    <br />
     <VideoYorumlari VideoYorum="SecilenVideo.Yorumlar" />
 </div>
 @code {
+
     [Parameter]
     public Video SecilenVideo { get; set; }
 }

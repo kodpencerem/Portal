@@ -1,25 +1,50 @@
-﻿@using VedasPortal.Entities.Models.Video
-@inject VedasPortal.Services.VideoService.IVideoService videoServisi
+﻿@using VedasPortal.Repository.Interface
 
-<div class="row">
-    <div class="col-7">
-        <VideoBoxComponent SecilenVideo="secilenVideo" />
-    </div>
-    <div class="col-5">
-        <VideoKoleksiyonu Videolar="videolar" VideoSec="SecilenVideo" />
-    </div>
+<div class="col-12">
+    <CardComponent cardStyle="Style.info">
+        <CardBody>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <VideoBoxComponent SecilenVideo="secilenVideo" />
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-3">
+                    <VideoKoleksiyonu Videolar="VideoList.ToList()"  VideoSec="SecilenVideo" />
+                </div>
+            </div>
+        </CardBody>
+
+    </CardComponent>
 </div>
 
-@code { List<Video> videolar = new List<Video>();
+@code {
+
+    [Inject]
+    protected IBaseRepository<Video> videoServisi { get; set; }
+
+    protected IEnumerable<Video> VideoList;
     Video secilenVideo = new Video();
 
     protected override void OnInitialized()
     {
-        videolar = videoServisi.VideoGetir();
-        secilenVideo = videolar.FirstOrDefault();
+        VideoList = videoServisi.GetAll();
+        secilenVideo = VideoList.FirstOrDefault();
     }
 
     void SecilenVideo(Video videoDetay)
     {
         secilenVideo = videoDetay;
-    } }
+    }
+}
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

@@ -1,27 +1,34 @@
 ﻿@using VedasPortal.Entities.Models.Video
-<div class="component-box">
 
+<div class="component-box" style="margin-top:20px">
     @foreach (var item in Videolar)
     {
+
         <div class="box-card" @onclick="() => VideoSec.InvokeAsync(item)">
             <div class="row">
-                <div class="col-4">
-                    <iframe style="width:100%" height="150"
-                            src="@item.Dosya.Yolu"
+                <div class="col-12">
+                    <iframe style="width:100%" ; height="150"
+                            src="videos/uploaded/sample.mp4"
                             frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                </div>
-                <div class="col-8">
+                            allowfullscreen controls>
+                    </iframe>
                     <h4>@item.Baslik</h4>
                 </div>
+
             </div>
+            <br />
         </div>
     }
+
 </div>
 
 @code {
+
     [Parameter]
-    public List<Video> Videolar { get; set; }
+    public IEnumerable<Video> Videolar { get; set; }
+
+    [Parameter]
+    public string Src { get; set; }
 
     [Parameter]
     public EventCallback<Video> VideoSec { get; set; }

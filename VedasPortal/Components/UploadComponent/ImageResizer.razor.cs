@@ -44,12 +44,22 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         private bool ShowCroper { get; set; } = false;
 
+        [Parameter]
+        public string _value { get; set; }
+        [Parameter]
+        public EventCallback<string> BindingValueChanged { get; set; } 
 
         [Parameter]
-        public Dosya Value { get; set; } = new Dosya();
-
-        [Parameter]
-        public EventCallback<Dosya> ValueChanged { get; set; } = new EventCallback<Dosya>();
+        public string BindingValue
+        {
+            get => _value;
+            set
+            {
+                if (_value == value) return;
+                _value = value;
+                BindingValueChanged.InvokeAsync(value);
+            }
+        }
 
         /// <summary>
         /// Resmin üzerinde kırpma ve boyutlandırma işlemleri için bir araç açar
@@ -120,6 +130,7 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
+        
 
         IList<Dosya> imageDataUrls = new List<Dosya>();
         /// <summary>
@@ -171,15 +182,14 @@ namespace VedasPortal.Components.UploadComponent
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
-            var newFile = new Dosya
-            {
-                Adi = fileName,
-                Boyutu = browserFileResizer.Size.ToString(),
-                Uzanti = fileName.Substring('.'),
-            };
-            Value = newFile;
-            await ValueChanged.InvokeAsync(Value);
-
+            //var newFile = new Dosya
+            //{
+            //    Adi = fileName,
+            //    Boyutu = browserFileResizer.Size.ToString(),
+            //    Uzanti = fileName.Substring('.'),
+            //};
+            BindingValue = fileName;
+            await BindingValueChanged.InvokeAsync(BindingValue);
         }
 
         /// <summary>
@@ -204,7 +214,7 @@ namespace VedasPortal.Components.UploadComponent
             if (browserFile != null)
             {
                 Stream inputFileStream = browserFile.OpenReadStream(MaxAllowedFileSize);
-                using MemoryStream memoryStream = new MemoryStream();
+                using MemoryStream memoryStream = new();
                 await inputFileStream?.CopyToAsync(memoryStream);
                 byte[] imageBytes = memoryStream.ToArray();
                 ImageBase64String = Convert.ToBase64String(imageBytes);

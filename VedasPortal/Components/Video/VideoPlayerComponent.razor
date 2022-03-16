@@ -1,13 +1,34 @@
 ﻿
-<VidazorVideo @ref="video" OnTimeUpdate="OnTimeUpdate" src="videos/uploaded/sample.mp4" class="video" controls />
+<VidazorVideo @ref="video" width="@Width" heigth="@Heigth" OnTimeUpdate="OnTimeUpdate" src="videos/uploaded/sample.mp4" class="video" controls />    
+<div class="article-details">
+    <div class="article-title">
+        <h4><a href="#">@VideoBaslik</a></h4>
+    </div>
+    <p class="text-black">
+        @((MarkupString) Aciklama)
+    </p>
+
+</div>
 
 @code {
     VidazorVideo video;
 
-    MediaPlayableStatus? canPlayType;
+    [Parameter]
+    public string Width { get; set; }
+    [Parameter]
+    public string Heigth { get; set; }
+
+    [Parameter]
+    public string VideoBaslik { get; set; }
+
+    [Parameter]
+    public string Aciklama { get; set; }
+
+    [Parameter]
+    public Video SecilenVideo { get; set; }
 
     void OnTimeUpdate()
     {
-        Console.WriteLine("Time update: " + video.CurrentTime);
+        Console.WriteLine("Güncellenme Zamanı: " + video.CurrentTime);
     }
 }

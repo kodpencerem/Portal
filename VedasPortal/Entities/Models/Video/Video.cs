@@ -22,7 +22,7 @@ namespace VedasPortal.Entities.Models.Video
         public List<string> Yorumlar { get; set; } = new List<string>();
         public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
         public Etkinlik.Etkinlik Etkinlik { get; set; }
-
+        public ICollection<VideoYorum> VideoYorumlari { get; set; }
     }
     public enum VideoKategori
     {

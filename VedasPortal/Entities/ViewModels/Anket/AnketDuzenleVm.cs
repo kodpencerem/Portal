@@ -53,7 +53,6 @@ namespace VedasPortal.Entities.ViewModels.Anket
             {
                 AnketSecenekEkle.Remove(AnketSecenekEkle.FirstOrDefault(x => x.Aciklama == Aciklama && x.AnketSecenekId == 0));
             }
-
         }
     }
 }

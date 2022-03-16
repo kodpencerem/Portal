@@ -31,7 +31,6 @@ using VedasPortal.Services.Anket;
 using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
-using VedasPortal.Services.VideoService;
 using VedasPortal.Utils.Anket.FromMapper;
 
 #endregion
@@ -60,7 +59,6 @@ namespace VedasPortal
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped<HavaDurumuService>();
             services.AddScoped<HttpClient>();
-            services.AddScoped<IVideoService, StaticVideoService>();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
