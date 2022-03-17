@@ -1,9 +1,5 @@
 ﻿@page "/video/ekle"
 @page "/video/duzenle/{egitimId:int}"
-
-@using Microsoft.AspNetCore.Hosting
-
-@inject IWebHostEnvironment Environment
 @inherits VideoEklemeModeli
 
 <div class="col-12">
@@ -19,7 +15,7 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">İçerik Ekleyin</label>
                         <div class="col-md-10">
-                            <MultipleUpload ValuePath="@VideoDosya" />
+                            <MultipleUpload ValuePath="@VideoDosya.Yolu" />
                         </div>
                     </div>
 

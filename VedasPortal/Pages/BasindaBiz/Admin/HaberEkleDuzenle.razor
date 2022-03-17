@@ -1,8 +1,5 @@
 ﻿@page "/haber/ekle"
 @page "/haber/duzenle/{haberId:int}"
-@using Microsoft.AspNetCore.Hosting
-
-@inject IWebHostEnvironment Environment
 @inherits HaberEkleDuzenleModel
 
 <div class="col-12">
@@ -18,7 +15,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-BindingValue="@HaberDosya.Yolu" />
+                                <MultipleUpload BindingValue="@haber.Dosya.FirstOrDefault()?.Yolu"/>
                             </div>
                         </div>
 

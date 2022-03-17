@@ -1,12 +1,11 @@
-﻿
-@using VedasPortal.Services.FileUploadDownload;
+﻿@using VedasPortal.Services.FileUploadDownload;
 @inject IFileUpload fileUpload;
 
 <div class="col-6">
     <div class="form-group">
         <div class="row" style="margin-top:2px">
             <div class="col-md-8">
-                <InputFile OnChange="OnInputFileChange" multiple />
+                <InputFile OnChange="OnInputFileChange" @bind-Value="@BindingValue" multiple />
             </div>
             <div class="col-md-4">
                 <button class="btn btn-sm btn-success" type="button" @onclick="UploadFiles">Yükle</button>
@@ -48,11 +47,21 @@
 
 
     [Parameter]
-    public Dosya ValuePath { get; set; }
+    public string _value { get; set; }
+    [Parameter]
+    public EventCallback<string> BindingValueChanged { get; set; }
 
     [Parameter]
-    public EventCallback<Dosya> ValuePathChanged { get; set; }
-
+    public string BindingValue
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            BindingValueChanged.InvokeAsync(value);
+        }
+    }
 
     // yalnızca yükleme sırasında ilerlemenin görüntülenmesini değiştirmek için kullanılır
     private bool displayProgress;

@@ -1,8 +1,6 @@
 ﻿@page "/mevzuat/ekle"
 @page "/mevzuat/duzenle/{mevzuatId:int}"
-
 @using Microsoft.AspNetCore.Hosting
-@inject IWebHostEnvironment Environment
 @inherits MevzuatModel
 
 <div class="col-12">
@@ -18,7 +16,7 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">İçerik Ekleyin</label>
                         <div class="col-md-10">
-                            <MultipleUpload ValuePath="@MevzuatDosya" />
+                            <MultipleUpload ValuePath="@MevzuatDosya.Yolu" />
                         </div>
                     </div>
 

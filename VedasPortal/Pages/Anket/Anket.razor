@@ -11,20 +11,17 @@
             @if (!isReady)
             {
 <p>Yükleniyor...</p> }
-                else
-                {
+else
+{
 <EditForm Model="AnketVm" OnValidSubmit="AnketGonder">
     <DataAnnotationsValidator />
     <div class="row justify-content-center">
         <ValidationSummary />
     </div>
-<br />
+    <br />
     <div class="row justify-content-center">@(AnketVm.AnketSorusu)?</div>
-            <br />
+    <br />
     <div class="row justify-content-center mt-3">
-
-
-
         <div class="form-group">
 
             @foreach (var anket in AnketVm.AnketSecenekleri)
@@ -35,7 +32,7 @@
            value="@anket.AnketSecenekId"
            checked="@(AnketVm.SecilenSecenek == anket.AnketSecenekId.ToString())"
            @onchange="@(() => SecilenDegeriGuncelle(anket.AnketSecenekId.ToString()))" />
-            
+
     <label class="form-check-label">@anket.Aciklama</label>
     <br /><br />
 </div>}

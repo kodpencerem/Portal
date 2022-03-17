@@ -1,8 +1,6 @@
 ﻿@page "/dosya/ekle"
 @page "/dosya/duzenle/{dosyaId:int}"
 @using Microsoft.AspNetCore.Hosting
-
-@inject IWebHostEnvironment Environment
 @inherits DosyaModel
 
 
@@ -19,7 +17,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
-                                <MultipleUpload @bind-ValuePath="@dosya" />
+                                <MultipleUpload @bind-ValuePath="@dosya.Yolu" />
                             </div>
                         </div>
 

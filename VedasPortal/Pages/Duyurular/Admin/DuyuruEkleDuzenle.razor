@@ -1,8 +1,6 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/{duyuruId:int}"
-
 @using Microsoft.AspNetCore.Hosting
-@inject IWebHostEnvironment Environment
 @inherits DuyuruEkleDuzenleModel
 
 <div class="col-12">
@@ -27,7 +25,7 @@
             <img src="@("images/uploaded/"+duyuru.Dosya.Yolu)" height="150" />
         }*@
                             </div>
-                            @*<ValidationMessage For="@(() => haber.Dosya)" />*@
+                            
                         </div>
 
                         <div class="form-group row">

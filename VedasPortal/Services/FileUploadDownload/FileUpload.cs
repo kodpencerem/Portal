@@ -14,7 +14,7 @@ namespace VedasPortal.Services.FileUploadDownload
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        Task<string> UploadFile(IBrowserFile file);
+        Task UploadFile(IBrowserFile file);
         /// <summary>
         /// önizleme url'si oluşturma yöntemi
         /// </summary>
@@ -55,7 +55,7 @@ namespace VedasPortal.Services.FileUploadDownload
                 // Örneğin, pdf için önizlemede bir pdf dosyasının logosunu kullanacağız.
                 if (file.ContentType.Contains("pdf"))
                 {
-                    return "img/pdf_logo.png";
+                    return "images/pdf_logo.png";
                 }
             }
 
@@ -101,11 +101,6 @@ namespace VedasPortal.Services.FileUploadDownload
 
             }
 
-        }
-
-        Task<string> IFileUpload.UploadFile(IBrowserFile file)
-        {
-            throw new NotImplementedException();
         }
 
         public bool DeleteFile(string fileName)
