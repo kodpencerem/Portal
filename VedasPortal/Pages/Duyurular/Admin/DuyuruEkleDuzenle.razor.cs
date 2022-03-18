@@ -48,7 +48,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected void HaberKayit()
         {
-            DuyuruServisi.AddUpdate(duyuru);
+            DuyuruServisi.Add(duyuru);
             
         }
         protected override void OnParametersSet()

@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         public int MevzuatId { get; set; }
 
         protected string Title = "Ekle";
-        public Mevzuat mevzuat = new Mevzuat();
+        public Mevzuat mevzuat = new();
 
         protected IEnumerable<Mevzuat> Mevzuatlar { get; set; }
 
@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected void Kayit()
         {
-            MevzuatServisi.AddUpdate(mevzuat);
+            MevzuatServisi.Add(mevzuat);
 
         }
         protected override void OnParametersSet()
@@ -113,13 +113,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

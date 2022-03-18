@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         protected void EtkinlikKayit()
         {
-            EtkinlikServisi.AddUpdate(etkinlik);
+            EtkinlikServisi.Add(etkinlik);
 
         }
         protected override void OnParametersSet()

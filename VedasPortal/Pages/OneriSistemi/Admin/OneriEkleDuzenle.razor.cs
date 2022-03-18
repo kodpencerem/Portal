@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public int OneriId { get; set; }
 
         protected string Title = "Ekle";
-        public Oneri oneri = new Oneri();
+        public Oneri oneri = new();
 
-        public Dosya OneriDosya = new Dosya();
+        public Dosya OneriDosya = new();
 
         protected IEnumerable<Oneri> Oneriler { get; set; }
 
@@ -73,7 +73,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
         protected void Kayit()
         {
-            OneriServisi.AddUpdate(oneri);
+            OneriServisi.Add(oneri);
 
         }
         protected override void OnParametersSet()
@@ -129,13 +129,13 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

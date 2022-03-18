@@ -49,7 +49,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         protected void DuzelticiFaaliyetKaydet()
         {
-            DuzelticiFaaliyetlerServisi.AddUpdate(duzelticiFaaliyet);
+            DuzelticiFaaliyetlerServisi.Add(duzelticiFaaliyet);
 
             DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim.FirstOrDefault()?.Yolu;
 

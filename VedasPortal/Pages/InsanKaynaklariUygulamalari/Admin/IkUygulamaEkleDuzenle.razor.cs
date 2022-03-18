@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         public int IkUygulamaId { get; set; }
 
         protected string Title = "Ekle";
-        public IkUygulama ikUygulama = new IkUygulama();
+        public IkUygulama ikUygulama = new();
 
         protected IEnumerable<IkUygulama> IkUygulamalari { get; set; }
 
@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
         protected void Kayit()
         {
-            IkUygulamaServisi.AddUpdate(ikUygulama);
+            IkUygulamaServisi.Add(ikUygulama);
 
         }
         protected override void OnParametersSet()
@@ -113,13 +113,13 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

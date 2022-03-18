@@ -67,7 +67,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             //});
             //haber.Dosya = dosya.ToArray();
             
-            HaberServisi.AddUpdate(haber);
+            HaberServisi.Add(haber);
         }
         protected override void OnParametersSet()
         {

@@ -7,7 +7,7 @@ namespace VedasPortal.Repository.Interface
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        int AddUpdate(T item);
+        int Add(T item);
        
         void AddRange(IEnumerable<T> items);
         int Count();

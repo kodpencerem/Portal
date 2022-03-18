@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         public int VideoId { get; set; }
 
         protected string Title = "Ekle";
-        public Video video = new Video();
+        public Video video = new();
 
-        public Dosya VideoDosya = new Dosya();
+        public Dosya VideoDosya = new();
 
         protected IEnumerable<Video> Videolar { get; set; }
 
@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected void Kayit()
         {
-            VideoServisi.AddUpdate(video);
+            VideoServisi.Add(video);
 
             VideoDosya.Yolu = video.Dosya?.Yolu;
 
@@ -116,13 +116,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

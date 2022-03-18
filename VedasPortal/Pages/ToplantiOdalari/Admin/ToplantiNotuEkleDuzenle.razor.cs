@@ -49,7 +49,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected void Kayit()
         {
-            ToplantiNotu.AddUpdate(ToplantiNot);
+            ToplantiNotu.Add(ToplantiNot);
         }
         protected override void OnParametersSet()
         {
@@ -96,13 +96,13 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

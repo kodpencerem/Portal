@@ -23,7 +23,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         public int DosyaId { get; set; }
 
         protected string Title = "Ekle";
-        public Dosya dosya = new Dosya();
+        public Dosya dosya = new();
 
         
 
@@ -48,7 +48,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
         protected void Kayit()
         {
-            DosyaServisi.AddUpdate(dosya);
+            DosyaServisi.Add(dosya);
 
             
 
@@ -100,13 +100,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

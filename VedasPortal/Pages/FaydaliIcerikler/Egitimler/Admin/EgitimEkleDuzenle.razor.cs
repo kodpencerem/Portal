@@ -24,9 +24,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         public int EgitimId { get; set; }
 
         protected string Title = "Ekle";
-        public Egitim egitim = new Egitim();
+        public Egitim egitim = new();
 
-        public Dosya EgitimDosya = new Dosya();
+        public Dosya EgitimDosya = new();
 
         protected IEnumerable<Egitim> Egitimler { get; set; }
 
@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         protected void Kayit()
         {
-            EgitimServisi.AddUpdate(egitim);
+            EgitimServisi.Add(egitim);
 
             EgitimDosya.Yolu = egitim.Kapak?.Yolu;
 
@@ -116,13 +116,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

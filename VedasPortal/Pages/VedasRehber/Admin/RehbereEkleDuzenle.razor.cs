@@ -23,7 +23,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         public int RehberId { get; set; }
 
         protected string Title = "Ekle";
-        public Rehber rehber = new Rehber();
+        public Rehber rehber = new();
 
         protected IEnumerable<Rehber> Rehber { get; set; }
 
@@ -38,7 +38,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
         protected void Kayit()
         {
-            RehberServisi.AddUpdate(rehber);
+            RehberServisi.Add(rehber);
 
         }
         protected override void OnParametersSet()
@@ -88,13 +88,13 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
 
         [Inject]
-        public IJSRuntime jsRun { get; set; }
+        public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                await jsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("dataTables");
             }
         }
     }

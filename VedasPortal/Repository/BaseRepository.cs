@@ -55,7 +55,7 @@ namespace VedasPortal.Repository
             context.SaveChanges();
         }
 
-        public int AddUpdate(T item)
+        public int Add(T item)
         {
             if (item.Id == 0)
             {
