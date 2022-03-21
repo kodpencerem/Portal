@@ -1,4 +1,6 @@
-﻿@using VedasPortal.Entities.Models.Kanban
+﻿@page "/IsEmirleri"
+@using VedasPortal.Entities.Models.Kanban
+@using VedasPortal.Repository.Interface
 <div class="col-12">
     <CardComponent cardStyle="Style.info">
         <CardHeader>
@@ -37,8 +39,19 @@
 
 @code{
 
-    public TaskItem CurrentTaskItem { get; set; }
+    public TaskItem GecerliIsEmri { get; set; }
+
     public Dictionary<string, TaskItem> TaskItems { get; set; } = new Dictionary<string, TaskItem>();
+
+    [Inject]
+    protected IBaseRepository<TaskItem> Gorev { get; set; }
+    protected IEnumerable<TaskItem> Gorevler;
+
+    protected IEnumerable<TaskItem> TumGorevleriGetir()
+    {
+        Gorevler = Gorev.GetAll();
+        return Gorevler;
+    }
 
     protected override void OnInitialized()
     {
@@ -60,17 +73,18 @@
             Priority = TaskPriority.Dusuk
         });
 
-
+        TumGorevleriGetir();
     }
 
     private void OnStartDrag(KeyValuePair<string, TaskItem> kvp)
     {
-        CurrentTaskItem = kvp.Value;
+        GecerliIsEmri = kvp.Value;
     }
 
     private void OnDrop(TaskPriority priority)
     {
-        CurrentTaskItem.Priority = priority;
+        GecerliIsEmri.Priority = priority;
+        TumGorevleriGetir();
     }
 
     public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
@@ -91,7 +105,6 @@
             TaskName = taskName,
             Priority = TaskPriority.Yuksek
         };
-
         TaskItems.Add(counter, taskItem);
     }
 
@@ -100,7 +113,7 @@
     public void OnDragEnter(KeyValuePair<string, TaskItem> kvp)
     {
 
-        if (kvp.Value != null && kvp.Value != CurrentTaskItem)
+        if (kvp.Value != null && kvp.Value != GecerliIsEmri)
         {
             NewTaskItem = kvp.Value;
         }
@@ -112,7 +125,7 @@
         {
 
             var kvp1 = TaskItems.FirstOrDefault(x => x.Value == NewTaskItem);
-            var kvp2 = TaskItems.FirstOrDefault(x => x.Value == CurrentTaskItem);
+            var kvp2 = TaskItems.FirstOrDefault(x => x.Value == GecerliIsEmri);
 
             TaskItems.Remove(kvp1.Key);
             TaskItems.Remove(kvp2.Key);
@@ -121,7 +134,6 @@
             TaskItems.Add(kvp2.Key, kvp1.Value);
 
         }
-
         NewTaskItem = null;
     }
 }

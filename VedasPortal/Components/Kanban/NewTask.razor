@@ -1,6 +1,8 @@
-﻿<div class="row p-3" style="max-width:950px;">
+﻿@using VedasPortal.Repository.Interface
+@using VedasPortal.Entities.Models.Kanban
+<div class="row p-3" style="max-width:950px;">
     <div class="input-group mb-3">
-        <input style="height:30px; margin-right:4px" type="text" id="inputTask" class="form-control" @bind-value="@_taskName" @attributes="InputParameters" />
+        <input style="height:30px; margin-right:4px" type="text" id="inputTask" class="form-control" @bind-value="@gorev.TaskName" @attributes="InputParameters" />
         <button type="button" class="btn btn-outline-secondary btn-primary" @onclick="OnClickHandlerAsync">
             Ekle
         </button>
@@ -9,7 +11,11 @@
 
 @code {
 
-    private string _taskName;
+    
+    [Inject]
+    public IBaseRepository<TaskItem> Gorevler { get; set; }
+
+    public TaskItem gorev = new();
 
     [Parameter]
     public EventCallback<string> OnSubmit { get; set; }
@@ -19,7 +25,9 @@
 
     private async Task OnClickHandlerAsync()
     {
-        await OnSubmit.InvokeAsync(_taskName);
-        _taskName = null;
+    
+        await OnSubmit.InvokeAsync(gorev.TaskName);
+        Gorevler.Add(gorev);
+        gorev.TaskName = null;
     }
 }

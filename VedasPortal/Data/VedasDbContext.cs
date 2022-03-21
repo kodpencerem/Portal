@@ -8,6 +8,7 @@ using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
+using VedasPortal.Entities.Models.Kanban;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
@@ -37,6 +38,7 @@ namespace VedasPortal.Data
         public DbSet<ToplantiTakvimi> ToplantiTakvimi { get; set; }
         public DbSet<Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
+        public DbSet<TaskItem> TaskItem { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

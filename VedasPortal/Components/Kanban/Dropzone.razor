@@ -4,7 +4,7 @@
     <div class="dropzone"
          @ondrop="OnDropHandler"
          ondragover="event.preventDefault()">
-
+       
         @foreach (var item in TaskItemsDictionary.Where(x => x.Value.Priority == Priority).OrderByDescending(x => x.Key))
         {
             <div class="draggable"
@@ -30,7 +30,6 @@
 
     [Parameter]
     public TaskPriority Priority { get; set; }
-
     [Parameter]
     public EventCallback<TaskPriority> OnDrop { get; set; }
 
@@ -67,7 +66,7 @@
         OnDragEnd.InvokeAsync();
     }
 
-    
+
 }
 
 <style>
