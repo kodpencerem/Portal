@@ -1,0 +1,25 @@
+﻿<div class="row p-3" style="max-width:950px;">
+    <div class="input-group mb-3">
+        <input style="height:30px; margin-right:4px" type="text" id="inputTask" class="form-control" @bind-value="@_taskName" @attributes="InputParameters" />
+        <button type="button" class="btn btn-outline-secondary btn-primary" @onclick="OnClickHandlerAsync">
+            Ekle
+        </button>
+    </div>
+</div>
+
+@code {
+
+    private string _taskName;
+
+    [Parameter]
+    public EventCallback<string> OnSubmit { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputParameters { get; set; }
+
+    private async Task OnClickHandlerAsync()
+    {
+        await OnSubmit.InvokeAsync(_taskName);
+        _taskName = null;
+    }
+}

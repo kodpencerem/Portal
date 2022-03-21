@@ -1,0 +1,99 @@
+﻿@using VedasPortal.Entities.Models.Kanban 
+<div class="priority">
+    <h2>@Priority.ToString()</h2>
+    <div class="dropzone"
+         @ondrop="OnDropHandler"
+         ondragover="event.preventDefault()">
+
+        @foreach (var item in TaskItemsDictionary.Where(x => x.Value.Priority == Priority).OrderByDescending(x => x.Key))
+        {
+            <div class="draggable"
+                 draggable="true"
+                 @ondragstart="@(() => OnStartDragHandler(item))"
+                 @ondragenter="@(() => OnDragEnterHandler(item))"
+                 @ondragend="OnDragEnd">
+                @item.Value.TaskName
+                <span class="badge badge-secondary">
+                    @item.Value.Priority
+                </span>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public Dictionary<string, TaskItem> TaskItemsDictionary { get; set; }
+
+    [Parameter]
+    public TaskPriority Priority { get; set; }
+
+    [Parameter]
+    public EventCallback<TaskPriority> OnDrop { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyValuePair<string, TaskItem>> OnStartDrag { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyValuePair<string, TaskItem>> OnDragEnter { get; set; }
+
+    [Parameter]
+    public EventCallback OnDragEnd { get; set; }
+
+    public void OnDropHandler()
+    {
+        OnDrop.InvokeAsync(Priority);
+    }
+
+    public void OnStartDragHandler(KeyValuePair<string, TaskItem> kvp)
+    {
+        OnStartDrag.InvokeAsync(kvp);
+    }
+
+    public void OnDragEnterHandler(KeyValuePair<string, TaskItem> kvp)
+    {
+        if (kvp.Value != null)
+        {
+            OnDragEnter.InvokeAsync(kvp);
+        }
+
+    }
+
+    public void OnDragEndHandler()
+    {
+        OnDragEnd.InvokeAsync();
+    }
+
+    
+}
+
+<style>
+    .draggable {
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        border: 1px solid #424d5c;
+        cursor: grab;
+        background: #ff6a00;
+        color: #fff;
+        border-radius: 5px;
+        width: 16rem;
+    }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+    .dropzone {
+        padding: .75rem;
+        border: 2px solid black;
+        min-height: 20rem;
+    }
+
+    .priority {
+        min-width: 20rem;
+        padding-right: 2rem;
+    }
+</style>
