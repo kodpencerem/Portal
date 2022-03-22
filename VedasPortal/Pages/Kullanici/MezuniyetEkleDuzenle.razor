@@ -1,0 +1,248 @@
+﻿@page "/duyuru/ekle"
+@page "/duyuru/duzenle/{duyuruId:int}"
+@using Microsoft.AspNetCore.Hosting
+@inherits DuyuruEkleDuzenleModel
+
+<div class="col-12">
+    <EditForm Model="@duyuru" OnValidSubmit="HaberKayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Duyuru @Title
+            </CardHeader>
+            <CardBody>
+
+
+
+                <div class="col-12">
+                    <div class="col-md-6 float-left">
+                        <div class="form-group row">
+                            <label class="form-label col-md-2">Resim Seçin</label>
+                            <div class="col-md-10">
+                                <ImageResizer @bind-Value="@DuyuruDosya" />
+                                @*@if (!string.IsNullOrEmpty(duyuru.Dosya.ToString()))
+        {
+            <img src="@("images/uploaded/"+duyuru.Dosya.Yolu)" height="150" />
+        }*@
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Duyuru Adı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="duyuru.Adi" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuru.Adi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Duyuru Alt Başlığı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="duyuru.AltBaslik" />
+                            </div>
+                            <ValidationMessage For="@(() => duyuru.AltBaslik)" />
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@duyuru.Kategori" class="form-control">
+                                    <option></option>
+                                    @if (Kategoriler != null)
+                                    {
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Şimdi Yayınlasın Mı?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.AktifPasif" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.AktifPasif)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Duyuru Kutusuna Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.AnasayfadaGoster" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.AnasayfadaGoster)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="duyuru.SliderdaGoster" />
+                                </div>
+                                <ValidationMessage For="@(() => duyuru.SliderdaGoster)" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 float-right">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value="@duyuru.Aciklama"
+                                                Label="Açıklama"
+                                                UrlToPostImage="images/uploaded/">
+                                </CKEditorBlazor>
+                            </div>
+                            <ValidationMessage For="@(() => duyuru.Aciklama)" />
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+            </CardBody>
+
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
+                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
+</div>
+
+
+@if (Duyurular == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Duyurular
+                    </div>
+                </div>
+
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Resim</th>
+
+                                <th>Duyuru Adı</th>
+                                <th>Duyuru Durumu</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            @foreach (var duyuru in Duyurular.Where(d => d.Kategori == HaberDuyuruKategori.Duyuru).ToList())
+
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@duyuru.Dosya.FirstOrDefault()?.Yolu</td>
+
+                                    <td>@duyuru.Adi</td>
+                                    <td>
+                                        @if (duyuru.AktifPasif == true)
+                                        {
+
+
+                                            <div class="badge badge-success badge-shadow">Yayında</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
+                                    </td>
+
+                                    <td>
+                                        <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary">Duyuru Detayı</a>
+                                        <a href='/duyuru/duzenle/@duyuru.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duyuru.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+}
+
+
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

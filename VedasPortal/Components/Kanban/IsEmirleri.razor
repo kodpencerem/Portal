@@ -1,0 +1,152 @@
+﻿@page "/IsEmirleri"
+@using VedasPortal.Entities.Models.Kanban
+@using VedasPortal.Repository.Interface
+<div class="col-12">
+    <CardComponent cardStyle="Style.info">
+        <CardHeader>
+            <NewTask OnSubmit="AddTask" @attributes="InputAttributes" />
+        </CardHeader>
+        <CardBody>
+            <div class="row p-2">
+                <Dropzone Priority="TaskPriority.Yuksek"
+                          TaskItemsDictionary="TaskItems"
+                          OnDrop="OnDrop"
+                          OnStartDrag="OnStartDrag"
+                          OnDragEnter="OnDragEnter"
+                          OnDragEnd="OnDragEnd" />
+
+                <Dropzone Priority="TaskPriority.Orta"
+                          TaskItemsDictionary="TaskItems"
+                          OnDrop="OnDrop"
+                          OnStartDrag="OnStartDrag"
+                          OnDragEnter="OnDragEnter"
+                          OnDragEnd="OnDragEnd" />
+
+                <Dropzone Priority="TaskPriority.Dusuk"
+                          TaskItemsDictionary="TaskItems"
+                          OnDrop="OnDrop"
+                          OnStartDrag="OnStartDrag"
+                          OnDragEnter="OnDragEnter"
+                          OnDragEnd="OnDragEnd" />
+
+
+            </div>
+
+        </CardBody>
+    </CardComponent>
+
+</div>
+
+@code{
+
+    public TaskItem GecerliIsEmri { get; set; }
+
+    public Dictionary<string, TaskItem> TaskItems { get; set; } = new Dictionary<string, TaskItem>();
+
+    [Inject]
+    protected IBaseRepository<TaskItem> Gorev { get; set; }
+    protected IEnumerable<TaskItem> Gorevler;
+
+    protected IEnumerable<TaskItem> TumGorevleriGetir()
+    {
+        Gorevler = Gorev.GetAll();
+        return Gorevler;
+    }
+
+    protected override void OnInitialized()
+    {
+        TaskItems.Add("1", new TaskItem()
+        {
+            TaskName = "Deneme 1",
+            Priority = TaskPriority.Yuksek
+        });
+
+        TaskItems.Add("2", new TaskItem()
+        {
+            TaskName = "Deneme 2",
+            Priority = TaskPriority.Orta
+        });
+
+        TaskItems.Add("3", new TaskItem()
+        {
+            TaskName = "Deneme 3",
+            Priority = TaskPriority.Dusuk
+        });
+
+        TumGorevleriGetir();
+    }
+
+    private void OnStartDrag(KeyValuePair<string, TaskItem> kvp)
+    {
+        GecerliIsEmri = kvp.Value;
+    }
+
+    private void OnDrop(TaskPriority priority)
+    {
+        GecerliIsEmri.Priority = priority;
+        TumGorevleriGetir();
+    }
+
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
+{
+        { "maxlength", "500" },
+        { "placeholder", "Yeni Bir İş Girin" },
+        { "title", "Bu metin kutusu, görevlerinizi girmek için kullanılır." }
+    };
+
+    private static string counter = "3";
+
+    private void AddTask(string taskName)
+    {
+        counter = $"{(int.Parse(counter += 1)).ToString()}";
+
+        var taskItem = new TaskItem()
+        {
+            TaskName = taskName,
+            Priority = TaskPriority.Yuksek
+        };
+        TaskItems.Add(counter, taskItem);
+    }
+
+    public TaskItem NewTaskItem { get; set; }
+
+    public void OnDragEnter(KeyValuePair<string, TaskItem> kvp)
+    {
+
+        if (kvp.Value != null && kvp.Value != GecerliIsEmri)
+        {
+            NewTaskItem = kvp.Value;
+        }
+    }
+
+    public void OnDragEnd()
+    {
+        if (NewTaskItem != null)
+        {
+
+            var kvp1 = TaskItems.FirstOrDefault(x => x.Value == NewTaskItem);
+            var kvp2 = TaskItems.FirstOrDefault(x => x.Value == GecerliIsEmri);
+
+            TaskItems.Remove(kvp1.Key);
+            TaskItems.Remove(kvp2.Key);
+
+            TaskItems.Add(kvp1.Key, kvp2.Value);
+            TaskItems.Add(kvp2.Key, kvp1.Value);
+
+        }
+        NewTaskItem = null;
+    }
+}
+
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
