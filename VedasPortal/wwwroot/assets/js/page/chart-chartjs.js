@@ -1,4 +1,4 @@
-window.chartChartjs = function () {
+function () {
 
 	"use strict";
 

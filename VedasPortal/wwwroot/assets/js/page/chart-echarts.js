@@ -1,4 +1,4 @@
-window.chartEchartjs = function () {
+function () {
     $(function (e) {
         'use strict'
 

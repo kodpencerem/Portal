@@ -1,4 +1,4 @@
-window.chartAmcart = function () {
+function () {
     'use strict';
     $(function () {
         barChart();

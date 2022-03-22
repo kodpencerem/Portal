@@ -1,4 +1,4 @@
-window.chartApexcharts = function () {
+function () {
     'use strict';
     $(function () {
         chart1();
