@@ -13,6 +13,10 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
             Video = new HashSet<Video.Video>();
         }
         public int No { get; set; }
+
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
+        [Display(Name = "Haber/Duyuru Başlığı:")]
+        [DataType(DataType.Text)]
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
         public string Aciklama { get; set; }
