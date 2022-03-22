@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.Video;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler

@@ -6,12 +6,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Kullanici
 {
-    public class MezunBilgiModeli : ComponentBase
+    public class ProfilModeli : ComponentBase
     {
+
+        [Inject]
+        public IBaseRepository<KursVeSertifika> KursVeSertifika { get; set; }
 
         [Inject]
         public IBaseRepository<OkulMezunBilgisi> MezunBilgisi { get; set; }
@@ -19,10 +23,24 @@ namespace VedasPortal.Pages.Kullanici
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
+        public KursVeSertifika kursVeSertifika = new();
+
+        [Parameter]
+        public int KursId { get; set; }
+
         [Parameter]
         public int MezunId { get; set; }
 
-        protected string Title = "Ekle";
+        protected IEnumerable<KursVeSertifika> KursVeSertifikalar { get; set; }
+
+        protected IEnumerable<KursVeSertifika> TumKursVeSertifikalariGetir()
+        {
+            KursVeSertifikalar = KursVeSertifika.GetAll();
+
+            return KursVeSertifikalar;
+
+        }
+
         public OkulMezunBilgisi okulMezunBilgisi = new();
 
         protected IEnumerable<OkulMezunBilgisi> MezunBilgileri { get; set; }
@@ -34,6 +52,28 @@ namespace VedasPortal.Pages.Kullanici
             return MezunBilgileri;
 
         }
+
+        protected void KursSilmeyiOnayla(int KursId)
+        {
+            ModalDialog.Open();
+            kursVeSertifika = KursVeSertifikalar.FirstOrDefault(x => x.Id == KursId);
+        }
+        protected void MezuniyetSilmeyiOnayla(int MezunId)
+        {
+            ModalDialog.Open();
+            okulMezunBilgisi = MezunBilgileri.FirstOrDefault(x => x.Id == MezunId);
+        }
+        public ModalComponent ModalDialog { get; set; }
+        protected string DialogGorunur { get; set; } = "none";
+
+        protected void KursSil()
+        {
+            if (kursVeSertifika.Id == 0)
+                return;
+            KursVeSertifika.Remove(kursVeSertifika.Id);
+            kursVeSertifika = new KursVeSertifika();
+            TumKursVeSertifikalariGetir();
+        }
         public Dictionary<EgitimDurumu, string> EgitimDurumlari { get; set; }
         protected void TumEgitimDurumlariniGetir()
         {
@@ -44,29 +84,7 @@ namespace VedasPortal.Pages.Kullanici
             }
             EgitimDurumlari = list;
         }
-
-        protected void Kayit()
-        {
-            MezunBilgisi.Add(okulMezunBilgisi);
-        }
-        protected override void OnParametersSet()
-        {
-            if (MezunId != 0)
-            {
-                Title = "Duzenle";
-                okulMezunBilgisi = MezunBilgisi.Get(MezunId);
-            }
-        }
-
-        protected void SilmeyiOnayla(int MezunId)
-        {
-            ModalDialog.Open();
-            okulMezunBilgisi = MezunBilgileri.FirstOrDefault(x => x.Id == MezunId);
-        }
-        public ModalComponent ModalDialog { get; set; }
-        protected string DialogGorunur { get; set; } = "none";
-
-        protected void Sil()
+        protected void MezuniyetSil()
         {
             if (okulMezunBilgisi.Id == 0)
                 return;
@@ -81,15 +99,10 @@ namespace VedasPortal.Pages.Kullanici
         {
             TumMezuniyetBilgileriniGetir();
             TumEgitimDurumlariniGetir();
+            TumKursVeSertifikalariGetir();
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            okulMezunBilgisi = null;
-
-            UrlNavigationManager.NavigateTo("/mezuniyet/ekle");
-        }
 
 
         [Inject]

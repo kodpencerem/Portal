@@ -1,117 +1,82 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.BasindaBiz.Admin
+namespace VedasPortal.Pages.Kullanici
 {
-    public class HaberEkleDuzenleModel : ComponentBase
+    public class KursEklemeModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; } 
+        public IBaseRepository<KursVeSertifika> KursVeSertifika { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int HaberId { get; set; }
+        public int KursId { get; set; }
 
         protected string Title = "Ekle";
-        public HaberDuyuru haber = new();
+        public KursVeSertifika kursVeSertifika = new();
+     
+        protected IEnumerable<KursVeSertifika> Kurslar { get; set; }
 
-        public Dosya HaberDosya = new();
+        protected IEnumerable<KursVeSertifika> TumKurslariGetir()
+        {
+            Kurslar = KursVeSertifika.GetAll();
+            return Kurslar;
+
+        }
         
-
-        protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
-
-        protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
+        protected void Kayit()
         {
-            Haberler = HaberServisi.GetAll();
-            return Haberler;
-
-        }
-        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
-        protected void TumKategorileriGetir()
-        {
-            var list = new Dictionary<HaberDuyuruKategori, string>();
-            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
-            {
-                list.Add(item, item.TextHaberDuyuru());
-            }
-            Kategoriler = list;
-        }
-
-        protected void HaberKayit()
-        {
-
-            //var dosya = haber.Dosya.Select(x => new Dosya
-            //{
-            //    Id = x.Id,
-            //    Adi = x.Adi,
-            //    Aciklama = x.Aciklama,
-            //    Boyutu = x.Boyutu,
-            //    Yolu = x.Yolu,
-            //    DuzenlemeTarihi = x.DuzenlemeTarihi,
-            //    DuzenleyenKullanici = x.DuzenleyenKullanici,
-            //    KaydedenKullanici = x.KaydedenKullanici,
-            //    KayitTarihi = x.KayitTarihi,
-            //    Uzanti = x.Uzanti
-
-            //});
-            //haber.Dosya = dosya.ToArray();
-            
-            HaberServisi.Add(haber);
+            KursVeSertifika.Add(kursVeSertifika);
         }
         protected override void OnParametersSet()
         {
-            if (HaberId != 0)
+            if (KursId != 0)
             {
                 Title = "Duzenle";
-                haber = HaberServisi.Get(HaberId);               
+                kursVeSertifika = KursVeSertifika.Get(KursId);
             }
         }
 
-
-
-        protected void SilmeyiOnayla(int haberId)
+        protected void SilmeyiOnayla(int KursId)
         {
             ModalDialog.Open();
-            haber = Haberler.FirstOrDefault(x => x.Id == haberId);
+            kursVeSertifika = Kurslar.FirstOrDefault(x => x.Id == KursId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected void HaberSil()
+        protected void Sil()
         {
-            if (haber.Id == 0)
+            if (kursVeSertifika.Id == 0)
                 return;
 
-            HaberServisi.Remove(haber.Id);
-            haber = new HaberDuyuru();
-            TumHaberleriGetir();
+            KursVeSertifika.Remove(kursVeSertifika.Id);
+            kursVeSertifika = new KursVeSertifika();
+            TumKurslariGetir();
         }
 
 
-        
+
         protected override Task OnInitializedAsync()
         {
-            TumHaberleriGetir();
-            TumKategorileriGetir();
+            TumKurslariGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            haber = null;
+            kursVeSertifika = null;
 
-            UrlNavigationManager.NavigateTo("/haber/ekle");
+            UrlNavigationManager.NavigateTo("/Profil");
         }
 
 

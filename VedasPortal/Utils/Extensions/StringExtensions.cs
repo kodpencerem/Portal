@@ -1,5 +1,6 @@
 ﻿using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
@@ -61,6 +62,32 @@ namespace VedasPortal
                     return "Duyuru";
                 case HaberDuyuruKategori.Haber:
                     return "Haber";
+                default:
+                    return "";
+            }
+        }
+
+        public static string TextEgitimDurumu(this EgitimDurumu kategori)
+        {
+            switch (kategori)
+            {
+                case EgitimDurumu.IlkOkul:
+                    return "İlk Okul";
+                case EgitimDurumu.OrtaOkul:
+                    return "Orta Okul";
+                case EgitimDurumu.Lise:
+                    return "Lise";
+                case EgitimDurumu.OnLisans:
+                    return "Ön Lisans";
+                case EgitimDurumu.Lisans:
+                    return "Lisans";
+                case EgitimDurumu.YuksekLisans:
+                    return "Yüksek Lisans";
+                case EgitimDurumu.Doktora:
+                    return "Doktora";
+                case EgitimDurumu.Master:
+                    return "Master";
+
                 default:
                     return "";
             }

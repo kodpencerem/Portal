@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
-using VedasPortal.Entities.Models.Video;
+using VedasPortal.Entities.Models.Egitim;
 
 namespace VedasPortal.Entities.Models.IKUygulama
 {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 

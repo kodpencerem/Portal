@@ -16,6 +16,7 @@ using VedasPortal.Data;
 using VedasPortal.Entities.Models;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
@@ -71,6 +72,8 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
             services.AddScoped<IBaseRepository<ToplantiTakvimi>, BaseRepository<ToplantiTakvimi>>();
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
+            services.AddScoped<IBaseRepository<KursVeSertifika>, BaseRepository<KursVeSertifika>>();
+            services.AddScoped<IBaseRepository<OkulMezunBilgisi>, BaseRepository<OkulMezunBilgisi>>();
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
             services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();

@@ -5,6 +5,7 @@ using VedasPortal.Entities.Models;
 using VedasPortal.Entities.Models.Anket;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
@@ -39,6 +40,8 @@ namespace VedasPortal.Data
         public DbSet<Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
         public DbSet<TaskItem> TaskItem { get; set; }
+        public DbSet<KursVeSertifika> KursVeSertifika { get; set; }
+        public DbSet<OkulMezunBilgisi> OkulMezunBilgisi { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

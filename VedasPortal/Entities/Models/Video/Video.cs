@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
+using VedasPortal.Entities.Models.Egitim;
 
 namespace VedasPortal.Entities.Models.Video
 {

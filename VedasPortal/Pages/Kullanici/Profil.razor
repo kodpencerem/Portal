@@ -1,5 +1,5 @@
 ﻿@page "/profil"
-
+@inherits ProfilModeli
 
 
 <div class="col-12 col-md-6 col-lg-4">
@@ -89,7 +89,7 @@
                     </span>
                 </p>
             </div>
-            <div class="mb-2 mt-3" style="margin:10px">               
+            <div class="mb-2 mt-3" style="margin:10px">
                 <a class="btn btn-success">İletişim Bilgisi Ekle</a>
                 <a class="btn btn-warning">Düzenle</a>
                 <a class="btn btn-danger">Sil</a>
@@ -135,7 +135,7 @@
                 </li>
             </ul>
 
-            <div class="mb-2 mt-3" style="margin:10px">              
+            <div class="mb-2 mt-3" style="margin:10px">
                 <a class="btn btn-success">Uzmanlık Alanı Ekle</a>
                 <a class="btn btn-warning">Düzenle</a>
                 <a class="btn btn-danger">Sil</a>
@@ -160,70 +160,95 @@
                 <div class="tab-content tab-bordered" id="myTab3Content">
                     <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
 
-                        <p class="m-t-30">
-                            Eğitim Açıklaması
-                        </p>
 
                         <div class="section-title">Aldığı Eğitimler</div>
                         <ul>
-                            <li>B.A.,Gujarat University, Ahmedabad,India.</li>
-                            <li>M.A.,Gujarat University, Ahmedabad, India.</li>
-                            <li>P.H.D., Shaurashtra University, Rajkot</li>
-                        </ul>
-                        <div class="mb-2 mt-3" style="margin:10px">                          
-                            <a class="btn btn-success">Eğitim Ekle</a>
-                            <a class="btn btn-warning">Düzenle</a>
-                            <a class="btn btn-danger">Sil</a>
+                            @foreach (var mezun in MezunBilgileri)
+                            {
+                                <li>
+                                    @mezun.EgitimDurumu - @mezun.OkulAdi <br />
+                                    @mezun.BaslamaTarihi - @mezun.MezuniyetTarihi 
+                                    <a href='/mezuniyet/duzenle/@mezun.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; MezuniyetSilmeyiOnayla(mezun.Id);})">
+                                        Sil
+                                    </button>
+                                </li>
+                            }
 
+                        </ul>
+                        <div class="mb-2 mt-3" style="margin:10px">
+                            <a href='/mezuniyet/ekle' class="btn btn-primary" role="button">
+                                <i class="fa fa-user-plus"></i> Eğitim Bilgisi Ekle
+                            </a>
                         </div>
                         <div class="section-title">Sertifika ve Kurs Bilgileri</div>
                         <ul>
-                            <li>
-                                One year experience as Jr. Professor from April-2009 to march-2010
-                                at B.
-                                J. Arts College, Ahmedabad.
-                            </li>
-                            <li>
-                                Three year experience as Jr. Professor at V.S. Arts &amp; Commerse
-                                Collage
-                                from April - 2008 to April - 2011.
-                            </li>
-                            <li>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                            </li>
-                            <li>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                            </li>
-                            <li>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                            </li>
-                            <li>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
-                            </li>
+
+                            @foreach (var kursVeSertifika in KursVeSertifikalar)
+                            {
+                                <li>
+                                    @kursVeSertifika.SertifikaKodu - @kursVeSertifika.SertifikaBaslik <br />
+                                    @kursVeSertifika.SertifikaUrlAdres <br />
+                                    Geçerlili Süresi : @kursVeSertifika.GecerlilikSuresi
+                                    @kursVeSertifika.Aciklama &amp; @kursVeSertifika.VerenKurum <br />
+                                    @kursVeSertifika.BaslamaTarihi - @kursVeSertifika.BitisTarihi <br />
+                                    Sertifika Veriliş Tarihi : @kursVeSertifika.SertifikaVerilisTarihi
+                                    <a href='/kurs/duzenle/@kursVeSertifika.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; KursSilmeyiOnayla(kursVeSertifika.Id);})">
+                                        Sil
+                                    </button>
+                                </li>
+                            }
+
                         </ul>
                         <div class="mb-2 mt-3" style="margin:10px">
-                            <a class="btn btn-success">Sertifika Bilgisi Ekle</a>
-                            <a class="btn btn-warning">Düzenle</a>
-                            <a class="btn btn-danger">Sil</a>
+                            <a href='/kurs/ekle' class="btn btn-primary" role="button">
+                                <i class="fa fa-user-plus"></i> Kurs ve Sertifika Bilgisi Ekle
+                            </a>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
-
                         Ayarlar
-
                     </div>
                 </div>
             </div>
         </CardBody>
     </CardComponent>
+    <IsEmirleri />
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{KursSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{MezuniyetSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
 </div>
 
 
 <style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;
@@ -235,8 +260,3 @@
         margin-left: -15px;
     }
 </style>
-
-
-
-
-
