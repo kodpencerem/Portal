@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Repository.Interface;
 
@@ -10,27 +9,19 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
     public class DosyaModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Dosya> HaberServisi
-        { get; set; }
+        protected IBaseRepository<Dosya> Dokuman { get; set; }
         protected IEnumerable<Dosya> Dokumanlar;
-
-        public Dosya HaberDosya { get; set; } = new Dosya();
-
+      
         protected override Task OnInitializedAsync()
         {
-            TumHeberleriGetir();
+            TumDosyalariGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Dosya>
-            TumHeberleriGetir()
+        protected IEnumerable<Dosya>TumDosyalariGetir()
         {
-            Dokumanlar = HaberServisi.GetAll();
+            Dokumanlar = Dokuman.GetAll();
             return Dokumanlar;
-        }
-
-        protected string DialogGorunur { get; set; } = "none";
-
-        public ModalComponent ModalDialog { get; set; }
+        }      
     }
 }

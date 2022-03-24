@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
@@ -19,13 +17,13 @@ namespace VedasPortal.Pages.BasindaBiz
 
         protected override Task OnInitializedAsync()
         {
-            TumHeberleriGetir();
+            TumHaberleriGetir();
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<HaberDuyuru> TumHeberleriGetir()
+        protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
         {
-            haberler = HaberServisi.GetAll().AsQueryable().Include(s=>s.Dosya).ToList();
+            haberler = HaberServisi.GetAll();
             return haberler;
         }
     }
