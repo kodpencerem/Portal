@@ -13,7 +13,7 @@
 
                 </div>
                 <div id="toDoList" class="flex-grow-1 flex-md-grow-0 pt-4">
-                    <ToDoListComponent CalendarDay="@calendarDay"></ToDoListComponent>
+                    <ToplantiListComponent ToplantiGetir="@gunlukToplanti"></ToplantiListComponent>
                 </div>
             </div>
 
@@ -23,11 +23,11 @@
 
 @code{
 
-    public Day calendarDay = null;
+    public GunlukToplanti gunlukToplanti = null;
 
-    public void SetNewCalendarDay(Day day)
+    public void SetNewCalendarDay(GunlukToplanti gun)
     {
-        calendarDay = day;
+        gunlukToplanti = gun;
         StateHasChanged();
     }
 }
@@ -43,5 +43,8 @@
         margin-top: -15px;
         margin-right: -15px;
         margin-left: -15px;
+    }
+    .form-group {
+        margin-bottom: -15px;
     }
 </style>

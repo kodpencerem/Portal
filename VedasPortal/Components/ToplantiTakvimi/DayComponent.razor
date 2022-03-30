@@ -2,49 +2,54 @@
 
 @implements IDisposable
 
-@if (CalendarDay != null)
+@if (ToplantiGetir != null)
 {
-<div class="@(today ? "currentDay":null)" @onclick="@ShowToDos">
-    <h5 class="float-right mt-2 mr-2">@CalendarDay.day</h5>
-    @if (CalendarDay.ToDosCount > 0)
-    {
-<h5 class="float-left mt-1 ml-1">!</h5>}
-</div>}
+    <div class="@(bugun ? "currentDay":null)" @onclick="@ToplantiGoster">
+        <h5 class="float-right mt-2 mr-2">@ToplantiGetir.gun</h5>
+        @if (ToplantiGetir.ToplantiSayisi > 0)
+        {
+            <h5 class="float-left mt-1 ml-1 text-danger">!Uyarı. Toplantı Var</h5>
+        }
+    </div>
+}
 
 
 
-@code { 
-
+@code {
     [Parameter]
-    public Day CalendarDay { get; set; }
+    public GunlukToplanti ToplantiGetir { get; set; }
 
     [CascadingParameter]
-    private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle GunlukToplanti { get; set; }
+    private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle ToplantiEkleDuzenle { get; set; }
 
-    private bool today = false;
+    private bool bugun = false;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        today = DateTime.Now.Year == CalendarDay.date.Year
-        && DateTime.Now.DayOfYear == CalendarDay.date.DayOfYear ? true : false;
+        bugun = DateTime.Now.Year == ToplantiGetir.tarih.Year
+        && DateTime.Now.DayOfYear == ToplantiGetir.tarih.DayOfYear ? true : false;
 
-        // To prevent more than 1 same actions - OnInitialized and OnAfterRender doesnt work
-        CalendarDay.OnChangeState -= OnDayChangeHandler;
-        CalendarDay.OnChangeState += OnDayChangeHandler;
+        // 1'den fazla aynı eylemi önlemek için - OnInitialized ve OnAfterRender çalışmıyor
+        ToplantiGetir.OnChangeState -= OnDayChangeHandler;
+        ToplantiGetir.OnChangeState += OnDayChangeHandler;
     }
 
     public void Dispose()
     {
-        CalendarDay.OnChangeState -= OnDayChangeHandler;
+        ToplantiGetir.OnChangeState -= OnDayChangeHandler;
     }
-
+    /// <summary>
+    /// Takvim üzerinde bir değişiklik meydana geldiğinde
+    /// </summary>
     private async void OnDayChangeHandler()
     {
         await InvokeAsync(StateHasChanged);
     }
 
-    private void ShowToDos()
+    private void ToplantiGoster()
     {
-        GunlukToplanti?.SetNewCalendarDay(CalendarDay);
-    } }
+        ToplantiEkleDuzenle.SetNewCalendarDay(ToplantiGetir);
+    }
+
+}

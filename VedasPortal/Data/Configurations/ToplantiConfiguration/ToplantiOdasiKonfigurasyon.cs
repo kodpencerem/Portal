@@ -20,7 +20,7 @@ namespace VedasPortal.Data.Configurations.ToplantiConfiguration
                 .HasMaxLength(300);
             builder.Property(x => x.Kapasite)
                 .HasMaxLength(100);
-            builder.HasOne(x => x.ToplantiMerkezi).WithMany(x => x.ToplantiOdalari);
+            //builder.HasOne(x => x.ToplantiMerkezi).WithMany(x => x.ToplantiOdalari);
         }
     }
 }

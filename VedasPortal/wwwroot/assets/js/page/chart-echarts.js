@@ -1,4 +1,4 @@
-function () {
+
     $(function (e) {
         'use strict'
 
@@ -517,6 +517,3 @@ function () {
         });
 
     });
-
-}
-

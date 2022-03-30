@@ -1,20 +1,20 @@
 ﻿@using VedasPortal.Entities.Models.Kanban 
 <div class="priority">
-    <h2>@Priority.ToString()</h2>
+    <h2>@Oncellik.ToString()</h2>
     <div class="dropzone"
          @ondrop="OnDropHandler"
          ondragover="event.preventDefault()">
        
-        @foreach (var item in TaskItemsDictionary.Where(x => x.Value.Priority == Priority).OrderByDescending(x => x.Key))
+        @foreach (var item in TaskItemsDictionary.Where(x => x.Value.Oncellik == Oncellik).OrderByDescending(x => x.Key))
         {
             <div class="draggable"
                  draggable="true"
                  @ondragstart="@(() => OnStartDragHandler(item))"
                  @ondragenter="@(() => OnDragEnterHandler(item))"
                  @ondragend="OnDragEnd">
-                @item.Value.TaskName
+                @item.Value.GorevAdi
                 <span class="badge badge-secondary">
-                    @item.Value.Priority
+                    @item.Value.Oncellik
                 </span>
             </div>
         }
@@ -26,33 +26,33 @@
 @code {
 
     [Parameter]
-    public Dictionary<string, TaskItem> TaskItemsDictionary { get; set; }
+    public Dictionary<string, GorevSecenek> TaskItemsDictionary { get; set; }
 
     [Parameter]
-    public TaskPriority Priority { get; set; }
+    public GorevOncelligi Oncellik { get; set; }
     [Parameter]
-    public EventCallback<TaskPriority> OnDrop { get; set; }
+    public EventCallback<GorevOncelligi> OnDrop { get; set; }
 
     [Parameter]
-    public EventCallback<KeyValuePair<string, TaskItem>> OnStartDrag { get; set; }
+    public EventCallback<KeyValuePair<string, GorevSecenek>> OnStartDrag { get; set; }
 
     [Parameter]
-    public EventCallback<KeyValuePair<string, TaskItem>> OnDragEnter { get; set; }
+    public EventCallback<KeyValuePair<string, GorevSecenek>> OnDragEnter { get; set; }
 
     [Parameter]
     public EventCallback OnDragEnd { get; set; }
 
     public void OnDropHandler()
     {
-        OnDrop.InvokeAsync(Priority);
+        OnDrop.InvokeAsync(Oncellik);
     }
 
-    public void OnStartDragHandler(KeyValuePair<string, TaskItem> kvp)
+    public void OnStartDragHandler(KeyValuePair<string, GorevSecenek> kvp)
     {
         OnStartDrag.InvokeAsync(kvp);
     }
 
-    public void OnDragEnterHandler(KeyValuePair<string, TaskItem> kvp)
+    public void OnDragEnterHandler(KeyValuePair<string, GorevSecenek> kvp)
     {
         if (kvp.Value != null)
         {

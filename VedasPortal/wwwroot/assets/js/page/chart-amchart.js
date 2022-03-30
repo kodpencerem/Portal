@@ -1,4 +1,4 @@
-function () {
+
     'use strict';
     $(function () {
         barChart();
@@ -969,4 +969,3 @@ function () {
             "dataField": "value"
         })
     }
-}

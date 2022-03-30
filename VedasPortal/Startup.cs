@@ -5,7 +5,9 @@ using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,7 @@ using VedasPortal.Services.Anket;
 using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
+using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
 
 #endregion
@@ -70,14 +73,12 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
             services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
-            services.AddScoped<IBaseRepository<ToplantiTakvimi>, BaseRepository<ToplantiTakvimi>>();
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<KursVeSertifika>, BaseRepository<KursVeSertifika>>();
             services.AddScoped<IBaseRepository<OkulMezunBilgisi>, BaseRepository<OkulMezunBilgisi>>();
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
-            services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
-            services.AddScoped<IBaseRepository<TaskItem>, BaseRepository<TaskItem>>();
+            services.AddScoped<IBaseRepository<GorevSecenek>, BaseRepository<GorevSecenek>>();
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
             services.AddScoped<IFileUpload, FileUpload>();           
             services.AddScoped<IFileDownload, FileDownload>();
@@ -87,7 +88,11 @@ namespace VedasPortal
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
-            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<AylikToplantiService>();
+            services.AddScoped<ToplantiService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

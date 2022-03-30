@@ -2,54 +2,54 @@
 @using System.Collections
 @using VedasPortal.Entities.Models.ToplantiTakvimi;
 @using VedasPortal.Services.ToplantiServices
-@inject MonthService monthService
+@inject AylikToplantiService aylikToplantilar
 
-@if (month == null)
+@if (aylikToplanti == null)
 {
-    <div class="loading"></div> }
+    <div class="loading">Yükleniyor</div> }
 else
 {
 
-            <div class="container p-0 p-md-5 m-auto">
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <div id="year" class="d-flex align-items-center">
-                        <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddYears(-1);})">&lsaquo;</span>
-                        <h3 class="mb-0">@date.Year</h3>
-                        <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddYears(1);})">&rsaquo;</span>
-                    </div>
-
-
-                    <div class="mt-1 d-flex justify-content-center">
-                        <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(-1);})">&lsaquo;</span>
-                        <h2 class="mb-0">@month.GetName</h2>
-                        <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(1);})">&rsaquo;</span>
-                    </div>
-
-                </div>
-
-                <div id="calendarContainer" class="d-flex flex-column">
-                    <div id="calendarSubContainer">
-                        <div class="calendarHeader d-flex justify-content-start">
-                            <h3>Pazartesi</h3>
-                            <h3>Salı</h3>
-                            <h3>Çarşamba</h3>
-                            <h3>Perşembe</h3>
-                            <h3>Cuma</h3>
-                            <h3>Cumartesi</h3>
-                            <h3>Pazar</h3>
-                        </div>
-
-                        <MonthComponent CalendarMonth=@month></MonthComponent>
-
-
-                    </div>
-                </div>
+    <div class="container p-0 p-md-5 m-auto">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div id="year" class="d-flex align-items-center">
+                <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddYears(-1);})">&lsaquo;</span>
+                <h3 class="mb-0">@tarih.Year</h3>
+                <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddYears(1);})">&rsaquo;</span>
             </div>
-    }
 
-@code { DateTime date;
-    Month month;
-    Dictionary<int, Month[]> loadedMonths;
+            <div class="mt-1 d-flex justify-content-center">
+                <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(-1);})">&lsaquo;</span>
+                <h2 class="mb-0">@aylikToplanti.AdiniGetir</h2>
+                <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(1);})">&rsaquo;</span>
+            </div>
+
+        </div>
+        <div id="calendarContainer" class="d-flex flex-column">
+            <div id="calendarSubContainer">
+                <div class="calendarHeader d-flex justify-content-start">
+                    <h3>Pazartesi</h3>
+                    <h3>Salı</h3>
+                    <h3>Çarşamba</h3>
+                    <h3>Perşembe</h3>
+                    <h3>Cuma</h3>
+                    <h3>Cumartesi</h3>
+                    <h3>Pazar</h3>
+                </div>
+                <MonthComponent AylikToplantiGetir=@aylikToplanti></MonthComponent>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+    DateTime tarih;
+
+    AylikToplanti aylikToplanti;
+
+    Dictionary<int, AylikToplanti[]> aylar;
+
     [CascadingParameter]
     private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle GunlukToplanti { get; set; }
 
@@ -57,56 +57,67 @@ else
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        date = DateTime.Now;
+        tarih = DateTime.Now;
 
 
-        var res = monthService.GetMonth(date);
-        month = res.Item1;
+        var ayGetir = aylikToplantilar.GetMonth(tarih);
+        aylikToplanti = ayGetir.Item1;
 
-        GunlukToplanti?.SetNewCalendarDay(month[date.Day - 1]);
+        GunlukToplanti?.SetNewCalendarDay(aylikToplanti[tarih.Day - 1]);
 
-        Month[] tmp = new Month[12];
+        AylikToplanti[] gecici = new AylikToplanti[12];
 
-        tmp[date.Month - 1] = month;
-        loadedMonths = new Dictionary<int, Month[]>();
-        loadedMonths.Add(date.Year, tmp);
+        gecici[tarih.Month - 1] = aylikToplanti;
+        aylar = new Dictionary<int, AylikToplanti[]>();
+        aylar.Add(tarih.Year, gecici);
     }
 
+    /// <summary>
+    /// Ayları ekle
+    /// </summary>
+    /// <param name="n"></param>
     public void AddMonths(int n)
     {
-        date = date.AddMonths(n);
+        tarih = tarih.AddMonths(n);
         SetNewMonth();
     }
 
+    /// <summary>
+    /// Yılları ekle
+    /// </summary>
+    /// <param name="n"></param>
     public void AddYears(int n)
     {
-        date = date.AddYears(n);
+        tarih = tarih.AddYears(n);
         SetNewMonth();
     }
 
+    /// <summary>
+    /// Yeni bir ay bilgisi oluştur
+    /// </summary>
     private void SetNewMonth()
     {
 
-        // check if user has already loaded month
-        if (loadedMonths.ContainsKey(date.Year)
-            && loadedMonths[date.Year][date.Month - 1] != null)
-            month = loadedMonths[date.Year][date.Month - 1];
+        // kullanıcının ay yükleyip yüklemediğini kontrol eder
+        if (aylar.ContainsKey(tarih.Year)
+            && aylar[tarih.Year][tarih.Month - 1] != null)
+            aylikToplanti = aylar[tarih.Year][tarih.Month - 1];
         else
         {
 
-            var res = monthService.GetMonth(date);
-            month = res.Item1;
+            var ayGetir = aylikToplantilar.GetMonth(tarih);
+            aylikToplanti = ayGetir.Item1;
 
-            if (loadedMonths.ContainsKey(date.Year))
+            if (aylar.ContainsKey(tarih.Year))
             {
-                loadedMonths[date.Year][date.Month - 1] = month;
+                aylar[tarih.Year][tarih.Month - 1] = aylikToplanti;
             }
             else
             {
-                Month[] tmp = new Month[12];
-                tmp[date.Month - 1] = month;
-                loadedMonths.Add(date.Year, tmp);
+                AylikToplanti[] gecici = new AylikToplanti[12];
+                gecici[tarih.Month - 1] = aylikToplanti;
+                aylar.Add(tarih.Year, gecici);
             }
         }
-    } }
-
+    }
+}

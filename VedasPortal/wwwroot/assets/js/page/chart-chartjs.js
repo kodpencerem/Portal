@@ -1,4 +1,3 @@
-function () {
 
 	"use strict";
 
@@ -581,5 +580,3 @@ function () {
 			}
 		}
 	});
-}
-

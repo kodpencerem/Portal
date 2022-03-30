@@ -26,7 +26,7 @@ namespace VedasPortal.Data.Configurations.ToplantiConfiguration
             builder.Property(x => x.SilmeTarihi).HasColumnType(SqlDbType.Date.ToString());
 
             builder.HasMany(x => x.GetDosya).WithOne(x => x.ToplantiNotu).OnDelete(DeleteBehavior.NoAction); // Navigation Propert 
-            builder.HasOne(x => x.ToplantiMerkezi).WithMany(x => x.ToplantiNotlari).OnDelete(DeleteBehavior.NoAction); // Navigation Propert 
+            //builder.HasOne(x => x.ToplantiMerkezi).WithMany(x => x.ToplantiNotlari).OnDelete(DeleteBehavior.NoAction); // Navigation Propert 
         }
     }
 }

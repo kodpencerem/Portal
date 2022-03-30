@@ -39,15 +39,15 @@
 
 @code{
 
-    public TaskItem GecerliIsEmri { get; set; }
+    public GorevSecenek GecerliIsEmri { get; set; }
 
-    public Dictionary<string, TaskItem> TaskItems { get; set; } = new Dictionary<string, TaskItem>();
+    public Dictionary<string, GorevSecenek> TaskItems { get; set; } = new Dictionary<string, GorevSecenek>();
 
     [Inject]
-    protected IBaseRepository<TaskItem> Gorev { get; set; }
-    protected IEnumerable<TaskItem> Gorevler;
+    protected IBaseRepository<GorevSecenek> Gorev { get; set; }
+    protected IEnumerable<GorevSecenek> Gorevler;
 
-    protected IEnumerable<TaskItem> TumGorevleriGetir()
+    protected IEnumerable<GorevSecenek> TumGorevleriGetir()
     {
         Gorevler = Gorev.GetAll();
         return Gorevler;
@@ -55,35 +55,35 @@
 
     protected override void OnInitialized()
     {
-        TaskItems.Add("1", new TaskItem()
+        TaskItems.Add("1", new GorevSecenek()
         {
-            TaskName = "Deneme 1",
-            Priority = TaskPriority.Yuksek
+            GorevAdi = "Deneme 1",
+            Oncellik = GorevOncelligi.Yuksek
         });
 
-        TaskItems.Add("2", new TaskItem()
+        TaskItems.Add("2", new GorevSecenek()
         {
-            TaskName = "Deneme 2",
-            Priority = TaskPriority.Orta
+            GorevAdi = "Deneme 2",
+            Oncellik = GorevOncelligi.Orta
         });
 
-        TaskItems.Add("3", new TaskItem()
+        TaskItems.Add("3", new GorevSecenek()
         {
-            TaskName = "Deneme 3",
-            Priority = TaskPriority.Dusuk
+            GorevAdi = "Deneme 3",
+            Oncellik = GorevOncelligi.Dusuk
         });
 
         TumGorevleriGetir();
     }
 
-    private void OnStartDrag(KeyValuePair<string, TaskItem> kvp)
+    private void OnStartDrag(KeyValuePair<string, GorevSecenek> kvp)
     {
         GecerliIsEmri = kvp.Value;
     }
 
-    private void OnDrop(TaskPriority priority)
+    private void OnDrop(GorevOncelligi gorevOncelligi)
     {
-        GecerliIsEmri.Priority = priority;
+        GecerliIsEmri.Oncellik = gorevOncelligi;
         TumGorevleriGetir();
     }
 
@@ -100,17 +100,17 @@
     {
         counter = $"{(int.Parse(counter += 1)).ToString()}";
 
-        var taskItem = new TaskItem()
+        var taskItem = new GorevSecenek()
         {
-            TaskName = taskName,
-            Priority = TaskPriority.Yuksek
+            GorevAdi = taskName,
+            Oncellik = GorevOncelligi.Yuksek
         };
         TaskItems.Add(counter, taskItem);
     }
 
-    public TaskItem NewTaskItem { get; set; }
+    public GorevSecenek NewTaskItem { get; set; }
 
-    public void OnDragEnter(KeyValuePair<string, TaskItem> kvp)
+    public void OnDragEnter(KeyValuePair<string, GorevSecenek> kvp)
     {
 
         if (kvp.Value != null && kvp.Value != GecerliIsEmri)

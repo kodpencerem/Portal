@@ -4,7 +4,7 @@
 <div class="row p-3" style="max-width:950px;">
     <div class="input-group mb-3">
         <input style="height:30px; margin-right:4px" type="text" id="inputTask" class="form-control" 
-               @bind-value="@gorev.TaskName" @attributes="InputParameters" />
+               @bind-value="@gorev.GorevAdi" @attributes="InputParameters" />
         <button type="button" class="btn btn-outline-secondary btn-primary" @onclick="OnClickHandlerAsync">
             Ekle
         </button>
@@ -15,9 +15,9 @@
 
     
     [Inject]
-    public IBaseRepository<TaskItem> Gorevler { get; set; }
+    public IBaseRepository<GorevSecenek> Gorevler { get; set; }
 
-    public TaskItem gorev = new();
+    public GorevSecenek gorev = new();
 
     [Parameter]
     public EventCallback<string> OnSubmit { get; set; }
@@ -28,8 +28,8 @@
     private async Task OnClickHandlerAsync()
     {
     
-        await OnSubmit.InvokeAsync(gorev.TaskName);
+        await OnSubmit.InvokeAsync(gorev.GorevAdi);
         Gorevler.Add(gorev);
-        gorev.TaskName = null;
+        gorev.GorevAdi = null;
     }
 }

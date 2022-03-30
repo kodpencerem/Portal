@@ -1,4 +1,4 @@
-function () {
+
     'use strict';
     $(function () {
         chart1();
@@ -573,4 +573,3 @@ function () {
 
 
     }
-}

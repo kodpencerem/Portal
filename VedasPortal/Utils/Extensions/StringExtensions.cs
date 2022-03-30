@@ -6,6 +6,7 @@ using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.Video;
 
 namespace VedasPortal
@@ -14,376 +15,228 @@ namespace VedasPortal
     {
         public static string TextEgitim(this EgitimKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-
-                case EgitimKategori.Elektrik:
-                    return "Elektrik";
-                case EgitimKategori.ElektrikElektronik:
-                    return "Elektrik ve Elektronik";
-                case EgitimKategori.FotografVeVideo:
-                    return "Fotoğraf-Video Çekim Ve Tasarım";
-
-                case EgitimKategori.Isletme:
-                    return "İşletme Eğitimi";
-                case EgitimKategori.KisiselGelisim:
-                    return "Kişisel Gelişim Ve Stres Eğitimi";
-
-                case EgitimKategori.Muhasebe:
-                    return "Muhasebe Eğitimi";
-
-                case EgitimKategori.OfisUygulamalari:
-                    return "Ofis Uygulamalarının Kullanımı";
-
-                case EgitimKategori.Pazarlama:
-                    return "Satış Ve Pazarlama";
-
-                case EgitimKategori.SaglikVeFitnes:
-                    return "Sağlıklı Yaşam ve Fitness";
-
-                case EgitimKategori.Tasarim:
-                    return "Tasarım Yapma ve Geliştirme";
-                case EgitimKategori.YasamTarzi:
-                    return "Yaşam Tarzı";
-
-                case EgitimKategori.Yazilim:
-                    return "Yazılım Geliştirme Teknolojileri";
-
-                default:
-                    return "";
-            }
+                EgitimKategori.Elektrik => "Elektrik",
+                EgitimKategori.ElektrikElektronik => "Elektrik ve Elektronik",
+                EgitimKategori.FotografVeVideo => "Fotoğraf-Video Çekim Ve Tasarım",
+                EgitimKategori.Isletme => "İşletme Eğitimi",
+                EgitimKategori.KisiselGelisim => "Kişisel Gelişim Ve Stres Eğitimi",
+                EgitimKategori.Muhasebe => "Muhasebe Eğitimi",
+                EgitimKategori.OfisUygulamalari => "Ofis Uygulamalarının Kullanımı",
+                EgitimKategori.Pazarlama => "Satış Ve Pazarlama",
+                EgitimKategori.SaglikVeFitnes => "Sağlıklı Yaşam ve Fitness",
+                EgitimKategori.Tasarim => "Tasarım Yapma ve Geliştirme",
+                EgitimKategori.YasamTarzi => "Yaşam Tarzı",
+                EgitimKategori.Yazilim => "Yazılım Geliştirme Teknolojileri",
+                _ => "",
+            };
         }
 
         public static string TextHaberDuyuru(this HaberDuyuruKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case HaberDuyuruKategori.Duyuru:
-                    return "Duyuru";
-                case HaberDuyuruKategori.Haber:
-                    return "Haber";
-                default:
-                    return "";
-            }
+                HaberDuyuruKategori.Duyuru => "Duyuru",
+                HaberDuyuruKategori.Haber => "Haber",
+                _ => "",
+            };
+        }
+
+        public static string TextToplantiMerkezi(this ToplantiMerkezi kategori)
+        {
+            return kategori switch
+            {
+                ToplantiMerkezi.Van => "Van Toplantı Merkezi",
+                ToplantiMerkezi.Ankara => "Ankara Toplantı Merkezi",
+                ToplantiMerkezi.Bitlis => "Bitlis Toplantı Merkezi",
+                ToplantiMerkezi.Hakkari => "Hakkari Toplantı Merkezi",
+                ToplantiMerkezi.Mus => "Muş Toplantı Merkezi",
+                _ => "",
+            };
         }
 
         public static string TextEgitimDurumu(this EgitimDurumu kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case EgitimDurumu.IlkOkul:
-                    return "İlk Okul";
-                case EgitimDurumu.OrtaOkul:
-                    return "Orta Okul";
-                case EgitimDurumu.Lise:
-                    return "Lise";
-                case EgitimDurumu.OnLisans:
-                    return "Ön Lisans";
-                case EgitimDurumu.Lisans:
-                    return "Lisans";
-                case EgitimDurumu.YuksekLisans:
-                    return "Yüksek Lisans";
-                case EgitimDurumu.Doktora:
-                    return "Doktora";
-                case EgitimDurumu.Master:
-                    return "Master";
-
-                default:
-                    return "";
-            }
+                EgitimDurumu.IlkOkul => "İlk Okul",
+                EgitimDurumu.OrtaOkul => "Orta Okul",
+                EgitimDurumu.Lise => "Lise",
+                EgitimDurumu.OnLisans => "Ön Lisans",
+                EgitimDurumu.Lisans => "Lisans",
+                EgitimDurumu.YuksekLisans => "Yüksek Lisans",
+                EgitimDurumu.Doktora => "Doktora",
+                EgitimDurumu.Master => "Master",
+                _ => "",
+            };
         }
 
         public static string TextOneriKategori(this OneriKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case OneriKategori.Bilgilendirme:
-                    return "Bilgilendirme ve Klavuzlar";
-                case OneriKategori.CalisanHaklari:
-                    return "Çalışan Hakları";
-                case OneriKategori.CalismaKosullari:
-                    return "Çalışma Koşulları";
-                case OneriKategori.CevreAydinlatma:
-                    return "Çevre Aydınlatma";
-                case OneriKategori.Diger:
-                    return "Diğer";
-                case OneriKategori.ElektrikUretim:
-                    return "Elektrik Üretim";
-                case OneriKategori.Gelirler:
-                    return "Gelir Kalemleri";
-                case OneriKategori.Giderler:
-                    return "Gider Kalemleri";
-                case OneriKategori.HizmetKalitesi:
-                    return "Hizmet Kalitesi";
-                case OneriKategori.IsGuvenligi:
-                    return "İş Güvenliği";
-                case OneriKategori.IsVerenHaklari:
-                    return "İş Veren Hakları";
-                case OneriKategori.KopruVeKavsakAydinlatma:
-                    return "Köprü ve Kavşak Aydınlatma";
-                case OneriKategori.Maliyet:
-                    return "Maliyet";
-                case OneriKategori.Motivasyon:
-                    return "İşçi Motivasyonu Artırma";
-                case OneriKategori.Proje:
-                    return "Proje ve Ürün";
-                case OneriKategori.ProsedurVePolitikalar:
-                    return "Prosedür ve Politikalar";
-                case OneriKategori.Rekabet:
-                    return "Rekabeti Artırma";
-                case OneriKategori.TesisVeyaKurum:
-                    return "Tesis veya Kurum";
-                default:
-                    return "";
-            }
+                OneriKategori.Bilgilendirme => "Bilgilendirme ve Klavuzlar",
+                OneriKategori.CalisanHaklari => "Çalışan Hakları",
+                OneriKategori.CalismaKosullari => "Çalışma Koşulları",
+                OneriKategori.CevreAydinlatma => "Çevre Aydınlatma",
+                OneriKategori.Diger => "Diğer",
+                OneriKategori.ElektrikUretim => "Elektrik Üretim",
+                OneriKategori.Gelirler => "Gelir Kalemleri",
+                OneriKategori.Giderler => "Gider Kalemleri",
+                OneriKategori.HizmetKalitesi => "Hizmet Kalitesi",
+                OneriKategori.IsGuvenligi => "İş Güvenliği",
+                OneriKategori.IsVerenHaklari => "İş Veren Hakları",
+                OneriKategori.KopruVeKavsakAydinlatma => "Köprü ve Kavşak Aydınlatma",
+                OneriKategori.Maliyet => "Maliyet",
+                OneriKategori.Motivasyon => "İşçi Motivasyonu Artırma",
+                OneriKategori.Proje => "Proje ve Ürün",
+                OneriKategori.ProsedurVePolitikalar => "Prosedür ve Politikalar",
+                OneriKategori.Rekabet => "Rekabeti Artırma",
+                OneriKategori.TesisVeyaKurum => "Tesis veya Kurum",
+                _ => "",
+            };
         }
 
         public static string TextOnemDerecesi(this OnemDerecesi kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case OnemDerecesi.Dusuk:
-                    return "Düşük";
-                case OnemDerecesi.Orta:
-                    return "Orta";
-                case OnemDerecesi.Yuksek:
-                    return "Yüksek";
-                default:
-                    return "";
-            }
+                OnemDerecesi.Dusuk => "Düşük",
+                OnemDerecesi.Orta => "Orta",
+                OnemDerecesi.Yuksek => "Yüksek",
+                _ => "",
+            };
         }
         public static string TextOdul(this Odul kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case Odul.IndirimKuponu:
-                    return "İndirim Kuponu";
-                case Odul.Izin:
-                    return "İzin";
-                case Odul.Para:
-                    return "Para";
-                default:
-                    return "";
-            }
+                Odul.IndirimKuponu => "İndirim Kuponu",
+                Odul.Izin => "İzin",
+                Odul.Para => "Para",
+                _ => "",
+            };
         }
 
         public static string TextVideo(this VideoKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case VideoKategori.Belgesel:
-                    return "Belgesel";
-                case VideoKategori.Egitim:
-                    return "Eğitim";
-
-                case VideoKategori.Genel:
-                    return "Genel";
-                case VideoKategori.Roportaj:
-                    return "Röportaj";
-
-                default:
-                    return "";
-            }
+                VideoKategori.Belgesel => "Belgesel",
+                VideoKategori.Egitim => "Eğitim",
+                VideoKategori.Genel => "Genel",
+                VideoKategori.Roportaj => "Röportaj",
+                _ => "",
+            };
         }
 
         public static string TextMevzuat(this MevzuatKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case MevzuatKategori.CumhurBaskanligiKararname:
-                    return "Cumurbaşkanlığı Kararnamesi";
-                case MevzuatKategori.Genelge:
-                    return "Genelge";
-                case MevzuatKategori.Kanun:
-                    return "Kanun";
-                case MevzuatKategori.KanunHukmundeKararname:
-                    return "Kanun Hükmünde Kararname";
-                case MevzuatKategori.Kararname:
-                    return "Kararname";
-                case MevzuatKategori.Teblig:
-                    return "Tebliğ";
-                case MevzuatKategori.Tuzuk:
-                    return "Tüzük";
-                case MevzuatKategori.Yonetmelik:
-                    return "Yönetmelik";
-                default:
-                    return "";
-            }
+                MevzuatKategori.CumhurBaskanligiKararname => "Cumurbaşkanlığı Kararnamesi",
+                MevzuatKategori.Genelge => "Genelge",
+                MevzuatKategori.Kanun => "Kanun",
+                MevzuatKategori.KanunHukmundeKararname => "Kanun Hükmünde Kararname",
+                MevzuatKategori.Kararname => "Kararname",
+                MevzuatKategori.Teblig => "Tebliğ",
+                MevzuatKategori.Tuzuk => "Tüzük",
+                MevzuatKategori.Yonetmelik => "Yönetmelik",
+                _ => "",
+            };
         }
 
         public static string TextBirimler(this Birimler kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case Birimler.TumBirimler:
-                    return "Tüm Birimler";
-
-                case Birimler.BilgiIslem:
-                    return "Bilgi İşlem Müdürlüğü";
-                case Birimler.CagriMerkezi:
-                    return "Çağrı Merkezi Müdürlüğü";
-                case Birimler.Hukuk:
-                    return "Hukuk İşleri Müdürlüğü";
-                case Birimler.Icra:
-                    return "İcra Müdürlüğü";
-                case Birimler.InsanKaynaklari:
-                    return "İnsan Kaynakları";
-
-                case Birimler.KacakVeTahakkuk:
-                    return "Kaçakla Mücadele ve Tahakkuk";
-
-                case Birimler.KaliteMudurlugu:
-                    return "Kalite Ve Eğitim Planlama Müdürlüğü";
-
-                case Birimler.KurumsalIletisim:
-                    return "Kurumsal İletişim Müdürlüğü";
-                case Birimler.Sayac:
-                    return "Sayaç Okumaları Müdürlüğü";
-
-                case Birimler.Scada:
-                    return "Elektrik ve Arıza Takip Sistemleri Müdürlüğü";
-
-                default:
-                    return "";
-            }
+                Birimler.TumBirimler => "Tüm Birimler",
+                Birimler.BilgiIslem => "Bilgi İşlem Müdürlüğü",
+                Birimler.CagriMerkezi => "Çağrı Merkezi Müdürlüğü",
+                Birimler.Hukuk => "Hukuk İşleri Müdürlüğü",
+                Birimler.Icra => "İcra Müdürlüğü",
+                Birimler.InsanKaynaklari => "İnsan Kaynakları",
+                Birimler.KacakVeTahakkuk => "Kaçakla Mücadele ve Tahakkuk",
+                Birimler.KaliteMudurlugu => "Kalite Ve Eğitim Planlama Müdürlüğü",
+                Birimler.KurumsalIletisim => "Kurumsal İletişim Müdürlüğü",
+                Birimler.Sayac => "Sayaç Okumaları Müdürlüğü",
+                Birimler.Scada => "Elektrik ve Arıza Takip Sistemleri Müdürlüğü",
+                _ => "",
+            };
         }
 
         public static string TextDosya(this DosyaKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case DosyaKategori.Docx:
-                    return "Word Dökümanı";
-                case DosyaKategori.Mkv:
-                    return "Matroska Video";
-
-                case DosyaKategori.Mp4:
-                    return "MPEG-4 Video";
-
-
-                case DosyaKategori.Pdf:
-                    return "Pdf Dökümanı";
-
-                case DosyaKategori.Pptx:
-                    return "PowerPoint Sunu";
-
-
-                case DosyaKategori.Pub:
-                    return "Microsoft Publiser";
-
-                case DosyaKategori.Rar:
-                    return "Arşiv Dosya";
-
-                case DosyaKategori.Xlsx:
-                    return "Excel Döküman";
-
-                case DosyaKategori.Zip:
-                    return "Sıkıştırılmış Dosya";
-
-                default:
-                    return "";
-            }
+                DosyaKategori.Docx => "Word Dökümanı",
+                DosyaKategori.Mkv => "Matroska Video",
+                DosyaKategori.Mp4 => "MPEG-4 Video",
+                DosyaKategori.Pdf => "Pdf Dökümanı",
+                DosyaKategori.Pptx => "PowerPoint Sunu",
+                DosyaKategori.Pub => "Microsoft Publiser",
+                DosyaKategori.Rar => "Arşiv Dosya",
+                DosyaKategori.Xlsx => "Excel Döküman",
+                DosyaKategori.Zip => "Sıkıştırılmış Dosya",
+                _ => "",
+            };
         }
 
         public static string TextDuzelticiFaaliyet(this DuzelticiFaaliyetKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case DuzelticiFaaliyetKategori.CevreAydinlatma:
-                    return "Çevre Aydınlatma";
-                case DuzelticiFaaliyetKategori.KopruKavsakAydinlatma:
-                    return "Köprü ve Kavşak Işıkları";
-
-                case DuzelticiFaaliyetKategori.ProsedurVePolitikalar:
-                    return "Prosedür ve Politikalar";
-
-                default:
-                    return "";
-            }
+                DuzelticiFaaliyetKategori.CevreAydinlatma => "Çevre Aydınlatma",
+                DuzelticiFaaliyetKategori.KopruKavsakAydinlatma => "Köprü ve Kavşak Işıkları",
+                DuzelticiFaaliyetKategori.ProsedurVePolitikalar => "Prosedür ve Politikalar",
+                _ => "",
+            };
         }
 
         public static string TextEtkinlik(this EtkinlikKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case EtkinlikKategori.CevreTemizligi:
-                    return "Çevre Temizliği";
-                case EtkinlikKategori.DogaYuruyusu:
-                    return "Doğa Yürüyüşü";
-
-                case EtkinlikKategori.FidanDikimi:
-                    return "Fidan Dikimi";
-
-                case EtkinlikKategori.Tanisma:
-                    return "Tanışma";
-
-                case EtkinlikKategori.Seminer:
-                    return "Seminer";
-
-                case EtkinlikKategori.Konferans:
-                    return "Konferans";
-
-                case EtkinlikKategori.Konser:
-                    return "Konser";
-
-                case EtkinlikKategori.Tiyatro:
-                    return "Tiyatro";
-
-                default:
-                    return "";
-            }
+                EtkinlikKategori.CevreTemizligi => "Çevre Temizliği",
+                EtkinlikKategori.DogaYuruyusu => "Doğa Yürüyüşü",
+                EtkinlikKategori.FidanDikimi => "Fidan Dikimi",
+                EtkinlikKategori.Tanisma => "Tanışma",
+                EtkinlikKategori.Seminer => "Seminer",
+                EtkinlikKategori.Konferans => "Konferans",
+                EtkinlikKategori.Konser => "Konser",
+                EtkinlikKategori.Tiyatro => "Tiyatro",
+                _ => "",
+            };
         }
 
         public static string TextKatilimci(this KatilimciKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case KatilimciKategori.TumPersonel:
-                    return "Tüm Personel";
-                case KatilimciKategori.Scada:
-                    return "Scada";
-
-                case KatilimciKategori.BilgiIslem:
-                    return "Bilgi İşlem Müdürlüğü";
-
-                case KatilimciKategori.CagriMerkezi:
-                    return "Çağrı Merkezi";
-
-
-                case KatilimciKategori.Hukuk:
-                    return "Hukuk Servisi Personeli";
-
-                case KatilimciKategori.InsanKaynaklariPersoneli:
-                    return "İnsan Kaynakları Personeli";
-
-                case KatilimciKategori.KaliteMudurlugu:
-                    return "Kalite Müdürlüğü";
-
-                case KatilimciKategori.Davetli:
-                    return "Davetli veya Misafir";
-
-                default:
-                    return "";
-            }
+                KatilimciKategori.TumPersonel => "Tüm Personel",
+                KatilimciKategori.Scada => "Scada",
+                KatilimciKategori.BilgiIslem => "Bilgi İşlem Müdürlüğü",
+                KatilimciKategori.CagriMerkezi => "Çağrı Merkezi",
+                KatilimciKategori.Hukuk => "Hukuk Servisi Personeli",
+                KatilimciKategori.InsanKaynaklariPersoneli => "İnsan Kaynakları Personeli",
+                KatilimciKategori.KaliteMudurlugu => "Kalite Müdürlüğü",
+                KatilimciKategori.Davetli => "Davetli veya Misafir",
+                _ => "",
+            };
         }
 
         public static string TextIkUygulama(this IkUygulamaKategori kategori)
         {
-            switch (kategori)
+            return kategori switch
             {
-                case IkUygulamaKategori.Bordro:
-                    return "Bordro Görüntüleme";
-                case IkUygulamaKategori.EgitimYonetimi:
-                    return "Eğitim Yönetimi ve Planlama";
-                case IkUygulamaKategori.IseAlmaCikarma:
-                    return "İşe Alma ve İşten Çıkarma";
-                case IkUygulamaKategori.IzinGoruntulemVeBasvuru:
-                    return "İzin Görüntüleme ve Başvuru";
-                case IkUygulamaKategori.PerformansDegerlendirme:
-                    return "Kariyer Planlama ve Performans Değerlendirme";
-                default:
-                    return "";
-            }
+                IkUygulamaKategori.Bordro => "Bordro Görüntüleme",
+                IkUygulamaKategori.EgitimYonetimi => "Eğitim Yönetimi ve Planlama",
+                IkUygulamaKategori.IseAlmaCikarma => "İşe Alma ve İşten Çıkarma",
+                IkUygulamaKategori.IzinGoruntulemVeBasvuru => "İzin Görüntüleme ve Başvuru",
+                IkUygulamaKategori.PerformansDegerlendirme => "Kariyer Planlama ve Performans Değerlendirme",
+                _ => "",
+            };
         }
     }
 }

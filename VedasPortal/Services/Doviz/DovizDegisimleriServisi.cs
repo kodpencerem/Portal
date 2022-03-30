@@ -56,7 +56,7 @@ namespace VedasPortal.Services.Doviz
             {
                 Dictionary<string, DovizKurlari> CurrencyRates = DovizleriGetir("http://www.tcmb.gov.tr/kurlar/today.xml");
 
-                DataTable dt = new DataTable();
+                DataTable dt = new();
                 dt.Columns.Add("Name", typeof(string));
                 dt.Columns.Add("Code", typeof(string));
                 dt.Columns.Add("CrossRateName", typeof(string));
@@ -127,7 +127,7 @@ namespace VedasPortal.Services.Doviz
 
                 Dictionary<string, DovizKurlari> CurrencyRates = DovizleriGetir("http://www.tcmb.gov.tr/kurlar/" + SYear + SMonth + "/" + SDay + SMonth + SYear + ".xml");
 
-                DataTable dt = new DataTable();
+                DataTable dt = new();
                 dt.Columns.Add("Name", typeof(string));
                 dt.Columns.Add("Code", typeof(string));
                 dt.Columns.Add("CrossRateName", typeof(string));
@@ -190,7 +190,7 @@ namespace VedasPortal.Services.Doviz
 
                 Dictionary<string, DovizKurlari> CurrencyRates = DovizleriGetir("http://www.tcmb.gov.tr/kurlar/" + SYear + SMonth + "/" + SDay + SMonth + SYear + ".xml");
 
-                DataTable dt = new DataTable();
+                DataTable dt = new();
                 dt.Columns.Add("Name", typeof(string));
                 dt.Columns.Add("Code", typeof(string));
                 dt.Columns.Add("CrossRateName", typeof(string));
@@ -571,19 +571,14 @@ namespace VedasPortal.Services.Doviz
                     DovizKurlari MainCurrency = CurrencyRates[FromCurrencyCode.ToString()];
                     DovizKurlari OtherCurrency = CurrencyRates[ToCurrencyCode.ToString()];
 
-                    switch (exchangeType)
+                    return exchangeType switch
                     {
-                        case DegisimTurleri.DovizAlis:
-                            return OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4);
-                        case DegisimTurleri.DovizSatis:
-                            return OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4);
-                        case DegisimTurleri.EfektifAlis:
-                            return OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4);
-                        case DegisimTurleri.EfektifSatis:
-                            return OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4);
-                        default:
-                            return 0;
-                    }
+                        DegisimTurleri.DovizAlis => OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4),
+                        DegisimTurleri.DovizSatis => OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4),
+                        DegisimTurleri.EfektifAlis => OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4),
+                        DegisimTurleri.EfektifSatis => OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4),
+                        _ => 0,
+                    };
                 }
             }
             catch (Exception)
@@ -656,19 +651,14 @@ namespace VedasPortal.Services.Doviz
                     DovizKurlari MainCurrency = CurrencyRates[FromCurrencyCode.ToString()];
                     DovizKurlari OtherCurrency = CurrencyRates[ToCurrencyCode.ToString()];
 
-                    switch (exchangeType)
+                    return exchangeType switch
                     {
-                        case DegisimTurleri.DovizAlis:
-                            return OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4);
-                        case DegisimTurleri.DovizSatis:
-                            return OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4);
-                        case DegisimTurleri.EfektifAlis:
-                            return OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4);
-                        case DegisimTurleri.EfektifSatis:
-                            return OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4);
-                        default:
-                            return 0;
-                    }
+                        DegisimTurleri.DovizAlis => OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4),
+                        DegisimTurleri.DovizSatis => OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4),
+                        DegisimTurleri.EfektifAlis => OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4),
+                        DegisimTurleri.EfektifSatis => OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4),
+                        _ => 0,
+                    };
                 }
             }
             catch (Exception)
@@ -732,19 +722,14 @@ namespace VedasPortal.Services.Doviz
                     DovizKurlari MainCurrency = CurrencyRates[FromCurrencyCode.ToString()];
                     DovizKurlari OtherCurrency = CurrencyRates[ToCurrencyCode.ToString()];
 
-                    switch (exchangeType)
+                    return exchangeType switch
                     {
-                        case DegisimTurleri.DovizAlis:
-                            return OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4);
-                        case DegisimTurleri.DovizSatis:
-                            return OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4);
-                        case DegisimTurleri.EfektifAlis:
-                            return OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4);
-                        case DegisimTurleri.EfektifSatis:
-                            return OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4);
-                        default:
-                            return 0;
-                    }
+                        DegisimTurleri.DovizAlis => OtherCurrency.DovizAlis == 0 || MainCurrency.DovizAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizAlis / OtherCurrency.DovizAlis), 4),
+                        DegisimTurleri.DovizSatis => OtherCurrency.DovizSatis == 0 || MainCurrency.DovizSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.DovizSatis / OtherCurrency.DovizSatis), 4),
+                        DegisimTurleri.EfektifAlis => OtherCurrency.EfektifAlis == 0 || MainCurrency.EfektifAlis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifAlis / OtherCurrency.EfektifAlis), 4),
+                        DegisimTurleri.EfektifSatis => OtherCurrency.EfektifSatis == 0 || MainCurrency.EfektifSatis == 0 ? 0 : Math.Round(Amount * (MainCurrency.EfektifSatis / OtherCurrency.EfektifSatis), 4),
+                        _ => 0,
+                    };
                 }
             }
             catch (Exception)
@@ -757,10 +742,10 @@ namespace VedasPortal.Services.Doviz
         {
             try
             {
-                XmlTextReader rdr = new XmlTextReader(Link);
+                XmlTextReader rdr = new(Link);
                 // XmlTextReader nesnesini yaratıyoruz ve parametre olarak xml dokümanın urlsini veriyoruz
                 // XmlTextReader urlsi belirtilen xml dokümanlarına hızlı ve forward-only giriş imkanı sağlar.
-                XmlDocument myxml = new XmlDocument();
+                XmlDocument myxml = new();
                 // XmlDocument nesnesini yaratıyoruz.
                 myxml.Load(rdr);
                 // Load metodu ile xml yüklüyoruz
@@ -773,13 +758,13 @@ namespace VedasPortal.Services.Doviz
                 XmlNodeList efektif_alis = myxml.SelectNodes("/Tarih_Date/Currency/BanknoteBuying");
                 XmlNodeList efektif_satis = myxml.SelectNodes("/Tarih_Date/Currency/BanknoteSelling");
 
-                Dictionary<string, DovizKurlari> ExchangeRates = new Dictionary<string, DovizKurlari>();
+                Dictionary<string, DovizKurlari> ExchangeRates = new();
 
                 ExchangeRates.Add("TRY", new DovizKurlari("Türk Lirası", "TRY", "TRY/TRY", 1, 1, 1, 1));
 
                 for (int i = 0; i < adi.Count; i++)
                 {
-                    DovizKurlari cur = new DovizKurlari(adi.Item(i).InnerText.ToString(),
+                    DovizKurlari cur = new(adi.Item(i).InnerText.ToString(),
                         kod.Item(i).InnerText.ToString(),
                         kod.Item(i).InnerText.ToString() + "/TRY",
                         string.IsNullOrWhiteSpace(doviz_alis.Item(i).InnerText.ToString()) ? 0 : Convert.ToDouble(doviz_alis.Item(i).InnerText.ToString().Replace(".", ",")),

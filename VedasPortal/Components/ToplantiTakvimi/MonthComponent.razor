@@ -1,30 +1,31 @@
 ﻿@using VedasPortal.Entities.Models.ToplantiTakvimi
-@using System
 
-@if (CalendarMonth == null)
+@if (AylikToplantiGetir == null)
 {
     <div class="loading"></div> }
 else
 {
-    @for (int i = 0; i < CalendarMonth.Rows; i++)
+    @for (int i = 0; i < AylikToplantiGetir.Satirlar; i++)
     {
         <div class="calendarCells d-flex justify-content-start">
 
-            @for (int j = i * 7; j < (i + 1) * 7 && j < CalendarMonth.numOfDays + CalendarMonth.FirstDaysToSkip; j++)
+            @for (int j = i * 7; j < (i + 1) * 7 && j < AylikToplantiGetir.gunSayisi + AylikToplantiGetir.GunAtla; j++)
             {
                 int k = j;
-                @if (k < CalendarMonth.FirstDaysToSkip)
+                @if (k < AylikToplantiGetir.GunAtla)
                 {
                     <div class="inactive"></div> }
                 else
                 {
-                    <DayComponent CalendarDay="@CalendarMonth[k - CalendarMonth.FirstDaysToSkip]"></DayComponent>}}
+                    <DayComponent ToplantiGetir="@AylikToplantiGetir[k - AylikToplantiGetir.GunAtla]"></DayComponent>}}
         </div>}}
 
 
 
-@code { [Parameter]
-    public Month CalendarMonth { get; set; }
+@code { 
+    
+    [Parameter]
+    public AylikToplanti AylikToplantiGetir { get; set; }
 
     [CascadingParameter]
     private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle GunlukToplanti { get; set; }

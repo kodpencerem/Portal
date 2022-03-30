@@ -52,6 +52,5 @@ namespace VedasPortal.Pages.Anasayfa
             await base.OnInitializedAsync();
 
         }
-
     }
 }

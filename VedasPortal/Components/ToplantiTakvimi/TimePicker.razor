@@ -4,19 +4,19 @@
 @if (time != default(DateTime))
 {
     <div class="d-flex justify-content-center align-items-center">
-        <Select TItem="int" SelectFirst="time.Hour" Size="5" Items="@hours" OnSelected="ChangeHour">
+        <ToplantiSec TItem="int" IlkSecilen="time.Hour" Size="5" Items="@hours" OnSelected="ChangeHour">
             <TimeTemplate>
                 @(context.ToString("00"))
             </TimeTemplate>
-        </Select>
+        </ToplantiSec>
 
         <span class="m-0 ml-1 mr-1">:</span>
 
-        <Select TItem="int" SelectFirst="time.Minute" Size="10" Items="@minutes" OnSelected="ChangeMinute">
+        <ToplantiSec TItem="int" IlkSecilen="time.Minute" Size="10" Items="@minutes" OnSelected="ChangeMinute">
             <TimeTemplate>
                 @(context.ToString("00"))
             </TimeTemplate>
-        </Select>
+        </ToplantiSec>
     </div>
 }
 
