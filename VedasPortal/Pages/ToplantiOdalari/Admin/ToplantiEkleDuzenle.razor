@@ -1,0 +1,47 @@
+﻿@page "/toplantilar"
+@using VedasPortal.Entities.Models.ToplantiTakvimi
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.warning">
+        <CardBody>
+            <div id="appContainer" class="d-flex flex-column flex-md-row-reverse">
+                <div id="calendarWrapper" class="flex-md-grow-1 pt-5">
+                    <h1 class="text-center mt-2">Toplantı Takvimi</h1>
+                    <CascadingValue Value="this">
+                        <CalendarComponent></CalendarComponent>
+                    </CascadingValue>
+
+                </div>
+                <div id="toDoList" class="flex-grow-1 flex-md-grow-0 pt-4">
+                    <ToDoListComponent CalendarDay="@calendarDay"></ToDoListComponent>
+                </div>
+            </div>
+
+        </CardBody>
+    </CardComponent>
+</div>
+
+@code{
+
+    public Day calendarDay = null;
+
+    public void SetNewCalendarDay(Day day)
+    {
+        calendarDay = day;
+        StateHasChanged();
+    }
+}
+
+<style>
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

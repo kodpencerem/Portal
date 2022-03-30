@@ -1,0 +1,31 @@
+﻿@using VedasPortal.Entities.Models.ToplantiTakvimi
+@using System
+
+@if (CalendarMonth == null)
+{
+    <div class="loading"></div> }
+else
+{
+    @for (int i = 0; i < CalendarMonth.Rows; i++)
+    {
+        <div class="calendarCells d-flex justify-content-start">
+
+            @for (int j = i * 7; j < (i + 1) * 7 && j < CalendarMonth.numOfDays + CalendarMonth.FirstDaysToSkip; j++)
+            {
+                int k = j;
+                @if (k < CalendarMonth.FirstDaysToSkip)
+                {
+                    <div class="inactive"></div> }
+                else
+                {
+                    <DayComponent CalendarDay="@CalendarMonth[k - CalendarMonth.FirstDaysToSkip]"></DayComponent>}}
+        </div>}}
+
+
+
+@code { [Parameter]
+    public Month CalendarMonth { get; set; }
+
+    [CascadingParameter]
+    private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle GunlukToplanti { get; set; }
+}

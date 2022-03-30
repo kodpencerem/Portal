@@ -1,0 +1,50 @@
+﻿@using VedasPortal.Entities.Models.ToplantiTakvimi
+
+@implements IDisposable
+
+@if (CalendarDay != null)
+{
+<div class="@(today ? "currentDay":null)" @onclick="@ShowToDos">
+    <h5 class="float-right mt-2 mr-2">@CalendarDay.day</h5>
+    @if (CalendarDay.ToDosCount > 0)
+    {
+<h5 class="float-left mt-1 ml-1">!</h5>}
+</div>}
+
+
+
+@code { 
+
+    [Parameter]
+    public Day CalendarDay { get; set; }
+
+    [CascadingParameter]
+    private Pages.ToplantiOdalari.Admin.ToplantiEkleDuzenle GunlukToplanti { get; set; }
+
+    private bool today = false;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        today = DateTime.Now.Year == CalendarDay.date.Year
+        && DateTime.Now.DayOfYear == CalendarDay.date.DayOfYear ? true : false;
+
+        // To prevent more than 1 same actions - OnInitialized and OnAfterRender doesnt work
+        CalendarDay.OnChangeState -= OnDayChangeHandler;
+        CalendarDay.OnChangeState += OnDayChangeHandler;
+    }
+
+    public void Dispose()
+    {
+        CalendarDay.OnChangeState -= OnDayChangeHandler;
+    }
+
+    private async void OnDayChangeHandler()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void ShowToDos()
+    {
+        GunlukToplanti?.SetNewCalendarDay(CalendarDay);
+    } }
