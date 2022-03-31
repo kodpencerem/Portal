@@ -5,12 +5,13 @@
 @if (Odalar == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p> 
+}
 
 else
 
 {
-<div class="col-12">
+    <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
             <div class="float-left">
@@ -39,7 +40,7 @@ else
                             <div class="card-content">
                                 <h5 class="font-15">Toplantı Odası adı:@oda.Adi</h5>
                                 <h2 class="mb-3 font-18">Kapasitesi(Kişi):@oda.Kapasite</h2>
-                                @if (oda.AktifPasif == true)
+                                @if (oda.AktifPasif == true && oda.RezervDurumu == true)
                                 {
 
 
@@ -60,13 +61,14 @@ else
                     </div>
                 </div>
             </div>
-            <hr style="margin-top:-0.30rem"/>
+            <hr style="margin-top:-0.30rem" />
         </CardBody>
         <CardFotter>
             @if (oda.RezervDurumu == true)
             {
-                <a href="oda/ekle/" class="btn disabled btn-primary" style="margin-left:1rem;">Rezerve Et</a>  }
-            else{ <a href="oda/ekle/" class="btn btn-primary" style="margin-left:1rem;">Rezerve Et</a>}
+<a href="oda/ekle/" class="btn disabled btn-primary" style="margin-left:1rem;">Rezerve Et</a> }
+else
+{ <a href="oda/duzenle/@oda.Id" class="btn btn-primary" style="margin-left:1rem;">Rezerve Et</a>}
             |
             <a href=@($"odadetayformu/{oda.Id}") class="btn btn-info ">Detay</a>
         </CardFotter>
@@ -79,7 +81,8 @@ else
 
         </CardBody>
     </CardComponent>
-</div>}
+</div>
+}
 
 
 <style>
@@ -88,7 +91,7 @@ else
         max-height: 310px;
     }
 
-    .theme-white .btn-primary {        
+    .theme-white .btn-primary {
         background-color: #6777ef;
         border-color: transparent !important;
         color: #fff;
