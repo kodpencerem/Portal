@@ -1,4 +1,5 @@
-﻿using VedasPortal.Entities.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.ToplantiTakvimi
 {
@@ -11,8 +12,8 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public string Adres { get; set; }
         public int Kapasite { get; set; }
         public bool VideoKonferansMi { get; set; }
-        public bool RezervDurumu { get; set; }
+        public bool RezervDurumu { get; set; }       
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
-        public Toplanti ToplantiTakvimi { get; set; }
+        public Toplanti Toplanti { get; set; }
     }
 }

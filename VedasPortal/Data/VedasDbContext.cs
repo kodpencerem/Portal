@@ -13,6 +13,7 @@ using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Kanban;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.Video;
 
@@ -36,13 +37,14 @@ namespace VedasPortal.Data
         public DbSet<Oneri> Oneri { get; set; }
         public DbSet<ToplantiNotu> ToplantiNotu { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
-        
         public DbSet<Anket> Anket { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
         public DbSet<GorevSecenek> GorevSecenek { get; set; }
         public DbSet<KursVeSertifika> KursVeSertifika { get; set; }
         public DbSet<OkulMezunBilgisi> OkulMezunBilgisi { get; set; }
         public DbSet<MailGonder> ToplantiMail { get; set; }
+        public DbSet<ToplantiMerkezi> Merkez { get; set; }
+        public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

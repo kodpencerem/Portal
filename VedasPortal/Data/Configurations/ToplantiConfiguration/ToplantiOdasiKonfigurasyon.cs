@@ -13,7 +13,6 @@ namespace VedasPortal.Data.Configurations.ToplantiConfiguration
                 .HasMaxLength(100);
 
             builder.Property(x => x.Kod)
-                .IsRequired()
                 .HasMaxLength(50);
 
             builder.Property(x => x.Aciklama)

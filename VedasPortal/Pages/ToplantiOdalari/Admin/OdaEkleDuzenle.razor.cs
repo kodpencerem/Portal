@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
+using VedasPortal.Entities.ViewModels;
 using VedasPortal.Repository.Interface;
+
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
 {
@@ -14,6 +16,11 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         [Inject]
         public IBaseRepository<ToplantiOdasi> ToplantiOdasi { get; set; }
+
+        protected ToplantiTakvimVm takvimVm { get; set; } = new ToplantiTakvimVm();
+
+        [Inject]
+        public IToplantiTakvimi _toplanti { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -34,6 +41,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         
         protected void Kayit()
         {
+            var merkeziSec = takvimVm.MerkezId;
             ToplantiOdasi.Add(Oda);
 
         }
@@ -42,12 +50,13 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             if (OdaId != 0)
             {
                 Title = "Duzenle";
+                var merkeziSec = takvimVm.MerkezId;
                 Oda = ToplantiOdasi.Get(OdaId);
                 //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
 
             }
         }
-
+        
         protected void SilmeyiOnayla(int OdaId)
         {
             ModalDialog.Open();
@@ -68,8 +77,19 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected override Task OnInitializedAsync()
         {
+            takvimVm.TMerkezler = _toplanti.TMerkezler();
+            takvimVm.MerkezId = "";
             TumOdalariGetir();
             return Task.CompletedTask;
+        }
+        protected void OnMerkezChange(string value)
+        {
+            if (value != null)
+            {
+                takvimVm.ToplantiOdasiId = "";
+                takvimVm.MerkezId = value.ToString();
+                
+            }
         }
 
         public void Temizle()

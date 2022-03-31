@@ -1,5 +1,4 @@
-﻿using VedasPortal.Entities.Models.ToplantiTakvimi;
-
+﻿
 namespace VedasPortal.Data.Toplanti
 {
     public class MailGonder : Entities.Models.ToplantiTakvimi.Toplanti

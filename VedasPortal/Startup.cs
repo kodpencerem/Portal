@@ -84,6 +84,7 @@ namespace VedasPortal
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();
             services.AddScoped<AltinDegisimleriServisi>();
+            services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
             services.AddBlazoredModal();
             services.AddScoped<Mapper>();
             services.AddBlazoredToast();

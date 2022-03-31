@@ -8,7 +8,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
     {
         public int PersonelId { get; set; }
         public string Kod { get; set; }
-        
+
         public string Aciklama { get; set; }
         [Required]
         [StringLength(250, ErrorMessage = "Toplatı konusu 250 karakterden uzun olamaz!")]
@@ -25,17 +25,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public bool AktifPasif { get; set; }
         public bool AnaSayfadaGoster { get; set; }
 
-        [DataType(DataType.Text)]
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
         public ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
-    }
-
-    public enum ToplantiMerkezi
-    {
-        Van,
-        Hakkari,
-        Mus,
-        Bitlis,
-        Ankara
     }
 }

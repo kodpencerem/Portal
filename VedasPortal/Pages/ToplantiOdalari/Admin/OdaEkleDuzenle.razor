@@ -1,5 +1,7 @@
 ﻿@page "/oda/ekle"
 @page "/oda/duzenle/{odaId:int}"
+
+
 @inherits ToplantiOdasiModeli
 
 <div class="col-12">
@@ -12,6 +14,24 @@
             <CardBody>
                 <div class="col-12">
                     <div class="col-md-6 float-left">
+
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Odanın Bağlı Olacağı Merkez:</label>
+                            <div class="col-md-10">
+                                <InputSelect id="Merkez" class="form-control"
+                                             ValueExpression="@(() => takvimVm.MerkezId)"
+                                             Value="@takvimVm.MerkezId"
+                                             ValueChanged="@((string value) => OnMerkezChange(value))">
+
+                                    @foreach (var merkez in takvimVm.TMerkezler)
+                                    {
+                                        <option value="@merkez.Value">@merkez.Text</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="@(() => takvimVm.MerkezId)" />
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="control-label col-md-2">Adı</label>
                             <div class="col-md-10">
@@ -148,10 +168,14 @@ else
                                     <td>@Oda.Kapasite</td>
                                     <td>@Oda.Adi</td>
                                     <td>
-                                        @if (Oda.AktifPasif == true)
+                                        @if (Oda.AktifPasif == true && Oda.RezervDurumu == false)
                                         {
 
-                                            <div class="badge badge-success badge-shadow">Aktif, Kullanımda</div>
+                                            <div class="badge badge-success badge-shadow">Aktif, Rezerv Edilmemiştir</div>
+                                        }
+                                        else if (Oda.AktifPasif == true && Oda.RezervDurumu == true)
+                                        {
+                                            <div class="badge badge-danger badge-shadow">Aktif, Rezerv Edilmiştir</div>
                                         }
                                         else
                                         {

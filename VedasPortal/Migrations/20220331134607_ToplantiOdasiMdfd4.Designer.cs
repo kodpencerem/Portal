@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220331134607_ToplantiOdasiMdfd4")]
+    partial class ToplantiOdasiMdfd4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1275,10 +1277,10 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ToplantiId")
+                    b.Property<int?>("ToplantiMerkeziId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ToplantiMerkeziId")
+                    b.Property<int?>("ToplantiTakvimiId")
                         .HasColumnType("int");
 
                     b.Property<bool>("VideoKonferansMi")
@@ -1286,9 +1288,9 @@ namespace VedasPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ToplantiId");
-
                     b.HasIndex("ToplantiMerkeziId");
+
+                    b.HasIndex("ToplantiTakvimiId");
 
                     b.ToTable("ToplantiOdasi");
                 });
@@ -1645,17 +1647,17 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiOdasi", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
-                        .WithMany("ToplantiOdasi")
-                        .HasForeignKey("ToplantiId");
-
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", "ToplantiMerkezi")
                         .WithMany("ToplantiOdasi")
                         .HasForeignKey("ToplantiMerkeziId");
 
-                    b.Navigation("Toplanti");
+                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "ToplantiTakvimi")
+                        .WithMany("ToplantiOdasi")
+                        .HasForeignKey("ToplantiTakvimiId");
 
                     b.Navigation("ToplantiMerkezi");
+
+                    b.Navigation("ToplantiTakvimi");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>

@@ -43,19 +43,6 @@ namespace VedasPortal
             };
         }
 
-        public static string TextToplantiMerkezi(this ToplantiMerkezi kategori)
-        {
-            return kategori switch
-            {
-                ToplantiMerkezi.Van => "Van Toplantı Merkezi",
-                ToplantiMerkezi.Ankara => "Ankara Toplantı Merkezi",
-                ToplantiMerkezi.Bitlis => "Bitlis Toplantı Merkezi",
-                ToplantiMerkezi.Hakkari => "Hakkari Toplantı Merkezi",
-                ToplantiMerkezi.Mus => "Muş Toplantı Merkezi",
-                _ => "",
-            };
-        }
-
         public static string TextEgitimDurumu(this EgitimDurumu kategori)
         {
             return kategori switch
