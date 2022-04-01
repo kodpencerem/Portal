@@ -6,7 +6,7 @@ namespace VedasPortal.Entities.Models.Oneri
 {
     public class Oneri : BaseEntity
     {
-        public virtual ICollection<Dosya.Dosya> OneriDosya { get; set; }
+        
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }
@@ -21,6 +21,9 @@ namespace VedasPortal.Entities.Models.Oneri
         public Odul Odul { get; set; }
         [DataType(DataType.Text)]
         public OneriKategori Kategori { get; set; }
+
+        public int DosyaId { get; set; }
+        public Dosya.Dosya Dosya { get; set; }
     }
 
     public enum OnemDerecesi

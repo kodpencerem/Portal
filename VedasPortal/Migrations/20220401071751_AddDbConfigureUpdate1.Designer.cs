@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220401071751_AddDbConfigureUpdate1")]
+    partial class AddDbConfigureUpdate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,6 +350,15 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("EtkinlikId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HaberDuyuruId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IkUygulamaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Kategori")
                         .HasColumnType("int");
 
@@ -357,11 +368,17 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("MevzuatId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ToplantiNotuId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Uzanti")
                         .HasColumnType("nvarchar(max)");
@@ -370,6 +387,16 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EtkinlikId");
+
+                    b.HasIndex("HaberDuyuruId");
+
+                    b.HasIndex("IkUygulamaId");
+
+                    b.HasIndex("MevzuatId");
+
+                    b.HasIndex("ToplantiNotuId");
 
                     b.ToTable("Dosya");
                 });
@@ -592,9 +619,6 @@ namespace VedasPortal.Migrations
                     b.Property<int>("KKategori")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KapakId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Kategori")
                         .HasColumnType("int");
 
@@ -617,8 +641,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KapakId");
 
                     b.ToTable("Etkinlik");
                 });
@@ -701,9 +723,6 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("AnasayfadaGoster")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DosyaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -731,14 +750,7 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("SliderdaGoster")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("VideoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DosyaId");
-
-                    b.HasIndex("VideoId");
 
                     b.ToTable("HaberDuyuru");
                 });
@@ -777,9 +789,6 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ResimId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
 
@@ -787,8 +796,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResimId");
 
                     b.ToTable("IkUygulama");
                 });
@@ -854,9 +861,6 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("BitisTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DosyaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -882,8 +886,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DosyaId");
 
                     b.ToTable("Mevzuat");
                 });
@@ -1152,9 +1154,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("VarChar");
 
-                    b.Property<int?>("GetDosyaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("VarChar");
 
@@ -1177,8 +1176,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GetDosyaId");
 
                     b.HasIndex("ToplantiMerkeziId");
 
@@ -1345,6 +1342,9 @@ namespace VedasPortal.Migrations
                     b.Property<int?>("EtkinlikId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HaberDuyuruId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IzlenmeDurumu")
                         .HasColumnType("bit");
 
@@ -1371,6 +1371,8 @@ namespace VedasPortal.Migrations
                     b.HasIndex("DosyaId");
 
                     b.HasIndex("EtkinlikId");
+
+                    b.HasIndex("HaberDuyuruId");
 
                     b.ToTable("Video");
                 });
@@ -1488,6 +1490,29 @@ namespace VedasPortal.Migrations
                     b.Navigation("Anket");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Dosya.Dosya", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.Etkinlik.Etkinlik", null)
+                        .WithMany("Kapak")
+                        .HasForeignKey("EtkinlikId");
+
+                    b.HasOne("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", null)
+                        .WithMany("Dosya")
+                        .HasForeignKey("HaberDuyuruId");
+
+                    b.HasOne("VedasPortal.Entities.Models.IKUygulama.IkUygulama", null)
+                        .WithMany("Resim")
+                        .HasForeignKey("IkUygulamaId");
+
+                    b.HasOne("VedasPortal.Entities.Models.Mevzuat.Mevzuat", null)
+                        .WithMany("Dosya")
+                        .HasForeignKey("MevzuatId");
+
+                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu.ToplantiNotu", null)
+                        .WithMany("GetDosya")
+                        .HasForeignKey("ToplantiNotuId");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.DuzelticiFaaliyet.DuzelticiFaaliyet", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Resim")
@@ -1512,15 +1537,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Video");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Etkinlik", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Kapak")
-                        .WithMany()
-                        .HasForeignKey("KapakId");
-
-                    b.Navigation("Kapak");
-                });
-
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Katilimci", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Etkinlik.Etkinlik", "Etkinlik")
@@ -1534,39 +1550,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Etkinlik");
 
                     b.Navigation("Resim");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Dosya")
-                        .WithMany()
-                        .HasForeignKey("DosyaId");
-
-                    b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
-                        .WithMany()
-                        .HasForeignKey("VideoId");
-
-                    b.Navigation("Dosya");
-
-                    b.Navigation("Video");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.IKUygulama.IkUygulama", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Resim")
-                        .WithMany()
-                        .HasForeignKey("ResimId");
-
-                    b.Navigation("Resim");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Dosya")
-                        .WithMany()
-                        .HasForeignKey("DosyaId");
-
-                    b.Navigation("Dosya");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Oneri.Oneri", b =>
@@ -1600,15 +1583,9 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu.ToplantiNotu", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "GetDosya")
-                        .WithMany()
-                        .HasForeignKey("GetDosyaId");
-
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", "ToplantiMerkezi")
                         .WithMany()
                         .HasForeignKey("ToplantiMerkeziId");
-
-                    b.Navigation("GetDosya");
 
                     b.Navigation("ToplantiMerkezi");
                 });
@@ -1638,9 +1615,15 @@ namespace VedasPortal.Migrations
                         .WithMany()
                         .HasForeignKey("EtkinlikId");
 
+                    b.HasOne("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", "HaberDuyuru")
+                        .WithMany("Video")
+                        .HasForeignKey("HaberDuyuruId");
+
                     b.Navigation("Dosya");
 
                     b.Navigation("Etkinlik");
+
+                    b.Navigation("HaberDuyuru");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
@@ -1659,7 +1642,26 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Etkinlik", b =>
                 {
+                    b.Navigation("Kapak");
+
                     b.Navigation("Katilimci");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", b =>
+                {
+                    b.Navigation("Dosya");
+
+                    b.Navigation("Video");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.IKUygulama.IkUygulama", b =>
+                {
+                    b.Navigation("Resim");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>
+                {
+                    b.Navigation("Dosya");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", b =>
@@ -1670,6 +1672,11 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", b =>
                 {
                     b.Navigation("ToplantiOdasi");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu.ToplantiNotu", b =>
+                {
+                    b.Navigation("GetDosya");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>

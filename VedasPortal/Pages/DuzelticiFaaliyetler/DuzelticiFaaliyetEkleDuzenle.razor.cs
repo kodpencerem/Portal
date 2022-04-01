@@ -51,7 +51,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         {
             DuzelticiFaaliyetlerServisi.Add(duzelticiFaaliyet);
 
-            DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim.FirstOrDefault()?.Yolu;
+            DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim?.Yolu;
 
             //var dosya = haber.Dosya.Select(x => new Dosya {
             //    Id= x.Id,
@@ -75,7 +75,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             {
                 Title = "Duzenle";
                 duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
-                DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim.FirstOrDefault()?.Yolu;
+                DFaaliyetDosya.Yolu = duzelticiFaaliyet.Resim?.Yolu;
             }
         }
 

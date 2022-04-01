@@ -182,12 +182,12 @@ namespace VedasPortal.Components.UploadComponent
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
-            //var newFile = new Dosya
-            //{
-            //    Adi = fileName,
-            //    Boyutu = browserFileResizer.Size.ToString(),
-            //    Uzanti = fileName.Substring('.'),
-            //};
+            var newFile = new Dosya
+            {
+                Adi = fileName,
+                Boyutu = browserFileResizer.Size.ToString(),
+                Uzanti = fileName.Substring('.'),
+            };
             BindingValue = fileName;
             await BindingValueChanged.InvokeAsync(BindingValue);
         }

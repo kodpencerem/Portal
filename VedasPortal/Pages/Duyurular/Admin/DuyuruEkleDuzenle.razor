@@ -19,7 +19,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-Value="@DuyuruDosya" />
+                                <ImageResizer @bind-BindingValue="@DuyuruDosya.Yolu" />
                             </div>
                             
                         </div>
@@ -173,7 +173,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@duyuru.Dosya.FirstOrDefault()?.Yolu</td>
+                                    <td>@duyuru.Dosya?.Yolu</td>
 
                                     <td>@duyuru.Adi</td>
                                     <td>

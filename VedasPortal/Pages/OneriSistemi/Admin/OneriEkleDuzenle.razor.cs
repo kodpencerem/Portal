@@ -25,9 +25,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
         protected string Title = "Ekle";
         public Oneri oneri = new();
-
-        public Dosya OneriDosya = new();
-
+        
         protected IEnumerable<Oneri> Oneriler { get; set; }
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
@@ -74,7 +72,6 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         protected void Kayit()
         {
             OneriServisi.Add(oneri);
-
         }
         protected override void OnParametersSet()
         {

@@ -16,10 +16,9 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
-                                <MultipleUpload @bind-BindingValue="@OneriDosya.Yolu" />
-
+                                <InputFile @bind-Value="@oneri.DosyaId" />
                             </div>
-
+                            
                         </div>
 
                         <div class="form-group row">
@@ -183,7 +182,7 @@ else
                                         <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td>@OneriDosya.Yolu</td>
+                                <td>@oneri.Dosya?.Yolu</td>
 
                                 <td>@oneri.Adi</td>
 
