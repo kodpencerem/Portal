@@ -20,8 +20,8 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public HaberDuyuruKategori Kategori { get; set; }
         public bool AktifPasif { get; set; } = true;
         public bool AnasayfadaGoster { get; set; } = true;
-        public virtual Dosya.Dosya Dosya { get; set; }
-        public virtual Video.Video Video { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        public virtual ICollection<Video.Video> Video { get; set; }
     }
 
     public enum HaberDuyuruKategori

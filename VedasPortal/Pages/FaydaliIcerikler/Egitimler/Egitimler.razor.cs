@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
 
         protected IEnumerable<Egitim> TumEgitimleriGetir()
         {
-            EgitimleriGetir = EgitimServisi.GetAll().AsQueryable().Include(s => s.Kapak).ToList();
+            EgitimleriGetir = EgitimServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return EgitimleriGetir;
         }       
     }

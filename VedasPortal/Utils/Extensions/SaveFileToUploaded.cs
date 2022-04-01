@@ -10,14 +10,14 @@ namespace VedasPortal
         public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
         {
             filePath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
-            DirectoryInfo info = new DirectoryInfo(filePath);
+            DirectoryInfo info = new(filePath);
             if (!info.Exists)
             {
                 info.Create();
             }
 
             string path = Path.Combine(filePath, fileName);
-            using (FileStream outputFileStream = new FileStream(path, FileMode.Create))
+            using (FileStream outputFileStream = new(path, FileMode.Create))
             {
                 inputStream.CopyTo(outputFileStream);
             }

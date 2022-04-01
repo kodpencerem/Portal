@@ -92,6 +92,7 @@ namespace VedasPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
+            services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
 
         }

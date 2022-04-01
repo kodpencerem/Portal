@@ -62,7 +62,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         {
             EgitimServisi.Add(egitim);
 
-            EgitimDosya.Yolu = egitim.Kapak?.Yolu;
+            EgitimDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
 
             
         }
@@ -72,7 +72,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             {
                 Title = "Duzenle";
                 egitim = EgitimServisi.Get(EgitimId);
-                EgitimDosya.Yolu = egitim.Kapak.Yolu;
+                EgitimDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
             }
         }
 

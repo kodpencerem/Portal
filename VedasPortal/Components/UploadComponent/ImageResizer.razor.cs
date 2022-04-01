@@ -186,9 +186,9 @@ namespace VedasPortal.Components.UploadComponent
             {
                 Adi = fileName,
                 Boyutu = browserFileResizer.Size.ToString(),
-                Uzanti = fileName.Substring('.'),
+                Uzanti = fileName['.'..],
             };
-            BindingValue = fileName;
+            BindingValue = newFile.Yolu;
             await BindingValueChanged.InvokeAsync(BindingValue);
         }
 

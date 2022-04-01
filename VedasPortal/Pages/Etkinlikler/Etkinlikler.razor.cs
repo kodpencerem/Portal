@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.Etkinlikler
 
         protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
-            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.Kapak).ToList();
+            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Etkinlikler;
         }
 

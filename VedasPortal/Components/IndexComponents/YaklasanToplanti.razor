@@ -1,25 +1,66 @@
-﻿<CardComponent cardStyle="Style.warning">
-    <CardHeader>
-        Yaklaşan Toplantılar
-    </CardHeader>
-    <CardBody>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tr>
-                    <th>Toplantı Adı</th>
-                    <th>Tarih</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Ecommerce website</td>
-                    <td>2018-01-20</td>
-                    <td>
-                        <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Detay">
-                            <i class="fas fa-pencil-alt"></i> Detay
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </CardBody>
-</CardComponent>
+﻿@using VedasPortal.Entities.Models.ToplantiTakvimi
+@using VedasPortal.Repository.Interface;
+
+
+@if (Toplantilar == null)
+
+{
+    <p><em>Yükleniyor...</em></p> }
+
+else
+{
+    <CardComponent cardStyle="Style.warning">
+        <CardHeader>
+            Yaklaşan Toplantılar
+        </CardHeader>
+        <CardBody>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Toplantı Adı</th>
+                        <th>Tarih</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var toplanti in Toplantilar.Take(3))
+                    {
+                        <tr>
+                            <td>@toplanti.Baslik</td>
+                            <td>@toplanti.ToplantiTarihi</td>
+                            <td>
+                                <a href="odadetayformu/@toplanti.Id" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Detay">
+                                    <i class="fas fa-pencil-alt"></i> Detay
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </CardBody>
+    </CardComponent>
+
+}
+
+
+
+@code {
+
+    [Inject]
+    public IBaseRepository<Toplanti> YaklasanToplantilar { get; set; }
+
+
+    protected IEnumerable<Toplanti> Toplantilar { get; set; }
+
+    protected IEnumerable<Toplanti> TumToplantilariGetir()
+    {
+        Toplantilar = YaklasanToplantilar.GetAll();
+
+        return Toplantilar;
+
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumToplantilariGetir();
+
+        return Task.CompletedTask;
+    } }

@@ -22,7 +22,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari
 
         protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
-            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Resim).ToList();
+            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
 
             return IkUygulamalari;
 

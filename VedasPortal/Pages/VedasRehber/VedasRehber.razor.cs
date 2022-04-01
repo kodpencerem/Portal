@@ -29,7 +29,7 @@ namespace VedasPortal.Pages.VedasRehber
 
         protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            rehber = Rehber.GetAll().AsQueryable().Include(s => s.ProfilResmi).ToList();
+            rehber = Rehber.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return rehber;
         }
 

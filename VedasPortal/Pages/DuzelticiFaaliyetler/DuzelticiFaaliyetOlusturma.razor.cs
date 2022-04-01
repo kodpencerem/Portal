@@ -22,7 +22,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         protected IEnumerable<DuzelticiFaaliyet> TumFaaliyetleriGetir()
         {
-            DuzelticiFaaliyet = DuzelticiFaaliyetler.GetAll().AsQueryable().Include(s => s.Resim).ToList();
+            DuzelticiFaaliyet = DuzelticiFaaliyetler.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return DuzelticiFaaliyet;
         }       
     }

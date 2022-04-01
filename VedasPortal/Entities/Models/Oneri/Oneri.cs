@@ -21,9 +21,7 @@ namespace VedasPortal.Entities.Models.Oneri
         public Odul Odul { get; set; }
         [DataType(DataType.Text)]
         public OneriKategori Kategori { get; set; }
-
-        public int DosyaId { get; set; }
-        public Dosya.Dosya Dosya { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
     }
 
     public enum OnemDerecesi

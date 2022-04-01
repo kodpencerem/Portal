@@ -12,7 +12,7 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public string Aciklama { get; set; }
         public DateTime BaslangicTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
-        public virtual Dosya.Dosya Kapak { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
         public bool SliderdaGoster { get; set; } = false;
         [DataType(DataType.Text)]
         public EtkinlikKategori Kategori { get; set; }

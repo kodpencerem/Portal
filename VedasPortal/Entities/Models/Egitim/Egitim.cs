@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Egitim
 {
     public class Egitim : BaseEntity
     {
-        public Dosya.Dosya Kapak { get; set; }
-        public Video.Video Video { get; set; }
+        public ICollection<Dosya.Dosya> Dosya { get; set; }
+        public ICollection<Video.Video> Video { get; set; }
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public string Gereksinim { get; set; }

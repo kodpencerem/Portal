@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
+using VedasPortal.Entities.Models.Etkinlik;
 
 namespace VedasPortal.Entities.Models.Dosya
 {
@@ -14,7 +15,25 @@ namespace VedasPortal.Entities.Models.Dosya
         [DataType(DataType.Text)]
         public DosyaKategori Kategori { get; set; }
         public bool AktifPasif { get; set; } = true;
-               
+        public int HaberDuyuruId { get; set; }
+        public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
+        public int DuzelticiFaaliyetId { get; set; }
+        public DuzelticiFaaliyet.DuzelticiFaaliyet DuzelticiFaaliyet { get; set; }
+        public int EgitimId { get; set; }
+        public Egitim.Egitim Egitim { get; set; }
+        public int EtkinlikId { get; set; }
+        public Etkinlik.Etkinlik Etkinlik { get; set; }
+        public int KatilimciId { get; set; }
+        public Katilimci Katilimci { get; set; }
+        public int IkUygulamaId { get; set; }
+        public IKUygulama.IkUygulama IkUygulama { get; set; }
+        public int MevzuatId { get; set; }
+        public Mevzuat.Mevzuat Mevzuat { get; set; }
+        public int OneriId { get; set; }
+        public Oneri.Oneri Oneri { get; set; }
+        public int RehberId { get; set; }
+        public Rehber Rehber { get; set; }
+
     }
 
     public enum DosyaKategori

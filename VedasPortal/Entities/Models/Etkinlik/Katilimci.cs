@@ -1,4 +1,5 @@
-﻿using VedasPortal.Entities.Models.Base;
+﻿using System.Collections.Generic;
+using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Etkinlik
 {
@@ -9,7 +10,8 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public string TelefonNo { get; set; }
         public bool KatilisDurumu { get; set; }
         public string KatilisNedeni { get; set; }
-        public virtual Dosya.Dosya Resim { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        
         public Etkinlik Etkinlik { get; set; }
     }
 }
