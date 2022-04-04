@@ -76,6 +76,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<KursVeSertifika>, BaseRepository<KursVeSertifika>>();
             services.AddScoped<IBaseRepository<OkulMezunBilgisi>, BaseRepository<OkulMezunBilgisi>>();
+            services.AddScoped<IBaseRepository<Yorum>, BaseRepository<Yorum>>();
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
             services.AddScoped<IBaseRepository<GorevSecenek>, BaseRepository<GorevSecenek>>();

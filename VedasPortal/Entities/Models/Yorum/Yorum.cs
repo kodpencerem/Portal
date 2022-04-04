@@ -1,9 +1,9 @@
 ﻿namespace VedasPortal.Entities.Models.Video
 {
-    public class VideoYorum : Base.BaseEntity
+    public class Yorum : Base.BaseEntity
     {
         public string Aciklama { get; set; }
-        public bool OnaylansınMı { get; set; }
+        public bool OnaylansınMı { get; set; } = false;
         public Video Video { get; set; }
     }
 }

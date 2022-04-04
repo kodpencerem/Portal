@@ -61,11 +61,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected void Kayit()
         {
-            VideoServisi.Add(video);
-
             VideoDosya.Yolu = video.Dosya?.Yolu;
-
-
+            VideoServisi.Add(video);
         }
         protected override void OnParametersSet()
         {

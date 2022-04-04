@@ -1,9 +1,8 @@
 ﻿@page "/yorum/ekle"
 @page "/yorum/duzenle/{YorumId:int}"
+
 @using VedasPortal.Repository.Interface
 
-
-<div class="col-12">
     <EditForm Model="@yorum" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
@@ -13,9 +12,13 @@
             <CardBody>
                 <div class="col-12">
                     <div class="form-group row">
-                        <label class="control-label col-md-2">Haber Adı</label>
-                        <div class="col-md-10">
-                            <InputText class="form-control" @bind-Value="yorum.Aciklama" />
+                        <div class="col-md-12">
+                            <CKEditorBlazor Id="MyEditor1"
+                                            @bind-Value=@yorum.Aciklama
+                                            Label="Açıklama"
+                                            UrlToPostImage="images/uploaded/">
+                            </CKEditorBlazor>
+
                         </div>
                         <ValidationMessage For="@(() => yorum.Aciklama)" />
                     </div>
@@ -29,8 +32,6 @@
             </CardFotter>
         </CardComponent>
     </EditForm>
-</div>
-
 
 @code {
 

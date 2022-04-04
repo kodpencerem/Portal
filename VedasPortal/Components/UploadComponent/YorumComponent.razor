@@ -11,39 +11,37 @@
 else
 
 {
-    <div class="col-12 col-sm-12 col-lg-6">
-        <CardComponent>
-            <CardBody>
-                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
-                    @foreach (var yorum in YorumListesi.Where(y => y.OnaylansınMı == true).ToList())
-                    {
-                        <li class="media">
-                            <img alt="image" class="mr-3 rounded-circle" width="70" src="images/default.png">
-                            <div class="media-body">
-                                <div class="media-right">
-                                    <div class="text-primary">Approved</div>
-                                </div>
-                                <div class="media-title mb-1"></div>
-                                <div class="text-time">@yorum.KaydedenKullanici</div>
-                                <div class="media-description text-muted">
-                                    @((MarkupString)yorum.Aciklama)
-                                </div>
-                                <div class="media-links">
-                                    <div class="bullet"></div>
-                                    <a href='/yorum/duzenle/@yorum.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                    <div class="bullet"></div>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                            @onclick="@(() => { DialogGorunur = "block"; SilmeyiOnayla(yorum.Id); })">
-                                        Sil
-                                    </button>
-                                </div>
+    <CardComponent>
+        <CardBody>
+            <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                @foreach (var yorum in YorumListesi.Where(y => y.OnaylansınMı == true).ToList())
+                {
+                    <li class="media">
+                        <img alt="image" class="mr-3 rounded-circle" width="70" src="images/default.png">
+                        <div class="media-body">
+                            <div class="media-right">
+                                <div class="text-primary">Approved</div>
                             </div>
-                        </li>
-                    }
-                </ul>
-            </CardBody>
-        </CardComponent>
-    </div>
+                            <div class="media-title mb-1"></div>
+                            <div class="text-time">@yorum.KaydedenKullanici</div>
+                            <div class="media-description text-muted">
+                                @((MarkupString)yorum.Aciklama)
+                            </div>
+                            <div class="media-links">
+                                <div class="bullet"></div>
+                                <a href='/yorum/duzenle/@yorum.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                <div class="bullet"></div>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                        @onclick="@(() => { DialogGorunur = "block"; SilmeyiOnayla(yorum.Id); })">
+                                    Sil
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </CardBody>
+    </CardComponent>
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
@@ -143,3 +141,23 @@ else
         }
     }
 }
+
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

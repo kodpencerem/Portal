@@ -976,6 +976,9 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Lokasyon")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
 
@@ -1323,7 +1326,7 @@ namespace VedasPortal.Migrations
                     b.Property<int>("Birimler")
                         .HasColumnType("int");
 
-                    b.Property<int>("DosyaId")
+                    b.Property<int?>("DosyaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
@@ -1338,7 +1341,7 @@ namespace VedasPortal.Migrations
                     b.Property<int?>("EtkinlikId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HaberDuyuruId")
+                    b.Property<int?>("HaberDuyuruId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IzlenmeDurumu")
@@ -1375,7 +1378,7 @@ namespace VedasPortal.Migrations
                     b.ToTable("Video");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Yorum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1413,7 +1416,7 @@ namespace VedasPortal.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoYorum");
+                    b.ToTable("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Data.Toplanti.MailGonder", b =>
@@ -1615,9 +1618,7 @@ namespace VedasPortal.Migrations
                 {
                     b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Dosya")
                         .WithMany()
-                        .HasForeignKey("DosyaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DosyaId");
 
                     b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
                         .WithMany("Video")
@@ -1629,9 +1630,7 @@ namespace VedasPortal.Migrations
 
                     b.HasOne("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", "HaberDuyuru")
                         .WithMany("Video")
-                        .HasForeignKey("HaberDuyuruId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HaberDuyuruId");
 
                     b.Navigation("Dosya");
 
@@ -1642,10 +1641,10 @@ namespace VedasPortal.Migrations
                     b.Navigation("HaberDuyuru");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Yorum", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
-                        .WithMany("VideoYorumlari")
+                        .WithMany("VideoYorum")
                         .HasForeignKey("VideoId");
 
                     b.Navigation("Video");
@@ -1719,7 +1718,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
                 {
-                    b.Navigation("VideoYorumlari");
+                    b.Navigation("VideoYorum");
                 });
 #pragma warning restore 612, 618
         }

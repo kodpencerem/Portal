@@ -38,25 +38,21 @@
             <div class="row">
                 @foreach (var personel in rehber)
                 {
-<div class="card-statistic-4">
-    <div class="align-items-center justify-content-between">
-        <div class="row ">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                <div class="card-content">
-                    <h5 class="font-15">@personel.Adi @personel.Soyadi</h5>
-                    <h2 class="font-18">@personel.TelefonNo</h2>
-                    <h2 class="font-18">@personel.Email</h2>
+
+                    <div class="col-lg-3">
+                        <div class="card client-card">
+                            <div class="card-body text-center">
+                                <img src="images/default.jpg" height="200" width="200" alt="user" class="rounded-circle thumb-xl">
+                                <h5 class=" client-name">@personel.Adi - @personel.Soyadi </h5>
+                                <p class="text-muted text-center mt-3">@personel.Unvani</p>
+                                <span class="text-muted mr-3"><i class="dripicons-location mr-2 text-info"></i>@personel.Lokasyon</span>
+                                <span class="text-muted"><i class="dripicons-phone mr-2 text-info"></i>@personel.TelefonNo</span>
+                                <p class="text-muted text-center mt-3">@personel.Email</p>
+                            </div><!--end card-body-->
+                        </div><!--end card-->
+                    </div>
+                 }
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                <div class="banner-img">
-                    <img src="images/uploaded/@personel.Dosya.FirstOrDefault()?.Yolu" alt="@personel.Adi">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>                    }
-            </div>
 
         </CardBody>
     </CardComponent>

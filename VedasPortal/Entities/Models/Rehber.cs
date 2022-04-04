@@ -11,5 +11,6 @@ namespace VedasPortal.Entities.Models
         public string Unvani { get; set; }
         public long TelefonNo { get; set; }
         public string Email { get; set; }
+        public string Lokasyon { get; set; }
     }
 }
