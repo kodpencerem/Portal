@@ -1,0 +1,75 @@
+﻿@page "/yorum/ekle"
+@page "/yorum/duzenle/{YorumId:int}"
+@using VedasPortal.Repository.Interface
+
+
+<div class="col-12">
+    <EditForm Model="@yorum" OnValidSubmit="Kayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Yorum @Title
+            </CardHeader>
+            <CardBody>
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Haber Adı</label>
+                        <div class="col-md-10">
+                            <InputText class="form-control" @bind-Value="yorum.Aciklama" />
+                        </div>
+                        <ValidationMessage For="@(() => yorum.Aciklama)" />
+                    </div>
+
+                </div>
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Gönder</button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
+</div>
+
+
+@code {
+
+    [Inject]
+    public IBaseRepository<Yorum> GelenYorumlar { get; set; }
+
+    [Inject]
+    public NavigationManager UrlNavigationManager { get; set; }
+
+    [Parameter]
+    public int YorumId { get; set; }
+
+    protected string Title = "Ekle";
+    public Yorum yorum = new();
+
+    protected void Kayit()
+    {
+        GelenYorumlar.Add(yorum);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (YorumId != 0)
+        {
+            Title = "Duzenle";
+            yorum = GelenYorumlar.Get(YorumId);
+        }
+    }
+
+
+    [Inject]
+    public IJSRuntime JsRun { get; set; }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            await JsRun.InvokeVoidAsync("dataTables");
+        }
+    }
+
+}

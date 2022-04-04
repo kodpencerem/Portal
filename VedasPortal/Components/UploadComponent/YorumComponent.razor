@@ -1,0 +1,145 @@
+﻿@using VedasPortal.Repository.Interface
+
+@if (YorumListesi == null)
+
+{
+
+    <p>
+        <em>Yükleniyor...</em>
+    </p> }
+
+else
+
+{
+    <div class="col-12 col-sm-12 col-lg-6">
+        <CardComponent>
+            <CardBody>
+                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                    @foreach (var yorum in YorumListesi.Where(y => y.OnaylansınMı == true).ToList())
+                    {
+                        <li class="media">
+                            <img alt="image" class="mr-3 rounded-circle" width="70" src="images/default.png">
+                            <div class="media-body">
+                                <div class="media-right">
+                                    <div class="text-primary">Approved</div>
+                                </div>
+                                <div class="media-title mb-1"></div>
+                                <div class="text-time">@yorum.KaydedenKullanici</div>
+                                <div class="media-description text-muted">
+                                    @((MarkupString)yorum.Aciklama)
+                                </div>
+                                <div class="media-links">
+                                    <div class="bullet"></div>
+                                    <a href='/yorum/duzenle/@yorum.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                    <div class="bullet"></div>
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                            @onclick="@(() => { DialogGorunur = "block"; SilmeyiOnayla(yorum.Id); })">
+                                        Sil
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </CardBody>
+        </CardComponent>
+    </div>
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(() => { Sil(); ModalDialog.Close(); })">Evet</button>
+            <button class="btn btn-warning" @onclick="@(() => { ModalDialog.Close(); })">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+
+}
+
+
+@code {
+
+    [Inject]
+    public IBaseRepository<Yorum> GelenYorumlar { get; set; }
+
+    [Inject]
+    public NavigationManager UrlNavigationManager { get; set; }
+
+    [Parameter]
+    public int YorumId { get; set; }
+
+    protected string Title = "Ekle";
+    public Yorum yorum = new();
+
+
+    protected IEnumerable<Yorum> YorumListesi { get; set; }
+
+    protected IEnumerable<Yorum> TumYorumlariGetir()
+    {
+        YorumListesi = GelenYorumlar.GetAll();
+
+        return YorumListesi;
+
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumYorumlariGetir();
+
+        return Task.CompletedTask;
+    }
+
+    public ModalComponent ModalDialog { get; set; }
+    protected string DialogGorunur { get; set; } = "none";
+
+    protected void SilmeyiOnayla(int YorumId)
+    {
+        ModalDialog.Open();
+        yorum = YorumListesi.FirstOrDefault(x => x.Id == YorumId);
+    }
+
+    protected void Sil()
+    {
+        if (yorum.Id == 0)
+            return;
+
+        GelenYorumlar.Remove(yorum.Id);
+        yorum = new Yorum();
+        TumYorumlariGetir();
+    }
+
+    public void Temizle()
+    {
+        yorum = null;
+
+        UrlNavigationManager.NavigateTo("/yorum/ekle");
+    }
+
+    protected void Kayit()
+    {
+        GelenYorumlar.Add(yorum);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (YorumId != 0)
+        {
+            Title = "Duzenle";
+            yorum = GelenYorumlar.Get(YorumId);
+        }
+    }
+
+
+    [Inject]
+    public IJSRuntime JsRun { get; set; }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            await JsRun.InvokeVoidAsync("dataTables");
+        }
+    }
+}
