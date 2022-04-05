@@ -10,8 +10,8 @@ using VedasPortal.Data;
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    [Migration("20220404074220_AddFirsDbAndTables")]
-    partial class AddFirsDbAndTables
+    [Migration("20220405102706_MdfDuyuruHaber")]
+    partial class MdfDuyuruHaber
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -978,6 +978,9 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Lokasyon")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
 
@@ -1377,7 +1380,7 @@ namespace VedasPortal.Migrations
                     b.ToTable("Video");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Yorum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1415,7 +1418,7 @@ namespace VedasPortal.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoYorum");
+                    b.ToTable("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Data.Toplanti.MailGonder", b =>
@@ -1640,7 +1643,7 @@ namespace VedasPortal.Migrations
                     b.Navigation("HaberDuyuru");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoYorum", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Yorum", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
                         .WithMany("VideoYorum")

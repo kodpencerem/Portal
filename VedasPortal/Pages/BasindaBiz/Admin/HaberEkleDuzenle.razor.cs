@@ -74,6 +74,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             if (HaberId != 0)
             {
                 Title = "Duzenle";
+                HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
                 haber = HaberServisi.Get(HaberId);               
             }
         }

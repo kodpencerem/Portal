@@ -5,7 +5,7 @@ using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 
 namespace VedasPortal.Data.Configurations.ToplantiConfiguration
 {
-    public class ToplantiNotuKonfigurasyon : IEntityTypeConfiguration<ToplantiNotu>
+    public class DosyaKonfigurasyon : IEntityTypeConfiguration<ToplantiNotu>
     {
         public void Configure(EntityTypeBuilder<ToplantiNotu> builder)
         {

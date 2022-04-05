@@ -173,7 +173,7 @@ namespace VedasPortal.Components.UploadComponent
             parsing = true;
             StateHasChanged();
             await Task.Delay(10);
-            await JSRuntime.InvokeVoidAsync("console.log", "converted!");
+            await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
 #pragma warning disable CS0618 // Type or member is obsolete
             string base64String = await args.GetBase64Async();
 #pragma warning restore CS0618 // Type or member is obsolete

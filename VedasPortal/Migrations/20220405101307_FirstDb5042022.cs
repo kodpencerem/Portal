@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VedasPortal.Migrations
 {
-    public partial class AddFirsDbAndTables : Migration
+    public partial class FirstDb5042022 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -359,6 +359,7 @@ namespace VedasPortal.Migrations
                     Unvani = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TelefonNo = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lokasyon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -584,83 +585,74 @@ namespace VedasPortal.Migrations
                     Adi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Yolu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Uzanti = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Aciklama = table.Column<string>(type: "VarChar", nullable: true),
                     Boyutu = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Kategori = table.Column<int>(type: "int", nullable: false),
-                    AktifPasif = table.Column<bool>(type: "bit", nullable: false),
-                    HaberDuyuruId = table.Column<int>(type: "int", nullable: false),
-                    DuzelticiFaaliyetId = table.Column<int>(type: "int", nullable: false),
-                    EgitimId = table.Column<int>(type: "int", nullable: false),
-                    EtkinlikId = table.Column<int>(type: "int", nullable: false),
-                    KatilimciId = table.Column<int>(type: "int", nullable: false),
-                    IkUygulamaId = table.Column<int>(type: "int", nullable: false),
-                    MevzuatId = table.Column<int>(type: "int", nullable: false),
-                    OneriId = table.Column<int>(type: "int", nullable: false),
-                    RehberId = table.Column<int>(type: "int", nullable: false),
-                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DuzenlemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SilmeTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    KaydedenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DuzenleyenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SilenKullanici = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    AktifPasif = table.Column<bool>(type: "Bit", nullable: false),
+                    HaberDuyuruId1 = table.Column<int>(type: "int", nullable: false),
+                    DuzelticiFaaliyetId1 = table.Column<int>(type: "int", nullable: false),
+                    EgitimId1 = table.Column<int>(type: "int", nullable: false),
+                    EtkinlikId1 = table.Column<int>(type: "int", nullable: false),
+                    KatilimciId1 = table.Column<int>(type: "int", nullable: false),
+                    IkUygulamaId1 = table.Column<int>(type: "int", nullable: false),
+                    MevzuatId1 = table.Column<int>(type: "int", nullable: false),
+                    OneriId1 = table.Column<int>(type: "int", nullable: false),
+                    RehberId1 = table.Column<int>(type: "int", nullable: false),
+                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    DuzenlemeTarihi = table.Column<DateTime>(type: "Date", nullable: true),
+                    SilmeTarihi = table.Column<DateTime>(type: "Date", nullable: true),
+                    KaydedenKullanici = table.Column<string>(type: "VarChar", nullable: true),
+                    DuzenleyenKullanici = table.Column<string>(type: "VarChar", nullable: true),
+                    SilenKullanici = table.Column<string>(type: "VarChar", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dosya", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dosya_DuzelticiFaaliyet_DuzelticiFaaliyetId",
-                        column: x => x.DuzelticiFaaliyetId,
+                        name: "FK_Dosya_DuzelticiFaaliyet_DuzelticiFaaliyetId1",
+                        column: x => x.DuzelticiFaaliyetId1,
                         principalTable: "DuzelticiFaaliyet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Egitim_EgitimId",
-                        column: x => x.EgitimId,
+                        name: "FK_Dosya_Egitim_EgitimId1",
+                        column: x => x.EgitimId1,
                         principalTable: "Egitim",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Etkinlik_EtkinlikId",
-                        column: x => x.EtkinlikId,
+                        name: "FK_Dosya_Etkinlik_EtkinlikId1",
+                        column: x => x.EtkinlikId1,
                         principalTable: "Etkinlik",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_HaberDuyuru_HaberDuyuruId",
-                        column: x => x.HaberDuyuruId,
+                        name: "FK_Dosya_HaberDuyuru_HaberDuyuruId1",
+                        column: x => x.HaberDuyuruId1,
                         principalTable: "HaberDuyuru",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_IkUygulama_IkUygulamaId",
-                        column: x => x.IkUygulamaId,
+                        name: "FK_Dosya_IkUygulama_IkUygulamaId1",
+                        column: x => x.IkUygulamaId1,
                         principalTable: "IkUygulama",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Katilimci_KatilimciId",
-                        column: x => x.KatilimciId,
+                        name: "FK_Dosya_Katilimci_KatilimciId1",
+                        column: x => x.KatilimciId1,
                         principalTable: "Katilimci",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Mevzuat_MevzuatId",
-                        column: x => x.MevzuatId,
+                        name: "FK_Dosya_Mevzuat_MevzuatId1",
+                        column: x => x.MevzuatId1,
                         principalTable: "Mevzuat",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Oneri_OneriId",
-                        column: x => x.OneriId,
+                        name: "FK_Dosya_Oneri_OneriId1",
+                        column: x => x.OneriId1,
                         principalTable: "Oneri",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Dosya_Rehber_RehberId",
-                        column: x => x.RehberId,
+                        name: "FK_Dosya_Rehber_RehberId1",
+                        column: x => x.RehberId1,
                         principalTable: "Rehber",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -796,7 +788,7 @@ namespace VedasPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VideoYorum",
+                name: "Yorum",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -813,9 +805,9 @@ namespace VedasPortal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VideoYorum", x => x.Id);
+                    table.PrimaryKey("PK_Yorum", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VideoYorum_Video_VideoId",
+                        name: "FK_Yorum_Video_VideoId",
                         column: x => x.VideoId,
                         principalTable: "Video",
                         principalColumn: "Id",
@@ -867,49 +859,49 @@ namespace VedasPortal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_DuzelticiFaaliyetId",
+                name: "IX_Dosya_DuzelticiFaaliyetId1",
                 table: "Dosya",
-                column: "DuzelticiFaaliyetId");
+                column: "DuzelticiFaaliyetId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_EgitimId",
+                name: "IX_Dosya_EgitimId1",
                 table: "Dosya",
-                column: "EgitimId");
+                column: "EgitimId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_EtkinlikId",
+                name: "IX_Dosya_EtkinlikId1",
                 table: "Dosya",
-                column: "EtkinlikId");
+                column: "EtkinlikId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_HaberDuyuruId",
+                name: "IX_Dosya_HaberDuyuruId1",
                 table: "Dosya",
-                column: "HaberDuyuruId");
+                column: "HaberDuyuruId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_IkUygulamaId",
+                name: "IX_Dosya_IkUygulamaId1",
                 table: "Dosya",
-                column: "IkUygulamaId");
+                column: "IkUygulamaId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_KatilimciId",
+                name: "IX_Dosya_KatilimciId1",
                 table: "Dosya",
-                column: "KatilimciId");
+                column: "KatilimciId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_MevzuatId",
+                name: "IX_Dosya_MevzuatId1",
                 table: "Dosya",
-                column: "MevzuatId");
+                column: "MevzuatId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_OneriId",
+                name: "IX_Dosya_OneriId1",
                 table: "Dosya",
-                column: "OneriId");
+                column: "OneriId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dosya_RehberId",
+                name: "IX_Dosya_RehberId1",
                 table: "Dosya",
-                column: "RehberId");
+                column: "RehberId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Katilimci_EtkinlikId",
@@ -962,8 +954,8 @@ namespace VedasPortal.Migrations
                 column: "HaberDuyuruId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VideoYorum_VideoId",
-                table: "VideoYorum",
+                name: "IX_Yorum_VideoId",
+                table: "Yorum",
                 column: "VideoId");
         }
 
@@ -1003,7 +995,7 @@ namespace VedasPortal.Migrations
                 name: "ToplantiOdasi");
 
             migrationBuilder.DropTable(
-                name: "VideoYorum");
+                name: "Yorum");
 
             migrationBuilder.DropTable(
                 name: "Anket");

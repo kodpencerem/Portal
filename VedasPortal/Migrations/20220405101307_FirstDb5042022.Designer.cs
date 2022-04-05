@@ -10,8 +10,8 @@ using VedasPortal.Data;
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    [Migration("20220404122947_MdfYorumRehberTable")]
-    partial class MdfYorumRehberTable
+    [Migration("20220405101307_FirstDb5042022")]
+    partial class FirstDb5042022
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,65 +332,67 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VarChar");
 
                     b.Property<string>("Adi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("AktifPasif")
-                        .HasColumnType("bit");
+                        .HasColumnType("Bit");
 
                     b.Property<string>("Boyutu")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("DuzelticiFaaliyetId")
+                    b.Property<int>("DuzelticiFaaliyetId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("DuzenleyenKullanici")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VarChar");
 
-                    b.Property<int>("EgitimId")
+                    b.Property<int>("EgitimId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("EtkinlikId")
+                    b.Property<int>("EtkinlikId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("HaberDuyuruId")
+                    b.Property<int>("HaberDuyuruId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("IkUygulamaId")
+                    b.Property<int>("IkUygulamaId1")
                         .HasColumnType("int");
 
                     b.Property<int>("Kategori")
                         .HasColumnType("int");
 
-                    b.Property<int>("KatilimciId")
+                    b.Property<int>("KatilimciId1")
                         .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VarChar");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<int>("MevzuatId")
+                    b.Property<int>("MevzuatId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("OneriId")
+                    b.Property<int>("OneriId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("RehberId")
+                    b.Property<int>("RehberId1")
                         .HasColumnType("int");
 
                     b.Property<string>("SilenKullanici")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VarChar");
 
                     b.Property<DateTime?>("SilmeTarihi")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("Uzanti")
                         .HasColumnType("nvarchar(max)");
@@ -400,23 +402,23 @@ namespace VedasPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DuzelticiFaaliyetId");
+                    b.HasIndex("DuzelticiFaaliyetId1");
 
-                    b.HasIndex("EgitimId");
+                    b.HasIndex("EgitimId1");
 
-                    b.HasIndex("EtkinlikId");
+                    b.HasIndex("EtkinlikId1");
 
-                    b.HasIndex("HaberDuyuruId");
+                    b.HasIndex("HaberDuyuruId1");
 
-                    b.HasIndex("IkUygulamaId");
+                    b.HasIndex("IkUygulamaId1");
 
-                    b.HasIndex("KatilimciId");
+                    b.HasIndex("KatilimciId1");
 
-                    b.HasIndex("MevzuatId");
+                    b.HasIndex("MevzuatId1");
 
-                    b.HasIndex("OneriId");
+                    b.HasIndex("OneriId1");
 
-                    b.HasIndex("RehberId");
+                    b.HasIndex("RehberId1");
 
                     b.ToTable("Dosya");
                 });
@@ -1497,56 +1499,56 @@ namespace VedasPortal.Migrations
                 {
                     b.HasOne("VedasPortal.Entities.Models.DuzelticiFaaliyet.DuzelticiFaaliyet", "DuzelticiFaaliyet")
                         .WithMany("Dosya")
-                        .HasForeignKey("DuzelticiFaaliyetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DuzelticiFaaliyetId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
                         .WithMany("Dosya")
-                        .HasForeignKey("EgitimId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("EgitimId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Etkinlik.Etkinlik", "Etkinlik")
                         .WithMany("Dosya")
-                        .HasForeignKey("EtkinlikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("EtkinlikId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", "HaberDuyuru")
                         .WithMany("Dosya")
-                        .HasForeignKey("HaberDuyuruId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("HaberDuyuruId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.IKUygulama.IkUygulama", "IkUygulama")
                         .WithMany("Dosya")
-                        .HasForeignKey("IkUygulamaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IkUygulamaId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Etkinlik.Katilimci", "Katilimci")
                         .WithMany("Dosya")
-                        .HasForeignKey("KatilimciId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("KatilimciId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Mevzuat.Mevzuat", "Mevzuat")
                         .WithMany("Dosya")
-                        .HasForeignKey("MevzuatId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("MevzuatId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Oneri.Oneri", "Oneri")
                         .WithMany("Dosya")
-                        .HasForeignKey("OneriId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("OneriId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VedasPortal.Entities.Models.Rehber", "Rehber")
                         .WithMany("Dosya")
-                        .HasForeignKey("RehberId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("RehberId1")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("DuzelticiFaaliyet");
