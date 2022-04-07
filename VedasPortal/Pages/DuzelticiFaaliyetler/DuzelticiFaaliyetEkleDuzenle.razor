@@ -22,9 +22,9 @@
                             <div class="col-md-10">
                                 <InputFile @bind-ValuePath="@DFaaliyetDosya" />
                                 @*@if (!string.IsNullOrEmpty(haber.Dosya.Yolu?.ToString()))
-                {
-                    <img src="@("images/uploaded/"+@haber.Dosya.Yolu)" height="150" />
-                }*@
+                                    {
+                                        <img src="@("images/uploaded/"+@haber.Dosya.Yolu)" height="150" />
+                                    }*@
                             </div>
                             @*<ValidationMessage For="@(() => haber.Dosya.Yolu)" />*@
                         </div>

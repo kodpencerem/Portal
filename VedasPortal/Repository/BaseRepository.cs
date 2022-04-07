@@ -22,7 +22,6 @@ namespace VedasPortal.Repository
         }
         public T Get(int Id)
         {
-
             var res = dbSet.Find(Id);
             return res;
         }
@@ -102,6 +101,4 @@ namespace VedasPortal.Repository
             return dbSet.Count();
         }
     }
-
-
 }

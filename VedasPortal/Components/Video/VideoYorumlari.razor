@@ -2,9 +2,15 @@
     <div class="row">
         <div class="col-6">
             <div class="form-group">
-                <input type="text" placeholder="Açıklama" class="form-control" @bind-value="description" />
+                <input type="text"
+                       placeholder="Açıklama"
+                       class="form-control"
+                       @bind-value="description" />
             </div>
-            <button class="btn btn-primary btn-block" @onclick="InsertComment">Yorum Ekle</button>
+            <button class="btn btn-primary btn-block"
+                    @onclick="InsertComment">
+                Yorum Ekle
+            </button>
         </div>
     </div>
     <hr />
@@ -12,15 +18,16 @@
     {
 <div class="box-card">
     <div class="row">
-        <img width="25" height="25" src="/images/default.png" class="comment-avatar" />
+        <img width="25" 
+             height="25" 
+             src="/images/default.png" 
+             class="comment-avatar" />
         <h6 class="comment-content">@item</h6>
     </div>
 </div>}
 </div>
 
-@code { 
-    
-    [Parameter]
+@code { [Parameter]
     public List<string> VideoYorum { get; set; }
 
     string description = string.Empty;
@@ -29,5 +36,4 @@
     {
         VideoYorum.Add(description);
         description = string.Empty;
-    }   
-}
+    } }

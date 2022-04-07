@@ -125,8 +125,12 @@ else
                                 <td>@mezun.MezuniyetTarihi</td>
                                 <td>
                                     
-                                    <a href='/mezuniyet/duzenle/@mezun.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                    <a href='/mezuniyet/duzenle/@mezun.Id' 
+                                       class="btn btn-info btn-outline-dark" 
+                                       role="button">Düzenle</a>
+                                    <button class="btn btn-danger" 
+                                            data-toggle="modal" 
+                                            data-target="#deleteEmpModal"
                                             @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mezun.Id);})">
                                         Sil
                                     </button>

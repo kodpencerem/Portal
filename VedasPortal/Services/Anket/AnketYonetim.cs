@@ -121,11 +121,7 @@ namespace VedasPortal.Services.Anket
 
                 return Result<bool>.Error("Bir hata ile karşılaşıldı. Anket silinemedi!");
             }
-
-
-
         }
-
         public async Task<Result<bool>> AnketSilAsync(int id)
         {
             try
@@ -150,7 +146,6 @@ namespace VedasPortal.Services.Anket
                 return Result<bool>.Error("Bir hata ile karşılaşıldı. Anket silinemedi!");
             }
         }
-
         public Result<AnketDTO> RastGeleAnketGetir()
         {
             try

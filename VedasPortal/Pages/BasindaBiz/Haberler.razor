@@ -17,8 +17,13 @@ else
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" height="200" alt="@haber.Adi" src="images/uploaded/@haber.Dosya.FirstOrDefault()?.Yolu" class="rounded-circle author-box-picture">
-                            <div class="clearfix"></div>
+                            <img width="200" 
+                                 height="200" 
+                                 alt="@haber.Adi" 
+                                 src="images/uploaded/@haber.Dosya.FirstOrDefault()?.Yolu" 
+                                 class="rounded-circle author-box-picture">
+                            <div class="clearfix">
+                            </div>
                         </div>
                         <div class="article-details">
                             <div class="article-category">
@@ -30,7 +35,9 @@ else
                                     <a href="haber/detay/@haber.Id">
                                         @if (haber.Adi != null)
                                         {
-                                            <MarkDownComponent Content="@(haber.Adi.Length>60 ? haber.Adi.Substring(0, 27) + "..." : haber.Adi)" />
+                                            <MarkDownComponent Content="@(haber.Adi.Length>60 ? 
+                                                                          haber.Adi.Substring(0, 27) + "..." : 
+                                                                          haber.Adi)" />
                                         }
                                     </a>
                                 </h1>
@@ -39,7 +46,9 @@ else
                                 <p class="alert-title">
                                     @if (haber.AltBaslik != null)
                                     {
-                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? haber.AltBaslik.Substring(0, 45) + "..." : haber.AltBaslik)" />
+                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? 
+                                                                      haber.AltBaslik.Substring(0, 45) + "..." : 
+                                                                      haber.AltBaslik)" />
                                     }
                                 </p>
                             </div>
@@ -48,7 +57,9 @@ else
 
                                 @if (haber.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? haber.Aciklama.Substring(0, 280) + "..." : haber.Aciklama)" />
+                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? 
+                                                                  haber.Aciklama.Substring(0, 280) + "..." : 
+                                                                  haber.Aciklama)" />
                                 }
                             </p>
 

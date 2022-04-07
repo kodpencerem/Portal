@@ -5,7 +5,16 @@ namespace VedasPortal
 {
     public static class SaveFileToUploaded
 {
-        public static string RandomFileName = DateTime.Now.ToShortDateString().Replace(":", "").Replace("/", "").Replace(@"\", "").Replace("-", "").Replace(".", "").ToString()+DateTime.Now.ToShortTimeString().Replace(":", "").Replace("/", "").Replace("-", "").Replace(@"\", "").Replace(".", "").ToString();
+        public static string RandomFileName = DateTime.Now.ToShortDateString()
+            .Replace(":", "")
+            .Replace("/", "")
+            .Replace(@"\", "")
+            .Replace("-", "")
+            .Replace(".", "")
+            .ToString()+DateTime.Now.ToShortTimeString()
+            .Replace(":", "").Replace("/", "")
+            .Replace("-", "").Replace(@"\", "")
+            .Replace(".", "").ToString();
         public static string ImageUploadedPath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
         public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
         {

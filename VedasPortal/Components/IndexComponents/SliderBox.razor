@@ -25,13 +25,20 @@ else
             </div>
             @foreach (var duyuru in Duyurular.Where(d => d.SliderdaGoster).ToList())
             {
-                <div class="carousel-item" style="max-height:600px;max-width:1203px">
+                <div class="carousel-item" 
+                     style="max-height:600px;max-width:1203px">
 
-                    <img class="d-block w-100" src="images/uploaded/@duyuru.Dosya.FirstOrDefault()?.Yolu" width="1203" height="600" alt="@duyuru.Adi">
+                    <img class="d-block w-100" 
+                         src="images/uploaded/@duyuru.Dosya.FirstOrDefault()?.Yolu" 
+                         width="1203" 
+                         height="600" 
+                         alt="@duyuru.Adi">
                     <div class="carousel-caption d-none d-md-block">
 
                         <h5 class="text-white" style="-webkit-text-stroke: 0.2px black;">
-                            <a href="duyuru/detay/@duyuru.Id" class="text-white" style="-webkit-text-stroke: 0.2px black;">
+                            <a href="duyuru/detay/@duyuru.Id" 
+                               class="text-white" 
+                               style="-webkit-text-stroke: 0.2px black;">
                                 @duyuru.Adi
                             </a>
 

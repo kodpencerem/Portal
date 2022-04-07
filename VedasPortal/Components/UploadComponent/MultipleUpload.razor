@@ -3,12 +3,20 @@
 
 <div class="col-6">
     <div class="form-group">
-        <div class="row" style="margin-top:2px">
+        <div class="row" 
+             style="margin-top:2px">
+
             <div class="col-md-8">
-                <InputFile OnChange="OnInputFileChange" @bind-Value="@BindingValue" multiple />
+                <InputFile OnChange="OnInputFileChange"
+                           @bind-Value="@BindingValue"
+                           multiple />
             </div>
             <div class="col-md-4">
-                <button class="btn btn-sm btn-success" type="button" @onclick="UploadFiles">Yükle</button>
+                <button class="btn btn-sm btn-success"
+                        type="button"
+                        @onclick="UploadFiles">
+                    Yükle
+                </button>
             </div>
         </div>
         <br />
@@ -16,11 +24,14 @@
 
             var progressCss = "progress" + (displayProgress ? "" : "d-none");
             // ilerleme çubuğu genişliği, yükleme ilerlemesinin yüzdesidir
-            var progressWidthStyle = progressPercent + "%"; }
+            var progressWidthStyle = progressPercent + "%"; 
+        }
         <div class="@progressCss">
-            <div class="progress-bar" role="progressbar" style="width:@progressWidthStyle" area-valuenow="@progressPercent"
-                 aria-minvalue="0" area-maxvalue="100">
-
+            <div class="progress-bar" role="progressbar" 
+                 style="width:@progressWidthStyle" 
+                 area-valuenow="@progressPercent"
+                 aria-minvalue="0" 
+                 area-maxvalue="100">
             </div>
         </div>
     </div>
@@ -37,8 +48,13 @@
             @foreach (var item in previewImages)
             {
                 <div class="col-2">
-                    <img class="rounded float-left" src="@item" width="100" height="100" style="margin:10px" />
-                </div>}
+                    <img class="rounded float-left" 
+                         src="@item" 
+                         width="100" 
+                         height="100" 
+                         style="margin:10px" />
+                </div>
+             }
         </div>
     </div>}
 

@@ -15,9 +15,9 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <MultipleUpload @bind-BindingValue="@HaberDosya.Yolu" />
+                                <ImageResizer @bind-Value="@HaberDosya" />
                             </div>
-                            
+
                         </div>
 
                         <div class="form-group row">
@@ -99,8 +99,16 @@
             </CardBody>
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="HaberKayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button type="submit"
+                            class="btn btn-primary"                            
+                            @onclick="HaberKayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
             </CardFotter>
         </CardComponent>

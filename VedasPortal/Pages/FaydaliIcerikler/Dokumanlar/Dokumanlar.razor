@@ -22,7 +22,7 @@ else
                 </div>
             </div>
             <div style="margin-left:960px" class="float-right">
-                <SearchComp  />
+                <SearchComp />
             </div>
         </CardHeader>
 
@@ -32,43 +32,52 @@ else
             <div class="row">
                 @foreach (var dokuman in Dokumanlar.Where(d => d.AktifPasif == true).ToList())
                 {
-<div class="col-12 col-sm-6 col-md-6 col-lg-3">
-    <article class="article article-style-b">
-        <div class="article-header">
-            <div class="article-image" data-background="images/uploaded/@dokuman.Yolu">
-            </div>
-            <div class="article-badge">
-                <div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> En çok okunan</div>
-            </div>
-        </div>
-        <div class="article-details">
-            <div class="article-title">
-                <h2>
-                    <a href="dosya/detay/@dokuman.Id">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                        <article class="article article-style-b">
+                            <div class="article-header">
+                                <div class="article-image" data-background="images/uploaded/@dokuman.Yolu">
+                                </div>
+                                <div class="article-badge">
+                                    <div class="article-badge-item bg-danger">
+                                        <i class="fas fa-fire"></i>
+                                        En çok okunan
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="article-details">
+                                <div class="article-title">
+                                    <h2>
+                                        <a href="dosya/detay/@dokuman.Id">
 
-                        @if (dokuman.Adi != null)
-                        {
-<MarkDownComponent Content="@(dokuman.Adi.Length>60 ? dokuman.Adi.Substring(0, 27) + "..." : dokuman.Adi)" />}
-
-
-                    </a>
-                </h2>
+                                            @if (dokuman.Adi != null)
+                                            {
+                                                <MarkDownComponent Content="@(dokuman.Adi.Length>60 ?   
+                                                                              dokuman.Adi.Substring(0, 27) + "..." : 
+                                                                              dokuman.Adi)" />
+                                            }
+                                        </a>
+                                    </h2>
+                                </div>
+                                <p>
+                                    @if (dokuman.Aciklama != null)
+                                    {
+                                        <MarkDownComponent Content="@(dokuman.Aciklama.Length>500 ? 
+                                                                      dokuman.Aciklama.Substring(0, 280) + "..." : 
+                                                                      dokuman.Aciklama)" />}
+                                </p>
+                                <div class="article-cta">
+                                    <a href="dosya/detay/@dokuman.Id">
+                                        Detayına Bak 
+                                        <i class="fas fa-chevron-right">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                 }
             </div>
-            <p>
-                @if (dokuman.Aciklama != null)
-                {
-<MarkDownComponent Content="@(dokuman.Aciklama.Length>500 ? dokuman.Aciklama.Substring(0, 280) + "..." : dokuman.Aciklama)" />}
-            </p>
-            <div class="article-cta">
-                <a href="dosya/detay/@dokuman.Id">Detayına Bak <i class="fas fa-chevron-right"></i></a>
-            </div>
-        </div>
-    </article>
-</div>}
-            </div>
-
         </CardBody>
-
     </CardComponent>
 
 </div>}

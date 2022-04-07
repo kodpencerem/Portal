@@ -3,35 +3,40 @@
 
 @using VedasPortal.Repository.Interface
 
-    <EditForm Model="@yorum" OnValidSubmit="Kayit">
-        <DataAnnotationsValidator />
-        <CardComponent cardStyle="Style.primary">
-            <CardHeader>
-                Yorum @Title
-            </CardHeader>
-            <CardBody>
-                <div class="col-12">
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <CKEditorBlazor Id="MyEditor1"
-                                            @bind-Value=@yorum.Aciklama
-                                            Label="Açıklama"
-                                            UrlToPostImage="images/uploaded/">
-                            </CKEditorBlazor>
+<EditForm Model="@yorum"
+          OnValidSubmit="Kayit">
+    <DataAnnotationsValidator />
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Yorum @Title
+        </CardHeader>
+        <CardBody>
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <CKEditorBlazor Id="MyEditor1"
+                                        @bind-Value=@yorum.Aciklama
+                                        Label="Açıklama"
+                                        UrlToPostImage="images/uploaded/">
+                        </CKEditorBlazor>
 
-                        </div>
-                        <ValidationMessage For="@(() => yorum.Aciklama)" />
                     </div>
+                    <ValidationMessage For="@(() => yorum.Aciklama)" />
+                </div>
 
-                </div>
-            </CardBody>
-            <CardFotter>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Gönder</button>
-                </div>
-            </CardFotter>
-        </CardComponent>
-    </EditForm>
+            </div>
+        </CardBody>
+        <CardFotter>
+            <div class="form-group">
+                <button type="submit" 
+                        class="btn btn-primary"
+                        @onclick="Kayit">
+                    Gönder
+                </button>
+            </div>
+        </CardFotter>
+    </CardComponent>
+</EditForm>
 
 @code {
 

@@ -60,10 +60,16 @@ namespace VedasPortal
                 .AddEntityFrameworkStores<VedasDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddScoped<HavaDurumuService>();
+            services.AddBlazoredModal();
+            services.AddBlazoredToast();
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<HttpClient>();
+            services.AddScoped<HavaDurumuService>();
+            services.AddScoped<Mapper>();
+            services.AddScoped<AltinDegisimleriServisi>();
+            services.AddScoped<AylikToplantiService>();
+            services.AddScoped<ToplantiService>();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
@@ -83,16 +89,10 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
             services.AddScoped<IFileUpload, FileUpload>();           
             services.AddScoped<IFileDownload, FileDownload>();
-            services.AddScoped<IModalService, ModalService>();
-            services.AddScoped<AltinDegisimleriServisi>();
-            services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
-            services.AddBlazoredModal();
-            services.AddScoped<Mapper>();
-            services.AddBlazoredToast();
+            services.AddScoped<IModalService, ModalService>();           
+            services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();           
             services.AddScoped<IAnketYonetim, AnketYonetim>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<AylikToplantiService>();
-            services.AddScoped<ToplantiService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();          
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
 

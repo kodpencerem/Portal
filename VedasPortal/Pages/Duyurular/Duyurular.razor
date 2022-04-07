@@ -19,7 +19,11 @@ else
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" height="200" alt="@duyuru.Adi" src="images/uploaded/@duyuru.Dosya.FirstOrDefault()?.Yolu" class="rounded-circle author-box-picture">
+                            <img width="200" 
+                                 height="200" 
+                                 alt="@duyuru.Adi" 
+                                 src="images/uploaded/@duyuru.Dosya.FirstOrDefault()?.Yolu" 
+                                 class="rounded-circle author-box-picture">
                             <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
@@ -34,7 +38,9 @@ else
 
                                         @if (duyuru.Adi != null)
                                         {
-                                            <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi)" />
+                                            <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? 
+                                                                          duyuru.Adi.Substring(0, 27) + "..." : 
+                                                                          duyuru.Adi)" />
                                         }
                                     </a>
                                 </h1>
@@ -44,7 +50,9 @@ else
 
                                     @if (duyuru.AltBaslik != null)
                                     {
-                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? duyuru.AltBaslik.Substring(0, 45) + "..." : duyuru.AltBaslik)" />
+                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? 
+                                                                      duyuru.AltBaslik.Substring(0, 45) + "..." : 
+                                                                      duyuru.AltBaslik)" />
                                     }
                                 </p>
                             </div>
@@ -52,7 +60,9 @@ else
 
                                 @if (duyuru.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? duyuru.Aciklama.Substring(0, 280) + "..." : duyuru.Aciklama)" />
+                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? 
+                                                                  duyuru.Aciklama.Substring(0, 280) + "..." : 
+                                                                  duyuru.Aciklama)" />
                                 }
                             </p>
 

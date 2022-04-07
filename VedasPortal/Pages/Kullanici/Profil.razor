@@ -6,7 +6,11 @@
     <CardComponent cardStyle="Style.primary">
         <CardBody>
             <div class="author-box-center text-center">
-                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
+                <img width="200" 
+                     height="200" 
+                     alt="image" 
+                     src="assets/img/users/user-1.png" 
+                     class="rounded-circle author-box-picture">
                 <div class="clearfix"></div>
                 <div class="author-box-name">
                     <a href="#">Personel Adı</a>
@@ -118,8 +122,10 @@
                         <div class="media-title">Web Tasarım</div>
                     </div>
                     <div class="media-progressbar p-t-10">
-                        <div class="progress" data-height="6">
-                            <div class="progress-bar bg-warning" data-width="80%"></div>
+                        <div class="progress" 
+                             data-height="6">
+                            <div class="progress-bar bg-warning" 
+                                 data-width="80%"></div>
                         </div>
                     </div>
                 </li>
@@ -147,13 +153,23 @@
     <CardComponent cardStyle="Style.primary">
         <CardBody>
             <div class="padding-20">
-                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                <ul class="nav nav-tabs" 
+                    id="myTab2" 
+                    role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab"
+                        <a class="nav-link active" 
+                           id="home-tab2" 
+                           data-toggle="tab" 
+                           href="#about" 
+                           role="tab"
                            aria-selected="true">Hakkında</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
+                        <a class="nav-link" 
+                           id="profile-tab2" 
+                           data-toggle="tab" 
+                           href="#settings" 
+                           role="tab"
                            aria-selected="false">Ayarlar</a>
                     </li>
                 </ul>
@@ -168,9 +184,14 @@
                                 <li>
                                     @mezun.EgitimDurumu - @mezun.OkulAdi <br />
                                     @mezun.BaslamaTarihi - @mezun.MezuniyetTarihi 
-                                    <a href='/mezuniyet/duzenle/@mezun.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                            @onclick="@(() => {DialogGorunur="block"; MezuniyetSilmeyiOnayla(mezun.Id);})">
+                                    <a href='/mezuniyet/duzenle/@mezun.Id' 
+                                       class="btn btn-info btn-outline-dark" 
+                                       role="button">Düzenle</a>
+                                    <button class="btn btn-danger" 
+                                            data-toggle="modal" 
+                                            data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; 
+                                                            MezuniyetSilmeyiOnayla(mezun.Id);})">
                                         Sil
                                     </button>
                                 </li>
@@ -194,9 +215,14 @@
                                     @kursVeSertifika.Aciklama &amp; @kursVeSertifika.VerenKurum <br />
                                     @kursVeSertifika.BaslamaTarihi - @kursVeSertifika.BitisTarihi <br />
                                     Sertifika Veriliş Tarihi : @kursVeSertifika.SertifikaVerilisTarihi
-                                    <a href='/kurs/duzenle/@kursVeSertifika.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                            @onclick="@(() => {DialogGorunur="block"; KursSilmeyiOnayla(kursVeSertifika.Id);})">
+                                    <a href='/kurs/duzenle/@kursVeSertifika.Id' 
+                                       class="btn btn-info btn-outline-dark" 
+                                       role="button">Düzenle</a>
+                                    <button class="btn btn-danger" 
+                                            data-toggle="modal" 
+                                            data-target="#deleteEmpModal"
+                                            @onclick="@(() => {DialogGorunur="block"; 
+                                                            KursSilmeyiOnayla(kursVeSertifika.Id);})">
                                         Sil
                                     </button>
                                 </li>

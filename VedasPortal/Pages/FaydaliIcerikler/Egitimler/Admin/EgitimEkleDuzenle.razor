@@ -8,9 +8,6 @@
 <div class="col-12">
     <EditForm Model="@egitim" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
-
-
-
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
                 Eğitim @Title
@@ -21,7 +18,7 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">Tanıtım Kapağı Seçin</label>
                         <div class="col-md-10">
-                            <ImageResizer Value="@EgitimDosya.Yolu" />
+                            <ImageResizer Value="@EgitimDosya" />
                         </div>
                     </div>
 
@@ -132,14 +129,19 @@
 
 
                 </div>
-
-
-
             </CardBody>
             <CardFotter>
                 <div class="form-group text-left">
-                    <button class="btn btn-primary" type="submit" @onclick="Kayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button class="btn btn-primary"
+                            type="submit"
+                            @onclick="Kayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
             </CardFotter>
         </CardComponent>
@@ -169,7 +171,6 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
@@ -208,8 +209,6 @@ else
                             @foreach (var egitim in Egitimler)
 
                             {
-
-
                                 <tr>
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
@@ -224,9 +223,18 @@ else
 
 
                                     <td>
-                                        <a href="@($"egitim/detay/{egitim.Id}")" class="btn btn-primary">Eğitim Detayı</a>
-                                        <a href='/egitim/duzenle/@egitim.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                        <a href="@($"egitim/detay/{egitim.Id}")"
+                                           class="btn btn-primary">
+                                            Eğitim Detayı
+                                        </a>
+                                        <a href='/egitim/duzenle/@egitim.Id'
+                                           class="btn btn-info btn-outline-dark"
+                                           role="button">
+                                            Düzenle
+                                        </a>
+                                        <button class="btn btn-danger"
+                                                data-toggle="modal"
+                                                data-target="#deleteEmpModal"
                                                 @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(egitim.Id);})">
                                             Sil
                                         </button>
@@ -252,8 +260,14 @@ else
         </ModalHeader>
 
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
-            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+            <button class="btn btn-danger"
+                    @onclick="@(()=>{Sil(); ModalDialog.Close();})">
+                Evet
+            </button>
+            <button class="btn btn-warning"
+                    @onclick="@(()=>{ModalDialog.Close();})">
+                Hayır
+            </button>
         </ModalFooter>
     </ModalComponent>
 

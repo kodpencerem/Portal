@@ -2,7 +2,10 @@
     <div class="blazor-modal-content">
         <div class="blazor-modal-header">
             <h5 class="blazor-modal-title">@Title</h5>
-            <span class="blazor-modal-close-button" @onclick="() => { IsOpened = false; Close(); }">X</span>
+            <span class="blazor-modal-close-button"
+                  @onclick="() => { IsOpened = false; Close(); }">
+                X
+            </span>
         </div>
         <div class="blazor-modal-body">
             @ModalBody

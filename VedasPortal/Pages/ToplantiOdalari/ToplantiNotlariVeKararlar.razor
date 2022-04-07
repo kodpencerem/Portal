@@ -18,14 +18,15 @@ else
                     Toplantı Notları ve Alınan Kararlar
                 </div>
             </div>
-            <div style="margin-left:920px" class="float-right">
-                <input style="border-radius: 5px; border-color: #6777ef" placeholder="Aramanızı bu alanda yapın..." />
+            <div style="margin-left:920px" 
+                 class="float-right">
+                <input style="border-radius: 5px; border-color: #6777ef" 
+                       placeholder="Aramanızı bu alanda yapın..." />
                 <button class="btn btn-primary">Ara</button>
             </div>
         </CardHeader>
         <CardBody>
             <div class="row">
-
                 @foreach (var toplantiNotKarar in NotlarVeKararlar)
                 {
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -35,7 +36,10 @@ else
                                     <div class="row ">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                                             <div class="card-content">
-                                                <h5 class="font-15">Toplatı Adı : @toplantiNotKarar.Baslik</h5>
+                                                <h5 class="font-15">
+                                                    Toplatı Adı : 
+                                                    @toplantiNotKarar.Baslik
+                                                </h5>
                                                 <h2 class="mb-3 font-18">Yapıldığı Tarih : @toplantiNotKarar.KayitTarihi</h2>
                                                 <h2 class="mb-3 font-18">Toplantı Konusu :  : @toplantiNotKarar.Konu</h2>
                                                 <a href="toplantinotdetayi/@toplantiNotKarar.Id" class="btn btn-primary">İncele</a>
@@ -53,7 +57,7 @@ else
                             </div>
                         </div>
                     </div>
-                                        }
+                  }
             </div>
 
         </CardBody>

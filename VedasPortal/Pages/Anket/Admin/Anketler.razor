@@ -35,8 +35,18 @@
                         @foreach (var anket in AnketListe)
                         {
                             <tr>
-                                <td><button class="btn btn-sm btn-primary" @onclick="() => Duzenle(anket.AnketId)">Düzenle</button></td>
-                                <td><button class="btn btn-sm btn-danger" @onclick="() => Sil(anket.AnketId)">Sil</button></td>
+                                <td>
+                                <button class="btn btn-sm btn-primary" 
+                                        @onclick="() => Duzenle(anket.AnketId)">
+                                    Düzenle
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger" 
+                                            @onclick="() => Sil(anket.AnketId)">
+                                        Sil
+                                    </button>
+                                </td>
                                 <td>@anket.Adi</td>
                                 <td>@anket.Aciklama</td>
                                 <td>@anket.ToplamAlinanSure</td>

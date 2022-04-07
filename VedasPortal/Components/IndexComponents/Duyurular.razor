@@ -7,7 +7,8 @@
 
     <p>
         <em>Yükleniyor...</em>
-    </p> }
+    </p> 
+ }
 
 else
 
@@ -19,19 +20,19 @@ else
         </CardHeader>
         <CardBody>
             <div class="list-group" id="duyuruDiv">
-                @foreach (var duyuru in DuyurularListesi.Where(d => d.AnasayfadaGoster == true && d.Kategori.TextHaberDuyuru() == "Duyuru").Take(3).ToList())
+                @foreach (var duyuru in DuyurularListesi.Where(
+                     d => d.AnasayfadaGoster == true && 
+                     d.Kategori.TextHaberDuyuru() == "Duyuru").Take(3).ToList())
                 {
 
                     <a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">
-
-
-
-
                                 @if (duyuru.Adi != null)
                                 {
-                                    <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? duyuru.Adi.Substring(0, 27) + "..." : duyuru.Adi)" />
+                                    <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? 
+                                                                  duyuru.Adi.Substring(0, 27) + "..." : 
+                                                                  duyuru.Adi)" />
                                 }
 
                             </h6>
@@ -39,11 +40,11 @@ else
                         </div>
                         <p id="haberKutusu" class="mb-1">
                             
-
-
                             @if (duyuru.Aciklama != null)
                             {
-                                <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? duyuru.Aciklama.Substring(0, 280) + "..." : duyuru.Aciklama)" />
+                                <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? 
+                                                              duyuru.Aciklama.Substring(0, 280) + "..." : 
+                                                              duyuru.Aciklama)" />
                             }
                         </p>
                     </a>}

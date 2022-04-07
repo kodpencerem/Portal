@@ -12,9 +12,6 @@
                 Katılımcı @Title
             </CardHeader>
             <CardBody>
-
-
-
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
@@ -22,9 +19,9 @@
                             <div class="col-md-10">
                                 <InputFile @bind-Value="@KatilimciDosya.Yolu" />
                                 @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
-        {
-            <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
-        }*@
+                                    {
+                                        <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
+                                    }*@
                             </div>
                             @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
                         </div>
@@ -92,8 +89,16 @@
             </CardBody>
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="KatilimciKayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            @onclick="KatilimciKayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
             </CardFotter>
         </CardComponent>
@@ -154,7 +159,9 @@ else
                                 <tr>
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                            <input type="checkbox"
+                                                   data-checkboxes="mygroup"
+                                                   class="custom-control-input"
                                                    id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
@@ -166,8 +173,12 @@ else
 
                                     <td>
                                         @*<a href="@($"katilimci/detay/{katilimci.Id}")" class="btn btn-primary">Etkinlik Detayı</a>*@
-                                        <a href='/katilimci/duzenle/@katilimci.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                        <a href='/katilimci/duzenle/@katilimci.Id'
+                                           class="btn btn-info btn-outline-dark"
+                                           role="button">Düzenle</a>
+                                        <button class="btn btn-danger"
+                                                data-toggle="modal"
+                                                data-target="#deleteEmpModal"
                                                 @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(katilimci.Id);})">
                                             Sil
                                         </button>

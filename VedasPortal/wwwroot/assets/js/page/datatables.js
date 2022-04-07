@@ -1,6 +1,4 @@
 window.dataTables = function () {
-
-
     "use strict";
 
     $("[data-checkboxes]").each(function () {
@@ -53,5 +51,4 @@ window.dataTables = function () {
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
-
 }

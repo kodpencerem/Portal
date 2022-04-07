@@ -12,8 +12,6 @@
 else
 
 {
-
-
     <div class="col-12">
         <CardComponent cardStyle="Style.primary">
 
@@ -27,8 +25,6 @@ else
                     <SearchComp />
                 </div>
             </CardHeader>
-
-
             <CardBody>
                 <div class="row">
                     @foreach (var egitim in EgitimleriGetir.Where(e => e.AktifPasif == true).ToList())
@@ -37,7 +33,8 @@ else
                             <article class="article article-style-c">
                                 <a href="egitimdetayi/@egitim.Id">
                                     <div class="article-header">
-                                        <div class="article-image" data-background="images/uploaded/@egitim.Dosya.FirstOrDefault()?.Yolu.ToString()">
+                                        <div class="article-image" 
+                                             data-background="images/uploaded/@egitim.Dosya.FirstOrDefault()?.Yolu.ToString()">
                                         </div>
                                     </div>
                                 </a>
@@ -51,7 +48,9 @@ else
                                             <a href="egitimdetayi/@egitim.Id">
                                                 @if (egitim.Adi != null)
                                                 {
-                                                    <MarkDownComponent Content="@(egitim.Adi.Length>60 ? egitim.Adi.Substring(0, 27) + "..." : egitim.Adi)" />
+                                                    <MarkDownComponent Content="@(egitim.Adi.Length>60 ? 
+                                                                                  egitim.Adi.Substring(0, 27) + "..." : 
+                                                                                  egitim.Adi)" />
                                                 }
                                             </a>
                                         </h2>
@@ -61,7 +60,9 @@ else
                                     <p>
                                         @if (egitim.Aciklama != null)
                                         {
-                                            <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ? egitim.Aciklama.Substring(0, 280) + "..." : egitim.Aciklama)" />
+                                            <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ? 
+                                                                          egitim.Aciklama.Substring(0, 280) + "..." : 
+                                                                          egitim.Aciklama)" />
                                         }
                                     </p>
                                     <div class="article-user">
@@ -82,9 +83,6 @@ else
             </CardBody>
         </CardComponent>
     </div>
-
-
-
 }
 
 <style>

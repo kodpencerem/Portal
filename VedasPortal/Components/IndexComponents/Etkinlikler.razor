@@ -21,28 +21,26 @@ else
                 @foreach (var etkinlik in EtkinlikDuyurulari.Where(d => d.AnasayfadaGoster == true).Take(3).ToList())
                 {
 
-                    <a href="etkinlik/detay/@etkinlik.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="etkinlik/detay/@etkinlik.Id" 
+                       class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">
-
-
-
-
                                 @if (etkinlik.Adi != null)
                                 {
-                                    <MarkDownComponent Content="@(etkinlik.Adi.Length>60 ? etkinlik.Adi.Substring(0, 27) + "..." : etkinlik.Adi)" />
+                                    <MarkDownComponent Content="@(etkinlik.Adi.Length>60 ? 
+                                                                  etkinlik.Adi.Substring(0, 27) + "..." : 
+                                                                  etkinlik.Adi)" />
                                 }
 
                             </h6>
                             <small>@etkinlik.KayitTarihi.ToLongDateString()</small>
                         </div>
                         <p id="etkinlikKutusu" class="mb-1">
-
-
-
                             @if (etkinlik.Aciklama != null)
                             {
-                                <MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ? etkinlik.Aciklama.Substring(0, 280) + "..." : etkinlik.Aciklama)" />
+                                <MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ? 
+                                                              etkinlik.Aciklama.Substring(0, 280) + "..." : 
+                                                              etkinlik.Aciklama)" />
                             }
                         </p>
                     </a>}

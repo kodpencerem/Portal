@@ -17,7 +17,12 @@ else
                 <div class="float-left">
                     <div class="col-md-12">
                         Sizden Gelen Öneriler |
-                        <a href='/oneri/ekle' class="btn btn-primary" role="button"><i class="fa fa-user-plus"></i> Yeni Bir Öneri Ekle</a>
+                        <a href='/oneri/ekle'
+                           class="btn btn-primary"
+                           role="button">
+                            <i class="fa fa-user-plus"></i>
+                            Yeni Bir Öneri Ekle
+                        </a>
                     </div>
                 </div>
                 @*<div style="margin-left:890px" class="float-right">
@@ -31,42 +36,51 @@ else
                     @foreach (var oneri in Oneriler)
                     {
 
-                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                        <img src="images/uploaded/80220221712img_11643800697.jpg" height="500" width="500" alt="" class="img-fluid">
-                        <a class="post-title" href="post-details.html">
-                            <h3 class="text-black">
-                                @if (oneri.Adi != null)
+                        <div class="profile-uoloaded-post border-bottom-1 pb-5">
+                            <img src="images/uploaded/80220221712img_11643800697.jpg" 
+                                 height="500" 
+                                 width="500" 
+                                 alt="" 
+                                 class="img-fluid">
+                            <a class="post-title" 
+                               href="post-details.html">
+                                <h3 class="text-black">
+                                    @if (oneri.Adi != null)
+                                    {
+                                        <MarkDownComponent Content="@(oneri.Adi.Length>60 ? 
+                                                                      oneri.Adi.Substring(0, 27) + "..." : 
+                                                                      oneri.Adi)" />
+                                    }
+                                </h3>
+                            </a>
+                            <p>
+                                @if (oneri.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(oneri.Adi.Length>60 ? oneri.Adi.Substring(0, 27) + "..." : oneri.Adi)" />
-                                }
-                            </h3>
-                        </a>
-                        <p>
-                            @if (oneri.Aciklama != null)
-                            {
-                                <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ? oneri.Aciklama.Substring(0, 280) + "..." : oneri.Aciklama)" />}
-                        </p>
+                                    <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ? 
+                                                                  oneri.Aciklama.Substring(0, 280) + "..." : 
+                                                                  oneri.Aciklama)" />}
+                            </p>
 
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            <div class="ratting">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <br />
+                            <button class="btn btn-primary mr-2">
+                                <span class="mr-2">
+                                    <i class="fa fa-heart"></i>
+                                </span>Beğen
+                            </button>
+                            <button class="btn btn-secondary" data-toggle="modal" data-target="#replyModal">
+                                <span class="mr-2">
+                                    <i class="fa fa-reply">
+                                    </i>
+                                </span>Yorum Yap
+                            </button>
                         </div>
-                        <br />
-                        <button class="btn btn-primary mr-2">
-                            <span class="mr-2">
-                                <i class="fa fa-heart"></i>
-                            </span>Beğen
-                        </button>
-                        <button class="btn btn-secondary" data-toggle="modal" data-target="#replyModal">
-                            <span class="mr-2">
-                                <i class="fa fa-reply">
-                                </i>
-                            </span>Yorum Yap
-                        </button>
-                    </div>
                     }
 
                 </div>

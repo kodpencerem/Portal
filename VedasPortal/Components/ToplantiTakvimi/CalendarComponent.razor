@@ -13,15 +13,27 @@ else
     <div class="container p-0 p-md-5 m-auto">
         <div class="d-flex flex-column justify-content-center align-items-center">
             <div id="year" class="d-flex align-items-center">
-                <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddYears(-1);})">&lsaquo;</span>
+                <span class="changeDateButton mr-3 pr-2 pl-2"
+                      @onclick="@(()=>{AddYears(-1);})">
+                    &lsaquo;
+                </span>
                 <h3 class="mb-0">@tarih.Year</h3>
-                <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddYears(1);})">&rsaquo;</span>
+                <span class="changeDateButton ml-3 pr-2 pl-2"
+                      @onclick="@(()=>{AddYears(1);})">
+                    &rsaquo;
+                </span>
             </div>
 
             <div class="mt-1 d-flex justify-content-center">
-                <span class="changeDateButton mr-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(-1);})">&lsaquo;</span>
+                <span class="changeDateButton mr-3 pr-2 pl-2"
+                      @onclick="@(()=>{AddMonths(-1);})">
+                    &lsaquo;
+                </span>
                 <h2 class="mb-0">@aylikToplanti.AdiniGetir</h2>
-                <span class="changeDateButton ml-3 pr-2 pl-2" @onclick="@(()=>{AddMonths(1);})">&rsaquo;</span>
+                <span class="changeDateButton ml-3 pr-2 pl-2"
+                      @onclick="@(()=>{AddMonths(1);})">
+                    &rsaquo;
+                </span>
             </div>
 
         </div>
@@ -36,7 +48,7 @@ else
                     <h3>Cumartesi</h3>
                     <h3>Pazar</h3>
                 </div>
-                <MonthComponent AylikToplantiGetir=@aylikToplanti></MonthComponent>
+                <MonthComponent AylikToplantiGetir=@aylikToplanti />
             </div>
         </div>
     </div>

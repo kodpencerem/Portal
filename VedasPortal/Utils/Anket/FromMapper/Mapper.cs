@@ -64,7 +64,11 @@ namespace VedasPortal.Utils.Anket.FromMapper
             List<SelectListItem> secilenListe = new();
             foreach (var anketSecenek in AnketSecenekDTO)
             {
-                secilenListe.Add(new SelectListItem { Text = anketSecenek.Aciklama, Selected = false, Value = anketSecenek.AnketSecenekId.ToString() });
+                secilenListe.Add(new SelectListItem 
+                { 
+                    Text = anketSecenek.Aciklama, 
+                    Selected = false, 
+                    Value = anketSecenek.AnketSecenekId.ToString() });
 
             }
             return secilenListe;

@@ -10,41 +10,44 @@
 
             @if (!isReady)
             {
-<p>Yükleniyor...</p> }
-else
-{
-<EditForm Model="AnketVm" OnValidSubmit="AnketGonder">
-    <DataAnnotationsValidator />
-    <div class="row justify-content-center">
-        <ValidationSummary />
-    </div>
-    <br />
-    <div class="row justify-content-center">@(AnketVm.AnketSorusu)?</div>
-    <br />
-    <div class="row justify-content-center mt-3">
-        <div class="form-group">
-
-            @foreach (var anket in AnketVm.AnketSecenekleri)
+                <p>Yükleniyor...</p> 
+            }
+            else
             {
-<div class="row">
-    <input style="margin-bottom:10px" class="form-check-input" type="radio"
-           name="SurveyOption"
-           value="@anket.AnketSecenekId"
-           checked="@(AnketVm.SecilenSecenek == anket.AnketSecenekId.ToString())"
-           @onchange="@(() => SecilenDegeriGuncelle(anket.AnketSecenekId.ToString()))" />
+                <EditForm Model="AnketVm" OnValidSubmit="AnketGonder">
+                    <DataAnnotationsValidator />
+                    <div class="row justify-content-center">
+                        <ValidationSummary />
+                    </div>
+                    <br />
+                    <div class="row justify-content-center">@(AnketVm.AnketSorusu)?</div>
+                    <br />
+                    <div class="row justify-content-center mt-3">
+                        <div class="form-group">
 
-    <label class="form-check-label">@anket.Aciklama</label>
-    <br /><br />
-</div>}
-        </div>
+                            @foreach (var anket in AnketVm.AnketSecenekleri)
+                            {
+                                <div class="row">
+                                    <input style="margin-bottom:10px"
+                                        class="form-check-input" 
+                                        type="radio"
+                                        name="SurveyOption"
+                                        value="@anket.AnketSecenekId"
+                                        checked="@(AnketVm.SecilenSecenek == anket.AnketSecenekId.ToString())"
+                                        @onchange="@(() => SecilenDegeriGuncelle(anket.AnketSecenekId.ToString()))" />
+                                 <label class="form-check-label">@anket.Aciklama</label>
+                                    <br /><br />
+                                </div>
+                             }
+                        </div>
+                    </div>
 
-    </div>
+                <div class="row justify-content-center my-3">
+                    <input type="submit" class="btn btn-primary" value="Gönder" />
+                </div>
 
-    <div class="row justify-content-center my-3">
-        <input type="submit" class="btn btn-primary" value="Gönder" />
-    </div>
-
-</EditForm>}
+                </EditForm>
+            }
 
         </CardBody>
         <CardFotter>

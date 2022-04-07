@@ -13,78 +13,91 @@
         <CardBody>
             @{if (NotVeKararDetayi != null)
                 {
-                        <div class="inbox-body no-pad">
-                            <section class="mail-list">
-                                <div class="mail-sender">
-                                    <div class="media">
-                                        <a href="#" class="table-img m-r-15">
-                                            <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle" width="35"
-                                                 data-toggle="tooltip" title="Sachin Pandit">
+                    <div class="inbox-body no-pad">
+                        <section class="mail-list">
+                            <div class="mail-sender">
+                                <div class="media">
+                                    <a href="#"
+                                       class="table-img m-r-15">
+                                        <img alt="image"
+                                             src="assets/img/users/user-2.png"
+                                             class="rounded-circle"
+                                             width="35"
+                                             data-toggle="tooltip"
+                                             title="Sachin Pandit">
+                                    </a>
+                                    <div class="media-body">
+                                        <span class="date pull-right">4:15AM 04 April 2017</span>
+                                        <h5 class="text-primary">Sarah Smith</h5>
+                                        <small class="text-muted">From: sarah@example.com</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="view-mail p-t-20">
+                                <p>
+                                    Toplantı Konusu :<br />
+                                    @NotVeKararDetayi.Konu
+                                </p>
+                                <br />
+                                <p>
+                                    Toplantı Madeleri ve Alınan Kararlar <br />
+                                    @NotVeKararDetayi.Aciklama
+
+                                </p>
+                                <br />
+                            </div>
+                            <div class="attachment-mail">
+                                <p>
+                                    <span>
+                                        <i class="fa fa-paperclip"></i>
+                                        Ek Dökümanlar :
+                                        <br />
+                                        @NotVeKararDetayi.GetDosya?.Yolu
+                                    </span>
+                                    <a href="#">Tüm Ekleri İndir</a> |
+                                    <a href="#">Ekleri Görüntüle</a>
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <a href="#">
+                                            <img class="img-thumbnail img-responsive" 
+                                                 alt="attachment"
+                                                 src="assets/img/users/user-1.png">
                                         </a>
-                                        <div class="media-body">
-                                            <span class="date pull-right">4:15AM 04 April 2017</span>
-                                            <h5 class="text-primary">Sarah Smith</h5>
-                                            <small class="text-muted">From: sarah@example.com</small>
-                                        </div>
+                                        <a class="name" href="#">
+                                            IMG_001.png
+                                            <span>20KB</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="#">
+                                            <img class="img-thumbnail img-responsive" 
+                                                 alt="attachment"
+                                                 src="assets/img/users/user-3.png">
+                                        </a>
+                                        <a class="name" href="#">
+                                            IMG_002.png
+                                            <span>22KB</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="#">
+                                            <img class="img-thumbnail img-responsive" 
+                                                 alt="attachment"
+                                                 src="assets/img/users/user-4.png">
+                                        </a>
+                                        <a class="name" href="#">
+                                            IMG_003.png
+                                            <span>28KB</span>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="view-mail p-t-20">
-                                    <p>
-                                        Toplantı Konusu :<br /> @NotVeKararDetayi.Konu
-                                    </p>
-                                    <br />
-                                    <p>
-                                        Toplantı Madeleri ve Alınan Kararlar <br /> @NotVeKararDetayi.Aciklama
+                            </div>
 
-                                    </p>
-                                    <br />                                   
-                                </div>
-                                <div class="attachment-mail">
-                                    <p>
-                                        <span>
-                                            <i class="fa fa-paperclip"></i> Ek Dökümanlar : <br />
-                                            @NotVeKararDetayi.GetDosya?.Yolu
-                                        </span>
-                                        <a href="#">Tüm Ekleri İndir</a> |
-                                        <a href="#">Ekleri Görüntüle</a>
-                                    </p>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <a href="#">
-                                                <img class="img-thumbnail img-responsive" alt="attachment"
-                                                     src="assets/img/users/user-1.png">
-                                            </a>
-                                            <a class="name" href="#">
-                                                IMG_001.png
-                                                <span>20KB</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a href="#">
-                                                <img class="img-thumbnail img-responsive" alt="attachment"
-                                                     src="assets/img/users/user-3.png">
-                                            </a>
-                                            <a class="name" href="#">
-                                                IMG_002.png
-                                                <span>22KB</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <a href="#">
-                                                <img class="img-thumbnail img-responsive" alt="attachment"
-                                                     src="assets/img/users/user-4.png">
-                                            </a>
-                                            <a class="name" href="#">
-                                                IMG_003.png
-                                                <span>28KB</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </section>
-                        </div>}
-                }
+                        </section>
+                    </div>
+                    }
+            }
 
         </CardBody>
     </CardComponent>

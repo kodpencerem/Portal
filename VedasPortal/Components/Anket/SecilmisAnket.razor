@@ -6,38 +6,46 @@
     <CardBody>
         @if (!isReady)
         {
-<p>Yükleniyor...</p> }
-else if (Anket != null)
-{
-<h5 class="card-title">@Anket.Adi</h5>
-        
-        <h6 class="card-description">@Anket.AnketSorusu</h6>
-        <p>@((MarkupString) Anket.Aciklama)</p>
+            <p>Yükleniyor...</p> 
+        }
+        else if (Anket != null)
         {
-<table class="table-borderless">
-    <tbody>
+            <h5 class="card-title">@Anket.Adi</h5>
+            <h6 class="card-description">@Anket.AnketSorusu</h6>
+            <p>@((MarkupString)Anket.Aciklama)</p>          
+            {
+                <table class="table-borderless">
+                    <tbody>
 
-        @foreach (var anket in Anket.AnketSecenekleri)
+                        @foreach (var anket in Anket.AnketSecenekleri)
+                        {
+                            <AnketSecenekItem Item="@anket" 
+                            TotalSurveyVotes="@Anket.ToplamKatilim" />
+                         }
+                    </tbody>
+                </table> 
+            }
+            <div class="mt-3">
+            <button href="#" class="btn btn-outline-dark" 
+                             @onclick="() => AnketiGetir(Anket.AnketId)">
+                Ankete Katıl
+            </button>
+            </div> 
+        }
+        else
         {
-<AnketSecenekItem Item="@anket" TotalSurveyVotes="@Anket.ToplamKatilim" />}
-
-    </tbody>
-</table> }
-<div class="mt-3">
-    <button href="#" class="btn btn-outline-dark" @onclick="()=> AnketiGetir(Anket.AnketId)">Ankete Katıl</button>
-</div> }
-else
-{
-<p class="text-center text-danger">Şu anda mevcut anket yok</p>}
+            <p class="text-center text-danger">Şu anda mevcut anket yok</p>
+        }
     </CardBody>
     <CardFotter>
         @if (Anket != null)
         {
-<p>@(Anket == null ? "" : Anket.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p> }
-else
-{
-<p></p>}
-
+            <p>@(Anket == null ? "" : Anket.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p> 
+        }
+        else
+        {
+            <p></p>
+        }
     </CardFotter>
 </CardComponent>
 

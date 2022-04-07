@@ -1,6 +1,5 @@
 ﻿@page "/etkinlik/ekle"
 @page "/etkinlik/duzenle/{etkinlikId:int}"
-@using Microsoft.AspNetCore.Hosting
 @inherits EtkinlikModeli
 
 <div class="col-12">
@@ -18,9 +17,9 @@
                             <div class="col-md-10">
                                 <InputFile @bind-Value="@EtkinlikDosya.Yolu" />
                                 @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
-        {
-            <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
-        }*@
+                                    {
+                                        <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
+                                    }*@
                             </div>
                             @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
                         </div>
@@ -110,8 +109,16 @@
             </CardBody>
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="EtkinlikKayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            @onclick="EtkinlikKayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
             </CardFotter>
         </CardComponent>

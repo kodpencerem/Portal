@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
@@ -45,21 +44,10 @@ namespace VedasPortal.Components.UploadComponent
         private bool ShowCroper { get; set; } = false;
 
         [Parameter]
-        public string _value { get; set; }
-        [Parameter]
-        public EventCallback<string> BindingValueChanged { get; set; } 
+        public Dosya Value { get; set; } = new Dosya();
 
         [Parameter]
-        public string BindingValue
-        {
-            get => _value;
-            set
-            {
-                if (_value == value) return;
-                _value = value;
-                BindingValueChanged.InvokeAsync(value);
-            }
-        }
+        public EventCallback<Dosya> ValueChanged { get; set; } = new EventCallback<Dosya>();
 
         /// <summary>
         /// Resmin üzerinde kırpma ve boyutlandırma işlemleri için bir araç açar
@@ -132,7 +120,7 @@ namespace VedasPortal.Components.UploadComponent
 
         
 
-        IList<Dosya> imageDataUrls = new List<Dosya>();
+        //IList<Dosya> imageDataUrls = new List<Dosya>();
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
@@ -186,10 +174,10 @@ namespace VedasPortal.Components.UploadComponent
             {
                 Adi = fileName,
                 Boyutu = browserFileResizer.Size.ToString(),
-                Uzanti = fileName['.'..],
+                Uzanti = fileName.Substring('.'),
             };
-            BindingValue = newFile.Yolu;
-            await BindingValueChanged.InvokeAsync(BindingValue);
+            Value = newFile;
+            await ValueChanged.InvokeAsync(Value);
         }
 
         /// <summary>

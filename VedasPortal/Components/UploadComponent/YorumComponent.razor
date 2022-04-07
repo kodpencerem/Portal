@@ -3,10 +3,10 @@
 @if (YorumListesi == null)
 
 {
-
     <p>
         <em>Yükleniyor...</em>
-    </p> }
+    </p>
+}
 
 else
 
@@ -20,7 +20,7 @@ else
                         <img alt="image" class="mr-3 rounded-circle" width="70" src="images/default.png">
                         <div class="media-body">
                             <div class="media-right">
-                                <div class="text-primary">Approved</div>
+                                <div class="text-primary">Onaylanmış</div>
                             </div>
                             <div class="media-title mb-1"></div>
                             <div class="text-time">@yorum.KaydedenKullanici</div>
@@ -49,8 +49,14 @@ else
         </ModalHeader>
 
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(() => { Sil(); ModalDialog.Close(); })">Evet</button>
-            <button class="btn btn-warning" @onclick="@(() => { ModalDialog.Close(); })">Hayır</button>
+            <button class="btn btn-danger"
+                    @onclick="@(() => { Sil(); ModalDialog.Close(); })">
+                Evet
+            </button>
+            <button class="btn btn-warning"
+                    @onclick="@(() => { ModalDialog.Close(); })">
+                Hayır
+            </button>
         </ModalFooter>
     </ModalComponent>
 

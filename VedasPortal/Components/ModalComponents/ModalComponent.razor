@@ -1,10 +1,18 @@
-﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+﻿
+<div class="modal @ModalClass"
+     tabindex="-1"
+     role="dialog"
+     style="display:@ModalDisplay">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 @ModalHeader
 
-                <span  aria-hidden="true" class="blazor-modal-close-button" @onclick="() => Close()">X</span>
+                <span aria-hidden="true"
+                      class="blazor-modal-close-button"
+                      @onclick="() => Close()">
+                    X
+                </span>
 
             </div>
             <div class="modal-body">
@@ -20,39 +28,39 @@
 
 @if (ShowBackdrop)
 {
-<div class="modal-backdrop fade show"></div>}
+    <div class="modal-backdrop fade show"></div>}
 
 
 @code { [Parameter]
-            public RenderFragment ModalHeader { get; set; }
+    public RenderFragment ModalHeader { get; set; }
 
-            [Parameter]
-            public RenderFragment ModalBody { get; set; }
+    [Parameter]
+    public RenderFragment ModalBody { get; set; }
 
-            [Parameter]
-            public RenderFragment ModalFooter { get; set; }
+    [Parameter]
+    public RenderFragment ModalFooter { get; set; }
 
 
-            public Guid Guid = Guid.NewGuid();
-            public string ModalDisplay = "none;";
-            public string ModalClass = "";
-            public bool ShowBackdrop = false;
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
 
-            public void Open()
-            {
-                ModalDisplay = "block;";
-                ModalClass = "Show";
-                ShowBackdrop = true;
-                StateHasChanged();
-            }
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
 
-            public void Close()
-            {
-                ModalDisplay = "none";
-                ModalClass = "";
-                ShowBackdrop = false;
-                StateHasChanged();
-            } }
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    } }
 
 <style>
     .blazor-modal-close-button {
