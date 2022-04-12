@@ -61,7 +61,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected void Kayit()
         {
-            VideoDosya.Yolu = video.Dosya?.Yolu;
+            VideoDosya.Yolu = video.Dosya?.FirstOrDefault().Yolu;
             VideoServisi.Add(video);
         }
         protected override void OnParametersSet()
@@ -70,7 +70,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             {
                 Title = "Duzenle";
                 video = VideoServisi.Get(VideoId);
-                VideoDosya.Yolu = video.Dosya.Yolu;
+                VideoDosya.Yolu = video.Dosya?.FirstOrDefault().Yolu;
             }
         }
 

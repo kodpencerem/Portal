@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
@@ -23,7 +25,7 @@ namespace VedasPortal.Pages.BasindaBiz
 
         protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
         {
-            haberler = HaberServisi.GetAll();
+            haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return haberler;
         }
     }

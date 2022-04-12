@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
     {
 
         [Inject]
-        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; } 
+        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+
+        [Inject]
+        public IBaseRepository<Dosya> DosyaServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -27,15 +31,13 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public HaberDuyuru haber = new();
 
         public Dosya HaberDosya = new();
-        
 
-        protected IEnumerable<HaberDuyuru> Haberler { get  ; set ; }
+        protected IEnumerable<HaberDuyuru> Haberler { get; set; }
 
         protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
         {
-            Haberler = HaberServisi.GetAll();
+            Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Haberler;
-
         }
         public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
         protected void TumKategorileriGetir()
@@ -50,34 +52,29 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
-            var dosya = haber.Dosya?.Select(x => new Dosya
-            {
-                Id = x.Id,
-                Adi = x.Adi,
-                Aciklama = x.Aciklama,
-                Boyutu = x.Boyutu,
-                Yolu = x.Yolu,
-                DuzenlemeTarihi = x.DuzenlemeTarihi,
-                DuzenleyenKullanici = x.DuzenleyenKullanici,
-                KaydedenKullanici = x.KaydedenKullanici,
-                KayitTarihi = x.KayitTarihi,
-                Uzanti = x.Uzanti
 
-            });
-            haber.Dosya = dosya?.ToArray();
-            HaberDosya.Yolu = haber.Dosya?.FirstOrDefault().Yolu;
             HaberServisi.Add(haber);
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                HaberDuyuruId = haber.Id,
+            };
+            DosyaServisi.Add(dosya);
         }
         protected override void OnParametersSet()
         {
-            if (HaberId != 0 || HaberDosya.Yolu!=null)
+            if (HaberId != 0 || HaberDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                haber = HaberServisi.Get(HaberId);                
+                haber = HaberServisi.Get(HaberId);
             }
         }
-
-
 
         protected void SilmeyiOnayla(int haberId)
         {
@@ -98,13 +95,11 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             TumHaberleriGetir();
         }
 
-
-        
         protected override Task OnInitializedAsync()
         {
             TumHaberleriGetir();
             TumKategorileriGetir();
-            
+
             return Task.CompletedTask;
         }
 
@@ -114,7 +109,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
             UrlNavigationManager.NavigateTo("/haber/ekle");
         }
-
 
         [Inject]
         public IJSRuntime JsRun { get; set; }

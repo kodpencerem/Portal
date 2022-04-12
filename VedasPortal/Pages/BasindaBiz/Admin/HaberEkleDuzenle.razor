@@ -165,7 +165,11 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@HaberDosya?.Yolu" width="50" height="50" /></td>
+                                    <td><img src="images/uploaded/@string.Concat(haber.Dosya.FirstOrDefault().Adi,".",
+                                                                   haber.Dosya.FirstOrDefault().Uzanti)" 
+                                             width="50" 
+                                             height="50" />
+                                    </td>
 
                                     <td>@haber.Adi</td>
 

@@ -1,5 +1,5 @@
 ﻿@using VedasPortal.Repository.Interface;
-
+@using Microsoft.EntityFrameworkCore;
 @if (Duyurular == null)
 
 {
@@ -29,7 +29,9 @@ else
                      style="max-height:600px;max-width:1203px">
 
                     <img class="d-block w-100" 
-                         src="images/uploaded/@HaberDosya?.Yolu" 
+                         src="images/uploaded/@string.Concat(duyuru.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               duyuru.Dosya?.FirstOrDefault().Uzanti)" 
                          width="1203" 
                          height="600" 
                          alt="@duyuru.Adi">
@@ -69,7 +71,7 @@ else
 
     protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
     {
-        Duyurular = DuyuruServisi.GetAll();
+        Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); ;
 
         return Duyurular;
 

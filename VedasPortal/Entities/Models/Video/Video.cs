@@ -21,9 +21,14 @@ namespace VedasPortal.Entities.Models.Video
         public Birimler Birimler { get; set; }
         [NotMapped]
         public List<string> Yorumlar { get; set; } = new List<string>();
+
+        public int? HaberDuyuruId { get; set; }
         public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
+
+        public int? EtkinlikId { get; set; }
         public Etkinlik.Etkinlik Etkinlik { get; set; }
-        public virtual Dosya.Dosya Dosya { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
         public ICollection<Yorum> VideoYorum { get; set; }
     }

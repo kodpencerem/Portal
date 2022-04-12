@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
 using VedasPortal.Entities.Models.Etkinlik;
 
@@ -17,33 +16,25 @@ namespace VedasPortal.Entities.Models.Dosya
         [DataType(DataType.Text)]
         public DosyaKategori Kategori { get; set; }
         public bool AktifPasif { get; set; } = true;
-        public int HaberDuyuruId { get; set; }
-        [ForeignKey("HaberDuyuruId")]
+        public int? HaberDuyuruId { get; set; }
         public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
-        public int DuzelticiFaaliyetId { get; set; }
-        [ForeignKey("DuzelticiFaaliyetId")]
+        public int? DuzelticiFaaliyetId { get; set; }
         public DuzelticiFaaliyet.DuzelticiFaaliyet DuzelticiFaaliyet { get; set; }
-        public int EgitimId { get; set; }
-        [ForeignKey("EgitimId")]
+        public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
-        public int EtkinlikId { get; set; }
-        [ForeignKey("EtkinlikId")]
+        public int? EtkinlikId { get; set; }
         public Etkinlik.Etkinlik Etkinlik { get; set; }
-        public int KatilimciId { get; set; }
-        [ForeignKey("KatilimciId")]
+        public int? KatilimciId { get; set; }
         public Katilimci Katilimci { get; set; }
-        public int IkUygulamaId { get; set; }
-        [ForeignKey("IkUygulamaId")]
+        public int? IkUygulamaId { get; set; }
         public IKUygulama.IkUygulama IkUygulama { get; set; }
-        public int MevzuatId { get; set; }
-        [ForeignKey("MevzuatId")]
+        public int? MevzuatId { get; set; }
         public Mevzuat.Mevzuat Mevzuat { get; set; }
-        public int OneriId { get; set; }
-        [ForeignKey("OneriId")]
+        public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
-        public int RehberId { get; set; }
-        [ForeignKey("RehberId")]
+        public int? RehberId { get; set; }
         public Rehber Rehber { get; set; }
+        public virtual ICollection<Video.Video>  Video { get; set; }
 
     }
 
@@ -58,5 +49,9 @@ namespace VedasPortal.Entities.Models.Dosya
         Mkv,
         Pub,
         Pptx,
+        Jpeg,
+        Jpg,
+        Gif,
+        Bitmap
     }
 }

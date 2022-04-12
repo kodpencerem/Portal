@@ -127,7 +127,7 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-        
+
 
         //IList<Dosya> imageDataUrls = new List<Dosya>();
         /// <summary>
@@ -168,13 +168,16 @@ namespace VedasPortal.Components.UploadComponent
             ImageCroppedResult args = await cropper.GetCropedResult();
             ShowCroper = false;
             parsing = true;
+
+            var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
+            SaveFileToUploaded.FileName = fileName;
             StateHasChanged();
             await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
 #pragma warning disable CS0618 // Type or member is obsolete
             string base64String = await args.GetBase64Async();
 #pragma warning restore CS0618 // Type or member is obsolete
-            var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
+
             File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
