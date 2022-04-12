@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.Etkinlik
@@ -11,7 +12,8 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public bool KatilisDurumu { get; set; }
         public string KatilisNedeni { get; set; }
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
-        
+        public int EtkinlikId { get; set; }
+        [ForeignKey("EtkinlikId")]
         public Etkinlik Etkinlik { get; set; }
     }
 }
