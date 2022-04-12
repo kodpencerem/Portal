@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <InputFile @bind-Value="@EtkinlikDosya.Yolu" />
+                                <ImageResizer @bind-ValueInput="@EtkinlikDosya.Yolu" />
                                 @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
                                     {
                                         <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
@@ -186,7 +186,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@EtkinlikDosya.Yolu</td>
+                                    <td> <img src="images/uploaded/@EtkinlikDosya?.Yolu" />  </td>
 
                                     <td>@etkinlik.Adi</td>
 

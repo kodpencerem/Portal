@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">İçerik Ekleyin</label>
                         <div class="col-md-10">
-                            <MultipleUpload ValuePath="@MevzuatDosya.Yolu" />
+                            <MultipleUpload @bind-ValueInput="@MevzuatDosya.Yolu" />
                         </div>
                     </div>
 
@@ -191,7 +191,7 @@ else
                 <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
             </div>
         </td>
-        <td>@mevzuat.Dosya.FirstOrDefault()?.Yolu</td>
+        <td><img src="images/uploaded/@MevzuatDosya?.Yolu"/></td>
 
         <td>@mevzuat.Adi</td>
         <td>
@@ -213,8 +213,7 @@ else
                 Sil
             </button>
         </td>
-    </tr>
-}
+    </tr>}
                     </tbody>
                 </table>
             </div>

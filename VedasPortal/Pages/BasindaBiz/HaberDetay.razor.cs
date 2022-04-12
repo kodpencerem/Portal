@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
@@ -12,6 +13,8 @@ namespace VedasPortal.Pages.BasindaBiz
 
         [Parameter]
         public int HaberId { get; set; }
+
+        public Dosya HahberDetayDosya { get; set; } = new();
 
         private HaberDuyuru HaberDetayGetir { get; set; }
 

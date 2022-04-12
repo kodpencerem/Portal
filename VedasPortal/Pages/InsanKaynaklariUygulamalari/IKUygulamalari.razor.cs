@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Repository.Interface;
 
@@ -19,7 +20,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari
             TumIkUygulamalariniGetir();
             return Task.CompletedTask;
         }
-
+        public Dosya IkUygulamaDosya { get; set; }
         protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
             IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();

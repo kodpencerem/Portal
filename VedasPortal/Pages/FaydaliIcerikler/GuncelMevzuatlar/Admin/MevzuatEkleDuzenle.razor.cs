@@ -26,6 +26,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected string Title = "Ekle";
         public Mevzuat mevzuat = new();
+        public Dosya MevzuatDosya { get; set; } = new();
 
         protected IEnumerable<Mevzuat> Mevzuatlar { get; set; }
 
@@ -94,8 +95,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             TumKategorileriGetir();
         }
 
-
-        public Dosya MevzuatDosya { get; set; } = new Dosya();
         protected override Task OnInitializedAsync()
         {
             TumMevzuatlariGetir();

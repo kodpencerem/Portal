@@ -48,6 +48,21 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected void HaberKayit()
         {
+            var dosya = duyuru.Dosya?.Select(x => new Dosya
+            {
+                Id = x.Id,
+                Adi = x.Adi,
+                Aciklama = x.Aciklama,
+                Boyutu = x.Boyutu,
+                Yolu = x.Yolu,
+                DuzenlemeTarihi = x.DuzenlemeTarihi,
+                DuzenleyenKullanici = x.DuzenleyenKullanici,
+                KaydedenKullanici = x.KaydedenKullanici,
+                KayitTarihi = x.KayitTarihi,
+                Uzanti = x.Uzanti
+
+            });
+            duyuru.Dosya = dosya?.ToArray();
             DuyuruServisi.Add(duyuru);
             
         }
@@ -76,7 +91,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         {
             if (duyuru.Id == 0)
                 return;
-
+            
             DuyuruServisi.Remove(duyuru.Id);
             duyuru = new HaberDuyuru();
             TumDuyurulariGetir();

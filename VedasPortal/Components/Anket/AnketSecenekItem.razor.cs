@@ -11,7 +11,7 @@ namespace VedasPortal.Components.Anket
         public AnketSecenekDTO Item { get; set; }
 
         [Parameter]
-        public int TotalSurveyVotes { get; set; }
+        public int ToplamAnketOyu { get; set; }
 
         private string imageSrc { get; set; }
 
@@ -20,13 +20,12 @@ namespace VedasPortal.Components.Anket
         protected override void OnInitialized()
         {
             imageSrc = $"images/{Item.Resim}";
-            double calculatedPercentage = 0;
+            double YuzdelikHesapla = 0;
             if (Item.ToplamKatilim != 0)
             {
-                calculatedPercentage = (double)Item.ToplamKatilim / TotalSurveyVotes * 100;
+                YuzdelikHesapla = (double)Item.ToplamKatilim / ToplamAnketOyu * 100;
             }
-
-            TotalPercentage = (int)Math.Floor(calculatedPercentage);
+            TotalPercentage = (int)Math.Floor(YuzdelikHesapla);
         }
     }
 }

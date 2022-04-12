@@ -50,32 +50,30 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected void HaberKayit()
         {
+            var dosya = haber.Dosya?.Select(x => new Dosya
+            {
+                Id = x.Id,
+                Adi = x.Adi,
+                Aciklama = x.Aciklama,
+                Boyutu = x.Boyutu,
+                Yolu = x.Yolu,
+                DuzenlemeTarihi = x.DuzenlemeTarihi,
+                DuzenleyenKullanici = x.DuzenleyenKullanici,
+                KaydedenKullanici = x.KaydedenKullanici,
+                KayitTarihi = x.KayitTarihi,
+                Uzanti = x.Uzanti
 
-            //var dosya = haber.Dosya.Select(x => new Dosya
-            //{
-            //    Id = x.Id,
-            //    Adi = x.Adi,
-            //    Aciklama = x.Aciklama,
-            //    Boyutu = x.Boyutu,
-            //    Yolu = x.Yolu,
-            //    DuzenlemeTarihi = x.DuzenlemeTarihi,
-            //    DuzenleyenKullanici = x.DuzenleyenKullanici,
-            //    KaydedenKullanici = x.KaydedenKullanici,
-            //    KayitTarihi = x.KayitTarihi,
-            //    Uzanti = x.Uzanti
-
-            //});
-            //haber.Dosya = dosya.ToArray();
-            
+            });
+            haber.Dosya = dosya?.ToArray();
+            HaberDosya.Yolu = haber.Dosya?.FirstOrDefault().Yolu;
             HaberServisi.Add(haber);
         }
         protected override void OnParametersSet()
         {
-            if (HaberId != 0)
+            if (HaberId != 0 || HaberDosya.Yolu!=null)
             {
                 Title = "Duzenle";
-                HaberDosya.Yolu = haber.Dosya.FirstOrDefault()?.Yolu;
-                haber = HaberServisi.Get(HaberId);               
+                haber = HaberServisi.Get(HaberId);                
             }
         }
 
@@ -84,6 +82,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         protected void SilmeyiOnayla(int haberId)
         {
             ModalDialog.Open();
+
             haber = Haberler.FirstOrDefault(x => x.Id == haberId);
         }
         public ModalComponent ModalDialog { get; set; }
@@ -93,7 +92,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
             if (haber.Id == 0)
                 return;
-
+            HaberDosya.Yolu = haber.Dosya?.FirstOrDefault().Yolu;
             HaberServisi.Remove(haber.Id);
             haber = new HaberDuyuru();
             TumHaberleriGetir();
@@ -105,6 +104,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
             TumHaberleriGetir();
             TumKategorileriGetir();
+            
             return Task.CompletedTask;
         }
 

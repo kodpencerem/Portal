@@ -6,7 +6,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Entities.Models.Dosya;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -43,11 +42,21 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         private bool ShowCroper { get; set; } = false;
 
-        [Parameter]
-        public Dosya Value { get; set; } = new Dosya();
+        private string _value;
+
+        [Parameter] public EventCallback<string> ValueInputChanged { get; set; }
 
         [Parameter]
-        public EventCallback<Dosya> ValueChanged { get; set; } = new EventCallback<Dosya>();
+        public string ValueInput
+        {
+            get => _value;
+            set
+            {
+                if (_value == value) return;
+                _value = value;
+                ValueInputChanged.InvokeAsync(value);
+            }
+        }
 
         /// <summary>
         /// Resmin üzerinde kırpma ve boyutlandırma işlemleri için bir araç açar
@@ -170,14 +179,8 @@ namespace VedasPortal.Components.UploadComponent
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
-            var newFile = new Dosya
-            {
-                Adi = fileName,
-                Boyutu = browserFileResizer.Size.ToString(),
-                Uzanti = fileName.Substring('.'),
-            };
-            Value = newFile;
-            await ValueChanged.InvokeAsync(Value);
+            ValueInput = fileName;
+            await ValueInputChanged.InvokeAsync(ValueInput);
         }
 
         /// <summary>

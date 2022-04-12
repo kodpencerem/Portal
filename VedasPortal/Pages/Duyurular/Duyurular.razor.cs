@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
@@ -15,8 +15,7 @@ namespace VedasPortal.Pages.Duyurular
         protected IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
         protected IEnumerable<HaberDuyuru> duyurular;
 
-
-
+        public Dosya DuyuruDosya { get; set; } = new();
         protected string SearchString { get; set; }
         protected override Task OnInitializedAsync()
         {
@@ -31,11 +30,5 @@ namespace VedasPortal.Pages.Duyurular
             return duyurular;
 
         }
-
-
-        protected string DialogGorunur { get; set; } = "none";
-
-        public ModalComponent ModalDialog { get; set; }
-
     }
 }

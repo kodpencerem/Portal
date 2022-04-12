@@ -17,7 +17,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <InputFile @bind-Value="@KatilimciDosya.Yolu" />
+                                <ImageResizer @bind-ValueInput="@KatilimciDosya.Yolu" />
                                 @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
                                     {
                                         <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />

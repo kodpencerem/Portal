@@ -1,6 +1,5 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/{duyuruId:int}"
-@using Microsoft.AspNetCore.Hosting
 @inherits DuyuruEkleDuzenleModel
 
 <div class="col-12">
@@ -11,15 +10,12 @@
                 Duyuru @Title
             </CardHeader>
             <CardBody>
-
-
-
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-Value="@DuyuruDosya" />
+                                <ImageResizer @bind-ValueInput="@DuyuruDosya.Yolu" />
                             </div>
 
                         </div>
@@ -39,7 +35,6 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.AltBaslik)" />
                         </div>
-
 
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
@@ -101,9 +96,6 @@
 
                     </div>
                 </div>
-
-
-
             </CardBody>
 
             <CardFotter>
@@ -123,7 +115,6 @@
         </CardComponent>
     </EditForm>
 </div>
-
 
 @if (Duyurular == null)
 
@@ -181,7 +172,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@*@duyuru.Dosya.FirstOrDefault().Yolu*@</td>
+                                    <td><img src="images/uploaded/@DuyuruDosya?.Yolu" width="50" height="50" /></td>
 
                                     <td>@duyuru.Adi</td>
                                     <td>

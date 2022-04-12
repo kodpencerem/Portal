@@ -15,9 +15,9 @@
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
-                            @*<div class="col-md-10">
-                                <ImageResizer @bind-BindingValue="@oneri.Dosya.FirstOrDefault()?.Yolu" />
-                            </div>*@
+                            <div class="col-md-10">
+                                <ImageResizer @bind-ValueInput="@OneriDosya.Yolu" />
+                            </div>
                             
                         </div>
 
@@ -182,7 +182,7 @@ else
                                         <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td>@oneri.Dosya.FirstOrDefault()?.Yolu</td>
+                                <td><img src="images/uploaded/@OneriDosya.Yolu" /></td>
 
                                 <td>@oneri.Adi</td>
 

@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-Value="@IkUygulamaDosya" />
+                                <ImageResizer @bind-ValueInput="@IkUygulamaDosya.Yolu" />
                             </div>
                         </div>
 
@@ -142,7 +142,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@ikUygulama.Dosya.FirstOrDefault()?.Yolu</td>
+                                    <td><img src="images/uploaded/@IkUygulamaDosya?.Yolu" /></td>
 
                                     <td>@ikUygulama.Adi</td>
                                     <td>

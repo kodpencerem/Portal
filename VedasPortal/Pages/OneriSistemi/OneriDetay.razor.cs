@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Repository.Interface;
 
@@ -12,7 +13,7 @@ namespace VedasPortal.Pages.OneriSistemi
 
         [Parameter]
         public int OneriId { get; set; }
-
+        public Dosya OneriDetayDosya { get; set; }
         private Oneri OneriDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()

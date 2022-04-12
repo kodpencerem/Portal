@@ -18,14 +18,14 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">Tanıtım Kapağı Seçin</label>
                         <div class="col-md-10">
-                            <ImageResizer Value="@EgitimDosya" />
+                            <ImageResizer @bind-ValueInput="@EgitimDosya.Yolu" />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="form-label col-md-2">İçerik Ekleyin</label>
                         <div class="col-md-10">
-                            <MultipleUpload ValuePath="@EgitimDosya.Yolu" />
+                            <MultipleUpload @bind-ValueInput="@EgitimDosya.Yolu" />
                         </div>
                     </div>
 
