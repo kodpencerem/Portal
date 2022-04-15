@@ -2,8 +2,11 @@
 
 <div class="mb-3">
     <InputFile @onclick="OpenModal" 
-               @bind-Value="@ValueInput" class="form-control form-control-lg" id="input1" 
-               OnChange="OnInputFileChange" multiple>
+               @bind-Value="@ValueInput" 
+               class="form-control form-control-lg" 
+               id="input1" 
+               OnChange="OnInputFileChange" 
+               multiple>
     </InputFile>
 </div>
 
@@ -17,7 +20,8 @@
                 @foreach (var image in PreviewImagePath)
                 {
                     <center>
-                        <img class="img-fluid" src="@image" />
+                        <img class="img-fluid" 
+                             src="@image" />
                     </center>
                 }
             </div>

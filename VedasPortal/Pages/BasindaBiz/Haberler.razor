@@ -12,16 +12,19 @@ else
 {
     <div class="col-12">
         <div class="row">
-            @foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" && h.AktifPasif == true))
+            @foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" && 
+             h.AktifPasif == true))
             {
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" 
-                                 height="200" 
+                            <img width="375" 
+                                 height="180" 
                                  alt="@haber.Adi" 
-                                 src="images/uploaded/@HaberDosya?.Yolu" 
-                                 class="rounded-circle author-box-picture">
+                                 src="images/uploaded/@string.Concat(haber.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               haber.Dosya?.FirstOrDefault().Uzanti)" 
+                                 class=" author-box-picture">
                             <div class="clearfix">
                             </div>
                         </div>
@@ -35,8 +38,8 @@ else
                                     <a href="haber/detay/@haber.Id">
                                         @if (haber.Adi != null)
                                         {
-                                            <MarkDownComponent Content="@(haber.Adi.Length>60 ? 
-                                                                          haber.Adi.Substring(0, 27) + "..." : 
+                                            <MarkDownComponent Content="@(haber.Adi.Length>30 ? 
+                                                                          haber.Adi.Substring(0, 19) + "..." : 
                                                                           haber.Adi)" />
                                         }
                                     </a>
@@ -80,8 +83,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 210px;
-        max-height: 210px;
+        min-height: 220px;
+        max-height: 290px;
     }
 
     .theme-white .btn-primary {

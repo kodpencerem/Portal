@@ -165,6 +165,10 @@ namespace VedasPortal
                 DosyaKategori.Rar => "Arşiv Dosya",
                 DosyaKategori.Xlsx => "Excel Döküman",
                 DosyaKategori.Zip => "Sıkıştırılmış Dosya",
+                DosyaKategori.Jpg => "Jpg Resmi",
+                DosyaKategori.Bitmap =>"Bitmap Resmi",
+                DosyaKategori.Gif =>  "Hareketli Resim",
+                DosyaKategori.Jpeg => "Jpeg Resmi",
                 _ => "",
             };
         }

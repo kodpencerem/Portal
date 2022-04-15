@@ -5,7 +5,7 @@
 
 
 <div class="col-12">
-    <EditForm Model="@dosya" OnValidSubmit="Kayit">
+    <EditForm Model="@dokuman" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -17,29 +17,29 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
-                                <MultipleUpload @bind-ValuePath="@dosya.Yolu" />
+                                <MultipleUpload @bind-ValueInput="@dokuman.Yolu" />
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Dosya Adı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="dosya.Adi" />
+                                <InputText class="form-control" @bind-Value="dokuman.Adi" />
                             </div>
-                            <ValidationMessage For="@(() => dosya.Adi)" />
+                            <ValidationMessage For="@(() => dokuman.Adi)" />
                         </div>
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Dosya Boyutu</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="dosya.Boyutu" />
+                                <InputText class="form-control" @bind-Value="dokuman.Boyutu" />
                             </div>
-                            <ValidationMessage For="@(() => dosya.Boyutu)" />
+                            <ValidationMessage For="@(() => dokuman.Boyutu)" />
                         </div>
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@dosya.Kategori" class="form-control">
+                                <InputSelect @bind-Value="@dokuman.Kategori" class="form-control">
                                     <option></option>
                                     @if (Kategoriler != null)
                                     {
@@ -58,9 +58,9 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Dosya Şimdi Yayınlasın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="dosya.AktifPasif" />
+                                    <InputCheckbox class="form-control" @bind-Value="dokuman.AktifPasif" />
                                 </div>
-                                <ValidationMessage For="@(() => dosya.AktifPasif)" />
+                                <ValidationMessage For="@(() => dokuman.AktifPasif)" />
                             </div>
 
 
@@ -72,13 +72,13 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value=@dosya.Aciklama
+                                                @bind-Value=@dokuman.Aciklama
                                                 Label="Açıklama"
                                                 UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
 
                             </div>
-                            <ValidationMessage For="@(() => dosya.Aciklama)" />
+                            <ValidationMessage For="@(() => dokuman.Aciklama)" />
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,8 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="~/images/uploaded/@dosya?.Yolu" width="50" height="50"/></td>
+                                    <td><img src="images/uploaded/@string.Concat(dosya.Adi,".",
+                                                                   dosya.Uzanti)" width="50" height="50"/></td>
 
                                     <td>@dosya.Adi</td>
 

@@ -146,18 +146,7 @@
             </CardFotter>
         </CardComponent>
 
-        <style>
-            .row {
-                display: -ms-flexbox;
-                display: -webkit-box;
-                display: flex;
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-                margin-top: -15px;
-                margin-right: -15px;
-                margin-left: -15px;
-            }
-        </style>
+
     </EditForm>
 </div>
 
@@ -206,7 +195,7 @@ else
 
 
 
-                            @foreach (var egitim in Egitimler)
+                            @foreach (var egitim in Egitimler.Where(d=>d.AktifPasif==true).ToList())
 
                             {
                                 <tr>
@@ -217,7 +206,8 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@EgitimDosya.Yolu</td>
+                                    <td><img src="images/uploaded/@string.Concat(egitim.Dosya.FirstOrDefault().Adi,".",
+                                                                   egitim.Dosya.FirstOrDefault().Uzanti)" /></td>
 
                                     <td>@egitim.Adi</td>
 

@@ -48,9 +48,14 @@ else
                                             <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
                                             <a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
                                             <p class="my-1">
-                                                @if (dFaaliyet.Aciklama != null)
-                                                {
-                                                    <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ?
+                                                <img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
+                                                                   dFaaliyet.Dosya.FirstOrDefault().Uzanti)" 
+                                                     height="350"
+                                                     width="600"
+                                                     />
+                                                     @if (dFaaliyet.Aciklama !=null)
+                                                     {
+                                                <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ?
                                                                                   dFaaliyet.Aciklama.Substring(0, 280) + "..." :
                                                                                   dFaaliyet.Aciklama)" />
                                                 }
@@ -69,7 +74,7 @@ else
                                 <a href="javascript:void(0)" class="card-footer card-link text-center small ">
                                     Tümünü Görüntüle
                                 </a>
-                                <a href='duzelticifaaliyet/duzenle'
+                                <a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
                                    class="btn btn-sm btn-info btn-outline-dark "
                                    role="button">Faaliyeti Düzenle</a>
 

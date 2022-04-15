@@ -66,7 +66,6 @@ else
 @code { [Inject]
     public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
-
     protected IEnumerable<HaberDuyuru> Duyurular { get; set; }
 
     protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
@@ -74,7 +73,6 @@ else
         Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); ;
 
         return Duyurular;
-
     }
 
     public Dosya HaberDosya { get; set; } = new Dosya();
@@ -82,6 +80,5 @@ else
     protected override Task OnInitializedAsync()
     {
         TumDuyurulariGetir();
-
         return Task.CompletedTask;
     } }

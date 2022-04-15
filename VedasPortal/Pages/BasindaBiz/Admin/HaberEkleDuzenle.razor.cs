@@ -19,7 +19,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> DosyaServisi { get; set; }
+        public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -64,8 +64,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 HaberDuyuruId = haber.Id,
+                
             };
-            DosyaServisi.Add(dosya);
+            HaberDosyaServisi.Add(dosya);
         }
         protected override void OnParametersSet()
         {
@@ -99,7 +100,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
             TumHaberleriGetir();
             TumKategorileriGetir();
-
             return Task.CompletedTask;
         }
 

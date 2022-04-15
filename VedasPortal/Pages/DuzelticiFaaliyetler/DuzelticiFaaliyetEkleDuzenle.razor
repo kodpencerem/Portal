@@ -12,21 +12,13 @@
                 Düzeltici ve Düzenleyici Faaliyetler @Title
             </CardHeader>
             <CardBody>
-
-
-
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
-                                <InputFile @bind-ValuePath="@DFaaliyetDosya" />
-                                @*@if (!string.IsNullOrEmpty(haber.Dosya.Yolu?.ToString()))
-                                    {
-                                        <img src="@("images/uploaded/"+@haber.Dosya.Yolu)" height="150" />
-                                    }*@
+                                <ImageResizer @bind-ValueInput="@DFaaliyetDosya.Yolu" />
                             </div>
-                            @*<ValidationMessage For="@(() => haber.Dosya.Yolu)" />*@
                         </div>
 
                         <div class="form-group row">
@@ -100,9 +92,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </CardBody>
             <CardFotter>
                 <div class="form-group">
@@ -124,11 +113,9 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
-
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
@@ -158,13 +145,9 @@ else
                         </thead>
                         <tbody>
 
-
-
-                            @foreach (var duzelticifaaliyet in DuzelticiFaaliyetler)
+                            @foreach (var duzelticifaaliyet in DuzelticiFaaliyetler.Where(d => d.AktifPasif == true).ToList())
 
                             {
-
-
                                 <tr>
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
@@ -173,13 +156,16 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@DFaaliyetDosya?.Yolu" /></td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(duzelticifaaliyet.Dosya.FirstOrDefault().Adi,".",
+                                                                   duzelticifaaliyet.Dosya.FirstOrDefault().Uzanti)"
+                                             width="50"
+                                             height="50" />
+                                    </td>
 
                                     <td>@duzelticiFaaliyet.FaaliyetGurupAdi</td>
 
-
                                     <td>
-                                        <a href="@($"duzelticifaaliyet/detay/{duzelticifaaliyet.Id}")" class="btn btn-primary">Düzeltici Faaliyet Detayı</a>
                                         <a href='/duzelticifaaliyet/duzenle/@duzelticifaaliyet.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
                                                 @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duzelticifaaliyet.Id);})">
@@ -187,9 +173,6 @@ else
                                         </button>
                                     </td>
                                 </tr>
-
-
-
                             }
                         </tbody>
                     </table>
@@ -199,7 +182,6 @@ else
         </CardComponent>
 
     </div>
-
 
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
@@ -213,7 +195,6 @@ else
     </ModalComponent>
 
 }
-
 
 <style>
     .modal-content {

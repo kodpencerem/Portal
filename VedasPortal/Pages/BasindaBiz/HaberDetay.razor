@@ -6,106 +6,126 @@
             <div class="container-fliud">
                 @{ if (HaberDetayGetir != null)
                     {
-    <div class="wrapper row">
-        <div class="preview col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                        <div class="wrapper row">
+                            <div class="preview col-lg-4 col-sm-12 col-md-6 col-xs-12">
 
-            <div class="preview-pic tab-content ">
-                <div class="tab-pane active col-lg-4 col-sm-12 col-md-6 col-xs-12"
-                     id="pic-1">
-                    <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                         width="500"
-                         alt="@HaberDetayGetir.Adi" />
-                </div>
-                <div class="tab-pane"
-                     id="pic-2">
-                    <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                         width="500"
-                         alt="@HaberDetayGetir.Adi" />
-                </div>
-                <div class="tab-pane"
-                     id="pic-3">
-                    <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                         width="500"
-                         alt="@HaberDetayGetir.Adi" />
-                </div>
-                <div class="tab-pane"
-                     id="pic-4">
-                    <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                         width="500"
-                         alt="@HaberDetayGetir.Adi" />
-                </div>
-                <div class="tab-pane"
-                     id="pic-5">
-                    <img src="images/uploaded/@HaberDetayGetir.Dosya"
-                         width="500"
-                         alt="@HaberDetayGetir.Adi" />
-                </div>
-            </div>
-            <ul class="preview-thumbnail nav nav-tabs">
-                <li class="active">
-                    <a data-target="#pic-1" data-toggle="tab">
-                        <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                             width="100"
-                             alt="@HaberDetayGetir.Adi" />
-                    </a>
-                </li>
-                <li>
-                    <a data-target="#pic-2"
-                       data-toggle="tab">
-                        <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                             width="97"
-                             alt="@HaberDetayGetir.Adi" />
-                    </a>
-                </li>
-                <li>
-                    <a data-target="#pic-3"
-                       data-toggle="tab">
-                        <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                             width="97"
-                             alt="@HaberDetayGetir.Adi" />
-                    </a>
-                </li>
-                <li>
-                    <a data-target="#pic-4"
-                       data-toggle="tab">
-                        <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                             width="97"
-                             alt="@HaberDetayGetir.Adi" />
-                    </a>
-                </li>
-                <li>
-                    <a data-target="#pic-5"
-                       data-toggle="tab">
-                        <img src="images/uploaded/@HahberDetayDosya?.Yolu"
-                             width="97"
-                             alt="@HaberDetayGetir.Adi" />
-                    </a>
-                </li>
-            </ul>
+                                <div class="preview-pic tab-content ">
+                                    <div class="tab-pane active col-lg-4 col-sm-12 col-md-6 col-xs-12"
+                                         id="pic-1">
+                                        <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="410"
+                                             alt="@HaberDetayGetir.Adi" />
+                                    </div>
+                                    <div class="tab-pane"
+                                         id="pic-2">
+                                        <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="410"
+                                             alt="@HaberDetayGetir.Adi" />
+                                    </div>
+                                    <div class="tab-pane"
+                                         id="pic-3">
+                                        <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="410"
+                                             alt="@HaberDetayGetir.Adi" />
+                                    </div>
+                                    <div class="tab-pane"
+                                         id="pic-4">
+                                        <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="410"
+                                             alt="@HaberDetayGetir.Adi" />
+                                    </div>
+                                    <div class="tab-pane"
+                                         id="pic-5">
+                                        <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="410"
+                                             alt="@HaberDetayGetir.Adi" />
+                                    </div>
+                                </div>
+                                <ul style="margin-left:7px" class="preview-thumbnail nav nav-tabs">
+                                    <li class="active">
+                                        <a data-target="#pic-1" data-toggle="tab">
+                                            <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                                 width="76"
+                                                 alt="@HaberDetayGetir.Adi" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#pic-2"
+                                           data-toggle="tab">
+                                            <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                                 width="76"
+                                                 alt="@HaberDetayGetir.Adi" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#pic-3"
+                                           data-toggle="tab">
+                                            <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                                 width="76"
+                                                 alt="@HaberDetayGetir.Adi" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#pic-4"
+                                           data-toggle="tab">
+                                            <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                                 width="76"
+                                                 alt="@HaberDetayGetir.Adi" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-target="#pic-5"
+                                           data-toggle="tab">
+                                            <img src="images/uploaded/@string.Concat(HaberDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               HaberDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                                 width="76"
+                                                 alt="@HaberDetayGetir.Adi" />
+                                        </a>
+                                    </li>
+                                </ul>
 
-        </div>
-        <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
-            <h3 class="product-title">@HaberDetayGetir.Adi</h3>
-            <div class="rating">
-                <div class="stars">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="review-no">41 Personel Gördü</span>
-            </div>
-            <p class="haber-detay">@((MarkupString) HaberDetayGetir.Aciklama)</p>
+                            </div>
+                            <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
+                                <h3 class="product-title">@HaberDetayGetir.Adi</h3>
+                                <div class="rating">
+                                    <div class="stars">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                    <span class="review-no">41 Personel Gördü</span>
+                                </div>
+                                <p class="haber-detay">@((MarkupString) HaberDetayGetir.Aciklama)</p>
 
-            <p class="vote"><strong>91%</strong> personel bu yayını beğendi <strong>(87 Beğeni)</strong></p>
+                                <p class="vote"><strong>91%</strong> personel bu yayını beğendi <strong>(87 Beğeni)</strong></p>
 
-            <div class="action">
+                                <div class="action">
 
-                <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
-            </div>
-        </div>
-    </div> } }
+                                    <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                                </div>
+                            </div>
+                        </div> } }
 
             </div>
 

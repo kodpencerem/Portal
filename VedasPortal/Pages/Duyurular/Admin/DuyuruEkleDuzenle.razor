@@ -1,9 +1,9 @@
 ﻿@page "/duyuru/ekle"
-@page "/duyuru/duzenle/{duyuruId:int}"
+@page "/duyuru/duzenle/{DuyuruId:int}"
 @inherits DuyuruEkleDuzenleModel
 
 <div class="col-12">
-    <EditForm Model="@duyuru" OnValidSubmit="HaberKayit">
+    <EditForm Model="@duyuru" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -35,7 +35,6 @@
                             </div>
                             <ValidationMessage For="@(() => duyuru.AltBaslik)" />
                         </div>
-
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
@@ -77,32 +76,32 @@
                                     <InputCheckbox class="form-control" @bind-Value="duyuru.SliderdaGoster" />
                                 </div>
                                 <ValidationMessage For="@(() => duyuru.SliderdaGoster)" />
+
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 float-right">
+
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value="@duyuru.Aciklama"
+                                                @bind-Value=@duyuru.Aciklama
                                                 Label="Açıklama"
                                                 UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
+
                             </div>
                             <ValidationMessage For="@(() => duyuru.Aciklama)" />
                         </div>
-
-
                     </div>
                 </div>
             </CardBody>
-
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"
-                            @onclick="HaberKayit">
+                            class="btn btn-primary"                            
+                            @onclick="Kayit">
                         Kaydet
                     </button>
                     <button class="btn btn-danger"
@@ -125,18 +124,15 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
-
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
                         Duyurular
                     </div>
                 </div>
-
             </CardHeader>
             <CardBody>
                 <div class="table-responsive">
@@ -153,15 +149,12 @@ else
                                 <th>Resim</th>
 
                                 <th>Duyuru Adı</th>
-                                <th>Duyuru Durumu</th>
+
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
-
-
-
-                            @foreach (var duyuru in Duyurular.Where(d => d.Kategori == HaberDuyuruKategori.Duyuru).ToList())
+                            @foreach (var duyuru in Duyurular.Where(h => h.Kategori == HaberDuyuruKategori.Duyuru).ToList())
 
                             {
                                 <tr>
@@ -172,20 +165,13 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@DuyuruDosya?.Yolu" width="50" height="50" /></td>
+                                    <td><img src="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
+                                                   duyuru.Dosya.FirstOrDefault().Uzanti)"
+                                             width="50" 
+                                             height="50" />
+                                    </td>
 
                                     <td>@duyuru.Adi</td>
-                                    <td>
-                                        @if (duyuru.AktifPasif == true)
-                                        {
-
-
-                                            <div class="badge badge-success badge-shadow">Yayında</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
-                                    </td>
 
                                     <td>
                                         <a href="@($"duyuru/detay/{duyuru.Id}")" class="btn btn-primary">Duyuru Detayı</a>
@@ -196,7 +182,6 @@ else
                                         </button>
                                     </td>
                                 </tr>
-
                             }
                         </tbody>
                     </table>
@@ -204,29 +189,18 @@ else
 
             </CardBody>
         </CardComponent>
-
     </div>
-
-
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
         </ModalHeader>
 
         <ModalFooter>
-            <button class="btn btn-danger"
-                    @onclick="@(()=>{DuyuruSil(); ModalDialog.Close();})">
-                Evet
-            </button>
-            <button class="btn btn-warning"
-                    @onclick="@(()=>{ModalDialog.Close();})">
-                Hayır
-            </button>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
-
 }
-
 
 <style>
     .modal-content {

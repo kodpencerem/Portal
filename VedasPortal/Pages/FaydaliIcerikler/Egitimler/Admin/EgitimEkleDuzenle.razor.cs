@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
@@ -18,6 +20,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         public IBaseRepository<Egitim> EgitimServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> EgitimDosyaServisi { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
@@ -32,7 +37,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         protected IEnumerable<Egitim> TumEgitimleriGetir()
         {
-            Egitimler = EgitimServisi.GetAll();
+            Egitimler = EgitimServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Egitimler;
 
         }
@@ -61,10 +66,23 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected void Kayit()
         {
             EgitimServisi.Add(egitim);
-
-            EgitimDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
-
             
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            FileInfo fileInfo = new FileInfo(filePath);
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                EgitimId = egitim.Id,
+
+            };
+            EgitimDosyaServisi.Add(dosya);
+
+
         }
         protected override void OnParametersSet()
         {

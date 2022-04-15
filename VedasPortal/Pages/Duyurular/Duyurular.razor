@@ -19,11 +19,12 @@ else
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" 
-                                 height="200" 
+                            <img width="375" 
+                                 height="180" 
                                  alt="@duyuru.Adi" 
-                                 src="images/uploaded/@DuyuruDosya?.Yolu" 
-                                 class="rounded-circle author-box-picture">
+                                 src="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
+                                                   duyuru.Dosya.FirstOrDefault().Uzanti)"
+                                 class=" author-box-picture">
                             <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
@@ -38,8 +39,8 @@ else
 
                                         @if (duyuru.Adi != null)
                                         {
-                                            <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? 
-                                                                          duyuru.Adi.Substring(0, 27) + "..." : 
+                                            <MarkDownComponent Content="@(duyuru.Adi.Length>30 ? 
+                                                                          duyuru.Adi.Substring(0, 19) + "..." : 
                                                                           duyuru.Adi)" />
                                         }
                                     </a>
@@ -80,8 +81,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 210px;
-        max-height: 210px;
+        min-height: 220px;
+        max-height: 290px;
     }
 
     .theme-white .btn-primary {

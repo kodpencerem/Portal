@@ -23,7 +23,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         public int DosyaId { get; set; }
 
         protected string Title = "Ekle";
-        public Dosya dosya = new();
+        public Dosya dokuman = new();
 
         
 
@@ -48,6 +48,18 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
         protected void Kayit()
         {
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                Id = dokuman.Id,
+
+            };
             DosyaServisi.Add(dosya);
 
             
@@ -58,7 +70,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
             if (DosyaId != 0)
             {
                 Title = "Duzenle";
-                dosya = DosyaServisi.Get(DosyaId);
+                dokuman = DosyaServisi.Get(DosyaId);
             }
         }
 
@@ -67,18 +79,18 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         protected void SilmeyiOnayla(int dosyaId)
         {
             ModalDialog.Open();
-            dosya = Dosyalar.FirstOrDefault(x => x.Id == dosyaId);
+            dokuman = Dosyalar.FirstOrDefault(x => x.Id == dosyaId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
         protected void Sil()
         {
-            if (dosya.Id == 0)
+            if (dokuman.Id == 0)
                 return;
 
-            DosyaServisi.Remove(dosya.Id);
-            dosya = new Dosya();
+            DosyaServisi.Remove(dokuman.Id);
+            dokuman = new Dosya();
             TumDosyalariGetir();
         }
 
@@ -93,7 +105,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
         public void Temizle()
         {
-            dosya = null;
+            dokuman = null;
 
             UrlNavigationManager.NavigateTo("/dosya/ekle");
         }

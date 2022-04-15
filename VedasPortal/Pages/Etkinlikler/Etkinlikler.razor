@@ -18,11 +18,13 @@ else
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
-                            <img width="200" 
-                                 height="200" 
+                            <img width="375" 
+                                 height="180" 
                                  alt="@etkinlik.Adi" 
-                                 src="images/uploaded/@EtkinlikDosya?.Yolu" 
-                                 class="rounded-circle author-box-picture">
+                                 src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               etkinlik.Dosya?.FirstOrDefault().Uzanti)" 
+                                 class="author-box-picture">
                             <div class="clearfix"></div>
                         </div>
                         <div class="article-details">
@@ -35,8 +37,8 @@ else
                                     <a href="etkinlik/detay/@etkinlik.Id">
                                         @if (etkinlik.Adi != null)
                                         {
-                                            <MarkDownComponent Content="@(etkinlik.Adi.Length>60 ? 
-                                                                          etkinlik.Adi.Substring(0, 27) + "..." : 
+                                            <MarkDownComponent Content="@(etkinlik.Adi.Length>30 ? 
+                                                                          etkinlik.Adi.Substring(0, 19) + "..." : 
                                                                           etkinlik.Adi)" />
                                         }
                                     </a>
@@ -70,8 +72,8 @@ else
 
 <style>
     .article .article-details {
-        min-height: 310px;
-        max-height: 310px;
+        min-height: 220px;
+        max-height: 280px;
     }
 
     .theme-white .btn-primary {

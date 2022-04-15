@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         public IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> EtkinlikDosyaServisi { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
@@ -32,7 +36,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
-            Etkinlikler = EtkinlikServisi.GetAll();
+            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Etkinlikler;
 
         }
@@ -61,6 +65,19 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         protected void EtkinlikKayit()
         {
             EtkinlikServisi.Add(etkinlik);
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                EtkinlikId = etkinlik.Id,
+
+            };
+            EtkinlikDosyaServisi.Add(dosya);
 
         }
         protected override void OnParametersSet()

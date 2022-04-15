@@ -16,12 +16,11 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@EtkinlikDosya.Yolu" />
-                                @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
+                                @if (!string.IsNullOrEmpty(etkinlik.Dosya?.FirstOrDefault().Yolu.ToString()))
                                     {
-                                        <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
-                                    }*@
+                                        <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)" height="150" />
+                                    }
                             </div>
-                            @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
                         </div>
 
                         <div class="form-group row">
@@ -173,7 +172,7 @@ else
 
 
 
-                            @foreach (var etkinlik in Etkinlikler)
+                            @foreach (var etkinlik in Etkinlikler.Where(d=>d.AktifPasif==true).ToList())
 
                             {
 
@@ -186,7 +185,10 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td> <img src="images/uploaded/@EtkinlikDosya?.Yolu" />  </td>
+                                    <td> <img src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,".",
+                                                                   etkinlik.Dosya?.FirstOrDefault().Uzanti)" 
+                                              width="50"
+                                              height="50"/>  </td>
 
                                     <td>@etkinlik.Adi</td>
 

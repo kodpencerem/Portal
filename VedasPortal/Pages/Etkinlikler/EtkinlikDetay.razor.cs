@@ -13,7 +13,9 @@ namespace VedasPortal.Pages.Etkinlikler
 
         [Parameter]
         public int EtkinlikId { get; set; }
-        public Dosya EtkinlikDetayDosya { get; set; }
+
+        public Dosya EtkinlikDetayDosya { get; set; } = new();
+
         private Etkinlik EtkinlikDetayGetir { get; set; }
 
         protected override Task OnInitializedAsync()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         public IBaseRepository<DuzelticiFaaliyet> DuzelticiFaaliyetlerServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> DuzelticiFaaliyetDosya { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
@@ -32,7 +36,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         protected IEnumerable<DuzelticiFaaliyet> TumFaaliyetleriGetir()
         {
-            DuzelticiFaaliyetler = DuzelticiFaaliyetlerServisi.GetAll();
+            DuzelticiFaaliyetler = DuzelticiFaaliyetlerServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return DuzelticiFaaliyetler;
 
         }
@@ -51,22 +55,19 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         {
             DuzelticiFaaliyetlerServisi.Add(duzelticiFaaliyet);
 
-            DFaaliyetDosya.Yolu = duzelticiFaaliyet.Dosya.FirstOrDefault()?.Yolu;
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                DuzelticiFaaliyetId = duzelticiFaaliyet.Id,
 
-            //var dosya = haber.Dosya.Select(x => new Dosya {
-            //    Id= x.Id,
-            //    Adi=x.Adi,
-            //    Aciklama= x.Aciklama,
-            //    Boyutu = x.Boyutu,
-            //    Yolu = x.Yolu,
-            //    DuzenlemeTarihi= x.DuzenlemeTarihi,
-            //    DuzenleyenKullanici = x.DuzenleyenKullanici,
-            //    KaydedenKullanici = x.KaydedenKullanici,
-            //    KayitTarihi = x.KayitTarihi,
-            //    Uzanti= x.Uzanti
-
-            //});
-            //haber.Dosya = dosya.ToArray();
+            };
+            DuzelticiFaaliyetDosya.Add(dosya);
 
         }
         protected override void OnParametersSet()
