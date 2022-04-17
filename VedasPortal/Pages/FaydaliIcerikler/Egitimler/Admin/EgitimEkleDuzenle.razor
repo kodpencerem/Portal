@@ -195,7 +195,7 @@ else
 
 
 
-                            @foreach (var egitim in Egitimler.Where(d=>d.AktifPasif==true).ToList())
+                            @foreach (var egitim in Egitimler.Where(d => d.AktifPasif == true).ToList())
 
                             {
                                 <tr>
@@ -206,8 +206,16 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@string.Concat(egitim.Dosya.FirstOrDefault().Adi,".",
-                                                                   egitim.Dosya.FirstOrDefault().Uzanti)" /></td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
+                                                                       egitim.Dosya?.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       egitim.Dosya?.FirstOrDefault().Uzanti)" 
+                                             width="50"
+                                             height="50"
+                                             alt=""
+                                             />
+                                    </td>
 
                                     <td>@egitim.Adi</td>
 

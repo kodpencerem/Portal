@@ -144,7 +144,14 @@ else
                                         <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </td>
-                                <td><img src="images/uploaded/@RehberDosya.Yolu" /></td>
+                                <td>
+                                    <img src="images/uploaded/@string.Concat(
+                                                                       rehber.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       rehber.Dosya.FirstOrDefault().Uzanti)"
+                                         width="50"
+                                         height="50" />
+                                </td>
 
                                 <td>@rehber.Adi</td>
                                 <td>@rehber.Soyadi</td>

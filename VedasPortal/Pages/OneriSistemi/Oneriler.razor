@@ -37,18 +37,20 @@ else
                     {
 
                         <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                            <img src="images/uploaded/@OneriDosya?.Yolu" 
-                                 height="500" 
-                                 width="500" 
-                                 alt="" 
-                                 class="img-fluid">
-                            <a class="post-title" 
+                            <img src="images/uploaded/@string.Concat(
+                                                                       oneri.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       oneri.Dosya.FirstOrDefault().Uzanti)"
+                                 width="50"
+                                 height="50"
+                                 class="img-fluid" />
+                            <a class="post-title"
                                href="post-details.html">
                                 <h3 class="text-black">
                                     @if (oneri.Adi != null)
                                     {
-                                        <MarkDownComponent Content="@(oneri.Adi.Length>60 ? 
-                                                                      oneri.Adi.Substring(0, 27) + "..." : 
+                                        <MarkDownComponent Content="@(oneri.Adi.Length>30 ?
+                                                                      oneri.Adi.Substring(0, 19) + "..." :
                                                                       oneri.Adi)" />
                                     }
                                 </h3>
@@ -56,8 +58,8 @@ else
                             <p>
                                 @if (oneri.Aciklama != null)
                                 {
-                                    <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ? 
-                                                                  oneri.Aciklama.Substring(0, 280) + "..." : 
+                                    <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ?
+                                                                  oneri.Aciklama.Substring(0, 280) + "..." :
                                                                   oneri.Aciklama)" />}
                             </p>
 

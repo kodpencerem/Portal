@@ -142,7 +142,15 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@IkUygulamaDosya?.Yolu" /></td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
+                                                                       ikUygulama.Dosya?.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       ikUygulama.Dosya?.FirstOrDefault().Uzanti)" 
+                                             width="50"
+                                             height="50"
+                                             />
+                                    </td>
 
                                     <td>@ikUygulama.Adi</td>
                                     <td>

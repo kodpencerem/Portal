@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public IBaseRepository<Oneri> OneriServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> OneriDosyaServisi { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int OneriId { get; set; }
+        public int? OneriId { get; set; }
 
         protected string Title = "Ekle";
         public Oneri oneri = new();
@@ -30,7 +34,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
         {
-            Oneriler = OneriServisi.GetAll();
+            Oneriler = OneriServisi?.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Oneriler;
 
         }
@@ -72,13 +76,28 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         protected void Kayit()
         {
             OneriServisi.Add(oneri);
+
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                OneriId = oneri.Id,
+
+            };
+            OneriDosyaServisi.Add(dosya);
         }
+
         protected override void OnParametersSet()
         {
-            if (OneriId != 0)
+            if (OneriId != 0 || OneriDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                oneri = OneriServisi.Get(OneriId);
+                oneri = OneriServisi.Get((int)OneriId);
                 
             }
         }

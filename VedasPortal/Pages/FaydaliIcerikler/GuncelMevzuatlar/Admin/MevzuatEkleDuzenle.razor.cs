@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected IEnumerable<Mevzuat> TumMevzuatlariGetir()
         {
-            Mevzuatlar = MevzuatServisi.GetAll();
+            Mevzuatlar = MevzuatServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
 
             return Mevzuatlar;
 
@@ -59,9 +60,25 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             Birimler = list;
         }
 
+        [Inject]
+        public IBaseRepository<Dosya> MevzuatDosyaServisi { get; set; }
         protected void Kayit()
         {
             MevzuatServisi.Add(mevzuat);
+
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                MevzuatId = mevzuat.Id,
+
+            };
+            MevzuatDosyaServisi.Add(dosya);
 
         }
         protected override void OnParametersSet()
@@ -72,8 +89,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
                 mevzuat = MevzuatServisi.Get(MevzuatId);
             }
         }
-
-
 
         protected void SilmeyiOnayla(int duyuruId)
         {
@@ -107,7 +122,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         {
             mevzuat = null;
 
-            UrlNavigationManager.NavigateTo("/duyuru/ekle");
+            UrlNavigationManager.NavigateTo("/mevzuat/ekle");
         }
 
 

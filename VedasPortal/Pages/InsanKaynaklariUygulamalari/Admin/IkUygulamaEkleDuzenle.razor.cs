@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
+        [Inject]
+        public IBaseRepository<Dosya> IkDosyaServisi { get; set; }
+
         [Parameter]
         public int IkUygulamaId { get; set; }
 
@@ -31,7 +35,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
         protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
-            IkUygulamalari = IkUygulamaServisi.GetAll();
+            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
 
             return IkUygulamalari;
 
@@ -61,6 +65,20 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         protected void Kayit()
         {
             IkUygulamaServisi.Add(ikUygulama);
+
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                IkUygulamaId = ikUygulama.Id,
+
+            };
+            IkDosyaServisi.Add(dosya);
 
         }
         protected override void OnParametersSet()

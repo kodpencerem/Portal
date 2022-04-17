@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         public IBaseRepository<Rehber> RehberServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> RehberDosyaServisi { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
@@ -29,7 +33,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
         protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            Rehber = RehberServisi.GetAll();
+            Rehber = RehberServisi.GetAll().AsQueryable().Include(d=>d.Dosya).ToList();
 
             return Rehber;
 
@@ -39,6 +43,20 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         protected void Kayit()
         {
             RehberServisi.Add(rehber);
+
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                RehberId = rehber.Id,
+
+            };
+            RehberDosyaServisi.Add(dosya);
 
         }
         protected override void OnParametersSet()

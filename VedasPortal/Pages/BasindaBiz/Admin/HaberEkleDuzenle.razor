@@ -57,7 +57,8 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Haber Şimdi Yayınlasın Mı?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.AktifPasif" />
+                                    <InputCheckbox class="form-control"
+                                                   @bind-Value="haber.AktifPasif" />
                                 </div>
                                 <ValidationMessage For="@(() => haber.AktifPasif)" />
                             </div>
@@ -65,7 +66,8 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Haber Kutusuna Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.AnasayfadaGoster" />
+                                    <InputCheckbox class="form-control"
+                                                   @bind-Value="haber.AnasayfadaGoster" />
                                 </div>
                                 <ValidationMessage For="@(() => haber.AnasayfadaGoster)" />
                             </div>
@@ -73,7 +75,8 @@
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Slidera Eklensin Mi?</label>
                                 <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="haber.SliderdaGoster" />
+                                    <InputCheckbox class="form-control"
+                                                   @bind-Value="haber.SliderdaGoster" />
                                 </div>
                                 <ValidationMessage For="@(() => haber.SliderdaGoster)" />
 
@@ -100,7 +103,7 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"                            
+                            class="btn btn-primary"
                             @onclick="HaberKayit">
                         Kaydet
                     </button>
@@ -165,9 +168,12 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@string.Concat(haber.Dosya.FirstOrDefault().Adi,".",
-                                                                   haber.Dosya.FirstOrDefault().Uzanti)" 
-                                             width="50" 
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
+                                                                       haber.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       haber.Dosya.FirstOrDefault().Uzanti)"
+                                             width="50"
                                              height="50" />
                                     </td>
 

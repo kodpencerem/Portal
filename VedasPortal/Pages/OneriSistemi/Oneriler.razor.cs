@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Oneri;
@@ -21,7 +23,7 @@ namespace VedasPortal.Pages.OneriSistemi
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
         {
-            Oneriler = Oneri.GetAll();
+            Oneriler = Oneri.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Oneriler;
         }
     }

@@ -180,7 +180,7 @@ else
 
 
 
-                        @foreach (var mevzuat in Mevzuatlar)
+                        @foreach (var mevzuat in Mevzuatlar.Where(d=>d.AktifPasif==true).ToList())
 
                         {
     <tr>
@@ -191,7 +191,9 @@ else
                 <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
             </div>
         </td>
-        <td><img src="images/uploaded/@MevzuatDosya?.Yolu"/></td>
+        <td><img src="images/uploaded/@string.Concat(mevzuat.Dosya?.FirstOrDefault().Adi,".",
+                                                                   mevzuat.Dosya?.FirstOrDefault().Uzanti)" />
+        </td>
 
         <td>@mevzuat.Adi</td>
         <td>
@@ -213,7 +215,8 @@ else
                 Sil
             </button>
         </td>
-    </tr>}
+    </tr>
+}
                     </tbody>
                 </table>
             </div>

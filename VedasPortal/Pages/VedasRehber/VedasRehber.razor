@@ -7,9 +7,9 @@
 {
 <p><em>Yükleniyor...</em></p> }
 
-            else
+else
 
-            {
+{
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
@@ -21,17 +21,17 @@
             <div style="margin-left:1050px;" class="float-right">
                 <div class="float-left">
                     @*<input type="text" class="form-control" placeholder="Personel adı veya soyadı ile arama yapın..." @bind="SearchString"
-        @bind:event="oninput" @onkeyup="FilterelemeYap" />*@
+                        @bind:event="oninput" @onkeyup="FilterelemeYap" />*@
                     <SearchComp OnSearch="FilterelemeYap" />
                 </div>
                 @*<div class="float-right">
-                    <div class="input-group-append">
-                        <button class="btn btn-info" @onclick="FilterelemeYap">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>*@
-               
+                        <div class="input-group-append">
+                            <button class="btn btn-info" @onclick="FilterelemeYap">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>*@
+
             </div>
         </CardHeader>
         <CardBody>
@@ -39,20 +39,25 @@
                 @foreach (var personel in rehber)
                 {
 
-                    <div class="col-lg-3">
-                        <div class="card client-card">
-                            <div class="card-body text-center">
-                                <img src="images/uploaded/@RehberDosya.Yolu" height="200" width="200" alt="user" class="rounded-circle thumb-xl">
-                                <h5 class=" client-name">@personel.Adi - @personel.Soyadi </h5>
-                                <p class="text-muted text-center mt-3">@personel.Unvani</p>
-                                <span class="text-muted mr-3"><i class="dripicons-location mr-2 text-info"></i>@personel.Lokasyon</span>
-                                <span class="text-muted"><i class="dripicons-phone mr-2 text-info"></i>@personel.TelefonNo</span>
-                                <p class="text-muted text-center mt-3">@personel.Email</p>
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div>
-                 }
-                </div>
+<div class="col-lg-3">
+    <div class="card client-card">
+        <div class="card-body text-center">
+            <img src="images/uploaded/@string.Concat(personel.Dosya.FirstOrDefault().Adi,
+                                       ".",
+                                       personel.Dosya.FirstOrDefault().Uzanti)"
+                 height="200"
+                 width="200"
+                 alt="user"
+                 class="rounded-circle thumb-xl">
+            <h5 class=" client-name">@personel.Adi - @personel.Soyadi </h5>
+            <p class="text-muted text-center mt-3">@personel.Unvani</p>
+            <span class="text-muted mr-3"><i class="dripicons-location mr-2 text-info"></i>@personel.Lokasyon</span>
+            <span class="text-muted"><i class="dripicons-phone mr-2 text-info"></i>@personel.TelefonNo</span>
+            <p class="text-muted text-center mt-3">@personel.Email</p>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>}
+            </div>
 
         </CardBody>
     </CardComponent>

@@ -28,34 +28,40 @@ else
 
                     @foreach (var ikUygulama in IkUygulamalari)
                     {
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <CardComponent cardStyle=Style.primary>
-                                <CardHeader>
-                                    <h4 class="font-15">@ikUygulama.Adi</h4>
-                                </CardHeader>
-                                <CardBody>
-
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="card">
+                                <div class="card-statistic-4">
                                     <div class="align-items-center justify-content-between">
                                         <div class="row ">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                                                 <div class="card-content">
-                                                    <h2 class="mb-3 font-18"></h2>
-                                                    <h2 class="mb-3 font-18"></h2>
-                                                    <a class="btn btn-primary uygulamayagit">Uygulamaya Git</a>
+                                                    <h3 class="font-15">@ikUygulama.Adi</h3>
+                                                    <h5 class="mb-3 font-18">@ikUygulama.Kategori</h5>
+                                                    <p class="mb-0">
+                                                        <span class="col-green">
+                                                            @((MarkupString) ikUygulama.Aciklama)
+                                                        </span>
+                                                    </p>
+                                                    <a class="btn btn-success text-black-50">Uygulamaya Git</a>
                                                 </div>
-                                            </div>
-                                            <div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
                                                 <div class="banner-img">
-                                                    <img src="images/uploaded/@IkUygulamaDosya?.Yolu" alt="">
+                                                    <img src="images/uploaded/@string.Concat(
+                                                                       ikUygulama.Dosya?.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       ikUygulama.Dosya?.FirstOrDefault().Uzanti)"
+                                                         width="140"
+                                                         height="140"
+                                                         alt="">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </CardBody>
-                            </CardComponent>
-                        </div>}
+                                </div>
+                            </div>
+                        </div>
+                    }
 
 
                 </div>
