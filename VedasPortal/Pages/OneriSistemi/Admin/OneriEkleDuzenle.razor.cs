@@ -12,7 +12,7 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.OneriSistemi.Admin
 {
-    public class OneriModeli : ComponentBase
+    public class OneriEklemeModeli : ComponentBase
     {
 
         [Inject]
@@ -25,19 +25,21 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
-        public int? OneriId { get; set; }
+        public int OneriId { get; set; }
 
         protected string Title = "Ekle";
         public Oneri oneri = new();
-        public Dosya OneriDosya { get; set; }
+
+        public Dosya OneriDosya = new();
+
         protected IEnumerable<Oneri> Oneriler { get; set; }
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
         {
-            Oneriler = OneriServisi?.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Oneriler = OneriServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Oneriler;
-
         }
+
         public Dictionary<OnemDerecesi, string> OnemDereceleri { get; set; }
         protected void TumDereceleriGetir()
         {
@@ -75,8 +77,8 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
         protected void Kayit()
         {
-            OneriServisi.Add(oneri);
 
+            OneriServisi.Add(oneri);
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
             var dosya = new Dosya()
@@ -91,23 +93,20 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             };
             OneriDosyaServisi.Add(dosya);
         }
-
         protected override void OnParametersSet()
         {
             if (OneriId != 0 || OneriDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                oneri = OneriServisi.Get((int)OneriId);
-                
+                oneri = OneriServisi.Get(OneriId);
             }
         }
 
-
-
-        protected void SilmeyiOnayla(int oneriId)
+        protected void SilmeyiOnayla(int OneriId)
         {
             ModalDialog.Open();
-            oneri = Oneriler.FirstOrDefault(x => x.Id == oneriId);
+
+            oneri = Oneriler.FirstOrDefault(x => x.Id == OneriId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
@@ -116,7 +115,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         {
             if (oneri.Id == 0)
                 return;
-
+            OneriDosya.Yolu = oneri.Dosya?.FirstOrDefault().Yolu;
             OneriServisi.Remove(oneri.Id);
             oneri = new Oneri();
             TumKategorileriGetir();
@@ -125,14 +124,13 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             TumOdulleriGetir();
         }
 
-
-
         protected override Task OnInitializedAsync()
         {
             TumKategorileriGetir();
             TumOnerileriGetir();
             TumDereceleriGetir();
             TumOdulleriGetir();
+
             return Task.CompletedTask;
         }
 
@@ -140,9 +138,8 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         {
             oneri = null;
 
-            UrlNavigationManager.NavigateTo("/oneri/ekle");
+            UrlNavigationManager.NavigateTo("/haber/ekle");
         }
-
 
         [Inject]
         public IJSRuntime JsRun { get; set; }

@@ -1,8 +1,8 @@
 ﻿@using VedasPortal.Entities.Models.Video
 
 <div class="component-box">
-    <VideoPlayerComponent Width="1150"
-                          Heigth="900" />
+    <VideoPlayerComponent Width="@Width.ToString()"
+                          Heigth="@Heigth.ToString()" />
     <h3>@SecilenVideo.Baslik</h3>
     <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
     <hr />
@@ -13,4 +13,10 @@
 
     [Parameter]
     public Video SecilenVideo { get; set; } = new();
+
+    [Parameter]
+    public int Width { get; set; } = 1150;
+
+    [Parameter]
+    public int Heigth { get; set; } = 900;
 }

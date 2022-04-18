@@ -1,16 +1,15 @@
 ﻿@page "/oneri/ekle"
-@page "/oneri/duzenle/{oneriId:int}"
-@inherits OneriModeli
+@page "/oneri/duzenle/{OneriId:int}"
+@inherits OneriEklemeModeli
 
 <div class="col-12">
     <EditForm Model="@oneri" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
-        <div class="card">
-            <div class="card-header">
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
                 Öneri @Title
-            </div>
-            <div class="card-body">
-
+            </CardHeader>
+            <CardBody>
                 <div class="col-12">
                     <div class="col-md-6 float-left">
                         <div class="form-group row">
@@ -89,6 +88,13 @@
                                 </div>
                                 <ValidationMessage For="@(() => oneri.AktifPasif)" />
                             </div>
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Öneri Kabul Durumu?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control" @bind-Value="oneri.KabulDurum" />
+                                </div>
+                                <ValidationMessage For="@(() => oneri.KabulDurum)" />
+                            </div>
                         </div>
                     </div>
 
@@ -107,20 +113,24 @@
                         </div>
                     </div>
                 </div>
-
-
-
-            </div>
-            <div class="card-footer">
+            </CardBody>
+            <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            @onclick="Kayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
-            </div>
-        </div>
+            </CardFotter>
+        </CardComponent>
     </EditForm>
 </div>
-
 
 @if (Oneriler == null)
 
@@ -131,18 +141,15 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
-
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
                         Öneriler
                     </div>
                 </div>
-
             </CardHeader>
             <CardBody>
                 <div class="table-responsive">
@@ -207,7 +214,7 @@ else
 
                                     <td>
                                         <a href="@($"oneri/detay/{oneri.Id}")" class="btn btn-primary">Öneri Detayı</a>
-                                        <a href='/etkinlik/duzenle/@oneri.Id'
+                                        <a href='/oneri/duzenle/@oneri.Id'
                                            class="btn btn-info btn-outline-dark"
                                            role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
@@ -226,10 +233,7 @@ else
 
             </CardBody>
         </CardComponent>
-
     </div>
-
-
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
@@ -240,9 +244,7 @@ else
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
-
 }
-
 
 <style>
     .modal-content {

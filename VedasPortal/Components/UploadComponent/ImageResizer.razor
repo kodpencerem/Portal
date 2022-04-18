@@ -101,7 +101,7 @@
             <div class="card-footer">
                 <button class="btn btn-success me-1" @onclick="@(async () => { isOpened = true;  await DoneCrop(); })">
                 Değişiklikleri Onayla</button>
-                <button class="btn btn-danger" @onclick="@(async () => { isOpened=false; await CancelCropAsync(); })">
+                <button class="btn btn-danger" @onclick="@(async () => { await CancelCropAsync(); })">
                 Vazgeç</button>
             </div>
         </ModalFooter>

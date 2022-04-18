@@ -20,6 +20,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
 
         protected IEnumerable<Dosya>TumDosyalariGetir()
         {
+            
+
             Dokumanlar = Dokuman.GetAll();
             return Dokumanlar;
         }      

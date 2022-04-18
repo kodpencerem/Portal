@@ -21,9 +21,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         [Inject]
         public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int HaberId { get; set; }
 
@@ -67,6 +64,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 
             };
             HaberDosyaServisi.Add(dosya);
+            
         }
         protected override void OnParametersSet()
         {
@@ -83,18 +81,18 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
             haber = Haberler.FirstOrDefault(x => x.Id == haberId);
         }
-        public ModalComponent ModalDialog { get; set; }
-        protected string DialogGorunur { get; set; } = "none";
 
         protected void HaberSil()
         {
             if (haber.Id == 0)
                 return;
-            HaberDosya.Yolu = haber.Dosya?.FirstOrDefault().Yolu;
             HaberServisi.Remove(haber.Id);
+            HaberDosyaServisi.Remove(HaberDosya.Id);
             haber = new HaberDuyuru();
             TumHaberleriGetir();
         }
+        public ModalComponent ModalDialog { get; set; }
+        protected string DialogGorunur { get; set; } = "none";
 
         protected override Task OnInitializedAsync()
         {
@@ -106,8 +104,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public void Temizle()
         {
             haber = null;
-
-            UrlNavigationManager.NavigateTo("/haber/ekle");
+            HaberDosya = null;
         }
 
         [Inject]

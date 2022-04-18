@@ -195,6 +195,7 @@ namespace VedasPortal.Components.UploadComponent
             ShowCroper = false;
             await UpdatePreviewASync(browserFileResizer);
             PreviewImagePath = null;
+            isOpened = false;
         }
 
         private readonly int MaxAllowedFileSize = 10 * 1024 * 1024;

@@ -21,9 +21,6 @@ namespace VedasPortal.Pages.Duyurular.Admin
         [Inject]
         public IBaseRepository<Dosya> DuyuruDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int DuyuruId { get; set; }
 
@@ -106,8 +103,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         public void Temizle()
         {
             duyuru = null;
-
-            UrlNavigationManager.NavigateTo("/haber/ekle");
+            DuyuruDosya = null;
         }
 
         [Inject]
