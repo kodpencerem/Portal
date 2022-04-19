@@ -19,6 +19,7 @@ namespace VedasPortal.Entities.Models.Video
         public VideoKategori Kategori { get; set; }
         [DataType(DataType.Text)]
         public Birimler Birimler { get; set; }
+
         [NotMapped]
         public List<string> Yorumlar { get; set; } = new List<string>();
 
@@ -30,7 +31,7 @@ namespace VedasPortal.Entities.Models.Video
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
         public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
-        public ICollection<Yorum> VideoYorum { get; set; }
+        public List<Yorum> VideoYorum { get; set; }
     }
     public enum VideoKategori
     {
