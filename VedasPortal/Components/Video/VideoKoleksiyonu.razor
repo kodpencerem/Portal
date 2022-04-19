@@ -11,7 +11,8 @@
                             src="videos/uploaded/sample.mp4"
                             frameborder="0" 
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen controls>
+                            allowfullscreen 
+                            controls>
                     </iframe>
                     <h4>@item.Baslik</h4>
                 </div>
@@ -29,8 +30,10 @@
     public IEnumerable<Video> Videolar { get; set; }
 
     [Parameter]
-    public string Src { get; set; }
+    public string Src { get; set; } = "videos/uploaded/sample.mp4";
 
     [Parameter]
     public EventCallback<Video> VideoSec { get; set; }
+
+    Video videoKaynak = new Video();
 }

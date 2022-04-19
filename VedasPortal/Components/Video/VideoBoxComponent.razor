@@ -2,7 +2,9 @@
 
 <div class="component-box">
     <VideoPlayerComponent Width="@Width.ToString()"
-                          Heigth="@Heigth.ToString()" />
+                          Heigth="@Heigth.ToString()"
+                          Src="@Src"
+                          />
     <h3>@SecilenVideo.Baslik</h3>
     <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
     <hr />
@@ -13,6 +15,9 @@
 
     [Parameter]
     public Video SecilenVideo { get; set; } = new();
+
+    [Parameter]
+    public string Src { get; set; } = "videos/uploaded/sample.mp4";
 
     [Parameter]
     public int Width { get; set; } = 1150;

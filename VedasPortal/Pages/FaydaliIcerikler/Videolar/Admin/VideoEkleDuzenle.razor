@@ -18,18 +18,7 @@
                             <MultipleUpload @bind-ValueInput="@VideoDosya.Yolu" />
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-12">Video Başlığı</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-12">Video Yolu</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-
-
+                  
                     <div class="form-group row">
                         <label class="control-label col-md-2">Video Başlığı</label>
                         <div class="col-md-10">
@@ -53,8 +42,6 @@
                         </div>
                         <ValidationMessage For="@(() => video.KaydedenKullanici)" />
                     </div>
-
-
 
                     <div class="form-group row">
                         <label for="Kategori" class="control-label col-md-2">Video Görecek Birimi Seçin</label>
@@ -102,8 +89,8 @@
 
                         <div class="form-group row col-md-4">
                             <label class="control-label col-md-6">Video Uzunluğu</label>
-                            <div class="col-md-6">
-                                <InputNumber class="form-control" @bind-Value="video.Uzunluk" />
+                            <div class="col-md-8">
+                                <InputNumber min="0" class="form-control" @bind-Value="video.Uzunluk" />
                             </div>
                             <ValidationMessage For="@(() => video.Uzunluk)" />
                         </div>
@@ -120,9 +107,6 @@
 
 
                 </div>
-
-
-
             </CardBody>
             <CardFotter>
                 <div class="form-group text-left">
@@ -227,8 +211,7 @@ else
                 Sil
             </button>
         </td>
-    </tr>
-}
+    </tr>}
                     </tbody>
                 </table>
             </div>

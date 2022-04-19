@@ -16,7 +16,6 @@ namespace VedasPortal.Components.UploadComponent
         /// </summary>
         protected Cropper cropper;
 
-
         /// <summary>
         /// Dosya seçilmesi için bir pencere açar
         /// </summary>
@@ -127,8 +126,6 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-
-
         //IList<Dosya> imageDataUrls = new List<Dosya>();
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
@@ -158,13 +155,13 @@ namespace VedasPortal.Components.UploadComponent
             CropCurrentHeight = cropSize.Item2;
         }
 
-
         /// <summary>
         /// Kırpma işlemlerini yapar ve resmin son değişiklerini ilgili dosya yoluna kaydeder
         /// </summary>
         /// <returns></returns>
         protected async Task DoneCrop()
         {
+            
             ImageCroppedResult args = await cropper.GetCropedResult();
             ShowCroper = false;
             parsing = true;
@@ -177,7 +174,6 @@ namespace VedasPortal.Components.UploadComponent
 #pragma warning disable CS0618 // Type or member is obsolete
             string base64String = await args.GetBase64Async();
 #pragma warning restore CS0618 // Type or member is obsolete
-
             File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();

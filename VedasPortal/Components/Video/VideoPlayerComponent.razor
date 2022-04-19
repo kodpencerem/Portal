@@ -3,7 +3,7 @@
               width="@Width"
               heigth="@Heigth"
               OnTimeUpdate="OnTimeUpdate"
-              src="videos/uploaded/sample.mp4"
+              src="@Src"
               class="video"
               controls />
 <div class="article-details">
@@ -17,12 +17,17 @@
 </div>
 
 @code {
+
     VidazorVideo video;
 
     [Parameter]
     public string Width { get; set; }
+
     [Parameter]
     public string Heigth { get; set; }
+
+    [Parameter]
+    public string Src { get; set; } = "videos/uploaded/sample.mp4";
 
     [Parameter]
     public string VideoBaslik { get; set; }

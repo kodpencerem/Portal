@@ -9,6 +9,7 @@
             <div class="col-md-8">
                 <InputFile OnChange="OnInputFileChange"
                            @bind-Value="@ValueInput"
+                           
                            multiple />
             </div>
             <div class="col-md-4">
@@ -122,10 +123,17 @@
                 // dosya yükleme esnasında bir ilerleme çubuğu açar
                 displayProgress = true;
 
+                var fileName = SaveFileToUploaded.RandomFileName + selectedFiles.FirstOrDefault().Name;
+                SaveFileToUploaded.FileName = fileName;
+                StateHasChanged();
+
                 foreach (var file in selectedFiles)
                 {
                     // dosyaları eşzamansız olarak yükler
                     await fileUpload.UploadFile(file);
+
+                    ValueInput = fileName;
+                    await ValueInputChanged.InvokeAsync(ValueInput);
 
                     // Her başarılı yüklemeden sonra yüklenen sayıyı artır
                     uploaded++;

@@ -34,7 +34,9 @@ namespace VedasPortal.Entities.Models.Dosya
         public Oneri.Oneri Oneri { get; set; }
         public int? RehberId { get; set; }
         public Rehber Rehber { get; set; }
-        public virtual ICollection<Video.Video>  Video { get; set; }
+
+        public int? VideoId { get; set; }
+        public Video.Video Video { get; set; }
 
     }
 

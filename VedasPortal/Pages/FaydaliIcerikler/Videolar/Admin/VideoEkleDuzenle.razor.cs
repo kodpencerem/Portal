@@ -19,6 +19,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         public IBaseRepository<Video> VideoServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Dosya> VideoDosyaServisi { get; set; }
+
+        [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
@@ -61,8 +64,21 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected void Kayit()
         {
-            VideoDosya.Yolu = video.Dosya?.FirstOrDefault().Yolu;
             VideoServisi.Add(video);
+
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Mp4,
+                AktifPasif = true,
+                VideoId    = video.Id,
+
+            };
+            VideoDosyaServisi.Add(dosya);
         }
         protected override void OnParametersSet()
         {
@@ -90,6 +106,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
                 return;
 
             VideoServisi.Remove(video.Id);
+            VideoDosyaServisi.Remove(VideoId);
             video = new Video();
             TumVideolariGetir();
             TumBirimleriGetir();
@@ -108,8 +125,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         public void Temizle()
         {
             video = null;
-
-            UrlNavigationManager.NavigateTo("/video/ekle");
+            VideoDosya = null;
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
@@ -11,6 +12,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         [Inject]
         protected IBaseRepository<Video> Video { get; set; }
         protected IEnumerable<Video> VideoGetir;
+        protected Dosya VideoDosya { get; set; } = new();
 
         protected override Task OnInitializedAsync()
         {

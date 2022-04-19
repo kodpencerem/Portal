@@ -10,32 +10,44 @@
 else
 
 {
-    <div class="row">
-        @foreach (var video in VideoGetir)
-        {
-            <div class="col-4 col-sm-6 col-md-6 col-lg-6">
-                <VideoPlayerComponent VideoBaslik="@video.Baslik"
-                                      Aciklama="@video.Aciklama"
-                                      Width="400px"
-                                      Heigth="500px"
-                                      />
+<div class="col-12">
+    <CardComponent>
+        <CardHeader>
+            Videolar
+        </CardHeader>
+        <CardBody>
+            <div class="row">
+                @foreach (var video in VideoGetir)
+                {
+                    <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                        <VideoPlayerComponent VideoBaslik="@video.Baslik"
+                                              Aciklama="@video.Aciklama"
+                                              Width="500px"
+                                              Heigth="500px" />
+                    </div>
+
+                }
             </div>
-        }
-    </div>
+        </CardBody>
+    </CardComponent>
+
+</div>
+    
+
 }
 
 
 <style>
-    
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;
         display: flex;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-        margin-top: -5px;
-        margin-right: -5px;
-        margin-left: -5px;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
     }
 </style>
 
