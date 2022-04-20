@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -46,7 +47,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             }
             Kategoriler = list;
         }
-
+        [Authorize(Roles="Admin")]
         protected void HaberKayit()
         {
 

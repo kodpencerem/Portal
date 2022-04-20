@@ -58,6 +58,7 @@ namespace VedasPortal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<VedasDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
