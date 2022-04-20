@@ -18,10 +18,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
         [Inject]
         public IBaseRepository<IkUygulama> IkUygulamaServisi { get; set; }
-
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
+        
         [Inject]
         public IBaseRepository<Dosya> IkDosyaServisi { get; set; }
 
@@ -125,8 +122,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         public void Temizle()
         {
             ikUygulama = null;
-
-            UrlNavigationManager.NavigateTo("/ikuygulama/ekle");
+            IkUygulamaDosya = null;
         }
 
 

@@ -21,9 +21,6 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         [Inject]
         public IBaseRepository<Dosya> OneriDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int OneriId { get; set; }
 
@@ -137,8 +134,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public void Temizle()
         {
             oneri = null;
-
-            UrlNavigationManager.NavigateTo("/haber/ekle");
+            OneriDosya = null; 
         }
 
         [Inject]

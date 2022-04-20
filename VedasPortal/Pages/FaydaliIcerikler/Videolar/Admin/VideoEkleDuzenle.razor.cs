@@ -21,9 +21,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         [Inject]
         public IBaseRepository<Dosya> VideoDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int VideoId { get; set; }
 

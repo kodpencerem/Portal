@@ -2,6 +2,7 @@
 @page "/yorum/duzenle/{YorumId:int}"
 
 @using VedasPortal.Repository.Interface
+@using VedasPortal.Entities.Models.Yorum
 
 <EditForm Model="@yorum"
           OnValidSubmit="Kayit">

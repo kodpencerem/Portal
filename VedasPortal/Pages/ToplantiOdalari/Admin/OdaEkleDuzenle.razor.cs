@@ -22,9 +22,6 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         [Inject]
         public IToplantiTakvimi _toplanti { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int OdaId { get; set; }
 
@@ -89,9 +86,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         {
             Oda = null;
             takvimVm = null;
-            UrlNavigationManager.NavigateTo("/oda/ekle");
         }
-
 
         [Inject]
         public IJSRuntime JsRun { get; set; }

@@ -28,6 +28,7 @@ using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.Video;
+using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;

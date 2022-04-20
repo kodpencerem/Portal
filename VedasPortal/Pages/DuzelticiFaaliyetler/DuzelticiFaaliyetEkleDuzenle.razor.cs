@@ -21,9 +21,6 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         [Inject]
         public IBaseRepository<Dosya> DuzelticiFaaliyetDosya { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int DFaaliyetId { get; set; }
 
@@ -113,7 +110,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         {
             duzelticiFaaliyet = null;
 
-            UrlNavigationManager.NavigateTo("/duzelticifaaliyet/ekle");
+            DFaaliyetDosya = null;
         }
 
 

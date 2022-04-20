@@ -20,10 +20,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         [Inject]
         public IBaseRepository<Dosya> EtkinlikDosyaServisi { get; set; }
-
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
+       
         [Parameter]
         public int EtkinlikId { get; set; }
 
@@ -124,7 +121,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         {
             etkinlik = null;
 
-            UrlNavigationManager.NavigateTo("/etkinlik/ekle");
+            EtkinlikDosya = null;
         }
 
 

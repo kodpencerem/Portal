@@ -1,11 +1,14 @@
-﻿<div class="component-box">
+﻿@using VedasPortal.Entities.Models.Yorum
+@inject VedasPortal.Repository.Interface.IBaseRepository<Yorum> _yorum
+
+<div class="component-box">
     <div class="row">
         <div class="col-6">
             <div class="form-group">
                 <input type="text"
                        placeholder="Açıklama"
                        class="form-control"
-                       @bind-value="description" />
+                       @bind-value="@yorum.Aciklama" />
             </div>
             <button class="btn btn-primary btn-block"
                     @onclick="InsertComment">
@@ -14,26 +17,47 @@
         </div>
     </div>
     <hr />
-    @foreach (var item in VideoYorum)
+    @if (Yorumlar == null)
+
     {
-<div class="box-card">
-    <div class="row">
-        <img width="25" 
-             height="25" 
-             src="/images/default.png" 
-             class="comment-avatar" />
-        <h6 class="comment-content">@item</h6>
-    </div>
-</div>}
+        <p><em>Yükleniyor...</em></p>
+    }
+
+    else
+    {
+        @foreach (var item in Yorumlar.Where(y => y.OnaylansınMı == true).ToList())
+        {
+            <div class="box-card">
+                <div class="row">
+                    <img width="25"
+                         height="25"
+                         src="/images/default.png"
+                         class="comment-avatar" />
+                    <h6 class="comment-content">@item?.Aciklama</h6>
+                </div>
+            </div>
+         }
+    }
+
 </div>
 
-@code { [Parameter]
-    public List<string> VideoYorum { get; set; }
+@code {
 
-    string description = string.Empty;
+    public Yorum yorum { get; set; } = new();
+
+    [Parameter]
+    public IEnumerable<Yorum> Yorumlar { get; set; }
+
+    protected IEnumerable<Yorum> TumYorumlariGetir()
+    {
+        Yorumlar = _yorum.GetAll();
+        return Yorumlar;
+    }
+
+
 
     void InsertComment()
     {
-        VideoYorum.Add(description);
-        description = string.Empty;
+        _yorum.Add(yorum);
+        yorum.Aciklama = string.Empty;
     } }

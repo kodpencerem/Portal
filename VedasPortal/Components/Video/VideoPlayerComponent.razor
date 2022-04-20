@@ -1,11 +1,15 @@
 ﻿
-<VidazorVideo @ref="video"
-              width="@Width"
-              heigth="@Heigth"
-              OnTimeUpdate="OnTimeUpdate"
-              src="@Src"
-              class="video"
-              controls />
+<BlazoredVideo @ref ="video"
+               PlayEvent="OnPlay" 
+               TimeUpate="OnTimeUpdate"
+               VideoStateOptions="options"
+               class="w-100"
+               style="max-width:800px;"
+               controls="controls">
+    <source src="@Src" 
+            type="video/mp4" />
+</BlazoredVideo>
+
 <div class="article-details">
     <div class="article-title">
         <h4><a href="#">@VideoBaslik</a></h4>
@@ -18,7 +22,7 @@
 
 @code {
 
-    VidazorVideo video;
+    BlazoredVideo video;
 
     [Parameter]
     public string Width { get; set; }
@@ -38,8 +42,20 @@
     [Parameter]
     public Video SecilenVideo { get; set; }
 
-    void OnTimeUpdate()
+    //void OnTimeUpdate()
+    //{
+    //    Console.WriteLine("Güncellenme Zamanı: " + video.CurrentTime);
+    //}
+
+    void OnPlay(VideoState state)
     {
-        Console.WriteLine("Güncellenme Zamanı: " + video.CurrentTime);
+        var url = state?.CurrentSrc;
+        // do something with this
+    }
+    void OnTimeUpdate(VideoState state)
+    {
+        var url = state?.CurrentSrc;
+        var currentTime = state?.CurrentTime;
+        // do something with this
     }
 }

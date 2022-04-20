@@ -19,9 +19,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         [Inject]
         public IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int MevzuatId { get; set; }
 
@@ -121,8 +118,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         public void Temizle()
         {
             mevzuat = null;
-
-            UrlNavigationManager.NavigateTo("/mevzuat/ekle");
+            MevzuatDosya = null;
         }
 
 

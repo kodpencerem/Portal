@@ -20,8 +20,8 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         [Inject]
         public IBaseRepository<Dosya> RehberDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
+        //[Inject]
+        //public NavigationManager UrlNavigationManager { get; set; }
 
         [Parameter]
         public int RehberId { get; set; }
@@ -100,8 +100,8 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         public void Temizle()
         {
             rehber = null;
-
-            UrlNavigationManager.NavigateTo("/rehber/ekle");
+            RehberDosya = null;
+            //UrlNavigationManager.NavigateTo("/rehber/ekle");
         }
 
 

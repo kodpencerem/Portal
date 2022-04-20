@@ -15,10 +15,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
         [Inject]
         public IBaseRepository<Dosya> DosyaServisi { get; set; }
-
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
+      
         [Parameter]
         public int DosyaId { get; set; }
 
@@ -106,8 +103,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         public void Temizle()
         {
             dokuman = null;
-
-            UrlNavigationManager.NavigateTo("/dosya/ekle");
         }
 
 

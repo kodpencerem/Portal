@@ -53,7 +53,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             HaberServisi.Add(haber);
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            long size = filePath.Length;
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
@@ -61,12 +60,11 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 Uzanti = fileName[1],
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
-                Boyutu = size.ToString(),
                 HaberDuyuruId = haber.Id,
                 
             };
             HaberDosyaServisi.Add(dosya);
-            
+
         }
         protected override void OnParametersSet()
         {

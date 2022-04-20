@@ -1,5 +1,56 @@
-﻿<h3>FaaliyetDetay</h3>
+﻿@page "/duzelticifaaliyet/detay/{dFaaliyetId:int}"
 
-@code {
+@if (DofDetayGetir != null)
+{
 
-}
+<div class="col-12">
+    <!-- Support tickets -->
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Düzeltici ve Önleyici Faaliyetler
+        </CardHeader>
+        <CardBody>
+            <div class="support-ticket media pb-1 mb-3">
+                <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
+                <div class="media-body ml-3">
+                    <div class="badge badge-pill badge-success mb-1 float-right">
+                        <a class="text-white" href="FaaliyetKategoriBilgisi">@DofDetayGetir.Kategori</a>
+                    </div>
+                    <span class="font-weight-bold">@DofDetayGetir.KonuEtiketi</span>
+                    <a href="javascript:void(0)">@DofDetayGetir.IstekFaaliyetKonusu</a>
+                    
+                        <div class="row">
+                            <div class="col-md-6 float-left " style="margin-top:10px">
+
+                                <img src="images/uploaded/@string.Concat(DofDetayGetir.Dosya.FirstOrDefault().Adi,".",
+                                                                   DofDetayGetir.Dosya.FirstOrDefault().Uzanti)"
+                                     height="350"
+                                     width="600" />
+                            </div>
+                            <div class="col-md-6 float-right">
+                                @if (DofDetayGetir.Aciklama != null)
+                                {
+                                    <p>
+                                        @((MarkupString) DofDetayGetir.Aciklama)
+                                    </p>
+                                 }
+                            </div>
+                        </div>
+                    
+                    <p class="my-1">@DofDetayGetir.LokasyonBilgisi</p>
+                    <small class="text-muted">
+                        Ekleyen <span class="font-weight-bold font-13">
+                            @DofDetayGetir.KaydedenKullanici
+                        </span>
+                        &nbsp;&nbsp; - @DofDetayGetir.KayitTarihi
+                    </small>
+                </div>
+            </div>
+
+        </CardBody>
+
+    </CardComponent>
+    <!-- Support tickets -->
+</div>}
+
+@code { }

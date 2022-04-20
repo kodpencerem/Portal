@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace VedasPortal.Entities.Models.Video
+namespace VedasPortal.Entities.Models.Yorum
 {
     public class Yorum : Base.BaseEntity
     {
-        public string Aciklama { get; set; }
-        public DateTime YorumTarihi { get; set; } = DateTime.Now;
+        public string? Aciklama { get; set; }
         public bool OnaylansınMı { get; set; } = false;
         public int? VideoId { get; set; }
-        public Video Video { get; set; }
+        public Video.Video Video { get; set; }
     }
 }

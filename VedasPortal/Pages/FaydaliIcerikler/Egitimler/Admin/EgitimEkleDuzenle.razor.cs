@@ -22,9 +22,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         [Inject]
         public IBaseRepository<Dosya> EgitimDosyaServisi { get; set; }
 
-        [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
-
         [Parameter]
         public int EgitimId { get; set; }
 
@@ -129,7 +126,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         {
             egitim = null;
 
-            UrlNavigationManager.NavigateTo("/egitim/ekle");
+            EgitimDosya = null;
         }
 
 
