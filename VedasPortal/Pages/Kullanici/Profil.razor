@@ -181,20 +181,20 @@
                         <ul>
                             @foreach (var mezun in MezunBilgileri)
                             {
-                                <li>
-                                    @mezun.EgitimDurumu - @mezun.OkulAdi <br />
-                                    @mezun.BaslamaTarihi - @mezun.MezuniyetTarihi 
-                                    <a href='/mezuniyet/duzenle/@mezun.Id' 
-                                       class="btn btn-info btn-outline-dark" 
-                                       role="button">Düzenle</a>
-                                    <button class="btn btn-danger" 
-                                            data-toggle="modal" 
-                                            data-target="#deleteEmpModal"
-                                            @onclick="@(() => {DialogGorunur="block"; 
+                            <li>
+                                @mezun.EgitimDurumu - @mezun.OkulAdi <br />
+                                @mezun.BaslamaTarihi.Date.ToShortDateString() - @mezun.MezuniyetTarihi.Date.ToShortDateString()
+                                <a href='/mezuniyet/duzenle/@mezun.Id'
+                                   class="btn btn-info btn-outline-dark"
+                                   role="button">Düzenle</a>
+                                <button class="btn btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteEmpModal"
+                                        @onclick="@(() => {DialogGorunur="block";
                                                             MezuniyetSilmeyiOnayla(mezun.Id);})">
-                                        Sil
-                                    </button>
-                                </li>
+                                    Sil
+                                </button>
+                            </li>
                             }
 
                         </ul>

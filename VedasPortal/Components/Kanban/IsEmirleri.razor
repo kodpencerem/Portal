@@ -8,28 +8,26 @@
         </CardHeader>
         <CardBody>
             <div class="row p-2">
-                <Dropzone Priority="TaskPriority.Yuksek"
+                <Dropzone Oncellik="GorevOncelligi.Yuksek"
                           TaskItemsDictionary="TaskItems"
                           OnDrop="OnDrop"
                           OnStartDrag="OnStartDrag"
                           OnDragEnter="OnDragEnter"
                           OnDragEnd="OnDragEnd" />
 
-                <Dropzone Priority="TaskPriority.Orta"
+                <Dropzone Oncellik="GorevOncelligi.Orta"
                           TaskItemsDictionary="TaskItems"
                           OnDrop="OnDrop"
                           OnStartDrag="OnStartDrag"
                           OnDragEnter="OnDragEnter"
                           OnDragEnd="OnDragEnd" />
 
-                <Dropzone Priority="TaskPriority.Dusuk"
+                <Dropzone Oncellik="GorevOncelligi.Dusuk"
                           TaskItemsDictionary="TaskItems"
                           OnDrop="OnDrop"
                           OnStartDrag="OnStartDrag"
                           OnDragEnter="OnDragEnter"
                           OnDragEnd="OnDragEnd" />
-
-
             </div>
 
         </CardBody>
@@ -53,27 +51,10 @@
         return Gorevler;
     }
 
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
-        TaskItems.Add("1", new GorevSecenek()
-        {
-            GorevAdi = "Deneme 1",
-            Oncellik = GorevOncelligi.Yuksek
-        });
-
-        TaskItems.Add("2", new GorevSecenek()
-        {
-            GorevAdi = "Deneme 2",
-            Oncellik = GorevOncelligi.Orta
-        });
-
-        TaskItems.Add("3", new GorevSecenek()
-        {
-            GorevAdi = "Deneme 3",
-            Oncellik = GorevOncelligi.Dusuk
-        });
-
         TumGorevleriGetir();
+        return Task.CompletedTask;
     }
 
     private void OnStartDrag(KeyValuePair<string, GorevSecenek> kvp)

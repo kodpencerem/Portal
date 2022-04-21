@@ -15,10 +15,10 @@ namespace VedasPortal.Repository.Interface.Anket
         Task<Result<bool>> AnketSilAsync(int id);
         Result<AnketDTO> RastGeleAnketGetir();
         Task<Result<AnketDTO>> RastGeleAnketGetirAsync();
-        Result<AnketDTO> AnketEkle(AnketDTO survey);
-        Task<Result<AnketDTO>> AnketEkleAsync(AnketDTO survey);
-        Result<bool> AnketDuzenle(AnketDTO survey);
-        Task<Result<bool>> AnketDuzenleAsync(AnketDTO survey);
+        Result<AnketDTO> AnketEkle(AnketDTO anketDTO);
+        Task<Result<AnketDTO>> AnketEkleAsync(AnketDTO anketDTO);
+        Result<bool> AnketDuzenle(AnketDTO anketDTO);
+        Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO);
         Result<AnketDTO> EnPopulerAnket();
         Task<Result<AnketDTO>> EnPopulerAnketAsync();
 

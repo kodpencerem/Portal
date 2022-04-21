@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Dosya;
@@ -13,6 +15,7 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Admin
 {
+    
     public class HaberEkleDuzenleModel : ComponentBase
     {
 
@@ -22,6 +25,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         [Inject]
         public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
 
+        [Inject]
+        public AuthenticationStateProvider StateProvider { get; set; }
+
         [Parameter]
         public int HaberId { get; set; }
 
@@ -29,6 +35,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public HaberDuyuru haber = new();
 
         public Dosya HaberDosya = new();
+
+        private ClaimsPrincipal User;
+        public string Message { get; set; }
 
         protected IEnumerable<HaberDuyuru> Haberler { get; set; }
 
@@ -47,24 +56,33 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             }
             Kategoriler = list;
         }
-        [Authorize(Roles="Admin")]
+        
+        [Authorize(Roles ="Admin")]
         protected void HaberKayit()
         {
-
-            HaberServisi.Add(haber);
-            var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            Message = "";
+            if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
-                Adi = fileName[0],
-                Yolu = filePath,
-                Uzanti = fileName[1],
-                Kategori = DosyaKategori.Jpg,
-                AktifPasif = true,
-                HaberDuyuruId = haber.Id,
-                
-            };
-            HaberDosyaServisi.Add(dosya);
+                HaberServisi.Add(haber);
+                var fileName = SaveFileToUploaded.FileName.Split(".");
+                var filePath = SaveFileToUploaded.ImageUploadedPath;
+                var dosya = new Dosya()
+                {
+                    Adi = fileName[0],
+                    Yolu = filePath,
+                    Uzanti = fileName[1],
+                    Kategori = DosyaKategori.Jpg,
+                    AktifPasif = true,
+                    HaberDuyuruId = haber.Id,
+
+                };
+                HaberDosyaServisi.Add(dosya);
+            }
+            else
+            {
+                Message = "Haber kayıt ekleme yetkiniz yoktur!";
+            }
+
 
         }
         protected override void OnParametersSet()
@@ -95,8 +113,10 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var giris =await StateProvider.GetAuthenticationStateAsync();
+            User = giris.User;
             TumHaberleriGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;

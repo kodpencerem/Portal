@@ -76,23 +76,26 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="assets/img/user.png" class="user-img-radious-style">
-                <span class="d-sm-none d-lg-inline-block"></span>
+
+                <span class="d-sm-none d-lg-inline-block">
+                </span>
             </a>
+            
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">Merhaba Kullanıcı</div>
                 <a href="profil" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profil
                 </a>
-                <a href="ayarlar" class="dropdown-item has-icon">
+                <a href="Identity/Account/Manage" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i>
                     Ayarlar
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="LogOut" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Çıkış Yap
-                </a>
 
+                <div class="dropdown-divider"></div>
+                <div style="margin-left:30px">
+                    <LoginDisplay />
+                </div>
+                
             </div>
         </li>
     </ul>
@@ -166,30 +169,30 @@
             <li class="dropdown">
                 <a href="IKUygulamalari" class="nav-link"><i data-feather="package"></i><span>IK Uygulamaları</span></a>
             </li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i data-feather="briefcase"></i><span>İçerik Ekle Düzenle</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="haber/ekle">Haber Ekle</a></li>
-                    <li><a class="nav-link" href="duyuru/ekle">Duyuru Ekle</a></li>
-                    <li><a class="nav-link" href="duzelticifaaliyet/ekle">Düzeltici Faaliyet Ekle</a></li>
-                    <li><a class="nav-link" href="etkinlik/ekle">Etkinlik Ekle</a></li>
-                    <li><a class="nav-link" href="katilimci/ekle">Etkinlik Ekle</a></li>
-                    <li><a class="nav-link" href="dosya/ekle">Döküman Ekle</a></li>
-                    <li><a class="nav-link" href="egitim/ekle">Etkinlik Ekle</a></li>
-                    <li><a class="nav-link" href="mevzuat/ekle">Güncel Mevzuat Ekle</a></li>
-                    <li><a class="nav-link" href="video/ekle">Video Ekle</a></li>
-                    <li><a class="nav-link" href="ikuygulama/ekle">İk Uygulaması Ekle</a></li>
-                    <li><a class="nav-link" href="ayrilis/ekle">Personel Aylış Ekle</a></li>
-                    <li><a class="nav-link" href="vefat/ekle">Vefat Durumu Ekle</a></li>
-                    <li><a class="nav-link" href="personel/ekle">Yeni İşe Başlayan Ekle</a></li>
-                    <li><a class="nav-link" href="rehber/ekle">Rehbere Bilgi Ekle</a></li>
-                </ul>
-            </li>
-            <AuthorizeView>
-                <Authorized>
 
+            <AuthorizeView Roles="Admin">
+                <Authorized>
+                    <li class="dropdown">
+                        <a href="#" class="menu-toggle nav-link has-dropdown">
+                            <i data-feather="briefcase"></i><span>İçerik Ekle Düzenle</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="haber/ekle">Haber Ekle</a></li>
+                            <li><a class="nav-link" href="duyuru/ekle">Duyuru Ekle</a></li>
+                            <li><a class="nav-link" href="duzelticifaaliyet/ekle">Düzeltici Faaliyet Ekle</a></li>
+                            <li><a class="nav-link" href="etkinlik/ekle">Etkinlik Ekle</a></li>
+                            <li><a class="nav-link" href="katilimci/ekle">Etkinlik Ekle</a></li>
+                            <li><a class="nav-link" href="dosya/ekle">Döküman Ekle</a></li>
+                            <li><a class="nav-link" href="egitim/ekle">Etkinlik Ekle</a></li>
+                            <li><a class="nav-link" href="mevzuat/ekle">Güncel Mevzuat Ekle</a></li>
+                            <li><a class="nav-link" href="video/ekle">Video Ekle</a></li>
+                            <li><a class="nav-link" href="ikuygulama/ekle">İk Uygulaması Ekle</a></li>
+                            <li><a class="nav-link" href="ayrilis/ekle">Personel Aylış Ekle</a></li>
+                            <li><a class="nav-link" href="vefat/ekle">Vefat Durumu Ekle</a></li>
+                            <li><a class="nav-link" href="personel/ekle">Yeni İşe Başlayan Ekle</a></li>
+                            <li><a class="nav-link" href="rehber/ekle">Rehbere Bilgi Ekle</a></li>
+                        </ul>
+                    </li>
                 </Authorized>
             </AuthorizeView>
         </ul>

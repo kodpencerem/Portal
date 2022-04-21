@@ -15,7 +15,6 @@ else
         <div class="row">
             @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
             {
-
                 <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
                     <article class="article article-style-c">
                         <div class="author-box-center align-center">
@@ -35,7 +34,6 @@ else
                             <div class="article-title">
                                 <h1 class="article-style-b">
                                     <a href="duyuru/detay/@duyuru.Id">
-
 
                                         @if (duyuru.Adi != null)
                                         {
@@ -66,14 +64,10 @@ else
                                                                   duyuru.Aciklama)" />
                                 }
                             </p>
-
-
                         </div>
-
                     </article>
                 </div>
             }
-
         </div>
     </div>
 
