@@ -92,7 +92,7 @@
     <None Include="Components\ToplantiTakvimi\DayComponent.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiDuzenle.razor" />
     <None Include="Components\ToplantiTakvimi\MonthComponent.razor" />
-    <None Include="Components\ToplantiTakvimi\NotAuthorizedComponent.razor" />
+    <None Include="Components\IndexComponents\NotAuthorizedComponent.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiSec.razor" />
     <None Include="Components\ToplantiTakvimi\TimePicker.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiListComponent.razor" />

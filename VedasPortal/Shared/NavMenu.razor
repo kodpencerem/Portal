@@ -31,47 +31,52 @@
             <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
                 <i data-feather="bell" class="bell"></i>
             </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-                <div class="dropdown-header">
-                    Bildirimler
-                    <div class="float-right">
-                        <a href="#">Tümünü Okundu İşaretle</a>
-                    </div>
-                </div>
-                <div class="dropdown-list-content dropdown-list-icons">
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                        <span class="dropdown-item-icon bg-primary text-white">
-                            <i class="fas fa-code"></i>
-                        </span>
-                        <span class="dropdown-item-desc">
-                            Template update is
-                            available now!
-                            <span class="time">
-                                2 Min
-                                Ago
-                            </span>
-                        </span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <span class="dropdown-item-icon bg-info text-white">
-                            <i class="far
+            <AuthorizeView>
+                <Authorized>
+                    <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
+                        <div class="dropdown-header">
+                            Bildirimler
+                            <div class="float-right">
+                                <a href="#">Tümünü Okundu İşaretle</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-list-content dropdown-list-icons">
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                                <span class="dropdown-item-icon bg-primary text-white">
+                                    <i class="fas fa-code"></i>
+                                </span>
+                                <span class="dropdown-item-desc">
+                                    Template update is
+                                    available now!
+                                    <span class="time">
+                                        2 Min
+                                        Ago
+                                    </span>
+                                </span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <span class="dropdown-item-icon bg-info text-white">
+                                    <i class="far
 												fa-user"></i>
-                        </span> <span class="dropdown-item-desc">
-                            <b>You</b> and <b>
-                                Dedik
-                                Sugiharto
-                            </b> are now friends <span class="time">
-                                10 Hours
-                                Ago
-                            </span>
-                        </span>
-                    </a>
+                                </span> <span class="dropdown-item-desc">
+                                    <b>You</b> and <b>
+                                        Dedik
+                                        Sugiharto
+                                    </b> are now friends <span class="time">
+                                        10 Hours
+                                        Ago
+                                    </span>
+                                </span>
+                            </a>
 
-                </div>
-                <div class="dropdown-footer text-center">
-                    <a href="#">Tümünü Göster <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
+                        </div>
+                        <div class="dropdown-footer text-center">
+                            <a href="#">Tümünü Göster <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+
+                </Authorized>
+            </AuthorizeView>
         </li>
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -83,13 +88,17 @@
             
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">Merhaba Kullanıcı</div>
-                <a href="profil" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> Profil
-                </a>
-                <a href="Identity/Account/Manage" class="dropdown-item has-icon">
-                    <i class="fas fa-cog"></i>
-                    Ayarlar
-                </a>
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="profil" class="dropdown-item has-icon">
+                            <i class="far fa-user"></i> Profil
+                        </a>
+                        <a href="Identity/Account/Manage" class="dropdown-item has-icon">
+                            <i class="fas fa-cog"></i>
+                            Ayarlar
+                        </a>
+                    </Authorized>
+                </AuthorizeView>
 
                 <div class="dropdown-divider"></div>
                 <div style="margin-left:30px">
@@ -109,68 +118,73 @@
         </div>
         <ul class="sidebar-menu">
             @*<li class="menu-header">Main</li>*@
-            <li class="dropdown @(anasayfaActive)">
-                <a href="/" class="nav-link"><i data-feather="home"></i><span>Anasayfa</span></a>
-            </li>
-            <li class="dropdown @(vedasRehberActive)">
-                <a href="vedasrehber" class="nav-link"><i data-feather="book"></i><span>Vedaş Rehber</span></a>
-            </li>
-            <li class="dropdown ">
-                <a href="ToplantiOdalari" class="nav-link">
-                    <i data-feather="clock"></i>
-                    <span>
-                        Toplantı
-                        Odaları
-                    </span>
-                </a>
-            </li>
 
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i data-feather="briefcase"></i><span>Faydalı İçerikler</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="Egitimler">Eğitimler</a></li>
-                    <li><a class="nav-link" href="Videolar">Videolar</a></li>
-                    <li><a class="nav-link" href="dosyalar">Dökümanlar</a></li>
-                    <li><a class="nav-link" href="GuncelMevzuatTakibi">Güncel Mevzuat Takibi ve Regülasyonlar</a></li>
-                </ul>
-            </li>
+            <AuthorizeView>
+                <Authorized>
+                    <li class="dropdown @(anasayfaActive)">
+                        <a href="/" class="nav-link"><i data-feather="home"></i><span>Anasayfa</span></a>
+                    </li>
+                    <li class="dropdown @(vedasRehberActive)">
+                        <a href="vedasrehber" class="nav-link"><i data-feather="book"></i><span>Vedaş Rehber</span></a>
+                    </li>
+                    <li class="dropdown ">
+                        <a href="ToplantiOdalari" class="nav-link">
+                            <i data-feather="clock"></i>
+                            <span>
+                                Toplantı
+                                Odaları
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="menu-toggle nav-link has-dropdown">
+                            <i data-feather="briefcase"></i><span>Faydalı İçerikler</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="Egitimler">Eğitimler</a></li>
+                            <li><a class="nav-link" href="Videolar">Videolar</a></li>
+                            <li><a class="nav-link" href="dosyalar">Dökümanlar</a></li>
+                            <li><a class="nav-link" href="GuncelMevzuatTakibi">Güncel Mevzuat Takibi ve Regülasyonlar</a></li>
+                        </ul>
+                    </li>
 
 
-            <li class="dropdown">
-                <a href="Oneriler" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Öneri Sistemi</span></a>
-            </li>
-            <li class="dropdown">
-                <a href="DuzelticiFaaliyetOlusturma" class="nav-link">
-                    <i data-feather="layers"></i><span>
-                        Düzeltici
-                        Faaliyet Oluşturma
-                    </span>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a href="haberler" class="nav-link"><i data-feather="book-open"></i><span>Basında Biz</span></a>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown">
-                    <i data-feather="speaker"></i><span>
-                        Haftalık
-                        Personel Durumları
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="Doganlar">Doğanlar</a></li>
-                    <li><a class="nav-link" href="Katilanlar">Katılanlar</a></li>
-                    <li><a class="nav-link" href="Ayrilanlar">Ayrılanlar</a></li>
-                    <li><a class="nav-link" href="Vefatlar">Vefatlar</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="IKUygulamalari" class="nav-link"><i data-feather="package"></i><span>IK Uygulamaları</span></a>
-            </li>
+                    <li class="dropdown">
+                        <a href="Oneriler" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Öneri Sistemi</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="DuzelticiFaaliyetOlusturma" class="nav-link">
+                            <i data-feather="layers"></i><span>
+                                Düzeltici
+                                Faaliyet Oluşturma
+                            </span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="haberler" class="nav-link"><i data-feather="book-open"></i><span>Basında Biz</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="menu-toggle nav-link has-dropdown">
+                            <i data-feather="speaker"></i><span>
+                                Haftalık
+                                Personel Durumları
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="Doganlar">Doğanlar</a></li>
+                            <li><a class="nav-link" href="Katilanlar">Katılanlar</a></li>
+                            <li><a class="nav-link" href="Ayrilanlar">Ayrılanlar</a></li>
+                            <li><a class="nav-link" href="Vefatlar">Vefatlar</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="IKUygulamalari" class="nav-link"><i data-feather="package"></i><span>IK Uygulamaları</span></a>
+                    </li>
+                </Authorized>
+            </AuthorizeView>
 
-            <AuthorizeView Roles="Admin">
+            <AuthorizeView>
                 <Authorized>
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown">
