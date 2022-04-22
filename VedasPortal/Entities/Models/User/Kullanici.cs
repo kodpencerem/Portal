@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Enums;
 
 namespace VedasPortal.Entities.Models.User
@@ -12,7 +14,10 @@ namespace VedasPortal.Entities.Models.User
         public string KullaniciAdi { get; set; }
         public DateTime? SonGirisBilgisi { get; set; }
         public bool AktifEdilsinMi { get; set; } = true;
+        [NotMapped]
         public List<KullaniciRol> Roller { get; set; } = new List<KullaniciRol>();
+
+        public Toplanti Toplanti { get; set; }
 
     }
     public class KullaniciGiris

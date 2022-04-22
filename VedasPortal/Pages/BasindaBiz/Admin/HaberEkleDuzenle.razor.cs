@@ -57,6 +57,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             Kategoriler = list;
         }
         
+
+
+
         [Authorize(Roles ="Admin")]
         protected void HaberKayit()
         {

@@ -19,7 +19,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         public IBaseRepository<ToplantiNotu> ToplantiNotu { get; set; }
 
         [Inject]
-        public NavigationManager UrlNavigationManager { get; set; }
+        public IBaseRepository<Dosya> ToplantiNotDosya { get; set; }
 
         [Parameter]
         public int ToplantiNotId { get; set; }
@@ -50,6 +50,19 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         protected void Kayit()
         {
             ToplantiNotu.Add(ToplantiNot);
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new Dosya()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                ToplantiNotuId= ToplantiNot.Id,
+
+            };
+            ToplantiNotDosya.Add(dosya);
         }
         protected override void OnParametersSet()
         {
@@ -90,8 +103,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         public void Temizle()
         {
             ToplantiNot = null;
-
-            UrlNavigationManager.NavigateTo("/toplantinotu/ekle");
+            GetDosya = null;
         }
 
 

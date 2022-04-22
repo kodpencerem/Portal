@@ -38,6 +38,9 @@ namespace VedasPortal.Entities.Models.Dosya
         public int? VideoId { get; set; }
         public Video.Video Video { get; set; }
 
+        public int? ToplantiNotuId { get; set; }
+        public ToplantiTakvimi.ToplantiNotu.ToplantiNotu ToplantiNotu { get; set; }
+
     }
 
     public enum DosyaKategori

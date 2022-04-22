@@ -27,5 +27,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
 
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
         public ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
+
+        public ICollection<User.Kullanici> Kullanici { get; set; }
     }
 }
