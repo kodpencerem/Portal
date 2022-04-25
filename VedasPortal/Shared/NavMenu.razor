@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager nav
+@attribute [Authorize(Roles = "Administrators, Users")]
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar sticky">
     <div class="form-inline mr-auto">
@@ -85,7 +86,7 @@
                 <span class="d-sm-none d-lg-inline-block">
                 </span>
             </a>
-            
+
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">Merhaba Kullanıcı</div>
                 <AuthorizeView>
@@ -104,7 +105,7 @@
                 <div style="margin-left:30px">
                     <LoginDisplay />
                 </div>
-                
+
             </div>
         </li>
     </ul>
@@ -184,13 +185,14 @@
                 </Authorized>
             </AuthorizeView>
 
-            <AuthorizeView>
+            <AuthorizeView Roles="Administrators">
                 <Authorized>
                     <li class="dropdown">
                         <a href="#" class="menu-toggle nav-link has-dropdown">
                             <i data-feather="briefcase"></i><span>İçerik Ekle Düzenle</span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="administration">Kullanıcı Ekle</a></li>
                             <li><a class="nav-link" href="haber/ekle">Haber Ekle</a></li>
                             <li><a class="nav-link" href="duyuru/ekle">Duyuru Ekle</a></li>
                             <li><a class="nav-link" href="duzelticifaaliyet/ekle">Düzeltici Faaliyet Ekle</a></li>

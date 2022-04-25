@@ -60,11 +60,11 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
 
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Administrators")]
         protected void HaberKayit()
         {
             Message = "";
-            if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            if(User.Identity.IsAuthenticated && User.IsInRole("Administrators"))
             {
                 HaberServisi.Add(haber);
                 var fileName = SaveFileToUploaded.FileName.Split(".");

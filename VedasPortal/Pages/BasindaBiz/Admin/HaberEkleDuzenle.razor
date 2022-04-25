@@ -1,7 +1,7 @@
 ﻿@page "/haber/ekle"
 @page "/haber/duzenle/{haberId:int}"
 @inherits HaberEkleDuzenleModel
-
+@attribute [Authorize(Roles ="Admin")]
 <div class="col-12">
     <EditForm Model="@haber" OnValidSubmit="HaberKayit">
         <DataAnnotationsValidator />

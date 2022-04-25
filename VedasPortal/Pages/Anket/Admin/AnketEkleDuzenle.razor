@@ -1,13 +1,12 @@
 ﻿@page "/anket/ekle"
 @page "/anket/duzenle/{id:int}"
+@attribute [Authorize(Roles = "Admin")]
 
 @if (Id == 0)
 {
-    <AnketEkleComponent />
-}
-else
-{
-    <CascadingValue Value="@Id">
-        <AnketDuzenleComponent />
-    </CascadingValue>
-}
+<AnketEkleComponent /> }
+            else
+            {
+<CascadingValue Value="@Id">
+    <AnketDuzenleComponent />
+</CascadingValue>}

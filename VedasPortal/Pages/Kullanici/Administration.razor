@@ -7,7 +7,7 @@
 @attribute [Authorize(Roles = "Administrators")]
 
 <div class="col-12">
-    <CardComponent>
+    <CardComponent cardStyle="Style.primary">
         <CardHeader>
             <h3>Kullanıcı Ekleme Düzenleme ve Silme</h3>
         </CardHeader>
@@ -16,32 +16,38 @@
                 <Authorized>
                     @if (@context.User.IsInRole(ADMINISTRATION_ROLE))
                     {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Kullanıcı Adı</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var user in ColUsers)
-                                {
+
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table-2">
+                                <thead>
                                     <tr>
-                                        <td>@user.Id.Substring(0, 5) ...</td>
-                                        <td>@user.UserName</td>
-                                        <td>@user.Email</td>
-                                        <td>
-                                            <!-- Mevcut alanı düzenle -->
-                                            <button class="btn btn-primary"
-                                                    @onclick="(() => EditUser(user))">
-                                                Edit
-                                            </button>
-                                        </td>
+                                        
+                                        <th>Id</th>
+                                        <th>Kullanıcı Adı</th>
+                                        <th>Email</th>
+                                        <th>İşlemler</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in ColUsers)
+                                    {
+                                        <tr>
+                                            <td>@user.Id.Substring(0, 5) ...</td>
+                                            <td>@user.UserName</td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <!-- Mevcut alanı düzenle -->
+                                                <button class="btn btn-primary"
+                                                        @onclick="(() => EditUser(user))">
+                                                    Edit
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
                         @if (ShowPopup)
                         {
                             <!-- Bu, bir kullanıcı oluşturmak veya düzenlemek için açılır penceredir. -->
@@ -49,7 +55,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h3 class="modal-title">Edit User</h3>
+                                            <h3 class="modal-title">Kullanıcı Ekle Düzenle</h3>
                                             <!-- Açılır pencereyi kapatmak için düğme -->
                                             <button type="button" class="close"
                                                     @onclick="ClosePopup">
@@ -101,7 +107,7 @@
                                                 <!--Tahmini silme düğmesi -->
                                                 <button class="btn btn-danger"
                                                         @onclick="DeleteUser">
-                                                    Delete
+                                                    Sil
                                                 </button>
                                             }
                                             <br />
@@ -111,7 +117,7 @@
                                 </div>
                             </div>
                         }
-                        <button class="btn btn-success" @onclick="AddNewUser">Kullanıcı Ekle</button>
+                        <button class="btn btn-primary" @onclick="AddNewUser">Kullanıcı Ekle</button>
                     }
                     else
                     {
@@ -412,6 +418,17 @@
     {
         // Popup'ı kapat
         ShowPopup = false;
+    }
+
+    [Inject]
+    public IJSRuntime JsRun { get; set; }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            await JsRun.InvokeVoidAsync("dataTables");
+        }
     }
 }
 
