@@ -2,14 +2,13 @@
 
 <BlazoredToasts Position="ToastPosition.TopRight" Timeout="1" />
 <div class="loader"></div>
-<div id="app">
-    <div class="main-wrapper main-wrapper-1">
-        <NavMenu />
-        <!-- Main Content -->
-        
 
-        <AuthorizeView>
-            <Authorized>
+<AuthorizeView>
+    <Authorized>
+        <div id="app">
+            <div class="main-wrapper main-wrapper-1">
+                <NavMenu />
+                <!-- Main Content -->
                 <div class="main-content">
                     <section class="section">
                         <div class="section-body">
@@ -19,18 +18,19 @@
                         </div>
                     </section>
                 </div>
-            </Authorized>
-            <NotAuthorized>
-                <NotAuthorizedComponent />
-            </NotAuthorized>
-        </AuthorizeView>
+                <footer class="main-footer">
+                    <div class="footer-left">
+                        <a href="https://www.vedas.com.tr" target="_blank">Vedaş</a>
+                    </div>
+                    <div class="footer-right">
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <NotAuthorizedComponent />
+    </NotAuthorized>
+</AuthorizeView>
 
-        <footer class="main-footer">
-            <div class="footer-left">
-                <a href="https://www.vedas.com.tr" target="_blank">Vedaş</a>
-            </div>
-            <div class="footer-right">
-            </div>
-        </footer>
-    </div>
-</div>
+
