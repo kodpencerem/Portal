@@ -22,12 +22,12 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public string Baslik { get; set; }
         public bool VideoKonferansMi { get; set; }
         public string Renk { get; set; }
-        public bool AktifPasif { get; set; }
+        public bool AktifPasif { get; set; } = true;
         public bool AnaSayfadaGoster { get; set; }
 
-        public ToplantiMerkezi ToplantiMerkezi { get; set; }
+        public ICollection<ToplantiMerkezi> ToplantiMerkezi { get; set; }
         public ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
-
+        public ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
         public ICollection<User.Kullanici> Kullanici { get; set; }
     }
 }

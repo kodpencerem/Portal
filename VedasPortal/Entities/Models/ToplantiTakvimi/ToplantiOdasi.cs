@@ -12,8 +12,10 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public string Adres { get; set; }
         public int Kapasite { get; set; }
         public bool VideoKonferansMi { get; set; }
-        public bool RezervDurumu { get; set; }       
+        public bool RezervDurumu { get; set; }
+        public int? ToplantiMerkeziId { get; set; }
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
+        public int? ToplantiId { get; set; }
         public Toplanti Toplanti { get; set; }
     }
 }

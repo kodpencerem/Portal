@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 using VedasPortal.Entities.Models.Egitim;
 
@@ -13,7 +14,11 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu
         public bool AktifPasif { get; set; }
         [DataType(DataType.Text)]
         public Birimler Birimler { get; set; }
+        public int? ToplantiMerkeziId { get; set; }
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
-        public Dosya.Dosya GetDosya { get; set; }
+        public int? ToplantiId { get; set; }
+        public Toplanti Toplanti { get; set; }
+        public int? DosyaId { get; set; }
+        public ICollection<Dosya.Dosya> Dosya { get; set; }
     }
 }
