@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using VedasPortal.Data.Toplanti;
@@ -15,11 +16,12 @@ using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Entities.Models.Video;
 
 namespace VedasPortal.Data
 {
-    public class VedasDbContext : IdentityDbContext
+    public class VedasDbContext : IdentityDbContext<Kullanici>
     {
         public VedasDbContext(DbContextOptions<VedasDbContext> options)
             : base(options)
@@ -45,6 +47,7 @@ namespace VedasPortal.Data
         public DbSet<MailGonder> ToplantiMail { get; set; }
         public DbSet<ToplantiMerkezi> Merkez { get; set; }
         public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
+        public DbSet<Kullanici> Kullanici { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

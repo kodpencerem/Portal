@@ -1,7 +1,8 @@
 ﻿@page "/administration"
 @using Microsoft.AspNetCore.Authorization;
 @using Microsoft.AspNetCore.Identity;
-@inject UserManager<IdentityUser> _UserManager
+@using VedasPortal.Entities.Models.User
+@inject UserManager<Kullanici> _UserManager
 @inject RoleManager<IdentityRole> _RoleManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize(Roles = "Administrators")]
@@ -146,13 +147,13 @@
     System.Security.Claims.ClaimsPrincipal CurrentUser;
 
     // Seçili olan kullanıcıyı eklemek veya düzenlemek için kullanılan özellik
-    IdentityUser objUser = new IdentityUser();
+    Kullanici objUser = new Kullanici();
 
     // Halihazırda seçili olan kullanıcı için seçilen rolü izler
     string CurrentUserRole { get; set; } = "Users";
 
     // Mevcut kullanıcıları görüntülemek için koleksiyon
-    List<IdentityUser> ColUsers = new List<IdentityUser>();
+    List<Kullanici> ColUsers = new List<Kullanici>();
 
     // Bir kullanıcı düzenlenirken roller açılır menüsünde görüntülenecek seçenekler
     List<string> Options = new List<string>() { "Users", "Administrators" };
@@ -198,10 +199,10 @@
         strError = "";
 
         // Kullanıcıları tutmak için koleksiyon
-        ColUsers = new List<IdentityUser>();
+        ColUsers = new List<Kullanici>();
 
         // _UserManager'dan kullanıcıları alın
-        var user = _UserManager.Users.Select(x => new IdentityUser
+        var user = _UserManager.Users.Select(x => new Kullanici
         {
             Id = x.Id,
             UserName = x.UserName,
@@ -218,7 +219,7 @@
     void AddNewUser()
     {
         // Yeni kullanıcı oluştur
-        objUser = new IdentityUser();
+        objUser = new Kullanici();
         objUser.PasswordHash = "*****";
 
         // Kimliği boş olarak ayarlayın, böylece yeni bir kayıt olduğunu bilelim
@@ -314,7 +315,7 @@
                 // yeni kullanıcı kayıt
 
                 var NewUser =
-                    new IdentityUser
+                    new Kullanici
                     {
                         UserName = objUser.UserName,
                         Email = objUser.Email
@@ -368,7 +369,7 @@
         }
     }
 
-    async Task EditUser(IdentityUser _IdentityUser)
+    async Task EditUser(Kullanici _IdentityUser)
     {
         // Seçilen kullanıcıyı ayarla
         // mevcut kullanıcı olarak

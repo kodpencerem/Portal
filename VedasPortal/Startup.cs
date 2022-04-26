@@ -27,6 +27,7 @@ using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Entities.Models.Video;
 using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Repository;
@@ -57,7 +58,7 @@ namespace VedasPortal
             services.AddDbContext<VedasDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Kullanici>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<VedasDbContext>();
             services.AddRazorPages();

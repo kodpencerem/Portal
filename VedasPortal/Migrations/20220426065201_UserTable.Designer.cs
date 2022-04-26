@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220426065201_UserTable")]
+    partial class UserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,6 +70,77 @@ namespace VedasPortal.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -1195,124 +1268,6 @@ namespace VedasPortal.Migrations
                     b.ToTable("ToplantiOdasi");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AdSoyad")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Adres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("AktifEdilsinMi")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("AyrilisNedeni")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BasladigiGorev")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Birimler")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DogumTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("IseBaslangicTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("IstenAyrilisTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("KullaniciDurum")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Resim")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("SonGirisBilgisi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TelefonNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TemsilcilikAdi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ToplantiId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<DateTime?>("VefatTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("YakinlikDerecesi")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ToplantiId");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.KursVeSertifika", b =>
                 {
                     b.Property<int>("Id")
@@ -1480,6 +1435,66 @@ namespace VedasPortal.Migrations
                     b.ToTable("Yorum");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("AdSoyad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Adres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AktifEdilsinMi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AyrilisNedeni")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BasladigiGorev")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Birimler")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DogumTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("IseBaslangicTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("IstenAyrilisTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("KullaniciDurum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Resim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SonGirisBilgisi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TelefonNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TemsilcilikAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ToplantiId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("VefatTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("YakinlikDerecesi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ToplantiId");
+
+                    b.HasDiscriminator().HasValue("Kullanici");
+                });
+
             modelBuilder.Entity("VedasPortal.Data.Toplanti.MailGonder", b =>
                 {
                     b.HasBaseType("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti");
@@ -1501,7 +1516,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1510,7 +1525,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1525,7 +1540,7 @@ namespace VedasPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1534,7 +1549,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1669,15 +1684,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("ToplantiMerkezi");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
-                        .WithMany("Kullanici")
-                        .HasForeignKey("ToplantiId");
-
-                    b.Navigation("Toplanti");
-                });
-
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
@@ -1706,6 +1712,15 @@ namespace VedasPortal.Migrations
                         .HasForeignKey("VideoId");
 
                     b.Navigation("Video");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
+                        .WithMany("Kullanici")
+                        .HasForeignKey("ToplantiId");
+
+                    b.Navigation("Toplanti");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>

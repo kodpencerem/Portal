@@ -7,6 +7,7 @@ using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Entities.Models.Video;
+using VedasPortal.Enums;
 
 namespace VedasPortal
 {
@@ -38,6 +39,17 @@ namespace VedasPortal
             {
                 HaberDuyuruKategori.Duyuru => "Duyuru",
                 HaberDuyuruKategori.Haber => "Haber",
+                _ => "",
+            };
+        }
+
+        public static string TextKullaniciDurum(this KullaniciDurum kategori)
+        {
+            return kategori switch
+            {
+                KullaniciDurum.Yeni => "Yeni Kullanici",
+                KullaniciDurum.Ayrilis => "Ayrılcak Kullanıcı",
+                KullaniciDurum.Vefat => "Vefat Durumu",
                 _ => "",
             };
         }
