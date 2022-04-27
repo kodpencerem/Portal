@@ -1,0 +1,442 @@
+﻿@page "/administration"
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Identity;
+@using VedasPortal.Entities.Models.User
+@inject UserManager<Kullanici> _UserManager
+@inject RoleManager<IdentityRole> _RoleManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize(Roles = "Administrators")]
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            <h3>Kullanıcı Ekleme Düzenleme ve Silme</h3>
+        </CardHeader>
+        <CardBody>
+            <AuthorizeView Roles="Administrators">
+                <Authorized>
+                    @if (@context.User.IsInRole(ADMINISTRATION_ROLE))
+                    {
+
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table-2">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Id</th>
+                                        <th>Kullanıcı Adı</th>
+                                        <th>Email</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in ColUsers)
+                                    {
+                                        <tr>
+                                            <td>@user.Id.Substring(0, 5) ...</td>
+                                            <td>@user.UserName</td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <!-- Mevcut alanı düzenle -->
+                                                <button class="btn btn-primary"
+                                                        @onclick="(() => EditUser(user))">
+                                                    Edit
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @if (ShowPopup)
+                        {
+                            <!-- Bu, bir kullanıcı oluşturmak veya düzenlemek için açılır penceredir. -->
+                            <div class="modal" tabindex="-1" style="display:block" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Kullanıcı Ekle Düzenle</h3>
+                                            <!-- Açılır pencereyi kapatmak için düğme -->
+                                            <button type="button" class="close"
+                                                    @onclick="ClosePopup">
+                                                <span aria-hidden="true">X</span>
+                                            </button>
+                                        </div>
+                                        <!-- Mevcut tahmin için formu düzenle -->
+                                        <div class="modal-body">
+                                            <!--Kimliği yalnızca yeni bir kullanıcı değilse göster -->
+                                            @if (objUser.Id != "")
+                                            {
+                                                <p>@objUser.Id</p>
+                                            }
+                                            <!-- Yalnızca yeni bir kullanıcı varsa düzenlemeye izin verin -->
+                                            @if (objUser.Id != "")
+                                            {
+                                                <p>@objUser.UserName</p>
+                                            }
+                                            else
+                                            {
+                                                <input class="form-control" type="text"
+                                                       placeholder="UserName"
+                                                       @bind="objUser.UserName" />
+                                            }
+                                            <input class="form-control" type="text"
+                                                   placeholder="Email"
+                                                   @bind="objUser.Email" />
+                                            <input class="form-control" type="password"
+                                                   placeholder="Password"
+                                                   @bind="objUser.PasswordHash" />
+                                            <select class="form-control"
+                                                    @bind="@CurrentUserRole">
+                                                @foreach (var option in Options)
+                                                {
+                                                    <option value="@option">
+                                                        @option
+                                                    </option>
+                                                }
+                                            </select>
+                                            <br /><br />
+                                            <!--Kullanıcıyı kaydetme düğmesi -->
+                                            <button class="btn btn-primary"
+                                                    @onclick="SaveUser">
+                                                Save
+                                            </button>
+                                            <!-- Yeni bir kayıt değilse, yalnızca sil düğmesini göster -->
+                                            @if (objUser.Id != "")
+                                            {
+                                                <!--Tahmini silme düğmesi -->
+                                                <button class="btn btn-danger"
+                                                        @onclick="DeleteUser">
+                                                    Sil
+                                                </button>
+                                            }
+                                            <br />
+                                            <span style="color:red">@strError</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <button class="btn btn-primary" @onclick="AddNewUser">Kullanıcı Ekle</button>
+                    }
+                    else
+                    {
+                        <p>@ADMINISTRATION_ROLE içinde kullanıcı olarak oturum açmadınız.</p>
+                    }
+                </Authorized>
+                <NotAuthorized>
+                    <p>
+                        Giriş yapmadınız.
+                    </p>
+                </NotAuthorized>
+            </AuthorizeView>
+
+        </CardBody>
+    </CardComponent>
+</div>
+
+
+
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    string ADMINISTRATION_ROLE = "Administrators";
+    System.Security.Claims.ClaimsPrincipal CurrentUser;
+
+    // Seçili olan kullanıcıyı eklemek veya düzenlemek için kullanılan özellik
+    Kullanici objUser = new Kullanici();
+
+    // Halihazırda seçili olan kullanıcı için seçilen rolü izler
+    string CurrentUserRole { get; set; } = "Users";
+
+    // Mevcut kullanıcıları görüntülemek için koleksiyon
+    List<Kullanici> ColUsers = new List<Kullanici>();
+
+    // Bir kullanıcı düzenlenirken roller açılır menüsünde görüntülenecek seçenekler
+    List<string> Options = new List<string>() { "Users", "Administrators" };
+
+    // Olası hataları tutmak için
+    string strError = "";
+
+    // Pop-up'ı göstermeyi etkinleştirmek için
+    bool ShowPopup = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // ADMINISTRATION_ROLE olduğundan emin olmak için
+        var RoleResult = await _RoleManager.FindByNameAsync(ADMINISTRATION_ROLE);
+        if (RoleResult == null)
+        {
+            // ADMINISTRATION_ROLE oluşturmak için
+            await _RoleManager.CreateAsync(new IdentityRole(ADMINISTRATION_ROLE));
+        }
+
+        // Ensure a user named emrullah04@outlook.com is an Administrator
+        var user = await _UserManager.FindByNameAsync("emrullah04@outlook.com");
+        if (user != null)
+        {
+            // emrullah04@outlook.com administrator rolünde mi?
+            var UserResult = await _UserManager.IsInRoleAsync(user, ADMINISTRATION_ROLE);
+            if (!UserResult)
+            {
+                await _UserManager.AddToRoleAsync(user, ADMINISTRATION_ROLE);
+            }
+        }
+
+        // hali hazırda kayıtlı olan kullanıcılar
+        CurrentUser = (await authenticationStateTask).User;
+
+        // kullanıcıları getir
+        GetUsers();
+    }
+
+    public void GetUsers()
+    {
+        // hata mesajlarını temizle
+        strError = "";
+
+        // Kullanıcıları tutmak için koleksiyon
+        ColUsers = new List<Kullanici>();
+
+        // _UserManager'dan kullanıcıları alın
+        var user = _UserManager.Users.Select(x => new Kullanici
+        {
+            Id = x.Id,
+            UserName = x.UserName,
+            Email = x.Email,
+            PasswordHash = "*****"
+        });
+
+        foreach (var item in user)
+        {
+            ColUsers.Add(item);
+        }
+    }
+
+    void AddNewUser()
+    {
+        // Yeni kullanıcı oluştur
+        objUser = new Kullanici();
+        objUser.PasswordHash = "*****";
+
+        // Kimliği boş olarak ayarlayın, böylece yeni bir kayıt olduğunu bilelim
+        objUser.Id = "";
+
+
+        ShowPopup = true;
+    }
+
+    async Task SaveUser()
+    {
+        try
+        {
+            //Bu mevcut bir kullanıcı mı ?
+            if (objUser.Id != "")
+            {
+                // kullanıcı kontrol et
+                var user = await _UserManager.FindByIdAsync(objUser.Id);
+
+                // mail bilgisini kontrol et
+                user.Email = objUser.Email;
+
+                // durumunu güncelle
+                await _UserManager.UpdateAsync(user);
+
+                // Yalnızca geçerli değer varsa parolayı güncelleyin
+                // hashe gönderilen değerler maskeleme içindir
+                if (objUser.PasswordHash != "*****")
+                {
+                    var resetToken =
+                        await _UserManager.GeneratePasswordResetTokenAsync(user);
+
+                    var passworduser =
+                        await _UserManager.ResetPasswordAsync(
+                            user,
+                            resetToken,
+                            objUser.PasswordHash);
+
+                    if (!passworduser.Succeeded)
+                    {
+                        if (passworduser.Errors.FirstOrDefault() != null)
+                        {
+                            strError =
+                                passworduser
+                                .Errors
+                                .FirstOrDefault()
+                                .Description;
+                        }
+                        else
+                        {
+                            strError = "Pasword error";
+                        }
+
+                        // Açılır pencereyi açık tutun
+                        return;
+                    }
+                }
+
+                // Rolleri işle
+
+                // Bu bir admin rolü mü?
+                var UserResult =
+                    await _UserManager
+                    .IsInRoleAsync(user, ADMINISTRATION_ROLE);
+
+                // Eğer admin rolü seçilmişse
+                // ve admin kullanicisi değilse?
+                if (
+                    (CurrentUserRole == ADMINISTRATION_ROLE)
+                    &
+                    (!UserResult))
+                {
+                    // Admin rolü ver 
+                    await _UserManager
+                        .AddToRoleAsync(user, ADMINISTRATION_ROLE);
+                }
+                else
+                {
+                    // Eğer admin rolü seçilmişse
+                    // ve admin kullanicisi ise?
+                    if ((CurrentUserRole != ADMINISTRATION_ROLE)
+                        &
+                        (UserResult))
+                    {
+                        // Administrator rolünü kaldır
+                        await _UserManager
+                            .RemoveFromRoleAsync(user, ADMINISTRATION_ROLE);
+                    }
+                }
+            }
+            else
+            {
+                // yeni kullanıcı kayıt
+
+                var NewUser =
+                    new Kullanici
+                    {
+                        UserName = objUser.UserName,
+                        Email = objUser.Email
+                    };
+
+                var CreateResult =
+                    await _UserManager
+                    .CreateAsync(NewUser, objUser.PasswordHash);
+
+                if (!CreateResult.Succeeded)
+                {
+                    if (CreateResult
+                        .Errors
+                        .FirstOrDefault() != null)
+                    {
+                        strError =
+                            CreateResult
+                            .Errors
+                            .FirstOrDefault()
+                            .Description;
+                    }
+                    else
+                    {
+                        strError = "Hata Oluştu";
+                    }
+
+                    // pencereyi işlem yapılana kadar açık tut
+                    return;
+                }
+                else
+                {
+                    // Rolü incele
+                    if (CurrentUserRole == ADMINISTRATION_ROLE)
+                    {
+                        // Admin rolü kontrolü gerçekleştir
+                        await _UserManager
+                            .AddToRoleAsync(NewUser, ADMINISTRATION_ROLE);
+                    }
+                }
+            }
+
+            // Popup kapat
+            ShowPopup = false;
+
+            // Kullanıcıları yenile
+            GetUsers();
+        }
+        catch (Exception ex)
+        {
+            strError = ex.GetBaseException().Message;
+        }
+    }
+
+    async Task EditUser(Kullanici _IdentityUser)
+    {
+        // Seçilen kullanıcıyı ayarla
+        // mevcut kullanıcı olarak
+        objUser = _IdentityUser;
+
+        // Kullanıcıyı getir
+        var user = await _UserManager.FindByIdAsync(objUser.Id);
+        if (user != null)
+        {
+            // Admin rolünde mi?
+            var UserResult =
+                await _UserManager
+                .IsInRoleAsync(user, ADMINISTRATION_ROLE);
+
+            if (UserResult)
+            {
+                CurrentUserRole = ADMINISTRATION_ROLE;
+            }
+            else
+            {
+                CurrentUserRole = "Users";
+            }
+        }
+
+        // Popup aç
+        ShowPopup = true;
+    }
+
+    async Task DeleteUser()
+    {
+        // popup kapat
+        ShowPopup = false;
+
+        // kullanıcıyı getir
+        var user = await _UserManager.FindByIdAsync(objUser.Id);
+        if (user != null)
+        {
+            // sil
+            await _UserManager.DeleteAsync(user);
+        }
+
+        // Kullanıcıları yenile
+        GetUsers();
+    }
+
+    void ClosePopup()
+    {
+        // Popup'ı kapat
+        ShowPopup = false;
+    }
+
+    [Inject]
+    public IJSRuntime JsRun { get; set; }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            await JsRun.InvokeVoidAsync("dataTables");
+        }
+    }
+}
+
+<style>
+    .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
+        margin-top: 150px !important;
+    }
+</style>

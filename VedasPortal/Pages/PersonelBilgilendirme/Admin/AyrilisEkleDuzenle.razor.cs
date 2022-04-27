@@ -1,0 +1,145 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.JSInterop;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using VedasPortal.Components.ModalComponents;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Repository.Interface;
+
+namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
+{
+
+    public class AyrilisModeli : ComponentBase
+    {
+
+        [Inject]
+        public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
+
+        [Inject]
+        public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
+
+        [Inject]
+        public AuthenticationStateProvider StateProvider { get; set; }
+
+        [Parameter]
+        public int HaberId { get; set; }
+
+        protected string Title = "Ekle";
+        public HaberDuyuru haber = new();
+
+        public Dosya HaberDosya = new();
+
+        private ClaimsPrincipal User;
+        public string Message { get; set; }
+
+        protected IEnumerable<HaberDuyuru> Haberler { get; set; }
+
+        protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
+        {
+            Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            return Haberler;
+        }
+        public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
+        protected void TumKategorileriGetir()
+        {
+            var list = new Dictionary<HaberDuyuruKategori, string>();
+            foreach (HaberDuyuruKategori item in Enum.GetValues(typeof(HaberDuyuruKategori)))
+            {
+                list.Add(item, item.TextHaberDuyuru());
+            }
+            Kategoriler = list;
+        }
+
+
+
+
+        [Authorize(Roles = "Administrators")]
+        protected void HaberKayit()
+        {
+            Message = "";
+            if (User.Identity.IsAuthenticated && User.IsInRole("Administrators"))
+            {
+                HaberServisi.Add(haber);
+                var fileName = SaveFileToUploaded.FileName.Split(".");
+                var filePath = SaveFileToUploaded.ImageUploadedPath;
+                var dosya = new Dosya()
+                {
+                    Adi = fileName[0],
+                    Yolu = filePath,
+                    Uzanti = fileName[1],
+                    Kategori = DosyaKategori.Jpg,
+                    AktifPasif = true,
+                    HaberDuyuruId = haber.Id,
+
+                };
+                HaberDosyaServisi.Add(dosya);
+            }
+            else
+            {
+                Message = "Haber kayıt ekleme yetkiniz yoktur!";
+            }
+
+
+        }
+        protected override void OnParametersSet()
+        {
+            if (HaberId != 0 || HaberDosya.Yolu != null)
+            {
+                Title = "Duzenle";
+                haber = HaberServisi.Get(HaberId);
+            }
+        }
+
+        protected void SilmeyiOnayla(int haberId)
+        {
+            ModalDialog.Open();
+
+            haber = Haberler.FirstOrDefault(x => x.Id == haberId);
+        }
+
+        protected void HaberSil()
+        {
+            if (haber.Id == 0)
+                return;
+            HaberServisi.Remove(haber.Id);
+            HaberDosyaServisi.Remove(HaberDosya.Id);
+            haber = new HaberDuyuru();
+            TumHaberleriGetir();
+        }
+        public ModalComponent ModalDialog { get; set; }
+        protected string DialogGorunur { get; set; } = "none";
+
+        protected override async Task<Task> OnInitializedAsync()
+        {
+            var giris = await StateProvider.GetAuthenticationStateAsync();
+            User = giris.User;
+            TumHaberleriGetir();
+            TumKategorileriGetir();
+            return Task.CompletedTask;
+        }
+
+        public void Temizle()
+        {
+            haber = null;
+            HaberDosya = null;
+        }
+
+        [Inject]
+        public IJSRuntime JsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
+                await JsRun.InvokeVoidAsync("dataTables");
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+﻿@using VedasPortal.Repository.Interface
+@using System.Linq;
+@using Microsoft.EntityFrameworkCore;
+@using VedasPortal.Entities.Models.Dosya;
+@using VedasPortal.Entities.Models.PersonelDurumlari;
+
+<CardComponent cardStyle="Style.danger">
+    <CardHeader>
+        <i class="fas fa-user-friends"></i> İşe Giriş - Ayrılış
+    </CardHeader>
+    <CardBody>
+        <ul id="personelDurumDiv" class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
+            @foreach (var durum in KatilanAyrilanPersonel.Where(d=>d.AnasayfadaGoster==true).Take(5).ToList())
+            {
+                <li class="media">
+                    <img alt="image" 
+                         class="mr-3 rounded-circle" 
+                         width="50" 
+                         src="images/uploaded/@string.Concat(
+                                                   durum.Dosya.FirstOrDefault().Adi,
+                                                   ".",
+                                                   durum.Dosya.FirstOrDefault().Uzanti)">
+                    <div class="media-body">
+                        <div class="media-title">@durum.AdSoyad</div>
+                        <div class="text-job text-muted">@durum.BasladigiGorev</div>
+                    </div>
+                    <div class="media-items">
+                        <div class="media-item">
+                            <div class="media-title">@durum.Birimler.TextBirimler()</div>
+                            <div class="text-job text-muted">Birim</div>
+                        </div>
+                        <div class="media-item">
+                            <div class="media-title">@durum.PersonelDurumu.TextPersonelDurumu()</div>
+                            <div class="text-job text-muted">Durum</div>
+                        </div>
+                    </div>
+                </li>
+
+            }
+        </ul>
+    </CardBody>
+</CardComponent>
+<style>
+    #duyuruDiv {
+        font-size: 10px
+    }
+
+    #personelDurumDiv .media-item {
+        width: 100px;
+    }
+</style>
+
+@code {
+
+    [Inject]
+    protected IBaseRepository<PersonelDurum> TumPersonelServisi { get; set; }
+    protected IEnumerable<PersonelDurum> KatilanAyrilanPersonel;
+
+    public Dosya PersonelDosya { get; set; } = new Dosya();
+
+    protected override Task OnInitializedAsync()
+    {
+        TumKatilanlariGetir();
+        return Task.CompletedTask;
+    }
+
+    protected IEnumerable<PersonelDurum> TumKatilanlariGetir()
+    {
+        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+        return KatilanAyrilanPersonel;
+    }
+
+
+}
