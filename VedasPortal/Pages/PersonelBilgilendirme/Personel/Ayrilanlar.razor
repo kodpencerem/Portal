@@ -1,135 +1,82 @@
 ﻿@page "/Ayrilanlar"
+@inherits Ayrilislar
 
-<div class="col-12">
-    <CardComponent cardStyle="Style.danger">
+@if (AyrilanPersonel == null)
 
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Aramızdan Ayrılan Personellerimiz
-                </div>
-            </div>            
-        </CardHeader>
+{
+    <p><em>Yükleniyor...</em></p> }
 
-        <CardBody>
-            <div class="row">
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.danger">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" 
-                                     height="200" 
-                                     alt="image" 
-                                     src="assets/img/users/user-1.png" 
-                                     class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details">
-                                <br />
-                                <div class="author-box-description">
-                                    <p style="color:blue" class="text-center">
-                                        Şirketimiz <strong style="color:darkblue">
-                                            Temsilcilik Adı Personel Görevi
-                                        </strong> Olarak Görev Yapan
-                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden
-                                        <strong style="color:darkblue">
-                                            Ayrılış Tarihi
-                                        </strong> Tarihi İtibariyle Ayrılmıştır.
-                                    </p> <p style="color:blue" class="text-center">
-                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
-                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
-                                    </p>
-                                </div>
+else
 
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
-                </div>
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.danger">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" 
-                                     height="200" 
-                                     alt="image" 
-                                     src="assets/img/users/user-1.png" 
-                                     class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details">
-                                <br />
-                                <div class="author-box-description">
-                                    <p style="color:blue" class="text-center">
-                                        Şirketimiz <strong style="color:darkblue">
-                                            Temsilcilik Adı Personel Görevi
-                                        </strong> Olarak Görev Yapan
-                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden <strong style="color:darkblue">
-                                            Ayrılış Tarihi
-                                        </strong> Tarihi İtibariyle Ayrılmıştır.
-                                    </p> <p style="color:blue" class="text-center">
-                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
-                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
-                                    </p>
-                                </div>
+{
 
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
+    <div class="col-12">
+        <CardComponent cardStyle="Style.danger">
+            <CardHeader>
+                Aramızdan Ayrılan Personellerimiz
+            </CardHeader>
+            <CardBody>
+                <div class="row">
+                    @foreach (var ayrilis in AyrilanPersonel.Where(a => a.PersonelDurumu.TextPersonelDurumu() == "Ayrılacak Personel" &&
+                                                                   a.AktifPasif == true))
+                    {
+                        <div style="margin-top:-15px" class="col-4">
+                            <CardComponent cardStyle="Style.danger">
+                                <CardBody>
+                                    <div class="author-box-center align-center">
+                                        <img width="200"
+                                             height="200"
+                                             alt="image"
+                                             src="images/uploaded/@string.Concat(
+                                                                       ayrilis.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       ayrilis.Dosya.FirstOrDefault().Uzanti)"
+                                             class="rounded-circle author-box-picture">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="author-box-details">
+                                        <br />
+                                        <div class="author-box-description">
+                                            <p style="color:blue" class="text-center">
+                                                Şirketimiz <strong style="color:darkblue">
+                                                    @ayrilis.TemsilcilikAdi @ayrilis.BasladigiGorev
+                                                </strong> Olarak Görev Yapan
+                                                <strong style="color:darkblue">@ayrilis.AdSoyad</strong>, Yürüttüğü Görevinden
+                                                <strong style="color:darkblue">
+                                                    @ayrilis.IstenAyrilisTarihi.Date.ToShortDateString()
+                                                </strong> Tarihi İtibariyle Ayrılmıştır.
+                                            </p> <p style="color:blue" class="text-center">
+                                                Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
+                                                Bundan Sonraki İş Hayatında Başarılar Dileriz.
+                                            </p>
+                                        </div>
+                                        <div class="float-right mt-sm-0 mt-3">
+                                            <a href="Profil" class="btn">
+                                                Personel Detay Bilgileri<i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </CardComponent>
+                        </div>}
                 </div>
 
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.danger">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details">
-                                <br />
-                                <div class="author-box-description">
-                                    <p style="color:blue" class="text-center">
-                                        Şirketimiz <strong style="color:darkblue">
-                                            Temsilcilik Adı Personel Görevi
-                                        </strong> Olarak Görev Yapan
-                                        <strong style="color:darkblue">Personel Adı</strong>, Yürüttüğü Görevinden <strong style="color:darkblue">
-                                            Ayrılış Tarihi
-                                        </strong> Tarihi İtibariyle Ayrılmıştır.
-                                    </p> <p style="color:blue" class="text-center">
-                                        Kendisine Bugüne Kadar Yapmış Olduğu Hizmetlerinden Dolayı Teşekkür Eder,
-                                        Bundan Sonraki İş Hayatında Başarılar Dileriz.
-                                    </p>
-                                </div>
+            </CardBody>
+        </CardComponent>
+    </div>}
 
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
-                </div>
-
-            </div>
-        </CardBody>
-    </CardComponent>
-
-</div>
 
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 220px;
+        max-height: 290px;
+    }
+
+    .theme-white .btn-primary {
+        margin-left: 8rem;
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
     }
 </style>
 

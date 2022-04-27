@@ -8,7 +8,7 @@ using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Kullanici
+namespace VedasPortal.Pages.KullaniciDurumlari
 {
     public class MezunBilgiModeli : ComponentBase
     {

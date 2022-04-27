@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using VedasPortal.Entities.Models.User
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IJSRuntime jsRunTime
 
 <div class="container mt-5">
     <div class="row">
@@ -8,15 +11,16 @@
                     Giriş Yap
                 </CardHeader>
                 <CardBody>
-                    <form method="POST" action="#" class="needs-validation" novalidate="">
+                    <EditForm Model="@kullanici"class="needs-validation" novalidate="">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input id="email" 
-                                   type="email" 
-                                   class="form-control" 
-                                   name="email" 
-                                   tabindex="1" 
-                                   required autofocus>
+                            <InputText id="email"
+                                       type="email"
+                                       @bind-Value="@kullanici.Email"
+                                       class="form-control"
+                                       name="email"
+                                       tabindex="1"
+                                       required autofocus/>
                             <div class="invalid-feedback">
                                 Lütfen Kullanıcı Email Girin:
                             </div>
@@ -25,23 +29,25 @@
                             <div class="d-block">
                                 <label for="password" class="control-label">Şifre:</label>
                             </div>
-                            <input id="password" 
-                                   type="password" 
-                                   class="form-control" 
-                                   name="password" 
-                                   tabindex="2" 
-                                   required>
+                            <InputText id="password"
+                                       type="password"
+                                       @bind-Value="@kullanici.Password"
+                                       class="form-control"
+                                       name="password"
+                                       tabindex="2"
+                                       required/>
                             <div class="invalid-feedback">
                                 Lütfen Şifrenizi Girin:
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit"  class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                Giriş Yap
-                            </button>
+                            <input type="submit"
+                                   value="Giriş Yap"
+                                   class="btn btn-primary btn-lg btn-block form-control"
+                                   tabindex="4" />
                         </div>
-                    </form>
+                    </EditForm>
                 </CardBody>
             </CardComponent>
         </div>
@@ -50,5 +56,31 @@
 
 @code {
 
+    private Kullanici kullanici;
 
+    public string LoginMessage { get; set; }
+
+    ClaimsPrincipal claimsPrincipal;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        kullanici = new Kullanici();
+
+        claimsPrincipal = (await authenticationStateTask).User;
+
+        if (claimsPrincipal.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/index");
+        }
+        {
+            kullanici.Email = "emrullah04@outlook.com";
+            kullanici.Password = "7895123.Zz";
+        }
+
+    }
+
+    
 }

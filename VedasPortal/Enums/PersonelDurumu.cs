@@ -1,6 +1,6 @@
 ﻿namespace VedasPortal.Enums
 {
-    public enum KullaniciDurum
+    public enum PersonelDurumu
     {
         Yeni,
         Ayrilis,

@@ -9,7 +9,7 @@ using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Kullanici
+namespace VedasPortal.Pages.KullaniciDurumlari
 {
     public class ProfilModeli : ComponentBase
     {

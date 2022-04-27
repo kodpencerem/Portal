@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220427074155_PersonelDurumMdf")]
+    partial class PersonelDurumMdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -908,9 +910,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("AdSoyad")
                         .HasColumnType("nvarchar(max)");
 
@@ -929,14 +928,11 @@ namespace VedasPortal.Migrations
                     b.Property<string>("BasladigiGorev")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Birimler")
+                    b.Property<int?>("Birimler")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DogumTarihi")
+                    b.Property<DateTime?>("DogumTarihi")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DogumYeri")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -944,13 +940,10 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EMail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("IseBaslangicTarihi")
+                    b.Property<DateTime?>("IseBaslangicTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("IstenAyrilisTarihi")
+                    b.Property<DateTime?>("IstenAyrilisTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("KaydedenKullanici")
@@ -959,8 +952,11 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonelDurumu")
+                    b.Property<int?>("PersonelDurumu")
                         .HasColumnType("int");
+
+                    b.Property<string>("Resim")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");

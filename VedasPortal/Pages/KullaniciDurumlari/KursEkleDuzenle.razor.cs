@@ -7,7 +7,7 @@ using VedasPortal.Components.ModalComponents;
 using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.Kullanici
+namespace VedasPortal.Pages.KullaniciDurumlari
 {
     public class KursEklemeModeli : ComponentBase
     {
@@ -23,7 +23,7 @@ namespace VedasPortal.Pages.Kullanici
 
         protected string Title = "Ekle";
         public KursVeSertifika kursVeSertifika = new();
-     
+
         protected IEnumerable<KursVeSertifika> Kurslar { get; set; }
 
         protected IEnumerable<KursVeSertifika> TumKurslariGetir()
@@ -32,7 +32,7 @@ namespace VedasPortal.Pages.Kullanici
             return Kurslar;
 
         }
-        
+
         protected void Kayit()
         {
             KursVeSertifika.Add(kursVeSertifika);

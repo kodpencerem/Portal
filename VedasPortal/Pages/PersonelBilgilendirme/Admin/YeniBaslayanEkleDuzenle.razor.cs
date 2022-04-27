@@ -18,7 +18,7 @@ using VedasPortal.Repository.Interface;
 namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 {
 
-    public class AyrilisModeli : ComponentBase
+    public class IseYeniBaslayan : ComponentBase
     {
 
         [Inject]
@@ -31,7 +31,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         public AuthenticationStateProvider StateProvider { get; set; }
 
         [Parameter]
-        public int AyrilisId { get; set; }
+        public int IseBaslayanId { get; set; }
 
         protected string Title = "Ekle";
         public PersonelDurum personelDurum = new();
@@ -99,18 +99,18 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         }
         protected override void OnParametersSet()
         {
-            if (AyrilisId != 0 || PersonelDosya.Yolu != null)
+            if (IseBaslayanId != 0 || PersonelDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                personelDurum = PersonelServisi.Get(AyrilisId);
+                personelDurum = PersonelServisi.Get(IseBaslayanId);
             }
         }
 
-        protected void SilmeyiOnayla(int AyrilisId)
+        protected void SilmeyiOnayla(int IseBaslayanId)
         {
             ModalDialog.Open();
 
-            personelDurum = PersonelDurumlari.FirstOrDefault(x => x.Id == AyrilisId);
+            personelDurum = PersonelDurumlari.FirstOrDefault(x => x.Id == IseBaslayanId);
         }
 
         protected void Sil()

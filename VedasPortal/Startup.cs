@@ -25,6 +25,7 @@ using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Kanban;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
@@ -90,6 +91,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
             services.AddScoped<IBaseRepository<GorevSecenek>, BaseRepository<GorevSecenek>>();
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
+            services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
             services.AddScoped<IFileUpload, FileUpload>();           
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();           
@@ -98,7 +100,6 @@ namespace VedasPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();          
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

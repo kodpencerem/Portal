@@ -14,6 +14,7 @@ using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Kanban;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
@@ -47,7 +48,8 @@ namespace VedasPortal.Data
         public DbSet<MailGonder> ToplantiMail { get; set; }
         public DbSet<ToplantiMerkezi> Merkez { get; set; }
         public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
-        public DbSet<Kullanici> Kullanici { get; set; }
+        public DbSet<PersonelDurum> PersonelDurum { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -18,7 +18,8 @@
                                 <ImageResizer @bind-ValueInput="@EtkinlikDosya.Yolu" />
                                 @if (!string.IsNullOrEmpty(etkinlik.Dosya?.FirstOrDefault().Yolu.ToString()))
                                     {
-                                        <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)" height="150" />
+                                        <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)" 
+                                             height="150" />
                                     }
                             </div>
                         </div>

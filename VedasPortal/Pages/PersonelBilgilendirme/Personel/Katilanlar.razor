@@ -1,102 +1,83 @@
 ﻿@page "/Katilanlar"
+@inherits KatilisModel
+
+@if (KatilanPersonel == null)
+
+{
+<p><em>Yükleniyor...</em></p> }
+
+else
+
+{
 
 <div class="col-12">
     <CardComponent cardStyle="Style.success">
         <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Aramıza Yeni Katılan Personeller
-                </div>
-            </div>
+            Aramıza Yeni Katılan Personeller
         </CardHeader>
-
         <CardBody>
             <div class="row">
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.success">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" 
-                                     height="200" 
-                                     alt="image" 
-                                     src="assets/img/users/user-1.png" 
-                                     class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details">
-                                <h5 style="color:darkblue" class="text-center">
-                                    <br />
-                                    <strong>
-                                        VEDAŞ AİLESİNE HOŞ GELDİNİZ
-                                    </strong>
-                                </h5>
-                                <div class="author-box-description">
-                                    <h6 style="color:darkblue" class="text-center">
-                                        Sayın <strong style="color:blue">
-                                            Personel Adı, İşe Giriş Tarihi
-                                        </strong> Tarihinde <strong style="color:blue">
-                                            Temsilcilik Adı, Birim Adı'
-                                        </strong>nde <strong style="color:blue">
-                                            Başladığı Görev
-                                        </strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
-                                    </h6>
-                                </div>
-
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
+                @foreach (var katilis in KatilanPersonel.Where(a => a.PersonelDurumu.TextPersonelDurumu() == "Yeni Personel" &&
+                                                         a.AktifPasif == true))
+                {
+<div style="margin-top:-15px" class="col-4">
+    <CardComponent cardStyle="Style.success">
+        <CardBody>
+            <div class="author-box-center align-center">
+                <img width="200"
+                     height="200"
+                     alt="image"
+                     src="images/uploaded/@string.Concat(
+                                               katilis.Dosya.FirstOrDefault().Adi,
+                                               ".",
+                                               katilis.Dosya.FirstOrDefault().Uzanti)"
+                     class="rounded-circle author-box-picture">
+                <div class="clearfix"></div>
+            </div>
+            <div class="author-box-details">
+                <h5 style="color:darkblue" class="text-center">
+                    <br />
+                    <strong>
+                        VEDAŞ AİLESİNE HOŞ GELDİNİZ
+                    </strong>
+                </h5>
+                <div class="author-box-description">
+                    <h6 style="color:darkblue" class="text-center">
+                        Sayın <strong style="color:blue">
+                            @katilis.AdSoyad, @katilis.IseBaslangicTarihi.Date.ToShortDateString()
+                        </strong> Tarihinde <strong style="color:blue">
+                            @katilis.TemsilcilikAdi, @katilis.Birimler.TextBirimler()'
+                        </strong>nde <strong style="color:blue">
+                            @katilis.BasladigiGorev
+                        </strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
+                    </h6>
                 </div>
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.success">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details">
-                                <h5 style="color:darkblue" class="text-center">
-                                    <br />
-                                    <strong>
-                                        VEDAŞ AİLESİNE HOŞ GELDİNİZ
-                                    </strong>
-                                </h5>
-                                <div class="author-box-description">
-                                    <h6 style="color:darkblue" class="text-center">
-                                        Sayın <strong style="color:blue">
-                                            Personel Adı, İşe Giriş Tarihi
-                                        </strong> Tarihinde <strong style="color:blue">
-                                            Temsilcilik Adı, Birim Adı'
-                                        </strong>nde <strong style="color:blue">
-                                            Başladığı Görev
-                                        </strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
-                                    </h6>
-                                </div>
 
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
+                <div class="float-right mt-sm-0 mt-3">
+                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
                 </div>
+            </div>
+        </CardBody>
+    </CardComponent>
+</div>              }
             </div>
 
         </CardBody>
     </CardComponent>
-</div>
+</div>}
+
 
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 220px;
+        max-height: 290px;
+    }
+
+    .theme-white .btn-primary {
+        margin-left: 8rem;
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
     }
 </style>
+

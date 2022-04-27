@@ -43,13 +43,13 @@ namespace VedasPortal
             };
         }
 
-        public static string TextKullaniciDurum(this KullaniciDurum kategori)
+        public static string TextPersonelDurumu(this PersonelDurumu kategori)
         {
             return kategori switch
             {
-                KullaniciDurum.Yeni => "Yeni Kullanici",
-                KullaniciDurum.Ayrilis => "Ayrılcak Kullanıcı",
-                KullaniciDurum.Vefat => "Vefat Durumu",
+                PersonelDurumu.Yeni => "Yeni Personel",
+                PersonelDurumu.Ayrilis => "Ayrılacak Personel",
+                PersonelDurumu.Vefat => "Vefat Durumu",
                 _ => "",
             };
         }
