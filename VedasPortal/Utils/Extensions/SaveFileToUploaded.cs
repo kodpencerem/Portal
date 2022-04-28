@@ -15,11 +15,11 @@ namespace VedasPortal
             .Replace(":", "").Replace("/", "")
             .Replace("-", "").Replace(@"\", "")
             .Replace(".", "").ToString();
-        public static string ImageUploadedPath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
+        public static string ImageUploadedPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
         public static string FileName { get; set; }
         public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
         {
-            filePath = Path.Combine(System.Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
+            filePath = ImageUploadedPath;
             DirectoryInfo info = new(filePath);
             if (!info.Exists)
             {

@@ -171,10 +171,11 @@ namespace VedasPortal.Components.UploadComponent
             StateHasChanged();
             await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
-#pragma warning disable CS0618 // Type or member is obsolete
             string base64String = await args.GetBase64Async();
-#pragma warning restore CS0618 // Type or member is obsolete
-            File.WriteAllBytes(Path.Combine(SaveFileToUploaded.ImageUploadedPath, fileName), Convert.FromBase64String(base64String));
+            File.WriteAllBytes(
+                Path.Combine(
+                    SaveFileToUploaded.ImageUploadedPath, fileName), 
+                Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();
             parsing = false;
