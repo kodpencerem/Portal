@@ -1,0 +1,261 @@
+﻿@page "/vefat/ekle"
+@page "/vefat/duzenle/{VefatDurumId:int}"
+
+@inherits Vefatlar
+@attribute [Authorize(Roles = "Administrators")]
+
+<div class="col-12">
+    <EditForm Model="@personelDurum" OnValidSubmit="Kayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Vefat Durumu @Title
+            </CardHeader>
+            <CardBody>
+                <div class="col-12">
+                    <div class="col-md-6 float-left">
+                        <div class="form-group row">
+                            <label class="form-label col-md-2">Resim Seçin</label>
+                            <div class="col-md-10">
+                                <ImageResizer @bind-ValueInput="@PersonelDosya.Yolu" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Personel Ad-Soyad</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="personelDurum.AdSoyad" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.AdSoyad)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Görev Yeri</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="personelDurum.TemsilcilikAdi" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.TemsilcilikAdi)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Görevi</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="personelDurum.BasladigiGorev" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
+                        </div>
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Personel Durumu</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control">
+                                    <option></option>
+                                    @if (EklemeDurumlari != null)
+                                    {
+                                        @foreach (var kategori in EklemeDurumlari)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+                                </InputSelect>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Çalıştığı Birimi Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control">
+                                    <option></option>
+                                    @if (Birimler != null)
+                                    {
+                                        @foreach (var kategori in Birimler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">İşe Başlama Tarihi</label>
+                            <div class="col-md-10">
+                                <InputDate class="form-control" @bind-Value="personelDurum.IseBaslangicTarihi" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">İşten Ayrilma Tarihi</label>
+                            <div class="col-md-10">
+                                <InputDate class="form-control" @bind-Value="personelDurum.IstenAyrilisTarihi" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.IstenAyrilisTarihi)" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 float-right">
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value=@personelDurum.AyrilisNedeni
+                                                Label="Ayrılış Nedeni"
+                                                UrlToPostImage="images/uploaded/">
+                                </CKEditorBlazor>
+
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.AyrilisNedeni)" />
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Personel Şimdi Aktif Edilsin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control"
+                                                   @bind-Value="personelDurum.AktifPasif" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.AktifPasif)" />
+                            </div>
+
+                            <div class="form-group row col-md-4">
+                                <label class="control-label col-md-8">Personel Durum Kutusuna Eklensin Mi?</label>
+                                <div class="col-md-4">
+                                    <InputCheckbox class="form-control"
+                                                   @bind-Value="personelDurum.AnasayfadaGoster" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.AnasayfadaGoster)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            @onclick="Kayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
+
+</div>
+
+
+
+@if (PersonelDurumlari == null)
+
+{
+    <p><em>Yükleniyor...</em></p> }
+
+else
+
+{
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        İşten Ayrılan Personel
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Resim</th>
+
+                                <th>Personel Adı ve Soyadı</th>
+
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ayrilis in PersonelDurumlari.Where(h => h.PersonelDurumu == PersonelDurumu.Ayrilis).ToList())
+
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
+                                                                       ayrilis.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       ayrilis.Dosya.FirstOrDefault().Uzanti)"
+                                             width="50"
+                                             height="50" />
+                                    </td>
+
+                                    <td>@ayrilis.AdSoyad</td>
+
+
+                                    <td>
+
+                                        <a href='/ayrilis/duzenle/@ayrilis.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(ayrilis.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+    </div>
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>}
+
+
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
