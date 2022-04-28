@@ -1,6 +1,7 @@
 ﻿@page "/egitim/ekle"
 @page "/egitim/duzenle/{egitimId:int}"
 @using Microsoft.AspNetCore.Hosting
+@attribute [Authorize(Roles = "Administrators, EgitimEkleDuzenle")]
 
 @inherits EgitimModeli
 
@@ -210,11 +211,10 @@ else
                                         <img src="images/uploaded/@string.Concat(
                                                                        egitim.Dosya?.FirstOrDefault().Adi,
                                                                        ".",
-                                                                       egitim.Dosya?.FirstOrDefault().Uzanti)" 
+                                                                       egitim.Dosya?.FirstOrDefault().Uzanti)"
                                              width="50"
                                              height="50"
-                                             alt=""
-                                             />
+                                             alt="" />
                                     </td>
 
                                     <td>@egitim.Adi</td>

@@ -1,5 +1,6 @@
 ﻿@page "/toplantinotu/ekle"
 @page "/toplantinotu/duzenle/{ToplantiNotId:int}"
+@attribute [Authorize(Roles = "Administrators, ToplantiNotuEkleDuzenle")]
 
 @inherits ToplantiNotuModeli
 

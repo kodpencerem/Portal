@@ -49,7 +49,8 @@ namespace VedasPortal.Data
         public DbSet<ToplantiMerkezi> Merkez { get; set; }
         public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
         public DbSet<PersonelDurum> PersonelDurum { get; set; }
-
+        public DbSet<VefatDurumu> VefatDurumu { get; set; }
+        public DbSet<UzmanlikAlani> UzmanlikAlani { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

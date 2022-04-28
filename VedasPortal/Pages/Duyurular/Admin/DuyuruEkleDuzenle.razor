@@ -1,6 +1,7 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/{DuyuruId:int}"
 @inherits DuyuruEkleDuzenleModel
+@attribute [Authorize(Roles = "Administrators, DuyuruEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@duyuru" OnValidSubmit="Kayit">
@@ -100,7 +101,7 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"                            
+                            class="btn btn-primary"
                             @onclick="Kayit">
                         Kaydet
                     </button>
@@ -165,9 +166,10 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@string.Concat(duyuru.Dosya?.FirstOrDefault().Adi,".",
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(duyuru.Dosya?.FirstOrDefault().Adi,".",
                                                    duyuru.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="50" 
+                                             width="50"
                                              height="50" />
                                     </td>
 

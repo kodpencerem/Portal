@@ -2,6 +2,7 @@
 @page "/mevzuat/duzenle/{mevzuatId:int}"
 @using Microsoft.AspNetCore.Hosting
 @inherits MevzuatModel
+@attribute [Authorize(Roles = "Administrators, MevzuatEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@mevzuat" OnValidSubmit="Kayit">
@@ -35,9 +36,9 @@
                                 <option></option>
                                 @if (Kategoriler != null)
                                 {
-        @foreach (var kategori in Kategoriler)
-        {
-<option value="@kategori.Key"> @kategori.Value </option>}}
+                                    @foreach (var kategori in Kategoriler)
+                                    {
+                                        <option value="@kategori.Key"> @kategori.Value </option>}}
 
                             </InputSelect>
                         </div>
@@ -50,9 +51,9 @@
                                 <option></option>
                                 @if (Birimler != null)
                                 {
-        @foreach (var kategori in Birimler)
-        {
-<option value="@kategori.Key"> @kategori.Value </option>}}
+                                    @foreach (var kategori in Birimler)
+                                    {
+                                        <option value="@kategori.Key"> @kategori.Value </option>}}
 
                             </InputSelect>
                         </div>
@@ -139,106 +140,107 @@
 @if (Mevzuatlar == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p> }
 
 else
 
 {
 
-<div class="col-12">
+    <div class="col-12">
 
-    <CardComponent cardStyle="Style.primary">
+        <CardComponent cardStyle="Style.primary">
 
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Mevzuatlar
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Mevzuatlar
+                    </div>
                 </div>
-            </div>
 
-        </CardHeader>
-        <CardBody>
-            <div class="table-responsive">
-                <table class="table table-striped" id="table-2">
-                    <thead>
-                        <tr>
-                            <th class="text-center pt-3">
-                                <div class="custom-checkbox custom-checkbox-table custom-control">
-                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                           class="custom-control-input" id="checkbox-all">
-                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                </div>
-                            </th>
-                            <th>Dosya</th>
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Dosya</th>
 
-                            <th>Mevzuat Adı</th>
-                            <th>Mevzuat Durumu</th>
-                            <th>İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
+                                <th>Mevzuat Adı</th>
+                                <th>Mevzuat Durumu</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 
-                        @foreach (var mevzuat in Mevzuatlar.Where(d=>d.AktifPasif==true).ToList())
 
-                        {
-    <tr>
-        <td class="text-center pt-2">
-            <div class="custom-checkbox custom-control">
-                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                       id="checkbox-1">
-                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-            </div>
-        </td>
-        <td><img src="images/uploaded/@string.Concat(
+                            @foreach (var mevzuat in Mevzuatlar.Where(d => d.AktifPasif == true).ToList())
+
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
                                            mevzuat.Dosya?.FirstOrDefault().Adi,
                                            ".",
                                            mevzuat.Dosya?.FirstOrDefault().Uzanti)" />
-        </td>
+                                    </td>
 
-        <td>@mevzuat.Adi</td>
-        <td>
-            @if (mevzuat.AktifPasif == true)
-            {
-
-
-<div class="badge badge-success badge-shadow">Yayında</div> }
-else
-{
-<div class="badge badge-warning badge-shadow">Yayında Değil</div>}
-        </td>
-
-        <td>
-            <a href="@($"mevzuat/detay/{mevzuat.Id}")" class="btn btn-primary">Mevzuat Detayı</a>
-            <a href='/mevzuat/duzenle/@mevzuat.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mevzuat.Id);})">
-                Sil
-            </button>
-        </td>
-    </tr>
-}
-                    </tbody>
-                </table>
-            </div>
-
-        </CardBody>
-    </CardComponent>
-
-</div>
+                                    <td>@mevzuat.Adi</td>
+                                    <td>
+                                        @if (mevzuat.AktifPasif == true)
+                                        {
 
 
-                <ModalComponent @ref="ModalDialog">
-                    <ModalHeader>
-                        <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
-                    </ModalHeader>
+                                            <div class="badge badge-success badge-shadow">Yayında</div> }
+                                        else
+                                        {
+                                            <div class="badge badge-warning badge-shadow">Yayında Değil</div>}
+                                    </td>
 
-                    <ModalFooter>
-                        <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
-                        <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
-                    </ModalFooter>
-                </ModalComponent>}
+                                    <td>
+                                        <a href="@($"mevzuat/detay/{mevzuat.Id}")" class="btn btn-primary">Mevzuat Detayı</a>
+                                        <a href='/mevzuat/duzenle/@mevzuat.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mevzuat.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
+
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>}
 
 
 <style>

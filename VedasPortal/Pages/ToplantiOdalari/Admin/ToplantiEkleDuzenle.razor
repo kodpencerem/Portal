@@ -1,5 +1,6 @@
 ﻿@page "/toplanti/ekle"
 @using VedasPortal.Entities.Models.ToplantiTakvimi
+@attribute [Authorize(Roles = "Administrators, ToplantiEkleDuzenle")]
 
 <div class="col-12">
     <CardComponent cardStyle="Style.warning">
@@ -16,7 +17,7 @@
                     </CascadingValue>
 
                 </div>
-                <div id="toDoList" 
+                <div id="toDoList"
                      class="flex-grow-1 flex-md-grow-0 pt-4">
                     <ToplantiListComponent ToplantiGetir="@gunlukToplanti" />
                 </div>

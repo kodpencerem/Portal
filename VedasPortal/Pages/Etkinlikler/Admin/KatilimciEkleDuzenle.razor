@@ -1,5 +1,6 @@
 ﻿@page "/katilimci/ekle"
 @page "/katilimci/duzenle/{katilimciId:int}"
+@attribute [Authorize(Roles = "Administrators, KatilimciEkleDuzenle")]
 
 @inherits KatilimciModel
 

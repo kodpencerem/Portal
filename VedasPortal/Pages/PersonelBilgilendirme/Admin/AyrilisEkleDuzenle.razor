@@ -2,7 +2,7 @@
 @page "/ayrilis/duzenle/{AyrilisId:int}"
 
 @inherits AyrilisModeli
-@attribute [Authorize(Roles = "Administrators")]
+@attribute [Authorize(Roles = "Administrators,AyrilisEkleDuzenle ")]
 
 <div class="col-12">
     <EditForm Model="@personelDurum" OnValidSubmit="Kayit">
@@ -89,7 +89,7 @@
                             </div>
                             <ValidationMessage For="@(() => personelDurum.IstenAyrilisTarihi)" />
                         </div>
-                        
+
                     </div>
 
                     <div class="col-md-6 float-right">

@@ -1,6 +1,7 @@
 ﻿@page "/ikuygulama/ekle"
 @page "/ikuygulama/duzenle/{ikUygulamaId:int}"
 @inherits IkUygulamaModel
+@attribute [Authorize(Roles = "Administrators,IkUygulamaEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@ikUygulama" OnValidSubmit="Kayit">
@@ -146,10 +147,9 @@ else
                                         <img src="images/uploaded/@string.Concat(
                                                                        ikUygulama.Dosya?.FirstOrDefault().Adi,
                                                                        ".",
-                                                                       ikUygulama.Dosya?.FirstOrDefault().Uzanti)" 
+                                                                       ikUygulama.Dosya?.FirstOrDefault().Uzanti)"
                                              width="50"
-                                             height="50"
-                                             />
+                                             height="50" />
                                     </td>
 
                                     <td>@ikUygulama.Adi</td>

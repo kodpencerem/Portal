@@ -5,63 +5,73 @@
 @if (rehber == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p> }
 
 else
 
 {
-<div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Vedaş Rehber
-                </div>
-            </div>
-            <div style="margin-left:1050px;" class="float-right">
-                <div class="float-left">
-                    @*<input type="text" class="form-control" placeholder="Personel adı veya soyadı ile arama yapın..." @bind="SearchString"
-                        @bind:event="oninput" @onkeyup="FilterelemeYap" />*@
-                    <SearchComp OnSearch="FilterelemeYap" />
-                </div>
-                @*<div class="float-right">
-                        <div class="input-group-append">
-                            <button class="btn btn-info" @onclick="FilterelemeYap">
-                                <i class="fa fa-search"></i>
-                            </button>
+    <div class="col-12">
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                        <div class="col-md-12">
+                            Vedaş Rehber
                         </div>
-                    </div>*@
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12" style="margin-right:20px; margin-left:-60px">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                                <input type="text"
+                                       class="form-control form-control-sm"
+                                       placeholder="Bu alanda arama yapabilirsiniz..."
+                                       aria-controls="table-2"
+                                       @bind="SearchString"
+                                       @bind:event="oninput"
+                                       @onkeyup="FilterelemeYap" />
+                            </div>
+                            <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12" style="margin-left:25px">
+                                <button class="btn btn-primary" @onclick="FilterelemeYap">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <div class="row">
+                    @foreach (var personel in rehber)
+                    {
 
-            </div>
-        </CardHeader>
-        <CardBody>
-            <div class="row">
-                @foreach (var personel in rehber)
-                {
-
-<div class="col-lg-3">
-    <div class="card client-card">
-        <div class="card-body text-center">
-            <img src="images/uploaded/@string.Concat(personel.Dosya.FirstOrDefault().Adi,
-                                       ".",
-                                       personel.Dosya.FirstOrDefault().Uzanti)"
-                 height="200"
-                 width="200"
-                 alt="user"
-                 class="rounded-circle thumb-xl">
-            <h5 class=" client-name">@personel.Adi - @personel.Soyadi </h5>
-            <p class="text-muted text-center mt-3">@personel.Unvani</p>
-            <span class="text-muted mr-3"><i class="dripicons-location mr-2 text-info"></i>@personel.Lokasyon</span>
-            <span class="text-muted"><i class="dripicons-phone mr-2 text-info"></i>@personel.TelefonNo</span>
-            <p class="text-muted text-center mt-3">@personel.Email</p>
-        </div><!--end card-body-->
-    </div><!--end card-->
-</div>}
-            </div>
-
-        </CardBody>
-    </CardComponent>
-</div>}
+                        <div class="col-lg-3">
+                            <div class="card client-card">
+                                <div class="card-body text-center">
+                                    <img src="images/uploaded/@string.Concat(
+                                                                   personel.Dosya.FirstOrDefault().Adi,
+                                                                   ".",
+                                                                   personel.Dosya.FirstOrDefault().Uzanti)"
+                                         height="200"
+                                         width="200"
+                                         alt="user"
+                                         class="rounded-circle thumb-xl">
+                                    <h5 class=" client-name">@personel.Adi - @personel.Soyadi </h5>
+                                    <p class="text-muted text-center mt-3">@personel.Unvani</p>
+                                    <span class="text-muted mr-3">
+                                        <i class="dripicons-location mr-2 text-info"></i>@personel.Lokasyon
+                                    </span>
+                                    <span class="text-muted">
+                                        <i class="dripicons-phone mr-2 text-info"></i>@personel.TelefonNo
+                                    </span>
+                                    <p class="text-muted text-center mt-3">@personel.Email</p>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div>
+                    }
+                </div>
+            </CardBody>
+        </CardComponent>
+    </div>}
 
 
 <style>
@@ -75,6 +85,13 @@ else
         background-color: #6777ef;
         border-color: transparent !important;
         color: #fff;
+    }
+
+    .form-control {
+        height: 31px;
+        font-size: 13px;
+        width: 220px;
+        border-radius: 30px;
     }
 </style>
 

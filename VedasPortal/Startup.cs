@@ -90,8 +90,10 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<ToplantiOdasi>, BaseRepository<ToplantiOdasi>>();
             services.AddScoped<IBaseRepository<IkUygulama>, BaseRepository<IkUygulama>>();
             services.AddScoped<IBaseRepository<GorevSecenek>, BaseRepository<GorevSecenek>>();
+            services.AddScoped<IBaseRepository<UzmanlikAlani>, BaseRepository<UzmanlikAlani>>();
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
             services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
+            services.AddScoped<IBaseRepository<VefatDurumu>, BaseRepository<VefatDurumu>>();
             services.AddScoped<IFileUpload, FileUpload>();           
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();           

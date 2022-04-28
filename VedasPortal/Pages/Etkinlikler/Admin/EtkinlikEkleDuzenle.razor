@@ -1,6 +1,7 @@
 ﻿@page "/etkinlik/ekle"
 @page "/etkinlik/duzenle/{etkinlikId:int}"
 @inherits EtkinlikModeli
+@attribute [Authorize(Roles = "Administrators, EtkinlikEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@etkinlik" OnValidSubmit="EtkinlikKayit">
@@ -17,10 +18,10 @@
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@EtkinlikDosya.Yolu" />
                                 @if (!string.IsNullOrEmpty(etkinlik.Dosya?.FirstOrDefault().Yolu.ToString()))
-                                    {
-                                        <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)" 
-                                             height="150" />
-                                    }
+                                {
+                                    <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)"
+                                         height="150" />
+                                }
                             </div>
                         </div>
 
@@ -173,7 +174,7 @@ else
 
 
 
-                            @foreach (var etkinlik in Etkinlikler.Where(d=>d.AktifPasif==true).ToList())
+                            @foreach (var etkinlik in Etkinlikler.Where(d => d.AktifPasif == true).ToList())
 
                             {
 
@@ -186,10 +187,12 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td> <img src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,".",
-                                                                   etkinlik.Dosya?.FirstOrDefault().Uzanti)" 
-                                              width="50"
-                                              height="50"/>  </td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,".",
+                                                                   etkinlik.Dosya?.FirstOrDefault().Uzanti)"
+                                             width="50"
+                                             height="50" />
+                                    </td>
 
                                     <td>@etkinlik.Adi</td>
 

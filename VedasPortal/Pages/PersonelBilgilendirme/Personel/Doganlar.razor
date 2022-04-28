@@ -1,171 +1,87 @@
 ﻿@page "/Doganlar"
+@inherits DogumGunuModeli
 
+@if (DogumGunleri == null)
 
-<div class="col-12">
-    <CardComponent cardStyle="Style.info">
+{
+    <p><em>Yükleniyor...</em></p> }
 
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Bu Hafta Doğanlar
-                </div>
-            </div>
-            
-        </CardHeader>
+else
 
-        <CardBody>
-            <div class="row">
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.info">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" 
-                                     height="200" 
-                                     alt="image" 
-                                     src="assets/img/users/user-1.png" 
-                                     class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details ">
-                                <div class="author-box-name text-center">
-                                    <a>Personel Adı</a>
-                                </div>
-                                <div class="author-box-job text-center">Web Developer</div>
-                                <div class="author-box-description">
-                                    <p>
-                                        <h5 style="color:darkblue" class="text-center">
-                                            İyiki Doğdunuz...
-                                        </h5>
-                                        <h6 style="color:blue" class="text-center">
-                                            Vedaş Ailesi Olarak Doğum Gününüzü Tebrik Eder. Nice Güzel Seneler Dileriz.
-                                        </h6>
-                                    </p>
-                                </div>
-                                <div class="mb-2 mt-3 text-center">
-                                    <button class="btn btn-success" type="submit">Tebrik Et</button>
-                                    
-                                    @*<a class="btn btn-info text-small font-weight-bold">Para Gönder</a>*@
-                                </div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
+{
+
+    <div class="col-12">
+        <CardComponent cardStyle="Style.info">
+            <CardHeader>
+                Bu Hafta Doğanlar
+            </CardHeader>
+            <CardBody>
+                <div class="row">
+                    @foreach (var dogumGunu in DogumGunleri.Where(
+                         a => a.DogumTarihi.Date.ToShortDateString()==DateTime.Now.Date.ToShortDateString() && 
+                         a.AktifPasif == true))
+                    {
+                        <div style="margin-top:-15px" class="col-4">
+                            <CardComponent cardStyle="Style.info">
+                                <CardBody>
+                                    <div class="author-box-center align-center">
+                                        <img width="200"
+                                             height="200"
+                                             alt="image"
+                                             src="images/uploaded/@string.Concat(
+                                                                       dogumGunu.Dosya.FirstOrDefault().Adi,
+                                                                       ".",
+                                                                       dogumGunu.Dosya.FirstOrDefault().Uzanti)"
+                                             class="rounded-circle author-box-picture">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="author-box-details ">
+                                        <div class="author-box-name text-center">
+                                            <a>@dogumGunu.AdSoyad</a>
+                                        </div>
+                                        <div class="author-box-job text-center">@dogumGunu.BasladigiGorev</div>
+                                        <div class="author-box-description">
+                                            <p>
+                                                <h5 style="color:darkblue" class="text-center">
+                                                    İyiki Doğdunuz...
+                                                </h5>
+                                                <h6 style="color:blue" class="text-center">
+                                                    Vedaş Ailesi Olarak Doğum Gününüzü Tebrik Eder. Nice Güzel Seneler Dileriz.
+                                                </h6>
+                                            </p>
+                                        </div>
+                                        <div class="mb-2 mt-3 text-center">
+                                            <button class="btn btn-success" type="submit">Tebrik Et</button>
+
+                                            @*<a class="btn btn-info text-small font-weight-bold">Para Gönder</a>*@
+                                        </div>
+                                        <div class="float-right mt-sm-0 mt-3">
+                                            <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </CardComponent>
+                        </div>
+
+                    }
                 </div>
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.info">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details ">
-                                <div class="author-box-name text-center">
-                                    <a>Personel Adı</a>
-                                </div>
-                                <div class="author-box-job text-center">Web Developer</div>
-                                <div class="author-box-description">
-                                    <p>
-                                        <h5 style="color:darkblue" class="text-center">
-                                            İyiki Doğdunuz...
-                                        </h5>
-                                        <h6 style="color:blue" class="text-center">
-                                            Vedaş Ailesi Olarak Doğum Gününüzü Tebrik Eder. Nice Güzel Seneler Dileriz.
-                                        </h6>
-                                    </p>
-                                </div>
-                                <div class="mb-2 mt-3 text-center">
-                                    <button class="btn btn-info">Tebrik Et</button>
-                                    @*<a class="btn btn-info text-small font-weight-bold">Para Gönder</a>*@
-                                </div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
-                </div>
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.info">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details ">
-                                <div class="author-box-name text-center">
-                                    <a>Personel Adı</a>
-                                </div>
-                                <div class="author-box-job text-center">Web Developer</div>
-                                <div class="author-box-description">
-                                    <p>
-                                        <h5 style="color:darkblue" class="text-center">
-                                            İyiki Doğdunuz...
-                                        </h5>
-                                        <h6 style="color:blue" class="text-center">
-                                            Vedaş Ailesi Olarak Doğum Gününüzü Tebrik Eder. Nice Güzel Seneler Dileriz.
-                                        </h6>
-                                    </p>
-                                </div>
-                                <div class="mb-2 mt-3 text-center">
-                                    <button class="btn btn-info">Tebrik Et</button>
-                                    @*<a class="btn btn-info text-small font-weight-bold">Para Gönder</a>*@
-                                </div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
-                </div>
-                <div style="margin-top:-15px" class="col-4">
-                    <CardComponent cardStyle="Style.info">
-                        <CardBody>
-                            <div class="author-box-center align-center">
-                                <img width="200" height="200" alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="author-box-details ">
-                                <div class="author-box-name text-center">
-                                    <a>Personel Adı</a>
-                                </div>
-                                <div class="author-box-job text-center">Web Developer</div>
-                                <div class="author-box-description">
-                                    <p>
-                                        <h5 style="color:darkblue" class="text-center">
-                                            İyiki Doğdunuz...
-                                        </h5>
-                                        <h6 style="color:blue" class="text-center">
-                                            Vedaş Ailesi Olarak Doğum Gününüzü Tebrik Eder. Nice Güzel Seneler Dileriz.
-                                        </h6>
-                                    </p>
-                                </div>
-                                <div class="mb-2 mt-3 text-center">
-                                    <button class="btn btn-info">Tebrik Et</button>
-                                    @*<a class="btn btn-info text-small font-weight-bold">Para Gönder</a>*@
-                                </div>
-                                <div class="float-right mt-sm-0 mt-3">
-                                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </CardBody>
-                    </CardComponent>
-                </div>
-            </div>
-        </CardBody>
-    </CardComponent>
-</div>
+
+            </CardBody>
+        </CardComponent>
+    </div>}
+
 
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
+    .article .article-details {
+        min-height: 220px;
+        max-height: 290px;
+    }
+
+    .theme-white .btn-primary {
+        margin-left: 8rem;
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
     }
 </style>
+

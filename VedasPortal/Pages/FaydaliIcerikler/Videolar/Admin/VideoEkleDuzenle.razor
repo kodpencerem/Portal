@@ -1,6 +1,7 @@
 ﻿@page "/video/ekle"
 @page "/video/duzenle/{VideoId:int}"
 @inherits VideoEklemeModeli
+@attribute [Authorize(Roles = "Administrators, VideoEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@video" OnValidSubmit="Kayit">
@@ -18,7 +19,7 @@
                             <MultipleUpload @bind-ValueInput="@VideoDosya.Yolu" />
                         </div>
                     </div>
-                  
+
                     <div class="form-group row">
                         <label class="control-label col-md-2">Video Başlığı</label>
                         <div class="col-md-10">
@@ -211,7 +212,8 @@ else
                 Sil
             </button>
         </td>
-    </tr>}
+    </tr>
+}
                     </tbody>
                 </table>
             </div>

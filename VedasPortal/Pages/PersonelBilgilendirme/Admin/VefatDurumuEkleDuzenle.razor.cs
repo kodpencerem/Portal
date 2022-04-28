@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VedasPortal.Components.ModalComponents;
-using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Enums;
@@ -22,30 +20,25 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
     {
 
         [Inject]
-        public IBaseRepository<PersonelDurum> PersonelServisi { get; set; }
-
-        [Inject]
-        public IBaseRepository<Dosya> PersonelDosyaServisi { get; set; }
-
+        public IBaseRepository<VefatDurumu> VefatDurumServisi { get; set; }
+      
         [Inject]
         public AuthenticationStateProvider StateProvider { get; set; }
 
         [Parameter]
-        public int AyrilisId { get; set; }
+        public int VefatDurumId { get; set; }
 
         protected string Title = "Ekle";
-        public PersonelDurum personelDurum = new();
-
-        public Dosya PersonelDosya = new();
+        public VefatDurumu vefatDurumu = new();
 
         private ClaimsPrincipal User;
         public string Message { get; set; }
 
-        protected IEnumerable<PersonelDurum> PersonelDurumlari { get; set; }
+        protected IEnumerable<VefatDurumu> PersonelDurumlari { get; set; }
 
-        protected IEnumerable<PersonelDurum> TumPersonelleriGetir()
+        protected IEnumerable<VefatDurumu> TumPersonelleriGetir()
         {
-            PersonelDurumlari = PersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            PersonelDurumlari = VefatDurumServisi.GetAll();
             return PersonelDurumlari;
         }
         public Dictionary<PersonelDurumu, string> EklemeDurumlari { get; set; }
@@ -75,20 +68,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             Message = "";
             if (User.Identity.IsAuthenticated && User.IsInRole("Administrators"))
             {
-                PersonelServisi.Add(personelDurum);
-                var fileName = SaveFileToUploaded.FileName.Split(".");
-                var filePath = SaveFileToUploaded.ImageUploadedPath;
-                var dosya = new Dosya()
-                {
-                    Adi = fileName[0],
-                    Yolu = filePath,
-                    Uzanti = fileName[1],
-                    Kategori = DosyaKategori.Jpg,
-                    AktifPasif = true,
-                    PersonelDurumId = personelDurum.Id,
-
-                };
-                PersonelDosyaServisi.Add(dosya);
+                VefatDurumServisi.Add(vefatDurumu);
             }
             else
             {
@@ -99,27 +79,26 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         }
         protected override void OnParametersSet()
         {
-            if (AyrilisId != 0 || PersonelDosya.Yolu != null)
+            if (VefatDurumId != 0)
             {
                 Title = "Duzenle";
-                personelDurum = PersonelServisi.Get(AyrilisId);
+                vefatDurumu = VefatDurumServisi.Get(VefatDurumId);
             }
         }
 
-        protected void SilmeyiOnayla(int AyrilisId)
+        protected void SilmeyiOnayla(int VefatDurumId)
         {
             ModalDialog.Open();
 
-            personelDurum = PersonelDurumlari.FirstOrDefault(x => x.Id == AyrilisId);
+            vefatDurumu = PersonelDurumlari.FirstOrDefault(x => x.Id == VefatDurumId);
         }
 
         protected void Sil()
         {
-            if (personelDurum.Id == 0)
+            if (vefatDurumu.Id == 0)
                 return;
-            PersonelServisi.Remove(personelDurum.Id);
-            PersonelDosyaServisi.Remove(PersonelDosya.Id);
-            personelDurum = new PersonelDurum();
+            VefatDurumServisi.Remove(vefatDurumu.Id);
+            vefatDurumu = new VefatDurumu();
             TumPersonelleriGetir();
             TumEklemeDurumlariniGetir();
             TumBirimleriGetir();
@@ -139,8 +118,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         public void Temizle()
         {
-            personelDurum = null;
-            PersonelDosya = null;
+            vefatDurumu = null;
         }
 
         [Inject]

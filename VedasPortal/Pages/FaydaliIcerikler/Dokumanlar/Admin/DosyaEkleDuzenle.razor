@@ -2,7 +2,7 @@
 @page "/dosya/duzenle/{dosyaId:int}"
 @using Microsoft.AspNetCore.Hosting
 @inherits DosyaModel
-
+@attribute [Authorize(Roles = "Administrators, DosyaEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@dokuman" OnValidSubmit="Kayit">
@@ -155,8 +155,10 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td><img src="images/uploaded/@string.Concat(dosya.Adi,".",
-                                                                   dosya.Uzanti)" width="50" height="50"/></td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(dosya.Adi,".",
+                                                                   dosya.Uzanti)" width="50" height="50" />
+                                    </td>
 
                                     <td>@dosya.Adi</td>
 
