@@ -23,19 +23,23 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
 
         public Task Execute(string key, string subject, string message, string email)
         {
-            var client = new SendGridClient(key);
-            var msg = new SendGridMessage()
+            if (key != null)
             {
-                From = new EmailAddress("mail@vedas.com.tr", Options.SendGridUser),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
+                var client = new SendGridClient(key);
+                var msg = new SendGridMessage()
+                {
+                    From = new EmailAddress("mail@vedas.com.tr", Options.SendGridUser),
+                    Subject = subject,
+                    PlainTextContent = message,
+                    HtmlContent = message
+                };
+                msg.AddTo(new EmailAddress(email));
 
-            msg.SetClickTracking(false, false);
+                msg.SetClickTracking(false, false);
 
-            return client.SendEmailAsync(msg);
+                return client.SendEmailAsync(msg);
+            }
+            return default;
         }
     }
 }

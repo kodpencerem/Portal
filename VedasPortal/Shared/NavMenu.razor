@@ -1,5 +1,7 @@
 ﻿@inject NavigationManager nav
-@attribute [Authorize(Roles = "Administrators, Users")]
+@attribute [Authorize(Roles = "Administrators, Users, HaberEkleDuzenle,EgitimEkleDuzenle,MevzuatEkleDuzenle,VideoEkleDuzenle," +
+                              "EtkinlikEkleDuzenle,KatilimciEkleDuzenle,DuyuruEkleDuzenle,RehberBilgiEkle,OdaEkleDuzenle," +
+                              "ToplantiEkleDuzenle,ToplantiNotuEkleDuzenle,AyrilisEkleDuzenle,IkUygulamaEkleDuzenle,DosyaEkleDuzenle ")]
 
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar sticky">

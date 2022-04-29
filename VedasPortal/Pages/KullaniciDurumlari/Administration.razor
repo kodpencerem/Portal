@@ -156,7 +156,11 @@
     List<Kullanici> ColUsers = new List<Kullanici>();
 
     // Bir kullanıcı düzenlenirken roller açılır menüsünde görüntülenecek seçenekler
-    List<string> Options = new List<string>() { "Users", "Administrators" };
+    List<string> Options = new List<string>() {
+        "Users", "Administrators", "EgitimEkleDuzenle", "MevzuatEkleDuzenle","VideoEkleDuzenle","EtkinlikEkleDuzenle",
+        "KatilimciEkleDuzenle", "DuyuruEkleDuzenle" ,"HaberEkleDuzenle", "RehberBilgiEkle", "OdaEkleDuzenle", "ToplantiEkleDuzenle",
+        "ToplantiNotuEkleDuzenle","AyrilisEkleDuzenle", "IkUygulamaEkleDuzenle", "DosyaEkleDuzenle"
+    };
 
     // Olası hataları tutmak için
     string strError = "";
