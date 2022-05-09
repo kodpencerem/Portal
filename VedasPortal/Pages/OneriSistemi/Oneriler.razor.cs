@@ -14,7 +14,14 @@ namespace VedasPortal.Pages.OneriSistemi
         [Inject]
         protected IBaseRepository<Oneri> Oneri { get; set; }
         protected IEnumerable<Oneri> Oneriler;
+        public Oneri GetOneri = new();
         public Dosya OneriDosya { get; set; }
+
+        protected void PostLiked(bool isLiked)
+        {
+            GetOneri.Begeni = isLiked;
+        }
+
         protected override Task OnInitializedAsync()
         {
             TumOnerileriGetir();

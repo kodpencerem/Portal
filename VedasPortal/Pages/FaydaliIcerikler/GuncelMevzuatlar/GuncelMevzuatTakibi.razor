@@ -27,24 +27,35 @@ else
 
                 @foreach (var mevzuat in mevzuatlar)
                 {
-<div class="col-lg-6 col-md-6">
-    <div class="card single_post">
-        <div class="header">
-            <h6 style="margin:10px"><strong>Son</strong> Gönderi</h6>
+            <div class="col-lg-6 col-md-6">
+                <div class="card single_post">
+                    <div class="header">
+                        <h6 style="margin:10px"><strong>Son</strong> Gönderi</h6>
 
-        </div>
+                    </div>
 
-        <div class="body">
-            <ul class="meta">
-                <li><a href="personeldetaybilgileri"><i class="zmdi zmdi-account col-blue">@mevzuat.KaydedenKullanici</i></a></li>
-                <li><a href="MevzuatKategoriBilgisi"><i class="zmdi zmdi-label col-amber"></i>@mevzuat.Kategori</a></li>
-            </ul>
-            <h6 style="margin:10px" class="m-t-0">@mevzuat.Adi</h6>
-            <p style="margin:10px">@((MarkupString) mevzuat.Aciklama)</p>
-            <a style="margin:10px" href="mevzuatdetay/@mevzuat.Id" title="read more" class="btn btn-round btn-primary">Tümünü Görüntüle</a>
-        </div>
-    </div>
-</div>}
+                    <div class="body">
+                        <ul class="meta">
+                            <li>
+                                <a href="personeldetaybilgileri">
+                                <i class="zmdi zmdi-account col-blue">@mevzuat.KaydedenKullanici</i>
+                                </a>
+                            </li>
+                            <li>
+                            <a href="MevzuatKategoriBilgisi">
+                                <i class="zmdi zmdi-label col-amber"></i>@mevzuat.Kategori
+                                </a>
+                            </li>
+                        </ul>
+                        <h6 style="margin:10px" class="m-t-0">@mevzuat.Adi</h6>
+                        <p style="margin:10px">@((MarkupString) mevzuat.Aciklama)</p>
+                        <a style="margin:10px" 
+                           href="mevzuatdetay/@mevzuat.Id" 
+                           title="read more" 
+                           class="btn btn-round btn-primary">Tümünü Görüntüle</a>
+                    </div>
+                </div>
+            </div>}
 
             </div>
         </CardBody>

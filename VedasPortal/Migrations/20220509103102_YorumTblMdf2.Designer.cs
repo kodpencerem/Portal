@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509103102_YorumTblMdf2")]
+    partial class YorumTblMdf2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -901,12 +903,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
-
-                    b.Property<bool>("Begeni")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("BegeniDerecesi")
-                        .HasColumnType("int");
 
                     b.Property<int>("Derece")
                         .HasColumnType("int");
@@ -1885,7 +1881,7 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
-                        .WithMany("Yorum")
+                        .WithMany()
                         .HasForeignKey("EgitimId");
 
                     b.HasOne("VedasPortal.Entities.Models.Oneri.Oneri", "Oneri")
@@ -1918,8 +1914,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Dosya");
 
                     b.Navigation("Video");
-
-                    b.Navigation("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Etkinlik", b =>

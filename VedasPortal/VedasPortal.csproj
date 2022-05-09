@@ -48,6 +48,9 @@
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
     <PackageReference Include="Blazored.Video" Version="1.0.0" />
+    <PackageReference Include="Blazorise" Version="0.9.5.7" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.5.7" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.7" />
     <PackageReference Include="Chronos.Blazor.Cropper" Version="1.2.2" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.488" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />

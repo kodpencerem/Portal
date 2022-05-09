@@ -5,14 +5,15 @@
 
 @code {
 
-    bool liked = false;
 
-    [Parameter] 
+    bool liked { get; set; } = false;
+
+    [Parameter]
     public EventCallback<bool> OnLikeToggled { get; set; }
 
     async Task ToggleLike()
     {
-        liked =  !liked;
+        liked = !liked;
         await OnLikeToggled.InvokeAsync(liked);
     }
 }

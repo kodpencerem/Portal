@@ -8,6 +8,8 @@ namespace VedasPortal.Entities.Models.Egitim
     {
         public ICollection<Dosya.Dosya> Dosya { get; set; }
         public ICollection<Video.Video> Video { get; set; }
+
+        public ICollection<Yorum.Yorum> Yorum { get; set; }
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public string Gereksinim { get; set; }

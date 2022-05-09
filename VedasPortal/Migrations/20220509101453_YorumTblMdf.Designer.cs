@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509101453_YorumTblMdf")]
+    partial class YorumTblMdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -902,12 +904,6 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Begeni")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("BegeniDerecesi")
-                        .HasColumnType("int");
-
                     b.Property<int>("Derece")
                         .HasColumnType("int");
 
@@ -1622,9 +1618,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EgitimId")
-                        .HasColumnType("int");
-
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
 
@@ -1633,9 +1626,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<bool>("OnaylansinMi")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("OneriId")
-                        .HasColumnType("int");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -1647,10 +1637,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EgitimId");
-
-                    b.HasIndex("OneriId");
 
                     b.HasIndex("VideoId");
 
@@ -1884,21 +1870,9 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
-                        .WithMany("Yorum")
-                        .HasForeignKey("EgitimId");
-
-                    b.HasOne("VedasPortal.Entities.Models.Oneri.Oneri", "Oneri")
-                        .WithMany("Yorum")
-                        .HasForeignKey("OneriId");
-
                     b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
                         .WithMany("VideoYorum")
                         .HasForeignKey("VideoId");
-
-                    b.Navigation("Egitim");
-
-                    b.Navigation("Oneri");
 
                     b.Navigation("Video");
                 });
@@ -1918,8 +1892,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Dosya");
 
                     b.Navigation("Video");
-
-                    b.Navigation("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Etkinlik", b =>
@@ -1954,8 +1926,6 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Oneri.Oneri", b =>
                 {
                     b.Navigation("Dosya");
-
-                    b.Navigation("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.PersonelDurumlari.PersonelDurum", b =>

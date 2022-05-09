@@ -2,6 +2,7 @@
 using Blazored.Modal;
 using Blazored.Modal.Services;
 using Blazored.Toast;
+using Blazorise;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +41,8 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 #endregion
 
@@ -49,7 +52,7 @@ namespace VedasPortal
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;            
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -74,7 +77,7 @@ namespace VedasPortal
             services.AddScoped<AltinDegisimleriServisi>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
-            services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru> >();
+            services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru>>();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
             services.AddScoped<IBaseRepository<Katilimci>, BaseRepository<Katilimci>>();
@@ -94,20 +97,22 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
             services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
             services.AddScoped<IBaseRepository<VefatDurumu>, BaseRepository<VefatDurumu>>();
-            services.AddScoped<IFileUpload, FileUpload>();           
+            services.AddScoped<IFileUpload, FileUpload>();
             services.AddScoped<IFileDownload, FileDownload>();
-            services.AddScoped<IModalService, ModalService>();           
-            services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();           
+            services.AddScoped<IModalService, ModalService>();
+            services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();          
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-        
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
