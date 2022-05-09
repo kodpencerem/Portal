@@ -46,19 +46,6 @@ else
                                     </div>
                                 </div>
                                 <div class="article-details">
-                                    <div class="article-title">
-                                        <h2>
-                                            <a href="dosya/detay/@dokuman.Id">
-
-                                                @if (dokuman.Adi != null)
-                                                {
-                                                    <MarkDownComponent Content="@(dokuman.Adi.Length>60 ?
-                                                                              dokuman.Adi.Substring(0, 27) + "..." :
-                                                                              dokuman.Adi)" />
-                                                }
-                                            </a>
-                                        </h2>
-                                    </div>
                                     <p>
                                         @if (dokuman.Aciklama != null)
                                         {

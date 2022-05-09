@@ -7,36 +7,36 @@
 <EditForm Model="@yorum"
           OnValidSubmit="Kayit">
     <DataAnnotationsValidator />
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Yorum @Title
-        </CardHeader>
-        <CardBody>
-            <div class="col-12">
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <CKEditorBlazor Id="MyEditor1"
-                                        @bind-Value=@yorum.Aciklama
-                                        Label="Açıklama"
-                                        UrlToPostImage="images/uploaded/">
-                        </CKEditorBlazor>
 
-                    </div>
-                    <ValidationMessage For="@(() => yorum.Aciklama)" />
-                </div>
+    <h5>
+        Yorum @Title
+    </h5>
+    <br />
+    <div class="col-12">
+        <div class="form-group row">
+            <div class="col-md-12">
+                <CKEditorBlazor Id="MyEditor1"
+                                @bind-Value=@yorum.Aciklama
+                                Label="Yorumunuz:"
+                                UrlToPostImage="images/uploaded/">
+                </CKEditorBlazor>
 
             </div>
-        </CardBody>
-        <CardFotter>
-            <div class="form-group">
-                <button type="submit" 
-                        class="btn btn-primary"
-                        @onclick="Kayit">
-                    Gönder
-                </button>
-            </div>
-        </CardFotter>
-    </CardComponent>
+            <ValidationMessage For="@(() => yorum.Aciklama)" />
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit"
+                class="btn btn-primary"
+                @onclick="Kayit">
+            Gönder
+        </button>
+    </div>
+
+
 </EditForm>
 
 @code {
@@ -56,6 +56,7 @@
     protected void Kayit()
     {
         GelenYorumlar.Add(yorum);
+        yorum = null;
     }
 
     protected override void OnParametersSet()

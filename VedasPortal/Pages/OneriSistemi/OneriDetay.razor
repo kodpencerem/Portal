@@ -13,15 +13,14 @@
             @if (OneriDetayGetir != null)
             {
 
-                <CardComponent cardStyle="Style.success">
-                    <CardBody>
+                
                         <div class="post-details">
                             <h3 class="mb-2 text-black">@OneriDetayGetir.Adi</h3>
                             <ul class="mb-4 post-meta d-flex flex-wrap">
                                 <li class="post-author mr-3">@OneriDetayGetir.KaydedenKullanici</li>
                                 <li class="post-date mr-3"><i class="fa fa-calender">
                                       </i>@OneriDetayGetir.KayitTarihi</li>
-                                <li class="post-comment"><i class="fa fa-comments-o"></i> 28</li>
+                                @*<li class="post-comment"><i class="fa fa-comments-o"></i> 28</li>*@
                             </ul>
                             <img src="images/uploaded/OneriDetayDosya?.Yolu" 
                                  alt="" 
@@ -35,67 +34,10 @@
                                 }
 
                             </p>
-
-                            <div class="comment-respond" id="respond">
-                                <h4 class="comment-reply-title text-primary mb-3" 
-                                    id="reply-title">Yorum Yap </h4>
-                                <form class="comment-form" 
-                                      id="commentform" 
-                                      method="post">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label for="author" 
-                                                    class="text-black font-w600">Name 
-                                                <span class="required">*</span></label>
-                                                <input type="text" 
-                                                    class="form-control" 
-                                                    value="Author" 
-                                                    name="Author" 
-                                                    placeholder="Author" 
-                                                    id="author">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label for="email" 
-                                                    class="text-black font-w600">Email 
-                                                <span class="required">*</span></label>
-                                                <input type="text" 
-                                                    class="form-control" 
-                                                    value="Email" 
-                                                    placeholder="Email" 
-                                                    name="Email" 
-                                                    id="email">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="comment" 
-                                                class="text-black font-w600">Comment</label>
-                                                <textarea   rows="8" 
-                                                        class="form-control" 
-                                                        name="comment" 
-                                                        placeholder="Comment" 
-                                                        id="comment">
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <input type="submit" 
-                                                    value="Post Comment" 
-                                                    class="submit btn btn-primary" 
-                                                    id="submit" 
-                                                    name="submit">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <YorumComponent/>
+                            <YorumEkleDuzenle/>
                         </div>
-                    </CardBody>
-                </CardComponent>}
+                    }
             </CardBody>
         </CardComponent>
 </div>

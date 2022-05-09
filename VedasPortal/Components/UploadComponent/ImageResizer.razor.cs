@@ -174,7 +174,7 @@ namespace VedasPortal.Components.UploadComponent
             string base64String = await args.GetBase64Async();
             File.WriteAllBytes(
                 Path.Combine(
-                    SaveFileToUploaded.ImageUploadedPath, fileName), 
+                    SaveFileToUploaded.ImageUploadedPath, fileName),
                 Convert.FromBase64String(base64String));
             PreviewImagePath = $"data:image/png;base64,{base64String}";
             args.Dispose();

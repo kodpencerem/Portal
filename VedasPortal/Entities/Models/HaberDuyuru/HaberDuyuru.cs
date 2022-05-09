@@ -8,13 +8,16 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
     public class HaberDuyuru : BaseEntity
     {   
         public int No { get; set; }
-
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         [Display(Name = "Haber/Duyuru Başlığı:")]
         [DataType(DataType.Text)]
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
         public string Aciklama { get; set; }
+        public bool Begeni { get; set; }
+        public string BegeniSayisi { get; set; }
+        public int BegeniYuzdesi { get; set; }
+        public int GorulduSayisi { get; set; }
         public bool SliderdaGoster { get; set; } = false;
         [DataType(DataType.Text)]
         public HaberDuyuruKategori Kategori { get; set; }
