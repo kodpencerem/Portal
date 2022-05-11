@@ -3,7 +3,7 @@ using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
+using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.ViewModels;
 using VedasPortal.Repository.Interface;

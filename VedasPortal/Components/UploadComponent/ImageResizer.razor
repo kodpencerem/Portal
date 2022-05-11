@@ -10,7 +10,7 @@
     </InputFile>
 </div>
 
-<ShowModalComponent Title="Resim Görünümü">
+<ShowModal Title="Resim Görünümü">
     <ModalBody>
         @if (!string.IsNullOrEmpty(PreviewImagePath) && !parsing)
         {
@@ -28,11 +28,11 @@
         </div>
         }
     </ModalBody>
-</ShowModalComponent>
+</ShowModal>
 
 @if (ShowCroper)
 {
-    <ShowModalComponent Title="Kırpma İşlemleri" IsOpened="isOpened">
+    <ShowModal Title="Kırpma İşlemleri" IsOpened="isOpened">
         <ModalBody>
             <div class="card">
                 <div class="card-body py-0">
@@ -105,5 +105,5 @@
                 Vazgeç</button>
             </div>
         </ModalFooter>
-    </ShowModalComponent>
+    </ShowModal>
 }

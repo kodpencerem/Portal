@@ -5,7 +5,7 @@ using Microsoft.JSInterop;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using VedasPortal.Components.ModalComponents;
+using VedasPortal.Components.ShowModalComponent;
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -83,7 +83,7 @@ namespace VedasPortal.Components.UploadComponent
         /// <summary>
         /// Resim kırpma ekranını bir popup olarak açılmasını sağlar
         /// </summary>
-        public ShowModalComponent ModalShow { get; set; }
+        public ShowModal ModalShow { get; set; }
 
         /// <summary>
         /// Resmin ön yüzü üzerinde resmini kolayca kırpılmasını sağlayan bir pencere açar

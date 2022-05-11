@@ -3,6 +3,8 @@ using Blazored.Modal;
 using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -41,8 +43,6 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
-using Blazorise.Bootstrap;
-using Blazorise.Icons.FontAwesome;
 
 #endregion
 
@@ -106,10 +106,11 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 

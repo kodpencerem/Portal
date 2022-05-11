@@ -2,7 +2,7 @@
     <EditForm Model="@AnketSecenekVm" 
               OnValidSubmit="SecenekKayit">
         <DataAnnotationsValidator />
-        <ShowModalComponent IsOpened="true">
+        <ShowModal IsOpened="true">
             <ModalBody>
                 <div class="form-group m-3">
                     <label class="bs-form-label">Açıklama</label>
@@ -15,7 +15,7 @@
                 <button type="submit" class="btn btn-primary">Ekle</button>
                 <button @onclick="Cancel" class="btn btn-secondary">Vazgeç</button>
             </ModalFooter>
-        </ShowModalComponent>
+        </ShowModal>
     </EditForm>
 </div>
 
