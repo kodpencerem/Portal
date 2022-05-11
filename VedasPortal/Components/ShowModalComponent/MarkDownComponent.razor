@@ -1,0 +1,12 @@
+﻿@if (Content == null)
+{
+    <span>Yükleniyor...</span>
+}
+else
+{
+    @(((MarkupString)Content).Sanitize())
+}
+
+@code {
+    [Parameter] public string Content { get; set; }
+}
