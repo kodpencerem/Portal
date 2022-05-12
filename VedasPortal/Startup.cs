@@ -62,7 +62,7 @@ namespace VedasPortal
             services.AddDbContext<VedasDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
-            services.AddDefaultIdentity<Kullanici>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Kullanici>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<AppIdentityRole>()
                 .AddEntityFrameworkStores<VedasDbContext>();
             services.AddRazorPages();
