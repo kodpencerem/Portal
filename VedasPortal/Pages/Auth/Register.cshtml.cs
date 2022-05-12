@@ -9,12 +9,12 @@ namespace VedasPortal.Pages.Auth
     public class RegisterModel : PageModel
     {
         private readonly UserManager<Kullanici> userManager;
-        private readonly RoleManager<AppIdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         [BindProperty]
         public Register RegisterData { get; set; }
 
-        public RegisterModel(UserManager<Kullanici> userManager, RoleManager<AppIdentityRole> roleManager)
+        public RegisterModel(UserManager<Kullanici> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -30,9 +30,8 @@ namespace VedasPortal.Pages.Auth
             {
                 if (!await roleManager.RoleExistsAsync("Manager"))
                 {
-                    AppIdentityRole role = new AppIdentityRole();
+                    IdentityRole role = new IdentityRole();
                     role.Name = "Manager";
-                    role.Description = "Can perform CRUD operations";
                     IdentityResult roleResult = await roleManager.CreateAsync(role);
                 }
 
