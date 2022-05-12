@@ -36,9 +36,13 @@
                 <br />
                 <div class="form-group mb-0">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
+                        <input type="checkbox" name="remember" 
+                               class="custom-control-input" 
+                               asp-for="SignInData.RememberMe"
+                               id="remember-me">
                         <label></label>
-                        <label class="custom-control-label" asp-for="SignInData.RememberMe">Beni Hatırla</label>
+                        <label class="custom-control-label" asp-for="SignInData.RememberMe"></label>
+                        
                     </div>
                 </div>
                 <br />
