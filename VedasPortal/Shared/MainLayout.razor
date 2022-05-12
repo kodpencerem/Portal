@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <BlazoredToasts Position="ToastPosition.TopRight" Timeout="1" />
+
 <div class="loader"></div>
 
 <AuthorizeView>
@@ -18,13 +19,10 @@
                         </div>
                     </section>
                 </div>
-                <footer class="main-footer">
-                    <div class="footer-left">
-                        <a href="https://www.vedas.com.tr" target="_blank">Vedaş</a>
-                    </div>
-                    <div class="footer-right">
-                    </div>
-                </footer>
+                <Footer CompanyName="Vedaş - Vangölü Elektrik Dağıtım A.Ş - Her Hakkı Saklıdır" 
+                        Href="https://www.vedas.com.tr"
+                        Target="Target.Blank"
+                        />
             </div>
         </div>
     </Authorized>
@@ -32,5 +30,4 @@
         <NotAuthorizedComponent />
     </NotAuthorized>
 </AuthorizeView>
-
 
