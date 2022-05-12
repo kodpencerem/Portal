@@ -322,7 +322,10 @@
                     new Kullanici
                     {
                         UserName = objUser.UserName,
-                        Email = objUser.Email
+                        Email = objUser.Email,
+                        Id = objUser.Id,
+                        ConcurrencyStamp = objUser.ConcurrencyStamp,
+                        SecurityStamp = objUser.SecurityStamp
                     };
 
                 var CreateResult =

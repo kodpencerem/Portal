@@ -1,0 +1,115 @@
+﻿@page
+@model VedasPortal.Pages.Auth.SignInModel
+
+<div class="row">
+    <div class="d-flex flex-column justify-content-around" id="SignInWrapper">
+        <form id="account" method="post" class="SignInContainer ml-auto mr-auto d-flex flex-column align-items-center justify-content-between">
+            <div class="card-header">
+                <h4>Vedaş Portal Giriş Formu</h4>
+                <img alt="image" width="100" src="/images/logo.png" class="header-logo" />
+            </div>
+            <br />
+            <div class="card-body pb-0">
+                <div class="form-group">
+                    <label asp-for="SignInData.UserName"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input class="form-control" type="text" asp-for="SignInData.UserName" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="SignInData.Password"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                        </div>
+                        <input type="password" asp-for="SignInData.Password" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group mb-0">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="remember" class="custom-control-input" id="remember-me">
+                        <label></label>
+                        <label class="custom-control-label" asp-for="SignInData.RememberMe">Beni Hatırla</label>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="card-footer pt-">
+                <button type="submit"
+                        onclick="$.cardProgress('#sample-login', {dismiss: true,onDismiss: function() {alert('Dismissed :)')}});return false;"
+                        class="btn btn-primary">
+                    Giriş Yap
+                </button>
+            </div>
+            <br />
+            <a asp-page="/Auth/Register" class="ml-2">Yeni Kullanıcı Olarak Kaydol</a>
+            <div asp-validation-summary="All" class="message"></div>
+        </form>
+    </div>
+
+</div>
+
+<style>
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        background: #afbcc500 !important; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #00223E, #FFA17F); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #00223E, #FFA17F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    ::-webkit-scrollbar {
+        display: none;
+        visibility: hidden;
+        opacity: 0
+    }
+
+    #SignInWrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 90%;
+        max-width: 300px;
+        min-height: 450px;
+        margin-top: 30px;
+        background-color: #3e83b1;
+        border-radius: 7px;
+        text-align: center;
+        -webkit-box-shadow: 0px 0px 25px 1px rgba(0,0,0,0.64);
+        -moz-box-shadow: 0px 0px 25px 1px rgba(0,0,0,0.64);
+        box-shadow: 0px 0px 25px 1px rgba(0,0,0,0.64);
+    }
+
+    .SignInContainer {
+        width: 100%;
+        max-width: 270px;
+        min-height: 290px;
+        background-color: #3e83b1;
+        
+    }
+
+        .SignInContainer > div:nth-child(-n+2) {
+            height: 150px;
+        }
+
+    a {
+        color: #131414;
+    }
+
+        a:hover {
+            color: #c33400;
+        }
+
+    .text-danger {
+        font-size: 11.5px;
+    }
+</style>

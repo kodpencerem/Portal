@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Reflection;
 using VedasPortal.Data.Toplanti;
 using VedasPortal.Entities.Models;
@@ -19,10 +21,11 @@ using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
 using VedasPortal.Entities.Models.Video;
+using VedasPortal.Enums;
 
 namespace VedasPortal.Data
 {
-    public class VedasDbContext : IdentityDbContext<Kullanici>
+    public class VedasDbContext : IdentityDbContext<Kullanici, AppIdentityRole, string>
     {
         public VedasDbContext(DbContextOptions<VedasDbContext> options)
             : base(options)
@@ -51,10 +54,12 @@ namespace VedasPortal.Data
         public DbSet<PersonelDurum> PersonelDurum { get; set; }
         public DbSet<VefatDurumu> VefatDurumu { get; set; }
         public DbSet<UzmanlikAlani> UzmanlikAlani { get; set; }
+
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);           
         }
     }
 }

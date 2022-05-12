@@ -63,7 +63,7 @@ namespace VedasPortal
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddDefaultIdentity<Kullanici>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
+                .AddRoles<AppIdentityRole>()
                 .AddEntityFrameworkStores<VedasDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -106,7 +106,6 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +137,7 @@ namespace VedasPortal
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
