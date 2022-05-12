@@ -1,0 +1,172 @@
+﻿@page "/users"
+@attribute [Authorize(Roles = nameof(EYetkiTipleri.Admin))]
+
+
+<Tabs SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
+    <Items>
+        <Tab Name="yenikullanici">Yeni Kullanıcı Ekle</Tab>
+        <Tab Name="kullanicilar">Kullanıcılar</Tab>
+    </Items>
+    <Content>
+
+        <TabPanel Name="yenikullanici">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Kullanıcılar</CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <DataGrid TItem="User"
+                              Data="@listUser"
+                              Filterable="true"
+                              FilterMethod="DataGridFilterMethod.Contains"
+                              Editable="false"
+                              Bordered
+                              ShowPager
+                              Responsive
+                              PageSize="15"
+                              PagerPosition="DataGridPagerPosition.TopAndBottom"
+                              ResizeMode="TableResizeMode.Header">
+
+                        <ChildContent>
+                            <DataGridColumn TItem="User"
+                                            Caption="İşlem"
+                                            Editable="false"
+                                            Width="10"
+                                            Field="@nameof(User.UserName)"
+                                            Filterable="false">
+                                <DisplayTemplate>
+                                    <Buttons Role="ButtonsRole.Toolbar">
+                                        <Buttons Margin="Margin.Is2.FromRight">
+                                            <AuthorizeView Roles="SuperAdmin" Context="authorizeContext">
+                                                <Authorized>
+                                                    <Button Clicked="@(()=>{refOnay.item=context; refOnay.ShowModal();})" Color="Color.Danger">
+                                                        <Icon Name="IconName.Remove" />Sil
+                                                    </Button>
+                                                </Authorized>
+                                            </AuthorizeView>
+                                            <Button Clicked="@(async ()=>await YetkiGuncelle(context))" Color="Color.Success">
+                                                <Icon Name="IconName.Edit" />Yetki Güncelle
+                                            </Button>
+                                        </Buttons>
+                                    </Buttons>
+                                </DisplayTemplate>
+                            </DataGridColumn>
+                            <DataGridColumn TItem="User" Field="@nameof(User.UserName)" Caption="Kullanıcı Adı" />
+                            <DataGridColumn TItem="User" Field="@nameof(User.Id)" Caption="Yetkiler">
+                                <DisplayTemplate>
+                                    @string.Join(",",context.Roles)
+                                </DisplayTemplate>
+                            </DataGridColumn>
+                        </ChildContent>
+                    </DataGrid>
+                </CardBody>
+            </Card>
+
+        </TabPanel>
+        <TabPanel Name="kullanicilar">
+
+
+            <!--TAB MENU-->
+            <!--USERS-->
+            <!--NEW USER-->
+            <!--FIND USER AND ADD-->
+            <!--ADD ROLES TO USER-->
+            <Card>
+                <CardHeader>
+                    <CardTitle>Kullanıcılar</CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <DataGrid TItem="User"
+                              Data="@listLdapUser"
+                              Filterable="true"
+                              FilterMethod="DataGridFilterMethod.Contains"
+                              Editable="false"
+                              Bordered="true"
+                              ShowPager="true"
+                              PageSize="15"
+                              PagerPosition="DataGridPagerPosition.TopAndBottom"
+                              Responsive="true"
+                              ResizeMode="TableResizeMode.Header">
+
+                        <ChildContent>
+                            <DataGridColumn TItem="User"
+                                            Caption="İşlem"
+                                            Editable="false"
+                                            Width="10"
+                                            Field="@nameof(User.UserName)"
+                                            Filterable="false">
+
+                                <DisplayTemplate>
+                                    <Buttons Role="ButtonsRole.Toolbar">
+                                        <Buttons Margin="Margin.Is2.FromRight">
+                                            <Button Clicked="@(()=>{refOnayEkle.item=context; listSelectedUserRole.Clear(); refOnayEkle.ShowModal();})" Color="Color.Success">
+                                                <Icon Name="IconName.Add" />Ekle
+                                            </Button>
+                                        </Buttons>
+                                    </Buttons>
+                                </DisplayTemplate>
+                            </DataGridColumn>
+                            <DataGridColumn TItem="User" Field="@nameof(User.UserName)" Caption="Kullanıcı Adı" />
+                        </ChildContent>
+                    </DataGrid>
+                </CardBody>
+            </Card>
+
+        </TabPanel>
+    </Content>
+</Tabs>
+
+<OnayComponent TItem="User" Soru="Silmek istediğinizden emin misiniz?" @ref="@refOnay"
+               EvetEvent="@(async ()=>{await Remove();listLdapUser.Add(refOnay.item);})" />
+
+
+<OnayComponent TItem="User" Soru="Lütfen yetki seçiniz" @ref="@refOnayEkle"
+               EvetEvent="@(async ()=>{
+if(listSelectedUserRole.Count==0)
+{
+    await snackbarStack.PushAsync("Lütfen yetki seçiniz!",SnackbarColor.Warning);
+        return;
+}
+else if(listSelectedUserRole.Count>1 && listSelectedUserRole.Any(q=>q.RoleNameEnum==EYetkiTipleri.Admin)){
+    await snackbarStack.PushAsync("Admin ve Farklı yetki türleri aynı kullanıcı için seçilemez!",SnackbarColor.Danger);
+        return;
+}
+await AddNewUser();
+})">
+    <Icerik>
+        <Fields>
+            @foreach (var item in listUserRole)
+            {
+                <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                    @*<Check TValue="bool" Checked="@(listSelectedUserRole.Any(q=>q.RoleNameEnum==item.RoleNameEnum))" CheckedChanged="@YetkiCheckChanged">@item.RoleName</Check>*@
+
+                    @*@if (listSelectedUserRole.Any(q => q.RoleNameEnum == item.RoleNameEnum))
+                        {
+                        <Check TValue="bool" Checked="true" CheckedChanged="@((val)=>{listSelectedUserRole.Remove(item);val=false;StateHasChanged();})">@item.RoleName</Check>
+                        }
+                        else
+                        {*@
+                    <Check TValue="bool" Checked="@(listSelectedUserRole.Any(q=>q.RoleNameEnum==item.RoleNameEnum))" CheckedChanged="@((val)=>
+                        {
+                            if(val){
+                                    if(item.RoleNameEnum==EYetkiTipleri.Admin){
+                                        listSelectedUserRole.Clear();
+                                    }
+                                    else if(listSelectedUserRole.Any(q=>q.RoleNameEnum==EYetkiTipleri.Admin)){
+                                        listSelectedUserRole.Remove(listSelectedUserRole.FirstOrDefault(q=>q.RoleNameEnum==EYetkiTipleri.Admin));
+                                    }
+                                listSelectedUserRole.Add(item);
+                            } else {
+                                listSelectedUserRole.Remove(item);
+                            }
+                        })">
+                        @item.RoleName
+                    </Check>
+                    @*}*@
+                </Field>
+            }
+        </Fields>
+    </Icerik>
+</OnayComponent>
+
+<SnackbarStack @ref="snackbarStack" Location="SnackbarStackLocation.Right" Style="z-index:123123" />
