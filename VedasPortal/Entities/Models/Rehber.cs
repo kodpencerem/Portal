@@ -12,5 +12,6 @@ namespace VedasPortal.Entities.Models
         public long TelefonNo { get; set; }
         public string Email { get; set; }
         public string Lokasyon { get; set; }
+        public bool AktifPasif { get; set; } = true;
     }
 }

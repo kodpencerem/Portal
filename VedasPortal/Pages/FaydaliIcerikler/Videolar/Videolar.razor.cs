@@ -14,8 +14,15 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         [Inject]
         protected IBaseRepository<Video> Video { get; set; }
 
-        protected IEnumerable<Video> VideoGetir;
+        protected IEnumerable<Video> VideoGetir { get; set; } = new List<Video>();
         protected Dosya VideoDosya { get; set; } = new();
+
+        public string SearchText = "";
+
+        public List<Video> FilteredVideo => VideoGetir.Where(
+            x => x.Baslik.ToLower().Contains(SearchText.ToLower())
+            || x.Aciklama.ToLower().Contains(SearchText.ToLower())
+            ).ToList();
 
         protected override Task OnInitializedAsync()
         {

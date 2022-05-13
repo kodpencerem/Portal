@@ -18,15 +18,23 @@ else
                     Güncel Mevzuat Takibi ve Regülasyonlar
                 </div>
             </div>
-            <div style="margin-left:850px" class="float-right">
-                <SearchComp />
+            <div style="margin-left:980px" class="float-right">
+                <div class="text-center bg-blue-100">
+                    <input class="form-control" @bind-value="SearchText"
+                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                </div>
             </div>
         </CardHeader>
         <CardBody>
             <div class="row">
 
-                @foreach (var mevzuat in mevzuatlar)
+                @if (!mevzuatlar.Any())
                 {
+            <p>İçerik Aranıyor</p> }
+        else
+        {
+            @foreach (var mevzuat in FilteredMevzuat.Where(x => x.AktifPasif == true).ToList())
+            {
             <div class="col-lg-6 col-md-6">
                 <div class="card single_post">
                     <div class="header">
@@ -38,24 +46,25 @@ else
                         <ul class="meta">
                             <li>
                                 <a href="personeldetaybilgileri">
-                                <i class="zmdi zmdi-account col-blue">@mevzuat.KaydedenKullanici</i>
+                                    <i class="zmdi zmdi-account col-blue">@mevzuat.KaydedenKullanici</i>
                                 </a>
                             </li>
                             <li>
-                            <a href="MevzuatKategoriBilgisi">
-                                <i class="zmdi zmdi-label col-amber"></i>@mevzuat.Kategori
+                                <a href="MevzuatKategoriBilgisi">
+                                    <i class="zmdi zmdi-label col-amber"></i>@mevzuat.Kategori
                                 </a>
                             </li>
                         </ul>
                         <h6 style="margin:10px" class="m-t-0">@mevzuat.Adi</h6>
                         <p style="margin:10px">@((MarkupString) mevzuat.Aciklama)</p>
-                        <a style="margin:10px" 
-                           href="mevzuatdetay/@mevzuat.Id" 
-                           title="read more" 
+                        <a style="margin:10px"
+                           href="mevzuatdetay/@mevzuat.Id"
+                           title="read more"
                            class="btn btn-round btn-primary">Tümünü Görüntüle</a>
                     </div>
                 </div>
-            </div>}
+            </div>}}
+
 
             </div>
         </CardBody>

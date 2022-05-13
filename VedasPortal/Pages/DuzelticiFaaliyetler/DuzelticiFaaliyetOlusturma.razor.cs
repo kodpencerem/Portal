@@ -12,7 +12,15 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
     {
         [Inject]
         protected IBaseRepository<DuzelticiFaaliyet> DuzelticiFaaliyetler { get; set; }
-        protected IEnumerable<DuzelticiFaaliyet> DuzelticiFaaliyet;
+        protected IEnumerable<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; } = new List<DuzelticiFaaliyet>();
+
+        public string SearchText = "";
+
+        public List<DuzelticiFaaliyet> FilteredFaaliyet => DuzelticiFaaliyet.Where(
+            x => x.FaaliyetGurupAdi.ToLower().Contains(SearchText.ToLower())
+            || x.Aciklama.ToLower().Contains(SearchText.ToLower())
+            ).ToList();
+
 
         protected override Task OnInitializedAsync()
         {

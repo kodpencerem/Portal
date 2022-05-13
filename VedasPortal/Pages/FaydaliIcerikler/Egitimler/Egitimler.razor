@@ -21,68 +21,81 @@ else
                         Eğitim Portalı
                     </div>
                 </div>
-                <div style="margin-left:1050px" class="float-right">
-                    <SearchComp />
+                <div style="margin-left:1180px" class="float-right">
+                    <div class="text-center bg-blue-100">
+                        <input class="form-control" @bind-value="SearchText"
+                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                    </div>
                 </div>
             </CardHeader>
             <CardBody>
                 <div class="row">
-                    @foreach (var egitim in EgitimleriGetir.Where(e => e.AktifPasif == true).ToList())
+
+                    @if (!EgitimleriGetir.Any())
                     {
-                        <div class="col-12 col-md-4 col-lg-4">
-                            <article class="article article-style-c">
-                                <a href="egitimdetayi/@egitim.Id">
-                                    <div class="article-header">
-                                        <div class="article-image" 
-                                             data-background="images/uploaded/@string.Concat(
+                        <p>İçerik Aranıyor</p>
+                    }
+                    else
+                    {
+                        @foreach (var egitim in FilteredEgitim.Where(e => e.AktifPasif == true).ToList())
+                        {
+
+                            <div class="col-12 col-md-4 col-lg-4">
+                                <article class="article article-style-c">
+                                    <a href="egitimdetayi/@egitim.Id">
+                                        <div class="article-header">
+                                            <div class="article-image"
+                                                 data-background="images/uploaded/@string.Concat(
                                                                                    egitim.Dosya.FirstOrDefault().Adi,
                                                                                    ".",
                                                                                    egitim.Dosya.FirstOrDefault().Uzanti)">
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="article-details">
-                                    <div class="article-category">
-                                        <a>@egitim.Kategori</a>
-                                        <div class="bullet"></div> <a>@egitim.KayitTarihi</a>
-                                    </div>
-                                    <div class="article-title">
-                                        <h2>
-                                            <a href="egitimdetayi/@egitim.Id">
-                                                @if (egitim.Adi != null)
-                                                {
-                                                    <MarkDownComponent Content="@(egitim.Adi.Length>30 ? 
-                                                                                  egitim.Adi.Substring(0, 20) + "..." : 
-                                                                                  egitim.Adi)" />
-                                                }
-                                            </a>
-                                        </h2>
-
-
-                                    </div>
-                                    <p>
-                                        @if (egitim.Aciklama != null)
-                                        {
-                                            <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ? 
-                                                                          egitim.Aciklama.Substring(0, 280) + "..." : 
-                                                                          egitim.Aciklama)" />
-                                        }
-                                    </p>
-                                    <div class="article-user">
-                                        <img alt="image" src="images/uploaded/@string.Concat(
-                                                                                   egitim.Dosya.FirstOrDefault().Adi,
-                                                                                   ".",
-                                                                                   egitim.Dosya.FirstOrDefault().Uzanti)">
-                                        <div class="article-user-details">
-                                            <div class="user-detail-name">
-                                                <a href="profil">@egitim.KaydedenKullanici</a>
                                             </div>
-                                            <div class="text-job">Kullanıcı Görev Bilgisi</div>
+                                        </div>
+                                    </a>
+                                    <div class="article-details">
+                                        <div class="article-category">
+                                            <a>@egitim.Kategori</a>
+                                            <div class="bullet"></div> <a>@egitim.KayitTarihi</a>
+                                        </div>
+                                        <div class="article-title">
+                                            <h2>
+                                                <a href="egitimdetayi/@egitim.Id">
+                                                    @if (egitim.Adi != null)
+                                                    {
+                                                        <MarkDownComponent Content="@(egitim.Adi.Length>30 ?
+                                                                                  egitim.Adi.Substring(0, 20) + "..." :
+                                                                                  egitim.Adi)" />
+                                                    }
+                                                </a>
+                                            </h2>
+
+
+                                        </div>
+                                        <p>
+                                            @if (egitim.Aciklama != null)
+                                            {
+                                                <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ?
+                                                                          egitim.Aciklama.Substring(0, 280) + "..." :
+                                                                          egitim.Aciklama)" />
+                                            }
+                                        </p>
+                                        <div class="article-user">
+                                            <img alt="image" src="images/uploaded/@string.Concat(
+                                                                                   egitim.Dosya.FirstOrDefault().Adi,
+                                                                                   ".",
+                                                                                   egitim.Dosya.FirstOrDefault().Uzanti)">
+                                            <div class="article-user-details">
+                                                <div class="user-detail-name">
+                                                    <a href="profil">@egitim.KaydedenKullanici</a>
+                                                </div>
+                                                <div class="text-job">Kullanıcı Görev Bilgisi</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
+                                </article>
+                            </div>
+
+                        }
                     }
 
                 </div>

@@ -12,11 +12,16 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
     {
         [Inject]
         protected IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
-        protected IEnumerable<Mevzuat> mevzuatlar;
+        protected IEnumerable<Mevzuat> mevzuatlar { get; set; } = new List<Mevzuat>();
+
+        public string SearchText = "";
+
+        public List<Mevzuat> FilteredMevzuat => mevzuatlar.Where(
+            x => x.Adi.ToLower().Contains(SearchText.ToLower())
+            || x.Aciklama.ToLower().Contains(SearchText.ToLower())
+            ).ToList();
 
 
-
-        protected string SearchString { get; set; }
         protected override Task OnInitializedAsync()
         {
             TumMevzuatlariGetir();

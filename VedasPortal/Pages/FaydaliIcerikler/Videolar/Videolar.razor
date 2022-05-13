@@ -10,29 +10,47 @@
 else
 
 {
-<div class="col-12">
-    <CardComponent>
-        <CardHeader>
-            Videolar
-        </CardHeader>
-        <CardBody>
-            <div class="row">
-                @foreach (var video in VideoGetir)
-                {
-                    <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
-                        <VideoPlayerComponent VideoBaslik="@video.Baslik"
-                                              Aciklama="@video.Aciklama"
-                                              Width="500px"
-                                              Heigth="500px" />
+    <div class="col-12">
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Eğitim Portalı
                     </div>
+                </div>
+                <div style="margin-left:1180px" class="float-right">
+                    <div class="text-center bg-blue-100">
+                        <input class="form-control" @bind-value="SearchText"
+                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <div class="row">
+                    @if (!VideoGetir.Any())
+                    {
+                        <p>İçerik Aranıyor</p>
+                    }
+                    else
+                    {
+                        @foreach (var video in FilteredVideo.Where(x=>x.AktifPasif==true).ToList())
+                        {
+                            <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                                <VideoPlayerComponent VideoBaslik="@video.Baslik"
+                                                      Aciklama="@video.Aciklama"
+                                                      Width="500px"
+                                                      Heigth="500px" />
+                            </div>
 
-                }
-            </div>
-        </CardBody>
-    </CardComponent>
+                        }
+                    }
 
-</div>
-    
+                </div>
+            </CardBody>
+        </CardComponent>
+
+    </div>
+
 
 }
 

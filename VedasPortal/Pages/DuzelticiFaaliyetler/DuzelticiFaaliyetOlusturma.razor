@@ -26,63 +26,74 @@ else
                         </a>
                     </div>
                 </div>
-                <div style="margin-left:700px" class="float-right">
-                    <SearchComp />
+                <div style="margin-left:820px" class="float-right">
+                    <div class="text-center bg-blue-100">
+                        <input class="form-control" @bind-value="SearchText"
+                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                    </div>
                 </div>
             </CardHeader>
             <CardBody>
                 <div class="row">
-                    @foreach (var dFaaliyet in DuzelticiFaaliyet)
-                    {
-                        <div class="col-md-6 col-lg-6 col-xl-6">
-                            <!-- Support tickets -->
-                            <div class="card">
 
-                                <div class="card-body">
-                                    <div class="support-ticket media pb-1 mb-3">
-                                        <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
-                                        <div class="media-body ml-3">
-                                            <div class="badge badge-pill badge-success mb-1 float-right">
-                                                <a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
-                                            </div>
-                                            <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
-                                            <a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
-                                            <p class="my-1">
-                                                <img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
-                                                                   dFaaliyet.Dosya.FirstOrDefault().Uzanti)" 
-                                                     height="350"
-                                                     width="600"
-                                                     />
-                                                     @if (dFaaliyet.Aciklama !=null)
-                                                     {
-                                                <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ?
+                    @if (!DuzelticiFaaliyet.Any())
+                    {
+                        <p>İçerik Aranıyor</p> }
+                    else
+                    {
+                        @foreach (var dFaaliyet in FilteredFaaliyet.Where(x => x.AktifPasif == true).ToList())
+                        {
+                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                <!-- Support tickets -->
+                                <div class="card">
+
+                                    <div class="card-body">
+                                        <div class="support-ticket media pb-1 mb-3">
+                                            <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
+                                            <div class="media-body ml-3">
+                                                @*<div class="badge badge-pill badge-success mb-1 float-right">
+                                                    <a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
+                                                </div>*@
+                                                <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
+                                                <a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
+                                                <p class="my-1">
+                                                    <img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
+                                                                   dFaaliyet.Dosya.FirstOrDefault().Uzanti)"
+                                                         height="350"
+                                                         width="600" />
+                                                    @if (dFaaliyet.Aciklama != null)
+                                                    {
+                                                        <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ?
                                                                                   dFaaliyet.Aciklama.Substring(0, 280) + "..." :
                                                                                   dFaaliyet.Aciklama)" />
-                                                }
-                                            </p>
-                                            <p class="my-1">@dFaaliyet.LokasyonBilgisi</p>
-                                            <small class="text-muted">
-                                                Ekleyen <span class="font-weight-bold font-13">
-                                                    @dFaaliyet.KaydedenKullanici
-                                                </span>
-                                                &nbsp;&nbsp; - @dFaaliyet.KayitTarihi
-                                            </small>
+                                                    }
+                                                </p>
+                                                <p class="my-1">@dFaaliyet.LokasyonBilgisi</p>
+                                                <small class="text-muted">
+                                                    Ekleyen <span class="font-weight-bold font-13">
+                                                        @dFaaliyet.KaydedenKullanici
+                                                    </span>
+                                                    &nbsp;&nbsp; - @dFaaliyet.KayitTarihi
+                                                </small>
+                                            </div>
                                         </div>
+
                                     </div>
+                                    <a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="card-footer card-link text-center small ">
+                                        Tümünü Görüntüle
+                                    </a>
+                                    <a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
+                                       class="btn btn-sm btn-info btn-outline-dark "
+                                       role="button">Faaliyeti Düzenle</a>
 
                                 </div>
-                                <a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="card-footer card-link text-center small ">
-                                    Tümünü Görüntüle
-                                </a>
-                                <a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
-                                   class="btn btn-sm btn-info btn-outline-dark "
-                                   role="button">Faaliyeti Düzenle</a>
-
+                                <!-- Support tickets -->
                             </div>
-                            <!-- Support tickets -->
-                        </div>
+
+                        }
 
                     }
+
                 </div>
             </CardBody>
         </CardComponent>
