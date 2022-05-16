@@ -55,7 +55,6 @@ namespace VedasPortal.Data
         public DbSet<VefatDurumu> VefatDurumu { get; set; }
         public DbSet<UzmanlikAlani> UzmanlikAlani { get; set; }
 
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

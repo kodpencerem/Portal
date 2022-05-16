@@ -106,6 +106,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,7 +129,7 @@ namespace VedasPortal
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -137,7 +138,6 @@ namespace VedasPortal
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -19,6 +19,10 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         [Inject]
         public IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
 
+        [Inject]
+        IJSRuntime jSRuntime { get; set; }
+
+
         [Parameter]
         public int MevzuatId { get; set; }
 
@@ -120,8 +124,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             mevzuat = null;
             MevzuatDosya = null;
         }
-
-
+        
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

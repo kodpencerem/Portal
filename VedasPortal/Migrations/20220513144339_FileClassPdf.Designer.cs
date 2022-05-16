@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220513144339_FileClassPdf")]
+    partial class FileClassPdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -837,6 +839,50 @@ namespace VedasPortal.Migrations
                     b.ToTable("GorevSecenek");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.FileClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DuzenlemeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DuzenleyenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FileClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KaydedenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SilenKullanici")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SilmeTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileClassId");
+
+                    b.ToTable("FileClass");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>
                 {
                     b.Property<int>("Id")
@@ -852,9 +898,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
-
-                    b.Property<string>("AlinanKararlar")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BaslangicTarihi")
                         .HasColumnType("datetime2");
@@ -1816,6 +1859,13 @@ namespace VedasPortal.Migrations
                     b.Navigation("Etkinlik");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.FileClass", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.Mevzuat.FileClass", null)
+                        .WithMany("Files")
+                        .HasForeignKey("FileClassId");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
@@ -1947,6 +1997,11 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.IKUygulama.IkUygulama", b =>
                 {
                     b.Navigation("Dosya");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.FileClass", b =>
+                {
+                    b.Navigation("Files");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>

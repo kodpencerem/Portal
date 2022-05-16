@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using VedasPortal.Entities.Models.Mevzuat;
 
 namespace VedasPortal.Services.FileUploadDownload
 {
@@ -98,7 +100,7 @@ namespace VedasPortal.Services.FileUploadDownload
                 {
                     var fileName = SaveFileToUploaded.RandomFileName + file.Name;                   
                     // Bir dosya yolu oluşturup kendi ismi ile kaydet
-                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "videos/uploaded", fileName);
+                    var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "files", fileName);
                     SaveFileToUploaded.FileName = fileName;
                     // dosyayı yüklemek için akış açar ve dosya yükleme gerçekleştirir
                     using (var stream = file.OpenReadStream())
@@ -126,7 +128,7 @@ namespace VedasPortal.Services.FileUploadDownload
         {
             try
             {
-                var path = $"{_webHostEnvironment.WebRootPath}\\videos\\uploaded\\{fileName}";
+                var path = $"{_webHostEnvironment.WebRootPath}\\files\\{fileName}";
                 if (File.Exists(path))
                 {
                     File.Delete(path);
@@ -138,6 +140,6 @@ namespace VedasPortal.Services.FileUploadDownload
             {
                 throw;
             }
-        }
+        }        
     }
 }

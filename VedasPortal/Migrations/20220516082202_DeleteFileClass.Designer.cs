@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220516082202_DeleteFileClass")]
+    partial class DeleteFileClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -853,9 +855,6 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
 
-                    b.Property<string>("AlinanKararlar")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("BaslangicTarihi")
                         .HasColumnType("datetime2");
 
@@ -880,6 +879,9 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("MevzuatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("No")
                         .HasColumnType("int");
 
@@ -890,6 +892,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MevzuatId");
 
                     b.ToTable("Mevzuat");
                 });
@@ -1816,6 +1820,13 @@ namespace VedasPortal.Migrations
                     b.Navigation("Etkinlik");
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.Mevzuat.Mevzuat", null)
+                        .WithMany("Mevzuatlar")
+                        .HasForeignKey("MevzuatId");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
@@ -1952,6 +1963,8 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Mevzuat.Mevzuat", b =>
                 {
                     b.Navigation("Dosya");
+
+                    b.Navigation("Mevzuatlar");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Oneri.Oneri", b =>

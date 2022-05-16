@@ -14,6 +14,7 @@ namespace VedasPortal.Entities.Models.Mevzuat
         public string Aciklama { get; set; }
         public DateTime BaslangicTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
+        public string AlinanKararlar { get; set; }
         public bool AktifPasif { get; set; } = true;
         [DataType(DataType.Text)]
         public MevzuatKategori Kategori { get; set; }
