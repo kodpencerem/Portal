@@ -43,7 +43,7 @@ namespace VedasPortal.Services.FileUploadDownload
             //sunucudan okunan dosyaların base64 url'lerini tutacak boş bir liste başlat
             var base64Urls = new List<string>();
             // Adını kullanarak dosya için yükleme yolu oluşturur
-            var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+            var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "files");
 
             // Bu yükleme klasöründeki tüm dosyaları alın
             var files = Directory.GetFiles(uploadPath);

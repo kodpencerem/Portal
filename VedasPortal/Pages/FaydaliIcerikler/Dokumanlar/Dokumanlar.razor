@@ -18,7 +18,7 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Dosyalar ve Dökümanlar
+                        İndirilebilir Dosyalar ve Dökümanlar
                     </div>
                 </div>
                 <div style="margin-left:1100px" class="float-right">
@@ -39,41 +39,7 @@ else
                     }
                     else
                     {
-                        @foreach (var dokuman in FilteredDokuman.Where(d => d.AktifPasif == true).ToList())
-                        {
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                                <article class="article article-style-b">
-                                    <div class="article-header">
-                                        <div class="article-image" data-background="images/uploaded/@string.Concat(dokuman.Adi,".",
-                                                                   dokuman.Uzanti)">
-                                        </div>
-                                        <div class="article-badge">
-                                            <div class="article-badge-item bg-danger">
-                                                <i class="fas fa-fire"></i>
-                                                En çok okunan
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="article-details">
-                                        <p>
-                                            @if (dokuman.Aciklama != null)
-                                            {
-                                                <MarkDownComponent Content="@(dokuman.Aciklama.Length>500 ?
-                                                                      dokuman.Aciklama.Substring(0, 280) + "..." :
-                                                                      dokuman.Aciklama)" />}
-                                        </p>
-                                        <div class="article-cta">
-                                            <a href="dosya/detay/@dokuman.Id">
-                                                Detayına Bak
-                                                <i class="fas fa-chevron-right">
-                                                </i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        }
-
+                        <DownloadComponent/>
                     }
                 </div>
             </CardBody>
