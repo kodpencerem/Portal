@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
 using VedasPortal.Entities.Models.Egitim;
 
@@ -28,7 +27,7 @@ namespace VedasPortal.Entities.Models.Video
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
         public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
-        public List<Yorum.Yorum> VideoYorum { get; set; }
+        public virtual ICollection<Yorum.Yorum> Yorum { get; set; } 
     }
     public enum VideoKategori
     {

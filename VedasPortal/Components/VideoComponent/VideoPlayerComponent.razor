@@ -1,12 +1,13 @@
-﻿
-<BlazoredVideo @ref ="video"
-               PlayEvent="OnPlay" 
+﻿@using VedasPortal.Entities.Models.Video;
+
+<BlazoredVideo @ref="video"
+               PlayEvent="OnPlay"
                TimeUpate="OnTimeUpdate"
                VideoStateOptions="options"
                class="w-100"
                style="max-width:800px;"
                controls="controls">
-    <source src="@Src" 
+    <source src="@Src"
             type="video/mp4" />
 </BlazoredVideo>
 

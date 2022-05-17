@@ -13,37 +13,118 @@
             @if (OneriDetayGetir != null)
             {
 
-                
-                        <div class="post-details">
-                            <h3 class="mb-2 text-black">@OneriDetayGetir.Adi</h3>
-                            <ul class="mb-4 post-meta d-flex flex-wrap">
-                                <li class="post-author mr-3">@OneriDetayGetir.KaydedenKullanici</li>
-                                <li class="post-date mr-3"><i class="fa fa-calender">
-                                      </i>@OneriDetayGetir.KayitTarihi</li>
-                                @*<li class="post-comment"><i class="fa fa-comments-o"></i> 28</li>*@
-                            </ul>
-                            <img src="images/uploaded/OneriDetayDosya?.Yolu" 
-                                 alt="" 
-                                 class="img-fluid mb-3">
-                            <p>
-                                @if (OneriDetayGetir.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(OneriDetayGetir.Aciklama.Length>500 ? 
-                                                                  OneriDetayGetir.Aciklama.Substring(0, 280) + "..." : 
-                                                                  OneriDetayGetir.Aciklama)" />
-                                }
 
-                            </p>
-                            <YorumComponent/>
-                            <YorumEkleDuzenle/>
+                <div class="post-details">
+                    <h3 class="mb-2 text-black">@OneriDetayGetir.Adi</h3>
+                    <ul class="mb-4 post-meta d-flex flex-wrap">
+                        <li class="post-author mr-3">@OneriDetayGetir.KaydedenKullanici</li>
+                        <li class="post-date mr-3">
+                            <i class="fa fa-calender">
+                            </i>@OneriDetayGetir.KayitTarihi
+                        </li>
+                        @*<li class="post-comment"><i class="fa fa-comments-o"></i> 28</li>*@
+                    </ul>
+                    <img src="images/uploaded/OneriDetayDosya?.Yolu"
+                         alt=""
+                         class="img-fluid mb-3">
+                    <p>
+                        @if (OneriDetayGetir.Aciklama != null)
+                        {
+                            <MarkDownComponent Content="@(OneriDetayGetir.Aciklama)" />}
+
+                    </p>
+                    <Rating Color="Color.Primary" @bind-SelectedValue="@OneriDetayGetir.BegeniDerecesi" MaxValue="5" />
+                    <br />
+                    <br />
+                    <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                        @foreach (var yorum in YorumListesi.Where(y => y.OnaylansinMi == true && y.OneriId == OneriDetayGetir.Id).ToList())
+                        {
+                            <li class="media">
+                                <img alt="image" class="mr-3 rounded-circle" width="50" src="images/default.png">
+                                <div class="media-body">
+                                    <div class="media-right">
+                                        <div class="text-primary">Onaylanmış</div>
+                                    </div>
+                                    <div class="media-title mb-1"></div>
+                                    <div class="text-time">@yorum.KaydedenKullanici</div>
+                                    <div class="media-description text-muted">
+                                        @((MarkupString)yorum.Aciklama)
+                                    </div>
+                                    <div class="media-links">
+                                        <div class="bullet"></div>
+                                        <a href='/yorum/duzenle/@yorum.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <div class="bullet"></div>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                                @onclick="@(() => { DialogGorunur = "block"; SilmeyiOnayla(yorum.Id); })">
+                                            Sil
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+}
+                    </ul>
+                    <EditForm Model="@yorum" OnValidSubmit="Kayit">
+                        <DataAnnotationsValidator />
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <CKEditorBlazor Id="MyEditor1"
+                                                @bind-Value=@yorum.Aciklama
+                                                Label="Açıklama"
+                                                UrlToPostImage="images/uploaded/">
+                                </CKEditorBlazor>
+
+                            </div>
+                            <ValidationMessage For="@(() => yorum.Aciklama)" />
                         </div>
-                    }
-            </CardBody>
-        </CardComponent>
+
+                        <div class="form-group">
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                Kaydet
+                            </button>
+                            <button class="btn btn-danger"
+                                    type="reset"
+                                    @onclick="Temizle">
+                                Tümünü Temizle
+                            </button>
+                        </div>
+
+                    </EditForm>
+                </div>
+
+            }
+        </CardBody>
+    </CardComponent>
 </div>
+
+<ModalComponent @ref="ModalDialog">
+    <ModalHeader>
+        <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+    </ModalHeader>
+
+    <ModalFooter>
+        <button class="btn btn-danger"
+                @onclick="@(() => { Sil(); ModalDialog.Close(); })">
+            Evet
+        </button>
+        <button class="btn btn-warning"
+                @onclick="@(() => { ModalDialog.Close(); })">
+            Hayır
+        </button>
+    </ModalFooter>
+</ModalComponent>
 
 
 <style>
+
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

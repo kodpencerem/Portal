@@ -8,7 +8,5 @@
         public Video.Video Video { get; set; }
         public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
-        public int? EgitimId { get; set; }
-        public Egitim.Egitim Egitim { get; set; }
     }
 }

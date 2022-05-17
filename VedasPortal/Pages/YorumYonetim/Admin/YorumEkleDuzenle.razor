@@ -49,10 +49,12 @@
     [Inject]
     public NavigationManager UrlNavigationManager { get; set; }
 
+    protected string Title = "Ekle";
+
     [Parameter]
     public int YorumId { get; set; }
 
-    protected string Title = "Ekle";
+    
     public Yorum yorum = new();
 
     protected void Kayit()

@@ -1,6 +1,6 @@
 ﻿@page "/egitimdetayi/{egitimId:int}"
 <div class="col-12 col-md-12 col-lg-4">
-    <CardComponent>
+    <CardComponent cardStyle="Style.info">
         <CardBody>
             @if (EgitimDetayGetir != null)
             {
@@ -26,7 +26,7 @@
             }
         </CardBody>
     </CardComponent>
-    <CardComponent>
+    <CardComponent cardStyle="Style.info">
         <CardHeader>
             <h4>Eğitmen Hakkında</h4>
         </CardHeader>
@@ -62,7 +62,7 @@
              }
         </CardBody>
     </CardComponent>
-    <CardComponent>
+    <CardComponent cardStyle="Style.info">
         <CardHeader>
             <h4>Yetenek ve Uzmanlık Alanları</h4>
         </CardHeader>
@@ -115,7 +115,7 @@
     </CardComponent>
 </div>
 <div class="col-12 col-md-12 col-lg-8">
-    <CardComponent>
+    <CardComponent cardStyle="Style.info">
         <CardBody>
             @if (EgitimDetayGetir != null)
             {

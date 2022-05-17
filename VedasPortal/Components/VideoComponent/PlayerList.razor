@@ -1,19 +1,17 @@
 ﻿@using VedasPortal.Repository.Interface
-
+@using VedasPortal.Entities.Models.Video;
 <div class="col-12">
     <CardComponent cardStyle="Style.info">
         <CardBody>
             <div class="row">
                 <div class="col-lg-8 col-sm-12 col-md-6 col-xs-12">
-                    <VideoBoxComponent Heigth="@Heigth" 
-                                       Width="@Width" 
-                                       SecilenVideo="secilenVideo"
-                                       />
+                    <VideoBoxComponent Heigth="@Heigth"
+                                       Width="@Width"
+                                       SecilenVideo="secilenVideo" />
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
-                    <VideoKoleksiyonu Videolar="VideoList.ToList()"  
-                                      VideoSec="SecilenVideo"
-                                      />
+                    <VideoKoleksiyonu Videolar="VideoList.ToList()"
+                                      VideoSec="SecilenVideo" />
                 </div>
             </div>
         </CardBody>
