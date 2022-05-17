@@ -1,0 +1,61 @@
+﻿
+<BlazoredVideo @ref ="video"
+               PlayEvent="OnPlay" 
+               TimeUpate="OnTimeUpdate"
+               VideoStateOptions="options"
+               class="w-100"
+               style="max-width:800px;"
+               controls="controls">
+    <source src="@Src" 
+            type="video/mp4" />
+</BlazoredVideo>
+
+<div class="article-details">
+    <div class="article-title">
+        <h4><a href="#">@VideoBaslik</a></h4>
+    </div>
+    <p class="text-black">
+        @((MarkupString) Aciklama)
+    </p>
+
+</div>
+
+@code {
+
+    BlazoredVideo video;
+
+    [Parameter]
+    public string Width { get; set; }
+
+    [Parameter]
+    public string Heigth { get; set; }
+
+    [Parameter]
+    public string Src { get; set; } = "files/sample.mp4";
+
+    [Parameter]
+    public string VideoBaslik { get; set; }
+
+    [Parameter]
+    public string Aciklama { get; set; }
+
+    [Parameter]
+    public Video SecilenVideo { get; set; }
+
+    //void OnTimeUpdate()
+    //{
+    //    Console.WriteLine("Güncellenme Zamanı: " + video.CurrentTime);
+    //}
+
+    void OnPlay(VideoState state)
+    {
+        var url = state?.CurrentSrc;
+        // do something with this
+    }
+    void OnTimeUpdate(VideoState state)
+    {
+        var url = state?.CurrentSrc;
+        var currentTime = state?.CurrentTime;
+        // do something with this
+    }
+}
