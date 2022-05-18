@@ -16,18 +16,10 @@
                     <div class="form-group row">
                         <label class="form-label col-md-2">İçerik Ekleyin</label>
                         <div class="col-md-10">
-                            <MultipleUpload @bind-ValueInput="@VideoDosya.Yolu" />
+                            <MultipleUpload @bind-ValueInput="@video.Yolu" />
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label class="control-label col-md-2">Video Başlığı</label>
-                        <div class="col-md-10">
-                            <InputText class="form-control" @bind-Value="video.Baslik" />
-                        </div>
-                        <ValidationMessage For="@(() => video.Baslik)" />
-                    </div>
-
+                   
                     <div class="form-group row">
                         <label class="control-label col-md-2">Alt Başlık</label>
                         <div class="col-md-10">
@@ -45,7 +37,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="Kategori" class="control-label col-md-2">Video Görecek Birimi Seçin</label>
+                        <label for="Kategori" class="control-label col-md-2">Videoyu Görecek Birimi Seçin</label>
                         <div class="col-md-10">
                             <InputSelect @bind-Value="@video.Birimler" class="form-control">
                                 <option></option>
@@ -111,7 +103,7 @@
             </CardBody>
             <CardFotter>
                 <div class="form-group text-left">
-                    <button class="btn btn-primary" type="submit" @onclick="Kayit">Kaydet</button>
+                    <button class="btn btn-primary" type="submit" >Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>

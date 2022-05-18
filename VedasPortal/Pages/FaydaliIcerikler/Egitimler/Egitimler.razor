@@ -72,12 +72,15 @@ else
 
                                         </div>
                                         <p>
-                                            @if (egitim.Aciklama != null)
-                                            {
-                                                <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ?
+                                            <a href="egitimdetayi/@egitim.Id">
+                                                @if (egitim.Aciklama != null)
+                                                {
+                                                    <MarkDownComponent Content="@(egitim.Aciklama.Length>500 ?
                                                                           egitim.Aciklama.Substring(0, 280) + "..." :
                                                                           egitim.Aciklama)" />
-                                            }
+                                                }
+                                            </a>
+                                               
                                         </p>
                                         <div class="article-user">
                                             <img alt="image" src="images/uploaded/@string.Concat(

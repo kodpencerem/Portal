@@ -84,7 +84,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<DuzelticiFaaliyet>, BaseRepository<DuzelticiFaaliyet>>();
             services.AddScoped<IBaseRepository<Egitim>, BaseRepository<Egitim>>();
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
-            services.AddScoped<IBaseRepository<Video>, BaseRepository<Video>>();
+            services.AddScoped<IBaseRepository<VideoClass>, BaseRepository<VideoClass>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<KursVeSertifika>, BaseRepository<KursVeSertifika>>();

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220518054146_VideoTableNameChange")]
+    partial class VideoTableNameChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -339,6 +341,9 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Uzanti")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VideoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Yolu")
                         .HasColumnType("nvarchar(max)");
 
@@ -365,6 +370,8 @@ namespace VedasPortal.Migrations
                     b.HasIndex("RehberId");
 
                     b.HasIndex("ToplantiNotuId");
+
+                    b.HasIndex("VideoId");
 
                     b.ToTable("Dosya");
                 });
@@ -1528,7 +1535,7 @@ namespace VedasPortal.Migrations
                     b.ToTable("KursVeSertifika");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoClass", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1536,8 +1543,7 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
@@ -1546,7 +1552,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Baslik")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Birimler")
@@ -1577,9 +1582,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -1587,14 +1590,8 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Uzanti")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long>("Uzunluk")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Yolu")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1604,7 +1601,7 @@ namespace VedasPortal.Migrations
 
                     b.HasIndex("HaberDuyuruId");
 
-                    b.ToTable("VideoClass");
+                    b.ToTable("Videolar");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
@@ -1615,8 +1612,7 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -1628,9 +1624,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("OnaylansinMi")
                         .HasColumnType("bit");
@@ -1644,14 +1638,14 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("VideoClassId")
+                    b.Property<int?>("VideoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OneriId");
 
-                    b.HasIndex("VideoClassId");
+                    b.HasIndex("VideoId");
 
                     b.ToTable("Yorum");
                 });
@@ -1781,6 +1775,10 @@ namespace VedasPortal.Migrations
                         .WithMany("Dosya")
                         .HasForeignKey("ToplantiNotuId");
 
+                    b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
+                        .WithMany("Dosya")
+                        .HasForeignKey("VideoId");
+
                     b.Navigation("DuzelticiFaaliyet");
 
                     b.Navigation("Egitim");
@@ -1802,6 +1800,8 @@ namespace VedasPortal.Migrations
                     b.Navigation("Rehber");
 
                     b.Navigation("ToplantiNotu");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Katilimci", b =>
@@ -1861,18 +1861,18 @@ namespace VedasPortal.Migrations
                     b.Navigation("Toplanti");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoClass", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Egitim.Egitim", "Egitim")
-                        .WithMany("VideoClass")
+                        .WithMany("Video")
                         .HasForeignKey("EgitimId");
 
                     b.HasOne("VedasPortal.Entities.Models.Etkinlik.Etkinlik", "Etkinlik")
-                        .WithMany("VideoClass")
+                        .WithMany()
                         .HasForeignKey("EtkinlikId");
 
                     b.HasOne("VedasPortal.Entities.Models.HaberDuyuru.HaberDuyuru", "HaberDuyuru")
-                        .WithMany("VideoClass")
+                        .WithMany("Video")
                         .HasForeignKey("HaberDuyuruId");
 
                     b.Navigation("Egitim");
@@ -1888,13 +1888,13 @@ namespace VedasPortal.Migrations
                         .WithMany("Yorum")
                         .HasForeignKey("OneriId");
 
-                    b.HasOne("VedasPortal.Entities.Models.Video.VideoClass", "VideoClass")
-                        .WithMany("Yorum")
-                        .HasForeignKey("VideoClassId");
+                    b.HasOne("VedasPortal.Entities.Models.Video.Video", "Video")
+                        .WithMany("Yorumlar")
+                        .HasForeignKey("VideoId");
 
                     b.Navigation("Oneri");
 
-                    b.Navigation("VideoClass");
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
@@ -1911,7 +1911,7 @@ namespace VedasPortal.Migrations
                 {
                     b.Navigation("Dosya");
 
-                    b.Navigation("VideoClass");
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Etkinlik", b =>
@@ -1919,8 +1919,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Dosya");
 
                     b.Navigation("Katilimci");
-
-                    b.Navigation("VideoClass");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Etkinlik.Katilimci", b =>
@@ -1932,7 +1930,7 @@ namespace VedasPortal.Migrations
                 {
                     b.Navigation("Dosya");
 
-                    b.Navigation("VideoClass");
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.IKUygulama.IkUygulama", b =>
@@ -1988,9 +1986,11 @@ namespace VedasPortal.Migrations
                     b.Navigation("Roller");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoClass", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.Video.Video", b =>
                 {
-                    b.Navigation("Yorum");
+                    b.Navigation("Dosya");
+
+                    b.Navigation("Yorumlar");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.PersonelDurumlari;
-using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.Models.Dosya
 {
@@ -35,17 +34,12 @@ namespace VedasPortal.Entities.Models.Dosya
         public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
         public int? RehberId { get; set; }
-        public Rehber Rehber { get; set; }
-
-        public int? VideoId { get; set; }
-        public Video.Video Video { get; set; }
-
+        public Rehber Rehber { get; set; }       
         public int? PersonelDurumId { get; set; }
         public PersonelDurum PersonelDurum { get; set; }
 
         public int? ToplantiNotuId { get; set; }
         public ToplantiTakvimi.ToplantiNotu.ToplantiNotu ToplantiNotu { get; set; }
-
     }
 
     public enum DosyaKategori

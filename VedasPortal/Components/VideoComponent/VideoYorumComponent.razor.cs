@@ -14,7 +14,7 @@ namespace VedasPortal.Components.VideoComponent
         private IBaseRepository<Yorum> YorumServisi { get; set; }
         public Yorum Yorum { get; set; } = new();
 
-        public Video VideoGetir { get; set; } = new();
+        private VideoClass VideoYorumGetir { get; set; } = new();
 
         protected string Title = "Ekle";
 
@@ -35,13 +35,12 @@ namespace VedasPortal.Components.VideoComponent
 
         public void InsertComment()
         {
-            var yorumEkle = new Yorum()
+            var yorum = new Yorum()
             {
                 Aciklama = Yorum.Aciklama,
-                VideoId = VideoGetir.Id
+                VideoClassId = VideoYorumGetir.Id
             };
-
-            YorumServisi.Add(yorumEkle);
+            YorumServisi.Add(yorum);
             Yorum.Aciklama = string.Empty;
         }
 

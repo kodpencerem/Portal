@@ -10,7 +10,7 @@
     {
         @if (Yorumlar != null)
         {
-            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.VideoId != VideoGetir.Id).ToList())
+            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.VideoClassId == VideoYorumGetir.Id).ToList())
             {
                 <div class="box-card">
                     <div class="row">
@@ -40,13 +40,15 @@
             Yorum @Title
         </h5>
         <br />
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <CKEditorBlazor Id="MyEditor1"
                                     @bind-Value=@Yorum.Aciklama
                                     Label="Yorumunuz:"
-                                    UrlToPostImage="images/uploaded/">
+                                    UrlToPostImage="images/uploaded/"
+                                    
+                                    >
                     </CKEditorBlazor>
 
                 </div>
@@ -67,3 +69,12 @@
 
 
 </div>
+
+<style>
+    .ck.ck-editor {
+        position: relative;
+        height: 250px;
+        width: 520px;
+        min-height: 250px;
+    }
+</style>

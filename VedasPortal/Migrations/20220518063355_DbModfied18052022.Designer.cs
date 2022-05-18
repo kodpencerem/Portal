@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220518063355_DbModfied18052022")]
+    partial class DbModfied18052022
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1536,8 +1538,7 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
@@ -1546,7 +1547,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Baslik")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Birimler")
@@ -1577,9 +1577,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -1615,8 +1613,7 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -1628,9 +1625,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("OnaylansinMi")
                         .HasColumnType("bit");
@@ -1889,7 +1884,7 @@ namespace VedasPortal.Migrations
                         .HasForeignKey("OneriId");
 
                     b.HasOne("VedasPortal.Entities.Models.Video.VideoClass", "VideoClass")
-                        .WithMany("Yorum")
+                        .WithMany("Yorumlar")
                         .HasForeignKey("VideoClassId");
 
                     b.Navigation("Oneri");
@@ -1990,7 +1985,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoClass", b =>
                 {
-                    b.Navigation("Yorum");
+                    b.Navigation("Yorumlar");
                 });
 #pragma warning restore 612, 618
         }

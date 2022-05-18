@@ -4,7 +4,7 @@ using VedasPortal.Entities.Models.Anket;
 
 namespace VedasPortal.Data.Configurations.AnketConfiguration
 {
-    public class AnketKonfigurasyon : IEntityTypeConfiguration<Anket>
+    public class VideoKonfigurasyon : IEntityTypeConfiguration<Anket>
     {
         public void Configure(EntityTypeBuilder<Anket> builder)
         {

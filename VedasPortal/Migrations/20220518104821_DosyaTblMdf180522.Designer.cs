@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220518104821_DosyaTblMdf180522")]
+    partial class DosyaTblMdf180522
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1618,6 +1620,9 @@ namespace VedasPortal.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int?>("DosyaId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -1648,6 +1653,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DosyaId");
 
                     b.HasIndex("OneriId");
 
@@ -1884,6 +1891,10 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
                 {
+                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Dosya")
+                        .WithMany("Yorum")
+                        .HasForeignKey("DosyaId");
+
                     b.HasOne("VedasPortal.Entities.Models.Oneri.Oneri", "Oneri")
                         .WithMany("Yorum")
                         .HasForeignKey("OneriId");
@@ -1891,6 +1902,8 @@ namespace VedasPortal.Migrations
                     b.HasOne("VedasPortal.Entities.Models.Video.VideoClass", "VideoClass")
                         .WithMany("Yorum")
                         .HasForeignKey("VideoClassId");
+
+                    b.Navigation("Dosya");
 
                     b.Navigation("Oneri");
 
@@ -1900,6 +1913,11 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
                 {
                     b.Navigation("AnketSecenek");
+                });
+
+            modelBuilder.Entity("VedasPortal.Entities.Models.Dosya.Dosya", b =>
+                {
+                    b.Navigation("Yorum");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.DuzelticiFaaliyet.DuzelticiFaaliyet", b =>

@@ -4,12 +4,12 @@
     <CardComponent cardStyle="Style.info">
         <CardBody>
             <div class="row">
-                <div class="col-lg-8 col-sm-12 col-md-6 col-xs-12">
+                <div class="col-lg-8 col-sm-12 col-md-6 col-xs-12 float-left">
                     <VideoBoxComponent Heigth="@Heigth"
                                        Width="@Width"
                                        SecilenVideo="secilenVideo" />
                 </div>
-                <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12 float-right" style="overflow:scroll">
                     <VideoKoleksiyonu Videolar="VideoList.ToList()"
                                       VideoSec="SecilenVideo" />
                 </div>
@@ -21,10 +21,10 @@
 @code {
 
     [Inject]
-    protected IBaseRepository<Video> videoServisi { get; set; }
+    protected IBaseRepository<VideoClass> videoServisi { get; set; }
 
-    protected IEnumerable<Video> VideoList;
-    Video secilenVideo = new Video();
+    protected IEnumerable<VideoClass> VideoList;
+    VideoClass secilenVideo = new VideoClass();
 
     [Parameter]
     public int Width { get; set; } = 650;
@@ -38,7 +38,7 @@
         secilenVideo = VideoList.FirstOrDefault();
     }
 
-    void SecilenVideo(Video videoDetay)
+    void SecilenVideo(VideoClass videoDetay)
     {
         secilenVideo = videoDetay;
     }

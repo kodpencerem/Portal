@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220518082939_VideoKonfigurayon")]
+    partial class VideoKonfigurayon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1615,8 +1617,7 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -1628,9 +1629,7 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("OnaylansinMi")
                         .HasColumnType("bit");

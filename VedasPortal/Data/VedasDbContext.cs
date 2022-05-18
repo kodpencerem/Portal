@@ -35,7 +35,7 @@ namespace VedasPortal.Data
         public DbSet<Dosya> Dosya { get; set; }
         public DbSet<Etkinlik> Etkinlik { get; set; }
         public DbSet<Rehber> Rehber { get; set; }
-        public DbSet<Video> Video { get; set; }
+        public DbSet<VideoClass> VideoClass { get; set; }
         public DbSet<Katilimci> Katilimci { get; set; }
         public DbSet<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; }
         public DbSet<Mevzuat> Mevzuat { get; set; }
@@ -58,7 +58,7 @@ namespace VedasPortal.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);           
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
