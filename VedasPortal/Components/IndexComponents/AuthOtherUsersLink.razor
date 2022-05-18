@@ -1,0 +1,115 @@
+﻿<AuthorizeView Roles="HaberEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="haber/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Haber Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="EgitimEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="egitim/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Eğitim Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="MevzuatEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="mevzuat/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Mevzuat Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="VideoEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="video/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Video Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="EtkinlikEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="etkinlik/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Etkinlik Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="KatilimciEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="katilimci/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Katılımcı Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="DuyuruEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="duyuru/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Duyuru Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="RehberBilgiEkle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="rehber/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Rehber Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="ToplantiEkleDuzenle,OdaEkleDuzenle,ToplantiNotuEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="speaker"></i><span>
+                    Haftalık
+                    Toplantı Durumları
+                </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="oda/ekle">Toplantı Odası Ekle</a></li>
+                <li><a class="nav-link" href="toplanti/ekle">Toplantı Ekle</a></li>
+                <li><a class="nav-link" href="toplantinotu/ekle">Toplantı Notu Ekle</a></li>
+            </ul>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="AyrilisEkleDuzenle,VefatDurumuEkleDuzenle,YeniBaslayanEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="speaker"></i><span>
+                    Haftalık
+                    Personel Durumları Ekle
+                </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="personel/ekle">Yeni İşe Başlayan Ekle</a></li>
+                <li><a class="nav-link" href="vefat/ekle">Vefat Durumu Ekle</a></li>
+                <li><a class="nav-link" href="ayrilis/ekle">Ayrılış Durumu Ekle</a></li>
+            </ul>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="IkUygulamaEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="ikuygulama/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>IK Uygulama Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="DosyaEkleDuzenle">
+    <Authorized>
+        <li class="dropdown">
+            <a href="dosya/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Dosya Ekle Düzenle</span></a>
+        </li>
+    </Authorized>
+</AuthorizeView>
