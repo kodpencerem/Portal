@@ -1,0 +1,128 @@
+﻿@page "/manageroles"
+@attribute [Authorize(Roles = "Admin")]
+@using Microsoft.AspNetCore.Identity;
+@using VedasPortal.Services.AuthServices
+
+@inject IManageRolesService _rolesService
+
+<h3>Manage Roles</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-success float-right" @onclick="AddNewRole">Add Role</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var role in AllRoles)
+                            {
+                                <tr>
+                                    <td>@role.Name</td>
+                                    <td>
+                                        <!-- Edit the current role -->
+                                        <button class="btn btn-primary"
+                                            @onclick="(() => EditRole(role))">
+                                            Edit
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @if (ShowPopup)
+                    {
+                        <!-- This is the popup to create or edit a role -->
+                        <EditRoleModal SaveRole="SaveRole" DeleteRole="DeleteRole" ClosePopup="ClosePopup" objRole="@objRole" strError="@strError" />
+                    }
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <p>You're not loggged in.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    IdentityRole objRole = new IdentityRole();
+    List<IdentityRole> AllRoles = new List<IdentityRole>();
+    string strError = "";
+    bool ShowPopup = false;
+
+    protected override void OnInitialized()
+    {
+        GetRoles();
+    }
+
+    void AddNewRole()
+    {
+        objRole = new IdentityRole();
+        ShowPopup = true;
+    }
+
+    async Task SaveRole()
+    {
+        try
+        {
+            var role = await _rolesService.GetRole(objRole.Id);
+            if (role == null)
+            {
+                await _rolesService.AddRole(objRole.Name);
+            }
+            else
+            {
+                role.Id = objRole.Id;
+                role.Name = objRole.Name;
+                role.NormalizedName = objRole.Name;
+                role.ConcurrencyStamp = objRole.ConcurrencyStamp;
+                await _rolesService.UpdateRole(role);
+            }
+            ShowPopup = false;
+            GetRoles();
+        }
+        catch (Exception ex)
+        {
+            strError = ex.GetBaseException().Message;
+        }
+    }
+
+    void EditRole(IdentityRole _role)
+    {
+        objRole = _role;
+        ShowPopup = true;
+    }
+
+    async Task DeleteRole()
+    {
+        ShowPopup = false;
+        var role = await _rolesService.GetRole(objRole.Id);
+        if (role != null)
+        {
+            await _rolesService.DeleteRole(role.Id);
+        }
+        GetRoles();
+    }
+
+    void ClosePopup()
+    {
+        ShowPopup = false;
+    }
+
+    public void GetRoles()
+    {
+        strError = "";
+        AllRoles = _rolesService.GetAllRoles();
+    }
+}
