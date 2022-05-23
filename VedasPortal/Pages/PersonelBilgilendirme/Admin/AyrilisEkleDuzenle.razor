@@ -2,7 +2,7 @@
 @page "/ayrilis/duzenle/{AyrilisId:int}"
 
 @inherits AyrilisModeli
-@attribute [Authorize(Roles = "Administrators,AyrilisEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin,AyrilisEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@personelDurum" OnValidSubmit="Kayit">

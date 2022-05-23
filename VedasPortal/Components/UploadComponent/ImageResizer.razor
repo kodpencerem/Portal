@@ -1,13 +1,13 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div class="mb-3">
-    <Microsoft.AspNetCore.Components.Forms.InputFile @onclick="OpenModal" 
+    <InputFile @onclick="OpenModal" 
                @bind-Value="@ValueInput" 
                class="form-control form-control-lg" 
                id="input1" 
                OnChange="OnInputFileChange" 
                multiple>
-    </Microsoft.AspNetCore.Components.Forms.InputFile>
+    </InputFile>
 </div>
 
 <ShowModal Title="Resim Görünümü">

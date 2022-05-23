@@ -1,7 +1,15 @@
-﻿<AuthorizeView Roles="HaberEkleDuzenle">
+﻿<AuthorizeView Roles="HaberEkleDuzenle, DuyuruEkleDuzenle">
     <Authorized>
         <li class="dropdown">
-            <a href="haber/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Haber Ekle Düzenle</span></a>
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="bell"></i><span>
+                    Haber Duyuru
+                </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="haber/ekle">Haber Ekle</a></li>
+                <li><a class="nav-link" href="duyuru/ekle">Duyuru Ekle</a></li>
+            </ul>
         </li>
     </Authorized>
 </AuthorizeView>
@@ -14,42 +22,18 @@
     </Authorized>
 </AuthorizeView>
 
-<AuthorizeView Roles="MevzuatEkleDuzenle">
+<AuthorizeView Roles="KatilimciEkleDuzenle, EtkinlikEkleDuzenle">
     <Authorized>
         <li class="dropdown">
-            <a href="mevzuat/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Mevzuat Ekle Düzenle</span></a>
-        </li>
-    </Authorized>
-</AuthorizeView>
-
-<AuthorizeView Roles="VideoEkleDuzenle">
-    <Authorized>
-        <li class="dropdown">
-            <a href="video/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Video Ekle Düzenle</span></a>
-        </li>
-    </Authorized>
-</AuthorizeView>
-
-<AuthorizeView Roles="EtkinlikEkleDuzenle">
-    <Authorized>
-        <li class="dropdown">
-            <a href="etkinlik/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Etkinlik Ekle Düzenle</span></a>
-        </li>
-    </Authorized>
-</AuthorizeView>
-
-<AuthorizeView Roles="KatilimciEkleDuzenle">
-    <Authorized>
-        <li class="dropdown">
-            <a href="katilimci/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Katılımcı Ekle Düzenle</span></a>
-        </li>
-    </Authorized>
-</AuthorizeView>
-
-<AuthorizeView Roles="DuyuruEkleDuzenle">
-    <Authorized>
-        <li class="dropdown">
-            <a href="duyuru/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Duyuru Ekle Düzenle</span></a>
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="activity"></i><span>
+                    Etkinlik Durumları
+                </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="etkinlik/ekle">Etkinlik Ekle</a></li>
+                <li><a class="nav-link" href="katilimci/ekle">Katılımcı Ekle</a></li>
+            </ul>
         </li>
     </Authorized>
 </AuthorizeView>
@@ -62,7 +46,7 @@
     </Authorized>
 </AuthorizeView>
 
-<AuthorizeView Roles="ToplantiEkleDuzenle,OdaEkleDuzenle,ToplantiNotuEkleDuzenle">
+<AuthorizeView Roles="ToplantiEkleDuzenle,OdaEkleDuzenle,ToplantiNotuEkleDuzenle,MerkezEkleDuzenle">
     <Authorized>
         <li class="dropdown">
             <a href="#" class="menu-toggle nav-link has-dropdown">
@@ -74,6 +58,7 @@
             <ul class="dropdown-menu">
                 <li><a class="nav-link" href="oda/ekle">Toplantı Odası Ekle</a></li>
                 <li><a class="nav-link" href="toplanti/ekle">Toplantı Ekle</a></li>
+                <li><a class="nav-link" href="toplantimerkezi/ekle">Toplantı Merkezi Ekle</a></li>
                 <li><a class="nav-link" href="toplantinotu/ekle">Toplantı Notu Ekle</a></li>
             </ul>
         </li>
@@ -106,10 +91,19 @@
     </Authorized>
 </AuthorizeView>
 
-<AuthorizeView Roles="DosyaEkleDuzenle">
+<AuthorizeView Roles="DosyaEkleDuzenle,MevzuatEkleDuzenle,VideoEkleDuzenle">
     <Authorized>
         <li class="dropdown">
-            <a href="dosya/ekle" class="nav-link"><i data-feather="arrow-up-circle"></i><span>Dosya Ekle Düzenle</span></a>
+            <a href="#" class="menu-toggle nav-link has-dropdown">
+                <i data-feather="folder"></i><span>
+                    Dosya Ekleme
+                </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="dosya/ekle">Döküman Ekle</a></li>
+                <li><a class="nav-link" href="mevzuat/ekle">Güncel Mevzuat Ekle</a></li>
+                <li><a class="nav-link" href="video/ekle">Video Ekle</a></li>
+            </ul>
         </li>
     </Authorized>
 </AuthorizeView>

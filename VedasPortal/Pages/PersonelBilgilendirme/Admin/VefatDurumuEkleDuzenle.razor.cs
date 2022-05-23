@@ -62,11 +62,11 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             Birimler = list;
         }
 
-        [Authorize(Roles = "Administrators")]
+        [Authorize(Roles = "Admin")]
         protected void Kayit()
         {
             Message = "";
-            if (User.Identity.IsAuthenticated && User.IsInRole("Administrators"))
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
                 VefatDurumServisi.Add(vefatDurumu);
             }

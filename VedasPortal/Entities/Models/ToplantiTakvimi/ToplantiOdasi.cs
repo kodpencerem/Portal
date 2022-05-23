@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using VedasPortal.Entities.Models.Base;
+﻿using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.ToplantiTakvimi
 {

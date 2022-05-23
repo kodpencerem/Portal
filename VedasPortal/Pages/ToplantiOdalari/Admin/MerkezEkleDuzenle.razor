@@ -1,126 +1,45 @@
-﻿@page "/oda/ekle"
-@page "/oda/duzenle/{odaId:int}"
-@attribute [Authorize(Roles = "Admin, OdaEkleDuzenle")]
-
-
-@inherits ToplantiOdasiModeli
+﻿@page "/toplantimerkezi/ekle"
+@page "/toplantimerkezi/duzenle/{TMerkezId:int}"
+@inherits ToplantiMerkeziModeli
+@attribute [Authorize(Roles = "Admin, MerkezEkleDuzenle")]
 
 <div class="col-12">
-    <EditForm Model="@Oda" OnValidSubmit="Kayit">
+    <EditForm Model="@toplantiMerkezi" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
-                Toplantı Odası @Title
+                Toplantı Merkezi @Title
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
-
-                        <div class="form-group row">
-                            <label for="Kategori"
-                                   class="control-label col-md-2">
-                                Odanın Bağlı Olacağı Merkez:
-                            </label>
-                            <div class="col-md-10">
-                                <InputSelect id="Merkez" class="form-control"
-                                             ValueExpression="@(() => takvimVm.MerkezId)"
-                                             Value="@takvimVm.MerkezId"
-                                             ValueChanged="@((string value) => OnMerkezChange(value))">
-
-                                    @foreach (var merkez in takvimVm.TMerkezler)
-                                    {
-                                        <option value="@merkez.Value">@merkez.Text</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(() => takvimVm.MerkezId)" />
-                            </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2">Toplantı Merkezi Adı</label>
+                        <div class="col-md-10">
+                            <InputText class="form-control" @bind-Value="toplantiMerkezi.Adi" />
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Adı</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="Oda.Adi" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Adi)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Kayıt Tarihi</label>
-                            <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="Oda.KayitTarihi" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.KayitTarihi)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Bulunduğu Lokasyon</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="Oda.Adres" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Adres)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Kapasitesi(Kişi)</label>
-                            <div class="col-md-10">
-                                <InputNumber Min="0"
-                                             ParsingErrorMessage="Belirlenen kapasite durumunu aştınız!"
-                                             class="form-control"
-                                             @bind-Value="Oda.Kapasite" />
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Kapasite)" />
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Şimdi Aktif Edilsin Mi?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="Oda.AktifPasif" />
-                                </div>
-                                <ValidationMessage For="@(() => Oda.AktifPasif)" />
-                            </div>
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Şimdi Rezerv Edilsin Mi?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="Oda.RezervDurumu" />
-                                </div>
-                                <ValidationMessage For="@(() => Oda.RezervDurumu)" />
-                            </div>
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Video Konferans Destekliyor Mu?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="Oda.VideoKonferansMi" />
-                                </div>
-                                <ValidationMessage For="@(() => Oda.VideoKonferansMi)" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 float-right">
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value="@Oda.Aciklama"
-                                                Label="Açıklama"
-                                                UrlToPostImage="images/uploaded/">
-                                </CKEditorBlazor>
-                            </div>
-                            <ValidationMessage For="@(() => Oda.Aciklama)" />
-                        </div>
+                        <ValidationMessage For="@(() => toplantiMerkezi.Adi)" />
                     </div>
                 </div>
             </CardBody>
-
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
-                    <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            @onclick="Kayit">
+                        Kaydet
+                    </button>
+                    <button class="btn btn-danger"
+                            type="reset"
+                            @onclick="Temizle">
+                        Tümünü Temizle
+                    </button>
                 </div>
             </CardFotter>
         </CardComponent>
     </EditForm>
 </div>
 
-@if (Odalar == null)
+@if (ToplantiMerkezleri == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -129,15 +48,13 @@
 else
 
 {
-
     <div class="col-12">
 
         <CardComponent cardStyle="Style.primary">
-
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Toplantı Odaları
+                        Toplantı Merkezleri
                     </div>
                 </div>
             </CardHeader>
@@ -146,26 +63,21 @@ else
                     <table class="table table-striped" id="table-2">
                         <thead>
                             <tr>
+
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
-                                        <input type="checkbox"
-                                               data-checkboxes="mygroup"
-                                               data-checkbox-role="dad"
-                                               class="custom-control-input"
-                                               id="checkbox-all">
-                                        <label for="checkbox-all"
-                                               class="custom-control-label">&nbsp;</label>
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
-                                <th>Kapasite</th>
-                                <th>Oda Adı</th>
-                                <th> Durumu</th>
+                                <th>Id</th>
+                                <th>Toplantı Merkezi Adı</th>
                                 <th>İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            @foreach (var Oda in Odalar)
+                            @foreach (var merkez in ToplantiMerkezleri)
 
                             {
                                 <tr>
@@ -176,40 +88,25 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
-                                    <td>@Oda.Kapasite</td>
-                                    <td>@Oda.Adi</td>
-                                    <td>
-                                        @if (Oda.AktifPasif == true && Oda.RezervDurumu == false)
-                                        {
-
-                                            <div class="badge badge-success badge-shadow">Aktif, Rezerv Edilmemiştir</div>
-                                        }
-                                        else if (Oda.AktifPasif == true && Oda.RezervDurumu == true)
-                                        {
-                                            <div class="badge badge-danger badge-shadow">Aktif, Rezerv Edilmiştir</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="badge badge-warning badge-shadow">Pasif, Kullanımda Değil</div>}
-                                    </td>
+                                    <td>@merkez.Id</td>
+                                    <td>@merkez.Adi</td>
 
                                     <td>
-                                        <a href='/Oda/duzenle/@Oda.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <a href='/toplantimerkezi/duzenle/@merkez.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(Oda.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(merkez.Id);})">
                                             Sil
                                         </button>
                                     </td>
                                 </tr>
-
                             }
                         </tbody>
                     </table>
                 </div>
+
             </CardBody>
         </CardComponent>
     </div>
-
     <ModalComponent @ref="ModalDialog">
         <ModalHeader>
             <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
@@ -220,7 +117,6 @@ else
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>
-
 }
 
 <style>

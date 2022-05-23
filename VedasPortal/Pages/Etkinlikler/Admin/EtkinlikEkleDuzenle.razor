@@ -1,7 +1,7 @@
 ﻿@page "/etkinlik/ekle"
 @page "/etkinlik/duzenle/{etkinlikId:int}"
 @inherits EtkinlikModeli
-@attribute [Authorize(Roles = "Administrators, EtkinlikEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, EtkinlikEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@etkinlik" OnValidSubmit="EtkinlikKayit">

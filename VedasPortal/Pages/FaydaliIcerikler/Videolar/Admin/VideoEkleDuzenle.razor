@@ -1,7 +1,7 @@
 ﻿@page "/video/ekle"
 @page "/video/duzenle/{VideoId:int}"
 @inherits VideoEklemeModeli
-@attribute [Authorize(Roles = "Administrators, VideoEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, VideoEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@video" OnValidSubmit="Kayit">

@@ -2,7 +2,7 @@
 @page "/dosya/duzenle/{dosyaId:int}"
 @using Microsoft.AspNetCore.Hosting
 @inherits DosyaModel
-@attribute [Authorize(Roles = "Administrators, DosyaEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, DosyaEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@dokuman" OnValidSubmit="Kayit">

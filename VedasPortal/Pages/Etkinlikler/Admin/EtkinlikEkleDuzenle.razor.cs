@@ -62,7 +62,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         protected void EtkinlikKayit()
         {
             EtkinlikServisi.Add(etkinlik);
-            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var fileName = SaveFileToUploaded.FileName?.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
             var dosya = new Dosya()
             {
@@ -75,6 +75,8 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
             };
             EtkinlikDosyaServisi.Add(dosya);
+            TumEtkinlikleriGetir();
+            Temizle();
 
         }
         protected override void OnParametersSet()

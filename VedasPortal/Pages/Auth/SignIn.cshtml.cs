@@ -8,12 +8,12 @@ namespace VedasPortal.Pages.Auth
 {
     public class SignInModel : PageModel
     {
-        private readonly SignInManager<Kullanici> signInManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
         [BindProperty]
         public SignIn SignInData { get; set; }
 
-        public SignInModel(SignInManager<Kullanici> signInManager)
+        public SignInModel(SignInManager<ApplicationUser> signInManager)
         {
             this.signInManager = signInManager;
         }

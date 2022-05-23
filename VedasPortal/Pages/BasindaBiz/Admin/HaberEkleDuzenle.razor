@@ -1,10 +1,10 @@
 ﻿@page "/haber/ekle"
 @page "/haber/duzenle/{haberId:int}"
 @inherits HaberEkleDuzenleModel
-@attribute [Authorize(Roles = "Administrators, HaberEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin , HaberEkleDuzenle")]
 
 <div class="col-12">
-    <EditForm Model="@haber">
+    <EditForm Model="@haber" OnValidSubmit="HaberKayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -105,7 +105,7 @@
                 <div class="form-group">
                     <button type="submit"
                             class="btn btn-primary"
-                            @onclick="HaberKayit">
+                            >
                         Kaydet
                     </button>
                     <button class="btn btn-danger"

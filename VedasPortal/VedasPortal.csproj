@@ -54,6 +54,7 @@
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.7" />
     <PackageReference Include="Blazorise.Sidebar" Version="0.9.5.7" />
     <PackageReference Include="Blazorise.Snackbar" Version="0.9.5.7" />
+    <PackageReference Include="BlazorTable" Version="1.17.0" />
     <PackageReference Include="Chronos.Blazor.Cropper" Version="1.2.2" />
     <PackageReference Include="HtmlSanitizer" Version="7.1.488" />
     <PackageReference Include="IdentityServer4.Storage" Version="4.1.2" />
@@ -87,6 +88,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Identity\Pages\Account\LogOut.cshtml" />
+    <None Include="Areas\Identity\Pages\Shared\_LoginPartial.cshtml" />
     <None Include="Components\Anket\AnketEkleComponent.razor" />
     <None Include="Components\Anket\AnketDuzenleComponent.razor" />
     <None Include="Components\Anket\SecilmisAnket.razor" />
@@ -96,6 +99,11 @@
     <None Include="Components\Anket\EnPopulerAnket.razor" />
     <None Include="Components\Anket\AnketKatilimSayisi.razor" />
     <None Include="Components\Anket\AnketSecenekItem.razor" />
+    <None Include="Components\Auth\EditRoleModal.razor" />
+    <None Include="Components\Auth\EditUserModal.razor" />
+    <None Include="Components\Auth\EditUserRolesModal.razor" />
+    <None Include="Components\Auth\PasswordModal.razor" />
+    <None Include="Components\Auth\UsersTable.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiEkle.razor" />
     <None Include="Components\ToplantiTakvimi\CalendarComponent.razor" />
     <None Include="Components\ToplantiTakvimi\DayComponent.razor" />
@@ -105,6 +113,9 @@
     <None Include="Components\ToplantiTakvimi\ToplantiSec.razor" />
     <None Include="Components\ToplantiTakvimi\TimePicker.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiListComponent.razor" />
+    <None Include="Pages\Shared\_Layout.cshtml" />
+    <None Include="Pages\Shared\_LoginPartial.cshtml" />
+    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />

@@ -28,9 +28,6 @@ namespace VedasPortal.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KullaniciId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -40,8 +37,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KullaniciId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -1395,7 +1390,7 @@ namespace VedasPortal.Migrations
                     b.ToTable("ToplantiOdasi");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -1416,6 +1411,12 @@ namespace VedasPortal.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -1666,13 +1667,6 @@ namespace VedasPortal.Migrations
                     b.HasDiscriminator().HasValue("MailGonder");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
-                        .WithMany("Roller")
-                        .HasForeignKey("KullaniciId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1684,7 +1678,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1693,7 +1687,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1708,7 +1702,7 @@ namespace VedasPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1717,7 +1711,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.Kullanici", null)
+                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1852,7 +1846,7 @@ namespace VedasPortal.Migrations
                     b.Navigation("ToplantiMerkezi");
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
+            modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
                         .WithMany("Kullanici")
@@ -1981,11 +1975,6 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu.ToplantiNotu", b =>
                 {
                     b.Navigation("Dosya");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.Kullanici", b =>
-                {
-                    b.Navigation("Roller");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Video.VideoClass", b =>

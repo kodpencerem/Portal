@@ -1,105 +1,115 @@
-﻿
-@page "/manageusers"
+﻿@page "/manageusers"
 @using VedasPortal.Entities.Models.User
 @using VedasPortal.Services.AuthServices
 @attribute [Authorize(Roles = "Admin")]
 
 @inject IManageUsersService _usersService
 
-<h3>Manage Users</h3>
 
 <AuthorizeView>
     <Authorized>
-        <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col">
-                    <button class="btn btn-success float-right" @onclick="AddNewUser">Add User</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <BlazorTable.Table TableItem="ApplicationUser" Items="_allUsers" PageSize="20" ColumnReorder="true" class="table">
-                        <BlazorTable.Column TableItem="ApplicationUser" Title="First Name" Field="@(x => x.FirstName)" Sortable="true" DefaultSortColumn="true" />
-                        <BlazorTable.Column TableItem="ApplicationUser" Title="Last Name" Field="@(x => x.LastName)" Sortable="true" />
-                        <BlazorTable.Column TableItem="ApplicationUser" Title="Email" Field="@(x => x.Email)" Sortable="true">
-                            <Template Context="_context">
-                                <a href="mailto:@_context.Email">@_context.Email</a>
-                            </Template>
-                        </BlazorTable.Column>
-                        <BlazorTable.Column TableItem="ApplicationUser" Title="" Width="20%">
-                            <Template Context="_context">
-                                <!-- Edit the current user -->
-                                <button class="btn btn-sm btn-primary"
-                                        @onclick="(() => EditUser(_context))">
-                                    Edit
-                                </button>
-                                <!-- Remove the role from user -->
-                                <button class="btn btn-sm btn-info"
-                                        @onclick="(() => AddRemoveUserRoles(_context))">
-                                    Roles
-                                </button>
-                                <!-- Generate new password -->
-                                <button class="btn btn-sm btn-secondary"
-                                        @onclick="(() => GeneratePassword(_context))">
-                                    <i class="oi oi-key"></i>
-                                </button>
-                            </Template>
-                        </BlazorTable.Column>
-                        <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
-                    </BlazorTable.Table>
+        <div class="col-12">
+            <CardComponent cardStyle="Style.primary">
+                <CardHeader>
+                    <div class="float-left">
+                        <div class="col-md-12">
+                            Kullanıcılar &nbsp;||&nbsp;<button class="btn btn-primary float-right" @onclick="AddNewUser">Yeni Kullanıcı Ekle</button>
+                        </div>
+                    </div>
 
-                    @if (ShowPopup)
-                    {
-                        <EditUserModal ClosePopup="ClosePopup" CurrentUserRoles="@CurrentUserRoles" DeleteUser="DeleteUser" objUser="@objUser" SaveUser="SaveUser" strError="@strError" />
-                    }
+                </CardHeader>
+                <CardBody>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <BlazorTable.Table TableItem="ApplicationUser" Items="_allUsers" PageSize="20" ColumnReorder="true" class="table">
+                                    <BlazorTable.Column TableItem="ApplicationUser" Title="Adınız" Field="@(x => x.FirstName)" Sortable="true" DefaultSortColumn="true" />
+                                    <BlazorTable.Column TableItem="ApplicationUser" Title="Soyadınız" Field="@(x => x.LastName)" Sortable="true" />
+                                    <BlazorTable.Column TableItem="ApplicationUser" Title="Email" Field="@(x => x.Email)" Sortable="true">
+                                        <Template Context="_context">
+                                            <a href="mailto:@_context.Email">@_context.Email</a>
+                                        </Template>
+                                    </BlazorTable.Column>
+                                    <BlazorTable.Column TableItem="ApplicationUser" Title="" Width="20%">
+                                        <Template Context="_context">
+                                            <!-- Geçerli Kullanıcıyı Düzenleme -->
+                                            <button class="btn btn-sm btn-primary"
+                                                    @onclick="(() => EditUser(_context))">
+                                                Düzenle
+                                            </button>
+                                            <!-- Kullanıcıdan rolünü silme -->
+                                            <button class="btn btn-sm btn-warning"
+                                                    @onclick="(() => AddRemoveUserRoles(_context))">
+                                                Roller
+                                            </button>
+                                            <!-- Yeni Şifre Ataması Yapma -->
+                                            <button class="btn btn-sm btn-danger"
+                                                    @onclick="(() => GeneratePassword(_context))">
+                                                <i class="oi oi-key"></i>
+                                                Yeni Şifre Ata
+                                            </button>
+                                        </Template>
+                                    </BlazorTable.Column>
+                                    <Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+                                </BlazorTable.Table>
 
-                    @if (ShowUserRolesPopup)
-                    {
-                        <!-- This is the popup to create or edit user roles -->
-                        <EditUserRolesModal AllRoles="@_allRoles" UserRoles="@_userRoles" CurrentUserRoles="@CurrentUserRoles" objUser="@objUser" AddRoleToUser="AddRoleToUser" RemoveRoleFromUser="RemoveRoleFromUser" strError="@strError" ClosePopup="ClosePopup" />
-                    }
+                                @if (ShowPopup)
+                                {
+                                    <EditUserModal ClosePopup="ClosePopup" CurrentUserRoles="@CurrentUserRoles" DeleteUser="DeleteUser" objUser="@objUser" SaveUser="SaveUser" strError="@strError" />
+                                }
 
-                    @if (ShowPasswordPopup)
-                    {
-                        <PasswordModal ClosePopup="@ClosePopup" objUser="@objUser" NewUserPassword="@NewUserPassword" />
-                    }
-                </div>
-            </div>
+                                @if (ShowUserRolesPopup)
+                                {
+                                    <!-- Bu, kullanıcı rolleri oluşturmak veya düzenlemek için açılan  penceredir -->
+                                    <EditUserRolesModal AllRoles="@_allRoles" UserRoles="@_userRoles" CurrentUserRoles="@CurrentUserRoles" objUser="@objUser" AddRoleToUser="AddRoleToUser" RemoveRoleFromUser="RemoveRoleFromUser" strError="@strError" ClosePopup="ClosePopup" />
+                                }
+
+                                @if (ShowPasswordPopup)
+                                {
+                                    <PasswordModal ClosePopup="@ClosePopup" objUser="@objUser" NewUserPassword="@NewUserPassword" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </CardBody>
+            </CardComponent>
         </div>
+
     </Authorized>
     <NotAuthorized>
-        <p>You're not loggged in.</p>
+        <p>Giriş Yapmadınız.</p>
     </NotAuthorized>
 </AuthorizeView>
 
 @code {
-    // Property used to add or edit the currently selected user
+    // Seçili olan kullanıcıyı eklemek veya düzenlemek için kullanılan özellik
     ApplicationUser objUser = new ApplicationUser();
 
     string CurrentUserRoles { get; set; }
 
-    // To show the new user password
+    // Yeni kullanıcı şifresini göstermek için
     string NewUserPassword { get; set; }
 
-    // Collection to display the existing users
+    // Mevcut kullanıcıları görüntülemek için koleksiyon
     List<ApplicationUser> _allUsers = new List<ApplicationUser>();
 
-    // Roles to display in the roles dropdown when adding a role to the user
+    // Kullanıcıya bir rol eklerken roller açılır menüsünde görüntülenecek roller
     List<string> _allRoles = new List<string>();
 
-    // Roles to display in the roles dropdown when removing a role from the user
+    // Kullanıcıdan bir rol kaldırılırken roller açılır menüsünde görüntülenecek roller
     List<string> _userRoles = new List<string>();
 
-    // To hold any possible errors
+    // Olası hataları tutmak için
     string strError = "";
 
-    // To enable showing the Popup
+    // Pop-up'ı göstermeyi etkinleştirmek için
     bool ShowPopup = false;
 
-    // To enable showing the User Roles Popup
+    // Kullanıcı Gurup Rolleri Açılır Penceresinin gösterilmesini etkinleştirmek için
     bool ShowUserRolesPopup = false;
 
-    // To enable showing the User Roles Popup
+    // Kullanıcı Rolleri Açılır Penceresinin gösterilmesini etkinleştirmek için
     bool ShowPasswordPopup = false;
 
     protected override void OnInitialized()
@@ -108,19 +118,16 @@
         GetUsers();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////Users Management Code///////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void AddNewUser()
     {
-        // Make new user
+        // Yeni Kullanıcı
         objUser = new ApplicationUser();
-        // Set Id to blank so we know it is a new record
+        // Kimliği boş olarak ayarlayın, böylece yeni bir kayıt olduğunu bilelim
         objUser.Id = "";
-        //Reset the allroles list
+        //Tüm roller listesini sıfırla
         _allRoles = _usersService.GetAllRoles();
-        // Open the Popup
+        // Popup aç
         ShowPopup = true;
     }
 
@@ -130,19 +137,19 @@
         {
             if (objUser.Id != "")
             {
-                // Get the user
+                // Kullanıcıyı getir
                 var user = await _usersService.GetUser(objUser.Id);
 
                 user.Email = objUser.Email;
                 user.FirstName = objUser.FirstName;
                 user.LastName = objUser.LastName;
 
-                // Update the user
+                // Güncelle
                 await _usersService.UpdateUser(user);
             }
             else
             {
-                // Insert new user
+                // Yeni kullanıcı ekle
                 var NewUser = new ApplicationUser
                 {
                     UserName = objUser.Email,
@@ -155,8 +162,8 @@
 
                 if (string.IsNullOrWhiteSpace(result))
                 {
-                    strError = "An unexpected error has occurred while creating the new user.";
-                    // Keep the popup opened
+                    strError = "Yeni kullanıcı oluşturulurken beklenmeyen bir hata oluştu.";
+                    // Açılır pencereyi açık tutar işlem bitene dek
                     return;
                 }
                 else
@@ -164,14 +171,14 @@
                     NewUserPassword = result;
                 }
             }
-            // Close the Popup
+            // Popupu kapat
             ShowPopup = false;
-            // Refresh Users
+            // Kullanıcı listesini yenile
             GetUsers();
 
             if (objUser.Id == "")
             {
-                //Show password
+                //Şifreyi göster
                 ShowPassword();
             }
         }
@@ -183,37 +190,37 @@
 
     async Task EditUser(ApplicationUser _ApplicationUser)
     {
-        // Set the selected user as the current user
+        // Seçili kullanıcıyı geçerli kullanıcı olarak ayarla
         objUser = _ApplicationUser;
-        // Get the user
+        // Kullanıcıyı getir
         var user = await _usersService.GetUser(objUser.Id);
         if (user != null)
         {
             var userRoles = await _usersService.GetUserRoles(user.Id);
             CurrentUserRoles = string.Join(", ", userRoles.ToArray());
         }
-        // Open the Popup
+        // Popup aç
         ShowPopup = true;
     }
 
     async Task DeleteUser()
     {
-        // Get the user
+        // Kullanıcıyı getir
         var user = await _usersService.GetUser(objUser.Id);
         if (user != null)
         {
-            // Delete the user
+            // Kullanıcıyı sil
             await _usersService.DeleteUser(user);
         }
-        // Close the Popup
+        // Popup kapat
         ShowPopup = false;
-        // Refresh Users
+        // Kullanıcı listesini yenile
         GetUsers();
     }
-
+    
     void ClosePopup()
     {
-        // Close the Popup
+        // Popup kapat
         ShowPopup = false;
         ShowUserRolesPopup = false;
         ShowPasswordPopup = false;
@@ -222,77 +229,72 @@
 
     public void GetUsers()
     {
-        // Clear any error messages
+        // Tüm hata mesajlarını temizle
         strError = "";
-        // Collection to hold users
+        // Kullanıcıları tutmak için koleksiyon
         _allUsers = _usersService.GetAllUsers();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////Roles Management Code/////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    // Rol yönetimi
     async Task AddRemoveUserRoles(ApplicationUser _ApplicationUser)
     {
-        // Set the selected user as the current user
+        // Seçili kullanıcıyı geçerli kullanıcı olarak ayarla
         objUser = _ApplicationUser;
-        // Get the user
+        // Kullanıcıyı getir
         var user = await _usersService.GetUser(objUser.Id);
         if (user != null)
         {
             var userRoles = await _usersService.GetUserRoles(user.Id);
             CurrentUserRoles = string.Join(", ", userRoles.ToArray());
 
-            //Only those roles which are assigned to this user
+            //Yalnızca bu kullanıcıya atanan roller
             _userRoles = await _usersService.GetUserRoles(user.Id);
 
-            //Only those roles which are not assigned to this user
+            //Yalnızca bu kullanıcıya atanmamış roller
             _allRoles = _usersService.GetAllRoles().Where(m => !_userRoles.Contains(m)).ToList();
         }
-        // Show the Delete Role Popup
+        // Rol Sil Açılır Penceresini Göster
         ShowUserRolesPopup = true;
     }
 
     async Task RemoveRoleFromUser(string SelectedUserRole)
     {
-        // Get the user
+        // Kullanıcıyı getir
         var user = await _usersService.GetUser(objUser.Id);
         if (user != null)
         {
             if (SelectedUserRole != "" && SelectedUserRole != null)
             {
-                // Delete the user role
+                // Rolü sil
                 await _usersService.RemoveRoleFromUser(user.Id, SelectedUserRole);
             }
         }
-        // Close the Popup
+        // pencereyi kapat
         ShowUserRolesPopup = false;
-        // Refresh Users
+        // Listeyi yenile
         GetUsers();
     }
 
     async Task AddRoleToUser(string SelectedUserRole)
     {
-        // Get the user
+        // Kullanıcıyı getir
         var user = await _usersService.GetUser(objUser.Id);
         if (user != null)
         {
             if (SelectedUserRole != "" && SelectedUserRole != null)
             {
-                // Delete the user role
+                // Kullanıcı rolü sil
                 await _usersService.AddRoleToUser(user.Id, SelectedUserRole);
             }
         }
-        // Close the Popup
+        // pencereyi kapat
         ShowUserRolesPopup = false;
-        // Refresh Users
+        // Listeyi yenile
         GetUsers();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////Password  Code////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // Şifre yönetimi
     void ShowPassword()
     {
         ShowPasswordPopup = true;
@@ -300,15 +302,15 @@
 
     async Task GeneratePassword(ApplicationUser _ApplicationUser)
     {
-        // Set the selected user as the current user
+        // Seçili kullanıcıyı geçerli kullanıcı olarak ayarla
         objUser = _ApplicationUser;
 
         var result = await _usersService.GenerateNewPassword(_ApplicationUser);
 
         if (string.IsNullOrWhiteSpace(result))
         {
-            strError = "An unexpected error has occurred while creating the new user.";
-            // Keep the popup opened
+            strError = "Yeni kullanıcı oluşturulurken beklenmeyen bir hata oluştu.";
+            // Açılır pencereyi açık tutun
             return;
         }
         else
@@ -320,3 +322,12 @@
     }
 
 }
+
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+        margin-top: 200px;
+    }
+</style>

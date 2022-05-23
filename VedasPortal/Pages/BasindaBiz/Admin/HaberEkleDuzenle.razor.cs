@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -24,10 +22,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         [Inject]
         public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
-
-        [Inject]
-        public AuthenticationStateProvider StateProvider { get; set; }
-
+       
         [Parameter]
         public int HaberId { get; set; }
 
@@ -60,12 +55,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
 
 
-        [Authorize(Roles ="Administrators")]
         protected void HaberKayit()
         {
-            Message = "";
-            if(User.Identity.IsAuthenticated && User.IsInRole("Administrators"))
-            {
+            
                 HaberServisi.Add(haber);
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -80,13 +72,9 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
                 };
                 HaberDosyaServisi.Add(dosya);
-            }
-            else
-            {
-                Message = "Haber kayıt ekleme yetkiniz yoktur!";
-            }
-
-
+                TumHaberleriGetir();
+                TumKategorileriGetir();
+            
         }
         protected override void OnParametersSet()
         {
@@ -118,8 +106,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         protected override async Task<Task> OnInitializedAsync()
         {
-            var giris =await StateProvider.GetAuthenticationStateAsync();
-            User = giris.User;
+           
             TumHaberleriGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;

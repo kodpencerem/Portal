@@ -6,31 +6,36 @@
     <CardBody>
         @if (!isReady)
         {
-            <p>Yükleniyor...</p> 
+            <p>Yükleniyor...</p>
         }
         else if (Anket != null)
         {
             <h5 class="card-title">@Anket.Adi</h5>
             <h6 class="card-description">@Anket.AnketSorusu</h6>
-            @*<p>@((MarkupString)Anket.Aciklama)</p>*@          
+            @*<p>@((MarkupString)Anket.Aciklama)</p>*@
             {
                 <table class="table-borderless">
                     <tbody>
 
                         @foreach (var anket in Anket.AnketSecenekleri)
                         {
-                            <AnketSecenekItem Item="@anket" 
-                            ToplamAnketOyu="@Anket.ToplamKatilim" />
-                         }
+                            <AnketSecenekItem Item="@anket"
+                                              ToplamAnketOyu="@Anket.ToplamKatilim" />
+                        }
                     </tbody>
-                </table> 
+                </table>
             }
             <div class="mt-3">
-            <button href="#" class="btn btn-outline-dark" 
-                             @onclick="() => AnketiGetir(Anket.AnketId)">
-                Ankete Katıl
-            </button>
-            </div> 
+                <button href="#" class="btn btn-outline-dark"
+                        @onclick="() => AnketiGetir(Anket.AnketId)">
+                    Ankete Katıl
+                </button>
+                ||
+                <button href="#" class="btn btn-outline-dark"
+                        @onclick="TakeRandomSurvey">
+                    Başka Bir Anket Getir
+                </button>
+            </div>
         }
         else
         {
@@ -40,7 +45,7 @@
     <CardFotter>
         @if (Anket != null)
         {
-            <p>@(Anket == null ? "" : Anket.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p> 
+            <p>@(Anket == null ? "" : Anket.OlusturulmaTarihi.ToShortDateString()) tarihinde oluşturuldu.</p>
         }
         else
         {

@@ -4,7 +4,7 @@
 @using VedasPortal.Repository.Interface
 @using VedasPortal.Entities.Models.Yorum
 
-@attribute [Authorize(Roles = "Administrators")]
+@attribute [Authorize(Roles = "Admin")]
 
 <EditForm Model="@yorum"
           OnValidSubmit="Kayit">

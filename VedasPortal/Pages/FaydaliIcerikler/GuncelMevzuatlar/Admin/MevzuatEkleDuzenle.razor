@@ -2,7 +2,7 @@
 @page "/mevzuat/duzenle/{mevzuatId:int}"
 @using Microsoft.AspNetCore.Hosting
 @inherits MevzuatModel
-@attribute [Authorize(Roles = "Administrators, MevzuatEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, MevzuatEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@mevzuat" OnValidSubmit="Kayit">

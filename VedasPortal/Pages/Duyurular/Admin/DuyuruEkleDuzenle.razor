@@ -1,7 +1,7 @@
 ﻿@page "/duyuru/ekle"
 @page "/duyuru/duzenle/{DuyuruId:int}"
 @inherits DuyuruEkleDuzenleModel
-@attribute [Authorize(Roles = "Administrators, DuyuruEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, DuyuruEkleDuzenle")]
 
 <div class="col-12">
     <EditForm Model="@duyuru" OnValidSubmit="Kayit">

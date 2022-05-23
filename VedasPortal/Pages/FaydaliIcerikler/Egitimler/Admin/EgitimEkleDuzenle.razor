@@ -1,7 +1,7 @@
 ﻿@page "/egitim/ekle"
 @page "/egitim/duzenle/{egitimId:int}"
 @using Microsoft.AspNetCore.Hosting
-@attribute [Authorize(Roles = "Administrators, EgitimEkleDuzenle")]
+@attribute [Authorize(Roles = "Admin, EgitimEkleDuzenle")]
 
 @inherits EgitimModeli
 

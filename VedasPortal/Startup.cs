@@ -5,6 +5,7 @@ using Blazored.Toast;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using BlazorTable;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
 using VedasPortal.Entities.Models;
@@ -38,6 +41,7 @@ using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Services.Anket;
+using VedasPortal.Services.AuthServices;
 using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
@@ -62,21 +66,26 @@ namespace VedasPortal
             services.AddDbContext<VedasDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
-            services.AddDefaultIdentity<Kullanici>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<VedasDbContext>();
-            services.AddRazorPages();
+            services.AddRazorPages().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
             services.AddServerSideBlazor();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddBlazoredModal();
             services.AddBlazoredToast();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddScoped<HttpClient>();
             services.AddScoped<HavaDurumuService>();
             services.AddScoped<Mapper>();
             services.AddScoped<AltinDegisimleriServisi>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
+            services.AddBlazorTable();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru>>();
             services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
@@ -96,6 +105,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<UzmanlikAlani>, BaseRepository<UzmanlikAlani>>();
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
             services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
+            services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<VefatDurumu>, BaseRepository<VefatDurumu>>();
             services.AddScoped<IFileUpload, FileUpload>();
             services.AddScoped<IFileDownload, FileDownload>();
@@ -105,6 +115,8 @@ namespace VedasPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IManageUsersService, ManageUsersService>();
+            services.AddTransient<IManageRolesService, ManageRolesService>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
             
         }
@@ -140,5 +152,34 @@ namespace VedasPortal
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var _RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var _UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            string[] roleNames = { "Admin", "Client" };
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await _RoleManager.RoleExistsAsync(roleName);
+
+                if (!roleExist)
+                {
+                    await _RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            var user = await _UserManager.FindByEmailAsync("admin@rolesmgmt.com");
+
+            if (user != null)
+            {
+                var roles = await _UserManager.GetRolesAsync(user);
+                if (roles == null || !roles.Contains("Admin"))
+                {
+                    await _UserManager.AddToRoleAsync(user, "Admin");
+                }
+            }
+        }
+
     }
 }

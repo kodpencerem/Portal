@@ -42,8 +42,8 @@ else
 
                             @if (haber.Aciklama != null)
                             {
-                                <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? 
-                                                              haber.Aciklama.Substring(0, 280) + "..." : 
+                                <MarkDownComponent Content="@(haber.Aciklama.Length>400 ? 
+                                                              haber.Aciklama.Substring(0, 190) + "..." : 
                                                               haber.Aciklama)" />
                             }
                         </p>

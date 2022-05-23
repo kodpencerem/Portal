@@ -5,87 +5,75 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
-using VedasPortal.Entities.ViewModels;
 using VedasPortal.Repository.Interface;
-
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
 {
-    public class ToplantiOdasiModeli : ComponentBase
+    public class ToplantiMerkeziModeli : ComponentBase
     {
 
         [Inject]
-        public IBaseRepository<ToplantiOdasi> ToplantiOdasi { get; set; }
-
-        protected ToplantiTakvimVm takvimVm { get; set; } = new ToplantiTakvimVm();
-
-        [Inject]
-        public IToplantiTakvimi _toplanti { get; set; }
+        public IBaseRepository<ToplantiMerkezi> ToplantiMerkeziServisi { get; set; }
 
         [Parameter]
-        public int OdaId { get; set; }
+        public int TMerkezId { get; set; }
 
         protected string Title = "Ekle";
-        public ToplantiOdasi Oda = new();
+        public ToplantiMerkezi toplantiMerkezi = new();
 
-        protected IEnumerable<ToplantiOdasi> Odalar { get; set; }
 
-        protected IEnumerable<ToplantiOdasi> TumOdalariGetir()
+        protected IEnumerable<ToplantiMerkezi> ToplantiMerkezleri { get; set; }
+
+        protected IEnumerable<ToplantiMerkezi> TumMerkezleriGetir()
         {
-            Odalar = ToplantiOdasi.GetAll();
-            return Odalar;
+            ToplantiMerkezleri = ToplantiMerkeziServisi.GetAll();
+            return ToplantiMerkezleri;
         }
         
+
         protected void Kayit()
-        {           
-            ToplantiOdasi.Add(Oda);
+        {
+
+            ToplantiMerkeziServisi.Add(toplantiMerkezi);
+            TumMerkezleriGetir();
+            Temizle();
         }
         protected override void OnParametersSet()
         {
-            if (OdaId != 0)
+            if (TMerkezId != 0 )
             {
                 Title = "Duzenle";
-                Oda = ToplantiOdasi.Get(OdaId);
-                //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
+                toplantiMerkezi = ToplantiMerkeziServisi.Get(TMerkezId);
             }
         }
-        
-        protected void SilmeyiOnayla(int OdaId)
+
+        protected void SilmeyiOnayla(int TMerkezId)
         {
             ModalDialog.Open();
-            Oda = Odalar.FirstOrDefault(x => x.Id == OdaId);
+
+            toplantiMerkezi = ToplantiMerkezleri.FirstOrDefault(x => x.Id == TMerkezId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
         protected void Sil()
         {
-            if (Oda.Id == 0)
+            if (toplantiMerkezi.Id == 0)
                 return;
-
-            ToplantiOdasi.Remove(Oda.Id);
-            Oda = new ToplantiOdasi();
-            TumOdalariGetir();
+            ToplantiMerkeziServisi.Remove(toplantiMerkezi.Id);
+            toplantiMerkezi = new ToplantiMerkezi();
+            TumMerkezleriGetir();
         }
 
         protected override Task OnInitializedAsync()
         {
-            takvimVm.TMerkezler = _toplanti.TMerkezler();
-            TumOdalariGetir();
+            TumMerkezleriGetir();
             return Task.CompletedTask;
-        }
-        protected void OnMerkezChange(string value)
-        {
-            if (value != null)
-            {
-                takvimVm.MerkezId = value.ToString();
-            }
         }
 
         public void Temizle()
         {
-            Oda = null;
-            takvimVm = null;
+            toplantiMerkezi = null;
         }
 
         [Inject]

@@ -25,7 +25,7 @@ using VedasPortal.Enums;
 
 namespace VedasPortal.Data
 {
-    public class VedasDbContext : IdentityDbContext<Kullanici, IdentityRole, string>
+    public class VedasDbContext : IdentityDbContext<ApplicationUser>
     {
         public VedasDbContext(DbContextOptions<VedasDbContext> options)
             : base(options)

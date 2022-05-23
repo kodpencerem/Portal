@@ -1,24 +1,23 @@
-﻿
-@using BlazorRolesMgmt.Data;
+﻿@using VedasPortal.Entities.Models.User
 
-<!-- This is the popup to create or edit a user -->
+<!-- Bu, bir kullanıcı oluşturmak veya düzenlemek için açılır penceredir. -->
 <div class="modal" tabindex="-1" style="display:block" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Add/Edit User</h3>
-                <!-- Button to close the popup -->
+                <h3 class="modal-title">Kullanıcı Ekle/Düzenle</h3>
+                <!-- Açılır pencereyi kapatmak için düğme -->
                 <button type="button" class="close" @onclick="ClosePopup"><span aria-hidden="true">X</span></button>
             </div>
-            <!-- Edit form for the current user -->
+            <!-- Geçerli kullanıcı için formu düzenle -->
             <div class="modal-body pl-5">
                 <div class="row">
                     <div class="col-md-10">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="First Name" @bind="objUser.FirstName" />
+                            <input class="form-control" type="text" placeholder="Adınız" @bind="objUser.FirstName" />
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Last Name" @bind="objUser.LastName" />
+                            <input class="form-control" type="text" placeholder="Soyadınız" @bind="objUser.LastName" />
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="text" placeholder="Email" @bind="objUser.Email" />
@@ -26,13 +25,13 @@
                         @if (objUser.Id != "" && CurrentUserRoles != "")
                         {
                             <div class="form-group">
-                                <span class="text-info font-italic">This user has @CurrentUserRoles role(s).</span>
+                                <span class="text-info font-italic">Bu kullanıcı @CurrentUserRoles rol/rollerine sahiptir.</span>
                             </div>
                         }
-                        <button class="btn btn-primary" @onclick="SaveUser">Save</button>
+                        <button class="btn btn-primary" @onclick="SaveUser">Kaydet</button>
                         @if (objUser.Id != "")
                         {
-                            <button class="btn btn-danger float-right" @onclick="DeleteUser">Delete</button>
+                            <button class="btn btn-danger float-right" @onclick="DeleteUser">Sil</button>
                         }
 
                         @if (!string.IsNullOrWhiteSpace(strError) && !string.IsNullOrEmpty(strError))
