@@ -1,0 +1,116 @@
+﻿@using VedasPortal.Entities.Models.ToplantiTakvimi;
+@using VedasPortal.Services.ToplantiServices
+@inject ToplantiService ToplantiService
+
+@if (ToplantiGetir == null)
+{
+    <div class="loading">Yükleniyor</div> }
+else
+{
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0 ml-4">
+            @ToplantiGetir.tarih.ToShortDateString()
+        </h3>
+        <button id="addToDo"
+                class="btn btn-light mr-3"
+                @onclick="()=>toplantiEkle = !toplantiEkle">
+            +
+        </button>
+    </div>
+
+    @for (int i = 0; i < ToplantiGetir.ToplantiSayisi; i++)
+    {
+        int j = i;
+        // Toplantılar
+        @if (ToplantiGetir[j] != null)
+        {
+
+            <div class="ml-5 d-flex justify-conent-between align-items-start">
+                <div id="toDo" class="flex-grow-1">
+                    <h6>
+                        @ToplantiGetir[j].BaslangicTarihi.ToString("HH:mm") - @ToplantiGetir[j].BitisTarihi.ToString("HH:mm")
+                    </h6>
+                    <p id="toDoText"
+                       class="m-0 pl-2 pr-1">
+                        @ToplantiGetir[j].Konu
+                    </p>
+                </div>
+                <div class="ml-2 mr-4">
+                    <i class="fas fa-edit mr-2 p-1"
+                       @onclick="() => { toplantiDuzenle = !toplantiDuzenle; toplanti = ToplantiGetir[j];}">
+                    </i>
+                    <i class="fas fa-trash p-1"
+                       @onclick="() => {DeleteToplanti(ToplantiGetir[j]); }">
+                    </i>
+                </div>
+            </div>
+            @if (toplantiDuzenle && toplanti != null)
+            {
+                <div class="formOverlay"
+                     @onclick="()=>toplantiDuzenle = false">
+                </div>
+                <ToplantiDuzenle Duzenle="toplanti"
+                                 OnEditedToplanti="EditToplanti" />
+}}}
+
+    @if (toplantiEkle)
+    {
+        <div class="formOverlay"
+             @onclick="()=>toplantiEkle = false">
+
+        </div>
+        <ToplantiEkle Date="ToplantiGetir.tarih"
+                      OnCreatedToplanti="AddToplanti" />
+}}
+
+
+
+@code {
+
+    bool toplantiDuzenle = false, toplantiEkle = false;
+
+    protected Toplanti toplanti;
+
+    [Parameter]
+    public GunlukToplanti ToplantiGetir { get; set; }
+
+    protected void AddToplanti(Toplanti toplanti)
+    {
+        if (toplanti != null)
+        {
+            (bool, int) eklenenToplanti = ToplantiService.PostToplanti(toplanti);
+            if (eklenenToplanti.Item1)
+            {
+                toplanti.PersonelId = eklenenToplanti.Item2;
+
+                ToplantiGetir.AddToplanti(toplanti);
+                ToplantiGetir.NotifyStateChanged();
+            }
+        }
+        toplantiEkle = false;
+    }
+
+    public void EditToplanti(Toplanti toplanti)
+    {
+        if (toplanti != null)
+        {
+            ToplantiService.UpdateToplanti(toplanti, Convert.ToInt32(toplanti.Kullanici.FirstOrDefault().Id));
+        }
+        toplantiDuzenle = false;
+    }
+
+    protected void DeleteToplanti(Toplanti toplanti)
+    {
+        if (toplanti != null)
+        {
+
+            bool deleted = ToplantiService.DeleteToplanti(Convert.ToInt32(toplanti.Kullanici.FirstOrDefault().Id));
+
+            if (deleted)
+            {
+                ToplantiGetir.RemoveToplanti(toplanti);
+                ToplantiGetir.NotifyStateChanged();
+            }
+        }
+    }
+}
