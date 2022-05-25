@@ -17,7 +17,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public DateTime BaslangicTarihi { get; set; }
         [Required]
         public DateTime BitisTarihi { get; set; }
-        public DateTime ToplantiTarihi { get; set; } = new DateTime(1900, 1, 1);
+        public DateTime ToplantiTarihi { get; set; }
         public int BeklenenKatilimSayisi { get; set; }
         public string Baslik { get; set; }
         public bool VideoKonferansMi { get; set; }
@@ -25,8 +25,13 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public bool AktifPasif { get; set; } = true;
         public bool AnaSayfadaGoster { get; set; }
 
-        public ICollection<ToplantiMerkezi> ToplantiMerkezi { get; set; }
-        public ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
+        public int? ToplantiOdasiId { get; set; }
+        public ToplantiOdasi ToplantiOdasi { get; set; }
+
+        public int? ToplantiMerkeziId { get; set; }
+
+        public ToplantiMerkezi ToplantiMerkezi { get; set; }
+
         public ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
         public ICollection<User.ApplicationUser> Kullanici { get; set; }
     }

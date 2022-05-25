@@ -16,7 +16,7 @@ namespace VedasPortal.Repository
             _dbContext = dbContext;
         }
 
-        public List<SelectListItem> TMerkezler()
+        public List<SelectListItem> ToplantiMerkezleri()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace VedasPortal.Repository
                 merkezler.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "Seçiniz..."
+                    Text = "---Seçiniz---"
                 });
                 return merkezler;
             }
@@ -41,32 +41,29 @@ namespace VedasPortal.Repository
             }
         }
 
-        public List<SelectListItem> OdaListe(int Id)
+        public List<SelectListItem> ToplantiOdalari(int Id)
         {
             try
             {
-                var odalar = (from oda in _dbContext.ToplantiOdasi.AsNoTracking()
-                              where oda.Id == Id
-                              select new SelectListItem()
-                              {
-                                  Text = oda.Adi,
-                                  Value = oda.Id.ToString()
-                              }).ToList();
-                odalar.Insert(0, new SelectListItem()
+                var listofstates = (from oda in _dbContext.ToplantiOdasi.AsNoTracking()
+                                    where oda.ToplantiMerkeziId == Id
+                                    select new SelectListItem()
+                                    {
+                                        Text = oda.Adi,
+                                        Value = oda.Id.ToString()
+                                    }
+                    ).ToList();
+                listofstates.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "Seçiniz..."
+                    Text = "---Seçiniz---"
                 });
-                return odalar;
+                return listofstates;
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
-
-
     }
 }

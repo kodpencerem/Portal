@@ -8,11 +8,11 @@
 <div class="col-12">
     <EditForm Model="@Oda" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
-        <CardComponent cardStyle="Style.primary">
-            <CardHeader>
+        <div class="card card-primary">
+            <div class="card-header">
                 Toplantı Odası @Title
-            </CardHeader>
-            <CardBody>
+            </div>
+            <div class="card-body">
                 <div class="col-12">
                     <div class="col-md-6 float-left">
 
@@ -27,7 +27,7 @@
                                              Value="@takvimVm.MerkezId"
                                              ValueChanged="@((string value) => OnMerkezChange(value))">
 
-                                    @foreach (var merkez in takvimVm.TMerkezler)
+                                    @foreach (var merkez in takvimVm.ListofToplantiMerkezleri)
                                     {
                                         <option value="@merkez.Value">@merkez.Text</option>
                                     }
@@ -108,15 +108,15 @@
                         </div>
                     </div>
                 </div>
-            </CardBody>
+            </div>
 
-            <CardFotter>
+            <div class="card-footer">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
-            </CardFotter>
-        </CardComponent>
+            </div>
+        </div>
     </EditForm>
 </div>
 
@@ -157,6 +157,7 @@ else
                                                class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
+                                <th>Id</th>
                                 <th>Kapasite</th>
                                 <th>Oda Adı</th>
                                 <th> Durumu</th>
@@ -176,6 +177,7 @@ else
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
+                                    <td>@Oda.Id</td>
                                     <td>@Oda.Kapasite</td>
                                     <td>@Oda.Adi</td>
                                     <td>

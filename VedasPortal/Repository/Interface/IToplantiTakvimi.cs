@@ -5,7 +5,7 @@ namespace VedasPortal.Repository.Interface
 {
     public interface IToplantiTakvimi
     {
-        List<SelectListItem> TMerkezler();
-        List<SelectListItem> OdaListe(int Id);
+        List<SelectListItem> ToplantiMerkezleri();
+        List<SelectListItem> ToplantiOdalari(int Id);
     }
 }

@@ -6,12 +6,12 @@ namespace VedasPortal.Entities.ViewModels
 {
     public class ToplantiTakvimVm
     {
-        [Required(ErrorMessage = "Bu Alan Gereklidir!")]
+        [Required(ErrorMessage = "Toplantı Merkezi Adi Gerekli")]
         public string MerkezId { get; set; }
-        public List<SelectListItem> TMerkezler { get; set; }
+        public List<SelectListItem> ListofToplantiMerkezleri { get; set; }
 
-        [Required(ErrorMessage = "Bu Alan Gereklidir!")]
-        public string ToplantiOdasiId { get; set; }
-        public List<SelectListItem> OdaListe { get; set; }
+        [Required(ErrorMessage = "Toplanti Odası Adı Gerekli")]
+        public string OdaId { get; set; }
+        public List<SelectListItem> ListofToplantiOdalari { get; set; }
     }
 }

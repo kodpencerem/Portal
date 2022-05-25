@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220525123201_ToplantiOdalariMdf2")]
+    partial class ToplantiOdalariMdf2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1203,9 +1205,6 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ToplantiMerkeziId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ToplantiOdasiId")
                         .HasColumnType("int");
 
@@ -1216,8 +1215,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ToplantiMerkeziId");
 
                     b.HasIndex("ToplantiOdasiId");
 
@@ -1798,15 +1795,9 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", "ToplantiMerkezi")
-                        .WithMany()
-                        .HasForeignKey("ToplantiMerkeziId");
-
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiOdasi", "ToplantiOdasi")
                         .WithMany("Toplanti")
                         .HasForeignKey("ToplantiOdasiId");
-
-                    b.Navigation("ToplantiMerkezi");
 
                     b.Navigation("ToplantiOdasi");
                 });

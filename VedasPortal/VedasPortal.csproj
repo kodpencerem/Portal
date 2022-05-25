@@ -111,7 +111,7 @@
     <None Include="Components\ToplantiTakvimi\MonthComponent.razor" />
     <None Include="Components\IndexComponents\NotAuthorizedComponent.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiSec.razor" />
-    <None Include="Components\ToplantiTakvimi\TimePicker.razor" />
+    <None Include="Components\ToplantiTakvimi\TimePickerComponent.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiListComponent.razor" />
     <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_LoginPartial.cshtml" />

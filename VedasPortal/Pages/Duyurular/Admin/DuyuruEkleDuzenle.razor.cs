@@ -65,7 +65,6 @@ namespace VedasPortal.Pages.Duyurular.Admin
             };
             DuyuruDosyaServisi.Add(dosya);
             TumDuyurulariGetir();
-            Temizle();
         }
         protected override void OnParametersSet()
         {

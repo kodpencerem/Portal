@@ -1,6 +1,5 @@
 ﻿@using VedasPortal.Entities.Models.ToplantiTakvimi;
 @using VedasPortal.Entities.ViewModels;
-@using Microsoft.AspNetCore.Mvc.Rendering;
 @inject VedasPortal.Repository.Interface.IToplantiTakvimi _toplanti
 @inject VedasPortal.Repository.Interface.IBaseRepository<Toplanti> _toplantiKayit
 
@@ -20,16 +19,16 @@
                     <div class="d-flex justify-content-center">
                         <p class="mb-0 mr-2">
                             <label class="mb-0 d-flex align-items-center">
-                                <span class="mr-2">Başlangıç Saati:</span>
-                                <VedasPortal.Components.ToplantiTakvimi.TimePicker OnTimeChanged="UpdateStartTime"
-                                            Time="toplantiGetir.BaslangicTarihi" />
+                                <span class="mr-2">Start:</span>
+                                <TimePickerComponent OnTimeChanged="UpdateStartTime" Time="toplantiGetir.BaslangicTarihi"></TimePickerComponent>
                             </label>
                         </p>
+
+
                         <p class="mb-0 ml-2">
                             <label class="mb-0 d-flex align-items-center">
-                                <span class="mr-2">Bitiş Saati:</span>
-                                <VedasPortal.Components.ToplantiTakvimi.TimePicker OnTimeChanged="UpdateEndTime"
-                                            Time="toplantiGetir.BitisTarihi" />
+                                <span class="mr-2">End:</span>
+                                <TimePickerComponent OnTimeChanged="UpdateEndTime" Time="toplantiGetir.BitisTarihi"></TimePickerComponent>
                             </label>
                         </p>
                     </div>
@@ -63,38 +62,7 @@
                         <ValidationMessage For="@(()=>toplantiGetir.Aciklama)" />
                     </div>
                     <br />
-                    <div class="form-group col-md-12">
-                        <label for="Merkez">Toplantı Merkezi Seçin:</label>
-                        <InputSelect id="Merkez" class="form-control"
-                                     ValueExpression="@(() => takvimVm.MerkezId)"
-                                     Value="@takvimVm.MerkezId"
-                                     ValueChanged="@((int value) => OnMerkezChange(value))">
-
-                            @foreach (var merkez in takvimVm.TMerkezler)
-                            {
-                                <option value="@merkez.Id">@merkez.Adi</option>
-                            }
-                        </InputSelect>
-                        <ValidationMessage For="@(() => takvimVm.MerkezId)" />
-                    </div>
-                    <br />
-                    <div class="form-group col-md-12">
-                        <label for="Oda">Toplantı Odası Seçin:</label>
-                        <InputSelect id="Oda" class="form-control"
-                                     ValueExpression="@(() => takvimVm.ToplantiOdasiId)"
-                                     Value="@takvimVm.ToplantiOdasiId"
-                                     ValueChanged="@((int value) => OnOdaChange(value))">
-
-                            @if (takvimVm.OdaListe != null)
-                            {
-                                @foreach (var oda in takvimVm.OdaListe)
-                                {
-                                    <option value="@oda.Id">@oda.Adi</option>
-                                }
-                            }
-                        </InputSelect>
-                        <ValidationMessage For="@(() => takvimVm.ToplantiOdasiId)" />
-                    </div>
+                                      
                 </CardBody>
                 <CardFotter>
                     <button class="btn btn-primary align-self-stretch rounded-0 mt-auto"
@@ -125,20 +93,20 @@
 
     public ToplantiMerkezi toplantiMerkezi { get; set; }
 
+    public int OdaId { get; set; }
+
+
     public async void EditToplanti()
     {
 
         this.Duzenle.BaslangicTarihi = toplantiGetir.BaslangicTarihi;
         this.Duzenle.BitisTarihi = toplantiGetir.BitisTarihi;
         this.Duzenle.Konu = toplantiGetir.Konu;
-        this.Duzenle.ToplantiMerkezi = toplantiGetir.ToplantiMerkezi;
         this.Duzenle.BeklenenKatilimSayisi = toplantiGetir.BeklenenKatilimSayisi;
         this.Duzenle.Baslik = toplantiGetir.Baslik;
         this.Duzenle.Aciklama = toplantiGetir.Aciklama;
-        this.Duzenle.ToplantiMerkezi = toplantiGetir.ToplantiMerkezi;
         this.Duzenle.ToplantiOdasi = toplantiGetir.ToplantiOdasi;
         var merkeziSec = takvimVm.MerkezId;
-        var odaSec = takvimVm.ToplantiOdasiId;
         Duzenle = _toplantiKayit.Get(ToplantiDuzenleId);
         await OnEditedToplanti.InvokeAsync(this.Duzenle);
     }
@@ -154,29 +122,12 @@
             toplantiGetir.Aciklama = this.Duzenle.Aciklama;
             toplantiGetir.Baslik = this.Duzenle.Baslik;
             toplantiGetir.BeklenenKatilimSayisi = this.Duzenle.BeklenenKatilimSayisi;
-            toplantiGetir.ToplantiMerkezi = this.Duzenle.ToplantiMerkezi;
             toplantiGetir.ToplantiOdasi = this.Duzenle.ToplantiOdasi;
 
         }
 
         base.OnParametersSet();
     }
-
-    protected override void OnInitialized()
-    {
-
-        takvimVm.MerkezId = 1;
-        takvimVm.OdaListe = new List<ToplantiOdasi>()
-{
-            new ToplantiOdasi()
-            {
-                Adi="Seçiniz...",
-                Id = 1
-            }
-        };
-    }
-
-
 
     public void UpdateStartTime(DateTime time)
     {
@@ -186,47 +137,5 @@
     public void UpdateEndTime(DateTime time)
     {
         toplantiGetir.BitisTarihi = time;
-    }
-
-
-
-
-    protected void OnTakvimChange(int value)
-    {
-
-        if (value != null)
-        {
-            takvimVm.MerkezId = value;
-            takvimVm.ToplantiOdasiId = 1;
-
-            takvimVm.OdaListe = new List<ToplantiOdasi>()
-{
-            new ToplantiOdasi()
-            {
-                Adi = "Seçiniz...",
-                Id = 1
-            }
-        };
-
-            takvimVm.OdaListe = _toplanti.OdaListe();
-            this.StateHasChanged();
-        }
-    }
-
-    protected void OnMerkezChange(int value)
-    {
-        if (value != null)
-        {
-            takvimVm.MerkezId = value;
-            takvimVm.OdaListe = _toplanti.OdaListe();
-        }
-    }
-
-    protected void OnOdaChange(int value)
-    {
-        if (value != null)
-        {
-            takvimVm.ToplantiOdasiId = value;
-        }
     }
 }

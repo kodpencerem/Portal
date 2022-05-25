@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         public int OdaId { get; set; }
 
         protected string Title = "Ekle";
+
         public ToplantiOdasi Oda = new();
 
         protected IEnumerable<ToplantiOdasi> Odalar { get; set; }
@@ -37,8 +39,28 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         }
         
         protected void Kayit()
-        {           
-            ToplantiOdasi.Add(Oda);
+        {
+            var oda = new ToplantiOdasi()
+            {
+                Aciklama = Oda.Aciklama,
+                Adi = Oda.Adi,
+                Adres = Oda.Adres,
+                AktifPasif = Oda.AktifPasif,
+                Id = Oda.Id,
+                DuzenlemeTarihi = Oda.DuzenlemeTarihi,
+                DuzenleyenKullanici = Oda.DuzenleyenKullanici,
+                Kapasite = Oda.Kapasite,
+                KaydedenKullanici = Oda.KaydedenKullanici,
+                KayitTarihi = Oda.KayitTarihi,
+                Kod = Oda.Kod,
+                VideoKonferansMi = Oda.VideoKonferansMi,
+                RezervDurumu = Oda.RezervDurumu,
+                SilenKullanici = Oda.SilenKullanici,
+                SilmeTarihi = Oda.SilmeTarihi,
+                ToplantiMerkeziId = Convert.ToInt32(takvimVm.MerkezId)
+            };
+            ToplantiOdasi.Add(oda);
+
         }
         protected override void OnParametersSet()
         {
@@ -70,7 +92,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected override Task OnInitializedAsync()
         {
-            takvimVm.TMerkezler = _toplanti.TMerkezler();
+            takvimVm.ListofToplantiMerkezleri = _toplanti.ToplantiMerkezleri();
             TumOdalariGetir();
             return Task.CompletedTask;
         }
@@ -78,7 +100,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         {
             if (value != null)
             {
-                takvimVm.MerkezId = value.ToString();
+                takvimVm.MerkezId = value;
             }
         }
 
