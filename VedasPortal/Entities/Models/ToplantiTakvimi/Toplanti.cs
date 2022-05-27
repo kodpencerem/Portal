@@ -8,7 +8,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
     {
         public int PersonelId { get; set; }
         public string Kod { get; set; }
-
         public string Aciklama { get; set; }
         [Required]
         [StringLength(250, ErrorMessage = "Toplatı konusu 250 karakterden uzun olamaz!")]
@@ -24,14 +23,10 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public string Renk { get; set; }
         public bool AktifPasif { get; set; } = true;
         public bool AnaSayfadaGoster { get; set; }
-
         public int? ToplantiOdasiId { get; set; }
         public ToplantiOdasi ToplantiOdasi { get; set; }
-
         public int? ToplantiMerkeziId { get; set; }
-
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
-
         public ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
         public ICollection<User.ApplicationUser> Kullanici { get; set; }
     }

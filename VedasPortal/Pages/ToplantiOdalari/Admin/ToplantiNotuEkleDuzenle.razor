@@ -1,12 +1,12 @@
 ﻿@page "/toplantinotu/ekle"
-@page "/toplantinotu/duzenle/{ToplantiNotId:int}"
+@page "/toplantinotu/duzenle/{TNotId:int}"
 @attribute [Authorize(Roles = "Admin, ToplantiNotuEkleDuzenle")]
 
 @inherits ToplantiNotuModeli
 
 
 <div class="col-12">
-    <EditForm Model="@ToplantiNot" OnValidSubmit="Kayit">
+    <EditForm Model="@GetToplantiNotu" OnValidSubmit="Kayit">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -23,58 +23,109 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6 float-left">
+                                <div class="form-group row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label for="Countries"> Toplantı Merkezi</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <InputSelect id="Countries" class="form-control col-md-6"
+                                                 ValueExpression="@(() => ToplantiTakvimVm.MerkezId)"
+                                                 Value="@ToplantiTakvimVm.MerkezId"
+                                                 ValueChanged="@((string value) => OnMerkezChange(value))">
+
+                                        @foreach (var state in ToplantiTakvimVm.ListofToplantiMerkezleri)
+                                        {
+                                            <option value="@state.Value">@state.Text</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => ToplantiTakvimVm.MerkezId)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 float-right">
+                                <div class="form-group row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label for="State">Toplantı Odası</label>
+                                    &nbsp;&nbsp;
+                                    <InputSelect id="State" class="form-control col-md-8"
+                                                 ValueExpression="@(() => ToplantiTakvimVm.OdaId)"
+                                                 Value="@ToplantiTakvimVm.OdaId"
+                                                 ValueChanged="@((string value) => OnOdaChange(value))">
+
+                                        @if (ToplantiTakvimVm.ListofToplantiOdalari != null)
+                                        {
+                                            @foreach (var state in ToplantiTakvimVm.ListofToplantiOdalari)
+                                            {
+                                                <option value="@state.Value">@state.Text</option>
+                                            }
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => ToplantiTakvimVm.OdaId)" />
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="control-label col-md-2">Not Başlığı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="ToplantiNot.Baslik" />
+                                <InputText class="form-control" @bind-Value="GetToplantiNotu.Baslik" />
                             </div>
-                            <ValidationMessage For="@(() => ToplantiNot.Baslik)" />
+                            <ValidationMessage For="@(() => GetToplantiNotu.Baslik)" />
                         </div>
 
                         <div class="form-group row">
                             <label class="control-label col-md-2">Alt Başlık</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="ToplantiNot.AltBaslik" />
+                                <InputText class="form-control" @bind-Value="GetToplantiNotu.AltBaslik" />
                             </div>
-                            <ValidationMessage For="@(() => ToplantiNot.AltBaslik)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Kayıt Tarihi</label>
-                            <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="ToplantiNot.KayitTarihi" />
-                            </div>
-                            <ValidationMessage For="@(() => ToplantiNot.KayitTarihi)" />
+                            <ValidationMessage For="@(() => GetToplantiNotu.AltBaslik)" />
                         </div>
                         <div class="form-group row">
-                            <label for="Kategori" class="control-label col-md-2">Notu Görecek Birimi Seçin</label>
+                            <label class="control-label col-md-2">Toplantı Konusu</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@ToplantiNot.Birimler" class="form-control">
-                                    <option></option>
-                                    @if (Birimler != null)
-                                    {
-                                        @foreach (var kategori in Birimler)
-                                        {
-                                            <option value="@kategori.Key"> @kategori.Value </option>
-                                        }
-                                    }
-
-                                </InputSelect>
+                                <InputText class="form-control" @bind-Value="GetToplantiNotu.Konu" />
                             </div>
+                            <ValidationMessage For="@(() => GetToplantiNotu.AltBaslik)" />
                         </div>
-
                         <br />
                         <div class="row">
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8"> Şimdi Yayınlansın Mı?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="ToplantiNot.AktifPasif" />
+                            <div class="col-md-4 float-left">
+                                <div class="form-group row col-md-12">
+                                    <label class="control-label col-md-4">Kayıt Tarihi</label>
+                                    <div class="col-md-8">
+                                        <InputDate class="form-control" @bind-Value="GetToplantiNotu.KayitTarihi" />
+                                    </div>
+                                    <ValidationMessage For="@(() => GetToplantiNotu.KayitTarihi)" />
                                 </div>
-                                <ValidationMessage For="@(() => ToplantiNot.AktifPasif)" />
                             </div>
+                            <div class="col-md-4 float-right">
+                                <div class="form-group row col-md-12">
+                                    <label class="control-label col-md-8"> Şimdi Yayınlansın Mı?</label>
+                                    <div class="col-md-4">
+                                        <InputCheckbox class="form-control" @bind-Value="GetToplantiNotu.AktifPasif" />
+                                    </div>
+                                    <ValidationMessage For="@(() => GetToplantiNotu.AktifPasif)" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 form-group row">
+                                <label for="Kategori" class="control-label col-md-6">Notu Görecek Birimi Seçin</label>
+                                <div class="col-md-6">
+                                    <InputSelect @bind-Value="@GetToplantiNotu.Birimler" class="form-control">
+                                        <option></option>
+                                        @if (Birimler != null)
+                                        {
+                                            @foreach (var kategori in Birimler)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
+                                        }
+
+                                    </InputSelect>
+                                </div>
+                            </div>
+
                         </div>
-
-
 
                     </div>
 
@@ -82,15 +133,30 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value="@ToplantiNot.Aciklama"
+                                                @bind-Value="@GetToplantiNotu.Aciklama"
                                                 Label="Açıklama ve Alınan Kararlar"
                                                 UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
                             </div>
-                            <ValidationMessage For="@(() => ToplantiNot.Aciklama)" />
+                            <ValidationMessage For="@(() => GetToplantiNotu.Aciklama)" />
                         </div>
 
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Toplantıyı Seçin</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@GetToplantiNotu.ToplantiId" class="form-control">
+                                    <option></option>
+                                    @if (Toplantilar != null)
+                                    {
+                                        @foreach (var kategori in Toplantilar)
+                                        {
+                                            <option value="@kategori.Id"> @kategori.Baslik </option>
+                                        }
+                                    }
 
+                                </InputSelect>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

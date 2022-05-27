@@ -13,12 +13,13 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }
         [DataType(DataType.Text)]
-        public Birimler Birimler { get; set; }
-        public int? ToplantiMerkeziId { get; set; }
-        public ToplantiMerkezi ToplantiMerkezi { get; set; }
+        public Birimler Birimler { get; set; }        
         public int? ToplantiId { get; set; }
         public Toplanti Toplanti { get; set; }
-        public int? DosyaId { get; set; }
-        public ICollection<Dosya.Dosya> Dosya { get; set; }
+        public int? ToplantiOdasiId { get; set; }
+        public ToplantiOdasi ToplantiOdasi { get; set; }
+        public int? ToplantiMerkeziId { get; set; }
+        public ToplantiMerkezi ToplantiMerkezi { get; set; }
+        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
     }
 }

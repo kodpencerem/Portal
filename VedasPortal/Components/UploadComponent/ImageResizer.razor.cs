@@ -168,7 +168,6 @@ namespace VedasPortal.Components.UploadComponent
 
             var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
             SaveFileToUploaded.FileName = fileName;
-            StateHasChanged();
             await Task.Delay(10);
             await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
             string base64String = await args.GetBase64Async();

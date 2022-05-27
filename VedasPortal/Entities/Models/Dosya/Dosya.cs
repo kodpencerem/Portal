@@ -37,7 +37,6 @@ namespace VedasPortal.Entities.Models.Dosya
         public Rehber Rehber { get; set; }       
         public int? PersonelDurumId { get; set; }
         public PersonelDurum PersonelDurum { get; set; }
-
         public int? ToplantiNotuId { get; set; }
         public ToplantiTakvimi.ToplantiNotu.ToplantiNotu ToplantiNotu { get; set; }
     }

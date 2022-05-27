@@ -1,5 +1,8 @@
 ﻿@using VedasPortal.Entities.Models.ToplantiTakvimi;
-@using VedasPortal.Entities.ViewModels;
+@using VedasPortal.Entities.ViewModels
+@using Microsoft.AspNetCore.Components;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using System;
 @inject VedasPortal.Repository.Interface.IToplantiTakvimi _toplanti
 @inject VedasPortal.Repository.Interface.IBaseRepository<Toplanti> _toplantiKayit
 
@@ -13,116 +16,198 @@
         <EditForm Model="@toplantiGetir" OnValidSubmit="EditToplanti"
                   class="flex-grow-1 d-flex flex-column align-items-center">
             <DataAnnotationsValidator />
-            <CardComponent cardStyle="Style.warning">
-                <CardBody>
+            <Div class="col-12">
+                <CardComponent cardStyle="Style.warning">
+                    <CardBody>
 
-                    <div class="d-flex justify-content-center">
-                        <p class="mb-0 mr-2">
-                            <label class="mb-0 d-flex align-items-center">
-                                <span class="mr-2">Start:</span>
-                                <TimePickerComponent OnTimeChanged="UpdateStartTime" Time="toplantiGetir.BaslangicTarihi"></TimePickerComponent>
+                        <div class="d-flex justify-content-center">
+                            <p class="mb-0 mr-2">
+                                <label class="mb-0 d-flex align-items-center">
+                                    <span class="mr-2">Başlangıç Saati:</span>
+                                    <TimePickerComponent OnTimeChanged="UpdateStartTime" Time="toplantiGetir.BaslangicTarihi"></TimePickerComponent>
+                                </label>
+                            </p>
+
+
+                            <p class="mb-0 ml-2">
+                                <label class="mb-0 d-flex align-items-center">
+                                    <span class="mr-2">Bitiş Saati:</span>
+                                    <TimePickerComponent OnTimeChanged="UpdateEndTime" Time="toplantiGetir.BitisTarihi"></TimePickerComponent>
+                                </label>
+                            </p>
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label for="Countries">Toplantı Merkezi</label>
+                            <InputSelect id="Countries" class="form-control"
+                                         ValueExpression="@(() => ToplantiTakvimVm.MerkezId)"
+                                         Value="@ToplantiTakvimVm.MerkezId"
+                                         ValueChanged="@((string value) => OnMerkezChange(value))">
+
+                                @foreach (var state in ToplantiTakvimVm.ListofToplantiMerkezleri)
+                                {
+                                    <option value="@state.Value">@state.Text</option>
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => ToplantiTakvimVm.MerkezId)" />
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label for="State">Toplantı Odası</label>
+                            <InputSelect id="State" class="form-control"
+                                         ValueExpression="@(() => ToplantiTakvimVm.OdaId)"
+                                         Value="@ToplantiTakvimVm.OdaId"
+                                         ValueChanged="@((string value) => OnOdaChange(value))">
+
+                                @if (ToplantiTakvimVm.ListofToplantiOdalari != null)
+                                {
+                                    @foreach (var state in ToplantiTakvimVm.ListofToplantiOdalari)
+                                    {
+                                        <option value="@state.Value">@state.Text</option>
+                                    }
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="@(() => ToplantiTakvimVm.OdaId)" />
+
+                        </div>
+
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>
+                                Toplantı Başlığı:
                             </label>
-                        </p>
+                            <InputText @bind-Value="toplantiGetir.Baslik"
+                                       class="form-control" />
+                            <ValidationMessage For="@(()=>toplantiGetir.Baslik)" />
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>Toplantı Konusu:</label>
+                            <InputText @bind-Value="toplantiGetir.Konu"
+                                       class="form-control" />
+                            <ValidationMessage For="@(()=>toplantiGetir.Konu)" />
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>Katılım Sayısı Sınırı:</label>
+                            <InputNumber @bind-Value="toplantiGetir.BeklenenKatilimSayisi"
+                                         class="form-control" min="0" />
+                            <ValidationMessage For="@(()=>toplantiGetir.BeklenenKatilimSayisi)" />
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>Açıklama:</label>
+                            <InputTextArea @bind-Value="toplantiGetir.Aciklama" class="form-control" />
+                            <ValidationMessage For="@(()=>toplantiGetir.Aciklama)" />
+                        </div>
+                        <br />
 
+                    </CardBody>
+                    <CardFotter>
+                        <button class="btn btn-primary align-self-stretch rounded-0 mt-auto"
+                                type="submit">
+                            Değişiklikleri Onayla
+                        </button>
+                    </CardFotter>
+                </CardComponent>
 
-                        <p class="mb-0 ml-2">
-                            <label class="mb-0 d-flex align-items-center">
-                                <span class="mr-2">End:</span>
-                                <TimePickerComponent OnTimeChanged="UpdateEndTime" Time="toplantiGetir.BitisTarihi"></TimePickerComponent>
-                            </label>
-                        </p>
-                    </div>
-                    <br />
-                    <div class="form-group col-md-12">
-                        <label>
-                            Toplantı Başlığı:
-                        </label>
-                        <InputText @bind-Value="toplantiGetir.Baslik"
-                                   class="form-control" />
-                        <ValidationMessage For="@(()=>toplantiGetir.Baslik)" />
-                    </div>
-                    <br />
-                    <div class="form-group col-md-12">
-                        <label>Toplantı Konusu:</label>
-                        <InputText @bind-Value="toplantiGetir.Konu"
-                                   class="form-control" />
-                        <ValidationMessage For="@(()=>toplantiGetir.Konu)" />
-                    </div>
-                    <br />
-                    <div class="form-group col-md-12">
-                        <label>Katılım Sayısı Sınırı:</label>
-                        <InputNumber @bind-Value="toplantiGetir.BeklenenKatilimSayisi"
-                                     class="form-control" min="0" />
-                        <ValidationMessage For="@(()=>toplantiGetir.BeklenenKatilimSayisi)" />
-                    </div>
-                    <br />
-                    <div class="form-group col-md-12">
-                        <label>Açıklama:</label>
-                        <InputTextArea @bind-Value="toplantiGetir.Aciklama" class="form-control" />
-                        <ValidationMessage For="@(()=>toplantiGetir.Aciklama)" />
-                    </div>
-                    <br />
-                                      
-                </CardBody>
-                <CardFotter>
-                    <button class="btn btn-primary align-self-stretch rounded-0 mt-auto"
-                            type="submit">
-                        Değişiklikleri Onayla
-                    </button>
-                </CardFotter>
-            </CardComponent>
+            </Div>
 
         </EditForm>
     </div>}
 
 
 
-@code { 
+@code {
 
     private Toplanti toplantiGetir;
     [Parameter]
-    public Toplanti Duzenle { get; set; }
+    public Toplanti Toplanti { get; set; }
 
     [Parameter]
-    public int ToplantiDuzenleId { get; set; }
+    public DateTime Date { get; set; }
 
     [Parameter]
     public EventCallback<Toplanti> OnEditedToplanti { get; set; }
 
-    protected ToplantiTakvimVm takvimVm { get; set; } = new ToplantiTakvimVm();
-
-    public ToplantiMerkezi toplantiMerkezi { get; set; }
-
-    public int OdaId { get; set; }
-
+    protected ToplantiTakvimVm ToplantiTakvimVm { get; set; } = new ToplantiTakvimVm();
 
     public async void EditToplanti()
     {
 
-        this.Duzenle.BaslangicTarihi = toplantiGetir.BaslangicTarihi;
-        this.Duzenle.BitisTarihi = toplantiGetir.BitisTarihi;
-        this.Duzenle.Konu = toplantiGetir.Konu;
-        this.Duzenle.BeklenenKatilimSayisi = toplantiGetir.BeklenenKatilimSayisi;
-        this.Duzenle.Baslik = toplantiGetir.Baslik;
-        this.Duzenle.Aciklama = toplantiGetir.Aciklama;
-        this.Duzenle.ToplantiOdasi = toplantiGetir.ToplantiOdasi;
-        var merkeziSec = takvimVm.MerkezId;
-        Duzenle = _toplantiKayit.Get(ToplantiDuzenleId);
-        await OnEditedToplanti.InvokeAsync(this.Duzenle);
+        this.Toplanti.BaslangicTarihi = toplantiGetir.BaslangicTarihi;
+        this.Toplanti.BitisTarihi = toplantiGetir.BitisTarihi;
+        this.Toplanti.Konu = toplantiGetir.Konu;
+        this.Toplanti.BeklenenKatilimSayisi = toplantiGetir.BeklenenKatilimSayisi;
+        this.Toplanti.Baslik = toplantiGetir.Baslik;
+        this.Toplanti.Aciklama = toplantiGetir.Aciklama;
+        this.Toplanti.ToplantiOdasi = toplantiGetir.ToplantiOdasi;
+        this.Toplanti.ToplantiMerkeziId = toplantiGetir.ToplantiMerkeziId;
+        this.Toplanti.ToplantiOdasiId = toplantiGetir.ToplantiOdasiId;
+        this.Toplanti.PersonelId = toplantiGetir.PersonelId;
+        this.Toplanti.AktifPasif = toplantiGetir.AktifPasif;
+        this.Toplanti.AnaSayfadaGoster = toplantiGetir.AnaSayfadaGoster;
+        this.Toplanti.DuzenlemeTarihi = toplantiGetir.DuzenlemeTarihi;
+        this.Toplanti.DuzenleyenKullanici = toplantiGetir.DuzenleyenKullanici;
+        this.Toplanti.KaydedenKullanici = toplantiGetir.KaydedenKullanici;
+        this.Toplanti.Id = toplantiGetir.Id;
+        this.Toplanti.KayitTarihi = toplantiGetir.KayitTarihi;
+        this.Toplanti.Kod = toplantiGetir.Kod;
+        this.Toplanti.Kullanici = toplantiGetir.Kullanici;
+        this.Toplanti.Renk = toplantiGetir.Renk;
+        this.Toplanti.SilenKullanici = toplantiGetir.SilenKullanici;
+        this.Toplanti.SilmeTarihi = toplantiGetir.SilmeTarihi;
+        this.Toplanti.VideoKonferansMi = toplantiGetir.VideoKonferansMi;
+        this.Toplanti.ToplantiNotu = toplantiGetir.ToplantiNotu;
+
+        await OnEditedToplanti.InvokeAsync(this.Toplanti);
+    }
+
+    protected override void OnInitialized()
+    {
+        
+        ToplantiTakvimVm.ListofToplantiMerkezleri = _toplanti.ToplantiMerkezleri();
+        ToplantiTakvimVm.MerkezId = "";
+        ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
+    {
+                new SelectListItem()
+                {
+                    Text = "Seçiniz",
+                    Value = ""
+                }
+            };
+
     }
 
     protected override void OnParametersSet()
     {
-        if (this.Duzenle != null)
+        if (this.Toplanti != null)
         {
             toplantiGetir = new Toplanti();
-            toplantiGetir.BaslangicTarihi = this.Duzenle.BaslangicTarihi;
-            toplantiGetir.BitisTarihi = this.Duzenle.BitisTarihi;
-            toplantiGetir.Konu = this.Duzenle.Konu;
-            toplantiGetir.Aciklama = this.Duzenle.Aciklama;
-            toplantiGetir.Baslik = this.Duzenle.Baslik;
-            toplantiGetir.BeklenenKatilimSayisi = this.Duzenle.BeklenenKatilimSayisi;
-            toplantiGetir.ToplantiOdasi = this.Duzenle.ToplantiOdasi;
+            toplantiGetir.BaslangicTarihi = this.Toplanti.BaslangicTarihi;
+            toplantiGetir.BitisTarihi = this.Toplanti.BitisTarihi;
+            toplantiGetir.Konu = this.Toplanti.Konu;
+            toplantiGetir.Aciklama = this.Toplanti.Aciklama;
+            toplantiGetir.Baslik = this.Toplanti.Baslik;
+            toplantiGetir.BeklenenKatilimSayisi = this.Toplanti.BeklenenKatilimSayisi;
+            toplantiGetir.ToplantiOdasi = this.Toplanti.ToplantiOdasi;
+            toplantiGetir.PersonelId = this.Toplanti.PersonelId;
+            toplantiGetir.Id = this.Toplanti.Id;
+            toplantiGetir.ToplantiMerkeziId = this.Toplanti.ToplantiMerkeziId;
+            toplantiGetir.ToplantiOdasiId = this.Toplanti.ToplantiOdasiId;
+            toplantiGetir.AktifPasif = this.Toplanti.AktifPasif;
+            toplantiGetir.AnaSayfadaGoster = this.Toplanti.AnaSayfadaGoster;
+            toplantiGetir.DuzenlemeTarihi = this.Toplanti.DuzenlemeTarihi;
+            toplantiGetir.DuzenleyenKullanici = this.Toplanti.DuzenleyenKullanici;
+            toplantiGetir.KayitTarihi = this.Toplanti.KayitTarihi;
+            toplantiGetir.KaydedenKullanici = this.Toplanti.KaydedenKullanici;
+            toplantiGetir.Kod = this.Toplanti.Kod;
+            toplantiGetir.Kullanici = this.Toplanti.Kullanici;
+            toplantiGetir.Renk = this.Toplanti.Renk;
+            toplantiGetir.SilenKullanici = this.Toplanti.SilenKullanici;
+            toplantiGetir.SilmeTarihi = this.Toplanti.SilmeTarihi;
+            toplantiGetir.VideoKonferansMi = this.Toplanti.VideoKonferansMi;
+            toplantiGetir.ToplantiNotu = this.Toplanti.ToplantiNotu;
 
         }
 
@@ -137,5 +222,34 @@
     public void UpdateEndTime(DateTime time)
     {
         toplantiGetir.BitisTarihi = time;
+    }
+
+    protected void OnMerkezChange(string value)
+    {
+
+        if (value != null)
+        {
+            ToplantiTakvimVm.MerkezId = value.ToString();
+            ToplantiTakvimVm.OdaId = "";
+            ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
+        {
+                    new SelectListItem()
+                    {
+                        Text = "Seçiniz...",
+                        Value = ""
+                    }
+                };
+
+            ToplantiTakvimVm.ListofToplantiOdalari = _toplanti.ToplantiOdalari(Convert.ToInt32(ToplantiTakvimVm.MerkezId));
+            this.StateHasChanged();
+        }
+    }
+
+    protected void OnOdaChange(string value)
+    {
+        if (value != null)
+        {
+            ToplantiTakvimVm.OdaId = value.ToString();
+        }
     }
 }

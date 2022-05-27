@@ -31,8 +31,6 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
 
         public Dosya HaberDosya = new();
 
-        public string Message { get; set; }
-
         protected IEnumerable<HaberDuyuru> Haberler { get; set; }
 
         [Inject]
@@ -57,6 +55,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         {
 
             HaberServisi.Add(haber);
+
             var fileName = SaveFileToUploaded.FileName?.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
             var dosya = new Dosya()
@@ -67,8 +66,8 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 HaberDuyuruId = haber.Id,
-
             };
+
             HaberDosyaServisi.Add(dosya);
             TumHaberleriGetir();
         }

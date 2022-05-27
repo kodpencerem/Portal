@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Repository.Interface;
@@ -9,7 +10,6 @@ namespace VedasPortal.Pages.ToplantiOdalari
     {
         [Inject]
         private IBaseRepository<ToplantiNotu> ToplantiNotu { get; set; }
-
         [Parameter]
         public int ToplantiNotId { get; set; }
 

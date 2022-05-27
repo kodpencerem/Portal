@@ -41,7 +41,6 @@ namespace VedasPortal.Components.VideoComponent
                 VideoClassId = VideoYorumGetir.Id
             };
             YorumServisi.Add(yorum);
-            Yorum.Aciklama = string.Empty;
         }
 
 

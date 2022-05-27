@@ -16,7 +16,7 @@ namespace VedasPortal
             .Replace("-", "").Replace(@"\", "")
             .Replace(".", "").ToString();
         public static string ImageUploadedPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "images", "uploaded");
-        public static string VideoUploadedPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "files");
+        public static string FileUploadedPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "files");
         public static string FileName { get; set; }
         public static void SaveStreamAsFile(string filePath, Stream inputStream, string fileName)
         {

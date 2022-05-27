@@ -4,8 +4,6 @@
 @using Microsoft.AspNetCore.Mvc.Rendering;
 @using System;
 @inject VedasPortal.Repository.Interface.IToplantiTakvimi toplantiTakvimi
-@inject VedasPortal.Repository.Interface.IBaseRepository<Toplanti> _toplantiKayit
-
 
 <div class="ToDoForm d-flex flex-column">
     <i class="bi bi-x-circle m-2 ml-auto"
@@ -121,8 +119,6 @@
 
     private Toplanti GetToplanti = new Toplanti();
 
-    public int OdaId { get; set; }
-
     [Parameter]
     public DateTime Date { get; set; }
 
@@ -131,18 +127,15 @@
 
     protected ToplantiTakvimVm ToplantiTakvimVm { get; set; } = new ToplantiTakvimVm();
 
-
     public async void CreateToplanti()
     {
-        //var selectedToplantiMerkezi = Convert.ToInt32(ToplantiTakvimVm.MerkezId);
-        //var selectedToplantiOdasi = Convert.ToInt32(ToplantiTakvimVm.OdaId);
 
         var toplantiOlustur = new Toplanti()
         {
             Aciklama = GetToplanti.Aciklama,
             AktifPasif = GetToplanti.AktifPasif,
             BitisTarihi = GetToplanti.BitisTarihi,
-            BaslangicTarihi= GetToplanti.BaslangicTarihi,
+            BaslangicTarihi = GetToplanti.BaslangicTarihi,
             AnaSayfadaGoster = GetToplanti.AnaSayfadaGoster,
             Baslik = GetToplanti.Baslik,
             BeklenenKatilimSayisi = GetToplanti.BeklenenKatilimSayisi,
@@ -192,7 +185,7 @@
                     Text = "Seçiniz",
                     Value = ""
                 }
-            };
+        };
 
     }
 
@@ -204,7 +197,7 @@
             ToplantiTakvimVm.MerkezId = value.ToString();
             ToplantiTakvimVm.OdaId = "";
             ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
-                {
+            {
                     new SelectListItem()
                     {
                         Text = "Seçiniz...",

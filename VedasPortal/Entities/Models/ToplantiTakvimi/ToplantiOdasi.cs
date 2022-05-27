@@ -16,5 +16,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public int ToplantiMerkeziId { get; set; }
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
         public virtual ICollection<Toplanti> Toplanti { get; set; }
+        public virtual ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
     }
 }

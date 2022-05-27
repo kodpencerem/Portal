@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
+using VedasPortal.Entities.ViewModels;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
@@ -16,23 +19,40 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
     {
 
         [Inject]
-        public IBaseRepository<ToplantiNotu> ToplantiNotu { get; set; }
+        public IBaseRepository<ToplantiNotu> ToplantiNotServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> ToplantiNotDosya { get; set; }
+        public IToplantiTakvimi toplantiTakvimi { get; set; }
+
+        [Inject]
+        public IBaseRepository<Dosya> ToplantiNotDosyaServisi { get; set; }
+
+        protected ToplantiTakvimVm ToplantiTakvimVm { get; set; } = new ToplantiTakvimVm();
+
+        public Toplanti toplanti { get; set; } = new();
 
         [Parameter]
-        public int ToplantiNotId { get; set; }
+        public int TNotId { get; set; }
 
         protected string Title = "Ekle";
-        public ToplantiNotu ToplantiNot = new();
+        public ToplantiNotu GetToplantiNotu = new();
         public Dosya GetDosya = new();
 
         protected IEnumerable<ToplantiNotu> ToplantiNotlari { get; set; }
 
+        [Inject]
+        protected IBaseRepository<Toplanti> ToplantiServisi { get; set; }
+        protected IEnumerable<Toplanti> Toplantilar;
+
+        protected IEnumerable<Toplanti> TumToplantilar()
+        {
+            Toplantilar = ToplantiServisi.GetAll();
+            return Toplantilar;
+        }
+
         protected IEnumerable<ToplantiNotu> TumNotlarilariGetir()
         {
-            ToplantiNotlari = ToplantiNotu.GetAll();
+            ToplantiNotlari = ToplantiNotServisi.GetAll();
             return ToplantiNotlari;
         }
 
@@ -49,60 +69,108 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected void Kayit()
         {
-            ToplantiNotu.Add(ToplantiNot);
-            var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
-            {
-                Adi = fileName[0],
-                Yolu = filePath,
-                Uzanti = fileName[1],
-                Kategori = DosyaKategori.Jpg,
-                AktifPasif = true,
-                ToplantiNotuId= ToplantiNot.Id,
 
-            };
-            ToplantiNotDosya.Add(dosya);
+            GetToplantiNotu.ToplantiMerkeziId = Convert.ToInt32(ToplantiTakvimVm.MerkezId);
+            GetToplantiNotu.ToplantiOdasiId = Convert.ToInt32(ToplantiTakvimVm.OdaId);
+           
+            ToplantiNotServisi.Add(GetToplantiNotu);
+
+            if(GetToplantiNotu.Id != 0)
+            {
+                var fileName = SaveFileToUploaded.FileName.Split(".");
+                var filePath = SaveFileToUploaded.FileUploadedPath;
+
+                var dosya = new Dosya()
+                {
+                    Adi = fileName[0],
+                    Yolu = filePath,
+                    Uzanti = fileName[1],
+                    Kategori = DosyaKategori.Jpg,
+                    AktifPasif = true,
+                    ToplantiNotuId = GetToplantiNotu.Id,
+                };
+                ToplantiNotDosyaServisi.Add(dosya);
+            }           
         }
+
         protected override void OnParametersSet()
         {
-            if (ToplantiNotId != 0)
+            if (TNotId != 0)
             {
                 Title = "Duzenle";
-                ToplantiNot = ToplantiNotu.Get(ToplantiNotId);
+                GetToplantiNotu = ToplantiNotServisi.Get(TNotId);
                 //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
             }
         }
 
-        protected void SilmeyiOnayla(int ToplantiNotId)
+        protected void SilmeyiOnayla(int TNotId)
         {
             ModalDialog.Open();
-            ToplantiNot = ToplantiNotlari.FirstOrDefault(x => x.Id == ToplantiNotId);
+            GetToplantiNotu = ToplantiNotlari.FirstOrDefault(x => x.Id == TNotId);
         }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
         protected void Sil()
         {
-            if (ToplantiNot.Id == 0)
+            if (GetToplantiNotu.Id == 0)
                 return;
 
-            ToplantiNotu.Remove(ToplantiNot.Id);
-            ToplantiNot = new ToplantiNotu();
+            ToplantiNotServisi.Remove(GetToplantiNotu.Id);
+            GetToplantiNotu = new ToplantiNotu();
             TumNotlarilariGetir();
             TumBirimleriGetir();
         }
 
+        protected void OnMerkezChange(string value)
+        {
+
+            if (value != null)
+            {
+                ToplantiTakvimVm.MerkezId = value.ToString();
+                ToplantiTakvimVm.OdaId = "";
+                ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
+                {
+                    new SelectListItem()
+                    {
+                        Text = "Seçiniz...",
+                        Value = ""
+                    }
+                };
+
+                ToplantiTakvimVm.ListofToplantiOdalari = toplantiTakvimi.ToplantiOdalari(Convert.ToInt32(ToplantiTakvimVm.MerkezId));
+                this.StateHasChanged();
+            }
+        }
+
+        protected void OnOdaChange(string value)
+        {
+            if (value != null)
+            {
+                ToplantiTakvimVm.OdaId = value.ToString();
+            }
+        }
         protected override Task OnInitializedAsync()
         {
+            ToplantiTakvimVm.ListofToplantiMerkezleri = toplantiTakvimi.ToplantiMerkezleri();
+            ToplantiTakvimVm.MerkezId = "";
+            ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = "Seçiniz",
+                    Value = ""
+                }
+            };
             TumNotlarilariGetir();
+            TumToplantilar();
             TumBirimleriGetir();
             return Task.CompletedTask;
         }
 
         public void Temizle()
         {
-            ToplantiNot = null;
+            GetToplantiNotu = null;
             GetDosya = null;
         }
 

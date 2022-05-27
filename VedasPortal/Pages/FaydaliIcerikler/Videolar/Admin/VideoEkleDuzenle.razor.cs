@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             VideoServisi.Add(video);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.VideoUploadedPath;
+            var filePath = SaveFileToUploaded.FileUploadedPath;
             var dosya = new VideoClass()
             {
                 Baslik = fileName[0],

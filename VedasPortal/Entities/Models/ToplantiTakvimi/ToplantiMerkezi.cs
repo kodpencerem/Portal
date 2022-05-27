@@ -6,5 +6,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
     {
         public string Adi { get; set; }
         public virtual ICollection<ToplantiOdasi> ToplantiOdasi { get; set; }
+        public virtual ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
     }
 }
