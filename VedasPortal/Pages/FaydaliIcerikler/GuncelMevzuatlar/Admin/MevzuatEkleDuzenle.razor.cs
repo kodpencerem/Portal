@@ -121,13 +121,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
-
-        public void Temizle()
-        {
-            mevzuat = null;
-            MevzuatDosya = null;
-        }
-        
+       
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

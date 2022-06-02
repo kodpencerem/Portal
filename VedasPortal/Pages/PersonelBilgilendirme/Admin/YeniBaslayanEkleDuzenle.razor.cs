@@ -139,12 +139,6 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            personelDurum = null;
-            PersonelDosya = null;
-        }
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

@@ -113,11 +113,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
-
-        public void Temizle()
-        {
-            video = null;
-        }
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

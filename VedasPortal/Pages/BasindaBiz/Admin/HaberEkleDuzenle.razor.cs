@@ -110,13 +110,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             TumKategorileriGetir();
             return Task.FromResult(Task.CompletedTask);
         }
-
-        public void Temizle()
-        {
-            haber = null;
-            HaberDosya = null;
-        }
-
+      
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

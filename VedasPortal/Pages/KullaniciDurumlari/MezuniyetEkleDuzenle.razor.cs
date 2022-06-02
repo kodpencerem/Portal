@@ -85,14 +85,6 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            okulMezunBilgisi = null;
-
-            UrlNavigationManager.NavigateTo("/mezuniyet/ekle");
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

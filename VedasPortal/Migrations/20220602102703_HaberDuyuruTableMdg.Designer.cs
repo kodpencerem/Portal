@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220602102703_HaberDuyuruTableMdg")]
+    partial class HaberDuyuruTableMdg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -666,9 +668,6 @@ namespace VedasPortal.Migrations
 
                     b.Property<DateTime>("BaslangicTarihi")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("BegeniDerecesi")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("BitisTarihi")
                         .HasColumnType("datetime2");

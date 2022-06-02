@@ -17,6 +17,7 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public bool Begeni { get; set; }
         public string BegeniSayisi { get; set; }
         public int BegeniYuzdesi { get; set; }
+        public int BegeniDerecesi { get; set; }
         public int GorulduSayisi { get; set; }
         public bool SliderdaGoster { get; set; } = false;
         [DataType(DataType.Text)]

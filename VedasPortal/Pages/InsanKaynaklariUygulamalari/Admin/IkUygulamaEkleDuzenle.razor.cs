@@ -123,13 +123,6 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            ikUygulama = null;
-            IkUygulamaDosya = null;
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

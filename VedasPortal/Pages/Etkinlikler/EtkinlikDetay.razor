@@ -15,41 +15,23 @@
                                         <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
                                                ".",
                                                EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="410"
+                                             width="494"
                                              alt="@EtkinlikDetayGetir.Adi" />
                                     </div>
-                                    <div class="tab-pane"
+
+                                    @foreach (var resim in EtkinlikDetayGetir?.Dosya.Where(x => x.EtkinlikId == EtkinlikDetayGetir.Id).ToList())
+                                    {
+                                        <div class="tab-pane"
                                          id="pic-2">
                                         <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
                                                ".",
                                                EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="410"
+                                             width="494"
                                              alt="@EtkinlikDetayGetir.Adi" />
-                                    </div>
-                                    <div class="tab-pane"
-                                         id="pic-3">
-                                        <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="410"
-                                             alt="@EtkinlikDetayGetir.Adi" />
-                                    </div>
-                                    <div class="tab-pane"
-                                         id="pic-4">
-                                        <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="410"
-                                             alt="@EtkinlikDetayGetir.Adi" />
-                                    </div>
-                                    <div class="tab-pane"
-                                         id="pic-5">
-                                        <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="410"
-                                             alt="@EtkinlikDetayGetir.Adi" />
-                                    </div>
+                                    </div>  
+                                    }
+
+                                                                                                                                           
                                 </div>
                                 <ul style="margin-left:7px" class="preview-thumbnail nav nav-tabs">
                                     <li class="active">
@@ -61,6 +43,8 @@
                                                  alt="@EtkinlikDetayGetir.Adi" />
                                         </a>
                                     </li>
+                                    @foreach (var resim in EtkinlikDetayGetir?.Dosya.Where(x => x.EtkinlikId == EtkinlikDetayGetir.Id).ToList())
+                                    {
                                     <li>
                                         <a data-target="#pic-2"
                                            data-toggle="tab">
@@ -71,51 +55,13 @@
                                                  alt="@EtkinlikDetayGetir.Adi" />
                                         </a>
                                     </li>
-                                    <li>
-                                        <a data-target="#pic-3"
-                                           data-toggle="tab">
-                                            <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                                 width="76"
-                                                 alt="@EtkinlikDetayGetir.Adi" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-target="#pic-4"
-                                           data-toggle="tab">
-                                            <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                                 width="76"
-                                                 alt="@EtkinlikDetayGetir.Adi" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-target="#pic-5"
-                                           data-toggle="tab">
-                                            <img src="images/uploaded/@string.Concat(EtkinlikDetayGetir.Dosya?.FirstOrDefault().Adi,
-                                               ".",
-                                               EtkinlikDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
-                                                 width="76"
-                                                 alt="@EtkinlikDetayGetir.Adi" />
-                                        </a>
-                                    </li>
+                                    }
                                 </ul>
 
                             </div>
                             <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
                                 <h3 class="product-title">@EtkinlikDetayGetir.Adi</h3>
-                                <div class="rating">
-                                    <div class="stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <span class="review-no">41 Personel Gördü</span>
-                                </div>
+                                <Rating Color="Color.Primary" @bind-SelectedValue="@EtkinlikDetayGetir.BegeniDerecesi" MaxValue="5" />
                                 <p class="haber-detay">@((MarkupString)EtkinlikDetayGetir.Aciklama)</p>
 
                                 <p class="vote"><strong>91%</strong> personel bu yayını beğendi <strong>(87 Beğeni)</strong></p>

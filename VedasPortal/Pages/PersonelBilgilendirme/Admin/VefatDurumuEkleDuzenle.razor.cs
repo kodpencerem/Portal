@@ -117,12 +117,6 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             TumBirimleriGetir();
             return Task.CompletedTask;
         }
-
-        public void Temizle()
-        {
-            vefatDurumu = null;
-        }
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

@@ -71,11 +71,6 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            toplantiMerkezi = null;
-        }
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

@@ -106,12 +106,6 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             }
         }
 
-        public void Temizle()
-        {
-            Oda = null;
-            takvimVm = null;
-        }
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

@@ -23,7 +23,7 @@ else
                     </h5>
                 </div>
             </div>
-            @foreach (var duyuru in Duyurular.Where(d => d.SliderdaGoster).ToList())
+            @foreach (var duyuru in Duyurular?.Where(d => d.SliderdaGoster).ToList())
             {
                 <div class="carousel-item" 
                      style="max-height:600px;max-width:1203px">

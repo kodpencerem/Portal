@@ -103,15 +103,6 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             TumEtkinlikleriGetir();
             return Task.CompletedTask;
         }
-
-        public void Temizle()
-        {
-            katilimci = null;
-
-            KatilimciDosya = null;
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

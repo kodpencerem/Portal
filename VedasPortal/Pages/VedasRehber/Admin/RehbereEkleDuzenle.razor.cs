@@ -100,14 +100,6 @@ namespace VedasPortal.Pages.VedasRehber.Admin
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            rehber = null;
-            RehberDosya = null;
-            //UrlNavigationManager.NavigateTo("/rehber/ekle");
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

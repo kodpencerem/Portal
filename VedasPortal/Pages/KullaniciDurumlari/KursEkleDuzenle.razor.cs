@@ -73,14 +73,6 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            kursVeSertifika = null;
-
-            UrlNavigationManager.NavigateTo("/Profil");
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

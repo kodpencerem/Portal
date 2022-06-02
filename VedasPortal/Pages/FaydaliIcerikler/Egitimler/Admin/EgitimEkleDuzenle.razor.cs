@@ -125,14 +125,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             return Task.CompletedTask;
         }
 
-        public void Temizle()
-        {
-            egitim = null;
-
-            EgitimDosya = null;
-        }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

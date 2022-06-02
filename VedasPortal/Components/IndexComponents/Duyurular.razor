@@ -22,7 +22,7 @@ else
             <div class="list-group" id="duyuruDiv">
                 @foreach (var duyuru in DuyurularListesi.Where(
                      d => d.AnasayfadaGoster == true && 
-                     d.Kategori.TextHaberDuyuru() == "Duyuru").Take(3).ToList())
+                     d.Kategori.TextHaberDuyuru() == HaberDuyuruKategori.Duyuru.ToString()).Take(3).ToList())
                 {
 
                     <a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
