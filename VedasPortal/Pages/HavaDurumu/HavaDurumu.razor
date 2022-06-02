@@ -1,9 +1,7 @@
-﻿@page "/HavaDurumu"
-
+﻿@*@page "/HavaDurumu"
+@using VedasPortal.Services.HavaDurumuService
+@inject VedasPortal.Services.HavaDurumuService.HavaDurumuService TahminServisi
 @using System.Linq
-@using VedasPortal.Models
-
-
 
 <h4 class="text-center">Hava Tahmin Değerleri</h4>
 <hr />
@@ -47,7 +45,7 @@ else
 
 <EditForm Model="sehirAra" OnValidSubmit="havaTahminAra">
     <DataAnnotationsValidator />
-    <ValidationSummary />
+    <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
     <p>
         <label for="sehirAdi">Aramak İstediğiniz Şehir Adını Yazınız.</label>
         <InputText id="sehirAdi" @bind-Value="sehirAra.SehirAdi" /> |
@@ -73,22 +71,7 @@ else
 }
 
 @code {
-    //private HavaTahmini[] forecasts { get; set; }
-
-    //private HavaTahminAramaModeli sehirAra { get; set; } = new HavaTahminAramaModeli();
-
-    //private HavaTahmini secilmisIlHavaTahmini { get; set; }
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    var secilenIllerHavaTahminDegerleri = new[] { "Van", "Hakkari", "Muş", "Bitlis", "Ankara" };
-    //    forecasts = await TahminServisi.HavaTahminiGetir(secilenIllerHavaTahminDegerleri);
-    //}
-
-    //private async Task havaTahminAra()
-    //{
-    //    secilmisIlHavaTahmini = (await TahminServisi.HavaTahminiGetir(sehirAra.SehirAdi)).First();
-    //}
 
     
 }
+*@

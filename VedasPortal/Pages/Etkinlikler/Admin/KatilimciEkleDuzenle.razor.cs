@@ -60,7 +60,8 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         protected void KatilimciKayit()
         {
             KatilimciServisi.Add(katilimci);
-
+            TumKatilimcilariGetir();
+            katilimci = new Katilimci();
         }
         protected override void OnParametersSet()
         {

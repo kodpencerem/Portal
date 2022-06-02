@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Egitim;
-using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari

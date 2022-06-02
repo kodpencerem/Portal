@@ -36,7 +36,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
             ToplantiMerkeziServisi.Add(toplantiMerkezi);
             TumMerkezleriGetir();
-            Temizle();
+            toplantiMerkezi = new ToplantiMerkezi();
         }
         protected override void OnParametersSet()
         {

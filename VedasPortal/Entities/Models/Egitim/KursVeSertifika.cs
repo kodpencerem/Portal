@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VedasPortal.Entities.Models.Video
+namespace VedasPortal.Entities.Models.Egitim
 {
     public class KursVeSertifika : Base.BaseEntity
     {

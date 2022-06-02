@@ -9,33 +9,18 @@
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
-                Haber @Title
+                Dosya @Title
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
                                 <MultipleUpload @bind-ValueInput="@dokuman.Yolu" />
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Dosya Adı</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="dokuman.Adi" />
-                            </div>
-                            <ValidationMessage For="@(() => dokuman.Adi)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Dosya Boyutu</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="dokuman.Boyutu" />
-                            </div>
-                            <ValidationMessage For="@(() => dokuman.Boyutu)" />
-                        </div>
+                                              
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
@@ -67,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
 
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -82,13 +67,10 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </CardBody>
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>
@@ -145,7 +127,7 @@ else
                             @foreach (var dosya in Dosyalar)
 
                             {
-
+                                
 
                                 <tr>
                                     <td class="text-center pt-2">
@@ -158,6 +140,7 @@ else
                                     <td>
                                         <img src="images/uploaded/@string.Concat(dosya.Adi,".",
                                                                    dosya.Uzanti)" width="50" height="50" />
+
                                     </td>
 
                                     <td>@dosya.Adi</td>

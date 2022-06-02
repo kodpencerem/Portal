@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
+using VedasPortal.Services.FileUploadDownload;
+
 
 namespace VedasPortal.Components.UploadComponent
 {
@@ -35,6 +38,11 @@ namespace VedasPortal.Components.UploadComponent
         /// Nesneyi ayrıştırma işlemlerini döndürür
         /// </summary>
         private bool parsing = false;
+
+        bool isCropLocked = false;
+        bool isImageLocked = false;
+        string enableProportion = "false";
+        double proportion = 1d;
 
         /// <summary>
         /// Resim kırpmak ve ayrıştırmak için bir ekran açar
@@ -126,19 +134,40 @@ namespace VedasPortal.Components.UploadComponent
             ratio = int.Parse(args.Value.ToString()) / 100.0;
         }
 
-        //IList<Dosya> imageDataUrls = new List<Dosya>();
+        [Inject]
+        public IFileUpload fileUpload { get; set; }
+        // yüklenecek seçili dosyaların listesi
+        IReadOnlyList<IBrowserFile> selectedFiles;
+        // dosyalar için önizleme URL'lerinin listesi
+        private IList<string> previewImages = new List<string>();
+
         /// <summary>
         /// Ön yüklemeden gelebilecek değişiklikleri algılar. Seçilen dosyayı kırpma işlemi bir popup açar ve kırpma işlemlerini aktif eder.
         /// </summary>
         /// <param name="args"></param>
-        protected Task OnInputFileChange(InputFileChangeEventArgs args)
+        protected async Task<Task> OnInputFileChange(InputFileChangeEventArgs args)
         {
-            foreach (var imageFile in args.GetMultipleFiles())
+            var files = args.GetMultipleFiles();
+            selectedFiles = files;
+
+            foreach (var file in files)
             {
                 PreviewImagePath = null;
-                browserFileResizer = imageFile;
+                browserFileResizer = file;
                 ShowCroper = true;
+                // resim dosyası için önizleme url'si oluştur
+                var imageUrl = await fileUpload.GeneratePreviewUrl(browserFileResizer);
+               
+                // resim url'sini önizleme url listesine ekler
+                previewImages.Add(imageUrl);
             }
+
+            //foreach (var imageFile in args.GetMultipleFiles())
+            //{
+            //    PreviewImagePath = null;
+            //    browserFileResizer = imageFile;
+            //    ShowCroper = true;
+            //}
             return Task.CompletedTask;
         }
 
@@ -162,24 +191,35 @@ namespace VedasPortal.Components.UploadComponent
         protected async Task DoneCrop()
         {
             
-            ImageCroppedResult args = await cropper.GetCropedResult();
-            ShowCroper = false;
-            parsing = true;
 
-            var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
-            SaveFileToUploaded.FileName = fileName;
-            await Task.Delay(10);
-            await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
-            string base64String = await args.GetBase64Async();
-            File.WriteAllBytes(
-                Path.Combine(
-                    SaveFileToUploaded.ImageUploadedPath, fileName),
-                Convert.FromBase64String(base64String));
-            PreviewImagePath = $"data:image/png;base64,{base64String}";
-            args.Dispose();
-            parsing = false;
-            ValueInput = fileName;
-            await ValueInputChanged.InvokeAsync(ValueInput);
+            if (selectedFiles is not null && selectedFiles.Count > 0)
+            {
+                // yüklenen dosyaları takip eder
+                var uploaded = 0;
+
+                foreach (var file in selectedFiles)
+                {
+                    ImageCroppedResult args = await cropper.GetCropedResult();
+                    ShowCroper = false;
+                    parsing = true;
+
+                    var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
+                    SaveFileToUploaded.FileName = fileName;
+                    await Task.Delay(10);
+                    await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
+                    string base64String = await args.GetBase64Async();
+                    File.WriteAllBytes(
+                        Path.Combine(
+                            SaveFileToUploaded.ImageUploadedPath, fileName),
+                        Convert.FromBase64String(base64String));
+                    PreviewImagePath = $"data:image/png;base64,{base64String}";
+                    args.Dispose();
+                    parsing = false;
+                    ValueInput = fileName;
+                    await ValueInputChanged.InvokeAsync(ValueInput);
+                    uploaded++;
+                }                   
+            }               
         }
 
         /// <summary>

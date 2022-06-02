@@ -20,7 +20,6 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public bool AnasayfadaGoster { get; set; } = true;
         public virtual ICollection<Katilimci> Katilimci { get; set; }
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
-        public virtual ICollection<Video.VideoClass> VideoClass { get; set; }
     }
 
     public enum EtkinlikKategori

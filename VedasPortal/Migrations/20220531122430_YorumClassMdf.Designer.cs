@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220531122430_YorumClassMdf")]
+    partial class YorumClassMdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,7 +311,7 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("IzlenmeDurumu")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Kategori")
+                    b.Property<int>("Kategori")
                         .HasColumnType("int");
 
                     b.Property<int?>("KatilimciId")
@@ -347,7 +349,7 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Uzanti")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VideoKategori")
+                    b.Property<int>("VideoKategori")
                         .HasColumnType("int");
 
                     b.Property<long>("VideoUzunluk")

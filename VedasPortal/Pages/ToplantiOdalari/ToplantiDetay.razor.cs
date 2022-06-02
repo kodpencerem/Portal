@@ -5,19 +5,19 @@ using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari
 {
-    public partial class OdaDetay
+    public partial class ToplantiDetay
     {
         [Inject]
-        private IBaseRepository<ToplantiOdasi> ToplantiOdasi { get; set; }
-
+        private IBaseRepository<Toplanti> ToplantiServisi { get; set; }
+     
         [Parameter]
-        public int OdaId { get; set; }
-
-        private ToplantiOdasi OdaDetayGetir { get; set; }
+        public int ToplantiId { get; set; }
+       
+        private Toplanti ToplantiGetir { get; set; }
 
         protected override Task OnInitializedAsync()
         {
-            OdaDetayGetir = ToplantiOdasi.Get(OdaId);
+            ToplantiGetir = ToplantiServisi.Get(ToplantiId);
             return Task.CompletedTask;
         }
     }

@@ -35,7 +35,6 @@ using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
-using VedasPortal.Entities.Models.Video;
 using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Repository;
 using VedasPortal.Repository.Interface;
@@ -82,7 +81,6 @@ namespace VedasPortal
             services.AddScoped<HttpClient>();
             services.AddScoped<HavaDurumuService>();
             services.AddScoped<Mapper>();
-            services.AddScoped<AltinDegisimleriServisi>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
             services.AddBlazorTable();
@@ -93,7 +91,6 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<DuzelticiFaaliyet>, BaseRepository<DuzelticiFaaliyet>>();
             services.AddScoped<IBaseRepository<Egitim>, BaseRepository<Egitim>>();
             services.AddScoped<IBaseRepository<Mevzuat>, BaseRepository<Mevzuat>>();
-            services.AddScoped<IBaseRepository<VideoClass>, BaseRepository<VideoClass>>();
             services.AddScoped<IBaseRepository<Oneri>, BaseRepository<Oneri>>();
             services.AddScoped<IBaseRepository<ToplantiNotu>, BaseRepository<ToplantiNotu>>();
             services.AddScoped<IBaseRepository<KursVeSertifika>, BaseRepository<KursVeSertifika>>();
@@ -169,7 +166,7 @@ namespace VedasPortal
                 }
             }
 
-            var user = await _UserManager.FindByEmailAsync("admin@rolesmgmt.com");
+            var user = await _UserManager.FindByEmailAsync("emrullah04@outlook.com");
 
             if (user != null)
             {

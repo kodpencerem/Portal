@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530145240_VideoDosyaClasMdf")]
+    partial class VideoDosyaClasMdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,7 +311,7 @@ namespace VedasPortal.Migrations
                     b.Property<bool>("IzlenmeDurumu")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Kategori")
+                    b.Property<int>("Kategori")
                         .HasColumnType("int");
 
                     b.Property<int?>("KatilimciId")
@@ -347,7 +349,7 @@ namespace VedasPortal.Migrations
                     b.Property<string>("Uzanti")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("VideoKategori")
+                    b.Property<int>("VideoKategori")
                         .HasColumnType("int");
 
                     b.Property<long>("VideoUzunluk")
@@ -1550,9 +1552,6 @@ namespace VedasPortal.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("DosyaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -1579,11 +1578,14 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("VideoClassId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DosyaId");
-
                     b.HasIndex("OneriId");
+
+                    b.HasIndex("VideoClassId");
 
                     b.ToTable("Yorum");
                 });
@@ -1796,17 +1798,17 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "Dosya")
-                        .WithMany("Yorum")
-                        .HasForeignKey("DosyaId");
-
                     b.HasOne("VedasPortal.Entities.Models.Oneri.Oneri", "Oneri")
                         .WithMany("Yorum")
                         .HasForeignKey("OneriId");
 
-                    b.Navigation("Dosya");
+                    b.HasOne("VedasPortal.Entities.Models.Dosya.Dosya", "VideoClass")
+                        .WithMany("Yorum")
+                        .HasForeignKey("VideoClassId");
 
                     b.Navigation("Oneri");
+
+                    b.Navigation("VideoClass");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>

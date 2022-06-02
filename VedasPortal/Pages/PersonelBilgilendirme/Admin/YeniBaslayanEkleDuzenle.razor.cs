@@ -89,6 +89,8 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
                 };
                 PersonelDosyaServisi.Add(dosya);
+                TumPersonelleriGetir();
+                personelDurum = new PersonelDurum();
             }
             else
             {

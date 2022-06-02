@@ -20,7 +20,6 @@ using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
-using VedasPortal.Entities.Models.Video;
 using VedasPortal.Enums;
 
 namespace VedasPortal.Data
@@ -35,7 +34,6 @@ namespace VedasPortal.Data
         public DbSet<Dosya> Dosya { get; set; }
         public DbSet<Etkinlik> Etkinlik { get; set; }
         public DbSet<Rehber> Rehber { get; set; }
-        public DbSet<VideoClass> VideoClass { get; set; }
         public DbSet<Katilimci> Katilimci { get; set; }
         public DbSet<DuzelticiFaaliyet> DuzelticiFaaliyet { get; set; }
         public DbSet<Mevzuat> Mevzuat { get; set; }

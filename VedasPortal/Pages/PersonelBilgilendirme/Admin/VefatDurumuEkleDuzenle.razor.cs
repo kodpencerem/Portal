@@ -69,6 +69,8 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
                 VefatDurumServisi.Add(vefatDurumu);
+                TumPersonelleriGetir();
+                vefatDurumu = new VefatDurumu();
             }
             else
             {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models;
 using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.VedasRehber.Admin
@@ -57,6 +58,8 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
             };
             RehberDosyaServisi.Add(dosya);
+            TumRehberiGetir();
+            rehber = new Rehber();
 
         }
         protected override void OnParametersSet()
@@ -82,7 +85,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         {
             if (rehber.Id == 0)
                 return;
-
+            RehberDosyaServisi.Remove(RehberDosya.Id);
             RehberServisi.Remove(rehber.Id);
             rehber = new Rehber();
             TumRehberiGetir();

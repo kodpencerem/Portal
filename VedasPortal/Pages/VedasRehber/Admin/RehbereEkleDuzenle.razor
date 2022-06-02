@@ -14,7 +14,7 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
@@ -45,7 +45,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
                         <div class="form-group row">
                             <label class="control-label col-md-2">Email</label>
                             <div class="col-md-10">
@@ -85,7 +85,7 @@
 
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>
@@ -97,103 +97,106 @@
 @if (Rehber == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 
 {
 
-<div class="col-12">
+    <div class="col-12">
 
-    <CardComponent cardStyle="Style.primary">
+        <CardComponent cardStyle="Style.primary">
 
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Rehber
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Rehber
+                    </div>
                 </div>
-            </div>
 
-        </CardHeader>
-        <CardBody>
-            <div class="table-responsive">
-                <table class="table table-striped" id="table-2">
-                    <thead>
-                        <tr>
-                            <th class="text-center pt-3">
-                                <div class="custom-checkbox custom-checkbox-table custom-control">
-                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
                                            class="custom-control-input" id="checkbox-all">
-                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                </div>
-                            </th>
-                            <th>Resim</th>
-                            <th>Personel Adı</th>
-                            <th>Personel Soyadı</th>
-                            <th>Telefon No</th>
-                            <th>E-Posta</th>
-                            <th>İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Resim</th>
+                                <th>Personel Adı</th>
+                                <th>Personel Soyadı</th>
+                                <th>Telefon No</th>
+                                <th>E-Posta</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
 
 
-                        @foreach (var rehber in Rehber)
+                            @foreach (var rehber in Rehber)
 
-                        {
-    <tr>
-        <td class="text-center pt-2">
-            <div class="custom-checkbox custom-control">
-                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                       id="checkbox-1">
-                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-            </div>
-        </td>
-        <td>
-            <img src="images/uploaded/@string.Concat(
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="images/uploaded/@string.Concat(
                                                                        rehber.Dosya.FirstOrDefault().Adi,
                                                                        ".",
                                                                        rehber.Dosya.FirstOrDefault().Uzanti)"
-                 width="50"
-                 height="50" />
-        </td>
+                                     width="50"
+                                     height="50" />
+                                    </td>
 
-        <td>@rehber.Adi</td>
-        <td>@rehber.Soyadi</td>
-        <td>
-            @rehber.TelefonNo
-        </td>
-        <td>@rehber.Email</td>
+                                    <td>@rehber.Adi</td>
+                                    <td>@rehber.Soyadi</td>
+                                    <td>
+                                        @rehber.TelefonNo
+                                    </td>
+                                    <td>@rehber.Email</td>
 
-        <td>
-            <a href='/rehber/duzenle/@rehber.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(rehber.Id);})">
-                Sil
-            </button>
-        </td>
-    </tr>}
-                    </tbody>
-                </table>
-            </div>
+                                    <td>
+                                        <a href='/rehber/duzenle/@rehber.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(rehber.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-        </CardBody>
-    </CardComponent>
+            </CardBody>
+        </CardComponent>
 
-</div>
+    </div>
 
 
-                <ModalComponent @ref="ModalDialog">
-                    <ModalHeader>
-                        <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
-                    </ModalHeader>
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
 
-                    <ModalFooter>
-                        <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
-                        <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
-                    </ModalFooter>
-                </ModalComponent>}
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+}
 
 
 <style>

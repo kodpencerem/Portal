@@ -48,6 +48,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         protected void Kayit()
         {
             MezunBilgisi.Add(okulMezunBilgisi);
+            okulMezunBilgisi = new OkulMezunBilgisi();
         }
         protected override void OnParametersSet()
         {

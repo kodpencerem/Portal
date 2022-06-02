@@ -1,5 +1,5 @@
 ﻿@using VedasPortal.Repository.Interface
-@using VedasPortal.Entities.Models.Video;
+@using VedasPortal.Entities.Models.Dosya;
 <div class="col-12">
     <CardComponent cardStyle="Style.info">
         <CardBody>
@@ -21,10 +21,10 @@
 @code {
 
     [Inject]
-    protected IBaseRepository<VideoClass> videoServisi { get; set; }
+    protected IBaseRepository<Dosya> videoServisi { get; set; }
 
-    protected IEnumerable<VideoClass> VideoList;
-    VideoClass secilenVideo = new VideoClass();
+    protected IEnumerable<Dosya> VideoList;
+    Dosya secilenVideo = new Dosya();
 
     [Parameter]
     public int Width { get; set; } = 650;
@@ -38,7 +38,7 @@
         secilenVideo = VideoList.FirstOrDefault();
     }
 
-    void SecilenVideo(VideoClass videoDetay)
+    void SecilenVideo(Dosya videoDetay)
     {
         secilenVideo = videoDetay;
     }

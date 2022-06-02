@@ -13,7 +13,7 @@ namespace VedasPortal.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Aciklama).HasMaxLength(255);
             builder.Property(x => x.KayitTarihi).IsRequired().HasDefaultValueSql("getdate()");
-            builder.HasOne(x => x.VideoClass).WithMany(x => x.Yorum).HasForeignKey(x => x.VideoClassId);
+            builder.HasOne(x => x.Dosya).WithMany(x => x.Yorum).HasForeignKey(x => x.DosyaId);
             builder.HasOne(x => x.Oneri).WithMany(x => x.Yorum).HasForeignKey(x => x.OneriId);
         }
     }

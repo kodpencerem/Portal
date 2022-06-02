@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
-using VedasPortal.Entities.Models.Video;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.FileUploadDownload;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 {
@@ -17,17 +16,19 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
     {
 
         [Inject]
-        public IBaseRepository<VideoClass> VideoServisi { get; set; }
+        public IBaseRepository<Dosya> VideoServisi { get; set; }
 
         [Parameter]
         public int VideoId { get; set; }
 
         protected string Title = "Ekle";
-        public VideoClass video = new();
-      
-        protected IEnumerable<VideoClass> Videolar { get; set; }
+        public Dosya video = new();
 
-        protected IEnumerable<VideoClass> TumVideolariGetir()
+        public Dosya VideoDosya = new();
+
+        protected IEnumerable<Dosya> Videolar { get; set; }
+
+        protected IEnumerable<Dosya> TumVideolariGetir()
         {
             Videolar = VideoServisi.GetAll();
             return Videolar;
@@ -57,20 +58,25 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected void Kayit()
         {
-            VideoServisi.Add(video);
-
+            
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.FileUploadedPath;
-            var dosya = new VideoClass()
+            var dosya = new Dosya()
             {
-                Baslik = fileName[0],
+                Adi = fileName[0],
                 Yolu= filePath,
                 Uzanti = fileName[1],
-                Kategori = (VideoKategori)DosyaKategori.Mp4,
+                Kategori = video.Kategori,
+                AltBaslik = video.AltBaslik,
+                VideoUzunluk = video.VideoUzunluk,
+                Aciklama = video.Aciklama,
+                Birimler = video.Birimler,
+                Boyutu = video.Boyutu,
                 AktifPasif = true,
-                
             };
             VideoServisi.Add(dosya);
+            TumVideolariGetir();
+            video = new Dosya();
         }
         protected override void OnParametersSet()
         {
@@ -97,13 +103,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
                 return;
 
             VideoServisi.Remove(video.Id);
-            video = new VideoClass();
             TumVideolariGetir();
             TumBirimleriGetir();
         }
-
-
-
         protected override Task OnInitializedAsync()
         {
             TumBirimleriGetir();
@@ -116,8 +118,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         {
             video = null;
         }
-
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

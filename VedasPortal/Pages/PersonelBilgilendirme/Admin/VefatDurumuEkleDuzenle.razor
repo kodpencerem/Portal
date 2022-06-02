@@ -13,7 +13,7 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
 
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Personel Durumu</label>
@@ -25,7 +25,7 @@
                                         @foreach (var kategori in EklemeDurumlari)
                                         {
                                             <option value="@kategori.Key"> @kategori.Value </option>
-                                         }
+                                        }
                                     }
                                 </InputSelect>
                             </div>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
                         <br />
                         <div class="row">
 
@@ -90,8 +90,7 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"
-                            @onclick="Kayit">
+                            class="btn btn-primary">
                         Kaydet
                     </button>
                     <button class="btn btn-danger"
@@ -108,81 +107,84 @@
 @if (PersonelDurumlari == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 
 {
-<div class="col-12">
+    <div class="col-12">
 
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    İşten Ayrılan Personel
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        İşten Ayrılan Personel
+                    </div>
                 </div>
-            </div>
-        </CardHeader>
-        <CardBody>
-            <div class="table-responsive">
-                <table class="table table-striped" id="table-2">
-                    <thead>
-                        <tr>
-                            <th class="text-center pt-3">
-                                <div class="custom-checkbox custom-checkbox-table custom-control">
-                                    <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
                                            class="custom-control-input" id="checkbox-all">
-                                    <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                </div>
-                            </th>
-                            <th>Personel Adı ve Soyadı</th>
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Personel Adı ve Soyadı</th>
 
-                            <th>Yakınının Adı ve Soyadı</th>
+                                <th>Yakınının Adı ve Soyadı</th>
 
-                            <th>İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var vefat in PersonelDurumlari.Where(h => h.PersonelDurumu == PersonelDurumu.Vefat).ToList())
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var vefat in PersonelDurumlari.Where(h => h.PersonelDurumu == PersonelDurumu.Vefat).ToList())
 
-                        {
-    <tr>
-        <td class="text-center pt-2">
-            <div class="custom-checkbox custom-control">
-                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                       id="checkbox-1">
-                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-            </div>
-        </td>
-        <td>
-            @vefat.AdSoyad
-        </td>
-        <td>@vefat.YakininAdSoyadi</td>
-        <td>
-            <a href='/vefat/duzenle/@vefat.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                    @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(vefat.Id);})">
-                Sil
-            </button>
-        </td>
-    </tr>}
-                    </tbody>
-                </table>
-            </div>
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @vefat.AdSoyad
+                                    </td>
+                                    <td>@vefat.YakininAdSoyadi</td>
+                                    <td>
+                                        <a href='/vefat/duzenle/@vefat.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(vefat.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-        </CardBody>
-    </CardComponent>
-</div>
-                <ModalComponent @ref="ModalDialog">
-                    <ModalHeader>
-                        <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
-                    </ModalHeader>
+            </CardBody>
+        </CardComponent>
+    </div>
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
 
-                    <ModalFooter>
-                        <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
-                        <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
-                    </ModalFooter>
-                </ModalComponent>}
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+}
 
 
 <style>

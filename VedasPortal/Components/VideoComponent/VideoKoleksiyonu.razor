@@ -1,4 +1,4 @@
-﻿@using VedasPortal.Entities.Models.Video
+﻿@using VedasPortal.Entities.Models.Dosya
 
 <div class="component-box" style="margin-top: 20px;">
     @foreach (var item in Videolar)
@@ -15,7 +15,7 @@
                             allowfullscreen 
                             controls>
                     </iframe>
-                    <h4>@item.Baslik</h4>
+                    <h4>@item.Adi</h4>
                 </div>
 
             </div>
@@ -28,13 +28,13 @@
 @code {
 
     [Parameter]
-    public IEnumerable<VideoClass> Videolar { get; set; }
+    public IEnumerable<Dosya> Videolar { get; set; }
 
     [Parameter]
     public string Src { get; set; } = "files/sample.mp4";
 
     [Parameter]
-    public EventCallback<VideoClass> VideoSec { get; set; }
+    public EventCallback<Dosya> VideoSec { get; set; }
 
-    VideoClass videoKaynak = new VideoClass();
+    Dosya videoKaynak = new Dosya();
 }

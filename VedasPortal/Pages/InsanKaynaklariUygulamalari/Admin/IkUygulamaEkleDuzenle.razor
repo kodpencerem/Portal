@@ -12,7 +12,7 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-right">
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
@@ -79,7 +79,7 @@
 
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary" >Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>
@@ -118,7 +118,7 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                               class="custom-control-input" id="checkbox-all">
+                                           class="custom-control-input" id="checkbox-all">
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
@@ -139,7 +139,7 @@ else
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                   id="checkbox-1">
+                                           id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
@@ -148,8 +148,8 @@ else
                                                                        ikUygulama.Dosya?.FirstOrDefault().Adi,
                                                                        ".",
                                                                        ikUygulama.Dosya?.FirstOrDefault().Uzanti)"
-                                             width="50"
-                                             height="50" />
+                                     width="50"
+                                     height="50" />
                                     </td>
 
                                     <td>@ikUygulama.Adi</td>
@@ -162,14 +162,15 @@ else
                                         }
                                         else
                                         {
-                                            <div class="badge badge-warning badge-shadow">Kullanımda Değil</div>}
+                                            <div class="badge badge-warning badge-shadow">Kullanımda Değil</div>
+                                        }
                                     </td>
 
                                     <td>
                                         <a href="@($"ikuygulama/detay/{ikUygulama.Id}")" class="btn btn-primary">Uygulama Detayı</a>
                                         <a href='/duyuru/duzenle/@ikUygulama.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(ikUygulama.Id);})">
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(ikUygulama.Id);})">
                                             Sil
                                         </button>
                                     </td>

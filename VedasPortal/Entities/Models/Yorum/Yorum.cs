@@ -4,8 +4,8 @@
     {
         public string Aciklama { get; set; }
         public bool OnaylansinMi { get; set; } = false;
-        public int? VideoClassId { get; set; }
-        public Video.VideoClass VideoClass { get; set; }
+        public int? DosyaId { get; set; }
+        public Dosya.Dosya Dosya { get; set; }
         public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
     }

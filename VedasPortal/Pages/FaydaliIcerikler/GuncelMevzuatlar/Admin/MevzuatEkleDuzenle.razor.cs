@@ -9,6 +9,7 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Mevzuat;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
@@ -68,7 +69,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             MevzuatServisi.Add(mevzuat);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var filePath = SaveFileToUploaded.FileUploadedPath;
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
@@ -80,7 +81,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
             };
             MevzuatDosyaServisi.Add(dosya);
-
+            TumMevzuatlariGetir();
+            mevzuat = new Mevzuat();
         }
         protected override void OnParametersSet()
         {
@@ -105,6 +107,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
                 return;
 
             MevzuatServisi.Remove(mevzuat.Id);
+            MevzuatDosyaServisi.Remove(MevzuatDosya.Id);
             mevzuat = new Mevzuat();
             TumMevzuatlariGetir();
             TumBirimleriGetir();

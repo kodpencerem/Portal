@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.OneriSistemi.Admin
@@ -89,6 +90,8 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
             };
             OneriDosyaServisi.Add(dosya);
+            TumOnerileriGetir();
+            oneri = new Oneri();
         }
         protected override void OnParametersSet()
         {
@@ -113,6 +116,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             if (oneri.Id == 0)
                 return;
             OneriDosya.Yolu = oneri.Dosya?.FirstOrDefault().Yolu;
+            OneriDosyaServisi.Remove(OneriDosya.Id);
             OneriServisi.Remove(oneri.Id);
             oneri = new Oneri();
             TumKategorileriGetir();

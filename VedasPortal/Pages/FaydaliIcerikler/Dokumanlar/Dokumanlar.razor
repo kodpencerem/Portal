@@ -6,7 +6,8 @@
 @if (Dokumanlar == null)
 
 {
-    <p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 
@@ -24,7 +25,7 @@ else
                 <div style="margin-left:1100px" class="float-right">
                     <div class="text-center bg-blue-100">
                         <input class="form-control" @bind-value="SearchText"
-                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
                     </div>
                 </div>
             </CardHeader>
@@ -39,13 +40,14 @@ else
                     }
                     else
                     {
-                        <DownloadComponent/>
+                        <DownloadComponent />
                     }
                 </div>
             </CardBody>
         </CardComponent>
 
-    </div>}
+    </div>
+}
 <style>
     .row {
         display: -ms-flexbox;

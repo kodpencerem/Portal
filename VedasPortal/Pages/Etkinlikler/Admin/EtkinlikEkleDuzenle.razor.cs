@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Etkinlik;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Etkinlikler.Admin
@@ -76,8 +77,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             };
             EtkinlikDosyaServisi.Add(dosya);
             TumEtkinlikleriGetir();
-            Temizle();
-
+            etkinlik = new Etkinlik();
         }
         protected override void OnParametersSet()
         {
@@ -105,6 +105,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
                 return;
 
             EtkinlikServisi.Remove(etkinlik.Id);
+            EtkinlikDosyaServisi.Remove(EtkinlikDosya.Id);
             etkinlik = new Etkinlik();
             TumEtkinlikleriGetir();
         }

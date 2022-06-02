@@ -1,4 +1,4 @@
-﻿@using VedasPortal.Entities.Models.Video;
+﻿@using VedasPortal.Entities.Models.Dosya;
 
 <BlazoredVideo @ref="video"
                PlayEvent="OnPlay"
@@ -41,7 +41,7 @@
     public string Aciklama { get; set; }
 
     [Parameter]
-    public VideoClass SecilenVideo { get; set; }
+    public Dosya SecilenVideo { get; set; }
 
     //void OnTimeUpdate()
     //{

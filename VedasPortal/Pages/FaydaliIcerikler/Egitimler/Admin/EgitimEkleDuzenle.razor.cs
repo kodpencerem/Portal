@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
@@ -38,6 +38,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             return Egitimler;
 
         }
+
         public Dictionary<EgitimKategori, string> Kategoriler { get; set; }
         protected void TumKategorileriGetir()
         {
@@ -65,8 +66,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             EgitimServisi.Add(egitim);
             
             var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
-            FileInfo fileInfo = new FileInfo(filePath);
+            var filePath = SaveFileToUploaded.FileUploadedPath;            
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
@@ -78,7 +78,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
             };
             EgitimDosyaServisi.Add(dosya);
-
+            
+            TumEgitimleriGetir();
+            egitim = new Egitim();
 
         }
         protected override void OnParametersSet()
@@ -107,6 +109,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                 return;
 
             EgitimServisi.Remove(egitim.Id);
+            EgitimDosyaServisi.Remove(EgitimDosya.Id);
             egitim = new Egitim();
             TumEgitimleriGetir();
             TumBirimleriGetir();

@@ -19,8 +19,8 @@ else
                     <div class="col-md-12">
                         Düzeltici ve Düzenleyici Faaliyetler |
                         <a href='/duzelticifaaliyet/ekle'
-                           class="btn btn-primary"
-                           role="button">
+                       class="btn btn-primary"
+                       role="button">
                             <i class="fa fa-user-plus"></i>
                             Duzeltici Faaliyet Ekle
                         </a>
@@ -29,7 +29,7 @@ else
                 <div style="margin-left:820px" class="float-right">
                     <div class="text-center bg-blue-100">
                         <input class="form-control" @bind-value="SearchText"
-                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
                     </div>
                 </div>
             </CardHeader>
@@ -38,7 +38,8 @@ else
 
                     @if (!DuzelticiFaaliyet.Any())
                     {
-                        <p>İçerik Aranıyor</p> }
+                        <p>İçerik Aranıyor</p>
+                    }
                     else
                     {
                         @foreach (var dFaaliyet in FilteredFaaliyet.Where(x => x.AktifPasif == true).ToList())
@@ -52,15 +53,15 @@ else
                                             <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
                                             <div class="media-body ml-3">
                                                 @*<div class="badge badge-pill badge-success mb-1 float-right">
-                                                    <a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
-                                                </div>*@
+                                    <a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
+                                    </div>*@
                                                 <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
                                                 <a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
                                                 <p class="my-1">
                                                     <img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
                                                                    dFaaliyet.Dosya.FirstOrDefault().Uzanti)"
-                                                         height="350"
-                                                         width="600" />
+                                             height="350"
+                                             width="600" />
                                                     @if (dFaaliyet.Aciklama != null)
                                                     {
                                                         <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>500 ?
@@ -83,8 +84,8 @@ else
                                         Tümünü Görüntüle
                                     </a>
                                     <a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
-                                       class="btn btn-sm btn-info btn-outline-dark "
-                                       role="button">Faaliyeti Düzenle</a>
+                           class="btn btn-sm btn-info btn-outline-dark "
+                           role="button">Faaliyeti Düzenle</a>
 
                                 </div>
                                 <!-- Support tickets -->

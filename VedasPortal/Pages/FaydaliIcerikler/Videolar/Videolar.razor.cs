@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.Video;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
@@ -12,15 +10,15 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
     public class VideoModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<VideoClass> Video { get; set; }
+        protected IBaseRepository<Dosya> Video { get; set; }
 
-        protected IEnumerable<VideoClass> VideoGetir { get; set; } = new List<VideoClass>();
+        protected IEnumerable<Dosya> VideoGetir { get; set; } = new List<Dosya>();
         protected Dosya VideoDosya { get; set; } = new();
 
         public string SearchText = "";
 
-        public List<VideoClass> FilteredVideo => VideoGetir.Where(
-            x => x.Baslik.ToLower().Contains(SearchText.ToLower())
+        public List<Dosya> FilteredVideo => VideoGetir.Where(
+            x => x.Adi.ToLower().Contains(SearchText.ToLower())
             || x.Aciklama.ToLower().Contains(SearchText.ToLower())
             ).ToList();
 
@@ -30,7 +28,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<VideoClass> TumVideolariGetir()
+        protected IEnumerable<Dosya> TumVideolariGetir()
         {
             VideoGetir = Video.GetAll();
             return VideoGetir;

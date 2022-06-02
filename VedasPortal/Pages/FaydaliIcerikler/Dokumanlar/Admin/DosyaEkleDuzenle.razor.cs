@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
@@ -15,14 +16,14 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 
         [Inject]
         public IBaseRepository<Dosya> DosyaServisi { get; set; }
-      
+
         [Parameter]
         public int DosyaId { get; set; }
 
         protected string Title = "Ekle";
         public Dosya dokuman = new();
 
-        
+
 
         protected IEnumerable<Dosya> Dosyalar { get; set; }
 
@@ -46,21 +47,26 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         protected void Kayit()
         {
             var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var filePath = SaveFileToUploaded.FileUploadedPath;
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
                 Yolu = filePath,
                 Uzanti = fileName[1],
-                Kategori = DosyaKategori.Jpg,
+                Kategori = dokuman.Kategori,
+                Aciklama = dokuman.Aciklama,
+                AltBaslik = dokuman.AltBaslik,
+                Birimler = dokuman.Birimler,
+                Boyutu = dokuman.Boyutu,
+                IzlenmeDurumu = dokuman.IzlenmeDurumu,
+                KayitTarihi = dokuman.KayitTarihi,
+                VideoUzunluk = dokuman.VideoUzunluk,
                 AktifPasif = true,
                 Id = dokuman.Id,
-
             };
             DosyaServisi.Add(dosya);
-
-            
-
+            TumDosyalariGetir();
+            dokuman = new Dosya();
         }
         protected override void OnParametersSet()
         {

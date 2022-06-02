@@ -13,7 +13,7 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
@@ -73,10 +73,10 @@
                             </div>
                             <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
                         </div>
-                                         
+
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-right">
 
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -144,7 +144,7 @@
                                         {
                                             @foreach (var kategori in Birimler)
                                             {
-                                                   <option value="@kategori.Key"> @kategori.Value </option>
+                                                <option value="@kategori.Key"> @kategori.Value </option>
                                             }
                                         }
 
@@ -160,8 +160,7 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"
-                            @onclick="Kayit">
+                            class="btn btn-primary">
                         Kaydet
                     </button>
                     <button class="btn btn-danger"
@@ -181,7 +180,8 @@
 @if (PersonelDurumlari == null)
 
 {
-    <p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 
@@ -204,7 +204,7 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                               class="custom-control-input" id="checkbox-all">
+                                           class="custom-control-input" id="checkbox-all">
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
@@ -223,7 +223,7 @@ else
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                   id="checkbox-1">
+                                           id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
@@ -232,8 +232,8 @@ else
                                                                        yeniPersonel.Dosya.FirstOrDefault().Adi,
                                                                        ".",
                                                                        yeniPersonel.Dosya.FirstOrDefault().Uzanti)"
-                                             width="50"
-                                             height="50" />
+                                     width="50"
+                                     height="50" />
                                     </td>
 
                                     <td>@yeniPersonel.AdSoyad</td>
@@ -243,7 +243,7 @@ else
 
                                         <a href='/personel/duzenle/@yeniPersonel.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(yeniPersonel.Id);})">
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(yeniPersonel.Id);})">
                                             Sil
                                         </button>
                                     </td>
@@ -265,7 +265,8 @@ else
             <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
-    </ModalComponent>}
+    </ModalComponent>
+}
 
 
 <style>

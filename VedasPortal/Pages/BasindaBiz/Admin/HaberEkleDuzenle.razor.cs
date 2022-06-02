@@ -1,5 +1,4 @@
-﻿using Blazored.Toast.Services;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.BasindaBiz.Admin
@@ -57,19 +57,24 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             HaberServisi.Add(haber);
 
             var fileName = SaveFileToUploaded.FileName?.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var imagePath = SaveFileToUploaded.ImageUploadedPath;
+
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
-                Yolu = filePath,
+                Yolu = imagePath,
                 Uzanti = fileName[1],
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 HaberDuyuruId = haber.Id,
             };
-
             HaberDosyaServisi.Add(dosya);
+            
             TumHaberleriGetir();
+            var aTimer = new System.Timers.Timer();
+            aTimer.Interval = 10;
+            haber = new HaberDuyuru();
+
         }
         protected override void OnParametersSet()
         {
@@ -83,13 +88,12 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         protected void SilmeyiOnayla(int haberId)
         {
             ModalDialog.Open();
-
             haber = Haberler.FirstOrDefault(x => x.Id == haberId);
         }
 
         protected void HaberSil()
         {
-            if (haber.Id == 0)
+            if (haber.Id == 0 && HaberDosya.Id == 0)
                 return;
             HaberServisi.Remove(haber.Id);
             HaberDosyaServisi.Remove(HaberDosya.Id);

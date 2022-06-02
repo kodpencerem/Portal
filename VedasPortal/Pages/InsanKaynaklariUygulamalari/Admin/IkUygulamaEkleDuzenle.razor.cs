@@ -9,6 +9,7 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.IKUygulama;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
@@ -76,6 +77,8 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
             };
             IkDosyaServisi.Add(dosya);
+            TumIkUygulamalariniGetir();
+            ikUygulama = new IkUygulama();
 
         }
         protected override void OnParametersSet()
@@ -103,6 +106,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
                 return;
 
             IkUygulamaServisi.Remove(ikUygulama.Id);
+            IkDosyaServisi.Remove(IkUygulamaDosya.Id);
             ikUygulama = new IkUygulama();
             TumIkUygulamalariniGetir();
             TumKategorileriGetir();

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.HaberDuyuru;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.Duyurular.Admin
@@ -23,6 +24,9 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         [Parameter]
         public int DuyuruId { get; set; }
+
+        [Parameter]
+        public int DuyuruDosyaId { get; set; }
 
         protected string Title = "Ekle";
         public HaberDuyuru duyuru = new();
@@ -65,6 +69,9 @@ namespace VedasPortal.Pages.Duyurular.Admin
             };
             DuyuruDosyaServisi.Add(dosya);
             TumDuyurulariGetir();
+            var aTimer = new System.Timers.Timer();
+            aTimer.Interval = 10;
+            duyuru = new HaberDuyuru();
         }
         protected override void OnParametersSet()
         {
@@ -72,6 +79,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             {
                 Title = "Duzenle";
                 duyuru = DuyuruServisi.Get(DuyuruId);
+                DuyuruDosya = DuyuruDosyaServisi.Get(DuyuruDosyaId);
             }
         }
 

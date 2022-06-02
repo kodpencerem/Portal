@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.DuzelticiFaaliyetler
@@ -65,7 +66,10 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
             };
             DuzelticiFaaliyetDosya.Add(dosya);
-
+            TumFaaliyetleriGetir();
+            var aTimer = new System.Timers.Timer();
+            aTimer.Interval = 10;
+            duzelticiFaaliyet = new DuzelticiFaaliyet();          
         }
         protected override void OnParametersSet()
         {
@@ -93,6 +97,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
                 return;
 
             DuzelticiFaaliyetlerServisi.Remove(duzelticiFaaliyet.Id);
+            DuzelticiFaaliyetDosya.Remove(DFaaliyetDosya.Id);
             duzelticiFaaliyet = new DuzelticiFaaliyet();
             TumFaaliyetleriGetir();
         }

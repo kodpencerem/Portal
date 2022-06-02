@@ -6,7 +6,6 @@ using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
-using VedasPortal.Entities.Models.Video;
 using VedasPortal.Enums;
 
 namespace VedasPortal

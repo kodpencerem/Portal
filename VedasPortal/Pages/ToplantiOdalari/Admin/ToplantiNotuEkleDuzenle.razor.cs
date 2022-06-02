@@ -11,6 +11,7 @@ using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.ViewModels;
+using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.ToplantiOdalari.Admin
@@ -90,7 +91,9 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
                     ToplantiNotuId = GetToplantiNotu.Id,
                 };
                 ToplantiNotDosyaServisi.Add(dosya);
-            }           
+            }
+            TumNotlarilariGetir();
+            GetToplantiNotu = new ToplantiNotu();
         }
 
         protected override void OnParametersSet()
@@ -117,6 +120,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
                 return;
 
             ToplantiNotServisi.Remove(GetToplantiNotu.Id);
+            ToplantiNotDosyaServisi.Remove(GetDosya.Id);
             GetToplantiNotu = new ToplantiNotu();
             TumNotlarilariGetir();
             TumBirimleriGetir();

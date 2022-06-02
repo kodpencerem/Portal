@@ -16,9 +16,9 @@
                     {
                         // görüntüleri doğrudan önizleyin
                         <img class="rounded float-left"
-                             src="@item"
-                             width="100"
-                             height="100" />
+                 src="@item"
+                 width="100"
+                 height="100" />
                     }
                     else
                     {
@@ -26,31 +26,34 @@
                         // örneğin, pdf dosyaları için pdf logosunu kullanırız
                         if (type[0].Contains("pdf"))
                         {
-                            <img class="rounded float-left" 
-                                 src="images/pdf_logo.png" 
-                                 width="150" 
-                                 height="150"
-                                 /> 
-                                 
+                            <img class="rounded float-left"
+                 src="images/pdf_logo.png"
+                 width="150"
+                 height="150" />
                         }
 
                         else if (type[0].Contains("mp4"))
                         {
-                            <img class="rounded float-left" 
-                                 src="images/mp4.png" 
-                                 width="150" 
-                                 height="150" />
-                            
+                            <img class="rounded float-left"
+                 src="images/mp4.png"
+                 width="150"
+                 height="150" />
+
                         }
                     }
                     <button @onclick="() => DownloadFile(item)">İndir</button>
-                </div>}
+
+                </div>
+
+            }
         </div>
-    </div>}
+        <br />
+    </div>
+}
 
-@code { 
+@code {
 
-    
+
 
     // yüklenen dosyalar için önizleme URL'lerinin listesi
     private IList<string> previewImages = new List<string>();
@@ -68,3 +71,13 @@
         // dosya indirme hizmetinden dosya indirme yöntemini yürütün
         await fileDownload.DownloadFile(url);
     } }
+
+
+<style>
+    .col-3 {
+        -ms-flex: 0 0 25%;
+        -webkit-box-flex: 0;
+        flex: 0 0 25%;
+        max-width: 35%;
+    }
+</style>

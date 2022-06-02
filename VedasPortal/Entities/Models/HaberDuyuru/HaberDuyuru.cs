@@ -24,7 +24,6 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public bool AktifPasif { get; set; } = true;
         public bool AnasayfadaGoster { get; set; } = true;
         public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
-        public virtual ICollection<Video.VideoClass> VideoClass { get; set; }
     }
 
     public enum HaberDuyuruKategori

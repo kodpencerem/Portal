@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VedasPortal.Entities.Models.Video;
+using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Repository.Interface;
 
@@ -14,7 +14,7 @@ namespace VedasPortal.Components.VideoComponent
         private IBaseRepository<Yorum> YorumServisi { get; set; }
         public Yorum Yorum { get; set; } = new();
 
-        private VideoClass VideoYorumGetir { get; set; } = new();
+        private Dosya VideoYorumGetir { get; set; } = new();
 
         protected string Title = "Ekle";
 
@@ -35,12 +35,15 @@ namespace VedasPortal.Components.VideoComponent
 
         public void InsertComment()
         {
-            var yorum = new Yorum()
+            if(VideoYorumGetir != null)
             {
-                Aciklama = Yorum.Aciklama,
-                VideoClassId = VideoYorumGetir.Id
-            };
-            YorumServisi.Add(yorum);
+                var yorum = new Yorum()
+                {
+                    Aciklama = Yorum.Aciklama,
+                    DosyaId = VideoYorumGetir.Id
+                };
+                YorumServisi.Add(yorum);
+            }
         }
 
 

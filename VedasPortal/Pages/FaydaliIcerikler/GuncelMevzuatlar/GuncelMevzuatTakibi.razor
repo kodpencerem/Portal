@@ -5,76 +5,80 @@
 @if (mevzuatlar == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 
 {
-<div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Güncel Mevzuat Takibi ve Regülasyonlar
+    <div class="col-12">
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Güncel Mevzuat Takibi ve Regülasyonlar
+                    </div>
                 </div>
-            </div>
-            <div style="margin-left:980px" class="float-right">
-                <div class="text-center bg-blue-100">
-                    <input class="form-control" @bind-value="SearchText"
+                <div style="margin-left:980px" class="float-right">
+                    <div class="text-center bg-blue-100">
+                        <input class="form-control" @bind-value="SearchText"
                            @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                    </div>
                 </div>
-            </div>
-        </CardHeader>
-        <CardBody>
-            
+            </CardHeader>
+            <CardBody>
+
 
                 @if (!mevzuatlar.Any())
                 {
-            <p>İçerik Aranıyor</p> }
-                                    else
-                                    {
-        <div class="row">
-            @foreach (var mevzuat in FilteredMevzuat.Where(x => x.AktifPasif == true).ToList())
-            {
+                    <p>İçerik Aranıyor</p>
+                }
+                else
+                {
+                    <div class="row">
+                        @foreach (var mevzuat in FilteredMevzuat.Where(x => x.AktifPasif == true).ToList())
+                        {
 
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                <article class="article">
-                    <div class="article-header">
-                        <div class="article-image" data-background="images/uploaded/@string.Concat(
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                                <article class="article">
+                                    <div class="article-header">
+                                        <div class="article-image" data-background="images/uploaded/@string.Concat(
                                                                        mevzuat.Dosya?.FirstOrDefault().Adi,
                                                                        ".",
                                                                        mevzuat.Dosya?.FirstOrDefault().Uzanti)">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi</a></h2>
-                        </div>
-                    </div>
-                    <div class="article-details">
-                        <p>
-                            <MarkDownComponent Content="@(mevzuat.Aciklama.Length>300 ?
+                                        </div>
+                                        <div class="article-title">
+                                            <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi</a></h2>
+                                        </div>
+                                    </div>
+                                    <div class="article-details">
+                                        <p>
+                                            <MarkDownComponent Content="@(mevzuat.Aciklama.Length>300 ?
                                                                      mevzuat.Aciklama.Substring(0, 180) + "..." :
                                                                      mevzuat.Aciklama)" />
-                        </p>
+                                        </p>
+
+                                    </div>
+                                    <div class="article-cta">
+                                        <a href="mevzuatdetay/@mevzuat.Id" class="btn btn-primary">Mevzuat Detay</a>
+                                    </div>
+                                </article>
+
+                            </div>
+                        }
 
                     </div>
-                    <div class="article-cta">
-                        <a href="mevzuatdetay/@mevzuat.Id" class="btn btn-primary">Mevzuat Detay</a>
-                    </div>
-                </article>
 
-            </div>}
 
-        </div>
-
-                                                                  
                 }
 
 
-           
-        </CardBody>
-    </CardComponent>
 
-</div>}
+            </CardBody>
+        </CardComponent>
+
+    </div>
+}
 
 <style>
     .article .article-details {

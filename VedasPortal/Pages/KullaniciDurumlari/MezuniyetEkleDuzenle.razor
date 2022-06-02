@@ -12,7 +12,7 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Eğitim Durumu Seçin</label>
                             <div class="col-md-10">
@@ -51,14 +51,14 @@
                             </div>
                             <ValidationMessage For="@(() => okulMezunBilgisi.MezuniyetTarihi)" />
                         </div>
-                                                
-                    </div>                    
+
+                    </div>
                 </div>
             </CardBody>
 
             <CardFotter>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </CardFotter>
@@ -97,7 +97,7 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                               class="custom-control-input" id="checkbox-all">
+                                           class="custom-control-input" id="checkbox-all">
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
@@ -113,29 +113,29 @@ else
                             @foreach (var mezun in MezunBilgileri)
 
                             {
-                            <tr>
-                                <td class="text-center pt-2">
-                                    <div class="custom-checkbox custom-control">
-                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                               id="checkbox-1">
-                                        <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                    </div>
-                                </td>
-                                <td>@mezun.OkulAdi</td>
-                                <td>@mezun.MezuniyetTarihi</td>
-                                <td>
-                                    
-                                    <a href='/mezuniyet/duzenle/@mezun.Id' 
-                                       class="btn btn-info btn-outline-dark" 
-                                       role="button">Düzenle</a>
-                                    <button class="btn btn-danger" 
-                                            data-toggle="modal" 
-                                            data-target="#deleteEmpModal"
-                                            @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mezun.Id);})">
-                                        Sil
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                           id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@mezun.OkulAdi</td>
+                                    <td>@mezun.MezuniyetTarihi</td>
+                                    <td>
+
+                                        <a href='/mezuniyet/duzenle/@mezun.Id'
+                                   class="btn btn-info btn-outline-dark"
+                                   role="button">Düzenle</a>
+                                        <button class="btn btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#deleteEmpModal"
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(mezun.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
 
                             }
                         </tbody>

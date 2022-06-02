@@ -10,7 +10,7 @@
     {
         @if (Yorumlar != null)
         {
-            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.VideoClassId == VideoYorumGetir.Id).ToList())
+            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.DosyaId == VideoYorumGetir.Id).ToList())
             {
                 <div class="box-card">
                     <div class="row">
@@ -25,8 +25,6 @@
                 </div>
                 <br />
             }
-
-
         }
 
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
-using VedasPortal.Entities.Models.Video;
+using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari
@@ -36,6 +36,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         protected void Kayit()
         {
             KursVeSertifika.Add(kursVeSertifika);
+            kursVeSertifika = new KursVeSertifika();
         }
         protected override void OnParametersSet()
         {

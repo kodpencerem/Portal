@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-left">
 
                         <div class="form-group row">
                             <label for="Kategori"
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
@@ -112,7 +112,7 @@
 
             <div class="card-footer">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" @onclick="Kayit">Kaydet</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
                     <button class="btn btn-danger" type="reset" @onclick="Temizle">Tümünü Temizle</button>
                 </div>
             </div>
@@ -149,12 +149,12 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox"
-                                               data-checkboxes="mygroup"
-                                               data-checkbox-role="dad"
-                                               class="custom-control-input"
-                                               id="checkbox-all">
+                                           data-checkboxes="mygroup"
+                                           data-checkbox-role="dad"
+                                           class="custom-control-input"
+                                           id="checkbox-all">
                                         <label for="checkbox-all"
-                                               class="custom-control-label">&nbsp;</label>
+                                           class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
                                 <th>Id</th>
@@ -173,7 +173,7 @@ else
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                   id="checkbox-1">
+                                           id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
@@ -192,13 +192,14 @@ else
                                         }
                                         else
                                         {
-                                            <div class="badge badge-warning badge-shadow">Pasif, Kullanımda Değil</div>}
+                                            <div class="badge badge-warning badge-shadow">Pasif, Kullanımda Değil</div>
+                                        }
                                     </td>
 
                                     <td>
                                         <a href='/Oda/duzenle/@Oda.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(Oda.Id);})">
+                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(Oda.Id);})">
                                             Sil
                                         </button>
                                     </td>

@@ -3,14 +3,15 @@
 
 <div class="col-6">
     <div class="form-group">
-        <div class="row" 
+        <div class="row"
              style="margin-top:2px">
 
             <div class="col-md-8">
                 <Microsoft.AspNetCore.Components.Forms.InputFile OnChange="OnInputFileChange"
-                           @bind-Value="@ValueInput"
-                           
-                           multiple />
+                                                                 @bind-Value="@ValueInput"
+                                                                  multiple
+                                                                  accept="image/*, video/*,application/* "
+                                                                  />
             </div>
             <div class="col-md-4">
                 <button class="btn btn-sm btn-success"
@@ -21,17 +22,18 @@
             </div>
         </div>
         <br />
-        @{ // Görüntüleme ilerlemesinin ayarlanıp ayarlanmadığına bağlı olarak ilerleme oluşturmak için bir  css sınıfı oluşturur.
+        @{
+            // Görüntüleme ilerlemesinin ayarlanıp ayarlanmadığına bağlı olarak ilerleme oluşturmak için bir  css sınıfı oluşturur.
 
             var progressCss = "progress" + (displayProgress ? "" : "d-none");
             // ilerleme çubuğu genişliği, yükleme ilerlemesinin yüzdesidir
-            var progressWidthStyle = progressPercent + "%"; 
+            var progressWidthStyle = progressPercent + "%";
         }
         <div class="@progressCss">
-            <div class="progress-bar" role="progressbar" 
-                 style="width:@progressWidthStyle" 
+            <div class="progress-bar" role="progressbar"
+                 style="width:@progressWidthStyle"
                  area-valuenow="@progressPercent"
-                 aria-minvalue="0" 
+                 aria-minvalue="0"
                  area-maxvalue="100">
             </div>
         </div>
@@ -49,17 +51,18 @@
             @foreach (var item in previewImages)
             {
                 <div class="col-2">
-                    <img class="rounded float-left" 
-                         src="@item" 
-                         width="100" 
-                         height="100" 
-                         style="margin:10px" />
+                    <img class="rounded float-left"
+                 src="@item"
+                 width="100"
+                 height="100"
+                 style="margin:10px" />
                 </div>
-             }
+            }
         </div>
-    </div>}
+    </div>
+}
 
-@code{
+@code {
 
 
 
@@ -105,7 +108,6 @@
 
             // resim url'sini önizleme url listesine ekler
             previewImages.Add(imageUrl);
-
         }
     }
 
@@ -141,7 +143,6 @@
                     // yükleme ilerlemesini günceller
                     progressPercent = (int)((uploaded / selectedFiles.Count) * 100);
                 }
-
                 // Yükleme bittiğinde progresbarı kapatır
                 displayProgress = false;
 

@@ -14,17 +14,13 @@
             </CardHeader>
             <CardBody>
                 <div class="col-12">
-                    <div class="col-md-6 float-left">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@KatilimciDosya.Yolu" />
-                                @*@if (!string.IsNullOrEmpty(etkinlik.Dosya.Yolu?.ToString()))
-                                    {
-                                        <img src="@("images/uploaded/"+@etkinlik.Dosya.Yolu)" height="150" />
-                                    }*@
+                                
                             </div>
-                            @*<ValidationMessage For="@(() => etkinlik.Dosya.Yolu)" />*@
                         </div>
 
                         <div class="form-group row">
@@ -69,7 +65,7 @@
 
                     </div>
 
-                    <div class="col-md-6 float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
 
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -92,7 +88,7 @@
                 <div class="form-group">
                     <button type="submit"
                             class="btn btn-primary"
-                            @onclick="KatilimciKayit">
+                            >
                         Kaydet
                     </button>
                     <button class="btn btn-danger"

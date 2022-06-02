@@ -1,81 +1,84 @@
-﻿@using VedasPortal.Services.Doviz; 
-@inject VedasPortal.Services.Doviz.AltinDegisimleriServisi altinDegisimi
+﻿@using System.Net
+@using Newtonsoft.Json
+@using VedasPortal.Services.Doviz;
+@using System.Xml.Linq;
 
-
+@*@inject Services.Doviz.AltinDegisimleri altinDegisimleri
+*@
 <CardComponent cardStyle="Style.secondary">
     <CardHeader>
         <i class="fas fa-money-check-alt"></i>Döviz Kurları |
         <a class="text-danger">TCMB hergün 15.30'da güncelleme yapmaktadır!</a>
     </CardHeader>
-	<CardBody>
-		<table class="table table-sm">
-			<thead>
-				<tr>
-					<th>Kur</th>
-					<th>Alış Fiyatı</th>
-					<th>Satış Fiyatı</th>
-					<th>Yön</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						@AltinDegisim?.AltinAdi
-					</td>
-					<td>@AltinDegisim?.result.FirstOrDefault()?.Alis</td>
+    <CardBody>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Kur</th>
+                    <th>Alış Fiyatı</th>
+                    <th>Satış Fiyatı</th>
+                    <th>Yön</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*<tr>
                     <td>
-                        @AltinDegisim?.result.FirstOrDefault()?.Satis
+                        @listDoviz.result?.FirstOrDefault().name
+                    </td>
+                    <td>@listDoviz.result?.FirstOrDefault().buy</td>
+                    <td>
+                        @listDoviz.result?.FirstOrDefault().sell
                     </td>
 
-					<td>
-						<i data-feather="chevrons-up"></i>
-					</td>
+                    <td>
+                        <i data-feather="chevrons-up"></i>
+                    </td>
 
-					<td>
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf4F6tQG4sww2u7kAUxeIsQTqKEAeqZGFV4Q&usqp=CAU" alt="" width="15">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						@dolar?.DovizAdi
-					</td>
-					<td>@dolar?.DovizAlis</td>
-					<td>
-						@dolar?.DovizSatis
-					</td>
+                    <td>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf4F6tQG4sww2u7kAUxeIsQTqKEAeqZGFV4Q&usqp=CAU" alt="" width="15">
+                    </td>
+                </tr>*@
+                <tr>
+                    <td>
+                        @dolar?.DovizAdi
+                    </td>
+                    <td>@dolar?.DovizAlis</td>
+                    <td>
+                        @dolar?.DovizSatis
+                    </td>
 
-					<td>
-						<i data-feather="chevrons-up"></i>
-					</td>
+                    <td>
+                        <i data-feather="chevrons-up"></i>
+                    </td>
 
-					<td>
-						<img src="https://cdn.pixabay.com/photo/2021/02/06/18/28/money-5988976_960_720.png" alt="" width="20">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						@euro?.DovizAdi
-					</td>
-					<td>@euro?.DovizAlis</td>
-					<td>
-						@euro?.DovizSatis
-					</td>
+                    <td>
+                        <img src="https://cdn.pixabay.com/photo/2021/02/06/18/28/money-5988976_960_720.png" alt="" width="20">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @euro?.DovizAdi
+                    </td>
+                    <td>@euro?.DovizAlis</td>
+                    <td>
+                        @euro?.DovizSatis
+                    </td>
 
-					<td>
-						<i data-feather="chevrons-up"></i>
-					</td>
-					<td>
-						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Euro_symbol_gold.svg/1200px-Euro_symbol_gold.svg.png" alt="" width="15">
-					</td>
+                    <td>
+                        <i data-feather="chevrons-up"></i>
+                    </td>
+                    <td>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Euro_symbol_gold.svg/1200px-Euro_symbol_gold.svg.png" alt="" width="15">
+                    </td>
 
-				</tr>
-			</tbody>
+                </tr>
+            </tbody>
 
-		</table>
+        </table>
 
-		
 
-	</CardBody>
+
+    </CardBody>
     <CardFotter>
         <a href="tumdovizler" class="nav-link"><span>Tüm Dövizler</span></a>
     </CardFotter>
@@ -84,27 +87,28 @@
 @code {
 
     [Parameter]
-    public string Degisim { get; set; }
+    public string Code { get; set; }
     [Parameter]
-    public string Satis { get; set; }
-
-    [Parameter]
-    public string Alis { get; set; }
+    public DateTime? Tarih { get; set; }
 
     DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
     DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
 
-    public AltinDegisimleriServisi.AltinDegisim  AltinDegisim { get; set; }
 
+    //public DovizDegisimleriResult listDoviz { get; set; }
 
     //protected override async Task OnAfterRenderAsync(bool firstRender)
     //{
     //    await base.OnAfterRenderAsync(firstRender);
 
-    //    AltinDegisim = await altinDegisimi.AltinDegisiminiGetir(Satis, Alis, Degisim);
+    //    listDoviz = await altinDegisimleri.DovizDegisimleriniGetir(Code,Tarih);
 
     //    await InvokeAsync(StateHasChanged);
     //}
+
+
+
+
 }
 
 <style>

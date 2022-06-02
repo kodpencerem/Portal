@@ -1,16 +1,16 @@
-﻿@page "/odadetayformu/{odaId:int}"
+﻿@page "/toplanti/detay/{ToplantiId:int}"
 
 <div class="col-12">
     <CardComponent cardStyle="Style.primary">
         <CardHeader>
             <div class="float-left">
                 <div class="col-md-12">
-                    Toplantı Odası Detay Formu
+                    Toplantı Detay Formu
                 </div>
             </div>
         </CardHeader>
         <CardBody>
-            @{if (OdaDetayGetir != null)
+            @{if (ToplantiGetir != null)
                 {
                     <div class="padding-5">
 
@@ -23,25 +23,26 @@
 
                                 <p class="m-t-30">
                                     <strong>
-                                        Toplantı Odası Adı:
+                                        Toplantı Merkezi:
                                     </strong>
-                                    @OdaDetayGetir.Adi  <br /><br />
+                                    @ToplantiGetir.ToplantiMerkeziId
+                                    <br /><br />
                                     <strong>
-                                        Bulunduğu Lokasyon:
+                                        Toplantı Odası:
                                     </strong>
-                                    @OdaDetayGetir.Adres
+                                    @ToplantiGetir.ToplantiOdasiId
                                 </p>
                                 <p>
                                     <strong>
-                                        Açıklama: 
+                                        Açıklama:
                                     </strong>
-                                    @((MarkupString) OdaDetayGetir.Aciklama)
+                                    @((MarkupString)ToplantiGetir.Aciklama)
                                 </p>
                                 <p>
                                     <strong>
-                                        Oda Kapasite:
+                                        Katılım Sayısı:
                                     </strong>
-                                    @OdaDetayGetir.Kapasite
+                                    @ToplantiGetir.BeklenenKatilimSayisi
                                 </p>
 
                                 <div class="section-title">
@@ -50,7 +51,7 @@
                                     </strong>
                                 </div>
 
-                                @if (@OdaDetayGetir.VideoKonferansMi == true)
+                                @if (ToplantiGetir.VideoKonferansMi == true)
                                 {
                                     <p class="text-primary">
                                         <strong>
@@ -73,7 +74,7 @@
                                     </strong>
                                 </div>
                                 <ul>
-                                    @if (OdaDetayGetir.RezervDurumu == true)
+                                    @if (ToplantiGetir?.ToplantiOdasi?.RezervDurumu == true)
                                     {
                                         <li class="text-danger">Evet Rezerv Edilmiştir.</li>
                                     }

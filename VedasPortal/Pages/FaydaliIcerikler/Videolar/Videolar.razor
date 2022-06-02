@@ -15,13 +15,13 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        Eğitim Portalı
+                        Video Portalı
                     </div>
                 </div>
                 <div style="margin-left:1180px" class="float-right">
                     <div class="text-center bg-blue-100">
                         <input class="form-control" @bind-value="SearchText"
-                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
                     </div>
                 </div>
             </CardHeader>
@@ -33,13 +33,13 @@ else
                     }
                     else
                     {
-                        @foreach (var video in FilteredVideo.Where(x=>x.AktifPasif==true).ToList())
+                        @foreach (var video in FilteredVideo.Where(x => x.AktifPasif == true && x.Kategori?.TextDosya() == DosyaKategori.Mp4.ToString() || x.Kategori?.TextDosya() == DosyaKategori.Mkv.ToString()).ToList())
                         {
                             <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
-                                <VideoPlayerComponent VideoBaslik="@video.Baslik"
-                                                      Aciklama="@video.Aciklama"
-                                                      Width="500px"
-                                                      Heigth="500px" />
+                                <VideoPlayerComponent VideoBaslik="@video.Adi"
+                                          Aciklama="@video.Aciklama"
+                                          Width="500px"
+                                          Heigth="500px" />
                             </div>
 
                         }

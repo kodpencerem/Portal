@@ -15,7 +15,7 @@ namespace VedasPortal.Services.HavaDurumuService
         {
             this.client = client;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "apikey 1Nr62I2nBJoTO7UuURtoio:7dX73dYEUpYc0JWerTu1rX");
+            client.DefaultRequestHeaders.Add("Authorization", "apikey 5seVX56XQ4WZLNvCkLDU3U:6zC5nR9b3FNGfIvl0cEhNi");
         }
         public async Task<HavaTahminiResult> HavaDurumuGetir(string sehir, DateTime? tarih)
         {

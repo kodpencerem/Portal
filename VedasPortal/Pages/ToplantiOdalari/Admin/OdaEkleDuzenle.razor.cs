@@ -60,6 +60,8 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
                 ToplantiMerkeziId = Convert.ToInt32(takvimVm.MerkezId)
             };
             ToplantiOdasi.Add(oda);
+            TumOdalariGetir();
+            Oda = new ToplantiOdasi();
 
         }
         protected override void OnParametersSet()

@@ -5,7 +5,8 @@
 @if (Toplantilar == null)
 
 {
-    <p><em>Yükleniyor...</em></p> }
+    <p><em>Yükleniyor...</em></p>
+}
 
 else
 {
@@ -21,23 +22,26 @@ else
                         <th>Tarih</th>
                         <th></th>
                     </tr>
-                    @foreach (var toplanti in Toplantilar.Where(y => y.BaslangicTarihi > DateTime.Now.AddDays(2)).Take(3))
+
+                    @foreach (var toplanti in Toplantilar.Where(y => y.AktifPasif == true && y.BaslangicTarihi>=DateTime.Now).Take(3))
                     {
                         <tr>
                             <td>@toplanti.Baslik</td>
                             <td>@toplanti.BaslangicTarihi.Date.ToShortDateString()</td>
                             <td>
-                                <a href="odadetayformu/@toplanti.Id"
-                                   class="btn btn-primary btn-action mr-1"
-                                   data-toggle="tooltip"
-                                   title="Detay">
+                                <a href="toplanti/detay/@toplanti.Id"
+                           class="btn btn-primary btn-action mr-1"
+                           data-toggle="tooltip"
+                           title="Detay">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Detay
                                 </a>
                             </td>
                         </tr>
+
                     }
+
                 </table>
             </div>
         </CardBody>
