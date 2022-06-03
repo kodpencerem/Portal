@@ -44,7 +44,7 @@ namespace VedasPortal.Services.FileUploadDownload
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
         }
-
+        private long maxFileSize = 1024 * 1024 * 15 * 15;
         /// <summary>
         /// Diğer dosya türleri için yalnızca görüntüleri önizleyebiliriz, görseller klasöründe içerik türü logo olan görselleri kullanabiliriz 
         /// </summary>
@@ -52,7 +52,6 @@ namespace VedasPortal.Services.FileUploadDownload
         /// <returns></returns>
         public async Task<string> GeneratePreviewUrl(IBrowserFile file)
         {
-            
             if (!file.ContentType.Contains("image"))
             {
                 // Örneğin, pdf için önizlemede bir pdf dosyasının logosunu kullanacağız.
@@ -69,26 +68,10 @@ namespace VedasPortal.Services.FileUploadDownload
             var buffer = new byte[resizedImage.Size];
 
             // boyutlandırılmış dosyayı oku
-            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            await resizedImage.OpenReadStream(maxFileSize).ReadAsync(buffer);
 
             // url oluşturup, önizleme listesine ekleme yapar
             return $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
-        }
-
-        private string _value;
-
-        [Parameter] public EventCallback<string> ValueInputChanged { get; set; }
-
-        [Parameter]
-        public string ValueInput
-        {
-            get => _value;
-            set
-            {
-                if (_value == value) return;
-                _value = value;
-                ValueInputChanged.InvokeAsync(value);
-            }
         }
 
         public async Task UploadFile(IBrowserFile file)
@@ -98,17 +81,17 @@ namespace VedasPortal.Services.FileUploadDownload
             {
                 try
                 {
-                    var fileName = SaveFileToUploaded.RandomFileName + file.Name;                   
+                    var fileName = SaveFileToUploaded.RandomFileName + file.Name;
                     // Bir dosya yolu oluşturup kendi ismi ile kaydet
                     var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "files", fileName);
                     SaveFileToUploaded.FileName = fileName;
                     // dosyayı yüklemek için akış açar ve dosya yükleme gerçekleştirir
-                    using (var stream = file.OpenReadStream())
+                    using (var stream = file.OpenReadStream(maxFileSize))
                     {
                         // yükleme yoluna yazma erişimi oluşturur.
                         var fileStream = File.Create(uploadPath);
                         // erişim olan yola kopyalama gerçekleştirir
-                        await stream.CopyToAsync(fileStream);              
+                        await stream.CopyToAsync(fileStream);
 
                         // akışı kapatıp kaynakları serbest bırakır
                         fileStream.Close();
@@ -140,6 +123,6 @@ namespace VedasPortal.Services.FileUploadDownload
             {
                 throw;
             }
-        }        
+        }
     }
 }
