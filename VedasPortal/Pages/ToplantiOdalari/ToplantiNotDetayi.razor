@@ -24,12 +24,12 @@
                                              class="rounded-circle"
                                              width="35"
                                              data-toggle="tooltip"
-                                             title="@NotVeKararDetayi.Toplanti?.Kullanici.FirstOrDefault().FirstName">
+                                             title="@NotVeKararDetayi.Toplanti?.ApplicationUser.FirstOrDefault().FirstName">
                                     </a>
                                     <div class="media-body">
                                         <span class="date pull-right">@NotVeKararDetayi.Toplanti?.ToplantiTarihi.Date.ToShortDateString()</span>
                                         <h5 class="text-primary">@NotVeKararDetayi.KaydedenKullanici</h5>
-                                        <small class="text-muted">From: @NotVeKararDetayi.Toplanti?.Kullanici.FirstOrDefault().Email</small>
+                                        <small class="text-muted">From: @NotVeKararDetayi.Toplanti?.ApplicationUser.FirstOrDefault().Email</small>
                                     </div>
                                 </div>
                             </div>

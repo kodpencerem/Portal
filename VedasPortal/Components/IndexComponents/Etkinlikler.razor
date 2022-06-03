@@ -39,7 +39,7 @@ else
                             @if (etkinlik.Aciklama != null)
                             {
                                 <MarkDownComponent Content="@(etkinlik.Aciklama.Length>400 ? 
-                                                              etkinlik.Aciklama.Substring(0, 170) + "..." : 
+                                                              etkinlik.Aciklama.Substring(0, 250) + "..." : 
                                                               etkinlik.Aciklama)" />
                             }
                         </p>

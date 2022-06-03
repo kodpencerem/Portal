@@ -24,8 +24,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
         protected string Title = "Ekle";
         public Dosya video = new();
 
-        public Dosya VideoDosya = new();
-
         protected IEnumerable<Dosya> Videolar { get; set; }
 
         protected IEnumerable<Dosya> TumVideolariGetir()
@@ -73,6 +71,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
                 Birimler = video.Birimler,
                 Boyutu = video.Boyutu,
                 AktifPasif = true,
+                Id = video.Id,
             };
             VideoServisi.Add(dosya);
             TumVideolariGetir();

@@ -50,7 +50,7 @@ namespace VedasPortal.Services.ToplantiServices
                 mailGonder.ToplantiTarihi = toplanti.BaslangicTarihi;
                 mailGonder.KayitTarihi = toplanti.KayitTarihi;
                 mailGonder.Kod = ToplantiKodu;
-                mailGonder.Kullanici = toplanti.Kullanici;
+                mailGonder.ApplicationUser = toplanti.ApplicationUser;
                 mailGonder.Renk = toplanti.Renk;
                 mailGonder.ToplantiNotu = toplanti.ToplantiNotu;
                 mailGonder.SilenKullanici = toplanti.SilenKullanici;
@@ -95,7 +95,7 @@ namespace VedasPortal.Services.ToplantiServices
                     entity.ToplantiTarihi = toplanti.BaslangicTarihi;
                     entity.KayitTarihi = toplanti.KayitTarihi;
                     entity.Kod = toplanti.Kod;
-                    entity.Kullanici = toplanti.Kullanici;
+                    entity.ApplicationUser = toplanti.ApplicationUser;
                     entity.Renk = toplanti.Renk;
                     entity.ToplantiNotu = toplanti.ToplantiNotu;
                     entity.SilenKullanici = toplanti.SilenKullanici;

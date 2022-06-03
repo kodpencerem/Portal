@@ -16,7 +16,7 @@
 					<div class="form-group row">
 						<label class="form-label col-md-2">İçerik Ekleyin</label>
 						<div class="col-md-10">
-							<MultipleUpload @bind-ValueInput="@VideoDosya.Yolu" />
+							<MultipleUpload @bind-ValueInput="@video.Yolu" />
 						</div>
 					</div>
 
@@ -150,7 +150,7 @@ else
 
 
 
-							@foreach (var video in Videolar)
+							@foreach (var video in Videolar.Where(x=>x.AktifPasif==true && x.Uzanti=="mp4" ||x.Uzanti=="mkv").ToList())
 
 							{
 

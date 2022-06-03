@@ -1,7 +1,7 @@
 ﻿@using VedasPortal.Entities.Models.Dosya
 
 <div class="component-box" style="margin-top: 20px;">
-    @foreach (var item in Videolar)
+    @foreach (var item in Videolar.Where(x=>x.Uzanti=="mp4" || x.Uzanti=="mkv"))
     {
 
         <div class="box-card" @onclick="() => VideoSec.InvokeAsync(item)" >
@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <iframe style="width:100%"  
                             height="150"
-                            src="files/sample.mp4"
+                            src="@Src"
                             frameborder="0" 
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen 
@@ -31,7 +31,7 @@
     public IEnumerable<Dosya> Videolar { get; set; }
 
     [Parameter]
-    public string Src { get; set; } = "files/sample.mp4";
+    public string Src { get; set; } 
 
     [Parameter]
     public EventCallback<Dosya> VideoSec { get; set; }

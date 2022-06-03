@@ -1291,6 +1291,9 @@ namespace VedasPortal.Migrations
                     b.Property<int?>("ToplantiOdasiId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ToplantiSuresi")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ToplantiTarihi")
                         .HasColumnType("datetime2");
 
@@ -1793,11 +1796,9 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", "Toplanti")
-                        .WithMany("Kullanici")
+                    b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", null)
+                        .WithMany("ApplicationUser")
                         .HasForeignKey("ToplantiId");
-
-                    b.Navigation("Toplanti");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Yorum.Yorum", b =>
@@ -1881,7 +1882,7 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.ToplantiTakvimi.Toplanti", b =>
                 {
-                    b.Navigation("Kullanici");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("ToplantiNotu");
                 });

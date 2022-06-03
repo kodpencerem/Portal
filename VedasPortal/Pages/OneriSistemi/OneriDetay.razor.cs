@@ -64,13 +64,6 @@ namespace VedasPortal.Pages.OneriSistemi
             yorum = new Yorum();
             TumYorumlariGetir();
         }
-
-        public void Temizle()
-        {
-            yorum = null;
-            
-        }
-
         protected void Kayit()
         {
             var yorumEkle = new Yorum()
@@ -78,6 +71,8 @@ namespace VedasPortal.Pages.OneriSistemi
                 OneriId = OneriDetayGetir.Id
             };
             GelenYorumlar.Add(yorumEkle);
+            yorum = new Yorum();
+
         }
 
         protected override void OnParametersSet()

@@ -94,7 +94,7 @@ else
     {
         if (toplanti != null)
         {
-            ToplantiService.UpdateToplanti(toplanti, Convert.ToInt32(toplanti.Kullanici?.FirstOrDefault().Id));
+            ToplantiService.UpdateToplanti(toplanti, Convert.ToInt32(toplanti.ApplicationUser?.FirstOrDefault().Id));
         }
         toplantiDuzenle = false;
     }
@@ -104,7 +104,7 @@ else
         if (toplanti != null)
         {
 
-            bool deleted = ToplantiService.DeleteToplanti(Convert.ToInt32(toplanti.Kullanici?.FirstOrDefault().Id));
+            bool deleted = ToplantiService.DeleteToplanti(Convert.ToInt32(toplanti.ApplicationUser?.FirstOrDefault().Id));
 
             if (deleted)
             {

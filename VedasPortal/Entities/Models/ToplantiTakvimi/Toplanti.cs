@@ -7,6 +7,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
     public class Toplanti : Base.BaseEntity
     {
         public int PersonelId { get; set; }
+        public int ToplantiSuresi { get; set; }
         public string Kod { get; set; }
         public string Aciklama { get; set; }
         [Required]
@@ -28,6 +29,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
         public int? ToplantiMerkeziId { get; set; }
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
         public ICollection<ToplantiNotu.ToplantiNotu> ToplantiNotu { get; set; }
-        public ICollection<User.ApplicationUser> Kullanici { get; set; }
+        public ICollection<User.ApplicationUser> ApplicationUser { get; set; }
     }
 }
