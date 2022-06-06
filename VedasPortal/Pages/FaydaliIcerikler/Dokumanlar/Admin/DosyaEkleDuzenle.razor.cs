@@ -60,7 +60,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
                 Boyutu = dokuman.Boyutu,
                 IzlenmeDurumu = dokuman.IzlenmeDurumu,
                 KayitTarihi = dokuman.KayitTarihi,
-                VideoUzunluk = dokuman.VideoUzunluk,
                 AktifPasif = true,
                 Id = dokuman.Id,
             };

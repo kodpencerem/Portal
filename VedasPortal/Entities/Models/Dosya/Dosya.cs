@@ -15,7 +15,6 @@ namespace VedasPortal.Entities.Models.Dosya
         public string Yolu { get; set; }
         public string Uzanti { get; set; }
         public string Aciklama { get; set; }
-        public long VideoUzunluk { get; set; }
         [StringLength(30)]
         public string Boyutu { get; set; }
         [DataType(DataType.Text)]

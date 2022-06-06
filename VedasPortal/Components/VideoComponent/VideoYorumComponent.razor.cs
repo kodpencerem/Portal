@@ -14,7 +14,7 @@ namespace VedasPortal.Components.VideoComponent
         private IBaseRepository<Yorum> YorumServisi { get; set; }
         public Yorum Yorum { get; set; } = new();
 
-        private Dosya VideoYorumGetir { get; set; } = new();
+        private Vidyo VideoYorumGetir { get; set; } = new();
 
         protected string Title = "Ekle";
 
