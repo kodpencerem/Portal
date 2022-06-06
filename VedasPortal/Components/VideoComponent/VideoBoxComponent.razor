@@ -3,7 +3,7 @@
 <div class="component-box">
     <VideoPlayerComponent Width="@Width.ToString()"
                           Heigth="@Heigth.ToString()"
-                          
+                          Src="@Src.ToString()"
                           />
     <h3>@SecilenVideo.Adi</h3>
     <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
@@ -14,7 +14,10 @@
 @code {
 
     [Parameter]
-    public Dosya SecilenVideo { get; set; } = new();
+    public string Src { get; set; }
+
+    [Parameter]
+    public Dosya SecilenVideo { get; set; }
 
     [Parameter]
     public int Width { get; set; } = 1150;
