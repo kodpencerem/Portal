@@ -4,7 +4,7 @@
 @attribute [Authorize(Roles = "Admin, VideoEkleDuzenle")]
 
 <div class="col-12">
-	<EditForm Model="@video" OnValidSubmit="Kayit">
+	<EditForm Model="@video" >
 		<DataAnnotationsValidator />
 		<CardComponent cardStyle="Style.primary">
 			<CardHeader>
@@ -97,7 +97,7 @@
 			</CardBody>
 			<CardFotter>
 				<div class="form-group text-left">
-					<button class="btn btn-primary" type="submit">Kaydet</button>
+					<button class="btn btn-primary" @onclick="Kayit" type="submit">Kaydet</button>
 				</div>
 			</CardFotter>
 		</CardComponent>

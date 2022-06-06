@@ -124,10 +124,20 @@ else
 
 
 
-                            @foreach (var dosya in Dosyalar)
+                            @foreach (var dosya in Dosyalar.Where(x=>x.AktifPasif==true && x.Uzanti=="Docx" ||
+                         x.Uzanti=="pdf"||
+                         x.Uzanti == "pptx" ||
+                         x.Uzanti == "Rar" ||
+                         x.Uzanti == "Xlsx" ||
+                         x.Uzanti == "Zip"
+
+
+
+
+                         ).ToList())
 
                             {
-                                
+
 
                                 <tr>
                                     <td class="text-center pt-2">

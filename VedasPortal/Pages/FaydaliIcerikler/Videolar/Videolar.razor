@@ -33,13 +33,14 @@ else
                     }
                     else
                     {
-                        @foreach (var video in FilteredVideo.Where(x => x.AktifPasif == true && x.Kategori?.TextDosya() == DosyaKategori.Mp4.ToString() || x.Kategori?.TextDosya() == DosyaKategori.Mkv.ToString()).ToList())
+                        @foreach (var video in FilteredVideo.Where(x => x.AktifPasif == true && x.Uzanti=="mp4" ||x.Uzanti=="mkv").ToList())
                         {
                             <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
                                 <VideoPlayerComponent VideoBaslik="@video.Adi"
                                           Aciklama="@video.Aciklama"
                                           Width="500px"
-                                          Heigth="500px" />
+                                          Heigth="500px"
+                                                      />
                             </div>
 
                         }
