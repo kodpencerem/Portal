@@ -7,13 +7,13 @@
                class="w-100"
                style="max-width:800px;"
                controls="controls">
-    <source src="files/606202208272.mp4"
+    <source src="files/@string.Concat(SecilenVideo?.Adi,".",SecilenVideo?.Uzanti)"
             type="video/mp4" />
 </BlazoredVideo>
 
 <div class="article-details">
     <div class="article-title">
-        <h4><a href="#">@VideoBaslik</a></h4>
+        <h4><a href="files/@string.Concat(SecilenVideo?.Adi,".",SecilenVideo?.Uzanti)">@VideoBaslik</a></h4>
     </div>
     <p class="text-black">
         @((MarkupString) Aciklama)
@@ -41,7 +41,7 @@
     public string Aciklama { get; set; }
 
     [Parameter]
-    public Dosya SecilenVideo { get; set; }
+    public Dosya SecilenVideo { get; set; } = new();
 
     //void OnTimeUpdate()
     //{

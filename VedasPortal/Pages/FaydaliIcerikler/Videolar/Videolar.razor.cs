@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Video;
+using Blazored.Video.Support;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +15,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         protected IBaseRepository<Dosya> Video { get; set; }
 
         protected IEnumerable<Dosya> VideoGetir { get; set; } = new List<Dosya>();
-        protected Dosya VideoDosya { get; set; } = new();
+        [Parameter]
+        public Dosya VideoDosya { get; set; } = new();
 
         public string SearchText = "";
 
@@ -32,6 +35,35 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         {
             VideoGetir = Video.GetAll();
             return VideoGetir;
-        }       
+        }
+
+        public BlazoredVideo video;
+
+        [Parameter]
+        public string Width { get; set; }
+
+        [Parameter]
+        public string Heigth { get; set; }
+
+        [Parameter]
+        public string Src { get; set; }
+
+        [Parameter]
+        public string VideoBaslik { get; set; }
+
+        [Parameter]
+        public string Aciklama { get; set; }
+
+        public void OnPlay(VideoState state)
+        {
+            var url = state?.CurrentSrc;
+            // do something with this
+        }
+        public void OnTimeUpdate(VideoState state)
+        {
+            var url = state?.CurrentSrc;
+            var currentTime = state?.CurrentTime;
+            // do something with this
+        }
     }
 }
