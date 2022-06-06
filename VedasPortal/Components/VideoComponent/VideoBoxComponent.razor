@@ -3,7 +3,8 @@
 <div class="component-box">
     <VideoPlayerComponent Width="@Width.ToString()"
                           Heigth="@Heigth.ToString()"
-                          
+                          Src="@Src.ToString()"
+                          Href ="@Href.ToString()"
                           />
     <h3>@SecilenVideo.Adi</h3>
     <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
@@ -18,6 +19,9 @@
 
     [Parameter]
     public Vidyo SecilenVideo { get; set; }
+
+    [Parameter]
+    public string Href { get; set; }
 
     [Parameter]
     public int Width { get; set; } = 1150;

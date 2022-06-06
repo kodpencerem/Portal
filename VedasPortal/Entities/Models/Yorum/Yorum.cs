@@ -1,4 +1,6 @@
-﻿namespace VedasPortal.Entities.Models.Yorum
+﻿using VedasPortal.Entities.Models.Dosya;
+
+namespace VedasPortal.Entities.Models.Yorum
 {
     public class Yorum : Base.BaseEntity
     {
@@ -8,5 +10,8 @@
         public Dosya.Dosya Dosya { get; set; }
         public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
+
+        public int? VidyoId { get; set; }
+        public Vidyo Vidyo { get; set; }
     }
 }

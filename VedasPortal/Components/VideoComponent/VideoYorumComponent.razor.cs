@@ -35,14 +35,16 @@ namespace VedasPortal.Components.VideoComponent
 
         public void InsertComment()
         {
-            if(VideoYorumGetir != null)
+            if(VideoYorumGetir.Id != 0)
             {
                 var yorum = new Yorum()
                 {
                     Aciklama = Yorum.Aciklama,
-                    DosyaId = VideoYorumGetir.Id
+                    VidyoId = VideoYorumGetir.Id
                 };
                 YorumServisi.Add(yorum);
+                TumYorumlariGetir();
+                VideoYorumGetir = new Vidyo();
             }
         }
 

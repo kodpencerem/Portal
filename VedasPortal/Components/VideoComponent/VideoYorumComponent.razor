@@ -10,7 +10,7 @@
     {
         @if (Yorumlar != null)
         {
-            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.DosyaId == VideoYorumGetir.Id).ToList())
+            @foreach (var item in Yorumlar.Where(y => y.OnaylansinMi == true && y.VidyoId == VideoYorumGetir.Id).ToList())
             {
                 <div class="box-card">
                     <div class="row">
@@ -31,7 +31,7 @@
     }
     <hr />
     <EditForm Model="@Yorum"
-              OnValidSubmit="InsertComment">
+              >
         <DataAnnotationsValidator />
 
         <h5>
@@ -57,7 +57,9 @@
 
         <div class="form-group">
             <button type="submit"
-                    class="btn btn-primary">
+                    class="btn btn-primary"
+                    @onclick="InsertComment"
+            >
                 Gönder
             </button>
         </div>

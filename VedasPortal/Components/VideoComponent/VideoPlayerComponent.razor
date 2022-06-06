@@ -7,13 +7,13 @@
                class="w-100"
                style="max-width:800px;"
                controls="controls">
-    <source src="files/@string.Concat(SecilenVideo?.Adi,".",SecilenVideo?.Uzanti))"
+    <source src="files/@Src.ToString()"
             type="video/mp4" />
 </BlazoredVideo>
 
 <div class="article-details">
     <div class="article-title">
-        <h4><a href="files/@string.Concat(SecilenVideo?.Adi,".",SecilenVideo?.Uzanti)">@VideoBaslik</a></h4>
+        <h4><a href="@Href">@VideoBaslik</a></h4>
     </div>
     <p class="text-black">
         @((MarkupString) Aciklama)
@@ -33,6 +33,8 @@
 
     [Parameter]
     public string Src { get; set; }
+    [Parameter]
+    public string Href { get; set; }
 
     [Parameter]
     public string VideoBaslik { get; set; }
