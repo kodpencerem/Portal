@@ -6,12 +6,13 @@ namespace VedasPortal.Entities.Models.Egitim
 {
     public class Egitim : BaseEntity
     {
-        public ICollection<Dosya.Dosya> Dosya { get; set; }
         public string Adi { get; set; }
+        public string AltBaslik { get; set; }
         public string Aciklama { get; set; }
         public string Gereksinim { get; set; }
         public string Egitmen { get; set; }
         public bool AktifPasif { get; set; }
+        public bool IzlenmeDurumu { get; set; }
         public long ToplamIzlenme { get; set; }
         public bool TamamlandiMi { get; set; }
         public string Sertifika { get; set; }
@@ -22,6 +23,10 @@ namespace VedasPortal.Entities.Models.Egitim
         public EgitimKategori Kategori { get; set; }
         [DataType(DataType.Text)]
         public Birimler Birimler { get; set; }
+
+        public ICollection<Dosya.Dosya> Dosya { get; set; }
+        public ICollection<Dosya.Vidyo> Vidyo { get; set; }
+        public ICollection<Yorum.Yorum> Yorum { get; set; }
     }
 
     public enum EgitimKategori

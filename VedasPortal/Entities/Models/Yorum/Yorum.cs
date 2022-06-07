@@ -13,5 +13,8 @@ namespace VedasPortal.Entities.Models.Yorum
 
         public int? VidyoId { get; set; }
         public Vidyo Vidyo { get; set; }
+
+        public int? EgitimId { get; set; }
+        public Egitim.Egitim Egitim { get; set; }
     }
 }

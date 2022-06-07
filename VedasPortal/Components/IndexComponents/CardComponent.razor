@@ -1,4 +1,4 @@
-﻿<div class="@("card card-"+cardStyle.ToString())" style="margin-top: 10px">
+﻿<div  class="@("card card-"+cardStyle.ToString())" style="margin-top: 10px; min-height:@MinHeighth">
 	<div class="card-header">
 		<h4>
 			@CardHeader
@@ -24,4 +24,6 @@
     [Parameter]
     public RenderFragment CardFotter { get; set; }
 
+	[Parameter]
+    public string MinHeighth { get; set; }
 }

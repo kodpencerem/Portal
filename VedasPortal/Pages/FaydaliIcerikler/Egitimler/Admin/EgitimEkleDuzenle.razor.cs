@@ -20,6 +20,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         public IBaseRepository<Egitim> EgitimServisi { get; set; }
 
         [Inject]
+        public IBaseRepository<Vidyo> VideoServisi { get; set; }
+
+        [Inject]
         public IBaseRepository<Dosya> EgitimDosyaServisi { get; set; }
 
         [Parameter]
@@ -28,8 +31,10 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected string Title = "Ekle";
         public Egitim egitim = new();
 
-        public Dosya EgitimDosya = new();
+        public Vidyo vidyo = new();
 
+        public Dosya EgitimDosya = new();
+      
         protected IEnumerable<Egitim> Egitimler { get; set; }
 
         protected IEnumerable<Egitim> TumEgitimleriGetir()
@@ -64,21 +69,47 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected void Kayit()
         {
             EgitimServisi.Add(egitim);
-            
-            var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.FileUploadedPath;            
-            var dosya = new Dosya()
-            {
-                Adi = fileName[0],
-                Yolu = filePath,
-                Uzanti = fileName[1],
-                Kategori = DosyaKategori.Jpg,
-                AktifPasif = true,
-                EgitimId = egitim.Id,
 
-            };
-            EgitimDosyaServisi.Add(dosya);
+            var videoName = SaveFileToUploaded.FileName.Split(".");
+            var videoPath = SaveFileToUploaded.FileUploadedPath;
+            if (egitim.Id != 0)
+            {
+                var video = new Vidyo()
+                {
+                    Adi = videoName[0],
+                    Yolu = videoPath,
+                    Uzanti = videoName[1],
+                    Kategori = DosyaKategori.Mp4,
+                    AktifPasif = true,
+                    Aciklama = egitim.Aciklama,
+                    EgitimId = egitim.Id,
+                    AltBaslik = egitim.AltBaslik,
+                    Birimler = egitim.Birimler,
+                    IzlenmeDurumu = egitim.IzlenmeDurumu,
+                    KayitTarihi = egitim.KayitTarihi,
+                    KaydedenKullanici = egitim.KaydedenKullanici,
+                    VideoKategori = vidyo.VideoKategori,
+                };
+                VideoServisi.Add(video);
+            }
+
+            //var fileName = SaveFileToUploaded.FileName.Split(".");
+            //var filePath = SaveFileToUploaded.ImageUploadedPath;
+                       
+            //var dosya = new Dosya()
+            //{
+            //    Adi = fileName[0],
+            //    Yolu = filePath,
+            //    Uzanti = fileName[1],
+            //    Kategori = DosyaKategori.Jpg,
+            //    AktifPasif = true,
+            //    EgitimId = egitim.Id,
+
+            //};
+            //EgitimDosyaServisi.Add(dosya);
+
             
+
             TumEgitimleriGetir();
             egitim = new Egitim();
 
@@ -92,8 +123,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                 EgitimDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
             }
         }
-
-
 
         protected void SilmeyiOnayla(int egitimId)
         {
@@ -114,8 +143,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             TumEgitimleriGetir();
             TumBirimleriGetir();
         }
-
-
 
         protected override Task OnInitializedAsync()
         {

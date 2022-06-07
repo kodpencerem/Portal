@@ -22,7 +22,8 @@ namespace VedasPortal.Entities.Models.Dosya
         public VideoKategori? VideoKategori { get; set; }
         [DataType(DataType.Text)]
         public Birimler Birimler { get; set; }
-
+        public int? EgitimId { get; set; }
+        public Egitim.Egitim Egitim { get; set; }
         public virtual ICollection<Yorum.Yorum> Yorum { get; set; }
     }
 }

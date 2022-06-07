@@ -5,80 +5,83 @@
 
 {
 
-    <p>
-        <em>Yükleniyor...</em>
-    </p> 
- }
+	<p>
+		<em>Yükleniyor...</em>
+	</p>
+}
 
 else
 
 {
 
-    <CardComponent cardStyle="Style.info">
-        <CardHeader>
-            <i class="far fa-list-alt"></i> Duyurlar
-        </CardHeader>
-        <CardBody>
-            <div class="list-group" id="duyuruDiv">
-                @foreach (var duyuru in DuyurularListesi.Where(
-                     d => d.AnasayfadaGoster == true && 
-                     d.Kategori.TextHaberDuyuru() == HaberDuyuruKategori.Duyuru.ToString()).Take(3).ToList())
-                {
+	<CardComponent cardStyle="Style.info" MinHeighth="495px">
+		<CardHeader>
+			<i class="far fa-list-alt"></i> Duyurlar
+		</CardHeader>
+		<CardBody>
+			<div class="list-group" id="duyuruDiv">
+				@foreach (var duyuru in DuyurularListesi.Where(
+						d => d.AnasayfadaGoster == true &&
+						d.Kategori.TextHaberDuyuru() == HaberDuyuruKategori.Duyuru.ToString()).Take(3).ToList())
+				{
 
-                    <a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">
-                                @if (duyuru.Adi != null)
-                                {
-                                    <MarkDownComponent Content="@(duyuru.Adi.Length>60 ? 
-                                                                  duyuru.Adi.Substring(0, 27) + "..." : 
+					<a href="duyuru/detay/@duyuru.Id" class="list-group-item list-group-item-action flex-column align-items-start">
+						<div class="d-flex w-100 justify-content-between">
+							<h6 class="mb-1">
+								@if (duyuru.Adi != null)
+								{
+									<MarkDownComponent Content="@(duyuru.Adi.Length>60 ?
+                                                                  duyuru.Adi.Substring(0, 27) + "..." :
                                                                   duyuru.Adi)" />
-                                }
+								}
 
-                            </h6>
-                            <small>@duyuru.KayitTarihi.ToLongDateString()</small>
-                        </div>
-                        <p id="haberKutusu" class="mb-1">
-                            
-                            @if (duyuru.Aciklama != null)
-                            {
-                                <MarkDownComponent Content="@(duyuru.Aciklama.Length>400 ? 
-                                                              duyuru.Aciklama.Substring(0, 380) + "..." : 
+							</h6>
+							<small>@duyuru.KayitTarihi.ToLongDateString()</small>
+						</div>
+						<p id="haberKutusu" class="mb-1">
+
+							@if (duyuru.Aciklama != null)
+							{
+								<MarkDownComponent Content="@(duyuru.Aciklama.Length>400 ?
+                                                              duyuru.Aciklama.Substring(0, 380) + "..." :
                                                               duyuru.Aciklama)" />
-                            }
-                        </p>
-                    </a>}
+							}
+						</p>
+					</a>
+				}
 
-            </div>
-        </CardBody>
-    </CardComponent>}
+			</div>
+		</CardBody>
+	</CardComponent>
+}
 
 
 <style>
-    #duyuruDiv {
-        font-size: 10px
-    }
+	#duyuruDiv {
+		font-size: 10px
+	}
+	
 </style>
 
 @code {
-    [Inject]
-    public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
+	[Inject]
+	public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
 
-    protected IEnumerable<HaberDuyuru> DuyurularListesi { get; set; }
+	protected IEnumerable<HaberDuyuru> DuyurularListesi { get; set; }
 
-    protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
-    {
-        DuyurularListesi = DuyuruServisi.GetAll();
+	protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
+	{
+		DuyurularListesi = DuyuruServisi.GetAll();
 
-        return DuyurularListesi;
+		return DuyurularListesi;
 
-    }
+	}
 
-    protected override Task OnInitializedAsync()
-    {
-        TumDuyurulariGetir();
+	protected override Task OnInitializedAsync()
+	{
+		TumDuyurulariGetir();
 
-        return Task.CompletedTask;
-    }
+		return Task.CompletedTask;
+	}
 }
