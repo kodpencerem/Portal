@@ -4,94 +4,103 @@
 @if (haberler == null)
 
 {
-    <p><em>Yükleniyor...</em></p>
+	<p><em>Yükleniyor...</em></p>
 }
 
 else
 
 {
-    <div class="col-12">
-        <div class="row">
-            @foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" && 
-             h.AktifPasif == true))
-            {
-                <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                    <article class="article article-style-c">
-                        <div class="author-box-center align-center">
-                            <img width="375" 
-                                 height="180" 
-                                 alt="@haber.Adi" 
-                                 src="images/uploaded/@string.Concat(haber.Dosya?.FirstOrDefault().Adi,
+	<div class="col-12">
+		<CardComponent cardStyle="Style.primary">
+			<CardHeader>Haberler</CardHeader>
+			<CardBody>
+				<div class="row">
+					@foreach (var haber in haberler.Where(h => h.Kategori.TextHaberDuyuru() == "Haber" &&
+							h.AktifPasif == true))
+					{
+						<div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
+							<article class="article article-style-c" id="minHeight">
+								<div class="author-box-center align-center">
+									<img width="365"
+								 height="180"
+								 alt="@haber.Adi"
+								 src="images/uploaded/@string.Concat(haber.Dosya?.FirstOrDefault().Adi,
                                                ".",
-                                               haber.Dosya?.FirstOrDefault().Uzanti)" 
-                                 class=" author-box-picture">
-                            <div class="clearfix">
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="haber/detay/@haber.Id">Haber</a>
-                                <div class="bullet"></div> <a>@haber.KayitTarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h1 class="article-style-b">
-                                    <a href="haber/detay/@haber.Id">
-                                        @if (haber.Adi != null)
-                                        {
-                                            <MarkDownComponent Content="@(haber.Adi.Length>30 ? 
-                                                                          haber.Adi.Substring(0, 19) + "..." : 
+                                               haber.Dosya?.FirstOrDefault().Uzanti)"
+								 class=" author-box-picture">
+									<div class="clearfix">
+									</div>
+								</div>
+								<div class="article-details">
+									<div class="article-category">
+										<a href="haber/detay/@haber.Id">Haber</a>
+										<div class="bullet"></div> <a>@haber.KayitTarihi</a>
+									</div>
+									<div class="article-title">
+										<h1 class="article-style-b">
+											<a href="haber/detay/@haber.Id">
+												@if (haber.Adi != null)
+												{
+													<MarkDownComponent Content="@(haber.Adi.Length>30 ?
+                                                                          haber.Adi.Substring(0, 19) + "..." :
                                                                           haber.Adi)" />
-                                        }
-                                    </a>
-                                </h1>
-                            </div>
-                            <div name="HaberAltBaslik" class="article-title">
-                                <p class="alert-title">
-                                    @if (haber.AltBaslik != null)
-                                    {
-                                        <MarkDownComponent Content="@(haber.AltBaslik.Length>60 ? 
-                                                                      haber.AltBaslik.Substring(0, 45) + "..." : 
+												}
+											</a>
+										</h1>
+									</div>
+									<div name="HaberAltBaslik" class="article-title">
+										<p class="alert-title">
+											@if (haber.AltBaslik != null)
+											{
+												<MarkDownComponent Content="@(haber.AltBaslik.Length>60 ?
+                                                                      haber.AltBaslik.Substring(0, 45) + "..." :
                                                                       haber.AltBaslik)" />
-                                    }
-                                </p>
-                            </div>
-                            <p name="HaberAciklama" class="accordion-header">
+											}
+										</p>
+									</div>
+									<p name="HaberAciklama" class="accordion-header">
 
 
-                                @if (haber.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(haber.Aciklama.Length>500 ? 
-                                                                  haber.Aciklama.Substring(0, 280) + "..." : 
+										@if (haber.Aciklama != null)
+										{
+											<MarkDownComponent Content="@(haber.Aciklama.Length>500 ?
+                                                                  haber.Aciklama.Substring(0, 280) + "..." :
                                                                   haber.Aciklama)" />
-                                }
-                            </p>
+										}
+									</p>
 
 
-                        </div>
-                        @*<div class="article-cta centered">
-                                <a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
-                            </div>*@
-                    </article>
-                </div>
-            }
+								</div>
+								@*<div class="article-cta centered">
+									<a href="@($"haber/detay/{haber.Id}")" class="btn btn-primary fas fa-chevron-right">Haber Detayı</a>
+									</div>*@
+							</article>
+						</div>
+					}
 
-        </div>
-    </div>
+				</div>
+			</CardBody>
+		</CardComponent>
+	</div>
 
 }
 
 
 <style>
-    .article .article-details {
-        min-height: 220px;
-        max-height: 290px;
-    }
+	.article .article-details {
+		min-height: 220px;
+		max-height: 290px;
+	}
 
-    .theme-white .btn-primary {
-        margin-left: 8rem;
-        background-color: #6777ef;
-        border-color: transparent !important;
-        color: #fff;
-    }
+	#minHeight {
+		min-height: 465px !important
+	}
+
+	.theme-white .btn-primary {
+		margin-left: 8rem;
+		background-color: #6777ef;
+		border-color: transparent !important;
+		color: #fff;
+	}
 </style>
 

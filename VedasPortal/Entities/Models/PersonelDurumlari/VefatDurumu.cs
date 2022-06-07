@@ -7,6 +7,7 @@ namespace VedasPortal.Entities.Models.PersonelDurumlari
 {
     public class VefatDurumu : Base.BaseEntity
     {
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string AdSoyad { get; set; }
         public string TelefonNo { get; set; }
         public string CalistigiYer { get; set; }

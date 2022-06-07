@@ -8,6 +8,7 @@ namespace VedasPortal.Entities.Models.Etkinlik
     public class Etkinlik : BaseEntity
     {
         public int No { get; set; }
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public DateTime BaslangicTarihi { get; set; }
@@ -32,7 +33,8 @@ namespace VedasPortal.Entities.Models.Etkinlik
         Seminer,
         Konferans,
         Konser,
-        Tiyatro
+        Tiyatro,
+        Etkinlik
     }
 
     public enum KatilimciKategori
@@ -44,6 +46,8 @@ namespace VedasPortal.Entities.Models.Etkinlik
         Hukuk,
         KaliteMudurlugu,
         InsanKaynaklariPersoneli,
+        SadeceKadinPersonel,
+        SadeceErkekPersonel,
         Davetli
     }
 }

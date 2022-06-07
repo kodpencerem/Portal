@@ -16,11 +16,11 @@ namespace VedasPortal.Pages.Etkinlikler
 
         public Dosya EtkinlikDetayDosya { get; set; } = new();
 
-        private Etkinlik EtkinlikDetayGetir { get; set; }
+        private Etkinlik etkinlik { get; set; } = new();
 
         protected override Task OnInitializedAsync()
         {
-            EtkinlikDetayGetir = EtkinlikServisi.Get(EtkinlikId);
+            etkinlik = EtkinlikServisi.Get(EtkinlikId);
             return Task.CompletedTask;
         }
     }

@@ -24,11 +24,11 @@
 									@foreach (var resim in DuyuruDetayGetir?.Dosya.Where(x => x.HaberDuyuruId == DuyuruDetayGetir.Id).ToList())
 									{
 										<div class="tab-pane" id="pic-2">
-										<img src="images/uploaded/@string.Concat(DuyuruDetayGetir.Dosya?.FirstOrDefault().Adi,
+										<img src="images/uploaded/@string.Concat(resim.Adi,
                                                ".",
-                                               DuyuruDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                               resim.Uzanti)"
 									 	width="494"
-									 	alt="@DuyuruDetayGetir.Adi" />
+									 	alt="@resim.Adi" />
 									</div>
 
 									}								
@@ -48,11 +48,11 @@
 									{
 										<li>
 										<a data-target="#pic-2" data-toggle="tab">
-											<img src="images/uploaded/@string.Concat(DuyuruDetayGetir.Dosya?.FirstOrDefault().Adi,
+											<img src="images/uploaded/@string.Concat(resim.Adi,
                                                ".",
-                                               DuyuruDetayGetir.Dosya?.FirstOrDefault().Uzanti)"
+                                               resim.Uzanti)"
 										 	width="76"
-										 	alt="@DuyuruDetayGetir.Adi" />
+										 	alt="@resim.Adi" />
 										</a>
 									</li>
 									}

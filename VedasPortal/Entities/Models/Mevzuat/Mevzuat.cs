@@ -10,6 +10,7 @@ namespace VedasPortal.Entities.Models.Mevzuat
     {
         public ICollection<Dosya.Dosya> Dosya { get; set; }
         public int No { get; set; }
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public DateTime BaslangicTarihi { get; set; }

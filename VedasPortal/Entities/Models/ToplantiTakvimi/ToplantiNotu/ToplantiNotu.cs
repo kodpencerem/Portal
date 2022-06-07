@@ -7,6 +7,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu
 {
     public class ToplantiNotu : BaseEntity
     {
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Baslik { get; set; }
         public string AltBaslik { get; set; }
         public string Konu { get; set; }

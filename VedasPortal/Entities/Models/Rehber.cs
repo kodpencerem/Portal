@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models
 {
     public class Rehber : BaseEntity
     {
-        public ICollection<Dosya.Dosya> Dosya { get; set; }
+        
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string Soyadi { get; set; }
         public string Unvani { get; set; }
@@ -13,5 +15,6 @@ namespace VedasPortal.Entities.Models
         public string Email { get; set; }
         public string Lokasyon { get; set; }
         public bool AktifPasif { get; set; } = true;
+        public ICollection<Dosya.Dosya> Dosya { get; set; }
     }
 }

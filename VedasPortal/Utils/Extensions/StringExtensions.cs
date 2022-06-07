@@ -200,6 +200,7 @@ namespace VedasPortal
             return kategori switch
             {
                 EtkinlikKategori.CevreTemizligi => "Çevre Temizliği",
+                EtkinlikKategori.Etkinlik => "Etkinlik",
                 EtkinlikKategori.DogaYuruyusu => "Doğa Yürüyüşü",
                 EtkinlikKategori.FidanDikimi => "Fidan Dikimi",
                 EtkinlikKategori.Tanisma => "Tanışma",
@@ -216,6 +217,8 @@ namespace VedasPortal
             return kategori switch
             {
                 KatilimciKategori.TumPersonel => "Tüm Personel",
+                KatilimciKategori.SadeceErkekPersonel => "Erkek Personel",
+                KatilimciKategori.SadeceKadinPersonel => "Kadın Personel",
                 KatilimciKategori.Scada => "Scada",
                 KatilimciKategori.BilgiIslem => "Bilgi İşlem Müdürlüğü",
                 KatilimciKategori.CagriMerkezi => "Çağrı Merkezi",

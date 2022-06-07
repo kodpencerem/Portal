@@ -6,7 +6,7 @@ namespace VedasPortal.Entities.Models.Oneri
 {
     public class Oneri : BaseEntity
     {
-        
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }

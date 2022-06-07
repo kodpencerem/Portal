@@ -12,63 +12,69 @@ else
 
 {
     <div class="col-12">
-        <div class="row">
-            @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
-            {
-                <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                    <article class="article article-style-c">
-                        <div class="author-box-center align-center">
-                            <img width="375" 
-                                 height="180" 
-                                 alt="@duyuru.Adi" 
-                                 src="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>Duyurular</CardHeader>
+            <CardBody>
+                <div class="row">
+                    @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
+                    {
+                        <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
+                            <article class="article article-style-c" id="minHeight">
+                                <div class="author-box-center align-center">
+                                    <img width="365"
+                                         height="180"
+                                         alt="@duyuru.Adi"
+                                         src="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
                                                    duyuru.Dosya.FirstOrDefault().Uzanti)"
-                                 class=" author-box-picture">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="duyuru/detay/@duyuru.Id">Duyuru</a>
-                                <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h1 class="article-style-b">
-                                    <a href="duyuru/detay/@duyuru.Id">
+                                         class=" author-box-picture">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="article-details">
+                                    <div class="article-category">
+                                        <a href="duyuru/detay/@duyuru.Id">Duyuru</a>
+                                        <div class="bullet"></div> <a>@duyuru.KayitTarihi</a>
+                                    </div>
+                                    <div class="article-title">
+                                        <h1 class="article-style-b">
+                                            <a href="duyuru/detay/@duyuru.Id">
 
-                                        @if (duyuru.Adi != null)
-                                        {
-                                            <MarkDownComponent Content="@(duyuru.Adi.Length>30 ? 
-                                                                          duyuru.Adi.Substring(0, 19) + "..." : 
+                                                @if (duyuru.Adi != null)
+                                                {
+                                                    <MarkDownComponent Content="@(duyuru.Adi.Length>30 ?
+                                                                          duyuru.Adi.Substring(0, 19) + "..." :
                                                                           duyuru.Adi)" />
-                                        }
-                                    </a>
-                                </h1>
-                            </div>
-                            <div name="HaberAltBaslik" class="article-title">
-                                <p class="alert-title">
+                                                }
+                                            </a>
+                                        </h1>
+                                    </div>
+                                    <div name="HaberAltBaslik" class="article-title">
+                                        <p class="alert-title">
 
-                                    @if (duyuru.AltBaslik != null)
-                                    {
-                                        <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ? 
-                                                                      duyuru.AltBaslik.Substring(0, 45) + "..." : 
+                                            @if (duyuru.AltBaslik != null)
+                                            {
+                                                <MarkDownComponent Content="@(duyuru.AltBaslik.Length>60 ?
+                                                                      duyuru.AltBaslik.Substring(0, 45) + "..." :
                                                                       duyuru.AltBaslik)" />
-                                    }
-                                </p>
-                            </div>
-                            <p name="HaberAciklama" class="accordion-header">
+                                            }
+                                        </p>
+                                    </div>
+                                    <p name="HaberAciklama" class="accordion-header">
 
-                                @if (duyuru.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ? 
-                                                                  duyuru.Aciklama.Substring(0, 280) + "..." : 
+                                        @if (duyuru.Aciklama != null)
+                                        {
+                                            <MarkDownComponent Content="@(duyuru.Aciklama.Length>500 ?
+                                                                  duyuru.Aciklama.Substring(0, 280) + "..." :
                                                                   duyuru.Aciklama)" />
-                                }
-                            </p>
+                                        }
+                                    </p>
+                                </div>
+                            </article>
                         </div>
-                    </article>
+                    }
                 </div>
-            }
-        </div>
+            </CardBody>
+        </CardComponent>
+
     </div>
 
 }
@@ -77,6 +83,10 @@ else
     .article .article-details {
         min-height: 220px;
         max-height: 290px;
+    }
+
+    #minHeight {
+        min-height: 465px !important
     }
 
     .theme-white .btn-primary {

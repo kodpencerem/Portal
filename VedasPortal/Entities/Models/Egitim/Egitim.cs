@@ -6,6 +6,7 @@ namespace VedasPortal.Entities.Models.Egitim
 {
     public class Egitim : BaseEntity
     {
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
         public string Aciklama { get; set; }
