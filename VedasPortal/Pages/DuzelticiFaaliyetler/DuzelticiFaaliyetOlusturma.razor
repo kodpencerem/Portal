@@ -46,11 +46,11 @@ else
 						{
 							<div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
 								<!-- Support tickets -->
-					<div class="card">
+					<div class="card" id="minHeight">
 
 									<div class="card-body">
 										<div class="support-ticket media pb-1 mb-3">
-											<img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
+											<img src="images/default.png" class="user-img mr-2" alt="">
 											<div class="media-body ml-3">
 												@*<div class="badge badge-pill badge-success mb-1 float-right">
 													<a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
@@ -60,7 +60,7 @@ else
 												<p class="my-1">
 													<img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
                                                                    dFaaliyet.Dosya.FirstOrDefault().Uzanti)"
-											 height="300"
+											 height="200"
 											 width="380" />
 													@if (dFaaliyet.Aciklama != null)
 													{
@@ -104,10 +104,12 @@ else
 
 <style>
 	.article .article-details {
-		min-height: 310px;
+		min-height: 300px;
 		max-height: 310px;
 	}
-
+	#minHeight {
+        min-height: 280px !important
+    }
 	.theme-white .btn-primary {
 		background-color: #6777ef;
 		border-color: transparent !important;

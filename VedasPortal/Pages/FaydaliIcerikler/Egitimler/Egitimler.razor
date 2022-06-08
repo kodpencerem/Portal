@@ -40,8 +40,8 @@ else
                         @foreach (var egitim in FilteredEgitim.Where(e => e.AktifPasif == true).ToList())
                         {
 
-                            <div class="col-12 col-md-4 col-lg-4">
-                                <article class="article article-style-c">
+                            <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
+                                <article class="article article-style-c" id="minHeight">
                                     <a href="egitimdetayi/@egitim.Id">
                                         <div class="article-header">
                                             <div class="article-image"
@@ -106,7 +106,9 @@ else
         min-height: 310px;
         max-height: 410px;
     }
-
+    #minHeight {
+        min-height: 465px !important
+    }
     .theme-white .btn-primary {
         margin-left: 8rem;
         background-color: #6777ef;

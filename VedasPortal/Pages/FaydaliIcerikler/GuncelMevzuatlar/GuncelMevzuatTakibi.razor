@@ -40,12 +40,9 @@ else
                         {
 
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                                <article class="article">
+                                <article class="article" id="minHeight">
                                     <div class="article-header">
-                                        <div class="article-image" data-background="images/uploaded/@string.Concat(
-                                                                       mevzuat.Dosya?.FirstOrDefault().Adi,
-                                                                       ".",
-                                                                       mevzuat.Dosya?.FirstOrDefault().Uzanti)">
+                                        <div class="article-image" data-background="images/indir2.jpg">
                                         </div>
                                         <div class="article-title">
                                             <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi</a></h2>
@@ -85,7 +82,9 @@ else
         min-height: 150px;
         max-height: 150px;
     }
-
+    #minHeight {
+        min-height: 390px !important
+    }
     .theme-white .btn-primary {
         margin-left: 8rem;
         background-color: #6777ef;

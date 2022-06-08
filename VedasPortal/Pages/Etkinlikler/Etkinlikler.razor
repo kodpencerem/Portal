@@ -5,82 +5,93 @@
 @if (Etkinlikler == null)
 
 {
-    <p><em>Yükleniyor...</em></p>
+	<p><em>Yükleniyor...</em></p>
 }
 
 else
 
 {
-    <div class="col-12">
-        <div class="row">
-            @foreach (var etkinlik in Etkinlikler.Where(e => e.AktifPasif == true))
-            {
-                <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                    <article class="article article-style-c">
-                        <div class="author-box-center align-center">
-                            <img width="375" 
-                                 height="180" 
-                                 alt="@etkinlik.Adi" 
-                                 src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,
+	<div class="col-12">
+		<CardComponent cardStyle="Style.primary">
+			<CardHeader>Etkinlikler</CardHeader>
+			<CardBody>
+				<div class="row">
+					@foreach (var etkinlik in Etkinlikler.Where(e => e.AktifPasif == true))
+					{
+						<div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
+							<article class="article article-style-c" id="minHeight">
+								<div class="author-box-center align-center">
+									<img width="363"
+								 height="180"
+								 alt="@etkinlik.Adi"
+								 src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,
                                                ".",
-                                               etkinlik.Dosya?.FirstOrDefault().Uzanti)" 
-                                 class="author-box-picture">
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-category">
-                                <a href="etkinlik/detay/@etkinlik.Id">Etkinlik</a>
-                                <div class="bullet"></div> <a>@etkinlik.KayitTarihi</a>
-                            </div>
-                            <div class="article-title">
-                                <h1 class="article-style-b">
-                                    <a href="etkinlik/detay/@etkinlik.Id">
-                                        @if (etkinlik.Adi != null)
-                                        {
-                                            <MarkDownComponent Content="@(etkinlik.Adi.Length>30 ? 
-                                                                          etkinlik.Adi.Substring(0, 19) + "..." : 
+                                               etkinlik.Dosya?.FirstOrDefault().Uzanti)"
+								 class="author-box-picture">
+									<div class="clearfix"></div>
+								</div>
+								<div class="article-details">
+									<div class="article-category">
+										<a href="etkinlik/detay/@etkinlik.Id">Etkinlik</a>
+										<div class="bullet"></div> <a>@etkinlik.KayitTarihi</a>
+									</div>
+									<div class="article-title">
+										<h1 class="article-style-b">
+											<a href="etkinlik/detay/@etkinlik.Id">
+												@if (etkinlik.Adi != null)
+												{
+													<MarkDownComponent Content="@(etkinlik.Adi.Length>30 ?
+                                                                          etkinlik.Adi.Substring(0, 19) + "..." :
                                                                           etkinlik.Adi)" />
-                                        }
-                                    </a>
-                                </h1>
-                            </div>
+												}
+											</a>
+										</h1>
+									</div>
 
-                            <p name="EtkinlikAciklama" class="accordion-header">
+									<p name="EtkinlikAciklama" class="accordion-header">
 
 
-                                @if (etkinlik.Aciklama != null)
-                                {
-                                    <MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ? 
-                                                                  etkinlik.Aciklama.Substring(0, 280) + "..." : 
+										@if (etkinlik.Aciklama != null)
+										{
+											<MarkDownComponent Content="@(etkinlik.Aciklama.Length>500 ?
+                                                                  etkinlik.Aciklama.Substring(0, 280) + "..." :
                                                                   etkinlik.Aciklama)" />
-                                }
-                            </p>
+										}
+									</p>
 
 
-                        </div>
-                        @*<div class="article-cta centered">
-                                <a href="@($"etkinlik/detay/{etkinlik.Id}")" class="btn btn-primary fas fa-chevron-right">Etkinlik Detayı</a>
-                            </div>*@
-                    </article>
-                </div>
-            }
+								</div>
+								@*<div class="article-cta centered">
+									<a href="@($"etkinlik/detay/{etkinlik.Id}")" class="btn btn-primary fas fa-chevron-right">Etkinlik Detayı</a>
+									</div>*@
+							</article>
+						</div>
+					}
 
-        </div>
-    </div>
+				</div>
+			</CardBody>
+		</CardComponent>
+
+
+	</div>
 
 }
 
 <style>
-    .article .article-details {
-        min-height: 220px;
-        max-height: 280px;
-    }
+	.article .article-details {
+		min-height: 220px;
+		max-height: 280px;
+	}
 
-    .theme-white .btn-primary {
-        margin-left: 8rem;
-        background-color: #6777ef;
-        border-color: transparent !important;
-        color: #fff;
-    }
+	#minHeight {
+		min-height: 425px !important
+	}
+
+	.theme-white .btn-primary {
+		margin-left: 8rem;
+		background-color: #6777ef;
+		border-color: transparent !important;
+		color: #fff;
+	}
 </style>
 

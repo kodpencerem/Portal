@@ -37,7 +37,7 @@ else
                         {
 
                             <div class="col-lg-3">
-                                <div class="card client-card">
+                                <div class="card client-card" id="minHeight">
                                     <div class="card-body text-center">
                                         <img src="images/uploaded/@string.Concat(
                                                                    personel.Dosya.FirstOrDefault().Adi,
@@ -73,6 +73,9 @@ else
     .article .article-details {
         min-height: 310px;
         max-height: 310px;
+    }
+    #minHeight {
+        min-height: 310px !important
     }
 
     .theme-white .btn-primary {

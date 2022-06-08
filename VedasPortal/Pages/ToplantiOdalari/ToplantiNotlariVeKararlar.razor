@@ -5,100 +5,107 @@
 @if (NotlarVeKararlar == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+	<p><em>Yükleniyor...</em></p>
+}
 
 else
 
 {
-<div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            <div class="float-left">
-                <div class="col-md-12">
-                    Toplantı Notları ve Alınan Kararlar
-                </div>
-            </div>
-            <div style="margin-left:1030px" class="float-right">
-                <div class="text-center bg-blue-100">
-                    <input class="form-control" @bind-value="SearchText"
-                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
-                </div>
-            </div>
-        </CardHeader>
-        <CardBody>
-            <div class="row">
-                @if (!NotlarVeKararlar.Any())
-                {
-<p>İçerik Aranıyor</p> }
-else
-{
-@foreach (var toplantiNotKarar in FilteredToplantiNotu.Where(a => a.AktifPasif == true).ToList())
-{
-<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-    <div class="card">
-        <div class="card-statistic-4">
-            <div class="align-items-center justify-content-between">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                            <h4 class="font-15">
-                                Not Başlığı :@toplantiNotKarar.Baslik
-                            </h4>
+	<div class="col-12">
+		<CardComponent cardStyle="Style.primary">
+			<CardHeader>
+				<div class="float-left">
+					<div class="col-md-12">
+						Toplantı Notları ve Alınan Kararlar
+					</div>
+				</div>
+				<div style="margin-left:1030px" class="float-right">
+					<div class="text-center bg-blue-100">
+						<input class="form-control" @bind-value="SearchText"
+						   @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+					</div>
+				</div>
+			</CardHeader>
+			<CardBody>
+				<div class="row">
+					@if (!NotlarVeKararlar.Any())
+					{
+						<p>İçerik Aranıyor</p>
+					}
+					else
+					{
+						@foreach (var toplantiNotKarar in FilteredToplantiNotu.Where(a => a.AktifPasif == true).ToList())
+						{
+							<div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
+								<div class="card" id="minHeight">
+									<div class="card-statistic-4">
+										<div class="align-items-center justify-content-between">
+											<div class="row ">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+													<div class="card-content">
+														<h4 class="font-15">
+															Not Başlığı :@toplantiNotKarar.Baslik
+														</h4>
 
-                            <h6 class="mb-3 font-14">Not Kayıt Tarihi : </h6>
-                            <p>@toplantiNotKarar.KayitTarihi</p>
-                            <h6 class="mb-3 font-14">
-                                Toplantı Konusu :
-                            </h6>
-                            <p>
-                                @if (toplantiNotKarar.AltBaslik != null)
-                                {
-    <MarkDownComponent Content="@(toplantiNotKarar.AltBaslik.Length>45 ?
+														<h6 class="mb-3 font-14">Not Kayıt Tarihi : </h6>
+														<p>@toplantiNotKarar.KayitTarihi</p>
+														<h6 class="mb-3 font-14">
+															Toplantı Konusu :
+														</h6>
+														<p>
+															@if (toplantiNotKarar.AltBaslik != null)
+															{
+																<MarkDownComponent Content="@(toplantiNotKarar.AltBaslik.Length>45 ?
                                                                   toplantiNotKarar.AltBaslik.Substring(0, 37) + "..." :
-                                                                  toplantiNotKarar.AltBaslik)" />}
-                            </p>
+                                                                  toplantiNotKarar.AltBaslik)" />
+															}
+														</p>
 
-                            <a href="toplantinotdetayi/@toplantiNotKarar.Id" class="btn btn-primary">İncele</a>
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                            <img src="assets/img/banner/1.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>}}
+														<a href="toplantinotdetayi/@toplantiNotKarar.Id" class="btn btn-primary">İncele</a>
+													</div>
+												</div>
+												<div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+													<div class="banner-img">
+														<img src="assets/img/banner/1.png" alt="">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						}}
 
 
-            </div>
+				</div>
 
-        </CardBody>
-    </CardComponent>
-</div>}
+			</CardBody>
+		</CardComponent>
+	</div>
+}
 
 
 <style>
-    .article .article-details {
-        min-height: 310px;
-        max-height: 310px;
+	.article .article-details {
+		min-height: 310px;
+		max-height: 310px;
+	}
+	#minHeight {
+        min-height: 300px !important
     }
+	.theme-white .btn-primary {
+		margin-left: 8rem;
+		background-color: #6777ef;
+		border-color: transparent !important;
+		color: #fff;
+	}
 
-    .theme-white .btn-primary {
-        margin-left: 8rem;
-        background-color: #6777ef;
-        border-color: transparent !important;
-        color: #fff;
-    }
-
-    .card .card-footer {
-        background-color: transparent;
-        border: none;
-        margin-top: -3rem;
-    }
+	.card .card-footer {
+		background-color: transparent;
+		border: none;
+		margin-top: -3rem;
+	}
 </style>
 
