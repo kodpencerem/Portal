@@ -41,10 +41,10 @@
 
                         }
                     }
+                    
                     <button @onclick="() => DownloadFile(item)">İndir</button>
 
                 </div>
-
             }
         </div>
         <br />
@@ -53,8 +53,7 @@
 
 @code {
 
-
-
+    
     // yüklenen dosyalar için önizleme URL'lerinin listesi
     private IList<string> previewImages = new List<string>();
 

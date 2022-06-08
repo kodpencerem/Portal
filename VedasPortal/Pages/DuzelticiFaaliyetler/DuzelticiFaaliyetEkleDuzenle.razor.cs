@@ -77,7 +77,6 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             {
                 Title = "Duzenle";
                 duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
-                DFaaliyetDosya.Yolu = duzelticiFaaliyet.Dosya.FirstOrDefault()?.Yolu;
             }
         }
 
@@ -101,9 +100,6 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             duzelticiFaaliyet = new DuzelticiFaaliyet();
             TumFaaliyetleriGetir();
         }
-
-
-
         protected override Task OnInitializedAsync()
         {
             TumFaaliyetleriGetir();

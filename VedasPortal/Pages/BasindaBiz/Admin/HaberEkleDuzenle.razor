@@ -18,11 +18,7 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@HaberDosya.Yolu" />
-                                @if (!string.IsNullOrEmpty(haber.Dosya?.FirstOrDefault().Yolu.ToString()))
-                                {
-                                    <img src="@("images/uploaded/"+@haber.Dosya?.FirstOrDefault().Yolu)"
-                                     height="150" />
-                                }
+                                
                             </div>
                         </div>
 
@@ -172,9 +168,9 @@ else
                                     </td>
                                     <td>
                                         <img src="images/uploaded/@string.Concat(
-                                                                       haber.Dosya.FirstOrDefault().Adi,
+                                                                       haber.Dosya.FirstOrDefault()?.Adi,
                                                                        ".",
-                                                                       haber.Dosya.FirstOrDefault().Uzanti)"
+                                                                       haber.Dosya.FirstOrDefault()?.Uzanti)"
                                      width="50"
                                      height="50" />
                                     </td>

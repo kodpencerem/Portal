@@ -25,7 +25,7 @@
                                 <InputSelect id="Merkez" class="form-control"
                                              ValueExpression="@(() => takvimVm.MerkezId)"
                                              Value="@takvimVm.MerkezId"
-                                             ValueChanged="@((string value) => OnMerkezChange(value))">
+                                             ValueChanged="@((string value) => OnMerkezChange(value))" required>
 
                                     @foreach (var merkez in takvimVm.ListofToplantiMerkezleri)
                                     {

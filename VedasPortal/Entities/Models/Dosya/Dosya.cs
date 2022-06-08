@@ -32,8 +32,7 @@ namespace VedasPortal.Entities.Models.Dosya
         public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
         public int? DuzelticiFaaliyetId { get; set; }
         public DuzelticiFaaliyet.DuzelticiFaaliyet DuzelticiFaaliyet { get; set; }
-        public int? EgitimId { get; set; }
-        public Egitim.Egitim Egitim { get; set; }
+        
         public int? EtkinlikId { get; set; }
         public Etkinlik.Etkinlik Etkinlik { get; set; }
         public int? KatilimciId { get; set; }

@@ -32,7 +32,7 @@
                                     <InputSelect id="Countries" class="form-control col-md-6"
                                                  ValueExpression="@(() => ToplantiTakvimVm.MerkezId)"
                                                  Value="@ToplantiTakvimVm.MerkezId"
-                                                 ValueChanged="@((string value) => OnMerkezChange(value))">
+                                                 ValueChanged="@((string value) => OnMerkezChange(value))" required>
 
                                         @foreach (var state in ToplantiTakvimVm.ListofToplantiMerkezleri)
                                         {
@@ -50,7 +50,7 @@
                                     <InputSelect id="State" class="form-control col-md-8"
                                                  ValueExpression="@(() => ToplantiTakvimVm.OdaId)"
                                                  Value="@ToplantiTakvimVm.OdaId"
-                                                 ValueChanged="@((string value) => OnOdaChange(value))">
+                                                 ValueChanged="@((string value) => OnOdaChange(value))" required>
 
                                         @if (ToplantiTakvimVm.ListofToplantiOdalari != null)
                                         {

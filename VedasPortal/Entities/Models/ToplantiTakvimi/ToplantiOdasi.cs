@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
 
 namespace VedasPortal.Entities.Models.ToplantiTakvimi
@@ -6,6 +7,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi
     public class ToplantiOdasi : BaseEntity
     {
         public string Kod { get; set; }
+        [Required(ErrorMessage = "Toplantı Odası Adi Gerekli")]
         public string Adi { get; set; }
         public bool AktifPasif { get; set; }
         public string Aciklama { get; set; }

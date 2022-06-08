@@ -1,7 +1,7 @@
 ﻿@using VedasPortal.Entities.Models.Dosya
 
 <div class="component-box" style="margin-top: 20px;">
-    @foreach (var item in Videolar.Where(x=>x.AktifPasif==true))
+    @foreach (var item in Videolar.Where(x=>x.AktifPasif==true && x.Uzanti=="mp4" || x.Uzanti=="mkv"))
     {
         <div class="box-card" @onclick="() => VideoSec.InvokeAsync(item)" >
             <div class="row" >

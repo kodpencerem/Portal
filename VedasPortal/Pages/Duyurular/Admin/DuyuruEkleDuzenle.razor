@@ -17,11 +17,7 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@DuyuruDosya.Yolu" />
-                                @if (!string.IsNullOrEmpty(duyuru.Dosya?.FirstOrDefault().Yolu.ToString()))
-                                {
-                                    <img src="@("images/uploaded/"+@duyuru.Dosya?.FirstOrDefault().Yolu)"
-                                     height="150" />
-                                }
+                                
                             </div>
 
                         </div>

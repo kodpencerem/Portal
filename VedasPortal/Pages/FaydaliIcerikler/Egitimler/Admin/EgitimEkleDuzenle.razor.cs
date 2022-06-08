@@ -22,9 +22,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         [Inject]
         public IBaseRepository<Vidyo> VideoServisi { get; set; }
 
-        [Inject]
-        public IBaseRepository<Dosya> EgitimDosyaServisi { get; set; }
-
         [Parameter]
         public int EgitimId { get; set; }
 
@@ -33,13 +30,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         public Vidyo vidyo = new();
 
-        public Dosya EgitimDosya = new();
-      
+        public Vidyo VideoDosya = new();
+
         protected IEnumerable<Egitim> Egitimler { get; set; }
 
         protected IEnumerable<Egitim> TumEgitimleriGetir()
         {
-            Egitimler = EgitimServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Egitimler = EgitimServisi.GetAll();
             return Egitimler;
 
         }
@@ -93,23 +90,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                 VideoServisi.Add(video);
             }
 
-            //var fileName = SaveFileToUploaded.FileName.Split(".");
-            //var filePath = SaveFileToUploaded.ImageUploadedPath;
-                       
-            //var dosya = new Dosya()
-            //{
-            //    Adi = fileName[0],
-            //    Yolu = filePath,
-            //    Uzanti = fileName[1],
-            //    Kategori = DosyaKategori.Jpg,
-            //    AktifPasif = true,
-            //    EgitimId = egitim.Id,
-
-            //};
-            //EgitimDosyaServisi.Add(dosya);
-
-            
-
             TumEgitimleriGetir();
             egitim = new Egitim();
 
@@ -119,8 +99,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             if (EgitimId != 0)
             {
                 Title = "Duzenle";
+                VideoDosya.Yolu = egitim.Vidyo.FirstOrDefault()?.Yolu;
                 egitim = EgitimServisi.Get(EgitimId);
-                EgitimDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
+                
             }
         }
 
@@ -136,12 +117,14 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         {
             if (egitim.Id == 0)
                 return;
-
+            if(egitim.Id == vidyo.EgitimId)
+            {
+                VideoServisi.Remove(vidyo.Id);
+            }
             EgitimServisi.Remove(egitim.Id);
-            EgitimDosyaServisi.Remove(EgitimDosya.Id);
             egitim = new Egitim();
             TumEgitimleriGetir();
-            TumBirimleriGetir();
+            
         }
 
         protected override Task OnInitializedAsync()
