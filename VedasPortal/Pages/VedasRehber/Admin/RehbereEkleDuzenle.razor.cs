@@ -39,8 +39,6 @@ namespace VedasPortal.Pages.VedasRehber.Admin
             return Rehber;
 
         }
-
-
         protected void Kayit()
         {
             RehberServisi.Add(rehber);

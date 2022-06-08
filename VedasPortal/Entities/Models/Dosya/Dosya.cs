@@ -13,6 +13,8 @@ namespace VedasPortal.Entities.Models.Dosya
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
+
+        [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Yolu { get; set; }
         public string Uzanti { get; set; }
         public string Aciklama { get; set; }

@@ -23,8 +23,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         protected string Title = "Ekle";
         public Dosya dokuman = new();
 
-
-
         protected IEnumerable<Dosya> Dosyalar { get; set; }
 
         protected IEnumerable<Dosya> TumDosyalariGetir()

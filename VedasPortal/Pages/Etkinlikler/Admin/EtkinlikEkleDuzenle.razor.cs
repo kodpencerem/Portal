@@ -84,8 +84,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             if (EtkinlikId != 0)
             {
                 Title = "Duzenle";
-                etkinlik = EtkinlikServisi.Get(EtkinlikId);
-                
+                etkinlik = EtkinlikServisi.Get(EtkinlikId);                
             }
         }
 
