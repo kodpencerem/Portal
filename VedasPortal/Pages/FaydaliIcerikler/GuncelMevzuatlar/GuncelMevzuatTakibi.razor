@@ -45,14 +45,16 @@ else
                                         <div class="article-image" data-background="images/indir2.jpg">
                                         </div>
                                         <div class="article-title">
-                                            <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi</a></h2>
+                                            <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi.Substring(15)...</a></h2>
                                         </div>
                                     </div>
                                     <div class="article-details">
                                         <p>
-                                            <MarkDownComponent Content="@(mevzuat.Aciklama.Length>300 ?
+                                            @if(mevzuat.Aciklama!=null){
+                                                <MarkDownComponent Content="@(mevzuat.Aciklama.Length>300 ?
                                                                      mevzuat.Aciklama.Substring(0, 180) + "..." :
                                                                      mevzuat.Aciklama)" />
+                                            }
                                         </p>
 
                                     </div>
@@ -83,7 +85,7 @@ else
         max-height: 150px;
     }
     #minHeight {
-        min-height: 390px !important
+        min-height: 150px !important
     }
     .theme-white .btn-primary {
         margin-left: 8rem;

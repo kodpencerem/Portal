@@ -24,14 +24,14 @@
 									@foreach (var resim in DuyuruDetayGetir?.Dosya.Where(x => x.HaberDuyuruId == DuyuruDetayGetir.Id).ToList())
 									{
 										<div class="tab-pane" id="pic-2">
-										<img src="images/uploaded/@string.Concat(resim.Adi,
+											<img src="images/uploaded/@string.Concat(resim.Adi,
                                                ".",
                                                resim.Uzanti)"
 									 	width="494"
 									 	alt="@resim.Adi" />
-									</div>
+										</div>
 
-									}								
+									}
 								</div>
 								<ul class="preview-thumbnail nav nav-tabs">
 									<li class="active">
@@ -47,14 +47,14 @@
 									@foreach (var resim in DuyuruDetayGetir?.Dosya.Where(x => x.HaberDuyuruId == DuyuruDetayGetir.Id).ToList())
 									{
 										<li>
-										<a data-target="#pic-2" data-toggle="tab">
-											<img src="images/uploaded/@string.Concat(resim.Adi,
+											<a data-target="#pic-2" data-toggle="tab">
+												<img src="images/uploaded/@string.Concat(resim.Adi,
                                                ".",
                                                resim.Uzanti)"
 										 	width="76"
 										 	alt="@resim.Adi" />
-										</a>
-									</li>
+											</a>
+										</li>
 									}
 
 
@@ -63,24 +63,13 @@
 							</div>
 							<div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
 								<h3 class="product-title">@DuyuruDetayGetir.Adi</h3>
-								<Rating Color="Color.Primary" @bind-SelectedValue="@DuyuruDetayGetir.BegeniDerecesi" MaxValue="5" />
-
 								<p class="blazor-modal-content">@((MarkupString) DuyuruDetayGetir.Aciklama)</p>
-
-								<p class="vote"><strong>@DuyuruDetayGetir.BegeniYuzdesi%</strong> personel bu yayını beğendi <strong>(@DuyuruDetayGetir.BegeniSayisi Beğeni)</strong></p>
-
-								<div class="action">
-
-									<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
-								</div>
 							</div>
 						</div>
 					}
 				}
 
 			</div>
-
-
 		</CardBody>
 
 		<CardFotter>

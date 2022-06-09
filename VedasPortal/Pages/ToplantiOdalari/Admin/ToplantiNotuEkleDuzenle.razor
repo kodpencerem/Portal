@@ -111,7 +111,7 @@
                             <div class="col-md-4 form-group row">
                                 <label for="Kategori" class="control-label col-md-6">Notu Görecek Birimi Seçin</label>
                                 <div class="col-md-6">
-                                    <InputSelect @bind-Value="@GetToplantiNotu.Birimler" class="form-control">
+                                    <InputSelect @bind-Value="@GetToplantiNotu.Birimler" class="form-control" required>
                                         <option></option>
                                         @if (Birimler != null)
                                         {
@@ -144,7 +144,7 @@
                         <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Toplantıyı Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@GetToplantiNotu.ToplantiId" class="form-control">
+                                <InputSelect @bind-Value="@GetToplantiNotu.ToplantiId" class="form-control" required>
                                     <option></option>
                                     @if (Toplantilar != null)
                                     {

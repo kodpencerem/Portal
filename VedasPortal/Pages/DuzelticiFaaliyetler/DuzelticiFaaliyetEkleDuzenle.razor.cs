@@ -73,10 +73,10 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         }
         protected override void OnParametersSet()
         {
-            if (DFaaliyetId != 0)
+            if (DFaaliyetId != 0 || DFaaliyetDosya.Yolu!=null)
             {
                 Title = "Duzenle";
-                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
+                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);               
             }
         }
 
@@ -95,8 +95,8 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             if (duzelticiFaaliyet.Id == 0)
                 return;
 
-            DuzelticiFaaliyetlerServisi.Remove(duzelticiFaaliyet.Id);
             DuzelticiFaaliyetDosya.Remove(DFaaliyetDosya.Id);
+            DuzelticiFaaliyetlerServisi.Remove(duzelticiFaaliyet.Id);
             duzelticiFaaliyet = new DuzelticiFaaliyet();
             TumFaaliyetleriGetir();
         }

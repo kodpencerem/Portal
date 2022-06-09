@@ -4,80 +4,83 @@
 @if (KatilanPersonel == null)
 
 {
-<p><em>Yükleniyor...</em></p> }
+	<p><em>Yükleniyor...</em></p>
+}
 
 else
 
 {
 
-<div class="col-12">
-    <CardComponent cardStyle="Style.success">
-        <CardHeader>
-            Aramıza Yeni Katılan Personeller
-        </CardHeader>
-        <CardBody>
-            <div class="row">
-                @foreach (var katilis in KatilanPersonel.Where(a => a.PersonelDurumu.TextPersonelDurumu() == "Yeni Personel" &&
-                                                         a.AktifPasif == true))
-                {
-<div style="margin-top:-15px" class="col-4">
-    <CardComponent cardStyle="Style.success">
-        <CardBody>
-            <div class="author-box-center align-center">
-                <img width="200"
-                     height="200"
-                     alt="image"
-                     src="images/uploaded/@string.Concat(
+	<div class="col-12">
+		<CardComponent cardStyle="Style.success">
+			<CardHeader>
+				Aramıza Yeni Katılan Personeller
+			</CardHeader>
+			<CardBody>
+				<div class="row">
+					@foreach (var katilis in KatilanPersonel.Where(a => a.PersonelDurumu.TextPersonelDurumu() == "Yeni Personel" &&
+							a.AktifPasif == true))
+					{
+						<div style="margin-top:-15px" class="col-4">
+							<CardComponent cardStyle="Style.success">
+								<CardBody>
+									<div class="author-box-center align-center">
+										<img width="200"
+									 height="200"
+									 alt="image"
+									 src="images/uploaded/@string.Concat(
                                                katilis.Dosya.FirstOrDefault().Adi,
                                                ".",
                                                katilis.Dosya.FirstOrDefault().Uzanti)"
-                     class="rounded-circle author-box-picture">
-                <div class="clearfix"></div>
-            </div>
-            <div class="author-box-details">
-                <h5 style="color:darkblue" class="text-center">
-                    <br />
-                    <strong>
-                        VEDAŞ AİLESİNE HOŞ GELDİNİZ
-                    </strong>
-                </h5>
-                <div class="author-box-description">
-                    <h6 style="color:darkblue" class="text-center">
-                        Sayın <strong style="color:blue">
-                            @katilis.AdSoyad, @katilis.IseBaslangicTarihi.Date.ToShortDateString()
-                        </strong> Tarihinde <strong style="color:blue">
-                            @katilis.TemsilcilikAdi, @katilis.Birimler.TextBirimler()'
-                        </strong>nde <strong style="color:blue">
-                            @katilis.BasladigiGorev
-                        </strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
-                    </h6>
-                </div>
+									 class="rounded-circle author-box-picture">
+										<div class="clearfix"></div>
+									</div>
+									<div class="author-box-details">
+										<h5 style="color:darkblue" class="text-center">
+											<br />
+											<strong>
+												VEDAŞ AİLESİNE HOŞ GELDİNİZ
+											</strong>
+										</h5>
+										<div class="author-box-description">
+											<h6 style="color:darkblue" class="text-center">
+												Sayın <strong style="color:blue">
+													@katilis.AdSoyad, @katilis.IseBaslangicTarihi.Date.ToShortDateString()
+												</strong> Tarihinde <strong style="color:blue">
+													@katilis.TemsilcilikAdi, @katilis.Birimler.TextBirimler()'
+												</strong>nde <strong style="color:blue">
+													@katilis.BasladigiGorev
+												</strong> Olarak Başladığınız Görevinizde Başarılar Dileriz.
+											</h6>
+										</div>
 
-                <div class="float-right mt-sm-0 mt-3">
-                    <a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </CardBody>
-    </CardComponent>
-</div>              }
-            </div>
+										<div class="float-right mt-sm-0 mt-3">
+											<a href="Profil" class="btn">Personel Detay Bilgileri<i class="fas fa-chevron-right"></i></a>
+										</div>
+									</div>
+								</CardBody>
+							</CardComponent>
+						</div>
+					}
+				</div>
 
-        </CardBody>
-    </CardComponent>
-</div>}
+			</CardBody>
+		</CardComponent>
+	</div>
+}
 
 
 <style>
-    .article .article-details {
-        min-height: 220px;
-        max-height: 290px;
-    }
+	.article .article-details {
+		min-height: 220px;
+		max-height: 290px;
+	}
 
-    .theme-white .btn-primary {
-        margin-left: 8rem;
-        background-color: #6777ef;
-        border-color: transparent !important;
-        color: #fff;
-    }
+	.theme-white .btn-primary {
+		margin-left: 8rem;
+		background-color: #6777ef;
+		border-color: transparent !important;
+		color: #fff;
+	}
 </style>
 

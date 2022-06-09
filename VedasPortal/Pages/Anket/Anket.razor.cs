@@ -71,7 +71,7 @@ namespace VedasPortal.Pages.Anket
             {
                 ToastService.ShowInfo("Ankete katılımınız için teşekkür ederiz.", "Teşekkürler");
 
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("/Anketler");
             }
             else
             {

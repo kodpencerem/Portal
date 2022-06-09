@@ -6,58 +6,69 @@
 @if (Dokumanlar == null)
 
 {
-    <p><em>Yükleniyor...</em></p>
+	<p><em>Yükleniyor...</em></p>
 }
 
 else
 
 {
 
-    <div class="col-12">
-        <CardComponent cardStyle="Style.primary">
+	<div class="col-12">
+		<CardComponent cardStyle="Style.primary">
 
-            <CardHeader>
-                <div class="float-left">
-                    <div class="col-md-12">
-                        İndirilebilir Dosyalar ve Dökümanlar
-                    </div>
-                </div>
-                <div style="margin-left:1100px" class="float-right">
-                    <div class="text-center bg-blue-100">
-                        <input class="form-control" @bind-value="SearchText"
-                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
-                    </div>
-                </div>
-            </CardHeader>
+			<CardHeader>
+				<div class="float-left">
+					<div class="col-md-12">
+						İndirilebilir Dosyalar ve Dökümanlar 
+						<AuthorizeView Roles="Admin,DosyaEkleDuzenle">
+							<Authorized>
+								||
+								<a href='/dosya/ekle'
+							   class="btn btn-primary"
+							   role="button">
+									<i class="fa fa-user-plus"></i>
+									Yeni Bir Dosya Ekle
+								</a>
+							</Authorized>
+						</AuthorizeView>
+					</div>
+				</div>
+				<div style="margin-left:900px" class="float-right">
+					<div class="text-center bg-blue-100">
+						<input class="form-control" @bind-value="SearchText"
+						   @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+					</div>
+				</div>
+			</CardHeader>
 
 
-            <CardBody>
+			<CardBody>
 
-                <div class="row">
-                    @if (!Dokumanlar.Any())
-                    {
-                        <p>İçerik Aranıyor</p>
-                    }
-                    else
-                    {
-                        <DownloadComponent />
-                    }
-                </div>
-            </CardBody>
-        </CardComponent>
+				<div class="row">
+					@if (!Dokumanlar.Any())
+					{
+						<p>İçerik Aranıyor</p>
+					}
+					else
+					{
+						<DownloadComponent />
+					}
+				</div>
+			</CardBody>
+		</CardComponent>
 
-    </div>
+	</div>
 }
 <style>
-    .row {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin-top: -15px;
-        margin-right: -15px;
-        margin-left: -15px;
-    }
+	.row {
+		display: -ms-flexbox;
+		display: -webkit-box;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin-top: -15px;
+		margin-right: -15px;
+		margin-left: -15px;
+	}
 </style>
 

@@ -14,11 +14,6 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
         public string Aciklama { get; set; }
-        public bool Begeni { get; set; }
-        public string BegeniSayisi { get; set; }
-        public int BegeniYuzdesi { get; set; }
-        public int BegeniDerecesi { get; set; }
-        public int GorulduSayisi { get; set; }
         public bool SliderdaGoster { get; set; } = false;
         [DataType(DataType.Text)]
         public HaberDuyuruKategori Kategori { get; set; }

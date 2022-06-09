@@ -24,23 +24,23 @@
                         <div class="form-group row">
                             <label class="control-label col-md-2">Düzeltici Faaliyet Adı</label>
                             <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="duzelticiFaaliyet.IstekFaaliyetKonusu" />
-                            </div>
-                            <ValidationMessage For="@(() => duzelticiFaaliyet.IstekFaaliyetKonusu)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Faaliyet Gurubu</label>
-                            <div class="col-md-10">
                                 <InputText class="form-control" @bind-Value="duzelticiFaaliyet.FaaliyetGurupAdi" />
                             </div>
                             <ValidationMessage For="@(() => duzelticiFaaliyet.FaaliyetGurupAdi)" />
                         </div>
 
                         <div class="form-group row">
+                            <label class="control-label col-md-2">Konu</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="duzelticiFaaliyet.IstekFaaliyetKonusu" />
+                            </div>
+                            <ValidationMessage For="@(() => duzelticiFaaliyet.IstekFaaliyetKonusu)" />
+                        </div>
+
+                        <div class="form-group row">
                             <label for="Kategori" class="control-label col-md-2">Kategori Seçin</label>
                             <div class="col-md-10">
-                                <InputSelect @bind-Value="@duzelticiFaaliyet.Kategori" class="form-control">
+                                <InputSelect @bind-Value="@duzelticiFaaliyet.Kategori" class="form-control" required>
                                     <option></option>
                                     @if (Kategoriler != null)
                                     {
@@ -136,7 +136,7 @@ else
                         </thead>
                         <tbody>
 
-                            @foreach (var duzelticifaaliyet in DuzelticiFaaliyetler)
+                            @foreach (var faaliyet in DuzelticiFaaliyetler)
 
                             {
                                 <tr>
@@ -148,18 +148,22 @@ else
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="images/uploaded/@string.Concat(duzelticifaaliyet.Dosya.FirstOrDefault().Adi,".",
-                                                                   duzelticifaaliyet.Dosya.FirstOrDefault().Uzanti)"
+                                        <img src="images/uploaded/@string.Concat(faaliyet.Dosya.FirstOrDefault().Adi,".",
+                                                                   faaliyet.Dosya.FirstOrDefault().Uzanti)"
                                              width="50"
                                              height="50" />
                                     </td>
 
-                                    <td>@duzelticiFaaliyet.FaaliyetGurupAdi</td>
+                                    <td>
+                                        
+                                          @faaliyet.FaaliyetGurupAdi
+                                        
+                                    </td>
 
                                     <td>
-                                        <a href='/duzelticifaaliyet/duzenle/@duzelticifaaliyet.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <a href='/duzelticifaaliyet/duzenle/@faaliyet.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(duzelticifaaliyet.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(faaliyet.Id);})">
                                             Sil
                                         </button>
                                     </td>

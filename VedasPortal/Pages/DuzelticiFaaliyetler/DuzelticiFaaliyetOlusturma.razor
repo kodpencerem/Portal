@@ -46,26 +46,35 @@ else
 						{
 							<div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
 								<!-- Support tickets -->
-					<div class="card" id="minHeight">
+					<CardComponent cardStyle="Style.light" MinHeighth="500">
 
-									<div class="card-body">
-										<div class="support-ticket media pb-1 mb-3">
+									<CardBody>
+										<div class="support-ticket media pb-1 mb-3" id="minHeight">
 											<img src="images/default.png" class="user-img mr-2" alt="">
 											<div class="media-body ml-3">
-												@*<div class="badge badge-pill badge-success mb-1 float-right">
-													<a class="text-white" href="FaaliyetKategoriBilgisi">@dFaaliyet.Kategori</a>
-													</div>*@
+
 												<span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
-												<a href="javascript:void(0)">@dFaaliyet.IstekFaaliyetKonusu</a>
+												<a href="javascript:void(0)">
+
+													@if (dFaaliyet.IstekFaaliyetKonusu != null)
+													{
+														<MarkDownComponent Content="@(dFaaliyet.IstekFaaliyetKonusu.Length>60 ?
+                                                                                  dFaaliyet.IstekFaaliyetKonusu.Substring(0, 50) + "..." :
+                                                                                  dFaaliyet.IstekFaaliyetKonusu)" />
+													}
+
+
+												</a>
 												<p class="my-1">
 													<img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
                                                                    dFaaliyet.Dosya.FirstOrDefault().Uzanti)"
 											 height="200"
 											 width="380" />
+													<br><br>
 													@if (dFaaliyet.Aciklama != null)
 													{
 														<MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>400 ?
-                                                                                  dFaaliyet.Aciklama.Substring(0, 360) + "..." :
+                                                                                  dFaaliyet.Aciklama.Substring(0, 120) + "..." :
                                                                                   dFaaliyet.Aciklama)" />
 													}
 												</p>
@@ -78,16 +87,15 @@ else
 												</small>
 											</div>
 										</div>
-
-									</div>
-									<a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="card-footer card-link text-center small ">
-										Tümünü Görüntüle
-									</a>
-									<a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
-						   class="btn btn-sm btn-info btn-outline-dark "
-						   role="button">Faaliyeti Düzenle</a>
-
-								</div>
+										<a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="btn btn-sm btn-link btn-outline-dark">
+											Tümünü Görüntüle
+										</a>
+										<a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
+							   class="btn btn-sm btn-primary btn-outline-dark "
+							   role="button">Faaliyeti Düzenle</a>
+									</CardBody>
+									
+								</CardComponent>
 								<!-- Support tickets -->
 				</div>
 
@@ -105,11 +113,13 @@ else
 <style>
 	.article .article-details {
 		min-height: 280px;
-		max-height: 310px;
+		max-height: 280px !important;
 	}
+
 	#minHeight {
-        min-height: 280px !important
-    }
+		min-height: 280px !important
+	}
+
 	.theme-white .btn-primary {
 		background-color: #6777ef;
 		border-color: transparent !important;

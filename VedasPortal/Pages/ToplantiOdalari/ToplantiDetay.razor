@@ -74,13 +74,14 @@
                                     </strong>
                                 </div>
                                 <ul>
-                                    @if (ToplantiGetir?.ToplantiOdasi?.RezervDurumu == true)
+                                    @if (ToplantiGetir.ToplantiOdasi?.RezervDurumu == true)
                                     {
-                                        <li class="text-danger">Evet Rezerv Edilmiştir.</li>
+                                         <li class="text-success">Rezerv Edilmemiştir.Rezerv Edilebilir</li>
                                     }
                                     else
                                     {
-                                        <li class="text-success">Rezerv Edilmemiştir.Rezerv Edilebilir</li>
+                                       
+                                        <li class="text-danger">Evet Rezerv Edilmiştir.</li>
                                     }
                                 </ul>
                             </div>

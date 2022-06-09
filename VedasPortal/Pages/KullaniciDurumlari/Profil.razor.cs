@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari
@@ -18,6 +20,11 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         [Inject]
         public IBaseRepository<OkulMezunBilgisi> MezunBilgisi { get; set; }
+
+        [Inject]
+        public IBaseRepository<UzmanlikAlani> Uzmanliklar { get; set; }
+
+        protected IEnumerable<UzmanlikAlani> UzmanlikAlani { get; set; }
 
         [Inject]
         public NavigationManager UrlNavigationManager { get; set; }
@@ -96,13 +103,28 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         protected override Task OnInitializedAsync()
         {
+            PersonelDetayGetir = PersonelDurumServisi.Get(PersonelId);
             TumMezuniyetBilgileriniGetir();
             TumEgitimDurumlariniGetir();
             TumKursVeSertifikalariGetir();
+            UzmanlikAlani = Uzmanliklar.GetAll();
             return Task.CompletedTask;
         }
 
+        [Inject]
+        private IBaseRepository<PersonelDurum> PersonelDurumServisi { get; set; }
 
+        [Parameter]
+        public int PersonelId { get; set; }
+        public PersonelDurum PersonelDetayGetir { get; set; }
+
+        protected IEnumerable<PersonelDurum> Personeller { get; set; }
+
+        protected IEnumerable<PersonelDurum> TumPersonelleriGetir()
+        {
+            Personeller = PersonelDurumServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            return Personeller;
+        }
 
         [Inject]
         public IJSRuntime JsRun { get; set; }
