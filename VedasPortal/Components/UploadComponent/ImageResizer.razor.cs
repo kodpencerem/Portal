@@ -174,11 +174,9 @@ namespace VedasPortal.Components.UploadComponent
             ImageCroppedResult args = await cropper.GetCropedResult();
             ShowCroper = false;
             parsing = true;
-
             var fileName = SaveFileToUploaded.RandomFileName + browserFileResizer.Name;
             SaveFileToUploaded.FileName = fileName;
             await Task.Delay(10);
-            await JSRuntime.InvokeVoidAsync("console.log", "Dönüştürüldü!");
             string base64String = await args.GetBase64Async();
             File.WriteAllBytes(
                 Path.Combine(
