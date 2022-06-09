@@ -1,0 +1,148 @@
+﻿@page "/uzmanlik/ekle"
+@page "/uzmanlik/duzenle/{UzmanlikId:int}"
+@inherits UzmanlikAlaniModeli
+
+<div class="col-12">
+    <EditForm Model="@uzmanlikAlani" OnValidSubmit="Kayit">
+        <DataAnnotationsValidator />
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Uzmanlık Alanı @Title
+            </CardHeader>
+            <CardBody>
+                <div class="col-12">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12">
+                        
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Uzmanlık Alanı Adı</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="uzmanlikAlani.Adi" />
+                            </div>
+                            <ValidationMessage For="@(() => uzmanlikAlani.Adi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Uzmanlık Seviyesi</label>
+                            <div class="col-md-10">
+                                <InputNumber min="0" class="form-control" @bind-Value="uzmanlikAlani.UzmanlikSeviyesi" />
+                            </div>
+                            <ValidationMessage For="@(() => uzmanlikAlani.UzmanlikSeviyesi)" />
+                        </div>                                              
+                    </div>                 
+                </div>
+            </CardBody>
+            <CardFotter>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </CardFotter>
+        </CardComponent>
+    </EditForm>
+</div>
+
+@if (UzmanlikAlanlari == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+    <div class="col-12">
+
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Uzmanlık Alanı Bilgileri
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th class="text-center pt-3">
+                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                        <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                               class="custom-control-input" id="checkbox-all">
+                                        <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
+                                    </div>
+                                </th>
+                                <th>Uzmanlık Alanı Adı</th>
+
+                                <th>Uzmanlık Seviyesi</th>
+
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var uzmanlikAlani in UzmanlikAlanlari)
+
+                            {
+                                <tr>
+                                    <td class="text-center pt-2">
+                                        <div class="custom-checkbox custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                   id="checkbox-1">
+                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                        </div>
+                                    </td>
+                                    <td>@uzmanlikAlani.Adi</td>
+
+                                    <td>@uzmanlikAlani.UzmanlikSeviyesi</td>
+
+
+                                    <td>
+                                        <a href='/uzmanlik/duzenle/@uzmanlikAlani.Id' 
+                                           class="btn btn-info btn-outline-dark" 
+                                           role="button">Düzenle</a>
+                                        <button class="btn btn-danger" 
+                                                data-toggle="modal" 
+                                                data-target="#deleteEmpModal"
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(uzmanlikAlani.Id);})">
+                                            Sil
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </CardBody>
+        </CardComponent>
+    </div>
+    <ModalComponent @ref="ModalDialog">
+        <ModalHeader>
+            <h5>Bu veriyi silmek istediğinize emin misiniz ??</h5>
+        </ModalHeader>
+
+        <ModalFooter>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
+        </ModalFooter>
+    </ModalComponent>
+}
+
+<style>
+    .modal-content {
+        max-width: 100%;
+        border: none;
+        margin-top: 200px;
+        box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>
