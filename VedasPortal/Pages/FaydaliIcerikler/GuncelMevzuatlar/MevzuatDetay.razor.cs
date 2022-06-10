@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Mevzuat;
@@ -20,6 +21,17 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
         {
             MevzuatDetayGetir = MevzuatServisi.Get(MevzuatId);
             return Task.CompletedTask;
+        }
+
+        [Inject]
+        public IJSRuntime JsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
+                await JsRun.InvokeVoidAsync("lightGallery");
+            }
         }
     }
 }

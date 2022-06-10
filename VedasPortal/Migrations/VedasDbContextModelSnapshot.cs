@@ -1518,7 +1518,7 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime?>("SilmeTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ToplantiMerkeziId")
+                    b.Property<int?>("ToplantiMerkeziId")
                         .HasColumnType("int");
 
                     b.Property<bool>("VideoKonferansMi")
@@ -1865,9 +1865,7 @@ namespace VedasPortal.Migrations
                 {
                     b.HasOne("VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiMerkezi", "ToplantiMerkezi")
                         .WithMany("ToplantiOdasi")
-                        .HasForeignKey("ToplantiMerkeziId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ToplantiMerkeziId");
 
                     b.Navigation("ToplantiMerkezi");
                 });

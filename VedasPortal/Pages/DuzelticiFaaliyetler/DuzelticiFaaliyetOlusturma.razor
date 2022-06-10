@@ -5,125 +5,132 @@
 @if (DuzelticiFaaliyet == null)
 
 {
-	<p><em>Yükleniyor...</em></p>
+    <p><em>Yükleniyor...</em></p>
 }
 
 else
 
 {
-	<div class="col-12">
-		<CardComponent cardStyle="Style.primary">
-			<CardHeader>
+    <div class="col-12">
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
 
-				<div class="float-left">
-					<div class="col-md-12">
-						Düzeltici ve Düzenleyici Faaliyetler |
-						<a href='/duzelticifaaliyet/ekle'
-					   class="btn btn-primary"
-					   role="button">
-							<i class="fa fa-user-plus"></i>
-							Duzeltici Faaliyet Ekle
-						</a>
-					</div>
-				</div>
-				<div style="margin-left:820px" class="float-right">
-					<div class="text-center bg-blue-100">
-						<input class="form-control" @bind-value="SearchText"
-						   @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
-					</div>
-				</div>
-			</CardHeader>
-			<CardBody>
-				<div class="row">
+                <div class="float-left">
+                    <div class="col-md-12">
+                        Düzeltici ve Düzenleyici Faaliyetler |
+                        <a href='/duzelticifaaliyet/ekle'
+                           class="btn btn-primary"
+                           role="button">
+                            <i class="fa fa-user-plus"></i>
+                            Duzeltici Faaliyet Ekle
+                        </a>
+                    </div>
+                </div>
+                <div style="margin-left:820px" class="float-right">
+                    <div class="text-center bg-blue-100">
+                        <input class="form-control" @bind-value="SearchText"
+                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                    </div>
+                </div>
+            </CardHeader>
+            <CardBody>
+                <div class="row">
 
-					@if (!DuzelticiFaaliyet.Any())
-					{
-						<p>İçerik Aranıyor</p>
-					}
-					else
-					{
-						@foreach (var dFaaliyet in FilteredFaaliyet.Where(x => x.AktifPasif == true).ToList())
-						{
-							<div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
-								<!-- Support tickets -->
-					<CardComponent cardStyle="Style.light" MinHeighth="500">
+                    @if (!DuzelticiFaaliyet.Any())
+                    {
+                        <p>İçerik Aranıyor</p>
+                    }
+                    else
+                    {
+                        @foreach (var dFaaliyet in FilteredFaaliyet.Where(x => x.AktifPasif == true).ToList())
+                        {
+                            <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                                <!-- Support tickets -->
+                                <CardComponent cardStyle="Style.light" MinHeighth="500">
 
-									<CardBody>
-										<div class="support-ticket media pb-1 mb-3" id="minHeight">
-											<img src="images/default.png" class="user-img mr-2" alt="">
-											<div class="media-body ml-3">
+                                    <CardBody>
+                                        <div class="support-ticket media pb-1 mb-3" id="minHeight">
+                                            <img src="images/default.png" class="user-img mr-2" alt="">
+                                            <div class="media-body ml-3">
 
-												<span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
-												<a href="javascript:void(0)">
+                                                <span class="font-weight-bold">@dFaaliyet.KonuEtiketi</span>
+                                                <a href="javascript:void(0)">
 
-													@if (dFaaliyet.IstekFaaliyetKonusu != null)
-													{
-														<MarkDownComponent Content="@(dFaaliyet.IstekFaaliyetKonusu.Length>60 ?
+                                                    @if (dFaaliyet.IstekFaaliyetKonusu != null)
+                                                    {
+                                                        <MarkDownComponent Content="@(dFaaliyet.IstekFaaliyetKonusu.Length>60 ?
                                                                                   dFaaliyet.IstekFaaliyetKonusu.Substring(0, 50) + "..." :
                                                                                   dFaaliyet.IstekFaaliyetKonusu)" />
-													}
+                                                    }
 
 
-												</a>
-												<p class="my-1">
-													<img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
+                                                </a>
+                                                <p class="my-1">
+                                                    <img src="images/uploaded/@string.Concat(dFaaliyet.Dosya.FirstOrDefault().Adi,".",
                                                                    dFaaliyet.Dosya.FirstOrDefault().Uzanti)"
-											 height="200"
-											 width="380" />
-													<br><br>
-													@if (dFaaliyet.Aciklama != null)
-													{
-														<MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>400 ?
+                                                         height="200"
+                                                         width="380" />
+                                                    <br><br>
+                                                    @if (dFaaliyet.Aciklama != null)
+                                                    {
+                                                        <MarkDownComponent Content="@(dFaaliyet.Aciklama.Length>400 ?
                                                                                   dFaaliyet.Aciklama.Substring(0, 120) + "..." :
                                                                                   dFaaliyet.Aciklama)" />
-													}
-												</p>
-												<p class="my-1">@dFaaliyet.LokasyonBilgisi</p>
-												<small class="text-muted">
-													Ekleyen <span class="font-weight-bold font-13">
-														@dFaaliyet.KaydedenKullanici
-													</span>
-													&nbsp;&nbsp; - @dFaaliyet.KayitTarihi
-												</small>
-											</div>
-										</div>
-										<a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="btn btn-sm btn-link btn-outline-dark">
-											Tümünü Görüntüle
-										</a>
-										<a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
-							   class="btn btn-sm btn-primary btn-outline-dark "
-							   role="button">Faaliyeti Düzenle</a>
-									</CardBody>
-									
-								</CardComponent>
-								<!-- Support tickets -->
-				</div>
+                                                    }
+                                                </p>
+                                                <p class="my-1">@dFaaliyet.LokasyonBilgisi</p>
+                                                <small class="text-muted">
+                                                    Ekleyen <span class="font-weight-bold font-13">
+                                                        @dFaaliyet.KaydedenKullanici
+                                                    </span>
+                                                    &nbsp;&nbsp; - @dFaaliyet.KayitTarihi
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <a href="duzelticifaaliyet/detay/@dFaaliyet.Id" class="btn btn-sm btn-link btn-outline-dark">
+                                            Tümünü Görüntüle
+                                        </a>
+                                        <a href='duzelticifaaliyet/duzenle/@dFaaliyet.Id'
+                                           class="btn btn-sm btn-primary btn-outline-dark "
+                                           role="button">Faaliyeti Düzenle</a>
+                                    </CardBody>
 
-						}
+                                </CardComponent>
+                                <!-- Support tickets -->
+                            </div>
 
-					}
+                        }
 
-				</div>
-			</CardBody>
-		</CardComponent>
-	</div>
+                    }
+
+                </div>
+            </CardBody>
+        </CardComponent>
+    </div>
 
 }
 
 <style>
-	.article .article-details {
-		min-height: 280px;
-		max-height: 280px !important;
-	}
+    .article .article-details {
+        min-height: 280px;
+        max-height: 280px !important;
+    }
 
-	#minHeight {
-		min-height: 280px !important
-	}
+    #minHeight {
+        min-height: 280px !important
+    }
 
-	.theme-white .btn-primary {
-		background-color: #6777ef;
-		border-color: transparent !important;
-		color: #fff;
-	}
+    .theme-white .btn-link {
+        font-weight: 400;
+        color: #6777ef;
+        background-color: transparent;
+        margin-left: 55px;
+    }
+
+    .theme-white .btn-primary {
+        background-color: #6777ef;
+        border-color: transparent !important;
+        color: #fff;
+    }
 </style>
 

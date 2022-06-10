@@ -93,6 +93,7 @@ namespace VedasPortal.Pages.OneriSistemi
             if (firstRender)
             {
                 await JsRun.InvokeVoidAsync("dataTables");
+                await JsRun.InvokeVoidAsync("lightGallery");
             }
         }
     }

@@ -22,7 +22,7 @@ else
                 <div style="margin-left:980px" class="float-right">
                     <div class="text-center bg-blue-100">
                         <input class="form-control" @bind-value="SearchText"
-                           @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
+                               @bind-value:event="oninput" placeholder="Bu alanda arama yapın..." />
                     </div>
                 </div>
             </CardHeader>
@@ -45,12 +45,22 @@ else
                                         <div class="article-image" data-background="images/indir2.jpg">
                                         </div>
                                         <div class="article-title">
-                                            <h2><a href="mevzuatdetay/@mevzuat.Id">@mevzuat.Adi.Substring(15)...</a></h2>
+                                            <h2>
+                                                <a href="mevzuatdetay/@mevzuat.Id">
+                                                    @if (mevzuat.Adi != null)
+                                                    {
+                                                        <MarkDownComponent Content="@(mevzuat.Adi.Length>60 ?
+                                                                     mevzuat.Adi.Substring(0, 15) + "..." :
+                                                                     mevzuat.Adi)" />
+                                                    }
+                                                </a>
+                                            </h2>
                                         </div>
                                     </div>
                                     <div class="article-details">
                                         <p>
-                                            @if(mevzuat.Aciklama!=null){
+                                            @if (mevzuat.Aciklama != null)
+                                            {
                                                 <MarkDownComponent Content="@(mevzuat.Aciklama.Length>300 ?
                                                                      mevzuat.Aciklama.Substring(0, 180) + "..." :
                                                                      mevzuat.Aciklama)" />
@@ -84,9 +94,11 @@ else
         min-height: 150px;
         max-height: 150px;
     }
+
     #minHeight {
         min-height: 150px !important
     }
+
     .theme-white .btn-primary {
         margin-left: 8rem;
         background-color: #6777ef;

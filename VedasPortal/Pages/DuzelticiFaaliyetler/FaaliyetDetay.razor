@@ -3,52 +3,43 @@
 @if (DofDetayGetir != null)
 {
 
-<div class="col-12">
-    <!-- Support tickets -->
-    <CardComponent cardStyle="Style.primary">
-        <CardHeader>
-            Düzeltici ve Önleyici Faaliyetler
-        </CardHeader>
-        <CardBody>
-            <div class="support-ticket media pb-1 mb-3">
-                <img src="assets/img/users/user-1.png" class="user-img mr-2" alt="">
-                <div class="media-body ml-3">
-                    
-                    <span class="font-weight-bold">@DofDetayGetir.KonuEtiketi</span>
-                    <a href="javascript:void(0)">@DofDetayGetir?.IstekFaaliyetKonusu</a>
-                    
-                        <div class="row">
-                            <div class="col-md-6 float-left " style="margin-top:10px">
+    <div class="col-12">
+        <!-- Support tickets -->
+        <CardComponent cardStyle="Style.primary">
+            <CardHeader>
+                Düzeltici ve Önleyici Faaliyetler
+            </CardHeader>
+            <CardBody>
+                <div class="container-fliud">
 
-                                <img src="images/uploaded/@string.Concat(DofDetayGetir.Dosya.FirstOrDefault().Adi,".",
-                                                                   DofDetayGetir.Dosya.FirstOrDefault().Uzanti)"
-                                     height="350"
-                                     width="600" />
-                            </div>
-                            <div class="col-md-6 float-right">
-                                @if (DofDetayGetir.Aciklama != null)
-                                {
-                                    <p>
-                                        @((MarkupString) DofDetayGetir.Aciklama)
-                                    </p>
-                                 }
+                    <div class="row">
+                        <div class="preview col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                            <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <a href="images/uploaded/@string.Concat(DofDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               DofDetayGetir.Dosya?.FirstOrDefault().Uzanti)" data-sub-html="@DofDetayGetir.FaaliyetGurupAdi">
+                                        <img class="img-responsive thumbnail" src="images/uploaded/@string.Concat(DofDetayGetir.Dosya?.FirstOrDefault().Adi,
+                                               ".",
+                                               DofDetayGetir.Dosya?.FirstOrDefault().Uzanti)" alt="">
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    
-                    <p class="my-1">@DofDetayGetir.LokasyonBilgisi</p>
-                    <small class="text-muted">
-                        Ekleyen <span class="font-weight-bold font-13">
-                            @DofDetayGetir.KaydedenKullanici
-                        </span>
-                        &nbsp;&nbsp; - @DofDetayGetir.KayitTarihi
-                    </small>
+                        <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
+                            <h3 class="product-title">@DofDetayGetir.FaaliyetGurupAdi</h3>
+
+                            <p class="haber-detay">@((MarkupString)DofDetayGetir.Aciklama)</p>
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-        </CardBody>
+            </CardBody>
 
-    </CardComponent>
-    <!-- Support tickets -->
-</div>}
+        </CardComponent>
+        <!-- Support tickets -->
+    </div>}
 
 @code { }

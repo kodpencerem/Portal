@@ -5,59 +5,74 @@
         <CardBody>
             @if (MevzuatDetayGetir != null)
             {
-                <div class="row">
-                    <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12 float-right">
-                        <img src="images/indir2.jpg"
-                         width="500"
-                         alt="@MevzuatDetayGetir.Adi" />
-                    </div>
-                    <div class="col-lg-8 col-sm-12 col-md-6 col-xs-12 float-left">
-                        <div class="boxs mail_listing">
-                            <div class="inbox-body no-pad">
-                                <section class="mail-list">
-                                    <div class="mail-sender">
-                                        <div class="mail-heading">
-                                            <h4 class="vew-mail-header">
-                                                <b>@MevzuatDetayGetir.Adi</b>
-                                            </h4>
-                                        </div>
-                                        <hr>
-                                        <div class="media">
+            
 
-                                            <div class="media-body">
-                                                <span class="date pull-right">@MevzuatDetayGetir.KayitTarihi.Date.ToShortDateString()</span>
-                                                <h5 class="text-primary">@MevzuatDetayGetir.KaydedenKullanici</h5>
-                                                <small class="text-muted">From: emrullah04@outlook.com</small>
-                                            </div>
+                <div class="container-fliud">
+                    @{
+                        if (MevzuatDetayGetir != null)
+                        {
+                            <div class="row">
+                                <div class="preview col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                                    <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <a href="images/indir2.jpg" data-sub-html="@MevzuatDetayGetir.Adi">
+                                                <img class="img-responsive thumbnail" src="images/indir2.jpg" alt="">
+                                            </a>
                                         </div>
                                     </div>
-                                    <p>
-                                        <Strong>Mevzuat Yürürlülük Başlangıç Tarihi:</Strong>
-                                        @MevzuatDetayGetir.BaslangicTarihi.Date.ToShortDateString()
-                                        <br /><br />
-                                        <Strong>Mevzuat Yürürlülük Bitiş Tarihi:</Strong>
-                                        @MevzuatDetayGetir.BitisTarihi.Date.ToShortDateString()
-                                    </p>
-                                    <hr />
-                                    <div class="view-mail p-t-20">
-                                        <p>
-                                            @((MarkupString) MevzuatDetayGetir.Aciklama)
-                                        </p>
-                                        <br />
+                                </div>
+                                <div class="details col-lg-8 col-sm-12 col-md-6 col-xs-12">
+                                    <div class="boxs mail_listing">
+                                        <div class="inbox-body no-pad">
+                                            <section class="mail-list">
+                                                <div class="mail-sender">
+                                                    <div class="mail-heading">
+                                                        <h4 class="vew-mail-header">
+                                                            <b>@MevzuatDetayGetir.Adi</b>
+                                                        </h4>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="media">
 
-                                        <p>
-                                            <Strong>Alınan Kararlar:</Strong>
-                                            @MevzuatDetayGetir.AlinanKararlar
-                                        </p>
-                                        <br />
+                                                        <div class="media-body">
+                                                            <span class="date pull-right">@MevzuatDetayGetir.KayitTarihi.Date.ToShortDateString()</span>
+                                                            <h5 class="text-primary">@MevzuatDetayGetir.KaydedenKullanici</h5>
+                                                            <small class="text-muted">From: emrullah04@outlook.com</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    <Strong>Mevzuat Yürürlülük Başlangıç Tarihi:</Strong>
+                                                    @MevzuatDetayGetir.BaslangicTarihi.Date.ToShortDateString()
+                                                    <br /><br />
+                                                    <Strong>Mevzuat Yürürlülük Bitiş Tarihi:</Strong>
+                                                    @MevzuatDetayGetir.BitisTarihi.Date.ToShortDateString()
+                                                </p>
+                                                <hr />
+                                                <div class="view-mail p-t-20">
+                                                    <p>
+                                                        @((MarkupString) MevzuatDetayGetir.Aciklama)
+                                                    </p>
+                                                    <br />
 
+                                                    <p>
+                                                        <Strong>Alınan Kararlar:</Strong>
+                                                        @MevzuatDetayGetir.AlinanKararlar
+                                                    </p>
+                                                    <br />
+
+                                                </div>
+
+                                            </section>
+                                        </div>
                                     </div>
 
-                                </section>
+
+                                </div>
                             </div>
-                        </div>
+                        }
+                    }
 
-                    </div>
                 </div>
 
             }

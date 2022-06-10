@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +28,17 @@ namespace VedasPortal.Pages.BasindaBiz
         {
             Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
             return Haberler;
+        }
+        
+        [Inject]
+        public IJSRuntime JsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
+                await JsRun.InvokeVoidAsync("lightGallery");
+            }
         }
 
         protected override Task OnInitializedAsync()

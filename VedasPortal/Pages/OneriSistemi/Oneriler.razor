@@ -25,54 +25,54 @@ else
                         </a>
                     </div>
                 </div>
-                @*<div style="margin-left:890px" class="float-right">
-                        <button btnStyle="Style.primary"></button>
-                    </div>*@
+
             </CardHeader>
             <CardBody>
 
                 <div class="row">
 
-                    @foreach (var oneri in Oneriler)
+                    @foreach (var oneri in Oneriler.Where(x => x.AktifPasif == true).ToList())
                     {
                         <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                            <CardComponent cardStyle="Style.primary">
-                                <CardBody>
+                            <article class="article article-style-c" id="Height">
 
-                                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                        <img src="images/uploaded/@string.Concat(
-                                                                       oneri.Dosya.FirstOrDefault().Adi,
-                                                                       ".",
-                                                                       oneri.Dosya.FirstOrDefault().Uzanti)"
-                                             width="350"
-                                             height="150"
-                                             class="img-fluid" />
-                                        <a class="post-title"
-                                           href="oneri/detay/@oneri.Id">
-                                            <h3 class="text-black">
+                                <div class="article-header">
+                                    <div class="article-image" data-background="images/uploaded/@string.Concat(oneri.Dosya.FirstOrDefault().Adi,".",
+                                                   oneri.Dosya.FirstOrDefault().Uzanti)">
+                                    </div>
+                                </div>
+
+                                <div class="article-details">
+                                    <div class="article-category">
+                                        <a href="oneri/detay/@oneri.Id">Öneri</a>
+                                        <div class="bullet"></div> <a>@oneri.KayitTarihi</a>
+                                    </div>
+                                    <div class="article-title">
+                                        <h1 class="article-style-b">
+                                            <a href="oneri/detay/@oneri.Id">
+
                                                 @if (oneri.Adi != null)
                                                 {
                                                     <MarkDownComponent Content="@(oneri.Adi.Length>30 ?
-                                                                      oneri.Adi.Substring(0, 19) + "..." :
-                                                                      oneri.Adi)" />
+                                                                          oneri.Adi.Substring(0, 19) + "..." :
+                                                                          oneri.Adi)" />
                                                 }
-                                            </h3>
-                                        </a>
-                                        <p>
-                                            @if (oneri.Aciklama != null)
-                                            {
-                                                <MarkDownComponent Content="@(oneri.Aciklama.Length>80 ?
-                                                                  oneri.Aciklama.Substring(0, 40) + "..." :
-                                                                  oneri.Aciklama)" />}
-                                        </p>
-                                        <LikeButton />
+                                            </a>
+                                        </h1>
                                     </div>
 
+                                    <p name="HaberAciklama" class="accordion-header">
 
-                                </CardBody>
-                            </CardComponent>
-                        </div>
-                    }
+                                        @if (oneri.Aciklama != null)
+                                        {
+                                            <MarkDownComponent Content="@(oneri.Aciklama.Length>500 ?
+                                                                  oneri.Aciklama.Substring(0, 280) + "..." :
+                                                                  oneri.Aciklama)" />
+                                        }
+                                    </p>
+                                </div>
+                            </article>
+                        </div>}
                 </div>
             </CardBody>
         </CardComponent>

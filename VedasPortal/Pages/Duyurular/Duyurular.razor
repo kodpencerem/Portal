@@ -19,16 +19,14 @@ else
                     @foreach (var duyuru in duyurular.Where(d => d.Kategori.TextHaberDuyuru() == "Duyuru" && d.AktifPasif == true))
                     {
                         <div class="col-lg-3 col-sm-12 col-md-6 col-xs-12">
-                            <article class="article article-style-c" id="minHeight">
-                                <div class="author-box-center align-center">
-                                    <img width="365"
-                                         height="180"
-                                         alt="@duyuru.Adi"
-                                         src="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
-                                                   duyuru.Dosya.FirstOrDefault().Uzanti)"
-                                         class=" author-box-picture">
-                                    <div class="clearfix"></div>
+                            <article class="article article-style-c" id="Height">
+
+                                <div class="article-header">
+                                    <div class="article-image" data-background="images/uploaded/@string.Concat(duyuru.Dosya.FirstOrDefault().Adi,".",
+                                                   duyuru.Dosya.FirstOrDefault().Uzanti)">
+                                    </div>
                                 </div>
+                                
                                 <div class="article-details">
                                     <div class="article-category">
                                         <a href="duyuru/detay/@duyuru.Id">Duyuru</a>
@@ -80,13 +78,10 @@ else
 }
 
 <style>
-    .article .article-details {
-        min-height: 220px;
-        max-height: 290px;
-    }
 
-    #minHeight {
-        min-height: 465px !important
+    #Height {
+        min-height: 480px !important;
+        min-height: 480px !important
     }
 
     .theme-white .btn-primary {

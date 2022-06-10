@@ -40,26 +40,8 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         
         protected void Kayit()
         {
-            var oda = new ToplantiOdasi()
-            {
-                Aciklama = Oda.Aciklama,
-                Adi = Oda.Adi,
-                Adres = Oda.Adres,
-                AktifPasif = Oda.AktifPasif,
-                Id = Oda.Id,
-                DuzenlemeTarihi = Oda.DuzenlemeTarihi,
-                DuzenleyenKullanici = Oda.DuzenleyenKullanici,
-                Kapasite = Oda.Kapasite,
-                KaydedenKullanici = Oda.KaydedenKullanici,
-                KayitTarihi = Oda.KayitTarihi,
-                Kod = Oda.Kod,
-                VideoKonferansMi = Oda.VideoKonferansMi,
-                RezervDurumu = Oda.RezervDurumu,
-                SilenKullanici = Oda.SilenKullanici,
-                SilmeTarihi = Oda.SilmeTarihi,
-                ToplantiMerkeziId = Convert.ToInt32(takvimVm.MerkezId)
-            };
-            ToplantiOdasi.Add(oda);
+            Oda.ToplantiMerkeziId = Convert.ToInt32(takvimVm.MerkezId);
+            ToplantiOdasi.Add(Oda);
             TumOdalariGetir();
             Oda = new ToplantiOdasi();
 
@@ -69,8 +51,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             if (OdaId != 0)
             {
                 Title = "Duzenle";
-                Oda = ToplantiOdasi.Get(OdaId);
-                //DuyuruDosya = duyuru.Dosya.FirstOrDefault();
+                Oda = ToplantiOdasi.Get(OdaId);                
             }
         }
         
