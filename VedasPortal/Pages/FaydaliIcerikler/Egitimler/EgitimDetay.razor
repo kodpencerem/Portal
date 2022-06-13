@@ -1,4 +1,5 @@
 ﻿@page "/egitimdetayi/{egitimId:int}"
+
 <div class="col-12 col-md-12 col-lg-4">
     <CardComponent cardStyle="Style.info">
         <CardBody>
@@ -57,9 +58,9 @@
                         <span class="float-right text-muted">
                             @PersonelDurum.EMail
                         </span>
-                    </p>                    
+                    </p>
                 </div>
-             }
+            }
         </CardBody>
     </CardComponent>
     <CardComponent cardStyle="Style.info">
@@ -129,6 +130,10 @@
                             <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
                                aria-selected="false">Oynatma Listeleri</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#dokuman" role="tab"
+                               aria-selected="false">Dökümanlar </a>
+                        </li>
                     </ul>
                     <div class="tab-content tab-bordered" id="myTab3Content">
                         <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
@@ -151,9 +156,53 @@
                         </div>
                         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
                             <PlayerList Heigth="800"
-                                        Width="580" 
-                                        
-                                        />
+                                        Width="580" />
+                        </div>
+                        <div class="tab-pane fade" id="dokuman" role="tabpanel" aria-labelledby="profile-tab3">
+                            <AuthorizeView Roles="Admin,EgitimEkleDuzenle,DosyaEkleDuzenle">
+                                <Authorized>
+                                    <BlazorInputFile.InputFile OnChange="HandleFileSelected" />
+                                </Authorized>
+                            </AuthorizeView>
+                            
+                            <table class="table table-bordered" style="margin-top:10px">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            SL
+                                        </th>
+                                        <th>
+                                            Döküman Adı
+                                        </th>
+                                        <th>
+                                            İşlemler
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (fileClass.Files != null && fileClass.Files.Count > 0)
+                                    {
+                                        @foreach (FileClass file in fileClass.Files)
+                                        {
+                                            <tr>
+                                                <td>@file.FileId</td>
+                                                <td>@file.Name</td>
+                                                <button @onclick="@(e=> ShowOnCurrentPage(file.FileId))">
+                                                    Geçerli Pencerede Görüntüle
+                                                </button>
+                                                <button @onclick="@(e=> ShowOnNewTab(file.FileId))">
+                                                    Yeni Sekmede  Görüntüle
+                                                </button>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            @if (!string.IsNullOrEmpty(pdfName))
+                            {
+                                <iframe src="/files/@pdfName" style="width:100%; height:1200px">
+                                </iframe>
+                            }
                         </div>
                     </div>
                 </div>}
