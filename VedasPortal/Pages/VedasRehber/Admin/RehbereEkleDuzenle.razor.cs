@@ -19,7 +19,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         public IBaseRepository<Rehber> RehberServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> RehberDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> RehberDosyaServisi { get; set; }
 
         //[Inject]
         //public NavigationManager UrlNavigationManager { get; set; }
@@ -45,7 +45,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,
@@ -90,7 +90,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
         }
 
 
-        public Dosya RehberDosya { get; set; } = new Dosya();
+        public ImageFile RehberDosya { get; set; } = new ImageFile();
         protected override Task OnInitializedAsync()
         {
             TumRehberiGetir();

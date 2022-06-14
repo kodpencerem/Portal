@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari
             TumIkUygulamalariniGetir();
             return Task.CompletedTask;
         }
-        public Dosya IkUygulamaDosya { get; set; }
+        public ImageFile IkUygulamaDosya { get; set; }
         protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
             IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();

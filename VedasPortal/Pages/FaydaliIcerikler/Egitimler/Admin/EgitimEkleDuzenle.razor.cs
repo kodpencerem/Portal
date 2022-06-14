@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 {
@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         public IBaseRepository<Egitim> EgitimServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Vidyo> VideoServisi { get; set; }
+        public IBaseRepository<Dosya> VideoServisi { get; set; }
 
         [Parameter]
         public int EgitimId { get; set; }
@@ -28,9 +28,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected string Title = "Ekle";
         public Egitim egitim = new();
 
-        public Vidyo vidyo = new();
+        public Dosya vidyo = new();
 
-        public Vidyo VideoDosya = new();
+        public Dosya VideoDosya = new();
 
         protected IEnumerable<Egitim> Egitimler { get; set; }
 
@@ -71,7 +71,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             var videoPath = SaveFileToUploaded.FileUploadedPath;
             if (egitim.Id != 0)
             {
-                var video = new Vidyo()
+                var video = new Dosya()
                 {
                     Adi = videoName[0],
                     Yolu = videoPath,
@@ -88,8 +88,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                     VideoKategori = vidyo.VideoKategori,
                 };
                 VideoServisi.Add(video);
-            }
-
+            }           
             TumEgitimleriGetir();
             egitim = new Egitim();
 
@@ -99,9 +98,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             if (EgitimId != 0)
             {
                 Title = "Duzenle";
-                VideoDosya.Yolu = egitim.Vidyo.FirstOrDefault()?.Yolu;
+                VideoDosya.Yolu = egitim.Dosya.FirstOrDefault()?.Yolu;
                 egitim = EgitimServisi.Get(EgitimId);
-                
+
             }
         }
 
@@ -117,14 +116,14 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         {
             if (egitim.Id == 0)
                 return;
-            if(egitim.Id == vidyo.EgitimId)
+            if (egitim.Id == vidyo.EgitimId)
             {
                 VideoServisi.Remove(vidyo.Id);
             }
             EgitimServisi.Remove(egitim.Id);
             egitim = new Egitim();
             TumEgitimleriGetir();
-            
+
         }
 
         protected override Task OnInitializedAsync()
@@ -134,7 +133,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
-
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

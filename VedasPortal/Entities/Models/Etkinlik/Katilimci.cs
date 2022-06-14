@@ -13,7 +13,7 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public string TelefonNo { get; set; }
         public bool KatilisDurumu { get; set; }
         public string KatilisNedeni { get; set; }
-        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
         public int? EtkinlikId { get; set; }
         public Etkinlik Etkinlik { get; set; }
     }

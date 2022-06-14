@@ -16,7 +16,7 @@ namespace VedasPortal.Pages.Etkinlikler
         protected IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
         protected IEnumerable<Etkinlik> Etkinlikler;
 
-        public Dosya EtkinlikDosya { get; set; } = new Dosya();
+        public ImageFile EtkinlikDosya { get; set; } = new ImageFile();
 
         protected override Task OnInitializedAsync()
         {

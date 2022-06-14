@@ -21,7 +21,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         public IBaseRepository<IkUygulama> IkUygulamaServisi { get; set; }
         
         [Inject]
-        public IBaseRepository<Dosya> IkDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> IkDosyaServisi { get; set; }
 
         [Parameter]
         public int IkUygulamaId { get; set; }
@@ -66,7 +66,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,
@@ -114,7 +114,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
         }
 
 
-        public Dosya IkUygulamaDosya { get; set; } = new Dosya();
+        public ImageFile IkUygulamaDosya { get; set; } = new ImageFile();
         protected override Task OnInitializedAsync()
         {
             TumIkUygulamalariniGetir();

@@ -10,13 +10,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
     public class DosyaModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Dosya> Dokuman { get; set; }
-        protected IEnumerable<Dosya> Dokumanlar { get; set; } = new List<Dosya>();
+        protected IBaseRepository<ImageFile> Dokuman { get; set; }
+        protected IEnumerable<ImageFile> Dokumanlar { get; set; } = new List<ImageFile>();
 
 
         public string SearchText = "";
 
-        public List<Dosya> FilteredDokuman => Dokumanlar.Where(
+        public List<ImageFile> FilteredDokuman => Dokumanlar.Where(
              x => x.Adi.ToLower().Contains(SearchText.ToLower())
             ).ToList();
 
@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Dosya>TumDosyalariGetir()
+        protected IEnumerable<ImageFile>TumDosyalariGetir()
         {
             Dokumanlar = Dokuman.GetAll();
             return Dokumanlar;

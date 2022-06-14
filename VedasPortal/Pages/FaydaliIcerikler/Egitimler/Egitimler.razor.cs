@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             || x.Aciklama.ToLower().Contains(SearchText.ToLower())
             ).ToList();
 
-        public Dosya EgitimDosya { get; set; } = new Dosya();
+        public ImageFile EgitimDosya { get; set; } = new ImageFile();
         
         protected override Task OnInitializedAsync()
         {

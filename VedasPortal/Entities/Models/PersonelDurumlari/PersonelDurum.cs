@@ -27,6 +27,6 @@ namespace VedasPortal.Entities.Models.PersonelDurumlari
         public bool AnasayfadaGoster { get; set; } = true;
         [DataType(DataType.Text)]
         public PersonelDurumu PersonelDurumu { get; set; }
-        public ICollection<Dosya.Dosya> Dosya { get; set; }
+        public ICollection<Dosya.ImageFile> Dosya { get; set; }
     }
 }

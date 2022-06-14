@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         public IBaseRepository<PersonelDurum> PersonelServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> PersonelDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> PersonelDosyaServisi { get; set; }
 
         [Inject]
         public AuthenticationStateProvider StateProvider { get; set; }
@@ -36,7 +36,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         protected string Title = "Ekle";
         public PersonelDurum personelDurum = new();
 
-        public Dosya PersonelDosya = new();
+        public ImageFile PersonelDosya = new();
 
         private ClaimsPrincipal User;
         public string Message { get; set; }
@@ -78,7 +78,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
                 PersonelServisi.Add(personelDurum);
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.ImageUploadedPath;
-                var dosya = new Dosya()
+                var dosya = new ImageFile()
                 {
                     Adi = fileName[0],
                     Yolu = filePath,

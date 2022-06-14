@@ -29,7 +29,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected string Title = "Ekle";
         public Mevzuat mevzuat = new();
-        public Dosya MevzuatDosya { get; set; } = new();
+        public ImageFile MevzuatDosya { get; set; } = new();
 
         protected IEnumerable<Mevzuat> Mevzuatlar { get; set; }
 
@@ -63,14 +63,14 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         }
 
         [Inject]
-        public IBaseRepository<Dosya> MevzuatDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> MevzuatDosyaServisi { get; set; }
         protected void Kayit()
         {
             MevzuatServisi.Add(mevzuat);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.FileUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

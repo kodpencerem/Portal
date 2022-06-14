@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         public IBaseRepository<DuzelticiFaaliyet> DuzelticiFaaliyetlerServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> DuzelticiFaaliyetDosya { get; set; }
+        public IBaseRepository<ImageFile> DuzelticiFaaliyetDosya { get; set; }
 
         [Parameter]
         public int DFaaliyetId { get; set; }
@@ -28,7 +28,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         protected string Title = "Ekle";
         public DuzelticiFaaliyet duzelticiFaaliyet = new();
 
-        public Dosya DFaaliyetDosya = new();
+        public ImageFile DFaaliyetDosya = new();
 
         protected IEnumerable<DuzelticiFaaliyet> DuzelticiFaaliyetler { get; set; }
 
@@ -55,7 +55,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         public IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> DuyuruDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> DuyuruDosyaServisi { get; set; }
 
         [Parameter]
         public int DuyuruId { get; set; }
@@ -31,7 +31,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         protected string Title = "Ekle";
         public HaberDuyuru duyuru = new();
 
-        public Dosya DuyuruDosya = new();
+        public ImageFile DuyuruDosya = new();
 
         protected IEnumerable<HaberDuyuru> Duyurular { get; set; }
 
@@ -57,7 +57,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             DuyuruServisi.Add(duyuru);
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

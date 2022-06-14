@@ -15,7 +15,7 @@ namespace VedasPortal.Pages.BasindaBiz
         protected IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
         protected IEnumerable<HaberDuyuru> haberler;
 
-        public Dosya HaberDosya { get; set; } = new Dosya();
+        public ImageFile HaberDosya { get; set; } = new ImageFile();
 
         protected override Task OnInitializedAsync()
         {

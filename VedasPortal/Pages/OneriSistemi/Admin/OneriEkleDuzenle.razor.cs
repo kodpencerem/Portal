@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public IBaseRepository<Oneri> OneriServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> OneriDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> OneriDosyaServisi { get; set; }
 
         [Parameter]
         public int OneriId { get; set; }
@@ -28,7 +28,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         protected string Title = "Ekle";
         public Oneri oneri = new();
 
-        public Dosya OneriDosya = new();
+        public ImageFile OneriDosya = new();
 
         protected IEnumerable<Oneri> Oneriler { get; set; }
 
@@ -79,7 +79,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             OneriServisi.Add(oneri);
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

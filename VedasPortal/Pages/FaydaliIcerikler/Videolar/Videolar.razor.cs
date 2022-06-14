@@ -12,15 +12,15 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
     public class VideoModeli : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Vidyo> Video { get; set; }
+        protected IBaseRepository<Dosya> Video { get; set; }
 
-        protected IEnumerable<Vidyo> VideoGetir { get; set; } = new List<Vidyo>();
+        protected IEnumerable<Dosya> VideoGetir { get; set; } = new List<Dosya>();
         [Parameter]
-        public Vidyo VideoDosya { get; set; } = new();
+        public Dosya VideoDosya { get; set; } = new();
 
         public string SearchText = "";
 
-        public List<Vidyo> FilteredVideo => VideoGetir.Where(
+        public List<Dosya> FilteredVideo => VideoGetir.Where(
             x => x.Adi.ToLower().Contains(SearchText.ToLower())
             || x.Aciklama.ToLower().Contains(SearchText.ToLower())
             ).ToList();
@@ -31,7 +31,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             return Task.CompletedTask;
         }
 
-        protected IEnumerable<Vidyo> TumVideolariGetir()
+        protected IEnumerable<Dosya> TumVideolariGetir()
         {
             VideoGetir = Video.GetAll();
             return VideoGetir;

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 
 namespace VedasPortal.Services.Pdf
@@ -16,21 +13,20 @@ namespace VedasPortal.Services.Pdf
         {
             _hostingEnvironment = hostingEnvironment;
         }
-        public List<FileClass> GetAllPDFs()
+        public List<Dosya> GetAllPDFs()
         {
-            List<FileClass> files = new List<FileClass>();
+            List<Dosya> files = new List<Dosya>();
             string path = $"{_hostingEnvironment.WebRootPath}\\files\\";
 
             int nFileId = 1;
 
             foreach(string pdfPath in Directory.EnumerateFiles(path, "*.pdf"))
             {
-                files.Add(new FileClass
+                files.Add(new Dosya
                 {
                     FileId = nFileId++,
-                    Name = Path.GetFileName(pdfPath),
-                    Path = pdfPath
-
+                    Adi = Path.GetFileName(pdfPath),
+                    Yolu = pdfPath,
                 });
             }
             return files;

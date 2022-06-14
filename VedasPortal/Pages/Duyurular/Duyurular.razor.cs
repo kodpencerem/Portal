@@ -15,7 +15,7 @@ namespace VedasPortal.Pages.Duyurular
         protected IBaseRepository<HaberDuyuru> DuyuruServisi { get; set; }
         protected IEnumerable<HaberDuyuru> duyurular;
 
-        public Dosya DuyuruDosya { get; set; } = new();
+        public ImageFile DuyuruDosya { get; set; } = new();
         protected string SearchString { get; set; }
         protected override Task OnInitializedAsync()
         {

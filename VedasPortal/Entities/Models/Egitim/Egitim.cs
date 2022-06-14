@@ -24,7 +24,7 @@ namespace VedasPortal.Entities.Models.Egitim
         public EgitimKategori Kategori { get; set; }
         [DataType(DataType.Text)]
         public Birimler Birimler { get; set; }
-        public ICollection<Dosya.Vidyo> Vidyo { get; set; }
+        public ICollection<Dosya.Dosya> Dosya { get; set; }
         public ICollection<Yorum.Yorum> Yorum { get; set; }
     }
 

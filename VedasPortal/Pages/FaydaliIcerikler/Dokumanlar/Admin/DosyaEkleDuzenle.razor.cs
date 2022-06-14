@@ -8,6 +8,7 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 {
@@ -56,10 +57,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
                 AltBaslik = dokuman.AltBaslik,
                 Birimler = dokuman.Birimler,
                 Boyutu = dokuman.Boyutu,
-                IzlenmeDurumu = dokuman.IzlenmeDurumu,
                 KayitTarihi = dokuman.KayitTarihi,
                 AktifPasif = true,
-                Id = dokuman.Id,
             };
             DosyaServisi.Add(dosya);
             TumDosyalariGetir();
@@ -73,9 +72,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
                 dokuman = DosyaServisi.Get(DosyaId);
             }
         }
-
-
-
         protected void SilmeyiOnayla(int dosyaId)
         {
             ModalDialog.Open();
@@ -94,10 +90,20 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
             TumDosyalariGetir();
         }
 
+        public Dosya fileClass = new Dosya();
+        public string pdfName = "";
 
+        [Inject]
+        private IFileService fileService { get; set; }
 
+        public void ShowOnCurrentPage(int fileId)
+        {
+            pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Adi, ".",
+                fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Uzanti);
+        }
         protected override Task OnInitializedAsync()
         {
+            fileClass.Files = fileService.GetAllPDFs();
             TumDosyalariGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;

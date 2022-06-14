@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         protected string Title = "Ekle";
         public Katilimci katilimci = new();
 
-        public Dosya KatilimciDosya = new();
+        public ImageFile KatilimciDosya = new();
 
         protected IEnumerable<Katilimci> Katilimcilar { get; set; }
 

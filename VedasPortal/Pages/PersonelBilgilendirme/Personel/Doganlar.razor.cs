@@ -15,7 +15,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Personel
         protected IBaseRepository<PersonelDurum> DogumGunuServisi { get; set; }
         protected IEnumerable<PersonelDurum> DogumGunleri;
 
-        public Dosya PersonelDosya { get; set; } = new Dosya();
+        public ImageFile PersonelDosya { get; set; } = new ImageFile();
 
         protected override Task OnInitializedAsync()
         {

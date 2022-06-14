@@ -16,7 +16,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
         public int MevzuatId { get; set; }
 
         protected Mevzuat MevzuatDetayGetir { get; set; }
-        public Dosya MevzuatDetayDosya { get; set; }
+        public ImageFile MevzuatDetayDosya { get; set; }
         protected override Task OnInitializedAsync()
         {
             MevzuatDetayGetir = MevzuatServisi.Get(MevzuatId);

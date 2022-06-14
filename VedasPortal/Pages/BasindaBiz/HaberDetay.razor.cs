@@ -18,7 +18,7 @@ namespace VedasPortal.Pages.BasindaBiz
         [Parameter]
         public int HaberId { get; set; }
 
-        public Dosya HahberDetayDosya { get; set; } = new();
+        public ImageFile HahberDetayDosya { get; set; } = new();
 
         private HaberDuyuru HaberDetayGetir { get; set; }
 

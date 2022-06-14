@@ -21,6 +21,6 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu
         public ToplantiOdasi ToplantiOdasi { get; set; }
         public int? ToplantiMerkeziId { get; set; }
         public ToplantiMerkezi ToplantiMerkezi { get; set; }
-        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
     }
 }

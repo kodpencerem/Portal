@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         public IBaseRepository<Etkinlik> EtkinlikServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> EtkinlikDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> EtkinlikDosyaServisi { get; set; }
        
         [Parameter]
         public int EtkinlikId { get; set; }
@@ -28,7 +28,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         protected string Title = "Ekle";
         public Etkinlik etkinlik = new();
 
-        public Dosya EtkinlikDosya = new();
+        public ImageFile EtkinlikDosya = new();
 
         protected IEnumerable<Etkinlik> Etkinlikler { get; set; }
 
@@ -65,7 +65,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             EtkinlikServisi.Add(etkinlik);
             var fileName = SaveFileToUploaded.FileName?.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

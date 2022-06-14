@@ -31,7 +31,7 @@ namespace VedasPortal.Data
         {
         }
         public DbSet<HaberDuyuru> HaberDuyuru { get; set; }
-        public DbSet<Dosya> Dosya { get; set; }
+        public DbSet<ImageFile> ImageFile { get; set; }
         public DbSet<Etkinlik> Etkinlik { get; set; }
         public DbSet<Rehber> Rehber { get; set; }
         public DbSet<Katilimci> Katilimci { get; set; }
@@ -50,7 +50,7 @@ namespace VedasPortal.Data
         public DbSet<ToplantiMerkezi> Merkez { get; set; }
         public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
         public DbSet<PersonelDurum> PersonelDurum { get; set; }
-        public DbSet<Vidyo> Vidyo { get; set; }
+        public DbSet<Dosya> Dosya { get; set; }
         public DbSet<VefatDurumu> VefatDurumu { get; set; }
         public DbSet<UzmanlikAlani> UzmanlikAlani { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

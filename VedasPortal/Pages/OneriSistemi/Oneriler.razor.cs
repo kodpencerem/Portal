@@ -15,7 +15,7 @@ namespace VedasPortal.Pages.OneriSistemi
         protected IBaseRepository<Oneri> Oneri { get; set; }
         protected IEnumerable<Oneri> Oneriler;
         public Oneri GetOneri = new();
-        public Dosya OneriDosya { get; set; }
+        public ImageFile OneriDosya { get; set; }
 
         protected void PostLiked(bool isLiked)
         {

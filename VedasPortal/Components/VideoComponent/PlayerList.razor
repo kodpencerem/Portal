@@ -24,10 +24,10 @@
 @code {
 
     [Inject]
-    protected IBaseRepository<Vidyo> videoServisi { get; set; }
+    protected IBaseRepository<Dosya> videoServisi { get; set; }
 
-    protected IEnumerable<Vidyo> VideoList;
-    Vidyo secilenVideo = new Vidyo();
+    protected IEnumerable<Dosya> VideoList;
+    Dosya secilenVideo = new Dosya();
 
     [Parameter]
     public int Width { get; set; } = 650;
@@ -41,7 +41,7 @@
         secilenVideo = VideoList.FirstOrDefault();
     }
 
-    void SecilenVideo(Vidyo videoDetay)
+    void SecilenVideo(Dosya videoDetay)
     {
         secilenVideo = videoDetay;
     }

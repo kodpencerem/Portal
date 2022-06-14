@@ -61,7 +61,7 @@
     protected IBaseRepository<PersonelDurum> TumPersonelServisi { get; set; }
     protected IEnumerable<PersonelDurum> KatilanAyrilanPersonel;
 
-    public Dosya PersonelDosya { get; set; } = new Dosya();
+    public ImageFile PersonelDosya { get; set; } = new ImageFile();
 
     protected override Task OnInitializedAsync()
     {

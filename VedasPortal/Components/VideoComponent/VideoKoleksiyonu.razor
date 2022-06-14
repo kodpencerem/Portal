@@ -28,16 +28,16 @@
 @code {
 
     [Parameter]
-    public IEnumerable<Vidyo> Videolar { get; set; }
+    public IEnumerable<Entities.Models.Dosya.Dosya> Videolar { get; set; }
 
     [Parameter]
-    public Vidyo Video { get; set; }
+    public Entities.Models.Dosya.Dosya Video { get; set; }
 
     [Parameter]
     public string Src { get; set; }
 
     [Parameter]
-    public EventCallback<Vidyo> VideoSec { get; set; }
+    public EventCallback<Entities.Models.Dosya.Dosya> VideoSec { get; set; }
 
-    Vidyo videoKaynak = new Vidyo();
+        Entities.Models.Dosya.Dosya videoKaynak = new Entities.Models.Dosya.Dosya();
 }

@@ -16,17 +16,17 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
     {
 
         [Inject]
-        public IBaseRepository<Vidyo> VideoServisi { get; set; }
+        public IBaseRepository<Dosya> VideoServisi { get; set; }
 
         [Parameter]
         public int VideoId { get; set; }
 
         protected string Title = "Ekle";
-        public Vidyo video = new();
+        public Dosya video = new();
 
-        protected IEnumerable<Vidyo> Videolar { get; set; }
+        protected IEnumerable<Dosya> Videolar { get; set; }
 
-        protected IEnumerable<Vidyo> TumVideolariGetir()
+        protected IEnumerable<Dosya> TumVideolariGetir()
         {
             Videolar = VideoServisi.GetAll();
             return Videolar;
@@ -59,7 +59,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.FileUploadedPath;
-            var dosya = new Vidyo()
+            var dosya = new Dosya()
             {
                 Adi = fileName[0],
                 Yolu= filePath,
@@ -74,7 +74,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             };
             VideoServisi.Add(dosya);
             TumVideolariGetir();
-            video = new Vidyo();
+            video = new Dosya();
         }
         protected override void OnParametersSet()
         {

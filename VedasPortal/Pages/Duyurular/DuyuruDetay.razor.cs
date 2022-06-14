@@ -17,7 +17,7 @@ namespace VedasPortal.Pages.Duyurular
 
         private HaberDuyuru DuyuruDetayGetir { get; set; }
 
-        public Dosya HaberDetayDosya { get; set; } = new();
+        public ImageFile HaberDetayDosya { get; set; } = new();
 
         protected override Task OnInitializedAsync()
         {

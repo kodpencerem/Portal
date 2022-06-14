@@ -8,12 +8,12 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
     public partial class DokumanDetay
     {
         [Inject]
-        private IBaseRepository<Dosya> HaberServisi { get; set; }
+        private IBaseRepository<ImageFile> HaberServisi { get; set; }
 
         [Parameter]
         public int DosyaId { get; set; }
 
-        protected Dosya GetDosya { get; set; }
+        protected ImageFile GetDosya { get; set; }
 
         protected override Task OnInitializedAsync()
         {

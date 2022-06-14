@@ -41,7 +41,6 @@ using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Services.Anket;
 using VedasPortal.Services.AuthServices;
-using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.Pdf;
@@ -86,7 +85,7 @@ namespace VedasPortal
             services.AddScoped<ToplantiService>();
             services.AddBlazorTable();
             services.AddScoped<IBaseRepository<HaberDuyuru>, BaseRepository<HaberDuyuru>>();
-            services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
+            services.AddScoped<IBaseRepository<ImageFile>, BaseRepository<ImageFile>>();
             services.AddScoped<IBaseRepository<Etkinlik>, BaseRepository<Etkinlik>>();
             services.AddScoped<IBaseRepository<Katilimci>, BaseRepository<Katilimci>>();
             services.AddScoped<IBaseRepository<DuzelticiFaaliyet>, BaseRepository<DuzelticiFaaliyet>>();
@@ -102,7 +101,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<GorevSecenek>, BaseRepository<GorevSecenek>>();
             services.AddScoped<IBaseRepository<UzmanlikAlani>, BaseRepository<UzmanlikAlani>>();
             services.AddScoped<IBaseRepository<Rehber>, BaseRepository<Rehber>>();
-            services.AddScoped<IBaseRepository<Vidyo>, BaseRepository<Vidyo>>();
+            services.AddScoped<IBaseRepository<Dosya>, BaseRepository<Dosya>>();
             services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
             services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<VefatDurumu>, BaseRepository<VefatDurumu>>();
@@ -112,7 +111,6 @@ namespace VedasPortal
             services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
             services.AddScoped<IFileService, FileService>();
-            services.AddScoped<IPdfUpload, PdfUpload>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();

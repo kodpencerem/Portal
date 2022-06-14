@@ -15,7 +15,7 @@ namespace VedasPortal.Pages.Etkinlikler
         [Parameter]
         public int EtkinlikId { get; set; }
 
-        public Dosya EtkinlikDetayDosya { get; set; } = new();
+        public ImageFile EtkinlikDetayDosya { get; set; } = new();
 
         private Etkinlik etkinlik { get; set; } = new();
 

@@ -20,7 +20,7 @@ namespace VedasPortal.Entities.Models.Etkinlik
         public bool AktifPasif { get; set; } = true;
         public bool AnasayfadaGoster { get; set; } = true;
         public virtual ICollection<Katilimci> Katilimci { get; set; }
-        public virtual ICollection<Dosya.Dosya> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
     }
 
     public enum EtkinlikKategori

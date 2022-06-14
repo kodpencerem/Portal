@@ -21,7 +21,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public IBaseRepository<HaberDuyuru> HaberServisi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> HaberDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> HaberDosyaServisi { get; set; }
 
         [Parameter]
         public int HaberId { get; set; }
@@ -29,7 +29,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         protected string Title = "Ekle";
         public HaberDuyuru haber = new();
 
-        public Dosya HaberDosya = new();
+        public ImageFile HaberDosya = new();
 
         protected IEnumerable<HaberDuyuru> Haberler { get; set; }
 
@@ -59,7 +59,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             var fileName = SaveFileToUploaded.FileName?.Split(".");
             var imagePath = SaveFileToUploaded.ImageUploadedPath;
 
-            var dosya = new Dosya()
+            var dosya = new ImageFile()
             {
                 Adi = fileName[0],
                 Yolu = imagePath,

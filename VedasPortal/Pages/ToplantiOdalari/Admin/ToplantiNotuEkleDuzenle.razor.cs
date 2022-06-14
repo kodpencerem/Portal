@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         public IToplantiTakvimi toplantiTakvimi { get; set; }
 
         [Inject]
-        public IBaseRepository<Dosya> ToplantiNotDosyaServisi { get; set; }
+        public IBaseRepository<ImageFile> ToplantiNotDosyaServisi { get; set; }
 
         protected ToplantiTakvimVm ToplantiTakvimVm { get; set; } = new ToplantiTakvimVm();
 
@@ -37,7 +37,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
         protected string Title = "Ekle";
         public ToplantiNotu GetToplantiNotu = new();
-        public Dosya GetDosya = new();
+        public ImageFile GetDosya = new();
 
         protected IEnumerable<ToplantiNotu> ToplantiNotlari { get; set; }
 
@@ -81,7 +81,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.FileUploadedPath;
 
-                var dosya = new Dosya()
+                var dosya = new ImageFile()
                 {
                     Adi = fileName[0],
                     Yolu = filePath,

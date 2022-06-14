@@ -18,7 +18,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         private DuzelticiFaaliyet DofDetayGetir { get; set; }
 
-        public Dosya DofDetayDosya { get; set; } = new();
+        public ImageFile DofDetayDosya { get; set; } = new();
 
         protected override Task OnInitializedAsync()
         {

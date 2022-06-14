@@ -18,7 +18,7 @@ namespace VedasPortal.Pages.OneriSistemi
 
         [Parameter]
         public int OneriId { get; set; }
-        public Dosya OneriDetayDosya { get; set; }
+        public ImageFile OneriDetayDosya { get; set; }
         private Oneri OneriDetayGetir { get; set; } = new();
 
         [Inject]

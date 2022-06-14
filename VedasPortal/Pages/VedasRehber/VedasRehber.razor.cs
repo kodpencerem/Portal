@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.VedasRehber
             ).ToList();
 
 
-        public Dosya RehberDosya { get; set; } = new Dosya();
+        public ImageFile RehberDosya { get; set; } = new ImageFile();
 
         protected override Task OnInitializedAsync()
         {
