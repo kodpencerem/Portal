@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari
@@ -30,6 +33,11 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         public NavigationManager UrlNavigationManager { get; set; }
 
         public KursVeSertifika kursVeSertifika = new();
+
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+
+        public string UserName;
 
         [Parameter]
         public int KursId { get; set; }
@@ -101,9 +109,11 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             TumEgitimDurumlariniGetir();
         }
 
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
             PersonelDetayGetir = PersonelDurumServisi.Get(PersonelId);
+            UserName = authState.User.Identity.Name;
             TumMezuniyetBilgileriniGetir();
             TumEgitimDurumlariniGetir();
             TumKursVeSertifikalariGetir();

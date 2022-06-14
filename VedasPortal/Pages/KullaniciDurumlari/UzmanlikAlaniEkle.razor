@@ -3,7 +3,7 @@
 @inherits UzmanlikAlaniModeli
 
 <div class="col-12">
-    <EditForm Model="@uzmanlikAlani" OnValidSubmit="Kayit">
+    <EditForm Model="@uzmanlikAlani" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>

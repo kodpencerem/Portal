@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari
@@ -24,6 +26,8 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         protected string Title = "Ekle";
         public UzmanlikAlani uzmanlikAlani = new();
 
+        public ApplicationUser ApplicationUser { get; set; }
+
         protected IEnumerable<UzmanlikAlani> UzmanlikAlanlari { get; set; }
 
         protected IEnumerable<UzmanlikAlani> TumUzmanliklariGetir()
@@ -33,9 +37,19 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         }
 
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+
+        protected async Task KayitAsync()
         {
-            UzmanlikAlaniServisi.Add(uzmanlikAlani);
+            var authState = await State;
+            var uzmanlik = new UzmanlikAlani()
+            {
+                Adi = uzmanlikAlani.Adi,
+                UzmanlikSeviyesi = uzmanlikAlani.UzmanlikSeviyesi,
+                KaydedenKullanici = authState.User.Identity.Name
+            };
+            UzmanlikAlaniServisi.Add(uzmanlik);
             uzmanlikAlani = new UzmanlikAlani();
         }
         protected override void OnParametersSet()

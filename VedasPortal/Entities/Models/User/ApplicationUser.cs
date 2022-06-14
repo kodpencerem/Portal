@@ -9,6 +9,6 @@ namespace VedasPortal.Entities.Models.User
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? SonGirisBilgisi { get; set; }
-        public bool? AktifEdilsinMi { get; set; } = true;
+        public bool? AktifEdilsinMi { get; set; } = true;        
     }
 }

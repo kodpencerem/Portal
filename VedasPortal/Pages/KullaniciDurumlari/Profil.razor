@@ -86,49 +86,51 @@
 		</CardHeader>
 		<CardBody>
 			@if (UzmanlikAlani != null)
-			{
-				<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-					@foreach (var uzmanlik in UzmanlikAlani)
-					{
-						<li class="media">
-							<div class="media-body">
-								<div class="media-title">@uzmanlik.Adi</div>
-							</div>
-							<div class="media-progressbar p-t-10">
-								<div class="progress" data-height="6">
-									@if (uzmanlik.UzmanlikSeviyesi <= 20)
-									{
-										<div class="progress-bar bg-orange" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
-									}
-									else if (uzmanlik.UzmanlikSeviyesi > 20 && uzmanlik.UzmanlikSeviyesi <= 40)
-									{
-										<div class="progress-bar bg-warning" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
-									}
+            { 
+            <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
 
-									else if (uzmanlik.UzmanlikSeviyesi > 40 && uzmanlik.UzmanlikSeviyesi <= 60)
-									{
-										<div class="progress-bar bg-blue" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
-									}
+                
+                @foreach (var uzmanlik in UzmanlikAlani.Where(x=>x.KaydedenKullanici==UserName ).ToList())
+                {
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="media-title">@uzmanlik.Adi</div>
+                        </div>
+                        <div class="media-progressbar p-t-10">
+                            <div class="progress" data-height="6">
+                                @if (uzmanlik.UzmanlikSeviyesi <= 20)
+                                {
+                                    <div class="progress-bar bg-orange" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
+                                }
+                                else if (uzmanlik.UzmanlikSeviyesi > 20 && uzmanlik.UzmanlikSeviyesi <= 40)
+                                {
+                                    <div class="progress-bar bg-warning" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
+                                }
 
-									else if (uzmanlik.UzmanlikSeviyesi > 60 && uzmanlik.UzmanlikSeviyesi <= 80)
-									{
-										<div class="progress-bar bg-primary" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
-									}
-									else if (uzmanlik.UzmanlikSeviyesi > 80 && uzmanlik.UzmanlikSeviyesi <= 100)
-									{
-										<div class="progress-bar bg-success" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
-									}
-									else
-									{
-										<div class="progress-bar bg-danger" data-width="@uzmanlik.UzmanlikSeviyesi%">Uzmanlık Seviyesi Yok</div>
-									}
+                                else if (uzmanlik.UzmanlikSeviyesi > 40 && uzmanlik.UzmanlikSeviyesi <= 60)
+                                {
+                                    <div class="progress-bar bg-blue" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
+                                }
 
-								</div>
-							</div>
-						</li>
-					}
+                                else if (uzmanlik.UzmanlikSeviyesi > 60 && uzmanlik.UzmanlikSeviyesi <= 80)
+                                {
+                                    <div class="progress-bar bg-primary" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
+                                }
+                                else if (uzmanlik.UzmanlikSeviyesi > 80 && uzmanlik.UzmanlikSeviyesi <= 100)
+                                {
+                                    <div class="progress-bar bg-success" data-width="@uzmanlik.UzmanlikSeviyesi%"></div>
+                                }
+                                else
+                                {
+                                    <div class="progress-bar bg-danger" data-width="@uzmanlik.UzmanlikSeviyesi%">Uzmanlık Seviyesi Yok</div>
+                                }
 
-				</ul>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+            </ul>
 
 			}
 		</CardBody>
