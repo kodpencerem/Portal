@@ -79,7 +79,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var uzmanlikAlani in UzmanlikAlanlari)
+                            @foreach (var uzmanlikAlani in UzmanlikAlanlari.Where(x => x.KaydedenKullanici == UserName))
 
                             {
                                 <tr>

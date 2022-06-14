@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,21 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             EgitimDurumlari = list;
         }
 
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
-            MezunBilgisi.Add(okulMezunBilgisi);
+            var authState = await State;
+            var mezunBilgi = new OkulMezunBilgisi()
+            {
+                BaslamaTarihi = okulMezunBilgisi.BaslamaTarihi,
+                KaydedenKullanici = authState.User.Identity.Name,
+                EgitimDurumu = okulMezunBilgisi.EgitimDurumu,
+                KayitTarihi = okulMezunBilgisi.KayitTarihi,
+                MezuniyetTarihi= okulMezunBilgisi.MezuniyetTarihi,
+                OkulAdi = okulMezunBilgisi.OkulAdi,
+            };
+            MezunBilgisi.Add(mezunBilgi);
             okulMezunBilgisi = new OkulMezunBilgisi();
         }
         protected override void OnParametersSet()
@@ -77,9 +90,11 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             TumMezuniyetBilgileriniGetir();
             TumEgitimDurumlariniGetir();
         }
-
-        protected override Task OnInitializedAsync()
+        public string UserName;
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             TumMezuniyetBilgileriniGetir();
             TumEgitimDurumlariniGetir();
             return Task.CompletedTask;

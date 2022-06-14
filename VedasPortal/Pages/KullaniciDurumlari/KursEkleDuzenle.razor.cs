@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,9 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         protected string Title = "Ekle";
         public KursVeSertifika kursVeSertifika = new();
 
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        public string UserName;
         protected IEnumerable<KursVeSertifika> Kurslar { get; set; }
 
         protected IEnumerable<KursVeSertifika> TumKurslariGetir()
@@ -33,9 +37,25 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         }
 
-        protected void Kayit()
+        protected async Task KayitAsync()
         {
-            KursVeSertifika.Add(kursVeSertifika);
+            var authState = await State;
+            var kursSertifika = new KursVeSertifika()
+            {
+               
+                KaydedenKullanici = authState.User.Identity.Name,
+                KayitTarihi = kursVeSertifika.KayitTarihi,
+                Aciklama = kursVeSertifika.Aciklama,
+                BaslamaTarihi = kursVeSertifika.BaslamaTarihi,
+                BitisTarihi = kursVeSertifika.BitisTarihi,
+                GecerlilikSuresi = kursVeSertifika.GecerlilikSuresi,
+                SertifikaBaslik = kursVeSertifika.SertifikaBaslik,
+                SertifikaKodu = kursVeSertifika.SertifikaKodu,
+                SertifikaUrlAdres = kursVeSertifika.SertifikaUrlAdres,
+                SertifikaVerilisTarihi = kursVeSertifika.SertifikaVerilisTarihi,
+                VerenKurum = kursVeSertifika.VerenKurum
+            };
+            KursVeSertifika.Add(kursSertifika);
             kursVeSertifika = new KursVeSertifika();
         }
         protected override void OnParametersSet()
@@ -64,11 +84,10 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             kursVeSertifika = new KursVeSertifika();
             TumKurslariGetir();
         }
-
-
-
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             TumKurslariGetir();
             return Task.CompletedTask;
         }

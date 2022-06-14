@@ -1,18 +1,18 @@
 ﻿@page "/kurs/ekle"
 @page "/kurs/duzenle/{KursId:int}"
 @inherits KursEklemeModeli
-
+@attribute [Authorize]
 <div class="col-12">
-    <EditForm Model="@kursVeSertifika" OnValidSubmit="Kayit">
+    <EditForm Model="@kursVeSertifika" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
-                Haber @Title
+                Sertifika ve Kurs Bilgisi @Title
             </CardHeader>
             <CardBody>
                 <div class="col-12">
                     <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
-                        
+
                         <div class="form-group row">
                             <label class="control-label col-md-2">Sertifika/Kurs Kodu</label>
                             <div class="col-md-10">
@@ -28,8 +28,53 @@
                             </div>
                             <ValidationMessage For="@(() => kursVeSertifika.SertifikaBaslik)" />
                         </div>
-                        
-                        
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Kursa Başlama Tarihi</label>
+                            <div class="col-md-10">
+                                <InputDate class="form-control" @bind-Value="kursVeSertifika.BaslamaTarihi" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.BaslamaTarihi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Kurs Bitirme Tarihi</label>
+                            <div class="col-md-10">
+                                <InputDate class="form-control" @bind-Value="kursVeSertifika.BitisTarihi" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.BitisTarihi)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Sertifika Geçerlilik Süresi</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="kursVeSertifika.GecerlilikSuresi" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.GecerlilikSuresi)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Sertifika/Kurs Url Adres</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="kursVeSertifika.SertifikaUrlAdres" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.SertifikaUrlAdres)" />
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Sertifika Veriliş Tarihi</label>
+                            <div class="col-md-10">
+                                <InputDate class="form-control" @bind-Value="kursVeSertifika.SertifikaVerilisTarihi" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.SertifikaVerilisTarihi)" />
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Sertifika/Kurs Veren Kuruluş</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="kursVeSertifika.VerenKurum" />
+                            </div>
+                            <ValidationMessage For="@(() => kursVeSertifika.VerenKurum)" />
+                        </div>
+
                     </div>
 
                     <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-right">
@@ -96,7 +141,7 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var kurs in Kurslar)
+                            @foreach (var kurs in Kurslar.Where(x => x.KaydedenKullanici == UserName))
 
                             {
                                 <tr>
@@ -113,11 +158,11 @@ else
 
 
                                     <td>
-                                        <a href='/haber/duzenle/@kursVeSertifika.Id' 
-                                           class="btn btn-info btn-outline-dark" 
+                                        <a href='/haber/duzenle/@kursVeSertifika.Id'
+                                           class="btn btn-info btn-outline-dark"
                                            role="button">Düzenle</a>
-                                        <button class="btn btn-danger" 
-                                                data-toggle="modal" 
+                                        <button class="btn btn-danger"
+                                                data-toggle="modal"
                                                 data-target="#deleteEmpModal"
                                                 @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(kursVeSertifika.Id);})">
                                             Sil

@@ -238,8 +238,8 @@
 
 						<div class="section-title">Aldığı Eğitimler</div>
 						<ul>
-							@foreach (var mezun in MezunBilgileri)
-							{
+							@foreach (var mezun in MezunBilgileri.Where(x => x.KaydedenKullanici == UserName).ToList())
+                            {
 								<li>
 									@mezun.EgitimDurumu - @mezun.OkulAdi <br />
 									@mezun.BaslamaTarihi.Date.ToShortDateString() - @mezun.MezuniyetTarihi.Date.ToShortDateString()
@@ -265,8 +265,8 @@
 						<div class="section-title">Sertifika ve Kurs Bilgileri</div>
 						<ul>
 
-							@foreach (var kursVeSertifika in KursVeSertifikalar)
-							{
+							@foreach (var kursVeSertifika in KursVeSertifikalar.Where(x => x.KaydedenKullanici == UserName).ToList())
+                            {
 								<li>
 									@kursVeSertifika.SertifikaKodu - @kursVeSertifika.SertifikaBaslik <br />
 									@kursVeSertifika.SertifikaUrlAdres <br />

@@ -25,9 +25,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         protected string Title = "Ekle";
         public UzmanlikAlani uzmanlikAlani = new();
-
-        public ApplicationUser ApplicationUser { get; set; }
-
+        
         protected IEnumerable<UzmanlikAlani> UzmanlikAlanlari { get; set; }
 
         protected IEnumerable<UzmanlikAlani> TumUzmanliklariGetir()
@@ -79,10 +77,12 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             TumUzmanliklariGetir();
         }
 
+        public string UserName;
 
-
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             TumUzmanliklariGetir();
             return Task.CompletedTask;
         }

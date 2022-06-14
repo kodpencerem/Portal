@@ -4,7 +4,7 @@
 @inherits MezunBilgiModeli
 
 <div class="col-12">
-    <EditForm Model="@okulMezunBilgisi" OnValidSubmit="Kayit">
+    <EditForm Model="@okulMezunBilgisi" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -109,7 +109,7 @@ else
 
 
 
-                            @foreach (var mezun in MezunBilgileri)
+                            @foreach (var mezun in MezunBilgileri.Where(x => x.KaydedenKullanici == UserName))
 
                             {
                                 <tr>
