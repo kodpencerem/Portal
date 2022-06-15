@@ -1,5 +1,4 @@
-﻿@using VedasPortal.Entities.Models.Dosya
-
+﻿
 <div class="component-box" style="margin-top: 20px;">
     @foreach (var item in Videolar.Where(x=>x.AktifPasif==true && x.Uzanti=="mp4" || x.Uzanti=="mkv"))
     {
@@ -13,7 +12,9 @@
                             frameborder="0" 
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen 
-                            controls="controls">
+                            controls="controls"
+                            
+                            >
                     </iframe>
                     <h4>@item.Adi</h4>
                 </div>
@@ -27,6 +28,7 @@
 
 @code {
 
+    
     [Parameter]
     public IEnumerable<Entities.Models.Dosya.Dosya> Videolar { get; set; }
 

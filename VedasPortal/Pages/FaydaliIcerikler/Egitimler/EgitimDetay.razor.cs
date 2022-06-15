@@ -7,7 +7,6 @@ using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
@@ -76,6 +75,17 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             UzmanlikAlani = Uzmanliklar.GetAll();
             fileClass.Files = fileService.GetAllPDFs();
             return Task.CompletedTask;
+        }
+
+        [Inject]
+        public IJSRuntime JsRun { get; set; }
+        protected override async void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if (firstRender)
+            {
+                await JsRun.InvokeVoidAsync("dataTables");
+            }
         }
     }
 }

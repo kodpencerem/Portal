@@ -6,9 +6,12 @@
                VideoStateOptions="options"
                class="w-100"
                style="max-width:800px;"
-               controls="controls">
+               controls="controls"
+               type ="@Type.ToString()"
+               >
     <source src="files/@Src.ToString()"
-            type="video/mp4" />
+            type="@Type.ToString()"
+            />
 </BlazoredVideo>
 
 <div class="article-details">
@@ -32,6 +35,9 @@
     public string Heigth { get; set; }
 
     [Parameter]
+    public string Type { get; set; }
+
+    [Parameter]
     public string Src { get; set; }
     [Parameter]
     public string Href { get; set; }
@@ -45,7 +51,7 @@
     [Parameter]
     public Entities.Models.Dosya.Dosya SecilenVideo { get; set; }
 
-    
+
 
     void OnPlay(VideoState state)
     {

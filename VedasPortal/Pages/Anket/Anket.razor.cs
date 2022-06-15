@@ -67,12 +67,13 @@ namespace VedasPortal.Pages.Anket
 
             var result = await AnketYonetim.AnketDuzenleAsync(AnketDTO);
 
-            if (result.IsSuccess )
+            if (result.IsSuccess)
             {
                 ToastService.ShowInfo("Ankete katılımınız için teşekkür ederiz.", "Teşekkürler");
 
                 NavigationManager.NavigateTo("/Anketler");
             }
+            
             else
             {
                 ToastService.ShowError("Bir hata ile karşılaşıldı!", "");
