@@ -82,6 +82,13 @@
                             </div>
                             <ValidationMessage For="@(() => duzelticiFaaliyet.Aciklama)" />
                         </div>
+                        <div class="form-group row col-md-4">
+                            <label class="control-label col-md-8">Faaliyet Şimdi Yayınlasın Mı?</label>
+                            <div class="col-md-4">
+                                <InputCheckbox class="form-control" @bind-Value="duzelticiFaaliyet.AktifPasif" />
+                            </div>
+                            <ValidationMessage For="@(() => duzelticiFaaliyet.AktifPasif)" />
+                        </div>
                     </div>
                 </div>
             </CardBody>

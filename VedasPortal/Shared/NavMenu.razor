@@ -1,7 +1,13 @@
 ﻿@inject NavigationManager nav
 @attribute [Authorize(Roles = "Admin, Yeni Kullanıcı, HaberEkleDuzenle,EgitimEkleDuzenle,MevzuatEkleDuzenle,VideoEkleDuzenle," +
-                       "EtkinlikEkleDuzenle,KatilimciEkleDuzenle,DuyuruEkleDuzenle,RehberBilgiEkle,OdaEkleDuzenle," +
-                       "ToplantiEkleDuzenle,ToplantiNotuEkleDuzenle,AyrilisEkleDuzenle,IkUygulamaEkleDuzenle,DosyaEkleDuzenle ")]
+                "EtkinlikEkleDuzenle,KatilimciEkleDuzenle,DuyuruEkleDuzenle,RehberBilgiEkle,OdaEkleDuzenle," +
+                "ToplantiEkleDuzenle,ToplantiNotuEkleDuzenle,AyrilisEkleDuzenle,IkUygulamaEkleDuzenle,DosyaEkleDuzenle ")]
+
+@using VedasPortal.Repository.Interface
+@using System.Linq;
+@using Microsoft.EntityFrameworkCore;
+@using VedasPortal.Entities.Models.Dosya;
+@using VedasPortal.Entities.Models.PersonelDurumlari;
 
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar sticky">
@@ -94,9 +100,13 @@
                 <div class="dropdown-title">Merhaba Kullanıcı</div>
                 <AuthorizeView>
                     <Authorized>
-                        <a href="profil" class="dropdown-item has-icon">
-                            <i class="far fa-user"></i> Profil
-                        </a>
+                        @foreach (var durum in KatilanAyrilanPersonel)
+                        {
+                            <a href="profil/@durum.Id" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Profil
+                            </a>
+                        }
+
                         <a href="Identity/Account/Manage" class="dropdown-item has-icon">
                             <i class="fas fa-cog"></i>
                             Ayarlar
@@ -145,7 +155,7 @@
                         <a href="#" class="menu-toggle nav-link has-dropdown">
                             <i data-feather="briefcase"></i><span>Faydalı İçerikler</span>
                         </a>
-                        
+
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="Egitimler">Eğitimler</a></li>
                             <li><a class="nav-link" href="Videolar">Videolar</a></li>
@@ -190,9 +200,9 @@
                 </Authorized>
             </AuthorizeView>
 
-            <AuthOtherUsersLink/>
+            <AuthOtherUsersLink />
 
-            <AuthAdminLink/>
+            <AuthAdminLink />
 
         </ul>
     </aside>
@@ -215,4 +225,24 @@
     {
         SayfaDegisti("anasayfa", e.Location);
         StateHasChanged();
-    } }
+    }
+
+    [Inject]
+    protected IBaseRepository<PersonelDurum> TumPersonelServisi { get; set; }
+    protected IEnumerable<PersonelDurum> KatilanAyrilanPersonel;
+
+    public ImageFile PersonelDosya { get; set; } = new ImageFile();
+
+    protected override Task OnInitializedAsync()
+    {
+        TumKatilanlariGetir();
+        return Task.CompletedTask;
+    }
+
+    protected IEnumerable<PersonelDurum> TumKatilanlariGetir()
+    {
+        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+        return KatilanAyrilanPersonel;
+    }
+
+}

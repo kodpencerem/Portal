@@ -19,9 +19,9 @@
 
 @code {
 
-    
+
     [Inject]
-    public IBaseRepository<GorevSecenek> Gorevler { get; set; }
+    public IBaseRepository<GorevSecenek> GorevServisi { get; set; }
 
     public GorevSecenek gorev = new();
 
@@ -31,11 +31,25 @@
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> InputParameters { get; set; }
 
+    protected IEnumerable<GorevSecenek> Gorevler;
+
+    protected IEnumerable<GorevSecenek> TumGorevleriGetir()
+    {
+        Gorevler = GorevServisi.GetAll();
+        return Gorevler;
+    }
+
     private async Task OnClickHandlerAsync()
     {
-    
+
         await OnSubmit.InvokeAsync(gorev.GorevAdi);
-        Gorevler.Add(gorev);
+        GorevServisi.Add(gorev);
         gorev.GorevAdi = null;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        TumGorevleriGetir();
+        return Task.CompletedTask;
     }
 }

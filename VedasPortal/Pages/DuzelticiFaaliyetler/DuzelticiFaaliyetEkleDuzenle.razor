@@ -1,11 +1,11 @@
-﻿@page "/duzelticifaaliyet/ekle"
-@page "/duzelticifaaliyet/duzenle/{dFaaliyetId:int}"
+﻿@page "/personel/duzelticifaaliyet/ekle"
+@page "/personel/duzelticifaaliyet/duzenle/{dFaaliyetId:int}"
 @using Microsoft.AspNetCore.Hosting
 
 @inherits DuzelticiFaaliyetModeli
 
 <div class="col-12">
-    <EditForm Model="@duzelticiFaaliyet" OnValidSubmit="DuzelticiFaaliyetKaydet">
+    <EditForm Model="@duzelticiFaaliyet" OnValidSubmit="DuzelticiFaaliyetKaydetAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -136,7 +136,7 @@ else
                         </thead>
                         <tbody>
 
-                            @foreach (var faaliyet in DuzelticiFaaliyetler)
+                            @foreach (var faaliyet in DuzelticiFaaliyetler.Where(x => x.KaydedenKullanici == UserName))
 
                             {
                                 <tr>
@@ -148,8 +148,8 @@ else
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="images/uploaded/@string.Concat(faaliyet.Dosya.FirstOrDefault().Adi,".",
-                                                                   faaliyet.Dosya.FirstOrDefault().Uzanti)"
+                                        <img src="images/uploaded/@string.Concat(faaliyet.Dosya.FirstOrDefault()?.Adi,".",
+                                                                   faaliyet.Dosya.FirstOrDefault()?.Uzanti)"
                                              width="50"
                                              height="50" />
                                     </td>

@@ -128,6 +128,8 @@ namespace VedasPortal.Pages.KullaniciDurumlari
         public int PersonelId { get; set; }
         public PersonelDurum PersonelDetayGetir { get; set; }
 
+        public ApplicationUser ApplicationUser { get; set; }
+
         protected IEnumerable<PersonelDurum> Personeller { get; set; }
 
         protected IEnumerable<PersonelDurum> TumPersonelleriGetir()

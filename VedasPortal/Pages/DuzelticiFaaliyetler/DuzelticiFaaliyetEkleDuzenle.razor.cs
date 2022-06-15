@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -21,6 +22,9 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         [Inject]
         public IBaseRepository<ImageFile> DuzelticiFaaliyetDosya { get; set; }
+
+        public Task<AuthenticationState> State { get; set; }
+        public string UserName;
 
         [Parameter]
         public int DFaaliyetId { get; set; }
@@ -49,8 +53,12 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             Kategoriler = list;
         }
 
-        protected void DuzelticiFaaliyetKaydet()
+        protected async Task DuzelticiFaaliyetKaydetAsync()
         {
+            var authState = await State;
+
+            duzelticiFaaliyet.KaydedenKullanici = authState.User.Identity.Name;
+
             DuzelticiFaaliyetlerServisi.Add(duzelticiFaaliyet);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
@@ -63,7 +71,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 DuzelticiFaaliyetId = duzelticiFaaliyet.Id,
-
+                KaydedenKullanici = authState.User.Identity.Name
             };
             DuzelticiFaaliyetDosya.Add(dosya);
             TumFaaliyetleriGetir();
@@ -100,8 +108,10 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             duzelticiFaaliyet = new DuzelticiFaaliyet();
             TumFaaliyetleriGetir();
         }
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             TumFaaliyetleriGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;

@@ -11,7 +11,7 @@ using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.DuzelticiFaaliyetler
+namespace VedasPortal.Pages.DuzelticiFaaliyetler.Admin
 {
     public class DuzelticiFaaliyetModeli : ComponentBase
     {
@@ -69,14 +69,14 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             TumFaaliyetleriGetir();
             var aTimer = new System.Timers.Timer();
             aTimer.Interval = 10;
-            duzelticiFaaliyet = new DuzelticiFaaliyet();          
+            duzelticiFaaliyet = new DuzelticiFaaliyet();
         }
         protected override void OnParametersSet()
         {
-            if (DFaaliyetId != 0 || DFaaliyetDosya.Yolu!=null)
+            if (DFaaliyetId != 0 || DFaaliyetDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);               
+                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
             }
         }
 
