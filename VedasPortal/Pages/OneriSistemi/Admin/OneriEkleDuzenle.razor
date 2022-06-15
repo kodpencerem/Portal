@@ -1,9 +1,10 @@
 ﻿@page "/oneri/ekle"
 @page "/oneri/duzenle/{OneriId:int}"
 @inherits OneriEklemeModeli
+@attribute [Authorize(Roles = "Admin,OneriEkleDuzenle")]
 
 <div class="col-12">
-    <EditForm Model="@oneri" OnValidSubmit="Kayit">
+    <EditForm Model="@oneri" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
@@ -26,14 +27,6 @@
                                 <InputText class="form-control" @bind-Value="oneri.Adi" />
                             </div>
                             <ValidationMessage For="@(() => oneri.Adi)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Öneri Yapan Personel</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="oneri.YapanAdiSoyadı" />
-                            </div>
-                            <ValidationMessage For="@(() => oneri.YapanAdiSoyadı)" />
                         </div>
 
                         <div class="form-group row">
@@ -78,6 +71,22 @@
                                 </InputSelect>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="Kategori" class="control-label col-md-2">Değerlendirme Durumu</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@oneri.OneriDurum" class="form-control">
+                                    <option></option>
+                                    @if (Durumlar != null)
+                                    {
+                                        @foreach (var kategori in Durumlar)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
 
                         <br />
                         <div class="row">
@@ -88,12 +97,22 @@
                                 </div>
                                 <ValidationMessage For="@(() => oneri.AktifPasif)" />
                             </div>
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8">Öneri Kabul Durumu?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="oneri.KabulDurum" />
+
+                            <div class="form-group row col-md-8">
+                                <label for="Kategori" class="control-label col-md-3">Ödüllendirme</label>
+                                <div class="col-md-9">
+                                    <InputSelect @bind-Value="@oneri.Odul" class="form-control">
+                                        <option></option>
+                                        @if (Oduller != null)
+                                        {
+                                            @foreach (var kategori in Oduller)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
+                                        }
+
+                                    </InputSelect>
                                 </div>
-                                <ValidationMessage For="@(() => oneri.KabulDurum)" />
                             </div>
                         </div>
                     </div>
@@ -117,8 +136,7 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"
-                            >
+                            class="btn btn-primary">
                         Kaydet
                     </button>
                 </div>
@@ -154,7 +172,7 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                           class="custom-control-input" id="checkbox-all">
+                                               class="custom-control-input" id="checkbox-all">
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
@@ -180,31 +198,35 @@ else
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                           id="checkbox-1">
+                                                   id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
                                     <td>
                                         <img src="images/uploaded/@string.Concat(
-                                                                       oneri.Dosya?.FirstOrDefault().Adi,
+                                                                       oneri.Dosya?.FirstOrDefault()?.Adi,
                                                                        ".",
-                                                                       oneri.Dosya?.FirstOrDefault().Uzanti)"
-                                     width="50"
-                                     height="50" />
+                                                                       oneri.Dosya?.FirstOrDefault()?.Uzanti)"
+                                             width="50"
+                                             height="50" />
                                     </td>
 
                                     <td>@oneri?.Adi</td>
 
                                     <td>
-                                        @if (oneri?.KabulDurum == true)
+                                        @if (oneri?.OneriDurum == DurumKodlari.Degerlendiriliyor)
                                         {
 
 
+                                            <div class="badge badge-warning badge-shadow">Değerlendirme Aşamasında</div>
+                                        }
+                                        else if (oneri?.OneriDurum == DurumKodlari.KabulEdildi)
+                                        {
                                             <div class="badge badge-success badge-shadow">Kabul Edildi</div>
                                         }
                                         else
                                         {
-                                            <div class="badge badge-warning badge-shadow">Red Edildi</div>
+                                            <div class="badge badge-danger badge-shadow">Red Edildi</div>
                                         }
                                     </td>
 
@@ -212,10 +234,10 @@ else
                                     <td>
                                         <a href="@($"oneri/detay/{oneri.Id}")" class="btn btn-primary">Öneri Detayı</a>
                                         <a href='/oneri/duzenle/@oneri.Id'
-                                   class="btn btn-info btn-outline-dark"
-                                   role="button">Düzenle</a>
+                                           class="btn btn-info btn-outline-dark"
+                                           role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(oneri.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(oneri.Id);})">
                                             Sil
                                         </button>
                                     </td>

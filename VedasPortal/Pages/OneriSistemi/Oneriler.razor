@@ -17,7 +17,7 @@ else
                 <div class="float-left">
                     <div class="col-md-12">
                         Sizden Gelen Öneriler |
-                        <a href='/oneri/ekle'
+                        <a href='/personel/oneri/ekle'
                            class="btn btn-primary"
                            role="button">
                             <i class="fa fa-user-plus"></i>
@@ -37,8 +37,8 @@ else
                             <article class="article article-style-c" id="Height">
 
                                 <div class="article-header">
-                                    <div class="article-image" data-background="images/uploaded/@string.Concat(oneri.Dosya.FirstOrDefault().Adi,".",
-                                                   oneri.Dosya.FirstOrDefault().Uzanti)">
+                                    <div class="article-image" data-background="images/uploaded/@string.Concat(oneri.Dosya.FirstOrDefault()?.Adi,".",
+                                                   oneri.Dosya.FirstOrDefault()?.Uzanti)">
                                     </div>
                                 </div>
 

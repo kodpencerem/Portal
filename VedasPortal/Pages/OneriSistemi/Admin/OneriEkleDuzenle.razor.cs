@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -30,6 +31,9 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
 
         public ImageFile OneriDosya = new();
 
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+
         protected IEnumerable<Oneri> Oneriler { get; set; }
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
@@ -47,6 +51,17 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
                 list.Add(item, item.TextOnemDerecesi());
             }
             OnemDereceleri = list;
+        }
+
+        public Dictionary<DurumKodlari, string> Durumlar { get; set; }
+        protected void TumDurumlariGetir()
+        {
+            var list = new Dictionary<DurumKodlari, string>();
+            foreach (DurumKodlari item in Enum.GetValues(typeof(DurumKodlari)))
+            {
+                list.Add(item, item.TextDurumKodlari());
+            }
+            Durumlar = list;
         }
 
 
@@ -73,23 +88,30 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             OneriKategorileri = list;
         }
 
-        protected void Kayit()
+        protected async Task KayitAsync()
         {
-
+            var authState = await State;
+            oneri.KaydedenKullanici = authState.User.Identity.Name;
             OneriServisi.Add(oneri);
-            var fileName = SaveFileToUploaded.FileName.Split(".");
-            var filePath = SaveFileToUploaded.ImageUploadedPath;
-            var dosya = new ImageFile()
-            {
-                Adi = fileName[0],
-                Yolu = filePath,
-                Uzanti = fileName[1],
-                Kategori = DosyaKategori.Jpg,
-                AktifPasif = true,
-                OneriId = oneri.Id,
 
-            };
-            OneriDosyaServisi.Add(dosya);
+            if (oneri.Id != 0)
+            {
+                var fileName = SaveFileToUploaded.FileName.Split(".");
+                var filePath = SaveFileToUploaded.ImageUploadedPath;
+                var dosya = new ImageFile()
+                {
+                    Adi = fileName[0],
+                    Yolu = filePath,
+                    Uzanti = fileName[1],
+                    Kategori = DosyaKategori.Jpg,
+                    AktifPasif = true,
+                    OneriId = oneri.Id,
+                    KaydedenKullanici = authState.User.Identity.Name
+
+                };
+                OneriDosyaServisi.Add(dosya);
+            }
+            
             TumOnerileriGetir();
             oneri = new Oneri();
         }
@@ -115,7 +137,6 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         {
             if (oneri.Id == 0)
                 return;
-            OneriDosya.Yolu = oneri.Dosya?.FirstOrDefault().Yolu;
             OneriDosyaServisi.Remove(OneriDosya.Id);
             OneriServisi.Remove(oneri.Id);
             oneri = new Oneri();
@@ -123,6 +144,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             TumOnerileriGetir();
             TumDereceleriGetir();
             TumOdulleriGetir();
+            TumDurumlariGetir();
         }
 
         protected override Task OnInitializedAsync()
@@ -131,7 +153,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             TumOnerileriGetir();
             TumDereceleriGetir();
             TumOdulleriGetir();
-
+            TumDurumlariGetir();
             return Task.CompletedTask;
         }
         [Inject]

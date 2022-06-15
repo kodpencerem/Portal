@@ -89,16 +89,16 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-4 float-left">
+                            <div class="col-md-6">
                                 <div class="form-group row col-md-12">
-                                    <label class="control-label col-md-4">Kayıt Tarihi</label>
+                                    <label class="control-label col-md-4" style="margin-left:-12px">Kayıt Tarihi</label>
                                     <div class="col-md-8">
-                                        <InputDate class="form-control" @bind-Value="GetToplantiNotu.KayitTarihi" />
+                                        <InputDate class="form-control" @bind-Value="GetToplantiNotu.KayitTarihi" id="girinti" />
                                     </div>
                                     <ValidationMessage For="@(() => GetToplantiNotu.KayitTarihi)" />
                                 </div>
                             </div>
-                            <div class="col-md-4 float-right">
+                            <div class="col-md-4">
                                 <div class="form-group row col-md-12">
                                     <label class="control-label col-md-8"> Şimdi Yayınlansın Mı?</label>
                                     <div class="col-md-4">
@@ -108,22 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 form-group row">
-                                <label for="Kategori" class="control-label col-md-6">Notu Görecek Birimi Seçin</label>
-                                <div class="col-md-6">
-                                    <InputSelect @bind-Value="@GetToplantiNotu.Birimler" class="form-control" required>
-                                        <option></option>
-                                        @if (Birimler != null)
-                                        {
-                                            @foreach (var kategori in Birimler)
-                                            {
-                                                <option value="@kategori.Key"> @kategori.Value </option>
-                                            }
-                                        }
-
-                                    </InputSelect>
-                                </div>
-                            </div>
+                            
 
                         </div>
 
@@ -140,23 +125,43 @@
                             </div>
                             <ValidationMessage For="@(() => GetToplantiNotu.Aciklama)" />
                         </div>
-
-                        <div class="form-group row">
-                            <label for="Kategori" class="control-label col-md-2">Toplantıyı Seçin</label>
-                            <div class="col-md-10">
-                                <InputSelect @bind-Value="@GetToplantiNotu.ToplantiId" class="form-control" required>
-                                    <option></option>
-                                    @if (Toplantilar != null)
-                                    {
-                                        @foreach (var kategori in Toplantilar)
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                <label for="Kategori" class="control-label col-md-4">Toplantıyı Seçin</label>
+                                <div class="col-md-8">
+                                    <InputSelect @bind-Value="@GetToplantiNotu.ToplantiId" class="form-control" required>
+                                        <option></option>
+                                        @if (Toplantilar != null)
                                         {
-                                            <option value="@kategori.Id"> @kategori.Baslik </option>
+                                            @foreach (var kategori in Toplantilar)
+                                            {
+                                                <option value="@kategori.Id"> @kategori.Baslik </option>
+                                            }
                                         }
-                                    }
 
-                                </InputSelect>
+                                    </InputSelect>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group row">
+                                <label for="Kategori" class="control-label col-md-6">Notu Görecek Birimi Seçin</label>
+                                <div class="col-md-6">
+                                    <InputSelect @bind-Value="@GetToplantiNotu.Birimler" class="form-control" required>
+                                        <option></option>
+                                        @if (Birimler != null)
+                                        {
+                                            @foreach (var kategori in Birimler)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
+                                        }
+
+                                    </InputSelect>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -319,7 +324,9 @@ else
         margin-top: 200px;
         box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
     }
-
+    #girinti{
+        margin-left:15px;
+    }
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

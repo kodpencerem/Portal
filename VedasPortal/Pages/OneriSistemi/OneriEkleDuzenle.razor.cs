@@ -12,9 +12,9 @@ using VedasPortal.Entities.Models.Oneri;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.OneriSistemi.Admin
+namespace VedasPortal.Pages.OneriSistemi
 {
-    public class OneriEklemeModeli : ComponentBase
+    public class OneriKullaniciModeli : ComponentBase
     {
 
         [Inject]
@@ -30,6 +30,8 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
         public Oneri oneri = new();
 
         public ImageFile OneriDosya = new();
+
+        public string UserName;
 
         [CascadingParameter]
         public Task<AuthenticationState> State { get; set; }
@@ -100,7 +102,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
                 };
                 OneriDosyaServisi.Add(dosya);
             }
-            
+
             TumOnerileriGetir();
             oneri = new Oneri();
         }
@@ -135,13 +137,15 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
             TumOdulleriGetir();
         }
 
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
+
             TumKategorileriGetir();
             TumOnerileriGetir();
             TumDereceleriGetir();
-            TumOdulleriGetir();
-
+            TumOdulleriGetir();           
             return Task.CompletedTask;
         }
         [Inject]

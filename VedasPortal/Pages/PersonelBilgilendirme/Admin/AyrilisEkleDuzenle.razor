@@ -42,52 +42,60 @@
                             </div>
                             <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
                         </div>
-                        <div class="form-group row">
-                            <label for="Kategori" class="control-label col-md-2">Personel Durumu</label>
-                            <div class="col-md-10">
-                                <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control">
-                                    <option></option>
-                                    @if (EklemeDurumlari != null)
-                                    {
-                                        @foreach (var kategori in EklemeDurumlari)
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                <label for="Kategori" class="control-label col-md-4">Personel Durumu</label>
+                               
+                                <div class="col-md-8" >
+                                    <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control" id="girinti">
+                                        <option></option>
+                                        @if (EklemeDurumlari != null)
                                         {
-                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                            @foreach (var kategori in EklemeDurumlari)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
                                         }
-                                    }
-                                </InputSelect>
+                                    </InputSelect>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="Kategori" class="control-label col-md-2">Çalıştığı Birimi Seçin</label>
-                            <div class="col-md-10">
-                                <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control">
-                                    <option></option>
-                                    @if (Birimler != null)
-                                    {
-                                        @foreach (var kategori in Birimler)
+                            
+                            <div class="form-group row col-md-6">
+                                
+                                <label for="Kategori" class="control-label col-md-4" >Çalıştığı Birimi Seçin</label>
+                                <div class="col-md-8">
+                                    
+                                    <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control" id="girinti">
+                                        <option></option>
+                                        @if (Birimler != null)
                                         {
-                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                            @foreach (var kategori in Birimler)
+                                            {
+                                    <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
                                         }
-                                    }
 
-                                </InputSelect>
+                                    </InputSelect>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">İşe Başlama Tarihi</label>
-                            <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="personelDurum.IseBaslangicTarihi" />
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                <label class="control-label col-md-4">İşe Başlama Tarihi</label>
+                                <div class="col-md-8">
+                                    <InputDate class="form-control" @bind-Value="personelDurum.IseBaslangicTarihi" id="girinti" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">İşten Ayrilma Tarihi</label>
-                            <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="personelDurum.IstenAyrilisTarihi" />
+                            <div class="form-group row col-md-6">
+                                <label class="control-label col-md-4">İşten Ayrilma Tarihi</label>
+                                <div class="col-md-8">
+                                    <InputDate class="form-control" @bind-Value="personelDurum.IstenAyrilisTarihi" id="girinti" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.IstenAyrilisTarihi)" />
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.IstenAyrilisTarihi)" />
                         </div>
 
                     </div>
@@ -242,6 +250,10 @@ else
         border: none;
         margin-top: 200px;
         box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    #girinti{
+        margin-left:10px
     }
 
     .row {

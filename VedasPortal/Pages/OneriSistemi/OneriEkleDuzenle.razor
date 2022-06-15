@@ -1,6 +1,6 @@
-﻿@page "/oneri/ekle"
-@page "/oneri/duzenle/{OneriId:int}"
-@inherits OneriEklemeModeli
+﻿@page "/personel/oneri/ekle"
+@page "/personel/oneri/duzenle/{OneriId:int}"
+@inherits OneriKullaniciModeli
 
 <div class="col-12">
     <EditForm Model="@oneri" OnValidSubmit="KayitAsync">
@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label class="form-label col-md-2">Dosya Seçin</label>
                             <div class="col-md-10">
-                                <ImageResizer @bind-ValueInput="@OneriDosya.Yolu" />
+                                <ImageResizer @bind-ValueInput="@OneriDosya.Yolu"/>
                             </div>
 
                         </div>
@@ -69,25 +69,7 @@
 
                                 </InputSelect>
                             </div>
-                        </div>
-
-                        <br />
-                        <div class="row">
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8">Öneri Şimdi Yayınlasın Mı?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="oneri.AktifPasif" />
-                                </div>
-                                <ValidationMessage For="@(() => oneri.AktifPasif)" />
-                            </div>
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-8">Öneri Kabul Durumu?</label>
-                                <div class="col-md-4">
-                                    <InputCheckbox class="form-control" @bind-Value="oneri.KabulDurum" />
-                                </div>
-                                <ValidationMessage For="@(() => oneri.KabulDurum)" />
-                            </div>
-                        </div>
+                        </div>                       
                     </div>
 
                     <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-right">
@@ -163,7 +145,7 @@ else
 
 
 
-                            @foreach (var oneri in Oneriler)
+                            @foreach (var oneri in Oneriler.Where(x=>x.KaydedenKullanici == UserName))
 
                             {
 
@@ -188,15 +170,19 @@ else
                                     <td>@oneri?.Adi</td>
 
                                     <td>
-                                        @if (oneri?.KabulDurum == true)
+                                        @if (oneri?.OneriDurum == DurumKodlari.Degerlendiriliyor)
                                         {
 
 
+                                            <div class="badge badge-warning badge-shadow">Değerlendirme Aşamasında</div>
+                                        }
+                                        else if (oneri?.OneriDurum == DurumKodlari.KabulEdildi)
+                                        {
                                             <div class="badge badge-success badge-shadow">Kabul Edildi</div>
                                         }
                                         else
                                         {
-                                            <div class="badge badge-warning badge-shadow">Red Edildi</div>
+                                            <div class="badge badge-danger badge-shadow">Red Edildi</div>
                                         }
                                     </td>
 

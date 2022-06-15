@@ -42,6 +42,17 @@ namespace VedasPortal
             };
         }
 
+        public static string TextDurumKodlari(this DurumKodlari kategori)
+        {
+            return kategori switch
+            {
+                DurumKodlari.Degerlendiriliyor => "Değerlendirme Aşamasında",
+                DurumKodlari.RedEdildi => "Red Edildi",
+                DurumKodlari.KabulEdildi => "Kabul Edildi",
+                _ => "",
+            };
+        }
+
         public static string TextPersonelDurumu(this PersonelDurumu kategori)
         {
             return kategori switch
@@ -112,6 +123,7 @@ namespace VedasPortal
                 Odul.IndirimKuponu => "İndirim Kuponu",
                 Odul.Izin => "İzin",
                 Odul.Para => "Para",
+                Odul.Degerlendiriliyor => "Değerlendirme Aşamasında",
                 _ => "",
             };
         }
