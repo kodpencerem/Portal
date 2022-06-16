@@ -7,7 +7,6 @@ namespace VedasPortal.Entities.DTOs.Anket
     public class AnketDTO : IAnketDTO
     {
         public int AnketId { get; set; }
-        public int ApplicationUserId { get; set; }
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public string AnketSorusu { get; set; }

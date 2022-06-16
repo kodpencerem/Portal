@@ -1,30 +1,40 @@
 ﻿@using VedasPortal.Entities.Models.Dosya;
+@using Blazored.Video;
+@using Blazored.Video.Support;
+@using Microsoft.AspNetCore.Components;
+@using System.Collections.Generic;
+@using VedasPortal.Repository.Interface;
 
-<BlazoredVideo @ref="video"
-               PlayEvent="OnPlay"
-               TimeUpate="OnTimeUpdate"
-               VideoStateOptions="options"
-               class="w-100"
-               style="max-width:800px;"
-               controls="controls"
-               type ="@Type.ToString()"
-               >
-    <source src="files/@Src.ToString()"
-            type="@Type.ToString()"
-            />
-</BlazoredVideo>
+@foreach (var videoGetir in VideoGetir.Where(x => x.AktifPasif == true && x.Uzanti == "mp4" || x.Uzanti == "mkv").ToList())
+{
+    <BlazoredVideo @ref="video"
+                   PlayEvent="OnPlay"
+                   TimeUpate="OnTimeUpdate"
+                   VideoStateOptions="options"
+                   class="w-100"
+                   style="max-width:800px;"
+                   controls="controls"
+                   type="@Type.ToString()">
+        <source src="files/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"
+                type="@Type.ToString()" />
+    </BlazoredVideo>
 
-<div class="article-details">
-    <div class="article-title">
-        <h4><a href="@Href">@VideoBaslik</a></h4>
+    <div class="article-details">
+        <div class="article-title">
+            <h4><a href="files/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"></a>@videoGetir.Adi</h4>
+        </div>
+        <p class="text-black">
+            @((MarkupString)Aciklama)
+        </p>
+
     </div>
-    <p class="text-black">
-        @((MarkupString) Aciklama)
-    </p>
-
-</div>
-
+}
 @code {
+
+    [Inject]
+    protected IBaseRepository<Dosya> Video { get; set; }
+
+    protected IEnumerable<Dosya> VideoGetir { get; set; } = new List<Dosya>();
 
     BlazoredVideo video;
 
@@ -51,7 +61,17 @@
     [Parameter]
     public Entities.Models.Dosya.Dosya SecilenVideo { get; set; }
 
+    protected override Task OnInitializedAsync()
+    {
+        TumVideolariGetir();
+        return Task.CompletedTask;
+    }
 
+    protected IEnumerable<Dosya> TumVideolariGetir()
+    {
+        VideoGetir = Video.GetAll();
+        return VideoGetir;
+    }
 
     void OnPlay(VideoState state)
     {

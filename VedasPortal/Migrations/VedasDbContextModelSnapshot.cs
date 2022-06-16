@@ -176,12 +176,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("AnketSorusu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -213,8 +207,6 @@ namespace VedasPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
-
                     b.ToTable("Anket");
                 });
 
@@ -229,12 +221,6 @@ namespace VedasPortal.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -265,8 +251,6 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("Fk_AnketId");
 
@@ -1760,21 +1744,8 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
-                        .WithMany("Anket")
-                        .HasForeignKey("ApplicationUserId1");
-
-                    b.Navigation("ApplicationUser");
-                });
-
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.AnketSecenek", b =>
                 {
-                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
-                        .WithMany("AnketSecenek")
-                        .HasForeignKey("ApplicationUserId1");
-
                     b.HasOne("VedasPortal.Entities.Models.Anket.Anket", "Anket")
                         .WithMany("AnketSecenek")
                         .HasForeignKey("Fk_AnketId")
@@ -1782,8 +1753,6 @@ namespace VedasPortal.Migrations
                         .IsRequired();
 
                     b.Navigation("Anket");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Dosya.Dosya", b =>
@@ -2053,13 +2022,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Toplanti");
 
                     b.Navigation("ToplantiNotu");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
-                {
-                    b.Navigation("Anket");
-
-                    b.Navigation("AnketSecenek");
                 });
 #pragma warning restore 612, 618
         }

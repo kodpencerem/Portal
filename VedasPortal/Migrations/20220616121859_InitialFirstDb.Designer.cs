@@ -10,8 +10,8 @@ using VedasPortal.Data;
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    [Migration("20220614111906_DosyaMdfImageFile2")]
-    partial class DosyaMdfImageFile2
+    [Migration("20220616121859_InitialFirstDb")]
+    partial class InitialFirstDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1072,9 +1072,6 @@ namespace VedasPortal.Migrations
                     b.Property<string>("EPosta")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("KabulDurum")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Kategori")
                         .HasColumnType("int");
 
@@ -1084,7 +1081,10 @@ namespace VedasPortal.Migrations
                     b.Property<DateTime>("KayitTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Odul")
+                    b.Property<int?>("Odul")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OneriDurum")
                         .HasColumnType("int");
 
                     b.Property<string>("RedNedeni")

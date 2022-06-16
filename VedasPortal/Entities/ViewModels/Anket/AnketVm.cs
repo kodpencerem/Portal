@@ -23,7 +23,6 @@ namespace VedasPortal.Entities.ViewModels.Anket
         public int ToplamKatilim { get; set; }
         public bool SecilenAnketMi { get; set; }
         public int ToplamAlinanSure { get; set; }
-        public int ApplicationUserId { get; set; }
         public DateTime OlusturulmaTarihi { get; set; }
         [Required(ErrorMessage = "Seçenekleri eklemelisiniz!")]
         public string SecilenSecenek { get; set; }
