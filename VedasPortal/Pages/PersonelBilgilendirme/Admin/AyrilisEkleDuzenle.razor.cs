@@ -68,13 +68,16 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             }
             Birimler = list;
         }
-
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
         [Authorize(Roles = "Admin")]
-        protected void Kayit()
+        protected async Task KayitAsync()
         {
             Message = "";
             if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
+                var authState = await State;
+                personelDurum.KaydedenKullanici = authState.User.Identity.Name;
                 PersonelServisi.Add(personelDurum);
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -86,6 +89,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
                     Kategori = DosyaKategori.Jpg,
                     AktifPasif = true,
                     PersonelDurumId = personelDurum.Id,
+                    KaydedenKullanici = authState.User.Identity.Name
 
                 };
                 PersonelDosyaServisi.Add(dosya);

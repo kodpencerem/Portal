@@ -65,9 +65,12 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         [Authorize(Roles = "Admin")]
         protected void Kayit()
         {
+
             Message = "";
             if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
+
+                vefatDurumu.KaydedenKullanici = User.Identity.Name;
                 VefatDurumServisi.Add(vefatDurumu);
                 TumPersonelleriGetir();
                 vefatDurumu = new VefatDurumu();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             }
             Birimler = list;
         }
-
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
-            
+            var authState = await State;
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.FileUploadedPath;
             var dosya = new Dosya()
@@ -70,7 +72,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
                 Birimler = video.Birimler,
                 Boyutu = video.Boyutu,
                 AktifPasif = true,
-                Id = video.Id,
+                KaydedenKullanici = authState.User.Identity.Name
             };
             VideoServisi.Add(dosya);
             TumVideolariGetir();

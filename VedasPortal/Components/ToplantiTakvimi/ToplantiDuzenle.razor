@@ -132,8 +132,12 @@
 
     protected ToplantiTakvimVm ToplantiTakvimVm { get; set; } = new ToplantiTakvimVm();
 
+    [CascadingParameter]
+    public Task<AuthenticationState> State { get; set; }
+
     public async void EditToplanti()
     {
+        var authState = await State;
 
         this.Toplanti.BaslangicTarihi = toplantiGetir.BaslangicTarihi;
         this.Toplanti.BitisTarihi = toplantiGetir.BitisTarihi;
@@ -148,9 +152,8 @@
         this.Toplanti.AktifPasif = toplantiGetir.AktifPasif;
         this.Toplanti.AnaSayfadaGoster = toplantiGetir.AnaSayfadaGoster;
         this.Toplanti.DuzenlemeTarihi = toplantiGetir.DuzenlemeTarihi;
-        this.Toplanti.DuzenleyenKullanici = toplantiGetir.DuzenleyenKullanici;
+        this.Toplanti.DuzenleyenKullanici = authState.User.Identity.Name;
         this.Toplanti.KaydedenKullanici = toplantiGetir.KaydedenKullanici;
-        this.Toplanti.Id = toplantiGetir.Id;
         this.Toplanti.KayitTarihi = toplantiGetir.KayitTarihi;
         this.Toplanti.Kod = toplantiGetir.Kod;
         this.Toplanti.ApplicationUser = toplantiGetir.ApplicationUser;
@@ -165,7 +168,7 @@
 
     protected override void OnInitialized()
     {
-        
+
         ToplantiTakvimVm.ListofToplantiMerkezleri = _toplanti.ToplantiMerkezleri();
         ToplantiTakvimVm.MerkezId = "";
         ToplantiTakvimVm.ListofToplantiOdalari = new List<SelectListItem>()
@@ -192,7 +195,6 @@
             toplantiGetir.BeklenenKatilimSayisi = this.Toplanti.BeklenenKatilimSayisi;
             toplantiGetir.ToplantiOdasi = this.Toplanti.ToplantiOdasi;
             toplantiGetir.PersonelId = this.Toplanti.PersonelId;
-            toplantiGetir.Id = this.Toplanti.Id;
             toplantiGetir.ToplantiMerkeziId = this.Toplanti.ToplantiMerkeziId;
             toplantiGetir.ToplantiOdasiId = this.Toplanti.ToplantiOdasiId;
             toplantiGetir.AktifPasif = this.Toplanti.AktifPasif;

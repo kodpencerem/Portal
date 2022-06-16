@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220616083223_AnketUserAdd")]
+    partial class AnketUserAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1763,7 +1765,7 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
-                        .WithMany("Anket")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId1");
 
                     b.Navigation("ApplicationUser");
@@ -1772,7 +1774,7 @@ namespace VedasPortal.Migrations
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.AnketSecenek", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
-                        .WithMany("AnketSecenek")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("VedasPortal.Entities.Models.Anket.Anket", "Anket")
@@ -2053,13 +2055,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Toplanti");
 
                     b.Navigation("ToplantiNotu");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
-                {
-                    b.Navigation("Anket");
-
-                    b.Navigation("AnketSecenek");
                 });
 #pragma warning restore 612, 618
         }

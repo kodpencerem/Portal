@@ -7,6 +7,7 @@ namespace VedasPortal.Repository.Interface.Anket
     public interface IAnketDTO
     {
         int AnketId { get; set; }
+        public int ApplicationUserId { get; set; }
         string Adi { get; set; }
         string Aciklama { get; set; }
         string AnketSorusu { get; set; }

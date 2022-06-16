@@ -4,7 +4,7 @@
 @attribute [Authorize(Roles = "Admin, MerkezEkleDuzenle")]
 
 <div class="col-12">
-    <EditForm Model="@toplantiMerkezi" OnValidSubmit="Kayit">
+    <EditForm Model="@toplantiMerkezi" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>

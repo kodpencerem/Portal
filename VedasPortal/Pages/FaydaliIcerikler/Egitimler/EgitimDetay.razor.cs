@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
 
         [Inject]
         private IBaseRepository<UzmanlikAlani> Uzmanliklar { get; set; }
+
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        public string UserName;
 
         public Dosya fileClass = new Dosya();
         public string pdfName = "";
@@ -67,8 +72,10 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
 
         }
 
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             EgitimDetayGetir = EgitimServisi.Get(EgitimId);
             PersonelDurum = PersonelServisi.Get(PersonelId);
             TumDosyalariGetir();

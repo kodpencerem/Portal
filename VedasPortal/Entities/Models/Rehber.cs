@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
+using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.Models
 {

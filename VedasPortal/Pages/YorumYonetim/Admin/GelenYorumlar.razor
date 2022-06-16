@@ -123,8 +123,14 @@ else
         UrlNavigationManager.NavigateTo("/yorum/ekle");
     }
 
-    protected void Kayit()
+    [CascadingParameter]
+    public Task<AuthenticationState> State { get; set; }
+
+    protected async Task Kayit()
     {
+        var authState = await State;
+        yorum.KaydedenKullanici = authState.User.Identity.Name;
+
         YorumServisi.Add(yorum);
         TumYorumlariGetir();
         yorum = new Yorum();

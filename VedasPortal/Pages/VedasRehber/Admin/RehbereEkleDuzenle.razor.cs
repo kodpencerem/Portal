@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
@@ -39,8 +40,14 @@ namespace VedasPortal.Pages.VedasRehber.Admin
             return Rehber;
 
         }
-        protected void Kayit()
+
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
+            var authState = await State;
+            rehber.KaydedenKullanici = authState.User.Identity.Name;
+
             RehberServisi.Add(rehber);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
@@ -53,6 +60,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 RehberId = rehber.Id,
+                KaydedenKullanici = authState.User.Identity.Name
 
             };
             RehberDosyaServisi.Add(dosya);

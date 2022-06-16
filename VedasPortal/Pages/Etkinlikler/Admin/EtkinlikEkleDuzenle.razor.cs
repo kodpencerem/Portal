@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -59,9 +60,12 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             }
             KatilacakPersonel = list;
         }
-
-        protected void EtkinlikKayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task EtkinlikKayitAsync()
         {
+            var authState = await State;
+            etkinlik.KaydedenKullanici = authState.User.Identity.Name;
             EtkinlikServisi.Add(etkinlik);
             var fileName = SaveFileToUploaded.FileName?.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -73,6 +77,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 EtkinlikId = etkinlik.Id,
+                KaydedenKullanici= authState.User.Identity.Name
 
             };
             EtkinlikDosyaServisi.Add(dosya);

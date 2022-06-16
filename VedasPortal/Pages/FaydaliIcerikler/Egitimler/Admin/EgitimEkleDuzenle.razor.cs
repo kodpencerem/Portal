@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         public Dosya VideoDosya = new();
 
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+
         protected IEnumerable<Egitim> Egitimler { get; set; }
 
         protected IEnumerable<Egitim> TumEgitimleriGetir()
@@ -63,8 +67,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             Birimler = list;
         }
 
-        protected void Kayit()
+        protected async Task KayitAsync()
         {
+            var authState = await State;
+            egitim.KaydedenKullanici = authState.User.Identity.Name;
+
             EgitimServisi.Add(egitim);
 
             var videoName = SaveFileToUploaded.FileName.Split(".");
@@ -84,7 +91,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                     Birimler = egitim.Birimler,
                     IzlenmeDurumu = egitim.IzlenmeDurumu,
                     KayitTarihi = egitim.KayitTarihi,
-                    KaydedenKullanici = egitim.KaydedenKullanici,
+                    KaydedenKullanici = authState.User.Identity.Name,
                     VideoKategori = vidyo.VideoKategori,
                 };
                 VideoServisi.Add(video);

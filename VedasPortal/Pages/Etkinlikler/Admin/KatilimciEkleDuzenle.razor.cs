@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -56,9 +57,12 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             return EtkinlikGetir;
 
         }
-
-        protected void KatilimciKayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KatilimciKayitAsync()
         {
+            var authState = await State;
+            katilimci.KaydedenKullanici = authState.User.Identity.Name;
             KatilimciServisi.Add(katilimci);
             TumKatilimcilariGetir();
             katilimci = new Katilimci();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -37,10 +38,13 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             Odalar = ToplantiOdasi.GetAll();
             return Odalar;
         }
-        
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
+            var authState = await State;
             Oda.ToplantiMerkeziId = Convert.ToInt32(takvimVm.MerkezId);
+            Oda.KaydedenKullanici = authState.User.Identity.Name;
             ToplantiOdasi.Add(Oda);
             TumOdalariGetir();
             Oda = new ToplantiOdasi();

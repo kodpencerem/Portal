@@ -5,7 +5,7 @@
 @inherits DuzelticiFaaliyetModeli
 
 <div class="col-12">
-    <EditForm Model="@duzelticiFaaliyet" OnValidSubmit="DuzelticiFaaliyetKaydet">
+    <EditForm Model="@duzelticiFaaliyet" OnValidSubmit="DuzelticiFaaliyetKaydetAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>

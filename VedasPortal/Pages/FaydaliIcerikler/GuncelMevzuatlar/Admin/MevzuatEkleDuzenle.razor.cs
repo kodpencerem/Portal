@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -64,8 +65,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         [Inject]
         public IBaseRepository<ImageFile> MevzuatDosyaServisi { get; set; }
-        protected void Kayit()
+
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
+            var authState = await State;
+            mevzuat.KaydedenKullanici = authState.User.Identity.Name;
             MevzuatServisi.Add(mevzuat);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
@@ -78,6 +84,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 MevzuatId = mevzuat.Id,
+                KaydedenKullanici = authState.User.Identity.Name
 
             };
             MevzuatDosyaServisi.Add(dosya);
@@ -121,7 +128,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             TumKategorileriGetir();
             return Task.CompletedTask;
         }
-       
+
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

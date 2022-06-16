@@ -57,8 +57,15 @@
 
     public Yorum yorum = new();
 
-    protected void Kayit()
+    [CascadingParameter]
+    public Task<AuthenticationState> State { get; set; }
+
+    protected async Task Kayit()
     {
+
+        var authState = await State;
+        yorum.KaydedenKullanici = authState.User.Identity.Name;
+
         GelenYorumlar.Add(yorum);
         yorum = new Yorum();
     }

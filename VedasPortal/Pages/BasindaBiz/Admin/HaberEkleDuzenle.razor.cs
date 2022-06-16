@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -30,7 +31,8 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public HaberDuyuru haber = new();
 
         public ImageFile HaberDosya = new();
-
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
         protected IEnumerable<HaberDuyuru> Haberler { get; set; }
 
         [Inject]
@@ -51,9 +53,10 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
             Kategoriler = list;
         }
 
-        protected void HaberKayit()
+        protected async Task HaberKayitAsync()
         {
-
+            var authState = await State;
+            haber.KaydedenKullanici = authState.User.Identity.Name;
             HaberServisi.Add(haber);
 
             var fileName = SaveFileToUploaded.FileName?.Split(".");
@@ -67,6 +70,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 HaberDuyuruId = haber.Id,
+                KaydedenKullanici = authState.User.Identity.Name
             };
             HaberDosyaServisi.Add(dosya);
             

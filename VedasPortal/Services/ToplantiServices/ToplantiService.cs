@@ -88,7 +88,6 @@ namespace VedasPortal.Services.ToplantiServices
                     entity.AnaSayfadaGoster = toplanti.AnaSayfadaGoster;
                     entity.Baslik = toplanti.Baslik;
                     entity.BeklenenKatilimSayisi = toplanti.BeklenenKatilimSayisi;
-                    entity.Id = toplanti.Id;
                     entity.DuzenlemeTarihi = toplanti.DuzenlemeTarihi;
                     entity.DuzenleyenKullanici = toplanti.DuzenleyenKullanici;
                     entity.KaydedenKullanici = toplanti.KaydedenKullanici;

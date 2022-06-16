@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -60,8 +61,12 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
             Birimler = list;
         }
 
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
+            var authState = await State;
+            ikUygulama.KaydedenKullanici = authState.User.Identity.Name;
             IkUygulamaServisi.Add(ikUygulama);
 
             var fileName = SaveFileToUploaded.FileName.Split(".");
@@ -74,6 +79,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 IkUygulamaId = ikUygulama.Id,
+                KaydedenKullanici= authState.User.Identity.Name
 
             };
             IkDosyaServisi.Add(dosya);

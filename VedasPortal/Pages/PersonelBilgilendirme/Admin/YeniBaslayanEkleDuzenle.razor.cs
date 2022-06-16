@@ -75,6 +75,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             Message = "";
             if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
             {
+                personelDurum.KaydedenKullanici = User.Identity.Name;
                 PersonelServisi.Add(personelDurum);
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -86,6 +87,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
                     Kategori = DosyaKategori.Jpg,
                     AktifPasif = true,
                     PersonelDurumId = personelDurum.Id,
+                    KaydedenKullanici = User.Identity.Name
 
                 };
                 PersonelDosyaServisi.Add(dosya);

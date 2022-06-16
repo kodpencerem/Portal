@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 using System;
@@ -50,10 +51,12 @@ namespace VedasPortal.Pages.Duyurular.Admin
             }
             Kategoriler = list;
         }
-
-        protected void Kayit()
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        protected async Task KayitAsync()
         {
-
+            var authState = await State;
+            duyuru.KaydedenKullanici = authState.User.Identity.Name;
             DuyuruServisi.Add(duyuru);
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -65,6 +68,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 HaberDuyuruId = duyuru.Id,
+                KaydedenKullanici = authState.User.Identity.Name
 
             };
             DuyuruDosyaServisi.Add(dosya);
