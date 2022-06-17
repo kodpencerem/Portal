@@ -8,9 +8,9 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Repository.Interface;
 
-namespace VedasPortal.Pages.YorumYonetim
+namespace VedasPortal.Pages.YorumYonetim.Admin
 {
-    public class PersonelYorumModeli : ComponentBase
+    public class YorumModeli : ComponentBase
     {
 
         [Inject]
@@ -72,12 +72,10 @@ namespace VedasPortal.Pages.YorumYonetim
             TumYorumlarilariGetir();
         }
 
-        public string UserName;
 
-        protected override async Task<Task> OnInitializedAsync()
+
+        protected override Task OnInitializedAsync()
         {
-            var authState = await State;
-            UserName = authState.User.Identity.Name;
             TumYorumlarilariGetir();
             return Task.CompletedTask;
         }

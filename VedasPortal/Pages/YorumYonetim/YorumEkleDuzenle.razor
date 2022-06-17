@@ -1,8 +1,7 @@
-﻿@page "/yorum/ekle"
-@page "/yorum/duzenle/{YorumId:int}"
-@attribute [Authorize(Roles = "Admin")]
+﻿@page "/personel/yorum/ekle"
+@page "/personel/yorum/duzenle/{YorumId:int}"
 
-@inherits YorumModeli
+@inherits PersonelYorumModeli
 
 
 <div class="col-12">
@@ -90,7 +89,7 @@ else
 
 
 
-                            @foreach (var yorum in Yorumlar)
+                            @foreach (var yorum in Yorumlar.Where(x => x.KaydedenKullanici == UserName))
 
                             {
 
@@ -111,7 +110,7 @@ else
 
 
                                     <td>
-                                        <a href='/katilimci/duzenle/@yorum.Id'
+                                        <a href='/personel/yorum/duzenle/@yorum.Id'
                                            class="btn btn-info btn-outline-dark"
                                            role="button">Düzenle</a>
                                         <button class="btn btn-danger"
@@ -142,7 +141,7 @@ else
         </ModalHeader>
 
         <ModalFooter>
-            <button class="btn btn-danger" @onclick="@(()=>{KatilimciSil(); ModalDialog.Close();})">Evet</button>
+            <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
     </ModalComponent>

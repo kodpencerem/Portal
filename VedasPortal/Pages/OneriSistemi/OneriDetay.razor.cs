@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,13 +31,15 @@ namespace VedasPortal.Pages.OneriSistemi
         protected string Title = "Ekle";
         public Yorum yorum = new();
 
-        protected override Task OnInitializedAsync()
+        protected override async Task<Task> OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             OneriDetayGetir = Oneri.Get(OneriId);
             TumYorumlariGetir();
             return Task.CompletedTask;
         }
-        
+
         protected IEnumerable<Yorum> YorumListesi { get; set; }
 
         protected IEnumerable<Yorum> TumYorumlariGetir()
@@ -45,7 +48,7 @@ namespace VedasPortal.Pages.OneriSistemi
 
             return YorumListesi;
 
-        }       
+        }
         public ModalComponent ModalDialog { get; set; }
         protected string DialogGorunur { get; set; } = "none";
 
@@ -64,11 +67,18 @@ namespace VedasPortal.Pages.OneriSistemi
             yorum = new Yorum();
             TumYorumlariGetir();
         }
-        protected void Kayit()
+
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        public string UserName;
+        protected async Task KayitAsync()
         {
+            var authState = await State;
             var yorumEkle = new Yorum()
-            {   Aciklama = yorum.Aciklama,            
-                OneriId = OneriDetayGetir.Id
+            {
+                Aciklama = yorum.Aciklama,
+                OneriId = OneriDetayGetir.Id,
+                KaydedenKullanici = authState.User.Identity.Name
             };
             GelenYorumlar.Add(yorumEkle);
             yorum = new Yorum();
