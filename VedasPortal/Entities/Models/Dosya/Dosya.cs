@@ -7,7 +7,6 @@ namespace VedasPortal.Entities.Models.Dosya
 {
     public class Dosya : Base.BaseEntity
     {
-        public int FileId { get; set; } = 0;
         public string Adi { get; set; }
         public string AltBaslik { get; set; }
         public string Yolu { get; set; }
@@ -25,6 +24,8 @@ namespace VedasPortal.Entities.Models.Dosya
         public Birimler Birimler { get; set; }
         public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
+        public int? MevzuatId { get; set; }
+        public Mevzuat.Mevzuat Mevzuat { get; set; }
         public virtual ICollection<Yorum.Yorum> Yorum { get; set; }
         public List<Dosya> Files { get; set; } = new List<Dosya>();
     }

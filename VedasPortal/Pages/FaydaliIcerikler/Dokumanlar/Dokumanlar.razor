@@ -6,139 +6,154 @@
 @if (Dokumanlar == null)
 
 {
-	<p><em>Yükleniyor...</em></p>
+    <p><em>Yükleniyor...</em></p>
 }
 
 else
 
 {
 
-	
-                    @if (!Dokumanlar.Any())
-                    {
-                        <p>İçerik Aranıyor</p>
-                    }
-                    else
-                    {
-                        <div class="col-12">
 
-                            <CardComponent cardStyle="Style.primary">
+    @if (!Dokumanlar.Any())
+    {
+        <p>İçerik Aranıyor</p>
+    }
+    else
+    {
+        <div class="col-12">
 
-                                <CardHeader>
-                                    <div class="float-left">
-                                        <div class="col-md-12">
-                                            İndirilebilir Dosyalar ve Dökümanlar
-                                            <AuthorizeView Roles="Admin,DosyaEkleDuzenle">
-                                                <Authorized>
-                                                    ||
-                                                    <a href='/dosya/ekle'
-                                                       class="btn btn-primary"
-                                                       role="button">
-                                                        <i class="fa fa-user-plus"></i>
-                                                        Yeni Bir Dosya Ekle
-                                                    </a>
-                                                </Authorized>
-                                            </AuthorizeView>
+            <CardComponent cardStyle="Style.primary">
+
+                <CardHeader>
+                    <div class="float-left">
+                        <div class="col-md-12">
+                            İndirilebilir Dosyalar ve Dökümanlar
+                            <AuthorizeView Roles="Admin,DosyaEkleDuzenle">
+                                <Authorized>
+                                    ||
+                                    <a href='/dosya/ekle'
+                                       class="btn btn-primary"
+                                       role="button">
+                                        <i class="fa fa-user-plus"></i>
+                                        Yeni Bir Dosya Ekle
+                                    </a>
+                                </Authorized>
+                            </AuthorizeView>
+                        </div>
+                    </div>
+
+                </CardHeader>
+                <CardBody>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table-2">
+                            <thead>
+                                <tr>
+                                    <th class="text-center pt-3">
+                                        <div class="custom-checkbox custom-checkbox-table custom-control">
+                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
+                                                   class="custom-control-input" id="checkbox-all">
+                                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                         </div>
-                                    </div>
+                                    </th>
+                                    <th>Dosya</th>
 
-                                </CardHeader>
-                                <CardBody>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="table-2">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center pt-3">
-                                                        <div class="custom-checkbox custom-checkbox-table custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                                                   class="custom-control-input" id="checkbox-all">
-                                                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </th>
-                                                    <th>Dosya</th>
+                                    <th>Dosya Adı</th>
 
-                                                    <th>Dosya Adı</th>
-
-                                                    <th>İşlemler</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
 
-                                                @foreach (var dosya in Dokumanlar.Where(x => x.Uzanti == "Docx" ||
-                                        x.Uzanti == "pdf" ||
-                                        x.Uzanti == "pptx" ||
-                                        x.Uzanti == "Rar" ||
-                                        x.Uzanti == "Xlsx" ||
-                                        x.Uzanti == "Zip"
+                                @foreach (var dosya in Dokumanlar.Where(x => x.Uzanti == "Docx" ||
+                      x.Uzanti == "pdf" ||
+                      x.Uzanti == "pptx" ||
+                      x.Uzanti == "Rar" ||
+                      x.Uzanti == "Xlsx" ||
+                      x.Uzanti == "Zip"
 
 
 
 
-                                        ).ToList())
+                      ).ToList())
 
-                                                {
-
-
-                                                    <tr>
-                                                        <td class="text-center pt-2">
-                                                            <div class="custom-checkbox custom-control">
-                                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                                       id="checkbox-1">
-                                                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <img src="images/pdf_logo.png" width="50" height="50" />
-
-                                                        </td>
-
-                                                        <td>
-                                                            @string.Concat(dosya.Adi, ".",
-                                                                                   dosya.Uzanti)
-                                                        </td>
+                                {
 
 
-                                                        <td>
+                                    <tr>
+                                        <td class="text-center pt-2">
+                                            <div class="custom-checkbox custom-control">
+                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
+                                                       id="checkbox-1">
+                                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <img src="images/pdf_logo.png" width="50" height="50" />
 
-                                                            <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(dosya.FileId))">
-                                                                Görüntüle
-                                                            </button>
-                                                            
-                                                        </td>
-                                                    </tr>
+                                        </td>
+
+                                        <td>
+                                            @string.Concat(dosya.Adi, ".",
+                                                                   dosya.Uzanti)
+                                        </td>
+
+
+                                        <td>
+
+                                            <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(dosya.Id))">
+                                                Görüntüle
+                                            </button>
+
+                                        </td>
+                                    </tr>
 
 
 
-                                                }
-                                            </tbody>
-                                        </table>
-                                        @if (!string.IsNullOrEmpty(pdfName))
-                                        {
-                                            <iframe src="/files/@string.Concat(Dokumanlar.FirstOrDefault().Adi, ".",
-                                                               Dokumanlar.FirstOrDefault().Uzanti)" style="width:100%; height:1200px">
-                                            </iframe>
-                                        }
-                                    </div>
+                                }
+                            </tbody>
+                        </table>
+                        @foreach (var dosya in Dokumanlar.Where(x => x.Uzanti == "Docx" ||
+                    x.Uzanti == "pdf" ||
+                    x.Uzanti == "pptx" ||
+                    x.Uzanti == "Rar" ||
+                    x.Uzanti == "Xlsx" ||
+                    x.Uzanti == "Zip"
 
-                                </CardBody>
-                            </CardComponent>
 
-                        </div>                       
-                    }
- 
+
+
+                    ).ToList())
+
+                        {
+                            @if (!string.IsNullOrEmpty(pdfName))
+                            {
+                                <iframe src="/files/@string.Concat(dosya.Adi, ".",
+                                                                   dosya.Uzanti)" 
+                                        style="width:100%; height:1200px">
+                                </iframe>
+                            }
+                        }
+                    </div>
+
+                </CardBody>
+            </CardComponent>
+
+        </div>
+    }
+
 }
 <style>
-	.row {
-		display: -ms-flexbox;
-		display: -webkit-box;
-		display: flex;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
-		margin-top: -15px;
-		margin-right: -15px;
-		margin-left: -15px;
-	}
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
 </style>
 

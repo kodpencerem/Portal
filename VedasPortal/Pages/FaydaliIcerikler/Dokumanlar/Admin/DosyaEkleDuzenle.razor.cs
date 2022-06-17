@@ -9,7 +9,6 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
 {
@@ -97,17 +96,13 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar.Admin
         public Dosya fileClass = new Dosya();
         public string pdfName = "";
 
-        [Inject]
-        private IFileService fileService { get; set; }
-
         public void ShowOnCurrentPage(int fileId)
         {
-            pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Adi, ".",
-                fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Uzanti);
+            pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.Id == fileId)?.Adi, ".",
+                fileClass.Files.SingleOrDefault(x => x.Id == fileId)?.Uzanti);
         }
         protected override Task OnInitializedAsync()
         {
-            fileClass.Files = fileService.GetAllPDFs();
             TumDosyalariGetir();
             TumKategorileriGetir();
             return Task.CompletedTask;

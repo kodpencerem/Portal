@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Repository.Interface;
 using VedasPortal.Services.FileUploadDownload;
-using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
 {
@@ -25,7 +24,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
 
         protected override Task OnInitializedAsync()
         {
-            fileClass.Files = fileService.GetAllPDFs();
             TumDosyalariGetir();
             return Task.CompletedTask;
         }
@@ -39,13 +37,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
         public Dosya fileClass = new Dosya();
         public string pdfName = "";
 
-        [Inject]
-        private IFileService fileService { get; set; }
-
+        
         public void ShowOnCurrentPage(int fileId)
         {
-            pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Adi, ".",
-                fileClass.Files.SingleOrDefault(x => x.FileId == fileId)?.Uzanti);
+            pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.Id == fileId)?.Adi, ".",
+                fileClass.Files.SingleOrDefault(x => x.Id == fileId)?.Uzanti);
         }
 
         [Inject]

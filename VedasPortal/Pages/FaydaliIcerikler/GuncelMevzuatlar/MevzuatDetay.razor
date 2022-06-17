@@ -5,7 +5,7 @@
         <CardBody>
             @if (MevzuatDetayGetir != null)
             {
-            
+
 
                 <div class="container-fliud">
                     @{
@@ -55,11 +55,41 @@
                                                     </p>
                                                     <br />
 
-                                                    <p>
-                                                        <Strong>Alınan Kararlar:</Strong>
-                                                        @MevzuatDetayGetir.AlinanKararlar
-                                                    </p>
+
+                                                    <Strong>Mevzuata Ait Dökümanlar</Strong>
                                                     <br />
+                                                    @if (Dosyalar == null)
+
+                                                    {
+                                                        <p><em>Yükleniyor...</em></p>
+                                                    }
+
+                                                    else
+
+                                                    {
+                                                        @foreach (var dosya in Dosyalar.Where(x => x.MevzuatId == MevzuatDetayGetir.Id && x.Uzanti == "pdf").ToList())
+
+                                                        {
+                                                            <p>@dosya.Adi</p>
+                                                            <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(Convert.ToInt32(dosya.MevzuatId==MevzuatDetayGetir.Id)))">
+                                                               Görüntüle
+                                                            </button>
+                                                            <br />
+                                                        }
+
+                                                    }
+
+                                                    <br />
+                                                    @foreach (var mevzuatDosya in Dosyalar.Where(x => x.MevzuatId == MevzuatDetayGetir.Id))
+                                                    {
+                                                        @if (!string.IsNullOrEmpty(pdfName))
+                                                        {
+                                                            <iframe src="/files/@string.Concat(mevzuatDosya.Adi,".",mevzuatDosya.Uzanti)"
+                                                                    style="width:100%; height:1200px">
+                                                            </iframe>
+                                                        }
+                                                    }
+
 
                                                 </div>
 

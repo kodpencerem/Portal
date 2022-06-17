@@ -26,7 +26,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected string Title = "Ekle";
         public Mevzuat mevzuat = new();
-        public ImageFile MevzuatDosya { get; set; } = new();
+        public Dosya MevzuatDosya { get; set; } = new();
 
         protected IEnumerable<Mevzuat> Mevzuatlar { get; set; }
 
@@ -60,7 +60,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
         }
 
         [Inject]
-        public IBaseRepository<ImageFile> MevzuatDosyaServisi { get; set; }
+        public IBaseRepository<Dosya> MevzuatDosyaServisi { get; set; }
 
         [CascadingParameter]
         public Task<AuthenticationState> State { get; set; }
@@ -69,10 +69,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
             var authState = await State;
             mevzuat.KaydedenKullanici = authState.User.Identity.Name;
             MevzuatServisi.Add(mevzuat);
-
             var fileName = SaveFileToUploaded.FileName.Split(".");
             var filePath = SaveFileToUploaded.FileUploadedPath;
-            var dosya = new ImageFile()
+            var dosya = new Dosya()
             {
                 Adi = fileName[0],
                 Yolu = filePath,

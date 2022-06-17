@@ -297,9 +297,6 @@ namespace VedasPortal.Migrations
                     b.Property<int?>("EgitimId")
                         .HasColumnType("int");
 
-                    b.Property<int>("FileId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IzlenmeDurumu")
                         .HasColumnType("bit");
 
@@ -313,6 +310,9 @@ namespace VedasPortal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
+
+                    b.Property<int?>("MevzuatId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -337,6 +337,8 @@ namespace VedasPortal.Migrations
                     b.HasIndex("DosyaId");
 
                     b.HasIndex("EgitimId");
+
+                    b.HasIndex("MevzuatId");
 
                     b.ToTable("Dosya");
                 });
@@ -1770,7 +1772,13 @@ namespace VedasPortal.Migrations
                         .WithMany("Dosya")
                         .HasForeignKey("EgitimId");
 
+                    b.HasOne("VedasPortal.Entities.Models.Mevzuat.Mevzuat", "Mevzuat")
+                        .WithMany()
+                        .HasForeignKey("MevzuatId");
+
                     b.Navigation("Egitim");
+
+                    b.Navigation("Mevzuat");
                 });
 
             modelBuilder.Entity("VedasPortal.Entities.Models.Dosya.ImageFile", b =>

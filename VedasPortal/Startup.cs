@@ -43,7 +43,6 @@ using VedasPortal.Services.Anket;
 using VedasPortal.Services.AuthServices;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
-using VedasPortal.Services.Pdf;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
 
@@ -110,7 +109,6 @@ namespace VedasPortal
             services.AddScoped<IModalService, ModalService>();
             services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
-            services.AddScoped<IFileService, FileService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();

@@ -10,7 +10,6 @@ using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.Pdf;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 {
@@ -69,7 +68,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         protected async Task KayitAsync()
         {
-            int nFileId = 1;
             var authState = await State;
             egitim.KaydedenKullanici = authState.User.Identity.Name;
             EgitimServisi.Add(egitim);
@@ -88,7 +86,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                     IzlenmeDurumu = egitim.IzlenmeDurumu,
                     KaydedenKullanici = authState.User.Identity.Name,
                     VideoKategori = vidyo.VideoKategori,
-                    FileId = nFileId++,
                 };
                 VideoServisi.Add(video);
             }           

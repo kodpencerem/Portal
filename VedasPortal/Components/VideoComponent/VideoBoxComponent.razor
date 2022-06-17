@@ -1,5 +1,6 @@
 ﻿@using VedasPortal.Entities.Models.Dosya
 @using VedasPortal.Repository.Interface 
+@using VedasPortal.Entities.Models.Egitim
 <div class="component-box">
     <VideoPlayerComponent Width="@Width.ToString()"
                           Heigth="@Heigth.ToString()"
@@ -46,6 +47,7 @@
 
     protected override void OnInitialized()
     {
+
         TumVideolariGetir();
         SecilenVideo = VideoList.FirstOrDefault();
     }

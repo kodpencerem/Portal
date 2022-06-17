@@ -219,17 +219,7 @@
 
 
 
-                                                        @foreach (var dosya in Dosyalar.Where(x =>x.EgitimId== EgitimDetayGetir.Id && x.Uzanti == "Docx" ||
-                                                x.Uzanti == "pdf" ||
-                                                x.Uzanti == "pptx" ||
-                                                x.Uzanti == "Rar" ||
-                                                x.Uzanti == "Xlsx" ||
-                                                x.Uzanti == "Zip"
-
-
-
-
-                                                ).ToList())
+                                                        @foreach (var dosya in Dosyalar.Where(x => x.EgitimId == EgitimDetayGetir.Id && x.Uzanti == "pdf").ToList())
 
                                                         {
 
@@ -254,7 +244,7 @@
 
 
                                                                 <td>
-                                                                    <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(dosya.FileId))">
+                                                                    <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(Convert.ToInt32(dosya.EgitimId == EgitimDetayGetir.Id)))">
                                                                         Görüntüle
                                                                     </button>
 
@@ -266,13 +256,17 @@
                                                         }
                                                     </tbody>
                                                 </table>
-                                                @if (!string.IsNullOrEmpty(pdfName))
+                                                @foreach (var dosya in Dosyalar.Where(x => x.EgitimId == EgitimDetayGetir.Id && x.Uzanti == "pdf").ToList())
+
                                                 {
-                                                    <iframe src="/files/@string.Concat(Dosyalar.FirstOrDefault().Adi, ".",
-                                                               Dosyalar.FirstOrDefault().Uzanti)" style="width:100%; height:1200px">
-                                                    </iframe>
+                                                    @if (!string.IsNullOrEmpty(pdfName))
+                                                    {
+                                                        <iframe src="/files/@string.Concat(dosya.Adi, ".",
+                                                                                           dosya.Uzanti)" style="width:100%; height:1200px">
+                                                        </iframe>
+                                                    }
                                                 }
-                                            </div>
+                                                </div>
 
                                         </CardBody>
                                     </CardComponent>
