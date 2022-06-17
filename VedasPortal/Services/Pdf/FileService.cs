@@ -8,14 +8,14 @@ namespace VedasPortal.Services.Pdf
     public class FileService : IFileService
     {
 
-        IHostingEnvironment _hostingEnvironment = null;
-        public FileService(IHostingEnvironment hostingEnvironment)
+        IWebHostEnvironment _hostingEnvironment = null;
+        public FileService(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
         }
         public List<Dosya> GetAllPDFs()
         {
-            List<Dosya> files = new List<Dosya>();
+            List<Dosya> files = new();
             string path = $"{_hostingEnvironment.WebRootPath}\\files\\";
 
             int nFileId = 1;

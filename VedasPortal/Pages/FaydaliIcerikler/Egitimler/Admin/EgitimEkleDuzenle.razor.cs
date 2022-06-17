@@ -69,11 +69,10 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
 
         protected async Task KayitAsync()
         {
+            int nFileId = 1;
             var authState = await State;
             egitim.KaydedenKullanici = authState.User.Identity.Name;
-
             EgitimServisi.Add(egitim);
-
             var videoName = SaveFileToUploaded.FileName.Split(".");
             var videoPath = SaveFileToUploaded.FileUploadedPath;
             if (egitim.Id != 0)
@@ -85,14 +84,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                     Uzanti = videoName[1],
                     Kategori = DosyaKategori.Mp4,
                     AktifPasif = true,
-                    Aciklama = egitim.Aciklama,
                     EgitimId = egitim.Id,
-                    AltBaslik = egitim.AltBaslik,
-                    Birimler = egitim.Birimler,
                     IzlenmeDurumu = egitim.IzlenmeDurumu,
-                    KayitTarihi = egitim.KayitTarihi,
                     KaydedenKullanici = authState.User.Identity.Name,
                     VideoKategori = vidyo.VideoKategori,
+                    FileId = nFileId++,
                 };
                 VideoServisi.Add(video);
             }           

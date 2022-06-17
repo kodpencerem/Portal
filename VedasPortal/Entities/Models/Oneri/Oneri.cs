@@ -25,7 +25,7 @@ namespace VedasPortal.Entities.Models.Oneri
         public Odul? Odul { get; set; } = Models.Oneri.Odul.Degerlendiriliyor;
         [DataType(DataType.Text)]
         public OneriKategori Kategori { get; set; }
-        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> ImageFile { get; set; }
         public virtual ICollection<Yorum.Yorum> Yorum { get; set; }
     }
 

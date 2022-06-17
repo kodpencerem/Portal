@@ -1,25 +1,33 @@
 ﻿@using VedasPortal.Entities.Models.Dosya
-
+@using VedasPortal.Repository.Interface 
 <div class="component-box">
     <VideoPlayerComponent Width="@Width.ToString()"
                           Heigth="@Heigth.ToString()"
                           Src="@Src.ToString()"
-                          Href ="@Href.ToString()"                          
+                          Href="@Href.ToString()"
                           SecilenVideo="SecilenVideo"
-                          Type="video/mp4"
-                          />
-    <h3>@SecilenVideo.Adi</h3>
-    <p>@SecilenVideo.KayitTarihi.ToString("D")</p>
-    <hr />
-    <br />
+                          Type="video/mp4" />
+    @foreach (var video in VideoList.Where(x => x.Uzanti == "mp4").ToList())
+    {
+        <h3>@video?.Adi</h3>
+        <p>@video?.KayitTarihi.ToString("D")</p>
+        <hr />
+        <br />
+    }
+
 </div>
 @code {
+
+    [Inject]
+    protected IBaseRepository<Dosya> VideoServisi { get; set; }
 
     [Parameter]
     public string Src { get; set; }
 
     [Parameter]
     public Entities.Models.Dosya.Dosya SecilenVideo { get; set; }
+
+    protected IEnumerable<Dosya> VideoList;
 
     [Parameter]
     public string Href { get; set; }
@@ -29,4 +37,16 @@
 
     [Parameter]
     public int Heigth { get; set; } = 900;
+
+    protected IEnumerable<Dosya> TumVideolariGetir()
+    {
+        VideoList = VideoServisi.GetAll();
+        return VideoList;
+    }
+
+    protected override void OnInitialized()
+    {
+        TumVideolariGetir();
+        SecilenVideo = VideoList.FirstOrDefault();
+    }
 }

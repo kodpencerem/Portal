@@ -241,7 +241,7 @@
 
     protected IEnumerable<PersonelDurum> TumKatilanlariGetir()
     {
-        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
         return KatilanAyrilanPersonel;
     }
 

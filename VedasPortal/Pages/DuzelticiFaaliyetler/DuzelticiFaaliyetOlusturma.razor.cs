@@ -30,7 +30,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
 
         protected IEnumerable<DuzelticiFaaliyet> TumFaaliyetleriGetir()
         {
-            DuzelticiFaaliyet = DuzelticiFaaliyetler.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            DuzelticiFaaliyet = DuzelticiFaaliyetler.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return DuzelticiFaaliyet;
         }       
     }

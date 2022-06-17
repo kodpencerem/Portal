@@ -29,9 +29,9 @@ else
                      style="max-height:600px;max-width:1203px">
 
                     <img class="d-block w-100" 
-                         src="images/uploaded/@string.Concat(duyuru.Dosya?.FirstOrDefault().Adi,
+                         src="images/uploaded/@string.Concat(duyuru.ImageFile?.FirstOrDefault().Adi,
                                                ".",
-                                               duyuru.Dosya?.FirstOrDefault().Uzanti)" 
+                                               duyuru.ImageFile?.FirstOrDefault().Uzanti)" 
                          width="1203" 
                          height="600" 
                          alt="@duyuru.Adi">
@@ -70,7 +70,7 @@ else
 
     protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
     {
-        Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); ;
+        Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList(); ;
 
         return Duyurular;
     }

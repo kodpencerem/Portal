@@ -2,7 +2,7 @@
 @inherits VedasRehberModel
 
 
-@if (rehber == null)
+@if (Rehber == null)
 
 {
     <p><em>Yükleniyor...</em></p> }
@@ -28,7 +28,7 @@ else
             <CardBody>
                 <div class="row">
 
-                    @if (!rehber.Any())
+                    @if (!Rehber.Any())
                     {
                         <p>İçerik Aranıyor</p> }
                     else
@@ -40,9 +40,9 @@ else
                                 <div class="card client-card" id="minHeight">
                                     <div class="card-body text-center">
                                         <img src="images/uploaded/@string.Concat(
-                                                                   personel.Dosya.FirstOrDefault().Adi,
+                                                                   personel.ImageFile.FirstOrDefault().Adi,
                                                                    ".",
-                                                                   personel.Dosya.FirstOrDefault().Uzanti)"
+                                                                   personel.ImageFile.FirstOrDefault().Uzanti)"
                                              height="200"
                                              width="200"
                                              alt="user"

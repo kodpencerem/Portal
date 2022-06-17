@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Personel
 
         protected IEnumerable<PersonelDurum> TumAyrilanlariGetir()
         {
-            AyrilanPersonel = PersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            AyrilanPersonel = PersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return AyrilanPersonel;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VedasPortal.Entities.Models.Base;
+using VedasPortal.Entities.Models.PersonelDurumlari;
 
 namespace VedasPortal.Entities.Models.Egitim
 {
@@ -26,6 +27,9 @@ namespace VedasPortal.Entities.Models.Egitim
         public Birimler Birimler { get; set; }
         public ICollection<Dosya.Dosya> Dosya { get; set; }
         public ICollection<Yorum.Yorum> Yorum { get; set; }
+
+        public int? PersonelDurumId { get; set; }
+        public PersonelDurum PersonelDurum { get; set; }
     }
 
     public enum EgitimKategori

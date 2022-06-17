@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VedasPortal.Entities.Models;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
+using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
@@ -19,7 +20,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         protected IEnumerable<Egitim> EgitimleriGetir { get; set; } = new List<Egitim>();
      
         public string SearchText = "";
-
+        protected PersonelDurum PersonelDurum { get; set; }
         public List<Egitim> FilteredEgitim => EgitimleriGetir.Where(
             x => x.Adi.ToLower().Contains(SearchText.ToLower())
             || x.Aciklama.ToLower().Contains(SearchText.ToLower())

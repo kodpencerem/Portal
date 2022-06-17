@@ -45,7 +45,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         protected IEnumerable<PersonelDurum> TumPersonelleriGetir()
         {
-            PersonelDurumlari = PersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            PersonelDurumlari = PersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return PersonelDurumlari;
         }
         public Dictionary<PersonelDurumu, string> EklemeDurumlari { get; set; }

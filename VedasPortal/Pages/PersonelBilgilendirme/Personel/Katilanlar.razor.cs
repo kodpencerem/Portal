@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Personel
 
         protected IEnumerable<PersonelDurum> TumKatilanlariGetir()
         {
-            KatilanPersonel = PersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            KatilanPersonel = PersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return KatilanPersonel;
         }
     }

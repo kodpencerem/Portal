@@ -35,7 +35,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
-            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Etkinlikler = EtkinlikServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Etkinlikler;
 
         }

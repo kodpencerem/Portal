@@ -34,7 +34,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
         protected IEnumerable<IkUygulama> TumIkUygulamalariniGetir()
         {
-            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            IkUygulamalari = IkUygulamaServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
 
             return IkUygulamalari;
 

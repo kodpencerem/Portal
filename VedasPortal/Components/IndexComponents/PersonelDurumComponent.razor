@@ -17,9 +17,9 @@
                          class="mr-3 rounded-circle" 
                          width="50" 
                          src="images/uploaded/@string.Concat(
-                                                   durum.Dosya.FirstOrDefault().Adi,
+                                                   durum.ImageFile.FirstOrDefault().Adi,
                                                    ".",
-                                                   durum.Dosya.FirstOrDefault().Uzanti)">
+                                                   durum.ImageFile.FirstOrDefault().Uzanti)">
                     <div class="media-body">
                         <div class="media-title">@durum.AdSoyad</div>
                         <div class="text-job text-muted">@durum.BasladigiGorev</div>
@@ -71,7 +71,7 @@
 
     protected IEnumerable<PersonelDurum> TumKatilanlariGetir()
     {
-        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+        KatilanAyrilanPersonel = TumPersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
         return KatilanAyrilanPersonel;
     }
 

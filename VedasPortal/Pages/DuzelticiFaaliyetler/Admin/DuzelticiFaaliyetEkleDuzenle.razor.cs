@@ -35,7 +35,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler.Admin
 
         protected IEnumerable<DuzelticiFaaliyet> TumFaaliyetleriGetir()
         {
-            DuzelticiFaaliyetler = DuzelticiFaaliyetlerServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            DuzelticiFaaliyetler = DuzelticiFaaliyetlerServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return DuzelticiFaaliyetler;
 
         }
@@ -72,8 +72,6 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler.Admin
             };
             DuzelticiFaaliyetDosya.Add(dosya);
             TumFaaliyetleriGetir();
-            var aTimer = new System.Timers.Timer();
-            aTimer.Interval = 10;
             duzelticiFaaliyet = new DuzelticiFaaliyet();
         }
         protected override void OnParametersSet()

@@ -38,7 +38,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
 
         protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
         {
-            Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Duyurular;
         }
         public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
@@ -73,8 +73,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             };
             DuyuruDosyaServisi.Add(dosya);
             TumDuyurulariGetir();
-            var aTimer = new System.Timers.Timer();
-            aTimer.Interval = 10;
+            
             duyuru = new HaberDuyuru();
         }
         protected override void OnParametersSet()
@@ -100,7 +99,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
         {
             if (duyuru.Id == 0)
                 return;
-            DuyuruDosya.Yolu = duyuru.Dosya?.FirstOrDefault().Yolu;
+            DuyuruDosya.Yolu = duyuru.ImageFile?.FirstOrDefault().Yolu;
             DuyuruServisi.Remove(duyuru.Id);
             duyuru = new HaberDuyuru();
             TumDuyurulariGetir();

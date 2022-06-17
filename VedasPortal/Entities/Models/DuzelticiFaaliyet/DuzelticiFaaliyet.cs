@@ -27,7 +27,7 @@ namespace VedasPortal.Entities.Models.DuzelticiFaaliyet
         [DataType(DataType.Date)]
         public DateTime BildirimTarihi { get; set; } = DateTime.Now.Date;
         public bool AktifPasif { get; set; } = true;
-        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> ImageFile { get; set; }
         [DataType(DataType.Text)]
         public DuzelticiFaaliyetKategori Kategori { get; set; }
         public string KonuEtiketi { get; set; }

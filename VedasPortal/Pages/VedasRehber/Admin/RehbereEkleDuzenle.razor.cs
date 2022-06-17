@@ -35,7 +35,7 @@ namespace VedasPortal.Pages.VedasRehber.Admin
 
         protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            Rehber = RehberServisi.GetAll().AsQueryable().Include(d=>d.Dosya).ToList();
+            Rehber = RehberServisi.GetAll().AsQueryable().Include(d=>d.ImageFile).ToList();
 
             return Rehber;
 

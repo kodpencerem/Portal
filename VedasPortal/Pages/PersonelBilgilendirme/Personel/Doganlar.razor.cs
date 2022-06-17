@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Personel
 
         protected IEnumerable<PersonelDurum> TumDoganlariGetir()
         {
-            DogumGunleri = DogumGunuServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            DogumGunleri = DogumGunuServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return DogumGunleri;
         }
     }

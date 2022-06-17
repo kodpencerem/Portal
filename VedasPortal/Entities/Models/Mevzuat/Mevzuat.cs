@@ -8,7 +8,7 @@ namespace VedasPortal.Entities.Models.Mevzuat
 {
     public class Mevzuat : BaseEntity
     {
-        public ICollection<Dosya.ImageFile> Dosya { get; set; }
+        public ICollection<Dosya.ImageFile> ImageFile { get; set; }
         public int No { get; set; }
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }

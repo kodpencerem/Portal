@@ -1,7 +1,7 @@
 ﻿@page "/egitimdetayi/{egitimId:int}"
 
 <div class="col-12 col-md-12 col-lg-4">
-    <CardComponent cardStyle="Style.info">
+    <CardComponent cardStyle="Style.primary">
         <CardBody>
             @if (EgitimDetayGetir != null && EgitimDetayGetir.KaydedenKullanici == UserName)
             {
@@ -9,7 +9,7 @@
                     <img width="150"
                          height="150"
                          alt="image"
-                         src="assets/img/users/user-1.png"
+                         src="images/default.png"
                          class="rounded-circle author-box-picture">
                     <div class="clearfix"></div>
                     <div class="author-box-name">
@@ -20,14 +20,14 @@
                 <div class="text-center">
                     <div class="author-box-description">
                         <p>
-                            Hakkında Kısa Bilgi
+                            @*Hakkında Kısa Bilgi*@
                         </p>
                     </div>
                 </div>
             }
         </CardBody>
     </CardComponent>
-    <CardComponent cardStyle="Style.info">
+    <CardComponent cardStyle="Style.primary">
         <CardHeader>
             <h4>Eğitmen Hakkında</h4>
         </CardHeader>
@@ -63,9 +63,22 @@
             }
         </CardBody>
     </CardComponent>
-    <CardComponent cardStyle="Style.info">
+    <CardComponent cardStyle="Style.primary">
         <CardHeader>
-            <h4>Yetenek ve Uzmanlık Alanları</h4>
+            <h4>
+                <div class="row" style="margin-top:5px">
+                    <div cllas="col-md-6 float-left">
+                        Yetenek ve Uzmanlık Alanları || &nbsp;
+                    </div>
+                    <div cllas="col-md-6 float-right" style="margin-top:-15px">
+                        <div class="mb-2 mt-3">
+                            <a href='/uzmanlik/ekle' class="btn btn-primary" role="button">
+                                <i class="fa fa-user-plus"></i> Uzmanlık Alanı Ekle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </h4>
         </CardHeader>
         <CardBody>
             @if (UzmanlikAlani != null)
@@ -116,7 +129,7 @@
     </CardComponent>
 </div>
 <div class="col-12 col-md-12 col-lg-8">
-    <CardComponent cardStyle="Style.info">
+    <CardComponent cardStyle="Style.primary">
         <CardBody>
             @if (EgitimDetayGetir != null)
             {

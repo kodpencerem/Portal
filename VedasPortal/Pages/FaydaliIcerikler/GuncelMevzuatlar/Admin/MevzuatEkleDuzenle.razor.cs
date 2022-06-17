@@ -20,11 +20,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         [Inject]
         public IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
-
-        [Inject]
-        IJSRuntime jSRuntime { get; set; }
-
-
+        
         [Parameter]
         public int MevzuatId { get; set; }
 
@@ -36,7 +32,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         protected IEnumerable<Mevzuat> TumMevzuatlariGetir()
         {
-            Mevzuatlar = MevzuatServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Mevzuatlar = MevzuatServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
 
             return Mevzuatlar;
 

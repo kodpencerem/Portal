@@ -39,7 +39,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
         public NavigationManager NavigationManager { get; set; }
         protected IEnumerable<HaberDuyuru> TumHaberleriGetir()
         {
-            Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Haberler;
         }
         public Dictionary<HaberDuyuruKategori, string> Kategoriler { get; set; }
@@ -73,10 +73,7 @@ namespace VedasPortal.Pages.BasindaBiz.Admin
                 KaydedenKullanici = authState.User.Identity.Name
             };
             HaberDosyaServisi.Add(dosya);
-            
             TumHaberleriGetir();
-            var aTimer = new System.Timers.Timer();
-            aTimer.Interval = 10;
             haber = new HaberDuyuru();
 
         }

@@ -2,7 +2,7 @@
 @inherits MevzuatModeli
 
 
-@if (mevzuatlar == null)
+@if (Mevzuatlar == null)
 
 {
     <p><em>Yükleniyor...</em></p>
@@ -29,7 +29,7 @@ else
             <CardBody>
 
 
-                @if (!mevzuatlar.Any())
+                @if (!Mevzuatlar.Any())
                 {
                     <p>İçerik Aranıyor</p>
                 }

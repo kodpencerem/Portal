@@ -13,12 +13,12 @@ namespace VedasPortal.Pages.VedasRehber
     public class VedasRehberModel : ComponentBase
     {
         [Inject]
-        protected IBaseRepository<Rehber> Rehber { get; set; }
-        protected IEnumerable<Rehber> rehber { get; set; } = new List<Rehber>();
+        protected IBaseRepository<Rehber> RehberServisi { get; set; }
+        protected IEnumerable<Rehber> Rehber { get; set; } = new List<Rehber>();
 
         public string SearchText = "";
 
-        public List<Rehber> FilteredRehber => rehber.Where(
+        public List<Rehber> FilteredRehber => Rehber.Where(
             x => x.Adi.ToLower().Contains(SearchText.ToLower())
             || x.Soyadi.ToLower().Contains(SearchText.ToLower())
             || x.Unvani.ToLower().Contains(SearchText.ToLower())
@@ -36,11 +36,11 @@ namespace VedasPortal.Pages.VedasRehber
 
         protected IEnumerable<Rehber> TumRehberiGetir()
         {
-            rehber = Rehber.GetAll()
+            Rehber = RehberServisi.GetAll()
                            .AsQueryable()
-                           .Include(s => s.Dosya)
+                           .Include(s => s.ImageFile)
                            .ToList();
-            return rehber;
+            return Rehber;
         }      
     }
 }

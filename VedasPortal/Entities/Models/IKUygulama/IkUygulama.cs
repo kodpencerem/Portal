@@ -11,7 +11,7 @@ namespace VedasPortal.Entities.Models.IKUygulama
         public string Adi { get; set; }
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }
-        public virtual ICollection<Dosya.ImageFile> Dosya { get; set; }
+        public virtual ICollection<Dosya.ImageFile> ImageFile { get; set; }
         [DataType(DataType.Text)]
         public IkUygulamaKategori Kategori { get; set; }
         [DataType(DataType.Text)]

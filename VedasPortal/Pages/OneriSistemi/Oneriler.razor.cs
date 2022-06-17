@@ -30,7 +30,7 @@ namespace VedasPortal.Pages.OneriSistemi
 
         protected IEnumerable<Oneri> TumOnerileriGetir()
         {
-            Oneriler = Oneri.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Oneriler = Oneri.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Oneriler;
         }
     }

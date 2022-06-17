@@ -17,9 +17,9 @@
                             <label class="form-label col-md-2">Resim Seçin</label>
                             <div class="col-md-10">
                                 <ImageResizer @bind-ValueInput="@EtkinlikDosya.Yolu" />
-                                @if (!string.IsNullOrEmpty(etkinlik.Dosya?.FirstOrDefault().Yolu.ToString()))
+                                @if (!string.IsNullOrEmpty(etkinlik.ImageFile?.FirstOrDefault().Yolu.ToString()))
                                 {
-                                    <img src="@("images/uploaded/"+@etkinlik.Dosya?.FirstOrDefault().Yolu)"
+                                    <img src="@("images/uploaded/"+@etkinlik.ImageFile?.FirstOrDefault().Yolu)"
                                      height="150" />
                                 }
                             </div>
@@ -178,8 +178,8 @@ else
                                         </div>
                                     </td>
                                     <td>
-                                        <img src="images/uploaded/@string.Concat(etkinlik.Dosya?.FirstOrDefault().Adi,".",
-                                                                   etkinlik.Dosya?.FirstOrDefault().Uzanti)"
+                                        <img src="images/uploaded/@string.Concat(etkinlik.ImageFile?.FirstOrDefault().Adi,".",
+                                                                   etkinlik.ImageFile?.FirstOrDefault().Uzanti)"
                                      width="50"
                                      height="50" />
                                     </td>

@@ -12,11 +12,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
     {
         [Inject]
         protected IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
-        protected IEnumerable<Mevzuat> mevzuatlar { get; set; } = new List<Mevzuat>();
+        protected IEnumerable<Mevzuat> Mevzuatlar { get; set; } = new List<Mevzuat>();
 
         public string SearchText = "";
 
-        public List<Mevzuat> FilteredMevzuat => mevzuatlar.Where(
+        public List<Mevzuat> FilteredMevzuat => Mevzuatlar.Where(
             x => x.Adi.ToLower().Contains(SearchText.ToLower())
             || x.Aciklama.ToLower().Contains(SearchText.ToLower())
             ).ToList();
@@ -30,9 +30,9 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
 
         protected IEnumerable<Mevzuat> TumMevzuatlariGetir()
         {
-            mevzuatlar = MevzuatServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Mevzuatlar = MevzuatServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
 
-            return mevzuatlar;
+            return Mevzuatlar;
 
         }
     }

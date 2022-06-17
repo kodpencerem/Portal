@@ -25,7 +25,7 @@ namespace VedasPortal.Pages.Duyurular
 
         protected IEnumerable<HaberDuyuru> TumDuyurulariGetir()
         {
-            duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList(); 
+            duyurular = DuyuruServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList(); 
 
             return duyurular;
 

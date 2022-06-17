@@ -134,7 +134,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         protected IEnumerable<PersonelDurum> TumPersonelleriGetir()
         {
-            Personeller = PersonelDurumServisi.GetAll().AsQueryable().Include(s => s.Dosya).ToList();
+            Personeller = PersonelDurumServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Personeller;
         }
 
