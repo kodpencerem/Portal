@@ -1,4 +1,6 @@
 ﻿using Ardalis.Result;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Utils.Anket.ToMapper;
 
@@ -229,11 +232,46 @@ namespace VedasPortal.Services.Anket
             }
         }
 
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
         public Result<bool> AnketDuzenle(AnketDTO anketDTO)
         {
             try
             {
+                var guncelOySayisi = 0;
 
+
+                foreach (var secenekDTO in anketDTO.AnketSecenekleri)
+                {
+                    guncelOySayisi += secenekDTO.ToplamKatilim;
+                }
+
+                var guncelAnket = Mapper.FromAnketDTO(anketDTO);
+                var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
+                anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
+                anketiGuncelle.ToplamKatilim = guncelOySayisi;
+                anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
+
+                _context.SaveChanges();
+
+
+
+
+                return Result<bool>.Success(true);
+            }
+            catch (Exception)
+            {
+
+                return Result<bool>.Error("Anket güncellenirken bir hatayla karşılaşıldı.");
+            }
+        }
+
+        public async Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO)
+        {
+            //var authState = await State;
+
+            try
+            {
                 var guncelOySayisi = 0;
 
                 foreach (var secenekDTO in anketDTO.AnketSecenekleri)
@@ -247,36 +285,8 @@ namespace VedasPortal.Services.Anket
                 anketiGuncelle.ToplamKatilim = guncelOySayisi;
                 anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
 
-
                 _context.SaveChanges();
 
-                return Result<bool>.Success(true);
-            }
-            catch (Exception)
-            {
-
-                return Result<bool>.Error("Anket güncellenirken bir hatayla karşılaşıldı.");
-            }
-        }
-
-        public async Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO)
-        {
-            try
-            {
-                var guncelOySayisi = 0;
-
-                foreach (var option in anketDTO.AnketSecenekleri)
-                {
-                    guncelOySayisi += option.ToplamKatilim;
-                }
-
-                var guncelAnket = Mapper.FromAnketDTO(anketDTO);
-                var anketiGuncelle = await _context.Anket.FirstOrDefaultAsync(x => x.Id == anketDTO.AnketId);
-                anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
-                anketiGuncelle.ToplamKatilim = guncelOySayisi;
-                anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
-
-                await _context.SaveChangesAsync();
 
                 return Result<bool>.Success(true);
             }

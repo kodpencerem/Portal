@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
-using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.Models.Anket
 {
