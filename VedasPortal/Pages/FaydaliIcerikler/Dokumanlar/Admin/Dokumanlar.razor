@@ -1,0 +1,39 @@
+﻿@page "/dokumanlar"
+@using Syncfusion.Blazor.FileManager
+@inject IJSRuntime JsRuntime;
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardBody>
+            <div id="ControlRegion">
+
+                <SfFileManager TValue="FileManagerDirectoryContent"
+                               ShowThumbnail="true"
+                               AllowDragAndDrop="true"
+                               AllowMultiSelection="true">
+
+                    <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
+                                             UploadUrl="/api/FileManager/Upload"
+                                             DownloadUrl="/api/FileManager/Download"
+                                             GetImageUrl="/api/FileManager/GetImage">
+                    </FileManagerAjaxSettings>
+                </SfFileManager>
+            </div>
+
+        </CardBody>
+    </CardComponent>
+</div>
+
+<style>
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+    .list {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    min-width: 200px;
+    }
+</style>
