@@ -3,25 +3,33 @@
 @inject IJSRuntime JsRuntime;
 
 <div class="col-12">
-    <CardComponent cardStyle="Style.primary">
-        <CardBody>
-            <div id="ControlRegion">
+    <AuthorizeView Roles="Admin,VideoEkleDuzenle,DosyaEkleDuzenle">
+        <Authorized>
+            <CardComponent cardStyle="Style.primary">
+                <CardBody>
+                    <div id="ControlRegion">
 
-                <SfFileManager TValue="FileManagerDirectoryContent"
-                               ShowThumbnail="true"
-                               AllowDragAndDrop="true"
-                               AllowMultiSelection="true">
+                        <SfFileManager TValue="FileManagerDirectoryContent"
+                                       ShowThumbnail="true"
+                                       AllowDragAndDrop="true"
+                                       AllowMultiSelection="true">
 
-                    <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
-                                             UploadUrl="/api/FileManager/Upload"
-                                             DownloadUrl="/api/FileManager/Download"
-                                             GetImageUrl="/api/FileManager/GetImage">
-                    </FileManagerAjaxSettings>
-                </SfFileManager>
-            </div>
+                            <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
+                                                     UploadUrl="/api/FileManager/Upload"
+                                                     DownloadUrl="/api/FileManager/Download"
+                                                     GetImageUrl="/api/FileManager/GetImage">
+                            </FileManagerAjaxSettings>
+                        </SfFileManager>
+                    </div>
 
-        </CardBody>
-    </CardComponent>
+                </CardBody>
+            </CardComponent>
+        </Authorized>
+        <NotAuthorized>
+            <p class="text text-center text-danger"> Bu Alanda İşlem Yapma Yetkiniz Yoktur!</p>
+        </NotAuthorized>
+    </AuthorizeView>
+    
 </div>
 
 <style>
@@ -35,5 +43,15 @@
     line-height: 20px;
     margin: 10px;
     min-width: 200px;
+    }
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
     }
 </style>

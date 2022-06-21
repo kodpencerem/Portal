@@ -1,150 +1,49 @@
 ﻿@page "/dosyalar"
+@using Syncfusion.Blazor.FileManager
+@inject IJSRuntime JsRuntime;
 
-@inherits DosyaModeli
-
-
-@if (Dokumanlar == null)
-
-{
-    <p><em>Yükleniyor...</em></p>
-}
-
-else
-
-{
-
-
-    @if (!Dokumanlar.Any())
-    {
-        <p>İçerik Aranıyor</p>
-    }
-    else
-    {
-        <div class="col-12">
-
+<div class="col-12">
+    <AuthorizeView>
+        <Authorized>
             <CardComponent cardStyle="Style.primary">
-
-                <CardHeader>
-                    <div class="float-left">
-                        <div class="col-md-12">
-                            İndirilebilir Dosyalar ve Dökümanlar
-                            <AuthorizeView Roles="Admin,DosyaEkleDuzenle">
-                                <Authorized>
-                                    ||
-                                    <a href='/dosya/ekle'
-                                       class="btn btn-primary"
-                                       role="button">
-                                        <i class="fa fa-user-plus"></i>
-                                        Yeni Bir Dosya Ekle
-                                    </a>
-                                </Authorized>
-                            </AuthorizeView>
-                        </div>
-                    </div>
-
-                </CardHeader>
                 <CardBody>
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="table-2">
-                            <thead>
-                                <tr>
-                                    <th class="text-center pt-3">
-                                        <div class="custom-checkbox custom-checkbox-table custom-control">
-                                            <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                                   class="custom-control-input" id="checkbox-all">
-                                            <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                                        </div>
-                                    </th>
-                                    <th>Dosya</th>
+                    <div id="ControlRegion">
 
-                                    <th>Dosya Adı</th>
+                        <SfFileManager TValue="FileManagerDirectoryContent"
+                                       ShowThumbnail="true"
+                                       AllowDragAndDrop="true"
+                                       AllowMultiSelection="true">
 
-                                    <th>İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-
-
-                                @foreach (var dosya in Dokumanlar.Where(x => x.Uzanti == "Docx" ||
-                      x.Uzanti == "pdf" ||
-                      x.Uzanti == "pptx" ||
-                      x.Uzanti == "Rar" ||
-                      x.Uzanti == "Xlsx" ||
-                      x.Uzanti == "Zip"
-
-
-
-
-                      ).ToList())
-
-                                {
-
-
-                                    <tr>
-                                        <td class="text-center pt-2">
-                                            <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                                       id="checkbox-1">
-                                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="images/pdf_logo.png" width="50" height="50" />
-
-                                        </td>
-
-                                        <td>
-                                            @string.Concat(dosya.Adi, ".",
-                                                                   dosya.Uzanti)
-                                        </td>
-
-
-                                        <td>
-
-                                            <button class="btn btn-warning" @onclick="@(e=> ShowOnCurrentPage(dosya.Id))">
-                                                Görüntüle
-                                            </button>
-
-                                        </td>
-                                    </tr>
-
-
-
-                                }
-                            </tbody>
-                        </table>
-                        @foreach (var dosya in Dokumanlar.Where(x => x.Uzanti == "Docx" ||
-                    x.Uzanti == "pdf" ||
-                    x.Uzanti == "pptx" ||
-                    x.Uzanti == "Rar" ||
-                    x.Uzanti == "Xlsx" ||
-                    x.Uzanti == "Zip"
-
-
-
-
-                    ).ToList())
-
-                        {
-                            @if (!string.IsNullOrEmpty(pdfName))
-                            {
-                                <iframe src="/files/@string.Concat(dosya.Adi, ".",
-                                                                   dosya.Uzanti)" 
-                                        style="width:100%; height:1200px">
-                                </iframe>
-                            }
-                        }
+                            <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
+                                                     UploadUrl="/api/FileManager/Upload"
+                                                     DownloadUrl="/api/FileManager/Download"
+                                                     GetImageUrl="/api/FileManager/GetImage">
+                            </FileManagerAjaxSettings>
+                        </SfFileManager>
                     </div>
 
                 </CardBody>
             </CardComponent>
+        </Authorized>
+        <NotAuthorized>
+            <p class="text text-center text-danger"> Giriş Yapmadınız!</p>
+        </NotAuthorized>
+    </AuthorizeView>
+    
+</div>
 
-        </div>
-    }
-
-}
 <style>
+    .ulstyle {
+        margin: 0px;
+        padding-left: 20px;
+        display: inline-block;
+    }
+    .list {
+    float: left;
+    line-height: 20px;
+    margin: 10px;
+    min-width: 200px;
+    }
     .row {
         display: -ms-flexbox;
         display: -webkit-box;
@@ -156,4 +55,3 @@ else
         margin-left: -15px;
     }
 </style>
-

@@ -45,6 +45,9 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
+using Syncfusion.Blazor;
+using Newtonsoft.Json.Serialization;
+
 
 #endregion
 
@@ -112,17 +115,19 @@ namespace VedasPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSyncfusionBlazor();
             services.AddTransient<IManageUsersService, ManageUsersService>();
             services.AddTransient<IManageRolesService, ManageRolesService>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
-            
+            services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjU5MzAyQDMyMzAyZTMxMmUzME9RQ1ZFeGdRNW9MaGpNdWcxNXh4YjQrMDh5VzF4bzExN0V4Q2lmSjNsMTA9");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -141,9 +146,10 @@ namespace VedasPortal
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
