@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Repository.Interface;
-using VedasPortal.Services.FileUploadDownload;
 
 namespace VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
 {

@@ -115,11 +115,8 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected void Sil()
         {
             if (egitim.Id == 0)
-                return;
-            if (egitim.Id == vidyo.EgitimId)
-            {
-                VideoServisi.Remove(vidyo.Id);
-            }
+                return;           
+            VideoServisi.Remove(vidyo.Id);
             EgitimServisi.Remove(egitim.Id);
             egitim = new Egitim();
             TumEgitimleriGetir();
