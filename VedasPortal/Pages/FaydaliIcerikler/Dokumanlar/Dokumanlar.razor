@@ -19,6 +19,8 @@
                                                      DownloadUrl="/api/FileManager/Download"
                                                      GetImageUrl="/api/FileManager/GetImage">
                             </FileManagerAjaxSettings>
+                            <FileManagerToolbarSettings Items="@ItemToolbar"></FileManagerToolbarSettings>
+                            <FileManagerContextMenuSettings File="@Items" Folder="@Items"></FileManagerContextMenuSettings>
                         </SfFileManager>
                     </div>
 
@@ -31,6 +33,13 @@
     </AuthorizeView>
     
 </div>
+
+@code{
+
+    public string[] Items = new string[] { "Open", "|", "Download","|", "Details" };
+
+    public string[] ItemToolbar = new string[] { "Download", "SortBy", "Refresh", "Selection", "View", "Details" };
+}
 
 <style>
     .ulstyle {

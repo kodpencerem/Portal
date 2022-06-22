@@ -20,8 +20,10 @@ namespace VedasPortal.Controllers
         public PhysicalFileProvider operation;
         public string basePath;
         string root = "wwwroot\\files";
+        //public AccessRule folderRule { get; set; } = new();
         public FileManagerController(IWebHostEnvironment hostingEnvironment)
         {
+            //this.operation?.SetRules(GetRules());
             basePath = hostingEnvironment.ContentRootPath;
             operation = new PhysicalFileProvider();
             if (basePath.EndsWith("\\"))
@@ -29,22 +31,34 @@ namespace VedasPortal.Controllers
             else
                 operation.RootFolder(basePath + "\\" + root);
         }
+
+        //public AccessDetails GetRules()
+        //{
+        //    AccessDetails accessDetails = new AccessDetails();
+
+        //    List<AccessRule> folderRule = new List<AccessRule> {
+        //        // For Admin User         
+        //        new AccessRule { Path = "/", Role = "User", Read = Permission.Allow, Write = Permission.Deny, Copy = Permission.Deny, WriteContents = Permission.Deny, Upload = Permission.Deny, Download = Permission.Allow },
+        //        new AccessRule { Path = "/*.*", Role = "User", Read = Permission.Allow, Write = Permission.Deny, Copy = Permission.Deny, WriteContents = Permission.Deny, Upload = Permission.Deny, Download = Permission.Allow },
+        //    };
+        //    accessDetails.AccessRules = folderRule;
+        //    accessDetails.Role = "User";
+        //    return accessDetails;
+        //}
+
         [Route("FileOperations")]
         public object FileOperations([FromBody] FileManagerDirectoryContent args)
         {
-            if (User.Identity.IsAuthenticated && User.IsInRole("Admin,VideoEkleDuzenle,DosyaEkleDuzenle"))
+            if (args.Action == "delete" || args.Action == "rename")
             {
-                if (args.Action == "delete" || args.Action == "rename")
+                if (args.TargetPath == null && args.Path == "")
                 {
-                    if (args.TargetPath == null && args.Path == "")
-                    {
-                        FileManagerResponse response = new FileManagerResponse();
-                        response.Error = new ErrorDetails { Code = "401", Message = "Kök klasör üzerinde değişiklik yapma yetkiniz yoktur!." };
-                        return operation.ToCamelCase(response);
-                    }
+                    FileManagerResponse response = new FileManagerResponse();
+                    response.Error = new ErrorDetails { Code = "401", Message = "Kök klasör üzerinde değişiklik yapma yetkiniz yoktur!." };
+                    return operation.ToCamelCase(response);
                 }
-                
             }
+
             switch (args.Action)
             {
 
@@ -52,6 +66,7 @@ namespace VedasPortal.Controllers
                     // verilen yoldan dosya(lar)ı veya klasör(ler)i okur.
                     return operation.ToCamelCase(operation.GetFiles(args.Path, args.ShowHiddenItems));
                 case "delete":
+
                     //seçilen dosya(lar)ı veya klasör(ler)i verilen yoldan siler.
                     return operation.ToCamelCase(operation.Delete(args.Path, args.Names));
                 case "copy":
@@ -73,7 +88,7 @@ namespace VedasPortal.Controllers
                     // bir dosya veya klasörü yeniden adlandırır.
                     return operation.ToCamelCase(operation.Rename(args.Path, args.Name, args.NewName));
             }
-            
+
             return null;
         }
 
@@ -83,23 +98,15 @@ namespace VedasPortal.Controllers
         public IActionResult Upload(string path, IList<IFormFile> uploadFiles, string action)
         {
             FileManagerResponse uploadResponse;
-            if (User.Identity.IsAuthenticated && User.IsInRole("Admin,VideoEkleDuzenle,DosyaEkleDuzenle"))
-            {
-                uploadResponse = operation.Upload(path, uploadFiles, action, null);
-                if (uploadResponse.Error != null)
-                {
-                    Response.Clear();
-                    Response.ContentType = "application/json; charset=utf-8";
-                    Response.StatusCode = Convert.ToInt32(uploadResponse.Error.Code);
-                    Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = uploadResponse.Error.Message;
-                }
 
-            }
-            else
+            uploadResponse = operation.Upload(path, uploadFiles, action, null);
+            if (uploadResponse.Error != null)
             {
-                return Content("Dosya Yükleme Yetkiniz Yoktur!");
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.StatusCode = Convert.ToInt32(uploadResponse.Error.Code);
+                Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = uploadResponse.Error.Message;
             }
-
             return Content("");
         }
 
@@ -118,5 +125,4 @@ namespace VedasPortal.Controllers
             return operation.GetImage(args.Path, args.Id, false, null, null);
         }
     }
-
 }

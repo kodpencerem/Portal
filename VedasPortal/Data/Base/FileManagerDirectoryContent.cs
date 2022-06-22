@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using VedasPortal.Entities.Models.User;
 
 namespace SfFileService.FileManager.Base
 {

@@ -73,7 +73,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     readResponse.Files = null;
                     accessMessage = cwd.Permission.Message;
-                    throw new UnauthorizedAccessException("'" + cwd.Name + "' is not accessible. You need permission to perform the read action.");
+                    throw new UnauthorizedAccessException("'" + cwd.Name + "' ulaşılabilir değil. WriteContents eylemini gerçekleştirmek için izne ihtiyacınız var.");
                 }
                 readResponse.Files = ReadDirectories(directory, extensions, showHiddenItems, data);
                 readResponse.Files = readResponse.Files.Concat(ReadFiles(directory, extensions, showHiddenItems, data));
@@ -83,7 +83,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 readResponse.Error = er;
                 return readResponse;
@@ -175,7 +175,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             return String.Empty;
         }
 
-        
+
         protected virtual IEnumerable<FileManagerDirectoryContent> ReadDirectories(DirectoryInfo directory, string[] extensions, bool showHiddenItems, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse readDirectory = new FileManagerResponse();
@@ -221,6 +221,8 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 throw;
             }
         }
+
+
         public virtual FileManagerResponse Create(string path, string name, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse createResponse = new FileManagerResponse();
@@ -231,7 +233,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. WriteContents eylemini gerçekleştirmek için izne ihtiyacınız var.");
                 }
 
                 string newDirectoryPath = Path.Combine(contentRootPath + path, name);
@@ -243,7 +245,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     DirectoryInfo exist = new DirectoryInfo(newDirectoryPath);
                     ErrorDetails er = new ErrorDetails();
                     er.Code = "400";
-                    er.Message = "A file or folder with the name " + exist.Name.ToString() + " already exists.";
+                    er.Message = exist.Name.ToString() + " bu isimde bir dosya halihazırda vardır!";
                     createResponse.Error = er;
 
                     return createResponse;
@@ -263,13 +265,15 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 CreateData.Permission = GetPermission(physicalPath, directory.Name, false);
                 FileManagerDirectoryContent[] newData = new FileManagerDirectoryContent[] { CreateData };
                 createResponse.Files = newData;
+
                 return createResponse;
+
             }
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 createResponse.Error = er;
                 return createResponse;
@@ -358,7 +362,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 getDetailResponse.Error = er;
                 return getDetailResponse;
             }
@@ -379,7 +383,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible.  you need permission to perform the write action.");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' ulaşılabilir değil. İzin almanız gerekli");
                     }
                 }
                 FileManagerDirectoryContent removingFile;
@@ -423,7 +427,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     }
                     else
                     {
-                        throw new ArgumentNullException("name should not be null");
+                        throw new ArgumentNullException("Isim alanı boş olamaz!");
                     }
                 }
                 DeleteResponse.Files = removedFiles;
@@ -431,7 +435,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible.  you need permission to perform the write action.";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
                     er.Code = "401";
                     if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                     DeleteResponse.Error = er;
@@ -446,7 +450,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 DeleteResponse.Error = er;
                 return DeleteResponse;
@@ -481,7 +485,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         FileInfo exist = new FileInfo(newPath);
                         ErrorDetails er = new ErrorDetails();
                         er.Code = "400";
-                        er.Message = "Cannot rename " + exist.Name.ToString() + " to " + newName + ": destination already exists.";
+                        er.Message = "Yeniden isimlendirme bir hata ile karşılaştı! " + exist.Name.ToString() + " bu " + newName + ": halihazırda mevcut.";
                         renameResponse.Error = er;
                         return renameResponse;
                     }
@@ -495,7 +499,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         DirectoryInfo exist = new DirectoryInfo(newPath);
                         ErrorDetails er = new ErrorDetails();
                         er.Code = "400";
-                        er.Message = "Cannot rename " + exist.Name.ToString() + " to " + newName + ": destination already exists.";
+                        er.Message = "Yeniden isimlendirme bir hata ile karşılaştı!  " + exist.Name.ToString() + " bu " + newName + ": halihazırda mevcut.";
                         renameResponse.Error = er;
 
                         return renameResponse;
@@ -521,7 +525,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(this.rootName + path + name) + "' is not accessible. You need permission to perform the write action." : e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 renameResponse.Error = er;
                 return renameResponse;
@@ -546,14 +550,14 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Copy))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the copy action.");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' ulaşılabilir değil. İzin almanız gerekli");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "'ulaşılabilir değil. İzin almanız gerekli");
                 }
 
 
@@ -678,7 +682,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform the copy action.";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
                     er.Code = "401";
                     copyResponse.Error = er;
                     return copyResponse;
@@ -689,7 +693,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     ErrorDetails er = new ErrorDetails();
                     er.FileExists = existFiles;
                     er.Code = "400";
-                    er.Message = "File Already Exists";
+                    er.Message = "Dosya halihazırda var!";
                     copyResponse.Error = er;
                 }
                 if (missingFiles.Count == 0)
@@ -703,14 +707,14 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     {
                         namelist = namelist + ", " + missingFiles[k];
                     }
-                    throw new FileNotFoundException(namelist + " not found in given location.");
+                    throw new FileNotFoundException(namelist + "belirtilen konumda bulunamadı.");
                 }
             }
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 er.FileExists = copyResponse.Error?.FileExists;
                 copyResponse.Error = er;
@@ -736,14 +740,14 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the write action.");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "'ulaşılabilir değil. İzin almanız gerekli");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' ulaşılabilir değil. İzin almanız gerekli");
                 }
 
                 List<string> existFiles = new List<string>();
@@ -886,7 +890,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform this action.";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
                     er.Code = "401";
                     moveResponse.Error = er;
                     return moveResponse;
@@ -896,7 +900,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     ErrorDetails er = new ErrorDetails();
                     er.FileExists = existFiles;
                     er.Code = "400";
-                    er.Message = "File Already Exists";
+                    er.Message = "Dosya Halihazırda Mevcut";
                     moveResponse.Error = er;
                 }
                 if (missingFiles.Count == 0)
@@ -910,7 +914,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     {
                         namelist = namelist + ", " + missingFiles[k];
                     }
-                    throw new FileNotFoundException(namelist + " not found in given location.");
+                    throw new FileNotFoundException(namelist + " aranan konumda bulunamadı!");
                 }
             }
             catch (Exception e)
@@ -918,7 +922,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 ErrorDetails er = new ErrorDetails
                 {
                     Message = e.Message.ToString(),
-                    Code = e.Message.ToString().Contains("is not accessible. You need permission") ? "401" : "417",
+                    Code = e.Message.ToString().Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417",
                     FileExists = moveResponse.Error?.FileExists
                 };
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
@@ -951,7 +955,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 if (cwd.Permission != null && !cwd.Permission.Read)
                 {
                     accessMessage = cwd.Permission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the read action.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. İzin almanız gerekli!");
                 }
                 searchResponse.CWD = cwd;
 
@@ -1017,13 +1021,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli!") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 searchResponse.Error = er;
                 return searchResponse;
             }
         }
-
         protected String byteConversion(long fileSize)
         {
             try
@@ -1051,7 +1054,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                               .Replace(@"\?", ".")
                        + "$";
         }
-
         public virtual FileStreamResult GetImage(string path, string id, bool allowCompress, ImageSize size, params FileManagerDirectoryContent[] data)
         {
             try
@@ -1069,8 +1071,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 return null;
             }
         }
-
-
         public virtual FileManagerResponse Upload(string path, IList<IFormFile> uploadFiles, string action, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse uploadResponse = new FileManagerResponse();
@@ -1080,7 +1080,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.Upload))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the upload action.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. İzin almanız gerekli.");
                 }
 
                 List<string> existFiles = new List<string>();
@@ -1115,7 +1115,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             {
                                 ErrorDetails er = new ErrorDetails();
                                 er.Code = "404";
-                                er.Message = "File not found.";
+                                er.Message = "Dosya bulunamadı.";
                                 uploadResponse.Error = er;
                             }
                         }
@@ -1155,7 +1155,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     ErrorDetails er = new ErrorDetails();
                     er.Code = "400";
-                    er.Message = "File already exists.";
+                    er.Message = "Dosya Halihazırda Mevcut.";
                     er.FileExists = existFiles;
                     uploadResponse.Error = er;
                 }
@@ -1165,8 +1165,8 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
 
-                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(path) + "' is not accessible. You need permission to perform the upload action." : e.Message.ToString();
-                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(path) + "' ulaşılabilir değil. İzin almanız gerekli." : e.Message.ToString();
+                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli.") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 uploadResponse.Error = er;
                 return uploadResponse;
@@ -1184,7 +1184,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     bool IsFile = !IsDirectory(physicalPath, names[i]);
                     AccessPermission FilePermission = GetPermission(physicalPath, names[i], IsFile);
                     if (FilePermission != null && (!FilePermission.Read || !FilePermission.Download))
-                        throw new UnauthorizedAccessException("'" + this.rootName + path + names[i] + "' is not accessible. Access is denied.");
+                        throw new UnauthorizedAccessException("'" + this.rootName + path + names[i] + "' ulaşılabilir değil. İzin almanız gerekli.");
 
                     fullPath = Path.Combine(contentRootPath + path, names[i]);
                     if ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory)
@@ -1206,7 +1206,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 return null;
             }
         }
-
         private FileStreamResult fileStreamResult;
         protected virtual FileStreamResult DownloadFile(string path, string[] names = null)
         {
@@ -1262,7 +1261,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         }
                         else
                         {
-                            throw new ArgumentNullException("name should not be null");
+                            throw new ArgumentNullException("isim alanı boş olamaz!");
                         }
                     }
                     try
@@ -1367,7 +1366,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 return null;
             }
         }
-
         private string DirectoryRename(string newPath)
         {
             int directoryCount = 0;
@@ -1378,7 +1376,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             newPath = newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : "");
             return newPath;
         }
-
         private string FileRename(string newPath, string fileName)
         {
             int name = newPath.LastIndexOf(".");
@@ -1394,18 +1391,16 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             newPath = newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(fileName);
             return newPath;
         }
-
-
         private string DirectoryCopy(string sourceDirName, string destDirName)
         {
             string result = String.Empty;
             try
             {
-                // Gets the subdirectories for the specified directory.
+                // Belirtilen dizin için alt dizinleri alır.
                 DirectoryInfo dir = new DirectoryInfo(sourceDirName);
 
                 DirectoryInfo[] dirs = dir.GetDirectories();
-                // If the destination directory doesn't exist, creates it.
+                // Hedef dizin yoksa, onu oluşturur.
                 if (!Directory.Exists(destDirName))
                 {
                     try
@@ -1425,7 +1420,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     }
                 }
 
-                // Gets the files in the directory and copy them to the new location.
+                // Dizindeki dosyaları alır ve yeni konuma kopyalar.
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo file in files)
                 {
@@ -1471,8 +1466,6 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 }
             }
         }
-
-
         protected virtual string DeleteDirectory(string path)
         {
             try
@@ -1678,17 +1671,21 @@ namespace SfFileService.FileManager.PhysicalFileProvider
         {
             return rule == Permission.Allow ? true : false;
         }
+
         protected virtual AccessPermission UpdateFileRules(AccessPermission filePermission, AccessRule fileRule)
         {
+
             filePermission.Copy = HasPermission(fileRule.Copy);
             filePermission.Download = HasPermission(fileRule.Download);
             filePermission.Write = HasPermission(fileRule.Write);
             filePermission.Read = HasPermission(fileRule.Read);
             filePermission.Message = string.IsNullOrEmpty(fileRule.Message) ? string.Empty : fileRule.Message;
+
             return filePermission;
         }
         protected virtual AccessPermission UpdateFolderRules(AccessPermission folderPermission, AccessRule folderRule)
         {
+
             folderPermission.Copy = HasPermission(folderRule.Copy);
             folderPermission.Download = HasPermission(folderRule.Download);
             folderPermission.Write = HasPermission(folderRule.Write);
