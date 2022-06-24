@@ -30,7 +30,7 @@ namespace VedasPortal.Utils.Anket.ToMapper
                 AnketSecenekId = anketSecenek.Id,
                 Aciklama = anketSecenek.Aciklama,
                 Resim = anketSecenek.Resim,
-                Fk_AnketId = anketSecenek.Fk_AnketId,
+                Fk_AnketId = anketSecenek.AnketId,
                 ToplamKatilim = anketSecenek.ToplamKatilim
             };
             return secenekDTO;
@@ -57,7 +57,8 @@ namespace VedasPortal.Utils.Anket.ToMapper
                 ToplamKatilim = anketDTO.ToplamKatilim,
                 ToplamAlinanSure = anketDTO.ToplamAlinanSure,
                 KayitTarihi = anketDTO.OlusturulmaTarihi,
-                AnketSecenek = FromAnketSecenekList(anketDTO.AnketSecenekleri)
+                AnketSecenek = FromAnketSecenekList(anketDTO.AnketSecenekleri),
+                ApplicationUserId = anketDTO.ApplicationUserId
             };
 
             return anket;
@@ -69,7 +70,7 @@ namespace VedasPortal.Utils.Anket.ToMapper
                 Id = secenekDTO.AnketSecenekId,
                 Aciklama = secenekDTO.Aciklama,
                 Resim = secenekDTO.Resim,
-                Fk_AnketId = secenekDTO.Fk_AnketId,
+                AnketId = secenekDTO.Fk_AnketId,
                 ToplamKatilim = secenekDTO.ToplamKatilim
             };
 

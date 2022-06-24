@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
@@ -17,9 +18,11 @@ namespace VedasPortal.Services.Anket
     public class AnketYonetim : IAnketYonetim
     {
         readonly VedasDbContext _context;
-
-        public AnketYonetim(VedasDbContext context)
+        public ApplicationUser ApplicationUser { get; set; }
+        private readonly AuthenticationStateProvider _AuthenticationStateProvider;
+        public AnketYonetim(VedasDbContext context, AuthenticationStateProvider AuthenticationStateProvider)
         {
+            _AuthenticationStateProvider = AuthenticationStateProvider;
             _context = context;
         }
         public Result<AnketDTO> AnketGetir(int id)
@@ -232,8 +235,7 @@ namespace VedasPortal.Services.Anket
             }
         }
 
-        [CascadingParameter]
-        public Task<AuthenticationState> State { get; set; }
+
         public Result<bool> AnketDuzenle(AnketDTO anketDTO)
         {
             try
@@ -265,30 +267,38 @@ namespace VedasPortal.Services.Anket
                 return Result<bool>.Error("Anket güncellenirken bir hatayla karşılaşıldı.");
             }
         }
-
+        private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
         public async Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO)
         {
-            //var authState = await State;
+            var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             try
             {
-                var guncelOySayisi = 0;
 
-                foreach (var secenekDTO in anketDTO.AnketSecenekleri)
+                if (_context.Anket.FirstOrDefault()?.ApplicationUserId==null)
                 {
-                    guncelOySayisi += secenekDTO.ToplamKatilim;
+                    var guncelOySayisi = 0;
+
+                    foreach (var secenekDTO in anketDTO.AnketSecenekleri)
+                    {
+                        guncelOySayisi += secenekDTO.ToplamKatilim;
+                    }
+
+                    var guncelAnket = Mapper.FromAnketDTO(anketDTO);
+                    var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
+                    anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
+                    anketiGuncelle.ApplicationUserId = user;
+                    anketiGuncelle.ToplamKatilim = guncelOySayisi;
+                    anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
+                    _context.SaveChanges();
+                    return Result<bool>.Success(true);
+                }
+                else
+                {
+                    return Result<bool>.Success(false);
                 }
 
-                var guncelAnket = Mapper.FromAnketDTO(anketDTO);
-                var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
-                anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
-                anketiGuncelle.ToplamKatilim = guncelOySayisi;
-                anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
-
-                _context.SaveChanges();
-
-
-                return Result<bool>.Success(true);
             }
             catch (Exception)
             {

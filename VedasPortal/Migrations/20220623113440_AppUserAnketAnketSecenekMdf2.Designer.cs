@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220623113440_AppUserAnketAnketSecenekMdf2")]
+    partial class AppUserAnketAnketSecenekMdf2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,19 +164,19 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Adi")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("AktifPasif")
                         .HasColumnType("bit");
 
                     b.Property<string>("AnketSorusu")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
@@ -186,7 +188,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<bool>("SecilenAnketMi")
                         .HasColumnType("bit");
@@ -205,8 +209,6 @@ namespace VedasPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.ToTable("Anket");
                 });
 
@@ -218,16 +220,18 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("AnketId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DuzenleyenKullanici")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Fk_AnketId")
+                        .HasColumnType("int");
 
                     b.Property<string>("KaydedenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -236,7 +240,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Resim")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("SilenKullanici")
                         .HasColumnType("nvarchar(max)");
@@ -249,7 +254,7 @@ namespace VedasPortal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnketId");
+                    b.HasIndex("Fk_AnketId");
 
                     b.ToTable("AnketSecenek");
                 });
@@ -262,9 +267,11 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Adi")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("AktifPasif")
@@ -302,7 +309,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<int?>("MevzuatId")
                         .HasColumnType("int");
@@ -1632,7 +1641,8 @@ namespace VedasPortal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int?>("DosyaId")
                         .HasColumnType("int");
@@ -1653,7 +1663,9 @@ namespace VedasPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("KayitTarihi")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<bool>("OnaylansinMi")
                         .HasColumnType("bit");
@@ -1741,20 +1753,11 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
-                {
-                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
-                        .WithMany("Anket")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.Navigation("ApplicationUser");
-                });
-
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.AnketSecenek", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Anket.Anket", "Anket")
                         .WithMany("AnketSecenek")
-                        .HasForeignKey("AnketId")
+                        .HasForeignKey("Fk_AnketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2045,11 +2048,6 @@ namespace VedasPortal.Migrations
                     b.Navigation("Toplanti");
 
                     b.Navigation("ToplantiNotu");
-                });
-
-            modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
-                {
-                    b.Navigation("Anket");
                 });
 #pragma warning restore 612, 618
         }

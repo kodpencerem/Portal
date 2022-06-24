@@ -15,6 +15,9 @@ namespace VedasPortal.Entities.Models.Anket
         public bool SecilenAnketMi { get; set; }
         public int ToplamAlinanSure { get; set; }
         public bool AktifPasif { get; set; }
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
         public ICollection<AnketSecenek> AnketSecenek { get; set; }
     }
 }

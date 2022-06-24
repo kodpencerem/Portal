@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using VedasPortal.Entities.DTOs.Anket;
 using VedasPortal.Entities.Models.User;
 
@@ -26,9 +23,8 @@ namespace VedasPortal.Entities.ViewModels.Anket
         public DateTime OlusturulmaTarihi { get; set; }
         [Required(ErrorMessage = "Seçenekleri eklemelisiniz!")]
         public string SecilenSecenek { get; set; }
-        public int? ApplicationUserId { get; set; }
         public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>();
-        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
         public void YapilanAnket()
         {
             ToplamKatilim += 1;

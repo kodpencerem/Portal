@@ -16,5 +16,6 @@ namespace VedasPortal.Entities.DTOs.Anket
         public int ToplamAlinanSure { get; set; }
         public DateTime OlusturulmaTarihi { get; set; }
         public List<AnketSecenekDTO> AnketSecenekleri { get; set; }
+        public string ApplicationUserId { get ; set; }
     }
 }
