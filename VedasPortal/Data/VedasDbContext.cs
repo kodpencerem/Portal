@@ -42,6 +42,7 @@ namespace VedasPortal.Data
         public DbSet<ToplantiNotu> ToplantiNotu { get; set; }
         public DbSet<IkUygulama> IkUygulama { get; set; }
         public DbSet<Anket> Anket { get; set; }
+        public DbSet<AnketUser> AnketUser { get; set; }
         public DbSet<AnketSecenek> AnketSecenek { get; set; }
         public DbSet<GorevSecenek> GorevSecenek { get; set; }
         public DbSet<KursVeSertifika> KursVeSertifika { get; set; }

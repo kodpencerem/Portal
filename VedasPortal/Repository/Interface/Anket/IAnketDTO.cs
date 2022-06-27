@@ -14,7 +14,6 @@ namespace VedasPortal.Repository.Interface.Anket
         bool SecilenAnketMi { get; set; }
         int ToplamAlinanSure { get; set; }
         DateTime OlusturulmaTarihi { get; set; }
-        public string ApplicationUserId { get; set; }
         List<AnketSecenekDTO> AnketSecenekleri { get; set; }
     }
 }

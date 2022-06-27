@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VedasPortal.Data;
 
 namespace VedasPortal.Migrations
 {
     [DbContext(typeof(VedasDbContext))]
-    partial class VedasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220627052102_AnketUserTable")]
+    partial class AnketUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,6 +175,9 @@ namespace VedasPortal.Migrations
                     b.Property<string>("AnketSorusu")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("DuzenlemeTarihi")
                         .HasColumnType("datetime2");
 
@@ -201,6 +206,8 @@ namespace VedasPortal.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Anket");
                 });
@@ -1776,6 +1783,15 @@ namespace VedasPortal.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VedasPortal.Entities.Models.Anket.Anket", b =>
+                {
+                    b.HasOne("VedasPortal.Entities.Models.User.ApplicationUser", "ApplicationUser")
+                        .WithMany("Anket")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("VedasPortal.Entities.Models.Anket.AnketSecenek", b =>
                 {
                     b.HasOne("VedasPortal.Entities.Models.Anket.Anket", "Anket")
@@ -2092,6 +2108,8 @@ namespace VedasPortal.Migrations
 
             modelBuilder.Entity("VedasPortal.Entities.Models.User.ApplicationUser", b =>
                 {
+                    b.Navigation("Anket");
+
                     b.Navigation("AnketUser");
                 });
 #pragma warning restore 612, 618

@@ -58,9 +58,7 @@ namespace VedasPortal.Utils.Anket.ToMapper
                 ToplamAlinanSure = anketDTO.ToplamAlinanSure,
                 KayitTarihi = anketDTO.OlusturulmaTarihi,
                 AnketSecenek = FromAnketSecenekList(anketDTO.AnketSecenekleri),
-                ApplicationUserId = anketDTO.ApplicationUserId
             };
-
             return anket;
         }
         public static AnketSecenek FromAnketSecenekDTO(AnketSecenekDTO secenekDTO)

@@ -11,6 +11,6 @@ namespace VedasPortal.Entities.Models.User
         public string LastName { get; set; }
         public DateTime? SonGirisBilgisi { get; set; }
         public bool? AktifEdilsinMi { get; set; } = true;
-        public ICollection<Anket.Anket> Anket { get; set; }
+        public ICollection<Anket.AnketUser> AnketUser { get; set; }
     }
 }

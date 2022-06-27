@@ -1,10 +1,18 @@
 ﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.Models.Anket;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Entities.ViewModels.Anket;
+using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Utils.Anket.FromMapper;
 
@@ -41,8 +49,27 @@ namespace VedasPortal.Pages.Anket
 
         private bool isReady = false;
 
+        [Inject]
+        public IBaseRepository<AnketUser> AnketUserServisi { get; set; }
+
+        public AnketUser AnketUser { get; set; }
+        protected IEnumerable<AnketUser> AnketKatilimcilari { get; set; }
+
+        protected IEnumerable<AnketUser> TumHaberleriGetir()
+        {
+            AnketKatilimcilari = AnketUserServisi.GetAll().ToList();
+            return AnketKatilimcilari;
+        }
+
+        public ApplicationUser ApplicationUser { get; set; }
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
+        public string UserName;
+
         protected override async Task OnInitializedAsync()
         {
+            var authState = await State;
+            UserName = authState.User.Identity.Name;
             var result = await AnketYonetim.AnketGetirAsync(Id);
 
             if (result.IsSuccess)
@@ -56,6 +83,25 @@ namespace VedasPortal.Pages.Anket
 
         private async Task AnketGonder()
         {
+            
+            var authState = await State;
+            var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (Context.AnketUser.Where(x => x.ApplicationUserId == user).Any())
+            {
+                ToastService.ShowInfo("Halihazırda ankete katılmışsınız zaten!", "Teşekkürler");
+
+            }
+            else
+            {
+                var anketKullanici = new AnketUser()
+                {
+                    AnketId = null,
+                    ApplicationUserId = user
+                };
+                AnketUserServisi.Add(anketKullanici);
+
+            }
+
             var model = AnketVm;
 
             AnketVm.YapilanAnket();
@@ -73,7 +119,7 @@ namespace VedasPortal.Pages.Anket
 
                 NavigationManager.NavigateTo("/Anketler");
             }
-            
+
             else
             {
                 ToastService.ShowError("Bir hata ile karşılaşıldı!", "");

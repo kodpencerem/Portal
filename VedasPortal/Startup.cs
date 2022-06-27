@@ -47,6 +47,7 @@ using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
 using Syncfusion.Blazor;
 using Newtonsoft.Json.Serialization;
+using VedasPortal.Entities.Models.Anket;
 
 
 #endregion
@@ -107,6 +108,7 @@ namespace VedasPortal
             services.AddScoped<IBaseRepository<PersonelDurum>, BaseRepository<PersonelDurum>>();
             services.AddScoped<IBaseRepository<ToplantiMerkezi>, BaseRepository<ToplantiMerkezi>>();
             services.AddScoped<IBaseRepository<VefatDurumu>, BaseRepository<VefatDurumu>>();
+            services.AddScoped<IBaseRepository<AnketUser>, BaseRepository<AnketUser>>();
             services.AddScoped<IFileUpload, FileUpload>();
             services.AddScoped<IFileDownload, FileDownload>();
             services.AddScoped<IModalService, ModalService>();

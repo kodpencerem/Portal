@@ -9,7 +9,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
+using VedasPortal.Entities.Models.Anket;
 using VedasPortal.Entities.Models.User;
+using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Utils.Anket.ToMapper;
 
@@ -18,7 +20,7 @@ namespace VedasPortal.Services.Anket
     public class AnketYonetim : IAnketYonetim
     {
         readonly VedasDbContext _context;
-        public ApplicationUser ApplicationUser { get; set; }
+        public AnketUser AnketUser { get; set; } = new();
         private readonly AuthenticationStateProvider _AuthenticationStateProvider;
         public AnketYonetim(VedasDbContext context, AuthenticationStateProvider AuthenticationStateProvider)
         {
@@ -268,15 +270,16 @@ namespace VedasPortal.Services.Anket
             }
         }
         private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
+
         public async Task<Result<bool>> AnketDuzenleAsync(AnketDTO anketDTO)
         {
             var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+            var anketUser = _context.AnketUser.FirstOrDefault();
             try
             {
 
-                if (_context.Anket.FirstOrDefault()?.ApplicationUserId==null)
+                if (anketUser.ApplicationUserId == user && anketUser.AnketId != null)
                 {
                     var guncelOySayisi = 0;
 
@@ -287,10 +290,12 @@ namespace VedasPortal.Services.Anket
 
                     var guncelAnket = Mapper.FromAnketDTO(anketDTO);
                     var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
+
+                    anketUser.AnketId = anketDTO.AnketId;
                     anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
-                    anketiGuncelle.ApplicationUserId = user;
                     anketiGuncelle.ToplamKatilim = guncelOySayisi;
                     anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
+
                     _context.SaveChanges();
                     return Result<bool>.Success(true);
                 }

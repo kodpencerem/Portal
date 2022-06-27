@@ -23,8 +23,8 @@ namespace VedasPortal.Entities.ViewModels.Anket
         public DateTime OlusturulmaTarihi { get; set; }
         [Required(ErrorMessage = "Seçenekleri eklemelisiniz!")]
         public string SecilenSecenek { get; set; }
-        public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>();
-        public string ApplicationUserId { get; set; }
+        public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>(); 
+        
         public void YapilanAnket()
         {
             ToplamKatilim += 1;
