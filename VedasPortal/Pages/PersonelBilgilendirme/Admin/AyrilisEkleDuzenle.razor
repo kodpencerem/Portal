@@ -12,7 +12,7 @@
                 İşten Ayrılış @Title
             </CardHeader>
             <CardBody>
-                <div class="col-12">
+                <div class="row" style="margin-top:15px">
                     <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
@@ -20,34 +20,51 @@
                                 <ImageResizer @bind-ValueInput="@PersonelDosya.Yolu" />
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group row col-md-6">
 
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Personel Ad-Soyad</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.AdSoyad" />
+                                <label for="Kategori" class="control-label col-md-4">Ayrılacak Personeli Seçin</label>
+                                <div class="col-md-8">
+
+                                    <InputSelect @bind-Value="@_allUsers.FirstOrDefault().UserName" class="form-control" id="girinti">
+                                        <option></option>
+                                        @if (_allUsers != null)
+                                        {
+                                            @foreach (var kategori in _allUsers)
+                                            {
+                                                <option value="@kategori.Id"> @kategori.UserName </option>
+                                            }
+                                        }
+
+                                    </InputSelect>
+                                </div>
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.AdSoyad)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Görev Yeri</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.TemsilcilikAdi" />
+
+                            <div class="form-group row col-md-6">
+
+                                <label for="Kategori" class="control-label col-md-4">Çalıştığı Birimi Seçin</label>
+                                <div class="col-md-8">
+
+                                    <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control" id="girinti">
+                                        <option></option>
+                                        @if (Birimler != null)
+                                        {
+                                            @foreach (var kategori in Birimler)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
+                                        }
+
+                                    </InputSelect>
+                                </div>
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.TemsilcilikAdi)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Görevi</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.BasladigiGorev" />
-                            </div>
-                            <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
                         </div>
                         <br />
                         <div class="row">
                             <div class="form-group row col-md-6">
                                 <label for="Kategori" class="control-label col-md-4">Personel Durumu</label>
-                               
-                                <div class="col-md-8" >
+
+                                <div class="col-md-8">
                                     <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control" id="girinti">
                                         <option></option>
                                         @if (EklemeDurumlari != null)
@@ -60,26 +77,25 @@
                                     </InputSelect>
                                 </div>
                             </div>
-                            
                             <div class="form-group row col-md-6">
-                                
-                                <label for="Kategori" class="control-label col-md-4" >Çalıştığı Birimi Seçin</label>
+                                <label class="control-label col-md-4">Görev Yeri</label>
                                 <div class="col-md-8">
                                     
-                                    <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control" id="girinti">
-                                        <option></option>
-                                        @if (Birimler != null)
-                                        {
-                                            @foreach (var kategori in Birimler)
-                                            {
-                                    <option value="@kategori.Key"> @kategori.Value </option>
-                                            }
-                                        }
-
-                                    </InputSelect>
+                                    <InputText style="margin-left:10px" class="form-control" @bind-Value="personelDurum.TemsilcilikAdi" />
                                 </div>
+                                <ValidationMessage For="@(() => personelDurum.TemsilcilikAdi)" />
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Görevi</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="personelDurum.BasladigiGorev" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
+                        </div>
+                        <br />
+                        
                         <br />
                         <div class="row">
                             <div class="form-group row col-md-6">

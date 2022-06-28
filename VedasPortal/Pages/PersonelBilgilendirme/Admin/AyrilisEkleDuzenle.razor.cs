@@ -12,8 +12,10 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.AuthServices;
 
 namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 {
@@ -28,6 +30,12 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         public IBaseRepository<ImageFile> PersonelDosyaServisi { get; set; }
 
         [Inject]
+        public IManageUsersService _usersService { get; set; }
+
+        // Mevcut kullanıcıları görüntülemek için koleksiyon
+        public List<ApplicationUser> _allUsers = new List<ApplicationUser>();
+
+        [Inject]
         public AuthenticationStateProvider StateProvider { get; set; }
 
         [Parameter]
@@ -40,6 +48,15 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         private ClaimsPrincipal User;
         public string Message { get; set; }
+        // Olası hataları tutmak için
+        string strError = "";
+        public void GetUsers()
+        {
+            // Tüm hata mesajlarını temizle
+            strError = "";
+            // Kullanıcıları tutmak için koleksiyon
+            _allUsers = _usersService.GetAllUsers();
+        }
 
         protected IEnumerable<PersonelDurum> PersonelDurumlari { get; set; }
 
@@ -137,6 +154,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         {
             var giris = await StateProvider.GetAuthenticationStateAsync();
             User = giris.User;
+            GetUsers();
             TumPersonelleriGetir();
             TumEklemeDurumlariniGetir();
             TumBirimleriGetir();
