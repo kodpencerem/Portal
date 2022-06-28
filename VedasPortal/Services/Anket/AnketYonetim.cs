@@ -1,4 +1,5 @@
 ﻿using Ardalis.Result;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace VedasPortal.Services.Anket
     {
         readonly VedasDbContext _context;
         public AnketUser AnketUser { get; set; } = new();
+        [Inject]
+        public IToastService ToastService { get; set; }
         private readonly AuthenticationStateProvider _AuthenticationStateProvider;
         public AnketYonetim(VedasDbContext context, AuthenticationStateProvider AuthenticationStateProvider)
         {
@@ -275,11 +278,11 @@ namespace VedasPortal.Services.Anket
         {
             var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var anketUser = _context.AnketUser.FirstOrDefault();
+            var anketUser = _context.AnketUser.FirstOrDefault(x=>x.ApplicationUserId==user);
             try
             {
 
-                if (anketUser.ApplicationUserId == user && anketUser.AnketId != null)
+                if (anketUser.ApplicationUserId == user && anketUser.AnketId==null)
                 {
                     var guncelOySayisi = 0;
 
@@ -292,6 +295,7 @@ namespace VedasPortal.Services.Anket
                     var anketiGuncelle = _context.Anket.FirstOrDefault(x => x.Id == anketDTO.AnketId);
 
                     anketUser.AnketId = anketDTO.AnketId;
+
                     anketiGuncelle.ToplamAlinanSure = guncelOySayisi;
                     anketiGuncelle.ToplamKatilim = guncelOySayisi;
                     anketiGuncelle.AnketSecenek = guncelAnket.AnketSecenek;
