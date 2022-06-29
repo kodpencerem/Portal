@@ -12,7 +12,8 @@
                         <SfFileManager TValue="FileManagerDirectoryContent"
                                        ShowThumbnail="true"
                                        AllowDragAndDrop="false"
-                                       AllowMultiSelection="true">
+                                       AllowMultiSelection="true"
+                                       Height="600px">
 
                             <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
                                                      UploadUrl="/api/FileManager/Upload"
@@ -31,12 +32,12 @@
             <p class="text text-center text-danger"> Giriş Yapmadınız!</p>
         </NotAuthorized>
     </AuthorizeView>
-    
+
 </div>
 
 @code{
 
-    public string[] Items = new string[] { "Open", "|", "Download","|", "Details" };
+    public string[] Items = new string[] { "Open", "|", "Download", "|", "Details" };
 
     public string[] ItemToolbar = new string[] { "Download", "SortBy", "Refresh", "Selection", "View", "Details" };
 }
@@ -47,12 +48,14 @@
         padding-left: 20px;
         display: inline-block;
     }
+
     .list {
-    float: left;
-    line-height: 20px;
-    margin: 10px;
-    min-width: 200px;
+        float: left;
+        line-height: 20px;
+        margin: 10px;
+        min-width: 200px;
     }
+
     .row {
         display: -ms-flexbox;
         display: -webkit-box;

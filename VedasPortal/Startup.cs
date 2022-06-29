@@ -117,7 +117,7 @@ namespace VedasPortal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddSyncfusionBlazor();
+            services.AddSyncfusionBlazor(options => { options.IgnoreScriptIsolation = true; });
             services.AddTransient<IManageUsersService, ManageUsersService>();
             services.AddTransient<IManageRolesService, ManageRolesService>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
