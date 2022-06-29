@@ -86,20 +86,21 @@ namespace VedasPortal.Pages.Anket
             
             var authState = await State;
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (Context.AnketUser.Where(x => x.ApplicationUserId == user).Any())
+            var anketUser = Context.AnketUser.Where(x => x.ApplicationUserId == user && x.AnketId==AnketVm.AnketId).Any();
+            if (!anketUser)
             {
-                ToastService.ShowInfo("Halihazırda ankete katılmışsınız zaten!", "Teşekkürler");
 
-            }
-            else
-            {
                 var anketKullanici = new AnketUser()
                 {
                     AnketId = null,
                     ApplicationUserId = user
                 };
-                AnketUserServisi.Add(anketKullanici);
+                AnketUserServisi.Add(anketKullanici);              
+            }
+            else
+            {
 
+                ToastService.ShowInfo("Halihazırda ankete katılmışsınız zaten!", "Teşekkürler");
             }
 
             var model = AnketVm;

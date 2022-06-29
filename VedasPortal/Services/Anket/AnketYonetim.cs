@@ -278,11 +278,11 @@ namespace VedasPortal.Services.Anket
         {
             var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var anketUser = _context.AnketUser.FirstOrDefault(x=>x.ApplicationUserId==user);
+            var anketUser = _context.AnketUser.FirstOrDefault(x=>x.ApplicationUserId==user && x.AnketId==null);
             try
             {
 
-                if (anketUser.ApplicationUserId == user && anketUser.AnketId==null)
+                if (anketUser?.ApplicationUserId == user && anketUser.AnketId==null)
                 {
                     var guncelOySayisi = 0;
 
