@@ -20,7 +20,7 @@ namespace VedasPortal.Repository
         {
             try
             {
-                var merkezler = (from merkez in _dbContext.Merkez.AsNoTracking()
+                var merkezler = (from merkez in _dbContext.ToplantiMerkezi.AsNoTracking()
                                  select new SelectListItem()
                                  {
                                      Text = merkez.Adi,

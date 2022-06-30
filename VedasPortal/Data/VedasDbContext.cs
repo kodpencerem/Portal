@@ -48,7 +48,7 @@ namespace VedasPortal.Data
         public DbSet<KursVeSertifika> KursVeSertifika { get; set; }
         public DbSet<OkulMezunBilgisi> OkulMezunBilgisi { get; set; }
         public DbSet<MailGonder> ToplantiMail { get; set; }
-        public DbSet<ToplantiMerkezi> Merkez { get; set; }
+        public DbSet<ToplantiMerkezi> ToplantiMerkezi { get; set; }
         public DbSet<ToplantiOdasi> ToplantiOdasi { get; set; }
         public DbSet<PersonelDurum> PersonelDurum { get; set; }
         public DbSet<Dosya> Dosya { get; set; }

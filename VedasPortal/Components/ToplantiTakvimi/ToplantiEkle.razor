@@ -85,9 +85,7 @@
                     <br />
                     <div class="form-group col-md-12">
                         <label>Katılım Sayısı Sınırı:</label>
-                        <InputNumber @bind-Value="GetToplanti.BeklenenKatilimSayisi"
-                                     class="form-control"
-                                     min="2" />
+                        <SfNumericTextBox Min="1" TValue="int" @bind-Value="@GetToplanti.BeklenenKatilimSayisi"/>
                         <ValidationMessage For="@(() => GetToplanti.BeklenenKatilimSayisi)" />
                     </div>
                     <br />
