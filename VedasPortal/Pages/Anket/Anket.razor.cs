@@ -1,8 +1,6 @@
 ﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -29,14 +27,8 @@ namespace VedasPortal.Pages.Anket
         public VedasDbContext Context { get; set; }
 
         [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
-        [Inject]
         public Mapper mapper { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
+       
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
 

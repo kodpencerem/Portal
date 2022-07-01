@@ -7,11 +7,7 @@ using VedasPortal.Repository.Interface.Anket;
 namespace VedasPortal.Components.Anket
 {
     public partial class AnketKatilimSayisi : ComponentBase
-    {
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-   
+    {         
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
 

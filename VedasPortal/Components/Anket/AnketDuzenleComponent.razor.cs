@@ -15,15 +15,7 @@ using Confirm = VedasPortal.Components.Anket.Modals.OnayComponent;
 namespace VedasPortal.Components.Anket
 {
     public partial class AnketDuzenleComponent : ComponentBase
-    {
-
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
+    {       
         [Inject]
         public VedasDbContext Context { get; set; }
 

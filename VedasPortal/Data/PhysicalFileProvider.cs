@@ -1,40 +1,35 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using SfFileService.FileManager.Base;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using DocumentExplorer.Models.FileManager;
 
-namespace SfFileService.FileManager.PhysicalFileProvider
+namespace DocumentExplorer.Data
 {
-    public class PhysicalFileProvider : PhysicalFileProviderBase
+    public class PhysicalFileProvider : IPhysicalFileProvider
     {
         protected string contentRootPath;
-        protected string[] allowedExtension = new string[] { "*" };
+        protected string[] allowedExtention = new string[] { "*" };
         AccessDetails AccessDetails = new AccessDetails();
-        private string rootName = string.Empty;
+        protected string rootName;
         protected string hostPath;
         protected string hostName;
         private string accessMessage = string.Empty;
 
-        public PhysicalFileProvider()
-        {
-        }
-
+        // Sets the root path
         public void RootFolder(string name)
         {
             this.contentRootPath = name;
             this.hostName = new Uri(contentRootPath).Host;
             if (!string.IsNullOrEmpty(this.hostName))
-            {
                 this.hostPath = Path.DirectorySeparatorChar + this.hostName + Path.DirectorySeparatorChar + contentRootPath.Substring((contentRootPath.ToLower().IndexOf(this.hostName) + this.hostName.Length + 1));
-            }
         }
 
         public void SetRules(AccessDetails details)
@@ -44,18 +39,16 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             this.rootName = root.Name;
         }
 
+        // Reads the files within the directorty
         public virtual FileManagerResponse GetFiles(string path, bool showHiddenItems, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse readResponse = new FileManagerResponse();
             try
             {
-                if (path == null)
-                {
-                    path = string.Empty;
-                }
+                if (path == null) path = string.Empty;
                 String fullPath = (contentRootPath + path);
                 DirectoryInfo directory = new DirectoryInfo(fullPath);
-                string[] extensions = this.allowedExtension;
+                string[] extensions = this.allowedExtention;
                 FileManagerDirectoryContent cwd = new FileManagerDirectoryContent();
                 string rootPath = string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : new DirectoryInfo(this.hostPath).FullName;
                 string parentPath = string.IsNullOrEmpty(this.hostPath) ? directory.Parent.FullName : new DirectoryInfo(this.hostPath + (path != "/" ? path : "")).Parent.FullName;
@@ -73,7 +66,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     readResponse.Files = null;
                     accessMessage = cwd.Permission.Message;
-                    throw new UnauthorizedAccessException("'" + cwd.Name + "' ulaşılabilir değil. WriteContents eylemini gerçekleştirmek için izne ihtiyacınız var.");
+                    throw new UnauthorizedAccessException("'" + cwd.Name + "' is not accessible. You need permission to perform the read action.");
                 }
                 readResponse.Files = ReadDirectories(directory, extensions, showHiddenItems, data);
                 readResponse.Files = readResponse.Files.Concat(ReadFiles(directory, extensions, showHiddenItems, data));
@@ -83,14 +76,14 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
+                if((er.Code=="401")&&!string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 readResponse.Error = er;
                 return readResponse;
             }
         }
-
-        protected virtual IEnumerable<FileManagerDirectoryContent> ReadFiles(DirectoryInfo directory, string[] extensions, bool showHiddenItems, params FileManagerDirectoryContent[] data)
+        // Reads each file
+        public virtual IEnumerable<FileManagerDirectoryContent> ReadFiles(DirectoryInfo directory, string[] extensions, bool showHiddenItems, params FileManagerDirectoryContent[] data)
         {
             try
             {
@@ -131,52 +124,41 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 }
                 return readFiles.Files;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception e) { throw e; }
         }
 
-        protected string GetRelativePath(string rootPath, string fullPath)
+        // Gets pelative path of file or folder
+        public string GetRelativePath(string rootPath, string fullPath)
         {
             if (!String.IsNullOrEmpty(rootPath) && !String.IsNullOrEmpty(fullPath))
             {
                 DirectoryInfo rootDirectory;
                 if (!string.IsNullOrEmpty(this.hostName))
                 {
-                    if (rootPath.Contains(this.hostName) || rootPath.ToLower().Contains(this.hostName) || rootPath.ToUpper().Contains(this.hostName))
-                    {
+                    if (rootPath.ToLower().Contains(this.hostName.ToLower()))
                         rootPath = rootPath.Substring(rootPath.IndexOf(this.hostName, StringComparison.CurrentCultureIgnoreCase) + this.hostName.Length);
-                    }
-                    if (fullPath.Contains(this.hostName) || fullPath.ToLower().Contains(this.hostName) || fullPath.ToUpper().Contains(this.hostName))
-                    {
+                    if (fullPath.ToLower().Contains(this.hostName.ToLower()))
                         fullPath = fullPath.Substring(fullPath.IndexOf(this.hostName, StringComparison.CurrentCultureIgnoreCase) + this.hostName.Length);
-                    }
                     rootDirectory = new DirectoryInfo(rootPath);
                     fullPath = new DirectoryInfo(fullPath).FullName;
                     rootPath = new DirectoryInfo(rootPath).FullName;
                 }
                 else
-                {
                     rootDirectory = new DirectoryInfo(rootPath);
-                }
                 if (rootDirectory.FullName.Substring(rootDirectory.FullName.Length - 1) == Path.DirectorySeparatorChar.ToString())
                 {
                     if (fullPath.Contains(rootDirectory.FullName))
-                    {
                         return fullPath.Substring(rootPath.Length - 1);
-                    }
                 }
                 else if (fullPath.Contains(rootDirectory.FullName + Path.DirectorySeparatorChar))
-                {
                     return Path.DirectorySeparatorChar + fullPath.Substring(rootPath.Length + 1);
-                }
             }
             return String.Empty;
         }
 
 
-        protected virtual IEnumerable<FileManagerDirectoryContent> ReadDirectories(DirectoryInfo directory, string[] extensions, bool showHiddenItems, params FileManagerDirectoryContent[] data)
+        // Reads child files within the directories
+        public virtual IEnumerable<FileManagerDirectoryContent> ReadDirectories(DirectoryInfo directory, string[] extensions, bool showHiddenItems, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse readDirectory = new FileManagerResponse();
             try
@@ -216,26 +198,21 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 }
                 return readDirectory.Files;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception e) { throw e; }
         }
 
-
+        // Creates a newFolder
         public virtual FileManagerResponse Create(string path, string name, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse createResponse = new FileManagerResponse();
-
             try
             {
                 AccessPermission PathPermission = GetPathPermission(path);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. WriteContents eylemini gerçekleştirmek için izne ihtiyacınız var.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
-
                 string newDirectoryPath = Path.Combine(contentRootPath + path, name);
 
                 bool directoryExist = Directory.Exists(newDirectoryPath);
@@ -245,7 +222,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     DirectoryInfo exist = new DirectoryInfo(newDirectoryPath);
                     ErrorDetails er = new ErrorDetails();
                     er.Code = "400";
-                    er.Message = exist.Name.ToString() + " bu isimde bir dosya halihazırda vardır!";
+                    er.Message = "A file or folder with the name " + exist.Name.ToString() + " already exists.";
                     createResponse.Error = er;
 
                     return createResponse;
@@ -265,20 +242,19 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 CreateData.Permission = GetPermission(physicalPath, directory.Name, false);
                 FileManagerDirectoryContent[] newData = new FileManagerDirectoryContent[] { CreateData };
                 createResponse.Files = newData;
-
                 return createResponse;
-
             }
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 createResponse.Error = er;
                 return createResponse;
             }
         }
+        // Gets the details of the selected item(s).
         public virtual FileManagerResponse Details(string path, string[] names, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse getDetailResponse = new FileManagerResponse();
@@ -289,18 +265,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     if (path == null) { path = string.Empty; };
                     string fullPath = "";
-                    if (names.Length == 0)
-                    {
-                        fullPath = (contentRootPath + path.Substring(0, path.Length - 1));
-                    }
-                    else if (string.IsNullOrEmpty(names[0]))
-                    {
-                        fullPath = (contentRootPath + path);
-                    }
-                    else
-                    {
-                        fullPath = Path.Combine(contentRootPath + path, names[0]);
-                    }
+                    fullPath = (names.Length == 0) ? (contentRootPath + path.Substring(0, path.Length - 1)) : ((names[0] == null || names[0] == "") ? (contentRootPath + path) : Path.Combine(contentRootPath + path, names[0]));
                     string physicalPath = GetPath(path);
                     DirectoryInfo directory = new DirectoryInfo(fullPath);
                     FileInfo info = new FileInfo(fullPath);
@@ -318,37 +283,29 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 else
                 {
                     bool isVariousFolders = false;
-                    string relativePath = "";
                     string previousPath = "";
                     string previousName = "";
                     FileDetails fileDetails = new FileDetails();
                     fileDetails.Size = "0";
-                    DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : this.hostPath);
-                    string parentPath = baseDirectory.Parent.FullName;
-                    string baseDirectoryParentPath = string.IsNullOrEmpty(this.hostName) ? parentPath : parentPath + Path.DirectorySeparatorChar;
                     for (int i = 0; i < names.Length; i++)
                     {
                         string fullPath = "";
-                        if (names[i] == null)
-                        {
-                            fullPath = (contentRootPath + path);
-                        }
-                        else
-                        {
-                            fullPath = Path.Combine(contentRootPath + path, names[i]);
-                        }
+                        fullPath = (names[i] == null) ? (contentRootPath + path) : Path.Combine(contentRootPath + path, names[i]);
+                        DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : this.hostPath);
+                        string baseDirectoryParentPath = string.IsNullOrEmpty(this.hostName) ? baseDirectory.Parent.FullName : baseDirectory.Parent.FullName + Path.DirectorySeparatorChar;
                         FileInfo info = new FileInfo(fullPath);
                         fileDetails.Name = previousName == "" ? previousName = data[i].Name : previousName = previousName + ", " + data[i].Name;
                         fileDetails.Size = (long.Parse(fileDetails.Size) + (((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory) ? info.Length : GetDirectorySize(new DirectoryInfo(fullPath), 0))).ToString();
-                        relativePath = GetRelativePath(baseDirectoryParentPath, info.Directory.FullName);
-                        previousPath = previousPath == "" ? relativePath : previousPath;
-                        if (previousPath == relativePath && !isVariousFolders)
+                        previousPath = previousPath == "" ? GetRelativePath(baseDirectoryParentPath, info.Directory.FullName) : previousPath;
+                        if (previousPath == GetRelativePath(baseDirectoryParentPath, info.Directory.FullName) && !isVariousFolders)
                         {
-                            previousPath = relativePath;
+                            previousPath = GetRelativePath(baseDirectoryParentPath, info.Directory.FullName);
+                            fileDetails.Location = GetRelativePath(baseDirectoryParentPath, info.Directory.FullName).Substring(1);
                         }
                         else
                         {
                             isVariousFolders = true;
+                            fileDetails.Location = "Various Folders";
                         }
                     }
                     fileDetails.Size = byteConversion(long.Parse(fileDetails.Size)).ToString();
@@ -362,12 +319,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 getDetailResponse.Error = er;
                 return getDetailResponse;
             }
         }
-
+        // Deletes file(s) or folder(s).
         public virtual FileManagerResponse Delete(string path, string[] names, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse DeleteResponse = new FileManagerResponse();
@@ -383,7 +340,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' ulaşılabilir değil. İzin almanız gerekli");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible.  you need permission to perform the write action.");
                     }
                 }
                 FileManagerDirectoryContent removingFile;
@@ -397,66 +354,47 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         removingFile = GetFileDetails(fullPath);
                         //detect whether its a directory or file
                         if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
-                        {
                             result = DeleteDirectory(fullPath);
-                        }
                         else
                         {
-                            try
-                            {
-                                File.Delete(fullPath);
-                            }
+                            try { File.Delete(fullPath); }
                             catch (Exception e)
                             {
                                 if (e.GetType().Name == "UnauthorizedAccessException")
-                                {
                                     result = fullPath;
-                                }
                                 else
-                                {
-                                    throw;
-                                }
+                                    throw e;
                             }
                         }
-                        if (result != String.Empty)
-                        {
-                            break;
-
-                        }
+                        if (result != String.Empty) break;
                         removedFiles.Add(removingFile);
                     }
-                    else
-                    {
-                        throw new ArgumentNullException("Isim alanı boş olamaz!");
-                    }
+                    else throw new ArgumentNullException("name should not be null");
                 }
                 DeleteResponse.Files = removedFiles;
                 if (result != String.Empty)
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible.  you need permission to perform the write action.";
                     er.Code = "401";
                     if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                     DeleteResponse.Error = er;
                     return DeleteResponse;
                 }
-                else
-                {
-                    return DeleteResponse;
-                }
+                else return DeleteResponse;
             }
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 DeleteResponse.Error = er;
                 return DeleteResponse;
             }
         }
-
+        // Renames file(s) or folder(s).
         public virtual FileManagerResponse Rename(string path, string name, string newName, bool replace = false, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse renameResponse = new FileManagerResponse();
@@ -470,12 +408,10 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     accessMessage = permission.Message;
                     throw new UnauthorizedAccessException();
                 }
-
                 string tempPath = (contentRootPath + path);
                 string oldPath = Path.Combine(tempPath, name);
                 string newPath = Path.Combine(tempPath, newName);
                 FileAttributes attr = File.GetAttributes(oldPath);
-
                 FileInfo info = new FileInfo(oldPath);
                 bool isFile = (File.GetAttributes(oldPath) & FileAttributes.Directory) != FileAttributes.Directory;
                 if (isFile)
@@ -485,7 +421,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         FileInfo exist = new FileInfo(newPath);
                         ErrorDetails er = new ErrorDetails();
                         er.Code = "400";
-                        er.Message = "Yeniden isimlendirme bir hata ile karşılaştı! " + exist.Name.ToString() + " bu " + newName + ": halihazırda mevcut.";
+                        er.Message = "Cannot rename " + exist.Name.ToString() + " to " + newName + ": destination already exists.";
                         renameResponse.Error = er;
                         return renameResponse;
                     }
@@ -499,9 +435,8 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         DirectoryInfo exist = new DirectoryInfo(newPath);
                         ErrorDetails er = new ErrorDetails();
                         er.Code = "400";
-                        er.Message = "Yeniden isimlendirme bir hata ile karşılaştı!  " + exist.Name.ToString() + " bu " + newName + ": halihazırda mevcut.";
+                        er.Message = "Cannot rename " + exist.Name.ToString() + " to " + newName + ": destination already exists.";
                         renameResponse.Error = er;
-
                         return renameResponse;
                     }
                     else if (oldPath.Equals(newPath, StringComparison.OrdinalIgnoreCase))
@@ -510,14 +445,9 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         Directory.Move(oldPath, tempPath);
                         Directory.Move(tempPath, newPath);
                     }
-                    else
-                    {
-                        Directory.Move(oldPath, newPath);
-                    }
+                    else Directory.Move(oldPath, newPath);
                 }
-                FileManagerDirectoryContent[] addedData = new[]{
-                        GetFileDetails(newPath)
-                    };
+                FileManagerDirectoryContent[] addedData = new[] { GetFileDetails(newPath) };
                 renameResponse.Files = addedData;
                 return renameResponse;
             }
@@ -525,23 +455,21 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(this.rootName + path + name) + "' is not accessible. You need permission to perform the write action." : e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 renameResponse.Error = er;
                 return renameResponse;
             }
         }
 
+        // Copies file(s) or folder(s).
         public virtual FileManagerResponse Copy(string path, string targetPath, string[] names, string[] renameFiles, FileManagerDirectoryContent targetData, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse copyResponse = new FileManagerResponse();
             try
             {
                 string result = String.Empty;
-                if (renameFiles == null)
-                {
-                    renameFiles = new string[0];
-                }
+                if (renameFiles == null) renameFiles = new string[0];
                 string physicalPath = GetPath(path);
                 for (int i = 0; i < names.Length; i++)
                 {
@@ -550,17 +478,15 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Copy))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' ulaşılabilir değil. İzin almanız gerekli");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the copy action.");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "'ulaşılabilir değil. İzin almanız gerekli");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
-
-
                 List<string> existFiles = new List<string>();
                 List<string> missingFiles = new List<string>();
                 List<FileManagerDirectoryContent> copiedFiles = new List<FileManagerDirectoryContent>();
@@ -574,10 +500,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         path = tempPath + names[i].Substring(0, name + 1);
                         names[i] = names[i].Substring(name + 1);
                     }
-                    else
-                    {
-                        path = tempPath;
-                    }
+                    else path = tempPath;
                     string itemPath = Path.Combine(contentRootPath + path, names[i]);
                     if (Directory.Exists(itemPath) || File.Exists(itemPath))
                     {
@@ -591,9 +514,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             {
                                 int index = -1;
                                 if (renameFiles.Length > 0)
-                                {
                                     index = Array.FindIndex(renameFiles, row => row.Contains(directoryName));
-                                }
                                 if ((newPath == oldPath) || (index != -1))
                                 {
                                     newPath = DirectoryRename(newPath);
@@ -603,10 +524,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                     detail.PreviousName = names[i];
                                     copiedFiles.Add(detail);
                                 }
-                                else
-                                {
-                                    existFiles.Add(fullname);
-                                }
+                                else existFiles.Add(fullname);
                             }
                             else
                             {
@@ -630,9 +548,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                 {
                                     int index = -1;
                                     if (renameFiles.Length > 0)
-                                    {
                                         index = Array.FindIndex(renameFiles, row => row.Contains(fileName));
-                                    }
                                     if ((newPath == oldPath) || (index != -1))
                                     {
                                         newPath = FileRename(newPath, fileName);
@@ -641,17 +557,11 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                         detail.PreviousName = names[i];
                                         copiedFiles.Add(detail);
                                     }
-                                    else
-                                    {
-                                        existFiles.Add(fullname);
-                                    }
+                                    else existFiles.Add(fullname);
                                 }
                                 else
                                 {
-                                    if (renameFiles.Length > 0)
-                                    {
-                                        File.Delete(newPath);
-                                    }
+                                    if (renameFiles.Length > 0) File.Delete(newPath);
                                     File.Copy(oldPath, newPath);
                                     FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                     detail.PreviousName = names[i];
@@ -660,61 +570,44 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             }
                             catch (Exception e)
                             {
-                                if (e.GetType().Name == "UnauthorizedAccessException")
-                                {
-                                    result = newPath;
-                                    break;
-                                }
-                                else
-                                {
-                                    throw;
-                                }
+                                if (e.GetType().Name == "UnauthorizedAccessException") { result = newPath; break; }
+                                else throw e;
                             }
                         }
                     }
-                    else
-                    {
-                        missingFiles.Add(names[i]);
-                    }
+                    else missingFiles.Add(names[i]);
                 }
                 copyResponse.Files = copiedFiles;
                 if (result != String.Empty)
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform the copy action.";
                     er.Code = "401";
                     copyResponse.Error = er;
                     return copyResponse;
                 }
-
                 if (existFiles.Count > 0)
                 {
                     ErrorDetails er = new ErrorDetails();
                     er.FileExists = existFiles;
                     er.Code = "400";
-                    er.Message = "Dosya halihazırda var!";
+                    er.Message = "File Already Exists";
                     copyResponse.Error = er;
                 }
-                if (missingFiles.Count == 0)
-                {
-                    return copyResponse;
-                }
+                if (missingFiles.Count == 0) return copyResponse;
                 else
                 {
                     string namelist = missingFiles[0];
-                    for (int k = 1; k < missingFiles.Count; k++)
-                    {
-                        namelist = namelist + ", " + missingFiles[k];
-                    }
-                    throw new FileNotFoundException(namelist + "belirtilen konumda bulunamadı.");
+                    for (int k = 1; k < missingFiles.Count; k++) { namelist = namelist + ", " + missingFiles[k]; }
+                    throw new FileNotFoundException(namelist + " not found in given location.");
                 }
             }
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 er.FileExists = copyResponse.Error?.FileExists;
                 copyResponse.Error = er;
@@ -722,16 +615,15 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             }
         }
 
+        // Moves file(s) or folder(s).
         public virtual FileManagerResponse Move(string path, string targetPath, string[] names, string[] renameFiles, FileManagerDirectoryContent targetData, params FileManagerDirectoryContent[] data)
-        {
+        { 
             FileManagerResponse moveResponse = new FileManagerResponse();
             try
             {
                 string result = String.Empty;
                 if (renameFiles == null)
-                {
                     renameFiles = new string[0];
-                }
                 string physicalPath = GetPath(path);
                 for (int i = 0; i < names.Length; i++)
                 {
@@ -740,16 +632,15 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "'ulaşılabilir değil. İzin almanız gerekli");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the write action.");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' ulaşılabilir değil. İzin almanız gerekli");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
-
                 List<string> existFiles = new List<string>();
                 List<string> missingFiles = new List<string>();
                 List<FileManagerDirectoryContent> movedFiles = new List<FileManagerDirectoryContent>();
@@ -763,10 +654,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         path = tempPath + names[i].Substring(0, name + 1);
                         names[i] = names[i].Substring(name + 1);
                     }
-                    else
-                    {
-                        path = tempPath;
-                    }
+                    else path = tempPath;
                     string itemPath = Path.Combine(contentRootPath + path, names[i]);
                     if (Directory.Exists(itemPath) || File.Exists(itemPath))
                     {
@@ -779,10 +667,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             if (exist)
                             {
                                 int index = -1;
-                                if (renameFiles.Length > 0)
-                                {
-                                    index = Array.FindIndex(renameFiles, row => row.Contains(directoryName));
-                                }
+                                if (renameFiles.Length > 0) index = Array.FindIndex(renameFiles, row => row.Contains(directoryName));
                                 if ((newPath == oldPath) || (index != -1))
                                 {
                                     newPath = DirectoryRename(newPath);
@@ -798,10 +683,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                     detail.PreviousName = names[i];
                                     movedFiles.Add(detail);
                                 }
-                                else
-                                {
-                                    existFiles.Add(fullName);
-                                }
+                                else existFiles.Add(fullName);
                             }
                             else
                             {
@@ -812,6 +694,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                 {
                                     result = DeleteDirectory(oldPath);
                                     if (result != String.Empty) { break; }
+
                                 }
                                 FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                 detail.PreviousName = names[i];
@@ -831,35 +714,24 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                 {
                                     int index = -1;
                                     if (renameFiles.Length > 0)
-                                    {
                                         index = Array.FindIndex(renameFiles, row => row.Contains(fileName));
-                                    }
                                     if ((newPath == oldPath) || (index != -1))
                                     {
                                         newPath = FileRename(newPath, fileName);
                                         File.Copy(oldPath, newPath);
                                         bool isExist = File.Exists(oldPath);
-                                        if (isExist)
-                                        {
-                                            File.Delete(oldPath);
-                                        }
+                                        if (isExist) File.Delete(oldPath);
                                         FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                         detail.PreviousName = names[i];
                                         movedFiles.Add(detail);
                                     }
-                                    else
-                                    {
-                                        existFiles.Add(fullName);
-                                    }
+                                    else existFiles.Add(fullName);
                                 }
                                 else
                                 {
                                     File.Copy(oldPath, newPath);
                                     bool isExist = File.Exists(oldPath);
-                                    if (isExist)
-                                    {
-                                        File.Delete(oldPath);
-                                    }
+                                    if (isExist) File.Delete(oldPath);
                                     FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                     detail.PreviousName = names[i];
                                     movedFiles.Add(detail);
@@ -870,27 +742,20 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             {
                                 if (e.GetType().Name == "UnauthorizedAccessException")
                                 {
-                                    result = newPath;
-                                    break;
+                                    result = newPath; break;
                                 }
-                                else
-                                {
-                                    throw;
-                                }
+                                else throw e;
                             }
                         }
                     }
-                    else
-                    {
-                        missingFiles.Add(names[i]);
-                    }
+                    else missingFiles.Add(names[i]);
                 }
                 moveResponse.Files = movedFiles;
                 if (result != String.Empty)
                 {
                     string deniedPath = result.Substring(this.contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' ulaşılabilir değil. İzin almanız gerekli";
+                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform this action.";
                     er.Code = "401";
                     moveResponse.Error = er;
                     return moveResponse;
@@ -900,21 +765,15 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     ErrorDetails er = new ErrorDetails();
                     er.FileExists = existFiles;
                     er.Code = "400";
-                    er.Message = "Dosya Halihazırda Mevcut";
+                    er.Message = "File Already Exists";
                     moveResponse.Error = er;
                 }
-                if (missingFiles.Count == 0)
-                {
-                    return moveResponse;
-                }
+                if (missingFiles.Count == 0) return moveResponse;
                 else
                 {
                     string namelist = missingFiles[0];
-                    for (int k = 1; k < missingFiles.Count; k++)
-                    {
-                        namelist = namelist + ", " + missingFiles[k];
-                    }
-                    throw new FileNotFoundException(namelist + " aranan konumda bulunamadı!");
+                    for (int k = 1; k < missingFiles.Count; k++) { namelist = namelist + ", " + missingFiles[k]; }
+                    throw new FileNotFoundException(namelist + " not found in given location.");
                 }
             }
             catch (Exception e)
@@ -922,15 +781,16 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 ErrorDetails er = new ErrorDetails
                 {
                     Message = e.Message.ToString(),
-                    Code = e.Message.ToString().Contains("ulaşılabilir değil. İzin almanız gerekli") ? "401" : "417",
+                    Code = e.Message.ToString().Contains("is not accessible. You need permission") ? "401" : "417",
                     FileExists = moveResponse.Error?.FileExists
-                };
+                }; 
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 moveResponse.Error = er;
                 return moveResponse;
             }
         }
 
+        // Search for particular file(s) or folder(s).
         public virtual FileManagerResponse Search(string path, string searchString, bool showHiddenItems = false, bool caseSensitive = false, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse searchResponse = new FileManagerResponse();
@@ -955,12 +815,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 if (cwd.Permission != null && !cwd.Permission.Read)
                 {
                     accessMessage = cwd.Permission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. İzin almanız gerekli!");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the read action.");
                 }
                 searchResponse.CWD = cwd;
 
                 List<FileManagerDirectoryContent> foundedFiles = new List<FileManagerDirectoryContent>();
-                string[] extensions = this.allowedExtension;
+                string[] extensions = this.allowedExtention;
                 DirectoryInfo searchDirectory = new DirectoryInfo(searchPath);
                 List<FileInfo> files = new List<FileInfo>();
                 List<DirectoryInfo> directories = new List<DirectoryInfo>();
@@ -974,19 +834,13 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     {
                         FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(this.contentRootPath, file.DirectoryName, file.Name));
                         bool hasPermission = parentsHavePermission(fileDetails);
-                        if (hasPermission)
-                        {
-                            foundedFiles.Add(fileDetails);
-                        }
+                        if (hasPermission) foundedFiles.Add(fileDetails);
                     }
                     foreach (DirectoryInfo dir in filteredDirectoryList)
                     {
                         FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(this.contentRootPath, dir.FullName));
                         bool hasPermission = parentsHavePermission(dirDetails);
-                        if (hasPermission)
-                        {
-                            foundedFiles.Add(dirDetails);
-                        }
+                        if (hasPermission) foundedFiles.Add(dirDetails);
                     }
                 }
                 else
@@ -999,19 +853,13 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     {
                         FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(this.contentRootPath, file.DirectoryName, file.Name));
                         bool hasPermission = parentsHavePermission(fileDetails);
-                        if (hasPermission)
-                        {
-                            foundedFiles.Add(fileDetails);
-                        }
+                        if (hasPermission) foundedFiles.Add(fileDetails);
                     }
                     foreach (DirectoryInfo dir in filteredDirectoryList)
                     {
                         FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(this.contentRootPath, dir.FullName));
                         bool hasPermission = parentsHavePermission(dirDetails);
-                        if (hasPermission)
-                        {
-                            foundedFiles.Add(dirDetails);
-                        }
+                        if (hasPermission) foundedFiles.Add(dirDetails);
                     }
                 }
                 searchResponse.Files = (IEnumerable<FileManagerDirectoryContent>)foundedFiles;
@@ -1021,39 +869,29 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli!") ? "401" : "417";
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 searchResponse.Error = er;
                 return searchResponse;
             }
         }
-        protected String byteConversion(long fileSize)
+        // Converts the bytes to definite size values
+        public String byteConversion(long fileSize)
         {
             try
             {
                 string[] index = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
-                if (fileSize == 0)
-                {
-                    return "0 " + index[0];
-                }
-
-                long bytes = Math.Abs(fileSize);
-                int loc = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
-                double num = Math.Round(bytes / Math.Pow(1024, loc), 1);
-                return (Math.Sign(fileSize) * num).ToString() + " " + index[loc];
+                if (fileSize == 0) return "0 " + index[0];
+                int loc = Convert.ToInt32(Math.Floor(Math.Log((Math.Abs(fileSize)), 1024)));
+                return (Math.Sign(fileSize) * (Math.Round((Math.Abs(fileSize)) / Math.Pow(1024, loc), 1))).ToString() + " " + index[loc];
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception e) { throw e; }
         }
-        protected virtual string WildcardToRegex(string pattern)
+        public virtual string WildcardToRegex(string pattern)
         {
-            return "^" + Regex.Escape(pattern)
-                              .Replace(@"\*", ".*")
-                              .Replace(@"\?", ".")
-                       + "$";
+            return "^" + Regex.Escape(pattern).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
         }
+        //Returns the image
         public virtual FileStreamResult GetImage(string path, string id, bool allowCompress, ImageSize size, params FileManagerDirectoryContent[] data)
         {
             try
@@ -1066,11 +904,10 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 FileStreamResult fileStreamResult = new FileStreamResult(fileStreamInput, "APPLICATION/octet-stream");
                 return fileStreamResult;
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            catch (Exception) { return null; }
         }
+
+        // Uploads the file(s) to the files system.
         public virtual FileManagerResponse Upload(string path, IList<IFormFile> uploadFiles, string action, params FileManagerDirectoryContent[] data)
         {
             FileManagerResponse uploadResponse = new FileManagerResponse();
@@ -1080,56 +917,40 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.Upload))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' ulaşılabilir değil. İzin almanız gerekli.");
+                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the upload action.");
                 }
-
                 List<string> existFiles = new List<string>();
                 foreach (IFormFile file in uploadFiles)
                 {
                     if (uploadFiles != null)
                     {
-                        var name = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim().ToString();
-                        var fullName = Path.Combine((this.contentRootPath + path), name);
+                        string name = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        string fullName = Path.Combine((this.contentRootPath + path), name);
                         if (action == "save")
                         {
                             if (!System.IO.File.Exists(fullName))
                             {
-                                using (FileStream fs = System.IO.File.Create(fullName))
-                                {
-                                    file.CopyTo(fs);
-                                    fs.Flush();
-                                }
+                                using (FileStream fs = System.IO.File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
                             }
-                            else
-                            {
-                                existFiles.Add(fullName);
-                            }
+                            else existFiles.Add(fullName);
                         }
                         else if (action == "remove")
                         {
                             if (System.IO.File.Exists(fullName))
-                            {
                                 System.IO.File.Delete(fullName);
-                            }
                             else
                             {
                                 ErrorDetails er = new ErrorDetails();
                                 er.Code = "404";
-                                er.Message = "Dosya bulunamadı.";
+                                er.Message = "File not found.";
                                 uploadResponse.Error = er;
                             }
                         }
                         else if (action == "replace")
                         {
                             if (System.IO.File.Exists(fullName))
-                            {
                                 System.IO.File.Delete(fullName);
-                            }
-                            using (FileStream fs = System.IO.File.Create(fullName))
-                            {
-                                file.CopyTo(fs);
-                                fs.Flush();
-                            }
+                            using (FileStream fs = System.IO.File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
                         }
                         else if (action == "keepboth")
                         {
@@ -1138,16 +959,9 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             if (index >= 0)
                                 newName = newName.Substring(0, index);
                             int fileCount = 0;
-                            while (System.IO.File.Exists(newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(name) : Path.GetExtension(name))))
-                            {
-                                fileCount++;
-                            }
+                            while (System.IO.File.Exists(newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(name) : Path.GetExtension(name)))) { fileCount++; }
                             newName = newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(name);
-                            using (FileStream fs = System.IO.File.Create(newName))
-                            {
-                                file.CopyTo(fs);
-                                fs.Flush();
-                            }
+                            using (FileStream fs = System.IO.File.Create(newName)) { file.CopyTo(fs); fs.Flush(); }
                         }
                     }
                 }
@@ -1155,7 +969,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 {
                     ErrorDetails er = new ErrorDetails();
                     er.Code = "400";
-                    er.Message = "Dosya Halihazırda Mevcut.";
+                    er.Message = "File already exists.";
                     er.FileExists = existFiles;
                     uploadResponse.Error = er;
                 }
@@ -1164,14 +978,14 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
-
-                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(path) + "' ulaşılabilir değil. İzin almanız gerekli." : e.Message.ToString();
-                er.Code = er.Message.Contains("ulaşılabilir değil. İzin almanız gerekli.") ? "401" : "417";
+                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(path) + "' is not accessible. You need permission to perform the upload action." : e.Message.ToString();
+                er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
                 if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 uploadResponse.Error = er;
                 return uploadResponse;
             }
         }
+        // Download file(s) or folder(s) from the file system
         public virtual FileStreamResult Download(string path, string[] names, params FileManagerDirectoryContent[] data)
         {
             try
@@ -1184,30 +998,19 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     bool IsFile = !IsDirectory(physicalPath, names[i]);
                     AccessPermission FilePermission = GetPermission(physicalPath, names[i], IsFile);
                     if (FilePermission != null && (!FilePermission.Read || !FilePermission.Download))
-                        throw new UnauthorizedAccessException("'" + this.rootName + path + names[i] + "' ulaşılabilir değil. İzin almanız gerekli.");
+                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the download action.");
 
                     fullPath = Path.Combine(contentRootPath + path, names[i]);
                     if ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory)
-                    {
                         count++;
-                    }
                 }
-                if (count == names.Length)
-                {
-                    return DownloadFile(path, names);
-                }
-                else
-                {
-                    return DownloadFolder(path, names, count);
-                }
+                return (count == names.Length) ? DownloadFile(path, names) : DownloadFolder(path, names, count);
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            catch (Exception) { return null; }
         }
+        // Downloads the file
         private FileStreamResult fileStreamResult;
-        protected virtual FileStreamResult DownloadFile(string path, string[] names = null)
+        public virtual FileStreamResult DownloadFile(string path, string[] names = null)
         {
             try
             {
@@ -1234,9 +1037,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     string newFileName = fileName.Substring(36);
                     tempPath = Path.Combine(Path.GetTempPath(), newFileName);
                     if (System.IO.File.Exists(tempPath))
-                    {
                         System.IO.File.Delete(tempPath);
-                    }
                     string currentDirectory;
                     ZipArchiveEntry zipEntry;
                     ZipArchive archive;
@@ -1250,19 +1051,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                 using (archive = ZipFile.Open(tempPath, ZipArchiveMode.Update))
                                 {
                                     currentDirectory = Path.Combine((contentRootPath + path), names[i]);
-
                                     zipEntry = archive.CreateEntryFromFile(Path.Combine(this.contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
                                 }
                             }
-                            catch (Exception)
-                            {
-                                return null;
-                            }
+                            catch (Exception) { return null; }
                         }
-                        else
-                        {
-                            throw new ArgumentNullException("isim alanı boş olamaz!");
-                        }
+                        else throw new ArgumentNullException("name should not be null");
                     }
                     try
                     {
@@ -1270,43 +1064,31 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         fileStreamResult = new FileStreamResult(fileStreamInput, "APPLICATION/octet-stream");
                         fileStreamResult.FileDownloadName = "files.zip";
                     }
-                    catch (Exception)
-                    {
-                        return null;
-                    }
+                    catch (Exception) { return null; }
                 }
                 if (File.Exists(tempPath))
-                {
                     File.Delete(tempPath);
-                }
                 return fileStreamResult;
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            catch (Exception) { return null; }
         }
+        // Downloads the directories
         protected FileStreamResult DownloadFolder(string path, string[] names, int count)
         {
             try
             {
                 if (!String.IsNullOrEmpty(path))
-                {
                     path = Path.GetDirectoryName(path);
-                }
                 FileStreamResult fileStreamResult;
                 // create a temp.Zip file intially 
                 string tempPath = Path.Combine(Path.GetTempPath(), "temp.zip");
                 String fullPath;
                 if (File.Exists(tempPath))
-                {
                     File.Delete(tempPath);
-                }
                 if (names.Length == 1)
                 {
                     fullPath = Path.Combine(contentRootPath + path, names[0]);
                     DirectoryInfo directoryName = new DirectoryInfo(fullPath);
-
                     ZipFile.CreateFromDirectory(fullPath, tempPath, CompressionLevel.Fastest, true);
                     FileStream fileStreamInput = new FileStream(tempPath, FileMode.Open, FileAccess.Read, FileShare.Delete);
                     fileStreamResult = new FileStreamResult(fileStreamInput, "APPLICATION/octet-stream");
@@ -1326,9 +1108,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                             {
                                 string[] files = Directory.GetFiles(currentDirectory, "*.*", SearchOption.AllDirectories);
                                 if (files.Length == 0)
-                                {
                                     zipEntry = archive.CreateEntry(names[i] + "/");
-                                }
                                 else
                                 {
                                     foreach (string filePath in files)
@@ -1339,16 +1119,11 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                                 foreach (string filePath in Directory.GetDirectories(currentDirectory, "*", SearchOption.AllDirectories))
                                 {
                                     if (Directory.GetFiles(filePath).Length == 0)
-                                    {
                                         zipEntry = archive.CreateEntry(names[i] + filePath.Substring(currentDirectory.Length) + "/");
-                                    }
                                 }
                             }
                             else
-                            {
                                 zipEntry = archive.CreateEntryFromFile(Path.Combine(this.contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
-
-                            }
                         }
                     }
                     FileStream fileStreamInput = new FileStream(tempPath, FileMode.Open, FileAccess.Read, FileShare.Delete);
@@ -1356,71 +1131,50 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     fileStreamResult.FileDownloadName = "folders.zip";
                 }
                 if (File.Exists(tempPath))
-                {
                     File.Delete(tempPath);
-                }
                 return fileStreamResult;
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            catch (Exception) { return null; }
         }
+        // Renames a directory
         private string DirectoryRename(string newPath)
         {
             int directoryCount = 0;
-            while (System.IO.Directory.Exists(newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : "")))
-            {
-                directoryCount++;
-            }
-            newPath = newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : "");
-            return newPath;
+            while (System.IO.Directory.Exists(newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : ""))) { directoryCount++; }
+            return newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : "");
         }
+        // Renames a File
         private string FileRename(string newPath, string fileName)
         {
             int name = newPath.LastIndexOf(".");
-            if (name >= 0)
-            {
-                newPath = newPath.Substring(0, name);
-            }
+            if (name >= 0) newPath = newPath.Substring(0, name);
             int fileCount = 0;
-            while (System.IO.File.Exists(newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(fileName) : Path.GetExtension(fileName))))
-            {
-                fileCount++;
-            }
-            newPath = newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(fileName);
-            return newPath;
+            while (System.IO.File.Exists(newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(fileName) : Path.GetExtension(fileName)))) { fileCount++; }
+            return newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(fileName);
         }
+
+        // Copies a directory
         private string DirectoryCopy(string sourceDirName, string destDirName)
         {
             string result = String.Empty;
             try
             {
-                // Belirtilen dizin için alt dizinleri alır.
+                // Gets the subdirectories for the specified directory.
                 DirectoryInfo dir = new DirectoryInfo(sourceDirName);
 
                 DirectoryInfo[] dirs = dir.GetDirectories();
-                // Hedef dizin yoksa, onu oluşturur.
+                // If the destination directory doesn't exist, creates it.
                 if (!Directory.Exists(destDirName))
                 {
-                    try
-                    {
-                        Directory.CreateDirectory(destDirName);
-                    }
+                    try { Directory.CreateDirectory(destDirName); }
                     catch (Exception e)
                     {
-                        if (e.GetType().Name == "UnauthorizedAccessException")
-                        {
-                            return destDirName;
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        if (e.GetType().Name == "UnauthorizedAccessException") return destDirName;
+                        else throw e;
                     }
                 }
 
-                // Dizindeki dosyaları alır ve yeni konuma kopyalar.
+                // Gets the files in the directory and copy them to the new location.
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo file in files)
                 {
@@ -1432,41 +1186,26 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     }
                     catch (Exception e)
                     {
-                        if (e.GetType().Name == "UnauthorizedAccessException")
-                        {
-                            return file.FullName;
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        if (e.GetType().Name == "UnauthorizedAccessException") return file.FullName;
+                        else throw e;
                     }
                 }
                 foreach (DirectoryInfo direc in dirs)
                 {
-                    string oldPath = Path.Combine(sourceDirName, direc.Name);
-                    string temppath = Path.Combine(destDirName, direc.Name);
-                    result = DirectoryCopy(oldPath, temppath);
-                    if (result != String.Empty)
-                    {
-                        return result;
-                    }
+                    result = DirectoryCopy(Path.Combine(sourceDirName, direc.Name), Path.Combine(destDirName, direc.Name));
+                    if (result != String.Empty) return result;
                 }
                 return result;
             }
             catch (Exception e)
             {
-                if (e.GetType().Name == "UnauthorizedAccessException")
-                {
-                    return sourceDirName;
-                }
-                else
-                {
-                    throw;
-                }
+                if (e.GetType().Name == "UnauthorizedAccessException") return sourceDirName;
+                else throw e;
             }
         }
-        protected virtual string DeleteDirectory(string path)
+
+        // Deletes a directory
+        public virtual string DeleteDirectory(string path)
         {
             try
             {
@@ -1482,41 +1221,27 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     }
                     catch (Exception e)
                     {
-                        if (e.GetType().Name == "UnauthorizedAccessException")
-                        {
-                            return file;
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        if (e.GetType().Name == "UnauthorizedAccessException") return file;
+                        else throw e;
                     }
                 }
                 foreach (string dir in dirs)
                 {
                     result = DeleteDirectory(dir);
                     if (result != String.Empty)
-                    {
                         return result;
-                    }
                 }
                 Directory.Delete(path, true);
                 return result;
             }
             catch (Exception e)
             {
-                if (e.GetType().Name == "UnauthorizedAccessException")
-                {
-                    return path;
-                }
-                else
-                {
-                    throw;
-                }
-
+                if (e.GetType().Name == "UnauthorizedAccessException") return path;
+                else throw e;
             }
         }
-        protected virtual FileManagerDirectoryContent GetFileDetails(string path)
+        // Returns the file details
+        public virtual FileManagerDirectoryContent GetFileDetails(string path)
         {
             try
             {
@@ -1525,10 +1250,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 FileInfo detailPath = new FileInfo(info.FullName);
                 int folderLength = 0;
                 bool isFile = ((attr & FileAttributes.Directory) == FileAttributes.Directory) ? false : true;
-                if (!isFile)
-                {
-                    folderLength = detailPath.Directory.GetDirectories().Length;
-                }
+                if (!isFile) folderLength = detailPath.Directory.GetDirectories().Length;
                 string filterPath = GetRelativePath(this.contentRootPath, info.DirectoryName + Path.DirectorySeparatorChar);
                 return new FileManagerDirectoryContent
                 {
@@ -1543,12 +1265,9 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                     Permission = GetPermission(GetPath(filterPath), info.Name, isFile)
                 };
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception e) { throw e; }
         }
-        protected virtual AccessPermission GetPermission(string location, string name, bool isFile)
+        public virtual AccessPermission GetPermission(string location, string name, bool isFile)
         {
             AccessPermission FilePermission = new AccessPermission();
             if (isFile)
@@ -1565,32 +1284,24 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         {
                             string parentPath = fileRule.Path.Substring(0, fileRule.Path.IndexOf("*.*"));
                             if (currentPath.IndexOf(GetPath(parentPath)) == 0 || parentPath == "")
-                            {
                                 FilePermission = UpdateFileRules(FilePermission, fileRule);
-                            }
                         }
                         else if (fileRule.Path.IndexOf("*.") > -1)
                         {
                             string pathExtension = Path.GetExtension(fileRule.Path).ToLower();
                             string parentPath = fileRule.Path.Substring(0, fileRule.Path.IndexOf("*."));
                             if ((GetPath(parentPath) == currentPath || parentPath == "") && nameExtension == pathExtension)
-                            {
                                 FilePermission = UpdateFileRules(FilePermission, fileRule);
-                            }
                         }
                         else if (fileRule.Path.IndexOf(".*") > -1)
                         {
                             string pathName = Path.GetFileNameWithoutExtension(fileRule.Path);
                             string parentPath = fileRule.Path.Substring(0, fileRule.Path.IndexOf(pathName + ".*"));
                             if ((GetPath(parentPath) == currentPath || parentPath == "") && fileName == pathName)
-                            {
                                 FilePermission = UpdateFileRules(FilePermission, fileRule);
-                            }
                         }
                         else if (GetPath(fileRule.Path) == GetValidPath(location + name))
-                        {
                             FilePermission = UpdateFileRules(FilePermission, fileRule);
-                        }
                     }
                 }
                 return FilePermission;
@@ -1606,14 +1317,10 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                         {
                             string parentPath = folderRule.Path.Substring(0, folderRule.Path.IndexOf("*"));
                             if (GetValidPath(location + name).IndexOf(GetPath(parentPath)) == 0 || parentPath == "")
-                            {
                                 FilePermission = UpdateFolderRules(FilePermission, folderRule);
-                            }
                         }
                         else if (GetPath(folderRule.Path) == GetValidPath(location + name) || GetPath(folderRule.Path) == GetValidPath(location + name + Path.DirectorySeparatorChar))
-                        {
                             FilePermission = UpdateFolderRules(FilePermission, folderRule);
-                        }
                         else if (GetValidPath(location + name).IndexOf(GetPath(folderRule.Path)) == 0)
                         {
                             FilePermission.Write = HasPermission(folderRule.WriteContents);
@@ -1624,68 +1331,61 @@ namespace SfFileService.FileManager.PhysicalFileProvider
                 return FilePermission;
             }
         }
-        protected virtual string GetPath(string path)
+        public virtual string GetPath(string path)
         {
             String fullPath = (this.contentRootPath + path);
             DirectoryInfo directory = new DirectoryInfo(fullPath);
             return directory.FullName;
         }
-        protected virtual string GetValidPath(string path)
+        public virtual string GetValidPath(string path)
         {
             DirectoryInfo directory = new DirectoryInfo(path);
             return directory.FullName;
         }
-        protected virtual string GetFilePath(string path)
+        public virtual string GetFilePath(string path)
         {
             return Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
         }
-        protected virtual string[] GetFolderDetails(string path)
+        public virtual string[] GetFolderDetails(string path)
         {
             string[] str_array = path.Split('/'), fileDetails = new string[2];
             string parentPath = "";
-            for (int i = 0; i < str_array.Length - 2; i++)
-            {
-                parentPath += str_array[i] + "/";
-            }
+            for (int i = 0; i < str_array.Length - 2; i++) { parentPath += str_array[i] + "/"; }
             fileDetails[0] = parentPath;
             fileDetails[1] = str_array[str_array.Length - 2];
             return fileDetails;
         }
-        protected virtual AccessPermission GetPathPermission(string path)
+        public virtual AccessPermission GetPathPermission(string path)
         {
             string[] fileDetails = GetFolderDetails(path);
             return GetPermission(GetPath(fileDetails[0]), fileDetails[1], false);
         }
-        protected virtual AccessPermission GetFilePermission(string path)
+        public virtual AccessPermission GetFilePermission(string path)
         {
             string parentPath = path.Substring(0, path.LastIndexOf("/") + 1);
             string fileName = Path.GetFileName(path);
             return GetPermission(GetPath(parentPath), fileName, true);
         }
-        protected virtual bool IsDirectory(string path, string fileName)
+        public virtual bool IsDirectory(string path, string fileName)
         {
             String fullPath = Path.Combine(path, fileName);
             return ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory) ? false : true;
         }
-        protected virtual bool HasPermission(Permission rule)
+        public virtual bool HasPermission(Permission rule)
         {
             return rule == Permission.Allow ? true : false;
         }
-
-        protected virtual AccessPermission UpdateFileRules(AccessPermission filePermission, AccessRule fileRule)
+        public virtual AccessPermission UpdateFileRules(AccessPermission filePermission, AccessRule fileRule)
         {
-
             filePermission.Copy = HasPermission(fileRule.Copy);
             filePermission.Download = HasPermission(fileRule.Download);
             filePermission.Write = HasPermission(fileRule.Write);
             filePermission.Read = HasPermission(fileRule.Read);
-            filePermission.Message = string.IsNullOrEmpty(fileRule.Message) ? string.Empty : fileRule.Message;
-
+            filePermission.Message = string.IsNullOrEmpty(fileRule.Message)?string.Empty:fileRule.Message;
             return filePermission;
         }
-        protected virtual AccessPermission UpdateFolderRules(AccessPermission folderPermission, AccessRule folderRule)
+        public virtual AccessPermission UpdateFolderRules(AccessPermission folderPermission, AccessRule folderRule)
         {
-
             folderPermission.Copy = HasPermission(folderRule.Copy);
             folderPermission.Download = HasPermission(folderRule.Download);
             folderPermission.Write = HasPermission(folderRule.Write);
@@ -1695,7 +1395,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             folderPermission.Message = string.IsNullOrEmpty(folderRule.Message) ? string.Empty : folderRule.Message;
             return folderPermission;
         }
-        protected virtual bool parentsHavePermission(FileManagerDirectoryContent fileDetails)
+        public virtual bool parentsHavePermission(FileManagerDirectoryContent fileDetails)
         {
             String parentPath = fileDetails.FilterPath.Replace(Path.DirectorySeparatorChar, '/');
             String[] parents = parentPath.Split('/');
@@ -1705,10 +1405,7 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             {
                 currPath = (parents[i] == "") ? currPath : (currPath + parents[i] + "/");
                 AccessPermission PathPermission = GetPathPermission(currPath);
-                if (PathPermission == null)
-                {
-                    break;
-                }
+                if (PathPermission == null) break;
                 else if (PathPermission != null && !PathPermission.Read)
                 {
                     hasPermission = false;
@@ -1719,20 +1416,13 @@ namespace SfFileService.FileManager.PhysicalFileProvider
         }
         public string ToCamelCase(FileManagerResponse userData)
         {
-            return JsonConvert.SerializeObject(userData, new JsonSerializerSettings
-            {
-                ContractResolver = new DefaultContractResolver
-                {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                }
-            });
+            return JsonConvert.SerializeObject(userData, new JsonSerializerSettings { ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() } });
         }
-
-        FileStreamResult FileProviderBase.Download(string path, string[] names, params FileManagerDirectoryContent[] data)
+        private string getFileNameFromPath(string path)
         {
-            throw new NotImplementedException();
+            int index = path.LastIndexOf("/");
+            return path.Substring(index + 1);
         }
-
         private bool CheckChild(string path)
         {
             bool hasChild;
@@ -1744,14 +1434,8 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             }
             catch (Exception e)
             {
-                if (e.GetType().Name == "UnauthorizedAccessException")
-                {
-                    hasChild = false;
-                }
-                else
-                {
-                    throw;
-                }
+                if (e.GetType().Name == "UnauthorizedAccessException") hasChild = false;
+                else throw e;
             }
             return hasChild;
         }
@@ -1766,14 +1450,8 @@ namespace SfFileService.FileManager.PhysicalFileProvider
             }
             catch (Exception e)
             {
-                if (e.GetType().Name == "UnauthorizedAccessException")
-                {
-                    hasAcceess = false;
-                }
-                else
-                {
-                    throw;
-                }
+                if (e.GetType().Name == "UnauthorizedAccessException") hasAcceess = false;
+                else throw e;
             }
             return hasAcceess;
         }
@@ -1781,21 +1459,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
         {
             try
             {
-                foreach (DirectoryInfo subdir in dir.GetDirectories())
-                {
-                    size = GetDirectorySize(subdir, size);
-                }
-                foreach (FileInfo file in dir.GetFiles())
-                {
-                    size += file.Length;
-                }
+                foreach (DirectoryInfo subdir in dir.GetDirectories()) { size = GetDirectorySize(subdir, size); }
+                foreach (FileInfo file in dir.GetFiles()) { size += file.Length; }
             }
             catch (Exception e)
             {
-                if (e.GetType().Name != "UnauthorizedAccessException")
-                {
-                    throw;
-                }
+                if (e.GetType().Name != "UnauthorizedAccessException") throw e;
             }
             return size;
         }
@@ -1803,21 +1472,12 @@ namespace SfFileService.FileManager.PhysicalFileProvider
         {
             try
             {
-                foreach (DirectoryInfo subdir in dir.GetDirectories())
-                {
-                    files = GetDirectoryFiles(subdir, files);
-                }
-                foreach (FileInfo file in dir.GetFiles())
-                {
-                    files.Add(file);
-                }
+                foreach (DirectoryInfo subdir in dir.GetDirectories()) { files = GetDirectoryFiles(subdir, files); }
+                foreach (FileInfo file in dir.GetFiles()) { files.Add(file); }
             }
             catch (Exception e)
             {
-                if (e.GetType().Name != "UnauthorizedAccessException")
-                {
-                    throw;
-                }
+                if (e.GetType().Name != "UnauthorizedAccessException") throw e;
             }
             return files;
         }
@@ -1825,29 +1485,11 @@ namespace SfFileService.FileManager.PhysicalFileProvider
         {
             try
             {
-                foreach (DirectoryInfo subdir in dir.GetDirectories())
-                {
-                    files = GetDirectoryFolders(subdir, files);
-                }
-                foreach (DirectoryInfo file in dir.GetDirectories())
-                {
-                    files.Add(file);
-                }
+                foreach (DirectoryInfo subdir in dir.GetDirectories()) { files = GetDirectoryFolders(subdir, files); }
+                foreach (DirectoryInfo file in dir.GetDirectories()) { files.Add(file); }
             }
-            catch (Exception e)
-            {
-                if (e.GetType().Name != "UnauthorizedAccessException")
-                {
-                    throw;
-                }
-            }
+            catch (Exception e) { if (e.GetType().Name != "UnauthorizedAccessException") throw e; }
             return files;
         }
-        private string getFileNameFromPath(string path)
-        {
-            int index = path.LastIndexOf("/");
-            return path.Substring(index + 1);
-        }
-
     }
 }

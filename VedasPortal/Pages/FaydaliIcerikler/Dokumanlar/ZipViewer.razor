@@ -3,33 +3,60 @@
 @using Syncfusion.Blazor.FileManager
 @using System.Text
 @using IO = System.IO
-@using DocumentExplorer.Models 
-<div class="zip-container" id="zipContainer">
-    <div class="zip-overlay @OverlayStyle">
-        <div class="loader"></div>
-    </div>
-    <div class="toolbar">
-        <TopToolbar @ref="_topToolbar" BackClick="BackClickHandler"></TopToolbar>
-    </div>
-    <div class="file-viewer">
-        <SfFileManager @ref="_zipManager" CssClass="e-zip" View="ViewType.Details" Path="@ViewerPath" RootAliasName="@RootName" Height="100%" AllowMultiSelection="false">
-            <FileManagerAjaxSettings Url=@(NavigationManager.BaseUri + "api/ZipViewer/FileOperations")
-                                     GetImageUrl=@(NavigationManager.BaseUri + "api/ZipViewer/GetImage")>
-            </FileManagerAjaxSettings>
-            <FileManagerNavigationPaneSettings Visible="false"></FileManagerNavigationPaneSettings>
-            <FileManagerEvents Created="AfterCreated" OnSend="BeforeSend" OnFileOpen="FileOpen"></FileManagerEvents>
-            <FileManagerToolbarSettings Visible="false"></FileManagerToolbarSettings>
-            <FileManagerContextMenuSettings Visible="false"></FileManagerContextMenuSettings>
-            <FileManagerDetailsViewSettings ColumnResizing="false">
-                <FileManagerColumns>
-                    @*Default column for file name*@
-                    <FileManagerColumn Field="name" HeaderText="Name" Width="120" Template="<span class='e-fe-text'>${name}</span>" HeaderTextAlign=TextAlign.Left TextAlign=TextAlign.Left CustomAttributes="@(new { @class = "e-fe-grid-name" } )"></FileManagerColumn>
-                    @*Default column for file size*@
-                    <FileManagerColumn Field="size" HeaderText="Size" Width="auto" Template="<span class='e-fe-size'>${size}</span>" HeaderTextAlign=TextAlign.Left TextAlign=TextAlign.Left></FileManagerColumn>
-                </FileManagerColumns>
-            </FileManagerDetailsViewSettings>
-        </SfFileManager>
-    </div>
+@using DocumentExplorer.Models
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardBody>
+            <div class="zip-container" id="zipContainer">
+                <div class="zip-overlay @OverlayStyle">
+                    <div class="loader"></div>
+                </div>
+                <div class="toolbar">
+                    <TopToolbar @ref="_topToolbar" BackClick="BackClickHandler"></TopToolbar>
+                </div>
+                <div class="file-viewer">
+                    <SfFileManager @ref="_zipManager"
+                                   CssClass="e-zip"
+                                   View="ViewType.Details"
+                                   Path="@ViewerPath"
+                                   RootAliasName="@RootName"
+                                   Height="100%"
+                                   AllowMultiSelection="false">
+                        <FileManagerAjaxSettings Url=@(NavigationManager.BaseUri + "api/ZipViewer/FileOperations")
+                                                 GetImageUrl=@(NavigationManager.BaseUri + "api/ZipViewer/GetImage")>
+                        </FileManagerAjaxSettings>
+                        <FileManagerNavigationPaneSettings Visible="false"></FileManagerNavigationPaneSettings>
+                        <FileManagerEvents Created="AfterCreated" OnSend="BeforeSend" OnFileOpen="FileOpen"></FileManagerEvents>
+                        <FileManagerToolbarSettings Visible="false"></FileManagerToolbarSettings>
+                        <FileManagerContextMenuSettings Visible="false"></FileManagerContextMenuSettings>
+                        <FileManagerDetailsViewSettings ColumnResizing="false">
+                            <FileManagerColumns>
+                                @*Dosya adý için varsayýlan sütun*@
+                                <FileManagerColumn Field="name"
+                                                   HeaderText="Name"
+                                                   Width="120"
+                                                   Template="<span class='e-fe-text'>${name}</span>"
+                                                   HeaderTextAlign=TextAlign.Left
+                                                   TextAlign=TextAlign.Left
+                                                   CustomAttributes="@(new { @class = "e-fe-grid-name" } )">
+
+                                </FileManagerColumn>
+                                @*Dosya boyutu için varsayýlan sütun*@
+                                <FileManagerColumn Field="size"
+                                                   HeaderText="Size"
+                                                   Width="auto"
+                                                   Template="<span class='e-fe-size'>${size}</span>"
+                                                   HeaderTextAlign=TextAlign.Left TextAlign=TextAlign.Left>
+
+                                </FileManagerColumn>
+                            </FileManagerColumns>
+                        </FileManagerDetailsViewSettings>
+                    </SfFileManager>
+                </div>
+            </div>
+        </CardBody>
+    </CardComponent>
 </div>
 
 @code { public string ZipPath { get; set; } = null;
@@ -138,3 +165,18 @@
             NavigationManager.NavigateTo(QueryHelpers.AddQueryString(NavigationManager.BaseUri + "word-viewer/", query));
         }
     } }
+
+<style>
+
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

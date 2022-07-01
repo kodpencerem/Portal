@@ -1,10 +1,12 @@
-﻿@*@page "/topToolbar"*@
-
+﻿
 @using Syncfusion.Blazor.Navigations
 
 <SfToolbar Height="50px" CssClass="e-zipToolbar">
     <ToolbarItems>
-        <Syncfusion.Blazor.Navigations.ToolbarItem TooltipText="Back" Align="@ItemAlign.Left" CssClass="e-zip-back-btn" OnClick="CallBackClick">
+        <Syncfusion.Blazor.Navigations.ToolbarItem TooltipText="Back" 
+                                                   Align="@ItemAlign.Left" 
+                                                   CssClass="e-zip-back-btn" 
+                                                   OnClick="CallBackClick">
             <Template>
                 <span class="e-icons e-FM-back"></span>
             </Template>
@@ -14,7 +16,10 @@
                 <div class="e-top-title">@RootName</div>
             </Template>
         </Syncfusion.Blazor.Navigations.ToolbarItem>
-        <Syncfusion.Blazor.Navigations.ToolbarItem TooltipText="Close" Align="@ItemAlign.Right" CssClass="e-zip-close-btn" OnClick="CallBackClick">
+        <Syncfusion.Blazor.Navigations.ToolbarItem TooltipText="Close" 
+                                                   Align="@ItemAlign.Right" 
+                                                   CssClass="e-zip-close-btn" 
+                                                   OnClick="CallBackClick">
             <Template>
                 <span class="e-icons e-FM-close"></span>
             </Template>

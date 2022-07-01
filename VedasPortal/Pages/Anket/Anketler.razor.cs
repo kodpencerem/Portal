@@ -13,16 +13,10 @@ namespace VedasPortal.Pages.Anket
 
         [Inject]
         public VedasDbContext Context { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
+       
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
+       
         public List<AnketDTO> AnketListe { get; set; }
 
         private bool isReady = false;

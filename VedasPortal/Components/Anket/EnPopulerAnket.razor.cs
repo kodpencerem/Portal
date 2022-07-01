@@ -10,9 +10,6 @@ namespace VedasPortal.Components.Anket
     public partial class EnPopulerAnket : ComponentBase
     {
         [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
-        [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
 
         [Inject]

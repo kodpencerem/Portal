@@ -19,10 +19,6 @@
 @using VedasPortal.Components
 @using System.Text.Json
 @using VedasPortal.Components.Alert.SweetAlert
-@using VedasPortal.Pages.FaydaliIcerikler
-@using VedasPortal.Pages.FaydaliIcerikler.Dokumanlar
-@using VedasPortal.Pages.FaydaliIcerikler.Egitimler
-@using VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
 @using VedasPortal.Components.VideoComponent
 @using VedasPortal.Components.ToplantiTakvimi
 @using VedasPortal.Entities.Models.DovizKurlari
@@ -55,4 +51,10 @@
 @using BlazorTable
 @using VedasPortal.Components.Auth
 @using Syncfusion.Blazor
-@using Syncfusion.Blazor.Inputs 
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Navigations
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+@inject NavigationManager NavigationManager;

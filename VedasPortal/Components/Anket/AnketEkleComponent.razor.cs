@@ -20,12 +20,6 @@ namespace VedasPortal.Components.Anket
         private bool isReady = true;
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
-        [Inject]
         public VedasDbContext Context { get; set; }
 
         [Inject]

@@ -115,12 +115,21 @@ namespace VedasPortal
             services.AddTransient<IToplantiTakvimi, ToplantiTakvimi>();
             services.AddScoped<IAnketYonetim, AnketYonetim>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSyncfusionBlazor();
             services.AddScoped<IBaseRepository<Toplanti>, BaseRepository<Toplanti>>();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddSyncfusionBlazor(options => { options.IgnoreScriptIsolation = true; });
             services.AddTransient<IManageUsersService, ManageUsersService>();
             services.AddTransient<IManageRolesService, ManageRolesService>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
             services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
 
         }
@@ -129,7 +138,7 @@ namespace VedasPortal
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjU5MzAyQDMyMzAyZTMxMmUzME9RQ1ZFeGdRNW9MaGpNdWcxNXh4YjQrMDh5VzF4bzExN0V4Q2lmSjNsMTA9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjY0ODQxQDMxMzgyZTMyMmUzMGJIRzNhWDhOVS9aTzl3MWNwNWFxTXhOU2wxaVdGRW9nc3BrelYzNCsvRlE9");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

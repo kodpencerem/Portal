@@ -8,31 +8,53 @@
 @using Newtonsoft.Json
 @using Syncfusion.Blazor.DocumentEditor
 
-<div class="zip-container" id="zipContainer">
-    <div class="loading_indicator @OverlayStyle">
-        <div class="e-de-spinner-pane">
-        </div>
-        <div class="e-de-loading-text">@DocumentName</div>
-        <div class="e-de-spinner-inner">
-            <svg class="e-de-spin-bootstrap4" viewBox="0 0 36 36">
-                <path class="e-de-path-circle" d="M18,1.8A16.2,16.2 0 1 1 1.8,18"></path>
-            </svg>
-        </div>
-    </div>
-    <div class="toolbar">
-        <TopToolbar @ref="_topToolbar" BackClick="BackClickHandler"></TopToolbar>
-    </div>
-    <div class="file-viewer" @onmousemove="@ToogleBottomToolBarVisibility">
-        <div id="LeftLayout" class="@ThumbnailStyle">
-            <Thumbnail @ref="_thumbnail" GotoSelectedThumbnailPage="GotoSlectedPage"></Thumbnail>
-        </div>
-        <div id="RightLayout" class="@DeMarginStyle">
-            <SfDocumentEditor @ref="_documenteditor" ID="DocEdit" PageOutline="#dee2e6" EnablePrint="true" Height="@Deheight" ZoomFactor="@ZoomFactor">
-                <DocumentEditorEvents Created="AfterCreated" ViewChanged="ViewChange" ZoomFactorChanged="ZoomChange"></DocumentEditorEvents>
-            </SfDocumentEditor>
-            <BottomToolbar @ref="_bottomToolbar" ShowHidePane="ShowHideThumbnail" ToolBarAction="FileToolBar" GotoPage="GotoAction"></BottomToolbar>
-        </div>
-    </div>
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary" MinHeighth="500px">
+        <CardBody>
+            <div class="zip-container" id="zipContainer">
+                <div class="loading_indicator @OverlayStyle">
+
+                    <div class="e-de-loading-text">@DocumentName</div>
+
+                </div>
+                <div class="toolbar">
+                    <TopToolbar @ref="_topToolbar"
+                                BackClick="BackClickHandler">
+
+                    </TopToolbar>
+                </div>
+                <div class="file-viewer" @onmousemove="@ToogleBottomToolBarVisibility">
+                    <div id="LeftLayout" class="@ThumbnailStyle">
+                        <Thumbnail @ref="_thumbnail"
+                                   GotoSelectedThumbnailPage="GotoSlectedPage">
+
+                        </Thumbnail>
+                    </div>
+                    <div id="RightLayout" class="@DeMarginStyle">
+                        <SfDocumentEditor @ref="_documenteditor"
+                                          ID="DocEdit"
+                                          PageOutline="#dee2e6"
+                                          EnablePrint="true"
+                                          Height="@Deheight"
+                                          ZoomFactor="@ZoomFactor">
+                            <DocumentEditorEvents Created="AfterCreated"
+                                                  ViewChanged="ViewChange"
+                                                  ZoomFactorChanged="ZoomChange">
+
+                            </DocumentEditorEvents>
+                        </SfDocumentEditor>
+                        <BottomToolbar @ref="_bottomToolbar"
+                                       ShowHidePane="ShowHideThumbnail"
+                                       ToolBarAction="FileToolBar"
+                                       GotoPage="GotoAction">
+
+                        </BottomToolbar>
+                    </div>
+                </div>
+            </div>
+
+        </CardBody>
+    </CardComponent>
 </div>
 
 @code { private string OverlayStyle { get; set; } = "overlayShow";
@@ -41,7 +63,7 @@
     private string FileName { get; set; }
     private string SubPath { get; set; }
     private string Path { get; set; }
-    private string Deheight { get; set; } = "height:300px;";
+    private string Deheight { get; set; } = "height:250px;";
     private string ThumbnailStyle { get; set; } = "thumbnailShow";
     private string DeMarginStyle { get; set; } = "e-word-right-layout";
     private double ZoomFactor { get; set; } = 1;
@@ -59,7 +81,7 @@
         if (QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query).TryGetValue("preview", out var param))
         {
             FileName = param.First();
-            DocumentName = "File is loading...";
+            DocumentName = "Dosya yukleniyor...";
             PreviewPath = Path + FileName;
         }
         if (QueryHelpers.ParseQuery(NavigationManager.ToAbsoluteUri(NavigationManager.Uri).Query).TryGetValue("subpath", out var subPathparam))
@@ -225,3 +247,20 @@
     }
     #endregion
 }
+
+<style>
+    #RightLayout {
+        margin-left: 255px !important
+    }
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

@@ -9,14 +9,6 @@ namespace VedasPortal.Components.Anket
 {
     public partial class SecilmisAnket : ComponentBase
     {
-
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        public IJSRuntime JSRuntime { get; set; }
-
         [Inject]
         IAnketYonetim AnketYonetim { get; set; }
 
