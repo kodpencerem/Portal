@@ -26,15 +26,15 @@ namespace DocumentExplorer.Controllers
         {
             this.basePath = hostingEnvironment.ContentRootPath;
             this.operation = new PhysicalFileProvider();
-            this.operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Files denotes in which files and folders are available.
+            this.operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduðunu belirtir.
         }
-        // Processing the File Manager operations
+        // Dosya Yöneticisi iþlemlerinin iþlenmesi
         [Route("FileOperations")]
         public object FileOperations([FromBody] FileManagerCustomContent args)
         {
             switch (args.Action)
             {
-                // Add your custom action here
+                // Özel iþleminizi buraya ekleyin
                 case "read":
                     if ((args.RootType != null) && ((args.RootType == "Recent") /*|| (args.RootType == "Starred")*/))
                     {
@@ -80,10 +80,10 @@ namespace DocumentExplorer.Controllers
                         return this.operation.ToCamelCase(this.operation.Details(args.Path, args.Names, args.Data));
                     }
                 case "create":
-                    // Path - Current path where the folder is to be created; Name - Name of the new folder
+                    // Path - Klasörün oluþturulacaðý geçerli yol; Ad - Yeni klasörün adý
                     return this.operation.ToCamelCase(this.operation.Create(args.Path, args.Name));
                 case "search":
-                    // Path - Current path where the search is performed; SearchString - String typed in the searchbox; CaseSensitive - Boolean value which specifies whether the search must be casesensitive                    
+                    // Path - Aramanýn yapýldýðý mevcut yol; SearchString - Arama kutusuna yazýlan dize; CaseSensitive - Aramanýn büyük/küçük harf duyarlý olmasý gerekip gerekmediðini belirten Boole deðeri                    
                     if ((args.RootType != null) && ((args.RootType == "Recent")))
                     {
                         FileManagerResponse result1 = this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive);
@@ -99,7 +99,7 @@ namespace DocumentExplorer.Controllers
                         return AddStarDetails(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                     }
                 case "rename":
-                    // Path - Current path of the renamed file; Name - Old file name; NewName - New file name
+                    // Path - Yeniden adlandýrýlan dosyanýn geçerli yolu; Ad - Eski dosya adý; NewName - Yeni dosya adý
                     if ((args.RootType != null) && (args.RootType == "Recent"))
                     {
                         var items = args.Data;

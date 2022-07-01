@@ -17,7 +17,7 @@ namespace DocumentExplorer.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class DocumentEditorController : ControllerBase
-    {   
+    {
         private string basePath;
         private string baseLocation;
         IWebHostEnvironment _hostingEnvironment;
@@ -40,32 +40,32 @@ namespace DocumentExplorer.Controllers
                 document.Dispose();
                 returnArray.Add(json);
                 return ConvertToImages(fs, returnArray, GetDocIOFormatType(Path.GetExtension(args.Path).ToLower())).ToArray();
-            }            
+            }
 
         }
         private List<string> ConvertToImages(FileStream fs, List<string> returnStrings, Syncfusion.DocIO.FormatType type)
         {
             DocIO.WordDocument wd = new DocIO.WordDocument(fs, type);
-            //Instantiation of DocIORenderer for Word to PDF conversion
+            //Word'den PDF'ye dönüþtürme için DocIORenderer örneði
             DocIORenderer render = new DocIORenderer();
-            //Converts Word document into PDF document
+            //Word belgesini PDF belgesine dönüþtürür
             PdfDocument pdfDocument = render.ConvertToPDF(wd);
-            //Releases all resources used by the Word document and DocIO Renderer objects
+            //Word belgesi ve DocIO Renderer nesneleri tarafýndan kullanýlan tüm kaynaklarý serbest býrakýr
             render.Dispose();
             wd.Dispose();
-            //Saves the PDF file
+            //PDF dosyasýný kaydeder
             MemoryStream outputStream = new MemoryStream();
             pdfDocument.Save(outputStream);
             outputStream.Position = 0;
-            //Closes the instance of PDF document object
+            //PDF belge nesnesinin örneðini kapatýr
             pdfDocument.Close();
 
             PdfRenderer pdfExportImage = new PdfRenderer();
-            //Loads the PDF document 
+            //PDF belgesini yükler
             pdfExportImage.Load(outputStream);
 
-            //Exports the PDF document pages into images
-            Bitmap[] bitmapimage = pdfExportImage.ExportAsImage(0, pdfExportImage.PageCount-1);
+            //PDF belge sayfalarýný görüntülere aktarýr
+            Bitmap[] bitmapimage = pdfExportImage.ExportAsImage(0, pdfExportImage.PageCount - 1);
             foreach (Bitmap bitmap in bitmapimage)
             {
                 using (MemoryStream ms = new MemoryStream())
@@ -90,7 +90,7 @@ namespace DocumentExplorer.Controllers
             }
 
         }
-               
+
         private ImportFormatType GetImportFormatType(string format)
         {
             if (string.IsNullOrEmpty(format))
@@ -114,14 +114,14 @@ namespace DocumentExplorer.Controllers
                 case Constants.Html:
                     return ImportFormatType.Html;
                 default:
-                    throw new NotSupportedException("DocumentEditor does not support this file format.");
+                    throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             }
         }
 
         private Syncfusion.DocIO.FormatType GetDocIOFormatType(string format)
         {
             if (string.IsNullOrEmpty(format))
-                throw new NotSupportedException("DocumentEditor does not support this file format.");
+                throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             switch (format.ToLower())
             {
                 case Constants.Dotx:
@@ -141,7 +141,7 @@ namespace DocumentExplorer.Controllers
                 case Constants.Html:
                     return Syncfusion.DocIO.FormatType.Html;
                 default:
-                    throw new NotSupportedException("DocumentEditor does not support this file format.");
+                    throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             }
         }
     }

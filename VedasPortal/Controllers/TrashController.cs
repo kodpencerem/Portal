@@ -36,25 +36,25 @@ namespace DocumentExplorer.Controllers
             {
                 switch (args.Action)
                 {
-                    // Add your custom action here
+                    // Özel işleminizi buraya ekleyin
                     case "read":
-                        // Path - Current path; ShowHiddenItems - Boolean value to show/hide hidden items
+                        // Path - Şuanki yol; ShowHiddenItems - Gizli öğeleri göstermek/gizlemek için Boole değeri
                         return this.operation.ToCamelCase(this.GetFiles());
                     case "search":
-                        // Path - Current path where the search is performed; SearchString - String typed in the searchbox; CaseSensitive - Boolean value which specifies whether the search must be casesensitive
+                        // Path - Aramanın yapıldığı mevcut yol; SearchString - Arama kutusuna yazılan dize; CaseSensitive - Aramanın büyük/küçük harf duyarlı olması gerekip gerekmediğini belirten Boole değeri
                         //return this.operation.ToCamelCase(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                         return this.operation.ToCamelCase(this.SearchFiles(args.SearchString,args.CaseSensitive));
                     case "details":
-                        // Path - Current path where details of file/folder is requested; Name - Names of the requested folders
+                        // Path - Dosya/klasör ayrıntılarının istendiği geçerli yol; Ad - İstenen klasörlerin adları
                         return this.operation.ToCamelCase(this.GetDetails(args.Data));
                     case "delete":
-                        // Path - Current path where of the folder to be deleted; Names - Name of the files to be deleted
+                        // Path - Silinecek klasörün geçerli yolu; Adlar - Silinecek dosyaların adı
                         return this.operation.ToCamelCase(this.DeleteFiles(args.Data));
                     case "rename":
                     case "create":
                     case "move":
                     case "copy":
-                        // Path - Current path of the renamed file; Name - Old file name; NewName - New file name
+                        // Path - Yeniden adlandırılan dosyanın geçerli yolu; Ad - Eski dosya adı; NewName - Yeni dosya adı
                         // return this.operation.ToCamelCase(this.operation.Rename(args.Path, args.Name, args.NewName));
                         FileManagerResponse response = new FileManagerResponse();
                         response.Error = new ErrorDetails() { Code = "401", Message = "Restore file to perform this action" };

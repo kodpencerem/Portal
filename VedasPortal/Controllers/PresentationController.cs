@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DocumentExplorer.Models.FileManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using DocumentExplorer.Models.FileManager;
 using Syncfusion.Pdf;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationToPdfConverter;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace DocumentExplorer.Controllers
 {
@@ -30,22 +28,22 @@ namespace DocumentExplorer.Controllers
         public string[] ConvertToPDF([FromBody] FileManagerDirectoryContent args)
         {
             string fileLocation = this.baseLocation + args.Path.Replace("/", "\\");
-            // If document get open from zip file, we have maintained the extracted document path in TargetPath property.
+            //Belge zip dosyasından açılırsa, çıkarılan belge yolunu TargetPath özelliğinde koruduk.
             if (args.TargetPath != null)
                 fileLocation = args.TargetPath;
             List<string> returnArray = new List<string>();
             using FileStream fs = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
-            //Open the existing presentation
+            //Mevcut sunuyu aç
             IPresentation presentation = Syncfusion.Presentation.Presentation.Open(fs);
-            //Convert the PowerPoint document to PDF document.
+            //PowerPoint belgesini PDF belgesine dönüştürün.
             PdfDocument pdfDocument = PresentationToPdfConverter.Convert(presentation);
-            //Save the document as a stream and retrun the stream
+            //Belgeyi bir akış olarak kaydedin ve akışı yeniden çalıştırın
             MemoryStream stream = new MemoryStream();
-            //Save the created PowerPoint document to MemoryStream
+            //Oluşturulan PowerPoint belgesini MemoryStream'e kaydedin
             pdfDocument.Save(stream);
             stream.Position = 0;
             returnArray.Add("data:application/pdf;base64," + Convert.ToBase64String(stream.ToArray()));
-            //Dispose the document objects.
+            //Belge nesnelerini atın.
             presentation.Dispose();
             pdfDocument.Dispose();
             stream.Dispose();

@@ -1,20 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Drawing;
-using System.Collections.Generic;
+﻿using DocumentExplorer.Data;
+using DocumentExplorer.Models;
+using DocumentExplorer.Models.FileManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-//File Manager's base functions are available in the below namespace
-using DocumentExplorer.Models.FileManager;
-//File Manager's operations are available in the below namespace
-using DocumentExplorer.Data;
-using DocIO = Syncfusion.DocIO.DLS;
+using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.DocIORenderer;
 using Syncfusion.Pdf;
-using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
-using DocumentExplorer.Models;
+using System;
+using System.Drawing;
+using System.IO;
+using DocIO = Syncfusion.DocIO.DLS;
 
 namespace DocumentExplorer.Controllers
 {
@@ -28,7 +25,7 @@ namespace DocumentExplorer.Controllers
         {
             basePath = hostingEnvironment.ContentRootPath;
             operation = new PhysicalFileProvider();
-            operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Files denotes in which files and folders are available.
+            operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
         }
 
         [Route("GetPreview")]
@@ -46,9 +43,9 @@ namespace DocumentExplorer.Controllers
                     {
                         FileStream fileStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
                         PdfRenderer pdfExportImage = new PdfRenderer();
-                        //Loads the PDF document 
+                        //PDF belgesini yükler
                         pdfExportImage.Load(fileStream);
-                        //Exports the PDF document pages into images
+                        //PDF belge sayfalarını görüntülere aktarır
                         Bitmap[] bitmapimage = pdfExportImage.ExportAsImage(0, 0);
                         imageStream = new MemoryStream();
                         bitmapimage[0].Save(imageStream, System.Drawing.Imaging.ImageFormat.Png);
@@ -66,27 +63,27 @@ namespace DocumentExplorer.Controllers
                     try
                     {
                         FileStream fileStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
-                        //Loads file stream into Word document
+                        //Dosya akışını Word belgesine yükler
                         DocIO.WordDocument document = new DocIO.WordDocument(fileStream, GetDocIOFormatType(extension));
                         fileStream.Dispose();
-                        //Instantiation of DocIORenderer for Word to PDF conversion
+                        //Word'den PDF'ye dönüştürme için DocIORenderer örneği
                         DocIORenderer render = new DocIORenderer();
-                        //Converts Word document into PDF document
+                        // Word belgesini PDF belgesine dönüştürür
                         PdfDocument pdfDocument = render.ConvertToPDF(document);
-                        //Releases all resources used by the Word document and DocIO Renderer objects
+                        //Word belgesi ve DocIO Renderer nesneleri tarafından kullanılan tüm kaynakları serbest bırakır
                         render.Dispose();
                         document.Dispose();
-                        //Saves the PDF file
+                        //PDF dosyasını kaydeder
                         MemoryStream outputStream = new MemoryStream();
                         pdfDocument.Save(outputStream);
                         outputStream.Position = 0;
-                        //Closes the instance of PDF document object
+                        //PDF belge nesnesinin örneğini kapatır
                         pdfDocument.Close();
 
                         PdfRenderer pdfExportImage = new PdfRenderer();
-                        //Loads the PDF document 
+                        //PDF belgesini yükler
                         pdfExportImage.Load(outputStream);
-                        //Exports the PDF document pages into images
+                        //PDF belge sayfalarını görüntülere aktarır
                         Bitmap[] bitmapimage = pdfExportImage.ExportAsImage(0, 0);
                         imageStream = new MemoryStream();
                         bitmapimage[0].Save(imageStream, System.Drawing.Imaging.ImageFormat.Png);
@@ -104,9 +101,9 @@ namespace DocumentExplorer.Controllers
                     try
                     {
                         IPresentation presentation = Presentation.Open(fullPath);
-                        //Initialize PresentationRenderer for image conversion
+                        //Görüntü dönüştürme için PresentationRenderer'ı başlatın
                         presentation.PresentationRenderer = new PresentationRenderer();
-                        //Convert the first slide to image
+                        //İlk slaydı resme dönüştür
                         imageStream = presentation.Slides[0].ConvertToImage(ExportImageFormat.Png);
                         presentation.Dispose();
                     }
@@ -136,7 +133,7 @@ namespace DocumentExplorer.Controllers
         private Syncfusion.DocIO.FormatType GetDocIOFormatType(string format)
         {
             if (string.IsNullOrEmpty(format))
-                throw new NotSupportedException("DocumentEditor does not support this file format.");
+                throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             switch (format.ToLower())
             {
                 case Constants.Dotx:
@@ -156,7 +153,7 @@ namespace DocumentExplorer.Controllers
                 case Constants.Html:
                     return Syncfusion.DocIO.FormatType.Html;
                 default:
-                    throw new NotSupportedException("DocumentEditor does not support this file format.");
+                    throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             }
         }
     }

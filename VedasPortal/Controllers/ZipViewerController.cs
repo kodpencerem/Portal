@@ -23,13 +23,13 @@ namespace VedasPortal.Controllers
             _hostingEnvironment = hostingEnvironment;
             this.basePath = _hostingEnvironment.ContentRootPath;
             this.baseLocation = this.basePath + "\\wwwroot\\";
-            // Temprorary location to store content of the zip file
+            // Zip dosyasýnýn içeriðini depolamak için geçici konum
             // this.tempDir = this.basePath + "\\" + "tempZipStorage";
             this.tempDir = Path.GetTempPath() + "tempZipStorage";
             if (!Directory.Exists(this.tempDir))
                 Directory.CreateDirectory(this.tempDir);
             this.operation = new PhysicalFileProvider();
-            //this.operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Files denotes in which files and folders are available.
+            //this.operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduðunu belirtir.
             this.operation.RootFolder(this.tempDir);
         }
 
@@ -39,7 +39,7 @@ namespace VedasPortal.Controllers
             return this.tempDir;
         }
 
-        // Processing the File Manager operations
+        // Dosya Yöneticisi iþlemlerini iþleme
         [Route("FileOperations")]
         public object FileOperations([FromBody] ReadArgs args)
         {
@@ -47,9 +47,9 @@ namespace VedasPortal.Controllers
             {
                 switch (args.Action)
                 {
-                    // Add your custom action here
+                    // Özel iþlemler bu kýsma eklenir
                     case "read":
-                        // Path - Current path; ShowHiddenItems - Boolean value to show/hide hidden items
+                        // Path - Þuanki yol; ShowHiddenItems - Gizli öðeleri göstermek/gizlemek için Boole deðeri
                         return this.operation.ToCamelCase(this.operation.GetFiles(args.Path, args.ShowHiddenItems));
                     case "search":
                     case "details":
@@ -59,7 +59,7 @@ namespace VedasPortal.Controllers
                     case "create":
                     case "rename":
                         FileManagerResponse response = new FileManagerResponse();
-                        response.Error = new ErrorDetails() { Code = "401", Message = "Extract the Zip file to perform this action" };
+                        response.Error = new ErrorDetails() { Code = "401", Message = "Bu eylemi gerçekleþtirmek için Zip dosyasýný çýkarýn" };
                         return this.operation.ToCamelCase(response);
                 }
                 return null;

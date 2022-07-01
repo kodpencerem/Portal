@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Hosting;
-//File Manager's base functions are available in the below namespace
 using DocumentExplorer.Models.FileManager;
-//File Manager's operations are available in the below namespace
 using DocumentExplorer.Data;
 using Newtonsoft.Json;
 using System.IO;
@@ -29,7 +27,7 @@ namespace DocumentExplorer.Controllers
         {
             this.basePath = hostingEnvironment.ContentRootPath;
             this.operation = new PhysicalFileProvider();
-            this.operation.RootFolder(this.basePath + "\\wwwroot\\SharedFiles"); // Data\\Files denotes in which files and folders are available.
+            this.operation.RootFolder(this.basePath + "\\wwwroot\\SharedFiles"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
         }
 
         // Processing the File Manager operations
@@ -38,9 +36,9 @@ namespace DocumentExplorer.Controllers
         {
             switch (args.Action)
             {
-                // Add your custom action here
+                // Özel işleminizi buraya ekleyin
                 case "read":
-                    // Path - Current path; ShowHiddenItems - Boolean value to show/hide hidden items
+                    // Path - Şuanki yol; ShowHiddenItems - Gizli öğeleri göstermek/gizlemek için Boole değeri
                     return this.operation.ToCamelCase(this.operation.GetFiles(args.Path, args.ShowHiddenItems));
                 case "details":
                     // Path - Current path where details of file/folder is requested; Name - Names of the requested folders
@@ -50,7 +48,7 @@ namespace DocumentExplorer.Controllers
                     createresponse.Error = new ErrorDetails() { Code = "401", Message = "Restricted to perform this action" };
                     return this.operation.ToCamelCase(createresponse);
                 case "search":
-                    // Path - Current path where the search is performed; SearchString - String typed in the searchbox; CaseSensitive - Boolean value which specifies whether the search must be casesensitive
+                    // Path - Aramanın yapıldığı mevcut yol; SearchString - Arama kutusuna yazılan dize; CaseSensitive - Aramanın büyük/küçük harf duyarlı olması gerekip gerekmediğini belirten Boole değeri
                     return this.operation.ToCamelCase(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                 case "delete":
                 case "copy":
@@ -110,27 +108,27 @@ namespace DocumentExplorer.Controllers
                 else if (extension == Constants.Docx || extension == Constants.Rtf || extension == Constants.Doc)
                 {
                     FileStream fileStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
-                    //Loads file stream into Word document
+                    //Dosya akışını Word belgesine yükler
                     WordDocument document = new WordDocument(fileStream, Syncfusion.DocIO.FormatType.Automatic);
                     fileStream.Dispose();
-                    //Instantiation of DocIORenderer for Word to PDF conversion
+                    //Word'den PDF'ye dönüştürme için DocIORenderer örneği
                     DocIORenderer render = new DocIORenderer();
-                    //Converts Word document into PDF document
+                    //Word belgesini PDF belgesine dönüştürür
                     PdfDocument pdfDocument = render.ConvertToPDF(document);
-                    //Releases all resources used by the Word document and DocIO Renderer objects
+                    //Word belgesi ve DocIO Renderer nesneleri tarafından kullanılan tüm kaynakları serbest bırakır
                     render.Dispose();
                     document.Dispose();
-                    //Saves the PDF file
+                    //PDF dosyasını kaydeder
                     MemoryStream outputStream = new MemoryStream();
                     pdfDocument.Save(outputStream);
                     outputStream.Position = 0;
-                    //Closes the instance of PDF document object
+                    //PDF belge nesnesinin örneğini kapatır
                     pdfDocument.Close();
 
                     PdfRenderer pdfExportImage = new PdfRenderer();
-                    //Loads the PDF document 
+                    //PDF belgesini yükler 
                     pdfExportImage.Load(outputStream);
-                    //Exports the PDF document pages into images
+                    //PDF belge sayfalarını görüntülere aktarır
                     Bitmap[] bitmapimage = pdfExportImage.ExportAsImage(0, 0);
                     imageStream = new MemoryStream();
                     bitmapimage[0].Save(imageStream, System.Drawing.Imaging.ImageFormat.Png);
@@ -141,9 +139,9 @@ namespace DocumentExplorer.Controllers
                 else if (extension == Constants.Pptx)
                 {
                     IPresentation presentation = Presentation.Open(fullPath);
-                    //Initialize PresentationRenderer for image conversion
+                    //Görüntü dönüştürme için PresentationRenderer'ı başlatın
                     presentation.PresentationRenderer = new PresentationRenderer();
-                    //Convert the first slide to image
+                    //İlk slaydı resme dönüştür
                     imageStream = presentation.Slides[0].ConvertToImage(ExportImageFormat.Png);
                     presentation.Dispose();
                 }
