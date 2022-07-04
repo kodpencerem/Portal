@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
-
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class FileManagerDirectoryContent
     {

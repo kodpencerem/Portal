@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DocumentExplorer.Models.FileManager
+﻿namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class AccessPermission
     {
@@ -12,6 +8,6 @@ namespace DocumentExplorer.Models.FileManager
         public bool WriteContents = true;
         public bool Read = true;
         public bool Upload = true;
-        public string Message = String.Empty;
+        public string Message = string.Empty;
     }
 }

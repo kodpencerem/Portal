@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Net.Http.Headers;
+using System.Collections.Generic;
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public interface IFileProvider
     {

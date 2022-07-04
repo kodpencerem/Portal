@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 #endif
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class AccessDetails
     {

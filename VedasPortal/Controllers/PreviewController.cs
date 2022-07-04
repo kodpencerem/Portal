@@ -1,7 +1,4 @@
-﻿using DocumentExplorer.Data;
-using DocumentExplorer.Models;
-using DocumentExplorer.Models.FileManager;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.DocIORenderer;
@@ -11,9 +8,12 @@ using Syncfusion.PresentationRenderer;
 using System;
 using System.Drawing;
 using System.IO;
+using VedasPortal.Data;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 using DocIO = Syncfusion.DocIO.DLS;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,16 +25,16 @@ namespace DocumentExplorer.Controllers
         {
             basePath = hostingEnvironment.ContentRootPath;
             operation = new PhysicalFileProvider();
-            operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
+            operation.RootFolder(basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
         }
 
         [Route("GetPreview")]
         public string GetPreview([FromBody] FileManagerDirectoryContent args)
         {
-            string baseFolder = this.basePath + "\\wwwroot\\Files";
+            string baseFolder = basePath + "\\wwwroot\\Files";
             try
             {
-                String fullPath = baseFolder + args.Path;
+                string fullPath = baseFolder + args.Path;
                 string extension = Path.GetExtension(fullPath);
                 Stream imageStream = null;
                 if (extension == Constants.Pdf)

@@ -1,18 +1,18 @@
-using System;
-using System.IO;
-using System.Drawing;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using DocumentExplorer.Models.FileManager;
 using Syncfusion.Blazor.DocumentEditor;
-using DocIO = Syncfusion.DocIO.DLS;
+using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.DocIORenderer;
 using Syncfusion.Pdf;
-using Syncfusion.Blazor.PdfViewer;
-using DocumentExplorer.Models;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.Dosya.FileManager;
+using DocIO = Syncfusion.DocIO.DLS;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,14 +24,14 @@ namespace DocumentExplorer.Controllers
         public DocumentEditorController(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
-            this.basePath = _hostingEnvironment.ContentRootPath;
-            this.baseLocation = this.basePath + "\\wwwroot\\";
+            basePath = _hostingEnvironment.ContentRootPath;
+            baseLocation = basePath + "\\wwwroot\\";
         }
 
         [Route("Import")]
         public string[] Import([FromBody] FileManagerDirectoryContent args)
         {
-            string fileLocation = this.baseLocation + args.Path.Replace("/", "\\");
+            string fileLocation = baseLocation + args.Path.Replace("/", "\\");
             List<string> returnArray = new List<string>();
             using (FileStream fs = new FileStream(fileLocation, FileMode.Open, FileAccess.Read))
             {
@@ -94,7 +94,7 @@ namespace DocumentExplorer.Controllers
         private ImportFormatType GetImportFormatType(string format)
         {
             if (string.IsNullOrEmpty(format))
-                throw new NotSupportedException("DocumentEditor does not support this file format.");
+                throw new NotSupportedException("DocumentEditor bu dosya biçimini desteklemiyor.");
             switch (format.ToLower())
             {
                 case Constants.Dotx:

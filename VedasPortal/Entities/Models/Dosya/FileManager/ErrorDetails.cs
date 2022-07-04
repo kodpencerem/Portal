@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 #if EJ2_DNX
 using System.Web;
 #endif
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class ErrorDetails
     {

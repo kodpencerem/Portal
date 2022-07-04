@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DocumentExplorer.Models
+﻿namespace VedasPortal.Entities.Models.Dosya
 {
     public class ThumbnailImage
     {

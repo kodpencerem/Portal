@@ -1,5 +1,4 @@
-﻿using DocumentExplorer.Models.FileManager;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.Pdf;
 using Syncfusion.Presentation;
@@ -7,8 +6,9 @@ using Syncfusion.PresentationToPdfConverter;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,14 +27,14 @@ namespace DocumentExplorer.Controllers
         [Route("ConvertToPDF")]
         public string[] ConvertToPDF([FromBody] FileManagerDirectoryContent args)
         {
-            string fileLocation = this.baseLocation + args.Path.Replace("/", "\\");
+            string fileLocation = baseLocation + args.Path.Replace("/", "\\");
             //Belge zip dosyasından açılırsa, çıkarılan belge yolunu TargetPath özelliğinde koruduk.
             if (args.TargetPath != null)
                 fileLocation = args.TargetPath;
             List<string> returnArray = new List<string>();
             using FileStream fs = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
             //Mevcut sunuyu aç
-            IPresentation presentation = Syncfusion.Presentation.Presentation.Open(fs);
+            IPresentation presentation = Presentation.Open(fs);
             //PowerPoint belgesini PDF belgesine dönüştürün.
             PdfDocument pdfDocument = PresentationToPdfConverter.Convert(presentation);
             //Belgeyi bir akış olarak kaydedin ve akışı yeniden çalıştırın

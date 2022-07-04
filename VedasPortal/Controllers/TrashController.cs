@@ -1,5 +1,4 @@
-﻿using DocumentExplorer.Models.FileManager;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -7,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using VedasPortal.Controllers;
-using DocumentExplorer.Data;
+using VedasPortal.Data;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("AllowAllOrigins")]
@@ -23,9 +22,9 @@ namespace DocumentExplorer.Controllers
 
         public TrashController(IWebHostEnvironment hostingEnvironment)
         {
-            this.basePath = hostingEnvironment.ContentRootPath;
-            this.baseLocation = this.basePath + "\\wwwroot";
-            this.operation = new PhysicalFileProvider();
+            basePath = hostingEnvironment.ContentRootPath;
+            baseLocation = basePath + "\\wwwroot";
+            operation = new PhysicalFileProvider();
         }
 
         // Processing the File Manager operations
@@ -39,17 +38,17 @@ namespace DocumentExplorer.Controllers
                     // Özel işleminizi buraya ekleyin
                     case "read":
                         // Path - Şuanki yol; ShowHiddenItems - Gizli öğeleri göstermek/gizlemek için Boole değeri
-                        return this.operation.ToCamelCase(this.GetFiles());
+                        return operation.ToCamelCase(GetFiles());
                     case "search":
                         // Path - Aramanın yapıldığı mevcut yol; SearchString - Arama kutusuna yazılan dize; CaseSensitive - Aramanın büyük/küçük harf duyarlı olması gerekip gerekmediğini belirten Boole değeri
                         //return this.operation.ToCamelCase(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
-                        return this.operation.ToCamelCase(this.SearchFiles(args.SearchString,args.CaseSensitive));
+                        return operation.ToCamelCase(SearchFiles(args.SearchString, args.CaseSensitive));
                     case "details":
                         // Path - Dosya/klasör ayrıntılarının istendiği geçerli yol; Ad - İstenen klasörlerin adları
-                        return this.operation.ToCamelCase(this.GetDetails(args.Data));
+                        return operation.ToCamelCase(GetDetails(args.Data));
                     case "delete":
                         // Path - Silinecek klasörün geçerli yolu; Adlar - Silinecek dosyaların adı
-                        return this.operation.ToCamelCase(this.DeleteFiles(args.Data));
+                        return operation.ToCamelCase(DeleteFiles(args.Data));
                     case "rename":
                     case "create":
                     case "move":
@@ -58,7 +57,7 @@ namespace DocumentExplorer.Controllers
                         // return this.operation.ToCamelCase(this.operation.Rename(args.Path, args.Name, args.NewName));
                         FileManagerResponse response = new FileManagerResponse();
                         response.Error = new ErrorDetails() { Code = "401", Message = "Restore file to perform this action" };
-                        return this.operation.ToCamelCase(response);
+                        return operation.ToCamelCase(response);
                 }
                 return null;
             }
@@ -72,7 +71,7 @@ namespace DocumentExplorer.Controllers
         {
             FileManagerResponse readResponse = new FileManagerResponse();
             FileManagerDirectoryContent cwd = new FileManagerDirectoryContent();
-            String fullPath = (this.baseLocation + "/Trash");
+            string fullPath = baseLocation + "/Trash";
             DirectoryInfo directory = new DirectoryInfo(fullPath);
             cwd.Name = "Trash";
             cwd.Size = 0;
@@ -84,7 +83,7 @@ namespace DocumentExplorer.Controllers
             cwd.FilterPath = "/";
             cwd.Permission = null;
             readResponse.CWD = cwd;
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<TrashContents> DeletedFiles = JsonConvert.DeserializeObject<List<TrashContents>>(jsonData) ?? new List<TrashContents>();
             List<FileManagerDirectoryContent> files = new List<FileManagerDirectoryContent>();
@@ -97,7 +96,7 @@ namespace DocumentExplorer.Controllers
         }
         public FileManagerResponse GetDetails(FileManagerDirectoryContent[] files)
         {
-            this.operation.RootFolder(this.baseLocation + "\\Trash");
+            operation.RootFolder(baseLocation + "\\Trash");
             FileManagerResponse response;
             string[] names = new string[files.Length];
             string responseName = "";
@@ -106,27 +105,27 @@ namespace DocumentExplorer.Controllers
             {
                 names[index] = file.Id;
                 index++;
-                responseName = (responseName == "") ? file.Name : (responseName + ", " + file.Name);
+                responseName = responseName == "" ? file.Name : responseName + ", " + file.Name;
             }
-            response = this.operation.Details("/", names);
+            response = operation.Details("/", names);
             response.Details.Name = responseName;
             response.Details.Location = "Trash";
             return response;
         }
         public FileManagerResponse DeleteFiles(FileManagerDirectoryContent[] files)
         {
-            this.operation.RootFolder(this.baseLocation);
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
+            operation.RootFolder(baseLocation);
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
-            List<FileManagerDirectoryContent> responseFiles =new List<FileManagerDirectoryContent>();
+            List<FileManagerDirectoryContent> responseFiles = new List<FileManagerDirectoryContent>();
             List<TrashContents> DeletedFiles = JsonConvert.DeserializeObject<List<TrashContents>>(jsonData) ?? new List<TrashContents>();
             foreach (FileManagerDirectoryContent file in files)
             {
-                TrashContents trashFile = DeletedFiles.Find(x => (x.Container.Equals(file.Id)));
+                TrashContents trashFile = DeletedFiles.Find(x => x.Container.Equals(file.Id));
                 string trashPath = "/Trash/" + trashFile.Container;
-                    DeleteDirectory(this.baseLocation + trashPath);
+                DeleteDirectory(baseLocation + trashPath);
                 responseFiles.Add(trashFile.Data);
-                    DeletedFiles.Remove(trashFile);
+                DeletedFiles.Remove(trashFile);
             }
             jsonData = JsonConvert.SerializeObject(DeletedFiles);
             System.IO.File.WriteAllText(jsonPath, jsonData);
@@ -135,9 +134,9 @@ namespace DocumentExplorer.Controllers
         [Route("EmptyTrash")]
         public IActionResult EmptyTrash()
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
-            string jsonData ="";
-            string[] dirs = Directory.GetDirectories(this.baseLocation);
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
+            string jsonData = "";
+            string[] dirs = Directory.GetDirectories(baseLocation);
             foreach (string dir in dirs)
             {
                 DeleteDirectory(dir);
@@ -149,20 +148,20 @@ namespace DocumentExplorer.Controllers
         [Route("Restore")]
         public IActionResult Restore([FromBody] FileManagerDirectoryContent[] files)
         {
-            this.operation.RootFolder(this.baseLocation);
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
+            operation.RootFolder(baseLocation);
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             string responseString = "";
             List<TrashContents> DeletedFiles = JsonConvert.DeserializeObject<List<TrashContents>>(jsonData) ?? new List<TrashContents>();
             foreach (FileManagerDirectoryContent file in files)
             {
-                TrashContents trashFile = DeletedFiles.Find(x => (x.Container.Equals(file.Id)));
+                TrashContents trashFile = DeletedFiles.Find(x => x.Container.Equals(file.Id));
                 string fileLocation = "/Files" + trashFile.Path;
                 string trashPath = "/Trash/" + trashFile.Container;
-                FileManagerResponse response = this.operation.Move(trashPath, fileLocation, new string[] { trashFile.Name }, new string[] { trashFile.Name }, null, null);
-                if ((response.Error == null))
+                FileManagerResponse response = operation.Move(trashPath, fileLocation, new string[] { trashFile.Name }, new string[] { trashFile.Name }, null, null);
+                if (response.Error == null)
                 {
-                    DeleteDirectory(this.baseLocation + trashPath);
+                    DeleteDirectory(baseLocation + trashPath);
                     DeletedFiles.Remove(trashFile);
                     responseString = "Restored";
                 }
@@ -178,16 +177,17 @@ namespace DocumentExplorer.Controllers
 
         public FileManagerResponse SearchFiles(string value, bool caseSensitive)
         {
-            this.operation.RootFolder(this.baseLocation);
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
+            operation.RootFolder(baseLocation);
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<TrashContents> DeletedFiles = JsonConvert.DeserializeObject<List<TrashContents>>(jsonData) ?? new List<TrashContents>();
-            List<TrashContents> searchFiles = DeletedFiles.FindAll(x => new Regex(WildcardToRegex(value), (caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase)).IsMatch(x.Name));
+            List<TrashContents> searchFiles = DeletedFiles.FindAll(x => new Regex(WildcardToRegex(value), caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase).IsMatch(x.Name));
             List<FileManagerDirectoryContent> data = new List<FileManagerDirectoryContent>();
-            foreach(TrashContents file in searchFiles) { 
+            foreach (TrashContents file in searchFiles)
+            {
                 data.Add(file.Data);
             }
-            return new FileManagerResponse() { Files=data} ;
+            return new FileManagerResponse() { Files = data };
         }
         public virtual string WildcardToRegex(string value)
         {

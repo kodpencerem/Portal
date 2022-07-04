@@ -1,20 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-//File Manager's base functions are available in the below namespace
-using DocumentExplorer.Models.FileManager;
-//File Manager's operations are available in the below namespace
-using DocumentExplorer.Data;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Linq;
-using System.IO;
 using Newtonsoft.Json.Serialization;
-using Microsoft.AspNetCore.Cors;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using VedasPortal.Data;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("AllowAllOrigins")]
@@ -24,9 +22,9 @@ namespace DocumentExplorer.Controllers
         private string basePath;
         public FileManagerController(IWebHostEnvironment hostingEnvironment)
         {
-            this.basePath = hostingEnvironment.ContentRootPath;
-            this.operation = new PhysicalFileProvider();
-            this.operation.RootFolder(this.basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduðunu belirtir.
+            basePath = hostingEnvironment.ContentRootPath;
+            operation = new PhysicalFileProvider();
+            operation.RootFolder(basePath + "\\wwwroot\\Files"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduðunu belirtir.
         }
         // Dosya Yöneticisi iþlemlerinin iþlenmesi
         [Route("FileOperations")]
@@ -36,98 +34,98 @@ namespace DocumentExplorer.Controllers
             {
                 // Özel iþleminizi buraya ekleyin
                 case "read":
-                    if ((args.RootType != null) && ((args.RootType == "Recent") /*|| (args.RootType == "Starred")*/))
+                    if (args.RootType != null && args.RootType == "Recent" /*|| (args.RootType == "Starred")*/)
                     {
-                        FileManagerResponse result1 = this.operation.Search(args.Path, "*", args.ShowHiddenItems, false);
+                        FileManagerResponse result1 = operation.Search(args.Path, "*", args.ShowHiddenItems, false);
                         result1 = FilterRecentFiles(result1);
                         return AddStarDetails(result1);
                     }
-                    else if ((args.RootType != null) && (args.RootType == "Starred"))
+                    else if (args.RootType != null && args.RootType == "Starred")
                     {
-                        return FilterStarred(this.operation.Search(args.Path, "*", args.ShowHiddenItems, false));
+                        return FilterStarred(operation.Search(args.Path, "*", args.ShowHiddenItems, false));
                     }
                     else
                     {
-                        return AddStarDetails(this.operation.GetFiles(args.Path, args.ShowHiddenItems));
+                        return AddStarDetails(operation.GetFiles(args.Path, args.ShowHiddenItems));
                     }
                 case "delete":
                     FileManagerDirectoryContent[] items1 = args.Data;
                     string[] names1 = args.Names;
                     for (var i = 0; i < items1.Length; i++)
                     {
-                        names1[i] = ((items1[i].FilterPath + items1[i].Name).Substring(1));
+                        names1[i] = (items1[i].FilterPath + items1[i].Name).Substring(1);
                         RemoveStarred(names1[i]);
                     }
-                    return this.operation.ToCamelCase(MoveToTrash(args.Data));
+                    return operation.ToCamelCase(MoveToTrash(args.Data));
                 case "copy":
                 case "move":
                     FileManagerResponse response = new FileManagerResponse();
                     response.Error = new ErrorDetails() { Code = "401", Message = "Restricted to perform this action" };
-                    return this.operation.ToCamelCase(response);
+                    return operation.ToCamelCase(response);
                 case "details":
-                    if ((args.RootType != null) && ((args.RootType == "Recent") || (args.RootType == "Starred")))
+                    if (args.RootType != null && (args.RootType == "Recent" || args.RootType == "Starred"))
                     {
                         FileManagerDirectoryContent[] items = args.Data;
                         string[] names = args.Names;
                         for (var i = 0; i < items.Length; i++)
                         {
-                            names[i] = ((items[i].FilterPath + items[i].Name).Substring(1));
+                            names[i] = (items[i].FilterPath + items[i].Name).Substring(1);
                         }
-                        return this.operation.ToCamelCase(this.operation.Details("/", names, args.Data));
+                        return operation.ToCamelCase(operation.Details("/", names, args.Data));
                     }
                     else
                     {
-                        return this.operation.ToCamelCase(this.operation.Details(args.Path, args.Names, args.Data));
+                        return operation.ToCamelCase(operation.Details(args.Path, args.Names, args.Data));
                     }
                 case "create":
                     // Path - Klasörün oluþturulacaðý geçerli yol; Ad - Yeni klasörün adý
-                    return this.operation.ToCamelCase(this.operation.Create(args.Path, args.Name));
+                    return operation.ToCamelCase(operation.Create(args.Path, args.Name));
                 case "search":
                     // Path - Aramanýn yapýldýðý mevcut yol; SearchString - Arama kutusuna yazýlan dize; CaseSensitive - Aramanýn büyük/küçük harf duyarlý olmasý gerekip gerekmediðini belirten Boole deðeri                    
-                    if ((args.RootType != null) && ((args.RootType == "Recent")))
+                    if (args.RootType != null && args.RootType == "Recent")
                     {
-                        FileManagerResponse result1 = this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive);
+                        FileManagerResponse result1 = operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive);
                         result1 = FilterRecentFiles(result1);
                         return AddStarDetails(result1);
                     }
-                    else if ((args.RootType != null) && (args.RootType == "Starred"))
+                    else if (args.RootType != null && args.RootType == "Starred")
                     {
-                        return FilterStarred(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
+                        return FilterStarred(operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                     }
                     else
                     {
-                        return AddStarDetails(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
+                        return AddStarDetails(operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                     }
                 case "rename":
                     // Path - Yeniden adlandýrýlan dosyanýn geçerli yolu; Ad - Eski dosya adý; NewName - Yeni dosya adý
-                    if ((args.RootType != null) && (args.RootType == "Recent"))
+                    if (args.RootType != null && args.RootType == "Recent")
                     {
                         var items = args.Data;
-                        var name = ((items[0].FilterPath + items[0].Name).Substring(1));
-                        var newName = ((items[0].FilterPath + args.NewName).Substring(1));
-                        return this.operation.ToCamelCase(this.operation.Rename("/", name, newName));
+                        var name = (items[0].FilterPath + items[0].Name).Substring(1);
+                        var newName = (items[0].FilterPath + args.NewName).Substring(1);
+                        return operation.ToCamelCase(operation.Rename("/", name, newName));
                     }
                     else
                     {
-                        return this.operation.ToCamelCase(this.operation.Rename(args.Path, args.Name, args.NewName));
+                        return operation.ToCamelCase(operation.Rename(args.Path, args.Name, args.NewName));
                     }
             }
             return null;
         }
         public FileManagerResponse FilterRecentFiles(FileManagerResponse result)
         {
-            IEnumerable<FileManagerDirectoryContent> allFiles = (result.Files);
+            IEnumerable<FileManagerDirectoryContent> allFiles = result.Files;
             allFiles = allFiles?.Where(item => item.DateModified.AddDays(5).CompareTo(DateTime.Now) != -1 && item.IsFile == true);
             result.Files = allFiles;
             return result;
         }
         public FileManagerResponse MoveToTrash(FileManagerDirectoryContent[] dataArray)
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\trash.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\trash.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<TrashContents> DeletedFiles = JsonConvert.DeserializeObject<List<TrashContents>>(jsonData) ?? new List<TrashContents>();
             PhysicalFileProvider trashOperation = new PhysicalFileProvider();
-            string root = this.basePath + "\\wwwroot";
+            string root = basePath + "\\wwwroot";
             trashOperation.RootFolder(root);
             List<FileManagerDirectoryContent> deletedFiles = new List<FileManagerDirectoryContent>();
             foreach (FileManagerDirectoryContent data in dataArray)
@@ -138,7 +136,7 @@ namespace DocumentExplorer.Controllers
                 string trashPath = "/Trash/" + container;
                 Directory.CreateDirectory(root + trashPath);
                 FileManagerResponse response = trashOperation.Move(fileLocation, trashPath, new string[] { data.Name }, null, null, null);
-                if ((response.Error == null))
+                if (response.Error == null)
                 {
                     TrashContents deletedFile = new TrashContents()
                     {
@@ -160,7 +158,7 @@ namespace DocumentExplorer.Controllers
         }
         public string AddStarDetails(FileManagerResponse value)
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\star.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\star.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<string> starredFiles = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
             FileResponse readResponse = new FileResponse();
@@ -177,7 +175,7 @@ namespace DocumentExplorer.Controllers
         }
         public string FilterStarred(FileManagerResponse value)
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\star.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\star.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<string> starredFiles = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
             FileResponse readResponse = new FileResponse();
@@ -200,7 +198,7 @@ namespace DocumentExplorer.Controllers
         }
         public void RemoveStarred(string filePath)
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\star.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\star.json";
             string jsonData = System.IO.File.ReadAllText(jsonPath);
             List<string> starredFiles = JsonConvert.DeserializeObject<List<string>>(jsonData) ?? new List<string>();
             string path = filePath.Replace(Path.DirectorySeparatorChar, '/');
@@ -242,7 +240,7 @@ namespace DocumentExplorer.Controllers
             string[] names = args.Names;
             for (var i = 0; i < items.Length; i++)
             {
-                names[i] = ((items[i].FilterPath + items[i].Name).Substring(1));
+                names[i] = (items[i].FilterPath + items[i].Name).Substring(1);
             }
             return operation.Download("/", names);
         }
@@ -250,7 +248,7 @@ namespace DocumentExplorer.Controllers
         [Route("ToggleStarred")]
         public IActionResult ToggleStarred([FromBody] FileManagerCustomContent args)
         {
-            string jsonPath = this.basePath + "\\wwwroot\\User\\star.json";
+            string jsonPath = basePath + "\\wwwroot\\User\\star.json";
             StreamReader reader = new StreamReader(jsonPath);
             string jsonData = reader.ReadToEnd();
             reader.Dispose();
@@ -272,7 +270,7 @@ namespace DocumentExplorer.Controllers
         [Route("GetImage")]
         public IActionResult GetImage(FileManagerDirectoryContent args)
         {
-            return this.operation.GetImage(args.Path, args.Id, false, null, null);
+            return operation.GetImage(args.Path, args.Id, false, null, null);
         }
 
         public class FileManagerCustomContent : FileManagerDirectoryContent

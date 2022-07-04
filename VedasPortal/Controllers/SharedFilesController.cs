@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
-using DocumentExplorer.Models.FileManager;
-using DocumentExplorer.Data;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.IO;
+using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.DocIO.DLS;
 using Syncfusion.DocIORenderer;
-using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.Pdf;
 using Syncfusion.Presentation;
 using Syncfusion.PresentationRenderer;
 using System.Drawing;
-using Microsoft.AspNetCore.Cors;
-using DocumentExplorer.Models;
+using System.IO;
+using VedasPortal.Data;
+using VedasPortal.Entities.Models.Dosya;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 
-namespace DocumentExplorer.Controllers
+namespace VedasPortal.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("AllowAllOrigins")]
@@ -25,9 +24,9 @@ namespace DocumentExplorer.Controllers
         private string basePath;
         public SharedFilesController(IWebHostEnvironment hostingEnvironment)
         {
-            this.basePath = hostingEnvironment.ContentRootPath;
-            this.operation = new PhysicalFileProvider();
-            this.operation.RootFolder(this.basePath + "\\wwwroot\\SharedFiles"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
+            basePath = hostingEnvironment.ContentRootPath;
+            operation = new PhysicalFileProvider();
+            operation.RootFolder(basePath + "\\wwwroot\\SharedFiles"); // Data\\Dosyalar, hangi dosya ve klasörlerin mevcut olduğunu belirtir.
         }
 
         // Processing the File Manager operations
@@ -39,24 +38,24 @@ namespace DocumentExplorer.Controllers
                 // Özel işleminizi buraya ekleyin
                 case "read":
                     // Path - Şuanki yol; ShowHiddenItems - Gizli öğeleri göstermek/gizlemek için Boole değeri
-                    return this.operation.ToCamelCase(this.operation.GetFiles(args.Path, args.ShowHiddenItems));
+                    return operation.ToCamelCase(operation.GetFiles(args.Path, args.ShowHiddenItems));
                 case "details":
                     // Path - Current path where details of file/folder is requested; Name - Names of the requested folders
-                    return this.operation.ToCamelCase(this.operation.Details(args.Path, args.Names));
+                    return operation.ToCamelCase(operation.Details(args.Path, args.Names));
                 case "create":
                     FileManagerResponse createresponse = new FileManagerResponse();
                     createresponse.Error = new ErrorDetails() { Code = "401", Message = "Restricted to perform this action" };
-                    return this.operation.ToCamelCase(createresponse);
+                    return operation.ToCamelCase(createresponse);
                 case "search":
                     // Path - Aramanın yapıldığı mevcut yol; SearchString - Arama kutusuna yazılan dize; CaseSensitive - Aramanın büyük/küçük harf duyarlı olması gerekip gerekmediğini belirten Boole değeri
-                    return this.operation.ToCamelCase(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
+                    return operation.ToCamelCase(operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                 case "delete":
                 case "copy":
                 case "move":
                 case "rename":
                     FileManagerResponse renameresponse = new FileManagerResponse();
                     renameresponse.Error = new ErrorDetails() { Code = "401", Message = "Restricted to perform this action" };
-                    return this.operation.ToCamelCase(renameresponse);
+                    return operation.ToCamelCase(renameresponse);
             }
             return null;
         }
@@ -70,7 +69,7 @@ namespace DocumentExplorer.Controllers
             string[] names = args.Names;
             for (var i = 0; i < items.Length; i++)
             {
-                names[i] = ((items[i].FilterPath + items[i].Name).Substring(1));
+                names[i] = (items[i].FilterPath + items[i].Name).Substring(1);
             }
             return operation.Download("/", names);
         }
@@ -79,16 +78,16 @@ namespace DocumentExplorer.Controllers
         [Route("GetImage")]
         public IActionResult GetImage(FileManagerFilterContent args)
         {
-            return this.operation.GetImage(args.Path, args.Id, false, null, null);
+            return operation.GetImage(args.Path, args.Id, false, null, null);
         }
         [Route("GetPreviewImage")]
         public IActionResult GetPreviewImage(FileManagerFilterContent args)
         {
-            string baseFolder = this.basePath + "\\wwwroot\\SharedFiles";
+            string baseFolder = basePath + "\\wwwroot\\SharedFiles";
 
             try
             {
-                String fullPath = baseFolder + args.Path;
+                string fullPath = baseFolder + args.Path;
                 string extension = Path.GetExtension(fullPath);
                 Stream imageStream = null;
                 if (extension == Constants.Pdf)

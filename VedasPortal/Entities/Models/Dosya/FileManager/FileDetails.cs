@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class FileDetails
     {

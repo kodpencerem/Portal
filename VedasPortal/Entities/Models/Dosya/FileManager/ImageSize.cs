@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-#if EJ2_DNX
+﻿#if EJ2_DNX
 using System.Web;
 #endif
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class ImageSize
     {

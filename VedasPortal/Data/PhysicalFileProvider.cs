@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,11 +9,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using DocumentExplorer.Models.FileManager;
+using VedasPortal.Entities.Models.Dosya.FileManager;
 
-namespace DocumentExplorer.Data
+namespace VedasPortal.Data
 {
     public class PhysicalFileProvider : IPhysicalFileProvider
     {
@@ -26,17 +26,17 @@ namespace DocumentExplorer.Data
         // Sets the root path
         public void RootFolder(string name)
         {
-            this.contentRootPath = name;
-            this.hostName = new Uri(contentRootPath).Host;
-            if (!string.IsNullOrEmpty(this.hostName))
-                this.hostPath = Path.DirectorySeparatorChar + this.hostName + Path.DirectorySeparatorChar + contentRootPath.Substring((contentRootPath.ToLower().IndexOf(this.hostName) + this.hostName.Length + 1));
+            contentRootPath = name;
+            hostName = new Uri(contentRootPath).Host;
+            if (!string.IsNullOrEmpty(hostName))
+                hostPath = Path.DirectorySeparatorChar + hostName + Path.DirectorySeparatorChar + contentRootPath.Substring(contentRootPath.ToLower().IndexOf(hostName) + hostName.Length + 1);
         }
 
         public void SetRules(AccessDetails details)
         {
-            this.AccessDetails = details;
-            DirectoryInfo root = new DirectoryInfo(this.contentRootPath);
-            this.rootName = root.Name;
+            AccessDetails = details;
+            DirectoryInfo root = new DirectoryInfo(contentRootPath);
+            rootName = root.Name;
         }
 
         // Reads the files within the directorty
@@ -46,13 +46,13 @@ namespace DocumentExplorer.Data
             try
             {
                 if (path == null) path = string.Empty;
-                String fullPath = (contentRootPath + path);
+                string fullPath = contentRootPath + path;
                 DirectoryInfo directory = new DirectoryInfo(fullPath);
-                string[] extensions = this.allowedExtention;
+                string[] extensions = allowedExtention;
                 FileManagerDirectoryContent cwd = new FileManagerDirectoryContent();
-                string rootPath = string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : new DirectoryInfo(this.hostPath).FullName;
-                string parentPath = string.IsNullOrEmpty(this.hostPath) ? directory.Parent.FullName : new DirectoryInfo(this.hostPath + (path != "/" ? path : "")).Parent.FullName;
-                cwd.Name = string.IsNullOrEmpty(this.hostPath) ? directory.Name : new DirectoryInfo(this.hostPath + path).Name;
+                string rootPath = string.IsNullOrEmpty(hostPath) ? contentRootPath : new DirectoryInfo(hostPath).FullName;
+                string parentPath = string.IsNullOrEmpty(hostPath) ? directory.Parent.FullName : new DirectoryInfo(hostPath + (path != "/" ? path : "")).Parent.FullName;
+                cwd.Name = string.IsNullOrEmpty(hostPath) ? directory.Name : new DirectoryInfo(hostPath + path).Name;
                 cwd.Size = 0;
                 cwd.IsFile = false;
                 cwd.DateModified = directory.LastWriteTime;
@@ -62,7 +62,7 @@ namespace DocumentExplorer.Data
                 cwd.FilterPath = GetRelativePath(rootPath, parentPath + Path.DirectorySeparatorChar);
                 cwd.Permission = GetPathPermission(path);
                 readResponse.CWD = cwd;
-                if (!hasAccess(directory.FullName) || (cwd.Permission != null && !cwd.Permission.Read))
+                if (!hasAccess(directory.FullName) || cwd.Permission != null && !cwd.Permission.Read)
                 {
                     readResponse.Files = null;
                     accessMessage = cwd.Permission.Message;
@@ -77,7 +77,7 @@ namespace DocumentExplorer.Data
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if((er.Code=="401")&&!string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 readResponse.Error = er;
                 return readResponse;
             }
@@ -100,7 +100,7 @@ namespace DocumentExplorer.Data
                                 DateCreated = file.CreationTime,
                                 HasChild = false,
                                 Type = file.Extension,
-                                FilterPath = GetRelativePath(this.contentRootPath, directory.FullName),
+                                FilterPath = GetRelativePath(contentRootPath, directory.FullName),
                                 Permission = GetPermission(directory.FullName, file.Name, true)
                             });
                     readFiles.Files = files;
@@ -117,10 +117,10 @@ namespace DocumentExplorer.Data
                                 DateCreated = file.CreationTime,
                                 HasChild = false,
                                 Type = file.Extension,
-                                FilterPath = GetRelativePath(this.contentRootPath, directory.FullName),
+                                FilterPath = GetRelativePath(contentRootPath, directory.FullName),
                                 Permission = GetPermission(directory.FullName, file.Name, true)
                             });
-                    readFiles.Files = (IEnumerable<FileManagerDirectoryContent>)files;
+                    readFiles.Files = files;
                 }
                 return readFiles.Files;
             }
@@ -130,15 +130,15 @@ namespace DocumentExplorer.Data
         // Gets pelative path of file or folder
         public string GetRelativePath(string rootPath, string fullPath)
         {
-            if (!String.IsNullOrEmpty(rootPath) && !String.IsNullOrEmpty(fullPath))
+            if (!string.IsNullOrEmpty(rootPath) && !string.IsNullOrEmpty(fullPath))
             {
                 DirectoryInfo rootDirectory;
-                if (!string.IsNullOrEmpty(this.hostName))
+                if (!string.IsNullOrEmpty(hostName))
                 {
-                    if (rootPath.ToLower().Contains(this.hostName.ToLower()))
-                        rootPath = rootPath.Substring(rootPath.IndexOf(this.hostName, StringComparison.CurrentCultureIgnoreCase) + this.hostName.Length);
-                    if (fullPath.ToLower().Contains(this.hostName.ToLower()))
-                        fullPath = fullPath.Substring(fullPath.IndexOf(this.hostName, StringComparison.CurrentCultureIgnoreCase) + this.hostName.Length);
+                    if (rootPath.ToLower().Contains(hostName.ToLower()))
+                        rootPath = rootPath.Substring(rootPath.IndexOf(hostName, StringComparison.CurrentCultureIgnoreCase) + hostName.Length);
+                    if (fullPath.ToLower().Contains(hostName.ToLower()))
+                        fullPath = fullPath.Substring(fullPath.IndexOf(hostName, StringComparison.CurrentCultureIgnoreCase) + hostName.Length);
                     rootDirectory = new DirectoryInfo(rootPath);
                     fullPath = new DirectoryInfo(fullPath).FullName;
                     rootPath = new DirectoryInfo(rootPath).FullName;
@@ -153,7 +153,7 @@ namespace DocumentExplorer.Data
                 else if (fullPath.Contains(rootDirectory.FullName + Path.DirectorySeparatorChar))
                     return Path.DirectorySeparatorChar + fullPath.Substring(rootPath.Length + 1);
             }
-            return String.Empty;
+            return string.Empty;
         }
 
 
@@ -175,7 +175,7 @@ namespace DocumentExplorer.Data
                                 DateCreated = subDirectory.CreationTime,
                                 HasChild = CheckChild(subDirectory.FullName),
                                 Type = subDirectory.Extension,
-                                FilterPath = GetRelativePath(this.contentRootPath, directory.FullName),
+                                FilterPath = GetRelativePath(contentRootPath, directory.FullName),
                                 Permission = GetPermission(directory.FullName, subDirectory.Name, false)
                             });
                     readDirectory.Files = directories;
@@ -191,7 +191,7 @@ namespace DocumentExplorer.Data
                         DateCreated = subDirectory.CreationTime,
                         HasChild = CheckChild(subDirectory.FullName),
                         Type = subDirectory.Extension,
-                        FilterPath = GetRelativePath(this.contentRootPath, directory.FullName),
+                        FilterPath = GetRelativePath(contentRootPath, directory.FullName),
                         Permission = GetPermission(directory.FullName, subDirectory.Name, false)
                     });
                     readDirectory.Files = directories;
@@ -211,7 +211,7 @@ namespace DocumentExplorer.Data
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
                 string newDirectoryPath = Path.Combine(contentRootPath + path, name);
 
@@ -249,7 +249,7 @@ namespace DocumentExplorer.Data
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 createResponse.Error = er;
                 return createResponse;
             }
@@ -265,17 +265,17 @@ namespace DocumentExplorer.Data
                 {
                     if (path == null) { path = string.Empty; };
                     string fullPath = "";
-                    fullPath = (names.Length == 0) ? (contentRootPath + path.Substring(0, path.Length - 1)) : ((names[0] == null || names[0] == "") ? (contentRootPath + path) : Path.Combine(contentRootPath + path, names[0]));
+                    fullPath = names.Length == 0 ? contentRootPath + path.Substring(0, path.Length - 1) : names[0] == null || names[0] == "" ? contentRootPath + path : Path.Combine(contentRootPath + path, names[0]);
                     string physicalPath = GetPath(path);
                     DirectoryInfo directory = new DirectoryInfo(fullPath);
                     FileInfo info = new FileInfo(fullPath);
                     FileDetails fileDetails = new FileDetails();
-                    DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : this.hostPath);
+                    DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(hostPath) ? contentRootPath : hostPath);
                     fileDetails.Name = info.Name == "" ? directory.Name : info.Name;
                     fileDetails.IsFile = (File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory;
                     fileDetails.Size = (File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory ? byteConversion(info.Length).ToString() : byteConversion(GetDirectorySize(new DirectoryInfo(fullPath), 0)).ToString();
                     fileDetails.Created = info.CreationTime;
-                    fileDetails.Location = GetRelativePath(string.IsNullOrEmpty(this.hostName) ? baseDirectory.Parent.FullName : baseDirectory.Parent.FullName + Path.DirectorySeparatorChar, info.FullName).Substring(1);
+                    fileDetails.Location = GetRelativePath(string.IsNullOrEmpty(hostName) ? baseDirectory.Parent.FullName : baseDirectory.Parent.FullName + Path.DirectorySeparatorChar, info.FullName).Substring(1);
                     fileDetails.Modified = info.LastWriteTime;
                     fileDetails.Permission = GetPermission(physicalPath, fileDetails.Name, fileDetails.IsFile);
                     detailFiles = fileDetails;
@@ -290,12 +290,12 @@ namespace DocumentExplorer.Data
                     for (int i = 0; i < names.Length; i++)
                     {
                         string fullPath = "";
-                        fullPath = (names[i] == null) ? (contentRootPath + path) : Path.Combine(contentRootPath + path, names[i]);
-                        DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : this.hostPath);
-                        string baseDirectoryParentPath = string.IsNullOrEmpty(this.hostName) ? baseDirectory.Parent.FullName : baseDirectory.Parent.FullName + Path.DirectorySeparatorChar;
+                        fullPath = names[i] == null ? contentRootPath + path : Path.Combine(contentRootPath + path, names[i]);
+                        DirectoryInfo baseDirectory = new DirectoryInfo(string.IsNullOrEmpty(hostPath) ? contentRootPath : hostPath);
+                        string baseDirectoryParentPath = string.IsNullOrEmpty(hostName) ? baseDirectory.Parent.FullName : baseDirectory.Parent.FullName + Path.DirectorySeparatorChar;
                         FileInfo info = new FileInfo(fullPath);
                         fileDetails.Name = previousName == "" ? previousName = data[i].Name : previousName = previousName + ", " + data[i].Name;
-                        fileDetails.Size = (long.Parse(fileDetails.Size) + (((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory) ? info.Length : GetDirectorySize(new DirectoryInfo(fullPath), 0))).ToString();
+                        fileDetails.Size = (long.Parse(fileDetails.Size) + ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory ? info.Length : GetDirectorySize(new DirectoryInfo(fullPath), 0))).ToString();
                         previousPath = previousPath == "" ? GetRelativePath(baseDirectoryParentPath, info.Directory.FullName) : previousPath;
                         if (previousPath == GetRelativePath(baseDirectoryParentPath, info.Directory.FullName) && !isVariousFolders)
                         {
@@ -332,7 +332,7 @@ namespace DocumentExplorer.Data
             try
             {
                 string physicalPath = GetPath(path);
-                string result = String.Empty;
+                string result = string.Empty;
                 for (int i = 0; i < names.Length; i++)
                 {
                     bool IsFile = !IsDirectory(physicalPath, names[i]);
@@ -340,13 +340,13 @@ namespace DocumentExplorer.Data
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible.  you need permission to perform the write action.");
+                        throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path + names[i]) + "' is not accessible.  you need permission to perform the write action.");
                     }
                 }
                 FileManagerDirectoryContent removingFile;
                 for (int i = 0; i < names.Length; i++)
                 {
-                    string fullPath = Path.Combine((contentRootPath + path), names[i]);
+                    string fullPath = Path.Combine(contentRootPath + path, names[i]);
                     DirectoryInfo directory = new DirectoryInfo(fullPath);
                     if (!string.IsNullOrEmpty(names[i]))
                     {
@@ -366,19 +366,19 @@ namespace DocumentExplorer.Data
                                     throw e;
                             }
                         }
-                        if (result != String.Empty) break;
+                        if (result != string.Empty) break;
                         removedFiles.Add(removingFile);
                     }
                     else throw new ArgumentNullException("name should not be null");
                 }
                 DeleteResponse.Files = removedFiles;
-                if (result != String.Empty)
+                if (result != string.Empty)
                 {
-                    string deniedPath = result.Substring(this.contentRootPath.Length);
+                    string deniedPath = result.Substring(contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible.  you need permission to perform the write action.";
+                    er.Message = "'" + getFileNameFromPath(deniedPath) + "' is not accessible.  you need permission to perform the write action.";
                     er.Code = "401";
-                    if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                    if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                     DeleteResponse.Error = er;
                     return DeleteResponse;
                 }
@@ -389,7 +389,7 @@ namespace DocumentExplorer.Data
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 DeleteResponse.Error = er;
                 return DeleteResponse;
             }
@@ -408,7 +408,7 @@ namespace DocumentExplorer.Data
                     accessMessage = permission.Message;
                     throw new UnauthorizedAccessException();
                 }
-                string tempPath = (contentRootPath + path);
+                string tempPath = contentRootPath + path;
                 string oldPath = Path.Combine(tempPath, name);
                 string newPath = Path.Combine(tempPath, newName);
                 FileAttributes attr = File.GetAttributes(oldPath);
@@ -454,9 +454,9 @@ namespace DocumentExplorer.Data
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
-                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(this.rootName + path + name) + "' is not accessible. You need permission to perform the write action." : e.Message.ToString();
+                er.Message = e.GetType().Name == "UnauthorizedAccessException" ? "'" + getFileNameFromPath(rootName + path + name) + "' is not accessible. You need permission to perform the write action." : e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 renameResponse.Error = er;
                 return renameResponse;
             }
@@ -468,7 +468,7 @@ namespace DocumentExplorer.Data
             FileManagerResponse copyResponse = new FileManagerResponse();
             try
             {
-                string result = String.Empty;
+                string result = string.Empty;
                 if (renameFiles == null) renameFiles = new string[0];
                 string physicalPath = GetPath(path);
                 for (int i = 0; i < names.Length; i++)
@@ -478,14 +478,14 @@ namespace DocumentExplorer.Data
                     if (permission != null && (!permission.Read || !permission.Copy))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the copy action.");
+                        throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path + names[i]) + "' is not accessible. You need permission to perform the copy action.");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
                 List<string> existFiles = new List<string>();
                 List<string> missingFiles = new List<string>();
@@ -515,11 +515,11 @@ namespace DocumentExplorer.Data
                                 int index = -1;
                                 if (renameFiles.Length > 0)
                                     index = Array.FindIndex(renameFiles, row => row.Contains(directoryName));
-                                if ((newPath == oldPath) || (index != -1))
+                                if (newPath == oldPath || index != -1)
                                 {
                                     newPath = DirectoryRename(newPath);
                                     result = DirectoryCopy(oldPath, newPath);
-                                    if (result != String.Empty) { break; }
+                                    if (result != string.Empty) { break; }
                                     FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                     detail.PreviousName = names[i];
                                     copiedFiles.Add(detail);
@@ -529,7 +529,7 @@ namespace DocumentExplorer.Data
                             else
                             {
                                 result = DirectoryCopy(oldPath, newPath);
-                                if (result != String.Empty) { break; }
+                                if (result != string.Empty) { break; }
                                 FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                 detail.PreviousName = names[i];
                                 copiedFiles.Add(detail);
@@ -540,7 +540,7 @@ namespace DocumentExplorer.Data
                             string fileName = names[i];
                             string oldPath = Path.Combine(contentRootPath + path, fileName);
                             string newPath = Path.Combine(contentRootPath + targetPath, fileName);
-                            bool fileExist = System.IO.File.Exists(newPath);
+                            bool fileExist = File.Exists(newPath);
                             try
                             {
 
@@ -549,7 +549,7 @@ namespace DocumentExplorer.Data
                                     int index = -1;
                                     if (renameFiles.Length > 0)
                                         index = Array.FindIndex(renameFiles, row => row.Contains(fileName));
-                                    if ((newPath == oldPath) || (index != -1))
+                                    if (newPath == oldPath || index != -1)
                                     {
                                         newPath = FileRename(newPath, fileName);
                                         File.Copy(oldPath, newPath);
@@ -578,11 +578,11 @@ namespace DocumentExplorer.Data
                     else missingFiles.Add(names[i]);
                 }
                 copyResponse.Files = copiedFiles;
-                if (result != String.Empty)
+                if (result != string.Empty)
                 {
-                    string deniedPath = result.Substring(this.contentRootPath.Length);
+                    string deniedPath = result.Substring(contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform the copy action.";
+                    er.Message = "'" + getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform the copy action.";
                     er.Code = "401";
                     copyResponse.Error = er;
                     return copyResponse;
@@ -608,7 +608,7 @@ namespace DocumentExplorer.Data
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 er.FileExists = copyResponse.Error?.FileExists;
                 copyResponse.Error = er;
                 return copyResponse;
@@ -617,11 +617,11 @@ namespace DocumentExplorer.Data
 
         // Moves file(s) or folder(s).
         public virtual FileManagerResponse Move(string path, string targetPath, string[] names, string[] renameFiles, FileManagerDirectoryContent targetData, params FileManagerDirectoryContent[] data)
-        { 
+        {
             FileManagerResponse moveResponse = new FileManagerResponse();
             try
             {
-                string result = String.Empty;
+                string result = string.Empty;
                 if (renameFiles == null)
                     renameFiles = new string[0];
                 string physicalPath = GetPath(path);
@@ -632,14 +632,14 @@ namespace DocumentExplorer.Data
                     if (permission != null && (!permission.Read || !permission.Write))
                     {
                         accessMessage = permission.Message;
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the write action.");
+                        throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path + names[i]) + "' is not accessible. You need permission to perform the write action.");
                     }
                 }
                 AccessPermission PathPermission = GetPathPermission(targetPath);
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.WriteContents))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
+                    throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + targetPath) + "' is not accessible. You need permission to perform the writeContents action.");
                 }
                 List<string> existFiles = new List<string>();
                 List<string> missingFiles = new List<string>();
@@ -668,16 +668,16 @@ namespace DocumentExplorer.Data
                             {
                                 int index = -1;
                                 if (renameFiles.Length > 0) index = Array.FindIndex(renameFiles, row => row.Contains(directoryName));
-                                if ((newPath == oldPath) || (index != -1))
+                                if (newPath == oldPath || index != -1)
                                 {
                                     newPath = DirectoryRename(newPath);
                                     result = DirectoryCopy(oldPath, newPath);
-                                    if (result != String.Empty) { break; }
+                                    if (result != string.Empty) { break; }
                                     bool isExist = Directory.Exists(oldPath);
                                     if (isExist)
                                     {
                                         result = DeleteDirectory(oldPath);
-                                        if (result != String.Empty) { break; }
+                                        if (result != string.Empty) { break; }
                                     }
                                     FileManagerDirectoryContent detail = GetFileDetails(newPath);
                                     detail.PreviousName = names[i];
@@ -688,12 +688,12 @@ namespace DocumentExplorer.Data
                             else
                             {
                                 result = DirectoryCopy(oldPath, newPath);
-                                if (result != String.Empty) { break; }
+                                if (result != string.Empty) { break; }
                                 bool isExist = Directory.Exists(oldPath);
                                 if (isExist)
                                 {
                                     result = DeleteDirectory(oldPath);
-                                    if (result != String.Empty) { break; }
+                                    if (result != string.Empty) { break; }
 
                                 }
                                 FileManagerDirectoryContent detail = GetFileDetails(newPath);
@@ -715,7 +715,7 @@ namespace DocumentExplorer.Data
                                     int index = -1;
                                     if (renameFiles.Length > 0)
                                         index = Array.FindIndex(renameFiles, row => row.Contains(fileName));
-                                    if ((newPath == oldPath) || (index != -1))
+                                    if (newPath == oldPath || index != -1)
                                     {
                                         newPath = FileRename(newPath, fileName);
                                         File.Copy(oldPath, newPath);
@@ -751,11 +751,11 @@ namespace DocumentExplorer.Data
                     else missingFiles.Add(names[i]);
                 }
                 moveResponse.Files = movedFiles;
-                if (result != String.Empty)
+                if (result != string.Empty)
                 {
-                    string deniedPath = result.Substring(this.contentRootPath.Length);
+                    string deniedPath = result.Substring(contentRootPath.Length);
                     ErrorDetails er = new ErrorDetails();
-                    er.Message = "'" + this.getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform this action.";
+                    er.Message = "'" + getFileNameFromPath(deniedPath) + "' is not accessible. You need permission to perform this action.";
                     er.Code = "401";
                     moveResponse.Error = er;
                     return moveResponse;
@@ -783,8 +783,8 @@ namespace DocumentExplorer.Data
                     Message = e.Message.ToString(),
                     Code = e.Message.ToString().Contains("is not accessible. You need permission") ? "401" : "417",
                     FileExists = moveResponse.Error?.FileExists
-                }; 
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                };
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 moveResponse.Error = er;
                 return moveResponse;
             }
@@ -798,16 +798,16 @@ namespace DocumentExplorer.Data
             {
                 if (path == null) { path = string.Empty; };
                 string searchWord = searchString;
-                string searchPath = (this.contentRootPath + path);
-                DirectoryInfo directory = new DirectoryInfo(this.contentRootPath + path);
+                string searchPath = contentRootPath + path;
+                DirectoryInfo directory = new DirectoryInfo(contentRootPath + path);
                 FileManagerDirectoryContent cwd = new FileManagerDirectoryContent();
                 cwd.Name = directory.Name;
                 cwd.Size = 0;
                 cwd.IsFile = false;
                 cwd.DateModified = directory.LastWriteTime;
                 cwd.DateCreated = directory.CreationTime;
-                string rootPath = string.IsNullOrEmpty(this.hostPath) ? this.contentRootPath : new DirectoryInfo(this.hostPath).FullName;
-                string parentPath = string.IsNullOrEmpty(this.hostPath) ? directory.Parent.FullName : new DirectoryInfo(this.hostPath + (path != "/" ? path : "")).Parent.FullName;
+                string rootPath = string.IsNullOrEmpty(hostPath) ? contentRootPath : new DirectoryInfo(hostPath).FullName;
+                string parentPath = string.IsNullOrEmpty(hostPath) ? directory.Parent.FullName : new DirectoryInfo(hostPath + (path != "/" ? path : "")).Parent.FullName;
                 cwd.HasChild = CheckChild(directory.FullName);
                 cwd.Type = directory.Extension;
                 cwd.FilterPath = GetRelativePath(rootPath, parentPath + Path.DirectorySeparatorChar);
@@ -815,30 +815,30 @@ namespace DocumentExplorer.Data
                 if (cwd.Permission != null && !cwd.Permission.Read)
                 {
                     accessMessage = cwd.Permission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the read action.");
+                    throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path) + "' is not accessible. You need permission to perform the read action.");
                 }
                 searchResponse.CWD = cwd;
 
                 List<FileManagerDirectoryContent> foundedFiles = new List<FileManagerDirectoryContent>();
-                string[] extensions = this.allowedExtention;
+                string[] extensions = allowedExtention;
                 DirectoryInfo searchDirectory = new DirectoryInfo(searchPath);
                 List<FileInfo> files = new List<FileInfo>();
                 List<DirectoryInfo> directories = new List<DirectoryInfo>();
                 if (showHiddenItems)
                 {
                     IEnumerable<FileInfo> filteredFileList = GetDirectoryFiles(searchDirectory, files).
-                        Where(item => new Regex(WildcardToRegex(searchString), (caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase)).IsMatch(item.Name));
+                        Where(item => new Regex(WildcardToRegex(searchString), caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase).IsMatch(item.Name));
                     IEnumerable<DirectoryInfo> filteredDirectoryList = GetDirectoryFolders(searchDirectory, directories).
-                        Where(item => new Regex(WildcardToRegex(searchString), (caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase)).IsMatch(item.Name));
+                        Where(item => new Regex(WildcardToRegex(searchString), caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase).IsMatch(item.Name));
                     foreach (FileInfo file in filteredFileList)
                     {
-                        FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(this.contentRootPath, file.DirectoryName, file.Name));
+                        FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(contentRootPath, file.DirectoryName, file.Name));
                         bool hasPermission = parentsHavePermission(fileDetails);
                         if (hasPermission) foundedFiles.Add(fileDetails);
                     }
                     foreach (DirectoryInfo dir in filteredDirectoryList)
                     {
-                        FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(this.contentRootPath, dir.FullName));
+                        FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(contentRootPath, dir.FullName));
                         bool hasPermission = parentsHavePermission(dirDetails);
                         if (hasPermission) foundedFiles.Add(dirDetails);
                     }
@@ -846,23 +846,23 @@ namespace DocumentExplorer.Data
                 else
                 {
                     IEnumerable<FileInfo> filteredFileList = GetDirectoryFiles(searchDirectory, files).
-                       Where(item => new Regex(WildcardToRegex(searchString), (caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase)).IsMatch(item.Name) && (item.Attributes & FileAttributes.Hidden) == 0);
+                       Where(item => new Regex(WildcardToRegex(searchString), caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase).IsMatch(item.Name) && (item.Attributes & FileAttributes.Hidden) == 0);
                     IEnumerable<DirectoryInfo> filteredDirectoryList = GetDirectoryFolders(searchDirectory, directories).
-                        Where(item => new Regex(WildcardToRegex(searchString), (caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase)).IsMatch(item.Name) && (item.Attributes & FileAttributes.Hidden) == 0);
+                        Where(item => new Regex(WildcardToRegex(searchString), caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase).IsMatch(item.Name) && (item.Attributes & FileAttributes.Hidden) == 0);
                     foreach (FileInfo file in filteredFileList)
                     {
-                        FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(this.contentRootPath, file.DirectoryName, file.Name));
+                        FileManagerDirectoryContent fileDetails = GetFileDetails(Path.Combine(contentRootPath, file.DirectoryName, file.Name));
                         bool hasPermission = parentsHavePermission(fileDetails);
                         if (hasPermission) foundedFiles.Add(fileDetails);
                     }
                     foreach (DirectoryInfo dir in filteredDirectoryList)
                     {
-                        FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(this.contentRootPath, dir.FullName));
+                        FileManagerDirectoryContent dirDetails = GetFileDetails(Path.Combine(contentRootPath, dir.FullName));
                         bool hasPermission = parentsHavePermission(dirDetails);
                         if (hasPermission) foundedFiles.Add(dirDetails);
                     }
                 }
-                searchResponse.Files = (IEnumerable<FileManagerDirectoryContent>)foundedFiles;
+                searchResponse.Files = foundedFiles;
                 return searchResponse;
             }
             catch (Exception e)
@@ -870,20 +870,20 @@ namespace DocumentExplorer.Data
                 ErrorDetails er = new ErrorDetails();
                 er.Message = e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 searchResponse.Error = er;
                 return searchResponse;
             }
         }
         // Converts the bytes to definite size values
-        public String byteConversion(long fileSize)
+        public string byteConversion(long fileSize)
         {
             try
             {
                 string[] index = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
                 if (fileSize == 0) return "0 " + index[0];
-                int loc = Convert.ToInt32(Math.Floor(Math.Log((Math.Abs(fileSize)), 1024)));
-                return (Math.Sign(fileSize) * (Math.Round((Math.Abs(fileSize)) / Math.Pow(1024, loc), 1))).ToString() + " " + index[loc];
+                int loc = Convert.ToInt32(Math.Floor(Math.Log(Math.Abs(fileSize), 1024)));
+                return (Math.Sign(fileSize) * Math.Round(Math.Abs(fileSize) / Math.Pow(1024, loc), 1)).ToString() + " " + index[loc];
             }
             catch (Exception e) { throw e; }
         }
@@ -899,7 +899,7 @@ namespace DocumentExplorer.Data
                 AccessPermission PathPermission = GetFilePermission(path);
                 if (PathPermission != null && !PathPermission.Read)
                     return null;
-                String fullPath = (contentRootPath + path);
+                string fullPath = contentRootPath + path;
                 FileStream fileStreamInput = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
                 FileStreamResult fileStreamResult = new FileStreamResult(fileStreamInput, "APPLICATION/octet-stream");
                 return fileStreamResult;
@@ -917,7 +917,7 @@ namespace DocumentExplorer.Data
                 if (PathPermission != null && (!PathPermission.Read || !PathPermission.Upload))
                 {
                     accessMessage = PathPermission.Message;
-                    throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path) + "' is not accessible. You need permission to perform the upload action.");
+                    throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path) + "' is not accessible. You need permission to perform the upload action.");
                 }
                 List<string> existFiles = new List<string>();
                 foreach (IFormFile file in uploadFiles)
@@ -925,19 +925,19 @@ namespace DocumentExplorer.Data
                     if (uploadFiles != null)
                     {
                         string name = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                        string fullName = Path.Combine((this.contentRootPath + path), name);
+                        string fullName = Path.Combine(contentRootPath + path, name);
                         if (action == "save")
                         {
-                            if (!System.IO.File.Exists(fullName))
+                            if (!File.Exists(fullName))
                             {
-                                using (FileStream fs = System.IO.File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
+                                using (FileStream fs = File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
                             }
                             else existFiles.Add(fullName);
                         }
                         else if (action == "remove")
                         {
-                            if (System.IO.File.Exists(fullName))
-                                System.IO.File.Delete(fullName);
+                            if (File.Exists(fullName))
+                                File.Delete(fullName);
                             else
                             {
                                 ErrorDetails er = new ErrorDetails();
@@ -948,9 +948,9 @@ namespace DocumentExplorer.Data
                         }
                         else if (action == "replace")
                         {
-                            if (System.IO.File.Exists(fullName))
-                                System.IO.File.Delete(fullName);
-                            using (FileStream fs = System.IO.File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
+                            if (File.Exists(fullName))
+                                File.Delete(fullName);
+                            using (FileStream fs = File.Create(fullName)) { file.CopyTo(fs); fs.Flush(); }
                         }
                         else if (action == "keepboth")
                         {
@@ -959,9 +959,9 @@ namespace DocumentExplorer.Data
                             if (index >= 0)
                                 newName = newName.Substring(0, index);
                             int fileCount = 0;
-                            while (System.IO.File.Exists(newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(name) : Path.GetExtension(name)))) { fileCount++; }
+                            while (File.Exists(newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(name) : Path.GetExtension(name)))) { fileCount++; }
                             newName = newName + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(name);
-                            using (FileStream fs = System.IO.File.Create(newName)) { file.CopyTo(fs); fs.Flush(); }
+                            using (FileStream fs = File.Create(newName)) { file.CopyTo(fs); fs.Flush(); }
                         }
                     }
                 }
@@ -978,9 +978,9 @@ namespace DocumentExplorer.Data
             catch (Exception e)
             {
                 ErrorDetails er = new ErrorDetails();
-                er.Message = (e.GetType().Name == "UnauthorizedAccessException") ? "'" + this.getFileNameFromPath(path) + "' is not accessible. You need permission to perform the upload action." : e.Message.ToString();
+                er.Message = e.GetType().Name == "UnauthorizedAccessException" ? "'" + getFileNameFromPath(path) + "' is not accessible. You need permission to perform the upload action." : e.Message.ToString();
                 er.Code = er.Message.Contains("is not accessible. You need permission") ? "401" : "417";
-                if ((er.Code == "401") && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
+                if (er.Code == "401" && !string.IsNullOrEmpty(accessMessage)) { er.Message = accessMessage; }
                 uploadResponse.Error = er;
                 return uploadResponse;
             }
@@ -991,20 +991,20 @@ namespace DocumentExplorer.Data
             try
             {
                 string physicalPath = GetPath(path);
-                String fullPath;
+                string fullPath;
                 int count = 0;
                 for (int i = 0; i < names.Length; i++)
                 {
                     bool IsFile = !IsDirectory(physicalPath, names[i]);
                     AccessPermission FilePermission = GetPermission(physicalPath, names[i], IsFile);
                     if (FilePermission != null && (!FilePermission.Read || !FilePermission.Download))
-                        throw new UnauthorizedAccessException("'" + this.getFileNameFromPath(this.rootName + path + names[i]) + "' is not accessible. You need permission to perform the download action.");
+                        throw new UnauthorizedAccessException("'" + getFileNameFromPath(rootName + path + names[i]) + "' is not accessible. You need permission to perform the download action.");
 
                     fullPath = Path.Combine(contentRootPath + path, names[i]);
                     if ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory)
                         count++;
                 }
-                return (count == names.Length) ? DownloadFile(path, names) : DownloadFolder(path, names, count);
+                return count == names.Length ? DownloadFile(path, names) : DownloadFolder(path, names, count);
             }
             catch (Exception) { return null; }
         }
@@ -1016,11 +1016,11 @@ namespace DocumentExplorer.Data
             {
                 path = Path.GetDirectoryName(path);
                 string tempPath = Path.Combine(Path.GetTempPath(), "temp.zip");
-                String fullPath;
+                string fullPath;
                 if (names == null || names.Length == 0)
                 {
-                    fullPath = (contentRootPath + path);
-                    byte[] bytes = System.IO.File.ReadAllBytes(fullPath);
+                    fullPath = contentRootPath + path;
+                    byte[] bytes = File.ReadAllBytes(fullPath);
                     FileStream fileStreamInput = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
                     fileStreamResult = new FileStreamResult(fileStreamInput, "APPLICATION/octet-stream");
                 }
@@ -1036,22 +1036,22 @@ namespace DocumentExplorer.Data
                     string fileName = Guid.NewGuid().ToString() + "temp.zip";
                     string newFileName = fileName.Substring(36);
                     tempPath = Path.Combine(Path.GetTempPath(), newFileName);
-                    if (System.IO.File.Exists(tempPath))
-                        System.IO.File.Delete(tempPath);
+                    if (File.Exists(tempPath))
+                        File.Delete(tempPath);
                     string currentDirectory;
                     ZipArchiveEntry zipEntry;
                     ZipArchive archive;
                     for (int i = 0; i < names.Count(); i++)
                     {
-                        fullPath = Path.Combine((contentRootPath + path), names[i]);
+                        fullPath = Path.Combine(contentRootPath + path, names[i]);
                         if (!string.IsNullOrEmpty(fullPath))
                         {
                             try
                             {
                                 using (archive = ZipFile.Open(tempPath, ZipArchiveMode.Update))
                                 {
-                                    currentDirectory = Path.Combine((contentRootPath + path), names[i]);
-                                    zipEntry = archive.CreateEntryFromFile(Path.Combine(this.contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
+                                    currentDirectory = Path.Combine(contentRootPath + path, names[i]);
+                                    zipEntry = archive.CreateEntryFromFile(Path.Combine(contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
                                 }
                             }
                             catch (Exception) { return null; }
@@ -1077,12 +1077,12 @@ namespace DocumentExplorer.Data
         {
             try
             {
-                if (!String.IsNullOrEmpty(path))
+                if (!string.IsNullOrEmpty(path))
                     path = Path.GetDirectoryName(path);
                 FileStreamResult fileStreamResult;
                 // create a temp.Zip file intially 
                 string tempPath = Path.Combine(Path.GetTempPath(), "temp.zip");
-                String fullPath;
+                string fullPath;
                 if (File.Exists(tempPath))
                     File.Delete(tempPath);
                 if (names.Length == 1)
@@ -1103,7 +1103,7 @@ namespace DocumentExplorer.Data
                     {
                         for (int i = 0; i < names.Length; i++)
                         {
-                            currentDirectory = Path.Combine((contentRootPath + path), names[i]);
+                            currentDirectory = Path.Combine(contentRootPath + path, names[i]);
                             if ((File.GetAttributes(currentDirectory) & FileAttributes.Directory) == FileAttributes.Directory)
                             {
                                 string[] files = Directory.GetFiles(currentDirectory, "*.*", SearchOption.AllDirectories);
@@ -1123,7 +1123,7 @@ namespace DocumentExplorer.Data
                                 }
                             }
                             else
-                                zipEntry = archive.CreateEntryFromFile(Path.Combine(this.contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
+                                zipEntry = archive.CreateEntryFromFile(Path.Combine(contentRootPath, currentDirectory), names[i], CompressionLevel.Fastest);
                         }
                     }
                     FileStream fileStreamInput = new FileStream(tempPath, FileMode.Open, FileAccess.Read, FileShare.Delete);
@@ -1140,7 +1140,7 @@ namespace DocumentExplorer.Data
         private string DirectoryRename(string newPath)
         {
             int directoryCount = 0;
-            while (System.IO.Directory.Exists(newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : ""))) { directoryCount++; }
+            while (Directory.Exists(newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : ""))) { directoryCount++; }
             return newPath + (directoryCount > 0 ? "(" + directoryCount.ToString() + ")" : "");
         }
         // Renames a File
@@ -1149,14 +1149,14 @@ namespace DocumentExplorer.Data
             int name = newPath.LastIndexOf(".");
             if (name >= 0) newPath = newPath.Substring(0, name);
             int fileCount = 0;
-            while (System.IO.File.Exists(newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(fileName) : Path.GetExtension(fileName)))) { fileCount++; }
+            while (File.Exists(newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" + Path.GetExtension(fileName) : Path.GetExtension(fileName)))) { fileCount++; }
             return newPath + (fileCount > 0 ? "(" + fileCount.ToString() + ")" : "") + Path.GetExtension(fileName);
         }
 
         // Copies a directory
         private string DirectoryCopy(string sourceDirName, string destDirName)
         {
-            string result = String.Empty;
+            string result = string.Empty;
             try
             {
                 // Gets the subdirectories for the specified directory.
@@ -1193,7 +1193,7 @@ namespace DocumentExplorer.Data
                 foreach (DirectoryInfo direc in dirs)
                 {
                     result = DirectoryCopy(Path.Combine(sourceDirName, direc.Name), Path.Combine(destDirName, direc.Name));
-                    if (result != String.Empty) return result;
+                    if (result != string.Empty) return result;
                 }
                 return result;
             }
@@ -1209,7 +1209,7 @@ namespace DocumentExplorer.Data
         {
             try
             {
-                string result = String.Empty;
+                string result = string.Empty;
                 string[] files = Directory.GetFiles(path);
                 string[] dirs = Directory.GetDirectories(path);
                 foreach (string file in files)
@@ -1228,7 +1228,7 @@ namespace DocumentExplorer.Data
                 foreach (string dir in dirs)
                 {
                     result = DeleteDirectory(dir);
-                    if (result != String.Empty)
+                    if (result != string.Empty)
                         return result;
                 }
                 Directory.Delete(path, true);
@@ -1249,9 +1249,9 @@ namespace DocumentExplorer.Data
                 FileAttributes attr = File.GetAttributes(path);
                 FileInfo detailPath = new FileInfo(info.FullName);
                 int folderLength = 0;
-                bool isFile = ((attr & FileAttributes.Directory) == FileAttributes.Directory) ? false : true;
+                bool isFile = (attr & FileAttributes.Directory) == FileAttributes.Directory ? false : true;
                 if (!isFile) folderLength = detailPath.Directory.GetDirectories().Length;
-                string filterPath = GetRelativePath(this.contentRootPath, info.DirectoryName + Path.DirectorySeparatorChar);
+                string filterPath = GetRelativePath(contentRootPath, info.DirectoryName + Path.DirectorySeparatorChar);
                 return new FileManagerDirectoryContent
                 {
                     Name = info.Name,
@@ -1260,7 +1260,7 @@ namespace DocumentExplorer.Data
                     DateModified = info.LastWriteTime,
                     DateCreated = info.CreationTime,
                     Type = info.Extension,
-                    HasChild = isFile ? false : (CheckChild(info.FullName)),
+                    HasChild = isFile ? false : CheckChild(info.FullName),
                     FilterPath = filterPath,
                     Permission = GetPermission(GetPath(filterPath), info.Name, isFile)
                 };
@@ -1272,7 +1272,7 @@ namespace DocumentExplorer.Data
             AccessPermission FilePermission = new AccessPermission();
             if (isFile)
             {
-                if (this.AccessDetails.AccessRules == null) return null;
+                if (AccessDetails.AccessRules == null) return null;
                 string nameExtension = Path.GetExtension(name).ToLower();
                 string fileName = Path.GetFileNameWithoutExtension(name);
                 string currentPath = GetFilePath(location + name);
@@ -1308,7 +1308,7 @@ namespace DocumentExplorer.Data
             }
             else
             {
-                if (this.AccessDetails.AccessRules == null) { return null; }
+                if (AccessDetails.AccessRules == null) { return null; }
                 foreach (AccessRule folderRule in AccessDetails.AccessRules)
                 {
                     if (folderRule.Path != null && folderRule.IsFile == false && (folderRule.Role == null || folderRule.Role == AccessDetails.Role))
@@ -1333,7 +1333,7 @@ namespace DocumentExplorer.Data
         }
         public virtual string GetPath(string path)
         {
-            String fullPath = (this.contentRootPath + path);
+            string fullPath = contentRootPath + path;
             DirectoryInfo directory = new DirectoryInfo(fullPath);
             return directory.FullName;
         }
@@ -1368,8 +1368,8 @@ namespace DocumentExplorer.Data
         }
         public virtual bool IsDirectory(string path, string fileName)
         {
-            String fullPath = Path.Combine(path, fileName);
-            return ((File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory) ? false : true;
+            string fullPath = Path.Combine(path, fileName);
+            return (File.GetAttributes(fullPath) & FileAttributes.Directory) != FileAttributes.Directory ? false : true;
         }
         public virtual bool HasPermission(Permission rule)
         {
@@ -1381,7 +1381,7 @@ namespace DocumentExplorer.Data
             filePermission.Download = HasPermission(fileRule.Download);
             filePermission.Write = HasPermission(fileRule.Write);
             filePermission.Read = HasPermission(fileRule.Read);
-            filePermission.Message = string.IsNullOrEmpty(fileRule.Message)?string.Empty:fileRule.Message;
+            filePermission.Message = string.IsNullOrEmpty(fileRule.Message) ? string.Empty : fileRule.Message;
             return filePermission;
         }
         public virtual AccessPermission UpdateFolderRules(AccessPermission folderPermission, AccessRule folderRule)
@@ -1397,13 +1397,13 @@ namespace DocumentExplorer.Data
         }
         public virtual bool parentsHavePermission(FileManagerDirectoryContent fileDetails)
         {
-            String parentPath = fileDetails.FilterPath.Replace(Path.DirectorySeparatorChar, '/');
-            String[] parents = parentPath.Split('/');
-            String currPath = "/";
+            string parentPath = fileDetails.FilterPath.Replace(Path.DirectorySeparatorChar, '/');
+            string[] parents = parentPath.Split('/');
+            string currPath = "/";
             bool hasPermission = true;
             for (int i = 0; i <= parents.Length - 2; i++)
             {
-                currPath = (parents[i] == "") ? currPath : (currPath + parents[i] + "/");
+                currPath = parents[i] == "" ? currPath : currPath + parents[i] + "/";
                 AccessPermission PathPermission = GetPathPermission(currPath);
                 if (PathPermission == null) break;
                 else if (PathPermission != null && !PathPermission.Read)
