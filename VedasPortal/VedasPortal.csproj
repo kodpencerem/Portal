@@ -743,7 +743,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\FaydaliIcerikler\Videolar\" />
     <Folder Include="wwwroot\images\uploaded\" />
     <Folder Include="wwwroot\SharedFiles\" />
   </ItemGroup>
