@@ -60,6 +60,7 @@ namespace VedasPortal
                 PersonelDurumu.Yeni => "Yeni Personel",
                 PersonelDurumu.Ayrilis => "Ayrılacak Personel",
                 PersonelDurumu.Vefat => "Vefat Durumu",
+                PersonelDurumu.GorevDegisikligi => "Görev Değişikliği",
                 _ => "",
             };
         }

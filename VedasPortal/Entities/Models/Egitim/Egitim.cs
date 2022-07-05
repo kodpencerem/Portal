@@ -60,6 +60,6 @@ namespace VedasPortal.Entities.Models.Egitim
         Sayac,
         KacakVeTahakkuk,
         Icra,
-        KurumsalIletisim
+        KurumsalIletisim,
     }
 }

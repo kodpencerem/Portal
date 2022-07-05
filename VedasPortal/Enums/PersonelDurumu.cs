@@ -4,6 +4,7 @@
     {
         Yeni,
         Ayrilis,
-        Vefat
+        Vefat,
+        GorevDegisikligi
     }
 }

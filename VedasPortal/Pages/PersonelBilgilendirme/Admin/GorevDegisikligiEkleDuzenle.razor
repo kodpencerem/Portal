@@ -1,18 +1,18 @@
-﻿@page "/personel/ekle"
-@page "/personel/duzenle/{IseBaslayanId:int}"
+﻿@page "/gorev/degisiklik/ekle"
+@page "/gorev/degisiklik/duzenle/{GorevDegisiklikId:int}"
 
-@inherits IseYeniBaslayan
-@attribute [Authorize(Roles = "Admin,YeniBaslayanEkleDuzenle")]
+@inherits GorevDegisiklikEkle
+@attribute [Authorize(Roles = "Admin,GorevDegisikligiEkleDuzenle")]
 
 <div class="col-12">
-    <EditForm Model="@personelDurum" OnValidSubmit="Kayit">
+    <EditForm Model="@personelDurum" OnValidSubmit="KayitAsync">
         <DataAnnotationsValidator />
         <CardComponent cardStyle="Style.primary">
             <CardHeader>
-                Yeni İşe Başlayan @Title
+                Görev Değişikliği @Title
             </CardHeader>
             <CardBody>
-                <div class="col-12">
+                <div class="row" style="margin-top:15px">
                     <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-left">
                         <div class="form-group row">
                             <label class="form-label col-md-2">Resim Seçin</label>
@@ -28,79 +28,86 @@
                             </div>
                             <ValidationMessage For="@(() => personelDurum.AdSoyad)" />
                         </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Telefon No</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.TelefonNo" />
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                <label for="Kategori" class="control-label col-md-4">Personel Durumu</label>
+
+                                <div class="col-md-8">
+                                    <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control" id="girinti">
+                                        <option></option>
+                                        @if (EklemeDurumlari != null)
+                                        {
+                                            @foreach (var kategori in EklemeDurumlari)
+                                            {
+                                                <option value="@kategori.Key"> @kategori.Value </option>
+                                            }
+                                        }
+                                    </InputSelect>
+                                </div>
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.TelefonNo)" />
+                            <div class="form-group row col-md-6">
+                                <label class="control-label col-md-4">Çalıştığı Temsilcilik</label>
+                                <div class="col-md-8">
+                                    <InputText  class="form-control" @bind-Value="personelDurum.TemsilcilikAdi" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.TemsilcilikAdi)" />
+                            </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="control-label col-md-2">E-Mail</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.EMail" />
-                            </div>
-                            <ValidationMessage For="@(() => personelDurum.EMail)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Açık Adres</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.Adres" />
-                            </div>
-                            <ValidationMessage For="@(() => personelDurum.Adres)" />
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Doğum Tarihi</label>
-                            <div class="col-md-10">
-                                <InputDate class="form-control" @bind-Value="personelDurum.DogumTarihi" />
-                            </div>
-                            <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Görev Yeri</label>
-                            <div class="col-md-10">
-                                <InputText class="form-control" @bind-Value="personelDurum.TemsilcilikAdi" />
-                            </div>
-                            <ValidationMessage For="@(() => personelDurum.TemsilcilikAdi)" />
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-2">Görevi</label>
+                            <label class="control-label col-md-2">Mevcut Görevi</label>
                             <div class="col-md-10">
                                 <InputText class="form-control" @bind-Value="personelDurum.BasladigiGorev" />
                             </div>
                             <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
                         </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2">Geçeceği Görev</label>
+                            <div class="col-md-10">
+                                <InputText class="form-control" @bind-Value="personelDurum.GorevDegisikligi" />
+                            </div>
+                            <ValidationMessage For="@(() => personelDurum.BasladigiGorev)" />
+                        </div>
+                        <br />
+
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                <label class="control-label col-md-4">İşe Başlama Tarihi</label>
+                                <div class="col-md-8">
+                                    <InputDate class="form-control" @bind-Value="personelDurum.IseBaslangicTarihi" id="girinti" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
+                            </div>
+                            <div class="form-group row col-md-6">
+                                <label class="control-label col-md-4">Değişiklik Tarihi</label>
+                                <div class="col-md-8">
+                                    <InputDate class="form-control" @bind-Value="personelDurum.IsDegisiklikTarihi" id="girinti" />
+                                </div>
+                                <ValidationMessage For="@(() => personelDurum.IstenAyrilisTarihi)" />
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12  float-right">
+                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-right">
 
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <CKEditorBlazor Id="MyEditor1"
                                                 @bind-Value=@personelDurum.Aciklama
-                                                Label="Özel Notlar"
+                                                Label="Değişiklik Nedeni"
                                                 UrlToPostImage="images/uploaded/">
                                 </CKEditorBlazor>
 
                             </div>
-                            <ValidationMessage For="@(() => personelDurum.AyrilisNedeni)" />
+                            <ValidationMessage For="@(() => personelDurum.Aciklama)" />
                         </div>
 
                         <br />
                         <div class="row">
-
-                            <div class="form-group row col-md-4">
-                                <label class="control-label col-md-6">İşe Başlama Tarihi</label>
-                                <div class="col-md-6">
-                                    <InputDate class="form-control" @bind-Value="personelDurum.IseBaslangicTarihi" />
-                                </div>
-                                <ValidationMessage For="@(() => personelDurum.IseBaslangicTarihi)" />
-                            </div>
-
                             <div class="form-group row col-md-4">
                                 <label class="control-label col-md-8">Personel Şimdi Aktif Edilsin Mi?</label>
                                 <div class="col-md-4">
@@ -118,41 +125,6 @@
                                 </div>
                                 <ValidationMessage For="@(() => personelDurum.AnasayfadaGoster)" />
                             </div>
-
-                            <div class="form-group row col-md-6">
-                                <label for="Kategori" class="control-label col-md-6">Personel Durumu</label>
-                                <div class="col-md-6">
-                                    <InputSelect @bind-Value="@personelDurum.PersonelDurumu" class="form-control">
-                                        <option></option>
-                                        @if (EklemeDurumlari != null)
-                                        {
-                                            @foreach (var kategori in EklemeDurumlari)
-                                            {
-                                                <option value="@kategori.Key"> @kategori.Value </option>
-                                            }
-                                        }
-                                    </InputSelect>
-                                </div>
-                            </div>
-
-                            <div class="form-group row col-md-6">
-                                <label for="Kategori" class="control-label col-md-6">Çalışacağı Birimi Seçin</label>
-                                <div class="col-md-6">
-                                    <InputSelect @bind-Value="@personelDurum.Birimler" class="form-control">
-                                        <option></option>
-                                        @if (Birimler != null)
-                                        {
-                                            @foreach (var kategori in Birimler)
-                                            {
-                                                <option value="@kategori.Key"> @kategori.Value </option>
-                                            }
-                                        }
-
-                                    </InputSelect>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -160,9 +132,11 @@
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary">
+                            class="btn btn-primary"
+                            @onclick="KayitAsync">
                         Kaydet
-                    </button>                   
+                    </button>
+
                 </div>
             </CardFotter>
         </CardComponent>
@@ -172,11 +146,10 @@
 
 
 
-@if (PersonelDurumlari == null)
+@if (GorevDegisiklikleri == null)
 
 {
-    <p><em>Yükleniyor...</em></p>
-}
+    <p><em>Yükleniyor...</em></p> }
 
 else
 
@@ -187,7 +160,7 @@ else
             <CardHeader>
                 <div class="float-left">
                     <div class="col-md-12">
-                        İşten Ayrılan Personel
+                        Görevi Değişen Personeller
                     </div>
                 </div>
             </CardHeader>
@@ -199,7 +172,7 @@ else
                                 <th class="text-center pt-3">
                                     <div class="custom-checkbox custom-checkbox-table custom-control">
                                         <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                           class="custom-control-input" id="checkbox-all">
+                                               class="custom-control-input" id="checkbox-all">
                                         <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                     </div>
                                 </th>
@@ -211,34 +184,34 @@ else
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var yeniPersonel in PersonelDurumlari.Where(h => h.PersonelDurumu == PersonelDurumu.Yeni).ToList())
+                            @foreach (var gorevDegisikligi in GorevDegisiklikleri.Where(h => h.PersonelDurumu == PersonelDurumu.GorevDegisikligi).ToList())
 
                             {
                                 <tr>
                                     <td class="text-center pt-2">
                                         <div class="custom-checkbox custom-control">
                                             <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                           id="checkbox-1">
+                                                   id="checkbox-1">
                                             <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                         </div>
                                     </td>
                                     <td>
                                         <img src="images/uploaded/@string.Concat(
-                                                                       yeniPersonel.ImageFile.FirstOrDefault().Adi,
+                                                                       gorevDegisikligi.ImageFile.FirstOrDefault().Adi,
                                                                        ".",
-                                                                       yeniPersonel.ImageFile.FirstOrDefault().Uzanti)"
-                                     width="50"
-                                     height="50" />
+                                                                       gorevDegisikligi.ImageFile.FirstOrDefault().Uzanti)"
+                                             width="50"
+                                             height="50" />
                                     </td>
 
-                                    <td>@yeniPersonel.AdSoyad</td>
+                                    <td>@gorevDegisikligi.AdSoyad</td>
 
 
                                     <td>
 
-                                        <a href='/personel/duzenle/@yeniPersonel.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
+                                        <a href='/gorev/degisiklik/duzenle/@gorevDegisikligi.Id' class="btn btn-info btn-outline-dark" role="button">Düzenle</a>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEmpModal"
-                                        @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(yeniPersonel.Id);})">
+                                                @onclick="@(() => {DialogGorunur="block"; SilmeyiOnayla(gorevDegisikligi.Id);})">
                                             Sil
                                         </button>
                                     </td>
@@ -260,8 +233,7 @@ else
             <button class="btn btn-danger" @onclick="@(()=>{Sil(); ModalDialog.Close();})">Evet</button>
             <button class="btn btn-warning" @onclick="@(()=>{ModalDialog.Close();})">Hayır</button>
         </ModalFooter>
-    </ModalComponent>
-}
+    </ModalComponent>}
 
 
 <style>
@@ -270,6 +242,10 @@ else
         border: none;
         margin-top: 200px;
         box-shadow: 0 3px 8px rgb(0 0 0 / 5%);
+    }
+
+    #girinti {
+        margin-left: 10px
     }
 
     .row {

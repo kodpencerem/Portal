@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
@@ -12,13 +11,15 @@ using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
+using VedasPortal.Entities.Models.User;
 using VedasPortal.Enums;
 using VedasPortal.Repository.Interface;
+using VedasPortal.Services.AuthServices;
 
 namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 {
 
-    public class IseYeniBaslayan : ComponentBase
+    public class GorevDegisiklikEkle : ComponentBase
     {
 
         [Inject]
@@ -28,10 +29,16 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         public IBaseRepository<ImageFile> PersonelDosyaServisi { get; set; }
 
         [Inject]
+        public IManageUsersService _usersService { get; set; }
+
+        // Mevcut kullanıcıları görüntülemek için koleksiyon
+        public List<ApplicationUser> _allUsers = new List<ApplicationUser>();
+
+        [Inject]
         public AuthenticationStateProvider StateProvider { get; set; }
 
         [Parameter]
-        public int IseBaslayanId { get; set; }
+        public int GorevDegisiklikId { get; set; }
 
         protected string Title = "Ekle";
         public PersonelDurum personelDurum = new();
@@ -40,13 +47,22 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         private ClaimsPrincipal User;
         public string Message { get; set; }
+        // Olası hataları tutmak için
+        string strError = "";
+        public void GetUsers()
+        {
+            // Tüm hata mesajlarını temizle
+            strError = "";
+            // Kullanıcıları tutmak için koleksiyon
+            _allUsers = _usersService.GetAllUsers();
+        }
 
-        protected IEnumerable<PersonelDurum> PersonelDurumlari { get; set; }
+        protected IEnumerable<PersonelDurum> GorevDegisiklikleri { get; set; }
 
         protected IEnumerable<PersonelDurum> TumPersonelleriGetir()
         {
-            PersonelDurumlari = PersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
-            return PersonelDurumlari;
+            GorevDegisiklikleri = PersonelServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
+            return GorevDegisiklikleri;
         }
         public Dictionary<PersonelDurumu, string> EklemeDurumlari { get; set; }
         protected void TumEklemeDurumlariniGetir()
@@ -68,14 +84,14 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
             }
             Birimler = list;
         }
+        [CascadingParameter]
+        public Task<AuthenticationState> State { get; set; }
 
-        [Authorize(Roles = "Admin")]
-        protected void Kayit()
+        protected async Task KayitAsync()
         {
-            Message = "";
-            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                personelDurum.KaydedenKullanici = User.Identity.Name;
+            
+                var authState = await State;
+                personelDurum.KaydedenKullanici = authState.User.Identity.Name;
                 PersonelServisi.Add(personelDurum);
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.ImageUploadedPath;
@@ -87,34 +103,27 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
                     Kategori = DosyaKategori.Jpg,
                     AktifPasif = true,
                     PersonelDurumId = personelDurum.Id,
-                    KaydedenKullanici = User.Identity.Name
+                    KaydedenKullanici = authState.User.Identity.Name
 
                 };
                 PersonelDosyaServisi.Add(dosya);
                 TumPersonelleriGetir();
-                personelDurum = new PersonelDurum();
-            }
-            else
-            {
-                Message = "Personel ayrılış kaydı oluşturma yetkiniz yoktur!";
-            }
-
-
+                personelDurum = new PersonelDurum();          
         }
         protected override void OnParametersSet()
         {
-            if (IseBaslayanId != 0 || PersonelDosya.Yolu != null)
+            if (GorevDegisiklikId != 0 || PersonelDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                personelDurum = PersonelServisi.Get(IseBaslayanId);
+                personelDurum = PersonelServisi.Get(GorevDegisiklikId);
             }
         }
 
-        protected void SilmeyiOnayla(int IseBaslayanId)
+        protected void SilmeyiOnayla(int GorevDegisiklikId)
         {
             ModalDialog.Open();
 
-            personelDurum = PersonelDurumlari.FirstOrDefault(x => x.Id == IseBaslayanId);
+            personelDurum = GorevDegisiklikleri.FirstOrDefault(x => x.Id == GorevDegisiklikId);
         }
 
         protected void Sil()
@@ -135,6 +144,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
         {
             var giris = await StateProvider.GetAuthenticationStateAsync();
             User = giris.User;
+            GetUsers();
             TumPersonelleriGetir();
             TumEklemeDurumlariniGetir();
             TumBirimleriGetir();
