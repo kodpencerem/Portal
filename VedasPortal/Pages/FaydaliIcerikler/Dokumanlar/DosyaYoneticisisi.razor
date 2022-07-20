@@ -4,6 +4,7 @@
 @using System.Text
 @using IO = System.IO
 @using VedasPortal.Entities.Models.Dosya
+@using VedasPortal.Entities.Models.Dosya.FileManager
 @using Syncfusion.Blazor.Popups
 
 <div class="col-12">
@@ -91,14 +92,26 @@
                     </div>
                 </div>
 
-                <SfDialog Width="335px" @ref="_dialog" Target="#target" IsModal="true" @bind-Visible="_isUnSupported">
+                <SfDialog Width="335px" @ref="_dialog" Target="#filemanager" IsModal="true" @bind-Visible="_isUnSupported">
                     <DialogTemplates>
                         <Header>@_fileName</Header>
                         <Content>
-                            <p>Bu dosya tipi onizlenemez.</p>
+                            @if (Constants.Mp4 == ".mp4")
+                            {
+
+                                <video id="videoTagId" controls="controls" width="400px" height="262px">
+                                    <source src=@source>
+                                </video>
+
+                            }
+                            else
+                            {
+                                <p>Bu Icerik Onizlenemez</p>
+                            }
+
                         </Content>
                     </DialogTemplates>
-                    <DialogEvents Closed="@DlgClose"></DialogEvents>
+                    <DialogEvents OnOpen="open" Closed="@DlgClose"></DialogEvents>
                     <DialogButtons>
                         <DialogButton Content="OK" IsPrimary="true" OnClick="@DlgButtonClick" />
                     </DialogButtons>
@@ -113,6 +126,7 @@
 @code {
     private SfFileManager _fileManager;
     private SfTreeView<OptionsDataModel> _treeObj;
+    public FileManagerDirectoryContent _content;
     private SfSidebar _sidebar;
     private SfDialog _dialog;
     private bool ShowThumbnail = true;
@@ -133,6 +147,7 @@
     private string _fileName = "";
     private int _mapId = 0;
     private int starid = 1;
+    public string source { get; set; } = "";
     private List<OptionsDataModel> _optionsData = new List<OptionsDataModel>() {
         new OptionsDataModel(){Name= "Tum Dosyalar", Id= "1", Select= true, Icon= "sf-icon-Allfiles"},
         new OptionsDataModel(){Name= "Son Yuklemeler", Id= "2", Select= false, Icon= "sf-icon-RecentFiles" },
@@ -202,6 +217,8 @@
     }
     private void DlgClose(Object args)
     {
+        this.source = "";
+        JSRuntime.InvokeAsync<string>("loadVideo");
         _isUnSupported = false;
     }
     public void Refresh()
@@ -440,6 +457,20 @@
                 case Constants.Png:
                 case Constants.Ico:
                     break;
+                case Constants.Mp4:
+
+                    if (Constants.Mp4 == ".mp4")
+                    {
+                        this._isUnSupported = true;
+                        // update the path for source attribute.
+                        string newPath = (fileDetails["filterPath"] + fileDetails["name"] + "/");
+                        this.source = newPath.Replace('\\', '/');
+
+
+                    }
+
+
+                    break;
                 default:
                     _fileName = fileDetails["name"];
                     _isUnSupported = true;
@@ -514,6 +545,9 @@
                             case Constants.Pptx:
                                 iconCss = "e-fe-pptx";
                                 break;
+                            case Constants.Mp4:
+                                iconCss = "e-fe-mp4";
+                                break;
                         }
                         await JSRuntime.InvokeVoidAsync("revertToIconPreview", val, iconCss);
                     }
@@ -572,7 +606,15 @@
         string baseUrl = "/api/FileManager/GetPreviewImage";
         string imgUrl = baseUrl + "?path=" + data["filterPath"] + data["name"];
         return imgUrl;
-    } }
+    }
+
+    private void open()
+    {
+        // need to call the load event of video
+        JSRuntime.InvokeAsync<string>("loadVideo");
+    }
+
+}
 
 
 <style>

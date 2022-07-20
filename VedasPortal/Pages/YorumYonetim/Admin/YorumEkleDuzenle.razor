@@ -13,40 +13,65 @@
                 Yorum @Title
             </CardHeader>
             <CardBody>
-                <div class="col-12">
-                    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12">
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <CKEditorBlazor Id="MyEditor1"
-                                                @bind-Value=@yorum.Aciklama
-                                                Label="Açıklama"
-                                                UrlToPostImage="images/uploaded/">
-                                </CKEditorBlazor>
+                <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-left">
+                    <div class="col-12">
+                        <div class="col-lg-12 col-sm-12 col-md-6 col-xs-12">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <CKEditorBlazor Id="MyEditor1"
+                                                    @bind-Value=@yorum.Aciklama
+                                                    Label="Açıklama"
+                                                    UrlToPostImage="images/uploaded/">
+                                    </CKEditorBlazor>
 
+                                </div>
+                                <ValidationMessage For="@(() => yorum.Aciklama)" />
                             </div>
-                            <ValidationMessage For="@(() => yorum.Aciklama)" />
                         </div>
                     </div>
                 </div>
-                <br />
-                <div class="form-group row col-md-6">
-                    <label class="control-label col-md-8">Yorum Şimdi Yayınlasın Mı?</label>
-                    <div class="col-md-4">
-                        <InputCheckbox class="form-control"
-                                       @bind-Value="yorum.OnaylansinMi" />
+                <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 float-left">
+                    <br />
+                    <div class="row">
+                        <div class="form-group row col-md-4">
+                            <label class="control-label col-md-8">Yorum Şimdi Yayınlasın Mı?</label>
+                            <div class="col-md-4">
+                                <InputCheckbox class="form-control"
+                                               @bind-Value="yorum.OnaylansinMi" />
+                            </div>
+                            <ValidationMessage For="@(() => yorum.OnaylansinMi)" />
+                        </div>
+
+                        <div class="form-group row col-md-8">
+                            <label for="Kategori" class="control-label col-md-2">Yorum Durumu</label>
+                            <div class="col-md-10">
+                                <InputSelect @bind-Value="@yorum.YorumDurum" class="form-control">
+                                    <option></option>
+                                    @if (Kategoriler != null)
+                                    {
+                                        @foreach (var kategori in Kategoriler)
+                                        {
+                                            <option value="@kategori.Key"> @kategori.Value </option>
+                                        }
+                                    }
+
+                                </InputSelect>
+                            </div>
+                        </div>
+
                     </div>
-                    <ValidationMessage For="@(() => yorum.OnaylansinMi)" />
                 </div>
+
+
 
             </CardBody>
             <CardFotter>
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary"
-                            >
+                            class="btn btn-primary">
                         Kaydet
                     </button>
-                    
+
                 </div>
             </CardFotter>
         </CardComponent>

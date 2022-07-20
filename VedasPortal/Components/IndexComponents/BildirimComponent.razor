@@ -1,5 +1,74 @@
-﻿<h3>BildirimComponent</h3>
+﻿@using VedasPortal.Repository.Interface
+@using VedasPortal.Entities.Models.Yorum
 
+@if (Bildirimler == null)
+
+{
+    <p><em>Yükleniyor...</em></p>
+}
+
+else
+
+{
+
+
+    <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
+        <div class="dropdown-header">
+            <p class="text text-center">Bildirimler</p>
+        </div>
+        <div class="dropdown-list-content dropdown-list-icons">
+            @foreach (var bildirim in Bildirimler.ToList())
+            {
+                @if (bildirim.YorumDurum == YorumDurum.OnayBekleniyor)
+                {
+                    <a href="yorum/duzenle/@bildirim.Id" class="dropdown-item dropdown-item-unread">
+                        <span class="dropdown-item-icon bg-primary text-white">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <span class="dropdown-item-desc">
+                            Onay Bekleyen Yorum Var
+                            <span class="time">
+                                @bildirim.KayitTarihi.Date.ToShortDateString()
+                            </span>
+                        </span>
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="dropdown-item dropdown-item-unread">
+                        <span class="dropdown-item-icon bg-primary text-white">
+                            <i class="fas fa-code"></i>
+                        </span>
+                        <span class="dropdown-item-desc">
+                            Onay Bekleyen Yorum Yok
+                            
+                        </span>
+                    </a>
+                }
+
+            }
+        </div>
+        <div class="dropdown-footer text-center">
+            <a href="yorum/ekle">Tümünü Göster <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+}
 @code {
 
+    [Inject]
+    protected IBaseRepository<Yorum> BildirimServisi { get; set; }
+    protected IEnumerable<Yorum> Bildirimler;
+
+
+    protected override Task OnInitializedAsync()
+    {
+        TumBildirimleriGetir();
+        return Task.CompletedTask;
+    }
+
+    protected IEnumerable<Yorum> TumBildirimleriGetir()
+    {
+        Bildirimler = BildirimServisi.GetAll().ToList();
+        return Bildirimler;
+    }
 }

@@ -6,6 +6,7 @@ using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Entities.Models.IKUygulama;
 using VedasPortal.Entities.Models.Mevzuat;
 using VedasPortal.Entities.Models.Oneri;
+using VedasPortal.Entities.Models.Yorum;
 using VedasPortal.Enums;
 
 namespace VedasPortal
@@ -41,7 +42,16 @@ namespace VedasPortal
                 _ => "",
             };
         }
-
+        public static string TextYorumDurum(this YorumDurum kategori)
+        {
+            return kategori switch
+            {
+                YorumDurum.OnayBekleniyor => "Onay Bekleyen Yorum",
+                YorumDurum.Onaylandi => "Onayla",
+                YorumDurum.RedEdildi => "Red Edildi",
+                _ => "",
+            };
+        }
         public static string TextDurumKodlari(this DurumKodlari kategori)
         {
             return kategori switch

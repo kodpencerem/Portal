@@ -1,4 +1,5 @@
-﻿using VedasPortal.Entities.Models.Dosya;
+﻿using System.ComponentModel.DataAnnotations;
+using VedasPortal.Entities.Models.Dosya;
 
 namespace VedasPortal.Entities.Models.Yorum
 {
@@ -16,5 +17,14 @@ namespace VedasPortal.Entities.Models.Yorum
 
         public int? EgitimId { get; set; }
         public Egitim.Egitim Egitim { get; set; }
+        [DataType(DataType.Text)]
+        public YorumDurum YorumDurum { get; set; } = YorumDurum.OnayBekleniyor;
+    }
+
+    public enum YorumDurum
+    {
+        OnayBekleniyor,
+        Onaylandi,
+        RedEdildi
     }
 }

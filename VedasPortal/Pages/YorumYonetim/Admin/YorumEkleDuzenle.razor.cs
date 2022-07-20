@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -72,11 +73,21 @@ namespace VedasPortal.Pages.YorumYonetim.Admin
             TumYorumlarilariGetir();
         }
 
-
+        public Dictionary<YorumDurum, string> Kategoriler { get; set; }
+        protected void TumKategorileriGetir()
+        {
+            var list = new Dictionary<YorumDurum, string>();
+            foreach (YorumDurum item in Enum.GetValues(typeof(YorumDurum)))
+            {
+                list.Add(item, item.TextYorumDurum());
+            }
+            Kategoriler = list;
+        }
 
         protected override Task OnInitializedAsync()
         {
             TumYorumlarilariGetir();
+            TumKategorileriGetir();
             return Task.CompletedTask;
         }
         [Inject]
