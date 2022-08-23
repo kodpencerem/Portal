@@ -5,36 +5,47 @@
 @using System.Collections.Generic;
 @using VedasPortal.Repository.Interface;
 
-@foreach (var videoGetir in VideoGetir.Where(x => x.AktifPasif == true && x.Uzanti == "mp4" || x.Uzanti == "mkv").ToList())
+@if (VideoGetir == null)
+
 {
-    <BlazoredVideo @ref="video"
-                   PlayEvent="OnPlay"
-                   TimeUpate="OnTimeUpdate"
-                   VideoStateOptions="options"
-                   class="w-100"
-                   style="max-width:800px;"
-                   controls="controls"
-                   type="@Type.ToString()">
-        <source src="Videolar/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"
-                type="@Type.ToString()" />
-    </BlazoredVideo>
+    <p><em>Yükleniyor...</em></p>
+}
 
-    <div class="article-details">
-        <div class="article-title">
-            <h4><a href="Videolar/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"></a>@videoGetir.Adi</h4>
+else
+{
+
+
+    @foreach (var videoGetir in VideoGetir.Where(x => x.AktifPasif == true && x.Uzanti == "mp4" || x.Uzanti == "mkv").ToList())
+    {
+        <BlazoredVideo @ref="video"
+                       PlayEvent="OnPlay"
+                       TimeUpate="OnTimeUpdate"
+                       VideoStateOptions="options"
+                       class="w-100"
+                       style="max-width:800px;"
+                       controls="controls"
+                       type="@Type.ToString()">
+            <source src="Videolar/@string.Concat(videoGetir?.Adi, ".", videoGetir?.Uzanti)"
+                    type="@Type.ToString()" />
+        </BlazoredVideo>
+
+        <div class="article-details">
+            <div class="article-title">
+                <h4><a href="Videolar/@string.Concat(videoGetir?.Adi, ".", videoGetir?.Uzanti)"></a>@videoGetir?.Adi</h4>
+            </div>
+            <p class="text-black">
+                @((MarkupString)Aciklama)
+            </p>
+
         </div>
-        <p class="text-black">
-            @((MarkupString)Aciklama)
-        </p>
-
-    </div>
+    }
 }
 @code {
 
     [Inject]
     protected IBaseRepository<Dosya> Video { get; set; }
 
-    protected IEnumerable<Dosya> VideoGetir { get; set; } = new List<Dosya>();
+    protected IEnumerable<Dosya> VideoGetir { get; set; } 
 
     BlazoredVideo video;
 

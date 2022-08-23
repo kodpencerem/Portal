@@ -109,6 +109,8 @@
     <None Include="Components\ToplantiTakvimi\ToplantiSec.razor" />
     <None Include="Components\ToplantiTakvimi\TimePickerComponent.razor" />
     <None Include="Components\ToplantiTakvimi\ToplantiListComponent.razor" />
+    <None Include="Pages\FaydaliIcerikler\Videolar\Admin\VideoEkleDuzenle.razor" />
+    <None Include="Pages\FaydaliIcerikler\Videolar\Videolar.razor" />
     <None Include="wwwroot\assets\bundles\amcharts4\animated.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\charts.js" />
     <None Include="wwwroot\assets\bundles\amcharts4\core.js" />
