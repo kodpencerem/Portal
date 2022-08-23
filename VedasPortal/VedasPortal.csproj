@@ -747,4 +747,11 @@
     <Folder Include="wwwroot\SharedFiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\Videolar\1706202210182.mp4">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

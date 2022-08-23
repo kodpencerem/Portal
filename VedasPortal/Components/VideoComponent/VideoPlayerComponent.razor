@@ -15,13 +15,13 @@
                    style="max-width:800px;"
                    controls="controls"
                    type="@Type.ToString()">
-        <source src="files/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"
+        <source src="Videolar/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"
                 type="@Type.ToString()" />
     </BlazoredVideo>
 
     <div class="article-details">
         <div class="article-title">
-            <h4><a href="files/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"></a>@videoGetir.Adi</h4>
+            <h4><a href="Videolar/@string.Concat(videoGetir?.Adi,".",videoGetir?.Uzanti)"></a>@videoGetir.Adi</h4>
         </div>
         <p class="text-black">
             @((MarkupString)Aciklama)

@@ -72,7 +72,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
             egitim.KaydedenKullanici = authState.User.Identity.Name;
             EgitimServisi.Add(egitim);
             var videoName = SaveFileToUploaded.FileName.Split(".");
-            var videoPath = SaveFileToUploaded.FileUploadedPath;
+            var videoPath = SaveFileToUploaded.VideoUploadedPath;
             if (egitim.Id != 0)
             {
                 var video = new Dosya()
