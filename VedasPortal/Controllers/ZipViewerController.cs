@@ -11,7 +11,7 @@ namespace VedasPortal.Controllers
     [ApiController]
     public class ZipViewerController : ControllerBase
     {
-        private PhysicalFileProvider operation;        
+        private PhysicalFileProvider operation;
         private string tempDir;
         private string basePath;
         private string baseLocation;

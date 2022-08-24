@@ -73,7 +73,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             };
             DuyuruDosyaServisi.Add(dosya);
             TumDuyurulariGetir();
-            
+
             duyuru = new HaberDuyuru();
         }
         protected override void OnParametersSet()
@@ -112,7 +112,7 @@ namespace VedasPortal.Pages.Duyurular.Admin
             return Task.CompletedTask;
         }
 
-        
+
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

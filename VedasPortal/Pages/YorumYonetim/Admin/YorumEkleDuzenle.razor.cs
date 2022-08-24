@@ -16,7 +16,7 @@ namespace VedasPortal.Pages.YorumYonetim.Admin
 
         [Inject]
         public IBaseRepository<Yorum> YorumServisi { get; set; }
-     
+
         [Parameter]
         public int YorumId { get; set; }
 

@@ -12,7 +12,7 @@ namespace VedasPortal.Components.Anket.Modals
     {
         [CascadingParameter]
         BlazoredModalInstance Modal { get; set; }
-       
+
         private EditContext editContext { get; set; }
 
         private AnketSecenekVm AnketSecenekVm { get; set; } = new AnketSecenekVm();
@@ -32,7 +32,7 @@ namespace VedasPortal.Components.Anket.Modals
             return Modal.CloseAsync(ModalResult.Ok(AnketSecenekDTO));
         }
 
-        void Cancel() => Modal.CancelAsync();     
-        
+        void Cancel() => Modal.CancelAsync();
+
     }
 }

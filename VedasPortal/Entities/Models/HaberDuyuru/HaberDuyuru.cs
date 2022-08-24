@@ -6,7 +6,7 @@ namespace VedasPortal.Entities.Models.HaberDuyuru
 
 {
     public class HaberDuyuru : BaseEntity
-    {   
+    {
         public int No { get; set; }
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         [Display(Name = "Haber/Duyuru Başlığı:")]

@@ -2,7 +2,6 @@
 using Blazored.Modal.Services;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Components.Anket.Modals;
 using VedasPortal.Data;
@@ -76,14 +75,14 @@ namespace VedasPortal.Components.Anket
             }
         }
 
-   
+
         private async Task SecenekEkle()
         {
             var maxId = AnketEkle.MaxIdGetir();
             var formModal = Modal.Show<YeniAnketSecenekEkle>("Bir seçenek ekleyin");
-            
+
             var result = await formModal.Result;
-            
+
             if (!result.Cancelled)
             {
                 var results = result?.Data;

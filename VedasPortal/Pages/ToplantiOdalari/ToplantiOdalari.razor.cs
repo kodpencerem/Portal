@@ -22,6 +22,6 @@ namespace VedasPortal.Pages.ToplantiOdalari
         {
             Odalar = ToplantiOdasi.GetAll();
             return Odalar;
-        }     
+        }
     }
 }

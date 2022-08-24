@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Components.ShowModalComponent;
 using VedasPortal.Entities.Models.Egitim;
-using VedasPortal.Entities.Models.User;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.KullaniciDurumlari
@@ -25,7 +24,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
 
         protected string Title = "Ekle";
         public UzmanlikAlani uzmanlikAlani = new();
-        
+
         protected IEnumerable<UzmanlikAlani> UzmanlikAlanlari { get; set; }
 
         protected IEnumerable<UzmanlikAlani> TumUzmanliklariGetir()

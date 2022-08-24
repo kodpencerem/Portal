@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Linq;
 using System.Threading.Tasks;
 using VedasPortal.Repository.Interface.Anket;
@@ -7,7 +6,7 @@ using VedasPortal.Repository.Interface.Anket;
 namespace VedasPortal.Components.Anket
 {
     public partial class AnketKatilimSayisi : ComponentBase
-    {         
+    {
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
 

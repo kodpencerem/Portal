@@ -16,12 +16,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using Syncfusion.Blazor;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
 using VedasPortal.Entities.Models;
+using VedasPortal.Entities.Models.Anket;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Entities.Models.Egitim;
@@ -45,9 +48,6 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
-using Syncfusion.Blazor;
-using Newtonsoft.Json.Serialization;
-using VedasPortal.Entities.Models.Anket;
 
 
 #endregion

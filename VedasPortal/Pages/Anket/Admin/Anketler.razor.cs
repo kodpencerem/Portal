@@ -2,7 +2,6 @@
 using Blazored.Modal.Services;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Components.Anket.Modals;
@@ -20,10 +19,10 @@ namespace VedasPortal.Pages.Anket.Admin
 
         [CascadingParameter]
         IModalService Modal { get; set; }
-       
+
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
-        
+
         public List<AnketDTO> AnketListe { get; set; }
 
         [Inject]

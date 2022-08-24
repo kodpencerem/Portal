@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
 
         [Inject]
         public IBaseRepository<IkUygulama> IkUygulamaServisi { get; set; }
-        
+
         [Inject]
         public IBaseRepository<ImageFile> IkDosyaServisi { get; set; }
 
@@ -79,7 +79,7 @@ namespace VedasPortal.Pages.InsanKaynaklariUygulamalari.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 IkUygulamaId = ikUygulama.Id,
-                KaydedenKullanici= authState.User.Identity.Name
+                KaydedenKullanici = authState.User.Identity.Name
 
             };
             IkDosyaServisi.Add(dosya);

@@ -24,14 +24,14 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar
         public ImageFile MevzuatDetayDosya { get; set; }
         protected override Task OnInitializedAsync()
         {
-            TumDosyalariGetir();            
+            TumDosyalariGetir();
             MevzuatDetayGetir = MevzuatServisi.Get(MevzuatId);
             return Task.CompletedTask;
         }
 
         public Dosya fileClass = new Dosya();
         public string pdfName = "";
-        
+
         public void ShowOnCurrentPage(int fileId)
         {
             pdfName = string.Concat(fileClass.Files.SingleOrDefault(x => x.MevzuatId == fileId)?.Adi, ".",

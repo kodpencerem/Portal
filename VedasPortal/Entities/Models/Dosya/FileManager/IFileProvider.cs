@@ -30,7 +30,7 @@ namespace VedasPortal.Entities.Models.Dosya.FileManager
 #endif
 
         FileStreamResult GetImage(string path, string id, bool allowCompress, ImageSize size, params FileManagerDirectoryContent[] data);
-      
+
     }
 
 }

@@ -55,10 +55,10 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
             if (OdaId != 0)
             {
                 Title = "Duzenle";
-                Oda = ToplantiOdasi.Get(OdaId);                
+                Oda = ToplantiOdasi.Get(OdaId);
             }
         }
-        
+
         protected void SilmeyiOnayla(int OdaId)
         {
             ModalDialog.Open();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using VedasPortal.Entities.Models.User;
 using VedasPortal.Repository.Interface.Anket;
 
 namespace VedasPortal.Entities.DTOs.Anket

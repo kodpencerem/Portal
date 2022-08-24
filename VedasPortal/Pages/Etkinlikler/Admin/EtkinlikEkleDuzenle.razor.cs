@@ -22,7 +22,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
 
         [Inject]
         public IBaseRepository<ImageFile> EtkinlikDosyaServisi { get; set; }
-       
+
         [Parameter]
         public int EtkinlikId { get; set; }
 
@@ -77,7 +77,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
                 Kategori = DosyaKategori.Jpg,
                 AktifPasif = true,
                 EtkinlikId = etkinlik.Id,
-                KaydedenKullanici= authState.User.Identity.Name
+                KaydedenKullanici = authState.User.Identity.Name
 
             };
             EtkinlikDosyaServisi.Add(dosya);
@@ -89,7 +89,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             if (EtkinlikId != 0)
             {
                 Title = "Duzenle";
-                etkinlik = EtkinlikServisi.Get(EtkinlikId);                
+                etkinlik = EtkinlikServisi.Get(EtkinlikId);
             }
         }
 
@@ -123,7 +123,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
             TumKatilimcilariGetir();
             return Task.CompletedTask;
         }
-        
+
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

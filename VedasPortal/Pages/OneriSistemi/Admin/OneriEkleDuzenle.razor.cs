@@ -111,7 +111,7 @@ namespace VedasPortal.Pages.OneriSistemi.Admin
                 };
                 OneriDosyaServisi.Add(dosya);
             }
-            
+
             TumOnerileriGetir();
             oneri = new Oneri();
         }

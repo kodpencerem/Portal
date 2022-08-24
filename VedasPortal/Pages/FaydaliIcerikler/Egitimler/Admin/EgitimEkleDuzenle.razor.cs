@@ -88,7 +88,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
                     VideoKategori = vidyo.VideoKategori,
                 };
                 VideoServisi.Add(video);
-            }           
+            }
             TumEgitimleriGetir();
             egitim = new Egitim();
 
@@ -115,7 +115,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler.Admin
         protected void Sil()
         {
             if (egitim.Id == 0)
-                return;           
+                return;
             VideoServisi.Remove(vidyo.Id);
             EgitimServisi.Remove(egitim.Id);
             egitim = new Egitim();

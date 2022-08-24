@@ -1,5 +1,4 @@
-﻿using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.DuzelticiFaaliyet;
+﻿using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.Etkinlik;
 using VedasPortal.Entities.Models.HaberDuyuru;
@@ -200,8 +199,8 @@ namespace VedasPortal
                 DosyaKategori.Xlsx => "Excel Döküman",
                 DosyaKategori.Zip => "Sıkıştırılmış Dosya",
                 DosyaKategori.Jpg => "Jpg Resmi",
-                DosyaKategori.Bitmap =>"Bitmap Resmi",
-                DosyaKategori.Gif =>  "Hareketli Resim",
+                DosyaKategori.Bitmap => "Bitmap Resmi",
+                DosyaKategori.Gif => "Hareketli Resim",
                 DosyaKategori.Jpeg => "Jpeg Resmi",
                 _ => "",
             };

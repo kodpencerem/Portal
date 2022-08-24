@@ -32,6 +32,6 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         {
             DuzelticiFaaliyet = DuzelticiFaaliyetler.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return DuzelticiFaaliyet;
-        }       
+        }
     }
 }

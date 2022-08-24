@@ -29,7 +29,7 @@ namespace VedasPortal.Pages.BasindaBiz
             Haberler = HaberServisi.GetAll().AsQueryable().Include(s => s.ImageFile).ToList();
             return Haberler;
         }
-        
+
         [Inject]
         public IJSRuntime JsRun { get; set; }
         protected override async void OnAfterRender(bool firstRender)

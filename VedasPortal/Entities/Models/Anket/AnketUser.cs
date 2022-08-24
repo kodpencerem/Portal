@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VedasPortal.Entities.Models.User;
+﻿using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.Models.Anket
 {

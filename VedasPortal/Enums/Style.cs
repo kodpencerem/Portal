@@ -2,14 +2,14 @@
 {
     public enum Style
     {
-		success,
-		danger,
-		secondary,
-		primary,
-		warning,
-		dark,
-		light,
-		info,
-		error
-	}
+        success,
+        danger,
+        secondary,
+        primary,
+        warning,
+        dark,
+        light,
+        info,
+        error
+    }
 }

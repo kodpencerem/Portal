@@ -6,7 +6,7 @@ namespace VedasPortal.Entities.Models
 {
     public class Rehber : BaseEntity
     {
-        
+
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
         public string Adi { get; set; }
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]

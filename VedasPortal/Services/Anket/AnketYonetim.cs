@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
 using VedasPortal.Entities.Models.Anket;
-using VedasPortal.Entities.Models.User;
-using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Utils.Anket.ToMapper;
 
@@ -278,11 +276,11 @@ namespace VedasPortal.Services.Anket
         {
             var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var anketUser = _context.AnketUser.FirstOrDefault(x=>x.ApplicationUserId==user && x.AnketId==null);
+            var anketUser = _context.AnketUser.FirstOrDefault(x => x.ApplicationUserId == user && x.AnketId == null);
             try
             {
 
-                if (anketUser?.ApplicationUserId == user && anketUser.AnketId==null)
+                if (anketUser?.ApplicationUserId == user && anketUser.AnketId == null)
                 {
                     var guncelOySayisi = 0;
 

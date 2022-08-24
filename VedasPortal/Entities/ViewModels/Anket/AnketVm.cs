@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using VedasPortal.Entities.DTOs.Anket;
-using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.ViewModels.Anket
 {
@@ -23,8 +22,8 @@ namespace VedasPortal.Entities.ViewModels.Anket
         public DateTime OlusturulmaTarihi { get; set; }
         [Required(ErrorMessage = "Lütfen Bir Seçenek Seçiniz!")]
         public string SecilenSecenek { get; set; }
-        public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>(); 
-        
+        public List<AnketSecenekDTO> AnketSecenekleri { get; set; } = new List<AnketSecenekDTO>();
+
         public void YapilanAnket()
         {
             ToplamKatilim += 1;

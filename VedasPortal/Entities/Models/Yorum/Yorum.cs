@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using VedasPortal.Entities.Models.Dosya;
 
 namespace VedasPortal.Entities.Models.Yorum
 {
