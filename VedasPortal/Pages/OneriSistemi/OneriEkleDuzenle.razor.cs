@@ -145,7 +145,7 @@ namespace VedasPortal.Pages.OneriSistemi
             TumKategorileriGetir();
             TumOnerileriGetir();
             TumDereceleriGetir();
-            TumOdulleriGetir();           
+            TumOdulleriGetir();
             return Task.CompletedTask;
         }
         [Inject]

@@ -21,7 +21,7 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         [Inject]
         public IBaseRepository<VefatDurumu> VefatDurumServisi { get; set; }
-      
+
         [Inject]
         public AuthenticationStateProvider StateProvider { get; set; }
 

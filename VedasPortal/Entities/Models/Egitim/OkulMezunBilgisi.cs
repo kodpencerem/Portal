@@ -6,7 +6,7 @@ namespace VedasPortal.Entities.Models.Egitim
     public class OkulMezunBilgisi : Base.BaseEntity
     {
         [Required(ErrorMessage = "Bu alanı boş geçemezsiniz!")]
-        [Display(Name ="Okul Adı:")]
+        [Display(Name = "Okul Adı:")]
         [DataType(DataType.Text)]
         public string OkulAdi { get; set; }
 

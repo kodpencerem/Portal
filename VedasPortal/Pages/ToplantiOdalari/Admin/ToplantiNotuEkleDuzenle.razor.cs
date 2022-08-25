@@ -73,10 +73,10 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
 
             GetToplantiNotu.ToplantiMerkeziId = Convert.ToInt32(ToplantiTakvimVm.MerkezId);
             GetToplantiNotu.ToplantiOdasiId = Convert.ToInt32(ToplantiTakvimVm.OdaId);
-           
+
             ToplantiNotServisi.Add(GetToplantiNotu);
 
-            if(GetToplantiNotu.Id != 0)
+            if (GetToplantiNotu.Id != 0)
             {
                 var fileName = SaveFileToUploaded.FileName.Split(".");
                 var filePath = SaveFileToUploaded.FileUploadedPath;

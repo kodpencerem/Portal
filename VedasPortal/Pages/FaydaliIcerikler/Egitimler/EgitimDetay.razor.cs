@@ -34,7 +34,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
 
         [Inject]
         private IJSRuntime jSRuntime { get; set; }
-      
+
         [Parameter]
         public int EgitimId { get; set; }
 

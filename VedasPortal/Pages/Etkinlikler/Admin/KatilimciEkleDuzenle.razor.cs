@@ -49,7 +49,7 @@ namespace VedasPortal.Pages.Etkinlikler.Admin
         }
 
         protected IEnumerable<Etkinlik> EtkinlikGetir { get; set; } = new List<Etkinlik>();
-      
+
         protected IEnumerable<Etkinlik> TumEtkinlikleriGetir()
         {
             EtkinlikGetir = EtkinlikServisi.GetAll();

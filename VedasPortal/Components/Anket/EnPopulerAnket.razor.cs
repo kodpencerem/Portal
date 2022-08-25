@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;

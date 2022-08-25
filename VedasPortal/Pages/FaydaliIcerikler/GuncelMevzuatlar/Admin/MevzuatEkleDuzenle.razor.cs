@@ -20,7 +20,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.GuncelMevzuatlar.Admin
 
         [Inject]
         public IBaseRepository<Mevzuat> MevzuatServisi { get; set; }
-        
+
         [Parameter]
         public int MevzuatId { get; set; }
 

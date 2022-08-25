@@ -8,7 +8,7 @@ namespace VedasPortal
         public static string RandomFileName = DateTime.Now.ToShortDateString()
             .Replace(":", "")
             .Replace("/", "")
-            .Replace("-","")
+            .Replace("-", "")
             .Replace(@"\", "")
             .Replace("-", "")
             .Replace(".", "")

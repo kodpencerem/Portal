@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +40,6 @@ namespace VedasPortal.Pages.VedasRehber
                            .Include(s => s.ImageFile)
                            .ToList();
             return Rehber;
-        }      
+        }
     }
 }

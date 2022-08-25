@@ -23,7 +23,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
 
         protected string Title = "Ekle";
         public Dosya video = new();
-      
+
         protected IEnumerable<Dosya> Videolar { get; set; }
 
         protected IEnumerable<Dosya> TumVideolariGetir()
@@ -63,11 +63,11 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Videolar.Admin
             var dosya = new Dosya()
             {
                 Adi = fileName[0],
-                Yolu= filePath,
+                Yolu = filePath,
                 Uzanti = fileName[1],
                 Kategori = (DosyaKategori?)(VideoKategori)DosyaKategori.Mp4,
                 AktifPasif = true,
-                
+
             };
             VideoServisi.Add(dosya);
         }

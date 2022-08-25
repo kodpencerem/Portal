@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 using VedasPortal.Data;
 using VedasPortal.Entities.DTOs.Anket;
-using VedasPortal.Entities.Models.User;
 using VedasPortal.Utils.Anket.CustomValidation;
 
 namespace VedasPortal.Entities.ViewModels.Anket

@@ -14,7 +14,7 @@ namespace VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu
         public string Aciklama { get; set; }
         public bool AktifPasif { get; set; }
         [DataType(DataType.Text)]
-        public Birimler Birimler { get; set; }        
+        public Birimler Birimler { get; set; }
         public int? ToplantiId { get; set; }
         public Toplanti Toplanti { get; set; }
         public int? ToplantiOdasiId { get; set; }

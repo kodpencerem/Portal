@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VedasPortal.Entities.Models;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.Egitim;
 using VedasPortal.Entities.Models.PersonelDurumlari;
@@ -18,7 +15,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
         protected IBaseRepository<Egitim> EgitimServisi { get; set; }
 
         protected IEnumerable<Egitim> EgitimleriGetir { get; set; } = new List<Egitim>();
-     
+
         public string SearchText = "";
         protected PersonelDurum PersonelDurum { get; set; }
         public List<Egitim> FilteredEgitim => EgitimleriGetir.Where(
@@ -27,7 +24,7 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             ).ToList();
 
         public ImageFile EgitimDosya { get; set; } = new ImageFile();
-        
+
         protected override Task OnInitializedAsync()
         {
             TumEgitimleriGetir();
@@ -40,6 +37,6 @@ namespace VedasPortal.Pages.FaydaliIcerikler.Egitimler
             return EgitimleriGetir;
         }
 
-        
+
     }
 }

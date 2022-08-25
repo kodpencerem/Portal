@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using VedasPortal.Entities.Models.Base;
-using VedasPortal.Entities.Models.User;
 
 namespace VedasPortal.Entities.Models.Anket
 {
@@ -15,7 +14,7 @@ namespace VedasPortal.Entities.Models.Anket
         public bool SecilenAnketMi { get; set; }
         public int ToplamAlinanSure { get; set; }
         public bool AktifPasif { get; set; }
-        
+
         public ICollection<AnketSecenek> AnketSecenek { get; set; }
         public ICollection<AnketUser> AnketUser { get; set; }
     }

@@ -42,7 +42,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
             var authState = await State;
             var kursSertifika = new KursVeSertifika()
             {
-               
+
                 KaydedenKullanici = authState.User.Identity.Name,
                 KayitTarihi = kursVeSertifika.KayitTarihi,
                 Aciklama = kursVeSertifika.Aciklama,

@@ -2,7 +2,6 @@
 using Blazored.Modal.Services;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Components.Anket.Modals;
 using VedasPortal.Data;
@@ -15,7 +14,7 @@ using Confirm = VedasPortal.Components.Anket.Modals.OnayComponent;
 namespace VedasPortal.Components.Anket
 {
     public partial class AnketDuzenleComponent : ComponentBase
-    {       
+    {
         [Inject]
         public VedasDbContext Context { get; set; }
 

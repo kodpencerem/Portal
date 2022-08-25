@@ -1,8 +1,8 @@
 ﻿namespace DocumentExplorer.Models.FileManager
 {
-    public  interface IPhysicalFileProvider : IFileProvider
-    {        
-            void RootFolder(string folderName);
-        }
-    
+    public interface IPhysicalFileProvider : IFileProvider
+    {
+        void RootFolder(string folderName);
+    }
+
 }

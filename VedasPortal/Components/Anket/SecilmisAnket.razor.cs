@@ -1,7 +1,6 @@
 ﻿using Ardalis.Result;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Repository.Interface.Anket;
 

@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 using System.Reflection;
 using VedasPortal.Data.Toplanti;
 using VedasPortal.Entities.Models;
@@ -20,7 +17,6 @@ using VedasPortal.Entities.Models.PersonelDurumlari;
 using VedasPortal.Entities.Models.ToplantiTakvimi;
 using VedasPortal.Entities.Models.ToplantiTakvimi.ToplantiNotu;
 using VedasPortal.Entities.Models.User;
-using VedasPortal.Enums;
 
 namespace VedasPortal.Data
 {

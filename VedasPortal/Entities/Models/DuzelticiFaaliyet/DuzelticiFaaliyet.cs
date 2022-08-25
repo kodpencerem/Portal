@@ -31,7 +31,7 @@ namespace VedasPortal.Entities.Models.DuzelticiFaaliyet
         [DataType(DataType.Text)]
         public DuzelticiFaaliyetKategori Kategori { get; set; }
         public string KonuEtiketi { get; set; }
-        public string LokasyonBilgisi { get; set; }     
+        public string LokasyonBilgisi { get; set; }
     }
 
     public enum DuzelticiFaaliyetKategori

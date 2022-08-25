@@ -57,7 +57,7 @@ namespace VedasPortal.Pages.KullaniciDurumlari
                 KaydedenKullanici = authState.User.Identity.Name,
                 EgitimDurumu = okulMezunBilgisi.EgitimDurumu,
                 KayitTarihi = okulMezunBilgisi.KayitTarihi,
-                MezuniyetTarihi= okulMezunBilgisi.MezuniyetTarihi,
+                MezuniyetTarihi = okulMezunBilgisi.MezuniyetTarihi,
                 OkulAdi = okulMezunBilgisi.OkulAdi,
             };
             MezunBilgisi.Add(mezunBilgi);

@@ -3,7 +3,6 @@ using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
-using VedasPortal.Entities.Models.HaberDuyuru;
 using VedasPortal.Repository.Interface;
 
 namespace VedasPortal.Pages.DuzelticiFaaliyetler

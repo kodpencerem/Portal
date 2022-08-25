@@ -16,12 +16,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using Syncfusion.Blazor;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VedasPortal.Areas.Identity;
 using VedasPortal.Data;
 using VedasPortal.Entities.Models;
+using VedasPortal.Entities.Models.Anket;
 using VedasPortal.Entities.Models.Dosya;
 using VedasPortal.Entities.Models.DuzelticiFaaliyet;
 using VedasPortal.Entities.Models.Egitim;
@@ -45,9 +48,6 @@ using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
-using Syncfusion.Blazor;
-using Newtonsoft.Json.Serialization;
-using VedasPortal.Entities.Models.Anket;
 
 
 #endregion
@@ -138,11 +138,13 @@ namespace VedasPortal
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjY0ODQxQDMxMzgyZTMyMmUzMGJIRzNhWDhOVS9aTzl3MWNwNWFxTXhOU2wxaVdGRW9nc3BrelYzNCsvRlE9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjY0ODQxQDMxMzgyZTMyMmUzMGJIRzNhWDhOVS9aTzl3MWNwNWFxTXhOU2wxaVdGRW9nc3BrelYzNCsvRlE9"); 
+
+#if DEBUG
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                app.UseMigrationsEndPoint(); 
             }
             else
             {
@@ -150,9 +152,12 @@ namespace VedasPortal
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            // app.UseHttpsRedirection();
+#else
+            app.UseDeveloperExceptionPage();
+            app.UseMigrationsEndPoint();
+#endif 
             app.UseStaticFiles();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();

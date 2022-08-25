@@ -43,7 +43,7 @@ namespace VedasPortal.Pages.ToplantiOdalari.Admin
         }
         protected override void OnParametersSet()
         {
-            if (TMerkezId != 0 )
+            if (TMerkezId != 0)
             {
                 Title = "Duzenle";
                 toplantiMerkezi = ToplantiMerkeziServisi.Get(TMerkezId);

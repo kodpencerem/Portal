@@ -31,7 +31,7 @@ namespace VedasPortal.Entities.Models.Dosya
         public HaberDuyuru.HaberDuyuru HaberDuyuru { get; set; }
         public int? DuzelticiFaaliyetId { get; set; }
         public DuzelticiFaaliyet.DuzelticiFaaliyet DuzelticiFaaliyet { get; set; }
-        
+
         public int? EtkinlikId { get; set; }
         public Etkinlik.Etkinlik Etkinlik { get; set; }
         public int? KatilimciId { get; set; }
@@ -43,7 +43,7 @@ namespace VedasPortal.Entities.Models.Dosya
         public int? OneriId { get; set; }
         public Oneri.Oneri Oneri { get; set; }
         public int? RehberId { get; set; }
-        public Rehber Rehber { get; set; }       
+        public Rehber Rehber { get; set; }
         public int? PersonelDurumId { get; set; }
         public PersonelDurum PersonelDurum { get; set; }
         public int? EgitimId { get; set; }
@@ -51,5 +51,5 @@ namespace VedasPortal.Entities.Models.Dosya
         public int? ToplantiNotuId { get; set; }
         public ToplantiTakvimi.ToplantiNotu.ToplantiNotu ToplantiNotu { get; set; }
         public virtual ICollection<Yorum.Yorum> Yorum { get; set; }
-    } 
+    }
 }

@@ -14,9 +14,9 @@ namespace VedasPortal.Shared
             base.OnAfterRender(firstRender);
             await JsRun.InvokeVoidAsync("scriptsInit");
             if (firstRender)
-            {             
-                await JsRun.InvokeVoidAsync("indexInit");              
-            }           
+            {
+                await JsRun.InvokeVoidAsync("indexInit");
+            }
         }
     }
 }

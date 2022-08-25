@@ -30,7 +30,7 @@ namespace DocumentExplorer.Models.FileManager
 #endif
 
         FileStreamResult GetImage(string path, string id, bool allowCompress, ImageSize size, params FileManagerDirectoryContent[] data);
-      
+
     }
 
 }

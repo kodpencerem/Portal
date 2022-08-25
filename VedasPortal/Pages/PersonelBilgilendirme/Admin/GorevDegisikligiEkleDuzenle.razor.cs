@@ -89,26 +89,26 @@ namespace VedasPortal.Pages.PersonelBilgilendirme.Admin
 
         protected async Task KayitAsync()
         {
-            
-                var authState = await State;
-                personelDurum.KaydedenKullanici = authState.User.Identity.Name;
-                PersonelServisi.Add(personelDurum);
-                var fileName = SaveFileToUploaded.FileName.Split(".");
-                var filePath = SaveFileToUploaded.ImageUploadedPath;
-                var dosya = new ImageFile()
-                {
-                    Adi = fileName[0],
-                    Yolu = filePath,
-                    Uzanti = fileName[1],
-                    Kategori = DosyaKategori.Jpg,
-                    AktifPasif = true,
-                    PersonelDurumId = personelDurum.Id,
-                    KaydedenKullanici = authState.User.Identity.Name
 
-                };
-                PersonelDosyaServisi.Add(dosya);
-                TumPersonelleriGetir();
-                personelDurum = new PersonelDurum();          
+            var authState = await State;
+            personelDurum.KaydedenKullanici = authState.User.Identity.Name;
+            PersonelServisi.Add(personelDurum);
+            var fileName = SaveFileToUploaded.FileName.Split(".");
+            var filePath = SaveFileToUploaded.ImageUploadedPath;
+            var dosya = new ImageFile()
+            {
+                Adi = fileName[0],
+                Yolu = filePath,
+                Uzanti = fileName[1],
+                Kategori = DosyaKategori.Jpg,
+                AktifPasif = true,
+                PersonelDurumId = personelDurum.Id,
+                KaydedenKullanici = authState.User.Identity.Name
+
+            };
+            PersonelDosyaServisi.Add(dosya);
+            TumPersonelleriGetir();
+            personelDurum = new PersonelDurum();
         }
         protected override void OnParametersSet()
         {

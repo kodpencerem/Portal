@@ -47,6 +47,6 @@ namespace VedasPortal.Components.Anket.Modals
         }
 
         void Cancel() => Modal.CancelAsync();
-  
+
     }
 }

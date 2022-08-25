@@ -28,7 +28,7 @@ namespace VedasPortal.Pages.Anket
 
         [Inject]
         public Mapper mapper { get; set; }
-       
+
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
 
@@ -75,10 +75,10 @@ namespace VedasPortal.Pages.Anket
 
         private async Task AnketGonder()
         {
-            
+
             var authState = await State;
             var user = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var anketUser = Context.AnketUser.Where(x => x.ApplicationUserId == user && x.AnketId==AnketVm.AnketId).Any();
+            var anketUser = Context.AnketUser.Where(x => x.ApplicationUserId == user && x.AnketId == AnketVm.AnketId).Any();
             if (!anketUser)
             {
 
@@ -87,7 +87,7 @@ namespace VedasPortal.Pages.Anket
                     AnketId = null,
                     ApplicationUserId = user
                 };
-                AnketUserServisi.Add(anketKullanici);              
+                AnketUserServisi.Add(anketKullanici);
             }
             else
             {

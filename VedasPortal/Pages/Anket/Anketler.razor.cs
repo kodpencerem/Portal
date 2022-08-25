@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VedasPortal.Data;
@@ -13,10 +12,10 @@ namespace VedasPortal.Pages.Anket
 
         [Inject]
         public VedasDbContext Context { get; set; }
-       
+
         [Inject]
         public IAnketYonetim AnketYonetim { get; set; }
-       
+
         public List<AnketDTO> AnketListe { get; set; }
 
         private bool isReady = false;

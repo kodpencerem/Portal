@@ -75,14 +75,14 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
             };
             DuzelticiFaaliyetDosya.Add(dosya);
             TumFaaliyetleriGetir();
-            duzelticiFaaliyet = new DuzelticiFaaliyet();          
+            duzelticiFaaliyet = new DuzelticiFaaliyet();
         }
         protected override void OnParametersSet()
         {
-            if (DFaaliyetId != 0 || DFaaliyetDosya.Yolu!=null)
+            if (DFaaliyetId != 0 || DFaaliyetDosya.Yolu != null)
             {
                 Title = "Duzenle";
-                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);               
+                duzelticiFaaliyet = DuzelticiFaaliyetlerServisi.Get(DFaaliyetId);
             }
         }
 

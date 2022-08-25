@@ -9,10 +9,10 @@ namespace VedasPortal.Pages.ToplantiOdalari
     {
         [Inject]
         private IBaseRepository<Toplanti> ToplantiServisi { get; set; }
-     
+
         [Parameter]
         public int ToplantiId { get; set; }
-       
+
         private Toplanti ToplantiGetir { get; set; }
 
         protected override Task OnInitializedAsync()

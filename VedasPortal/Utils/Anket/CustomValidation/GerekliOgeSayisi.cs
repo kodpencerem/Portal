@@ -13,10 +13,10 @@ namespace VedasPortal.Utils.Anket.CustomValidation
             var numberOfItemsInList = ((List<AnketSecenekDTO>)value).Count();
             if (numberOfItemsInList < GerekliKayitSayisi)
             {
-                ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ? 
-                    $"{validationContext.MemberName} en az {GerekliKayitSayisi} öğeye sahip olmalıdır" : 
+                ErrorMessage = string.IsNullOrEmpty(ErrorMessage) ?
+                    $"{validationContext.MemberName} en az {GerekliKayitSayisi} öğeye sahip olmalıdır" :
                     ErrorMessage;
-                return new ValidationResult(ErrorMessage, 
+                return new ValidationResult(ErrorMessage,
                     new[] { validationContext.MemberName });
             }
             return ValidationResult.Success;

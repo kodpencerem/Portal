@@ -100,7 +100,7 @@ namespace VedasPortal.Services.ToplantiServices
                     entity.SilenKullanici = toplanti.SilenKullanici;
                     entity.SilmeTarihi = toplanti.SilmeTarihi;
                     entity.VideoKonferansMi = toplanti.VideoKonferansMi;
-                    
+
                     _context.SaveChanges();
                 }
             }

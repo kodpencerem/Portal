@@ -31,6 +31,6 @@ namespace VedasPortal.Pages.ToplantiOdalari
         {
             NotlarVeKararlar = ToplantiNotu.GetAll();
             return NotlarVeKararlar;
-        }     
+        }
     }
 }
