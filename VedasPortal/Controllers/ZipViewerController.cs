@@ -1,9 +1,9 @@
+using DocumentExplorer.Models.FileManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.IO.Compression;
 using VedasPortal.Data;
-using VedasPortal.Entities.Models.Dosya.FileManager;
 
 namespace VedasPortal.Controllers
 {

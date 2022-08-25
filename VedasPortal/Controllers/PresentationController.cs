@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using DocumentExplorer.Models.FileManager;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.Pdf;
 using Syncfusion.Presentation;
@@ -6,7 +7,6 @@ using Syncfusion.PresentationToPdfConverter;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using VedasPortal.Entities.Models.Dosya.FileManager;
 
 namespace VedasPortal.Controllers
 {

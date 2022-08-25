@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DocumentExplorer.Models.FileManager;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -9,7 +10,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
-using VedasPortal.Entities.Models.Dosya.FileManager;
 
 namespace VedasPortal.Data
 {

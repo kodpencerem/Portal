@@ -5,7 +5,7 @@ using System.Web;
 using Microsoft.AspNetCore.Http;
 #endif
 
-namespace VedasPortal.Entities.Models.Dosya.FileManager
+namespace DocumentExplorer.Models.FileManager
 {
     public class FileManagerParams
     {

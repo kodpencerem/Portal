@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using DocumentExplorer.Models.FileManager;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.Blazor.PdfViewer;
 using Syncfusion.DocIORenderer;
@@ -10,7 +11,6 @@ using System.Drawing;
 using System.IO;
 using VedasPortal.Data;
 using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.Dosya.FileManager;
 using DocIO = Syncfusion.DocIO.DLS;
 
 namespace VedasPortal.Controllers

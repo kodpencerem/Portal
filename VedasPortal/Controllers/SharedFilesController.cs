@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using DocumentExplorer.Models.FileManager;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,7 +13,6 @@ using System.Drawing;
 using System.IO;
 using VedasPortal.Data;
 using VedasPortal.Entities.Models.Dosya;
-using VedasPortal.Entities.Models.Dosya.FileManager;
 
 namespace VedasPortal.Controllers
 {
