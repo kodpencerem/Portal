@@ -1,4 +1,4 @@
-﻿using DocumentExplorer.Models.FileManager;
+﻿using VedasPortal.Entities.Models.Dosya.FileManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

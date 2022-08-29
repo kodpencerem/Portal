@@ -1,5 +1,5 @@
-﻿namespace DocumentExplorer.Models.FileManager
-{
+﻿namespace VedasPortal.Entities.Models.Dosya.FileManager
+{ 
     public class AccessPermission
     {
         public bool Copy = true;

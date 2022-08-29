@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DocumentExplorer.Models.FileManager
+namespace VedasPortal.Entities.Models.Dosya.FileManager
 {
     public class FileManagerDirectoryContent
     {
