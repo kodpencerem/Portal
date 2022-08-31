@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VedasPortal.Entities.Models.Dosya.FileManager
+namespace Syncfusion.EJ2.FileManager.Base
 {
     public class FileDetails
     {

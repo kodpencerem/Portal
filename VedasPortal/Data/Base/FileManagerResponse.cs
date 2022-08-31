@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 #if EJ2_DNX
 using System.Web;
 #endif
 
-namespace VedasPortal.Entities.Models.Dosya.FileManager
+namespace Syncfusion.EJ2.FileManager.Base
 {
 
     public class FileManagerResponse

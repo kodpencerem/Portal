@@ -1,10 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 
-namespace VedasPortal.Entities.Models.Dosya.FileManager
+namespace Syncfusion.EJ2.FileManager.Base
 {
-    public interface IFileProvider
+    public interface FileProviderBase
     {
 
         FileManagerResponse GetFiles(string path, bool showHiddenItems, params FileManagerDirectoryContent[] data);
@@ -30,7 +38,7 @@ namespace VedasPortal.Entities.Models.Dosya.FileManager
 #endif
 
         FileStreamResult GetImage(string path, string id, bool allowCompress, ImageSize size, params FileManagerDirectoryContent[] data);
-
+      
     }
 
 }
