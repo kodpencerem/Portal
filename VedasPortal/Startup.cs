@@ -121,24 +121,14 @@ namespace VedasPortal
             services.AddTransient<IManageUsersService, ManageUsersService>();
             services.AddTransient<IManageRolesService, ManageRolesService>();
             services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins", builder =>
-                {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-                });
-            });
-            services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ContractResolver = new DefaultContractResolver(); });
-
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjY0ODQxQDMxMzgyZTMyMmUzMGJIRzNhWDhOVS9aTzl3MWNwNWFxTXhOU2wxaVdGRW9nc3BrelYzNCsvRlE9"); 
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NzA4NTczQDMyMzAyZTMyMmUzMFEzTlRJaTF5MHJPTTN4SEtkL0xmbU9uUDRNZkZnckRHMEFRODdrMjh5eVE9"); 
 
 #if DEBUG
             if (env.IsDevelopment())

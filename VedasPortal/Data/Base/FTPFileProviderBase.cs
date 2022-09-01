@@ -10,9 +10,9 @@ using Microsoft.Net.Http.Headers;
 
 namespace SfFileService.FileManager.Base
 {
-    public interface PhysicalFileProviderBase : FileProviderBase
-    {        
-        void RootFolder(string folderName);       
-        void SetRules(AccessDetails details);
+    public interface FTPFileProviderBase : FileProviderBase
+    {
+        void SetFTPConnection(string hostName, string userName, string password);
     }
+
 }

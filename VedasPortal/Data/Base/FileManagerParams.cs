@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if EJ2_DNX
-using System.Web;
-#else
 using Microsoft.AspNetCore.Http;
-#endif
 
-namespace Syncfusion.EJ2.FileManager.Base
+namespace SfFileService.FileManager.Base
 {
     public class FileManagerParams
     {
@@ -28,6 +24,6 @@ namespace Syncfusion.EJ2.FileManager.Base
         public IEnumerable<IFormFile> FileUpload { get; set; }
 
 #endif
-        public string[] ReplacedItemNames { get; set; }
+        public string[] RenameFiles { get; set; }
     }
 }

@@ -3,25 +3,38 @@
 
 @using Syncfusion.Blazor.FileManager;
 @using Syncfusion.Blazor.Popups;
-@using Syncfusion.Blazor.Buttons;
+
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Dosya Yöneticisi
+        </CardHeader>
+        <CardBody>
+            <SfFileManager @ref="filemanager"
+                           ID="filemanager"
+                           TValue="FileManagerDirectoryContent"
+                           AllowDragAndDrop="false"
+                           RootAliasName="Kategoriler"
+                           Path="/files/"
+                           
+                           >
+                <FileManagerEvents TValue="FileManagerDirectoryContent"
+                                   OnFileOpen="FileOpen">
+
+                </FileManagerEvents>
+                <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
+                                         UploadUrl="/api/FileManager/Upload"
+                                         DownloadUrl="/api/FileManager/Download"
+                                         GetImageUrl="/api/FileManager/GetImage">
+                </FileManagerAjaxSettings>
+                <FileManagerContextMenuSettings File="@Items" Folder="@Items"></FileManagerContextMenuSettings>
+                <FileManagerToolbarSettings Items="@TopItems"></FileManagerToolbarSettings>
+            </SfFileManager>
+        </CardBody>
+    </CardComponent>
+</div>
 
 
-<SfFileManager @ref="filemanager"
-               ID="filemanager"
-               TValue="FileManagerDirectoryContent"
-               AllowDragAndDrop="false">
-    <FileManagerEvents TValue="FileManagerDirectoryContent"
-                       OnFileOpen="FileOpen">
-
-    </FileManagerEvents>
-    <FileManagerAjaxSettings Url="/api/Home/FileOperations"
-                             UploadUrl="/api/Home/Upload"
-                             DownloadUrl="/api/Home/Download"
-                             GetImageUrl="/api/Home/GetImage">
-    </FileManagerAjaxSettings>
-    <FileManagerContextMenuSettings File="@Items" Folder="@Items"></FileManagerContextMenuSettings>
-    <FileManagerToolbarSettings Items="@TopItems"></FileManagerToolbarSettings>
-</SfFileManager>
 <SfDialog @ref="Dialog" Width="447px" Target="#filemanager" ShowCloseIcon="true" @bind-Visible="@IsVisible">
     <DialogEvents OnOpen="open" Closed="close"></DialogEvents>
     <DialogTemplates>
@@ -39,8 +52,7 @@
     public string[] TopItems = new string[] { "Download", "SortBy", "Refresh", "Selection", "View", "Details" };
 
     SfDialog Dialog;
-    SfFileManager<FileManagerDirectoryContent>
-filemanager;
+    SfFileManager<FileManagerDirectoryContent> filemanager;
     private bool IsVisible { get; set; } = false;
     public string source { get; set; } = "";
     private void open()
@@ -68,5 +80,19 @@ filemanager;
 
         }
     }
-
 }
+
+
+<style>
+    
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

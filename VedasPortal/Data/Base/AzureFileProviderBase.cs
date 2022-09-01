@@ -10,9 +10,9 @@ using Microsoft.Net.Http.Headers;
 
 namespace SfFileService.FileManager.Base
 {
-    public interface PhysicalFileProviderBase : FileProviderBase
-    {        
-        void RootFolder(string folderName);       
-        void SetRules(AccessDetails details);
+    public interface AzureFileProviderBase : FileProviderBase
+    {
+        void RegisterAzure(string accountName, string accountKey, string blobName);
     }
+
 }

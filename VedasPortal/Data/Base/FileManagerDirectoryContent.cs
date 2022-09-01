@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 
-
-namespace Syncfusion.EJ2.FileManager.Base
+namespace SfFileService.FileManager.Base
 {
     public class FileManagerDirectoryContent
     {
@@ -14,7 +16,7 @@ namespace Syncfusion.EJ2.FileManager.Base
         public string NewName { get; set; }
 
         public string[] Names { get; set; }
-
+		
         public string Name { get; set; }
 
         public long Size { get; set; }
@@ -36,16 +38,21 @@ namespace Syncfusion.EJ2.FileManager.Base
         public string FilterPath { get; set; }
 
         public string FilterId { get; set; }
-
-        public string ParentId { get; set; }
+		
+		public string ParentId { get; set; }
 
         public string TargetPath { get; set; }
 
         public string[] RenameFiles { get; set; }
 
+#if EJ2_DNX
+             public IList<System.Web.HttpPostedFileBase> UploadFiles { get; set; }
+#else
         public IList<IFormFile> UploadFiles { get; set; }
+#endif
 
         public bool CaseSensitive { get; set; }
+
 
         public string SearchString { get; set; }
 

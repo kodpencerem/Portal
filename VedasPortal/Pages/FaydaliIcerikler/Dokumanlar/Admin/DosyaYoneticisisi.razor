@@ -3,53 +3,83 @@
 
 @using Syncfusion.Blazor.FileManager;
 @using Syncfusion.Blazor.Popups;
-@using Syncfusion.Blazor.Buttons;
 
+<div class="col-12">
+    <CardComponent cardStyle="Style.primary">
+        <CardHeader>
+            Dosya Yöneticisi
+        </CardHeader>
+        <CardBody>
 
-    <SfFileManager @ref="filemanager" ID="filemanager" TValue="FileManagerDirectoryContent" >
-        <FileManagerEvents TValue="FileManagerDirectoryContent" OnFileOpen="FileOpen" ></FileManagerEvents>
-        <FileManagerAjaxSettings Url="/api/Home/FileOperations"
-                                 UploadUrl="/api/Home/Upload"
-                                 DownloadUrl="/api/Home/Download"
-                                 GetImageUrl="/api/Home/GetImage">
-        </FileManagerAjaxSettings>
-    </SfFileManager>
-    <SfDialog @ref="Dialog" Width="447px" Target="#filemanager" ShowCloseIcon="true" @bind-Visible="@IsVisible">
-        <DialogEvents  OnOpen="open" Closed="close"></DialogEvents>
-        <DialogTemplates>
-            <Header> Video Dosyası </Header>
-            <Content>
-                <video id="videoTagId" controls="controls" width="400px" height="262px">
-                    <source  src=@source>
-                </video>
-            </Content>
-        </DialogTemplates>
-    </SfDialog>
-    @code{
-        SfDialog Dialog;
-        SfFileManager<FileManagerDirectoryContent> filemanager;
-        private bool IsVisible { get; set; } = false;
-        public string source { get; set; } = "";
-        private void open()
+            <SfFileManager @ref="filemanager" 
+                           ID="filemanager" 
+                           TValue="FileManagerDirectoryContent"
+                           RootAliasName="Kategoriler"
+                           >
+                <FileManagerEvents TValue="FileManagerDirectoryContent" 
+                                   OnFileOpen="FileOpen">
+
+                </FileManagerEvents>
+                <FileManagerAjaxSettings Url="/api/FileManager/FileOperations"
+                                         UploadUrl="/api/FileManager/Upload"
+                                         DownloadUrl="/api/FileManager/Download"
+                                         GetImageUrl="/api/FileManager/GetImage">
+                </FileManagerAjaxSettings>
+            </SfFileManager>
+        </CardBody>
+    </CardComponent>
+</div>
+<SfDialog @ref="Dialog" Width="447px" Target="#filemanager" ShowCloseIcon="true" @bind-Visible="@IsVisible">
+    <DialogEvents OnOpen="open" Closed="close"></DialogEvents>
+    <DialogTemplates>
+        <Header> Video Dosyası </Header>
+        <Content>
+            <video id="videoTagId" controls="controls" width="400px" height="262px">
+                <source src=@source>
+            </video>
+        </Content>
+    </DialogTemplates>
+</SfDialog>
+@code{
+    SfDialog Dialog;
+    SfFileManager<FileManagerDirectoryContent> filemanager;
+    private bool IsVisible { get; set; } = false;
+    public string source { get; set; } = "";
+    private void open()
+    {
+        // videonun load olayını çağırmamız gerekiyor
+        jsRuntime.InvokeAsync<string>("loadVideo");
+    }
+    public void close()
+    {
+        // kaynak niteliğini değiştirir ve videonun load olayını çağırır.
+        this.source = "";
+        jsRuntime.InvokeAsync<string>("loadVideo");
+    }
+
+    public void FileOpen(Syncfusion.Blazor.FileManager.FileOpenEventArgs<FileManagerDirectoryContent> args)
+    {
+        if ((args.FileDetails.IsFile == true) && args.FileDetails.Type == ".mp4")
         {
-            // videonun load olayını çağırmamız gerekiyor
-            jsRuntime.InvokeAsync<string>("loadVideo");
-        }
-        public void close()
-        {
-            // kaynak niteliğini değiştirir ve videonun load olayını çağırır.
-            this.source = "";
-            jsRuntime.InvokeAsync<string>("loadVideo");
-        }
+            this.IsVisible = true;
+            // kaynak özniteliği için yolu günceller
+            this.source = args.FileDetails.FilterPath.Replace("\\", "/") + args.FileDetails.Name;
 
-        public void FileOpen(Syncfusion.Blazor.FileManager.FileOpenEventArgs<FileManagerDirectoryContent> args)
-        {
-            if ((args.FileDetails.IsFile == true) && args.FileDetails.Type == ".mp4")
-            {
-                this.IsVisible = true;
-                // kaynak özniteliği için yolu günceller
-                this.source = args.FileDetails.FilterPath.Replace("\\", "/") + args.FileDetails.Name;
-
-            }
         }
     }
+}
+
+
+<style>
+
+    .row {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-top: -15px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+</style>

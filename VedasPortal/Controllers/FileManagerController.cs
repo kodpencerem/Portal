@@ -12,14 +12,14 @@ namespace VedasPortal.Controllers
 {
 
     [Route("api/[controller]")]
-    public class HomeController : Controller
+    public class FileManagerController : Controller
     {
         public PhysicalFileProvider operation;
         public string basePath;
-        string root = "wwwroot\\Files";
-        //string root = "wwwroot\\Files";
+        string root = "wwwroot";
 
-        public HomeController(IHostingEnvironment hostingEnvironment)
+        [Obsolete]
+        public FileManagerController(IHostingEnvironment hostingEnvironment)
         {
             this.basePath = hostingEnvironment.ContentRootPath;
             this.operation = new PhysicalFileProvider();
@@ -28,47 +28,47 @@ namespace VedasPortal.Controllers
         [Route("FileOperations")]
         public object FileOperations([FromBody] FileManagerDirectoryContent args)
         {
-           
+
             if (args.Action == "delete" || args.Action == "rename")
             {
                 if ((args.TargetPath == null) && (args.Path == ""))
                 {
                     FileManagerResponse response = new FileManagerResponse();
-                    response.Error = new ErrorDetails { Code = "401", Message = "Restricted to modify the root folder." };
+                    response.Error = new ErrorDetails { Code = "401", Message = "Kök klasörü değiştirme yetkiniz yoktur." };
                     return this.operation.ToCamelCase(response);
                 }
             }
             switch (args.Action)
             {
                 case "read":
-                    // reads the file(s) or folder(s) from the given path.
+                    // verilen yoldan dosya(lar)ı veya klasör(ler)i okur.
                     return this.operation.ToCamelCase(this.operation.GetFiles(args.Path, args.ShowHiddenItems));
                 case "delete":
-                    // deletes the selected file(s) or folder(s) from the given path.
+                    // seçilen dosya(lar)ı veya klasör(ler)i verilen yoldan siler.
                     return this.operation.ToCamelCase(this.operation.Delete(args.Path, args.Names));
                 case "copy":
-                    // copies the selected file(s) or folder(s) from a path and then pastes them into a given target path.
+                    // seçilen dosya(lar)ı veya klasör(ler)i bir yoldan kopyalar ve ardından bunları belirli bir hedef yola yapıştırır.
                     return this.operation.ToCamelCase(this.operation.Copy(args.Path, args.TargetPath, args.Names, args.RenameFiles, args.TargetData));
                 case "move":
-                    // cuts the selected file(s) or folder(s) from a path and then pastes them into a given target path.
+                    // seçilen dosya(lar)ı veya klasör(ler)i bir yoldan keser ve ardından bunları belirli bir hedef yola yapıştırır.
                     return this.operation.ToCamelCase(this.operation.Move(args.Path, args.TargetPath, args.Names, args.RenameFiles, args.TargetData));
                 case "details":
-                    // gets the details of the selected file(s) or folder(s).
+                    // seçilen dosya(lar)ın veya klasör(ler)in ayrıntılarını alır.
                     return this.operation.ToCamelCase(this.operation.Details(args.Path, args.Names, args.Data));
                 case "create":
-                    // creates a new folder in a given path.
+                    // belirli bir yolda yeni bir klasör oluşturur.
                     return this.operation.ToCamelCase(this.operation.Create(args.Path, args.Name));
                 case "search":
-                    // gets the list of file(s) or folder(s) from a given path based on the searched key string.
+                    // aranan anahtar dizgisine göre belirli bir yoldan dosya(lar)ın veya klasör(ler)in listesini alır.
                     return this.operation.ToCamelCase(this.operation.Search(args.Path, args.SearchString, args.ShowHiddenItems, args.CaseSensitive));
                 case "rename":
-                    // renames a file or folder.
+                    // bir dosya veya klasörü yeniden adlandırır.
                     return this.operation.ToCamelCase(this.operation.Rename(args.Path, args.Name, args.NewName));
             }
             return null;
         }
         [Route("Upload")]
-        // uploads the file(s) into a specified path
+        // dosyaları belirli bir yola yükler
         public IActionResult Upload(string path, IList<IFormFile> uploadFiles, string action, string CustomData)
         {
             FileManagerResponse uploadResponse;
@@ -83,14 +83,14 @@ namespace VedasPortal.Controllers
             return Content("");
         }
         [Route("Download")]
-        // downloads the selected file(s) and folder(s)
+        // seçilen dosya(lar)ı ve klasör(ler)i indirir
         public IActionResult Download(string downloadInput)
         {
             FileManagerDirectoryContent args = JsonConvert.DeserializeObject<FileManagerDirectoryContent>(downloadInput);
             return operation.Download(args.Path, args.Names, args.Data);
         }
         [Route("GetImage")]
-        // gets the image(s) from the given path
+        // verilen yoldan resim(ler)i alır
         public IActionResult GetImage(FileManagerDirectoryContent args)
         {
             return this.operation.GetImage(args.Path, args.Id, false, null, null);
