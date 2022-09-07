@@ -1,26 +1,25 @@
-﻿@inject Services.HavaDurumuService.HavaDurumuService havaTahminiService
-@using Services.HavaDurumuService
-@using System.Xml.Linq;
+﻿@using System.Xml.Linq
+@using VedasPortal.Entities.Models.HavaDurum
 
-@if (listHavaTahmini != null)
-{
-    <div class="col-lg-6 col-sm-12 col-md-6 col-xs-12" @attributes="attributes">
-        <div class="@("card "+cardBackground)" style="height:130px">
-            <div class="card-body">
-                <div class="text-white">
-                    <h4>@Sehir </h4>
-                    <div class="row">
-                        <span class="font-20">@listHavaTahmini.result.FirstOrDefault()?.degree C°</span>
-                        <span class="font-20" style="margin-left:5px">@listHavaTahmini.result.FirstOrDefault()?.humidity %</span>
-                        <img style="margin-left:20px"
+
+<div class="col-lg-6 col-sm-12 col-md-6 col-xs-12" @attributes="attributes">
+    <div class="@("card " + cardBackground)" style="height:160px">
+        <div class="card-body">
+            <div class="text-white">
+                <h4 style="margin-top:3px">@SehirAdi </h4>
+                <div class="row">
+                    <img style="margin-left:5px"
                          src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" width="60">
-                    </div>
+                    <span class="font-15">Max Sıcaklık:@HavaDurumuGetir(@Sehir.ToString()).FirstOrDefault().MaksimunDerece C°</span>
+                    <span class="font-10" style="margin-left:5px">@HavaDurumuGetir(@Sehir.ToString()).FirstOrDefault().Durum</span>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-}
+
 @code {
 
     [Parameter(CaptureUnmatchedValues = true)]
@@ -28,6 +27,8 @@
 
     [Parameter]
     public string Sehir { get; set; }
+    [Parameter]
+    public string SehirAdi { get; set; }
     [Parameter]
     public DateTime? Tarih { get; set; }
     [Parameter]
@@ -45,15 +46,27 @@
         }
     }
 
-    public HavaTahminiResult listHavaTahmini { get; set; }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    List<HavaDurumModeli> HavaDurumuGetir(string sehir)
     {
-        await base.OnAfterRenderAsync(firstRender);
+        List<HavaDurumModeli> HavaDurumuList = new List<HavaDurumModeli>();
+        try
+        {
+            XDocument xDoc = XDocument.Load("https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml");
+            HavaDurumuList = xDoc.Descendants("sehirler").Where(x => (string)x.Element("Merkez") == sehir).Select(o => new HavaDurumModeli
+            {
+                Bolge = (string)o.Element("Bolge"),
+                Merkez = (string)o.Element("Merkez"),
+                Durum = (string)o.Element("Durum"),
+                Ili = (string)o.Element("ili"),
+                MaksimunDerece = (string)o.Element("Mak")
+            }).ToList();
+            return HavaDurumuList;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
 
-        listHavaTahmini = await havaTahminiService.HavaDurumuGetir(Sehir, Tarih);
-
-        await InvokeAsync(StateHasChanged);
     }
-
 
 }

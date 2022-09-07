@@ -45,7 +45,6 @@ using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Services.Anket;
 using VedasPortal.Services.AuthServices;
 using VedasPortal.Services.FileUploadDownload;
-using VedasPortal.Services.HavaDurumuService;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
 
@@ -82,7 +81,6 @@ namespace VedasPortal
             services.AddBlazoredToast();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddScoped<HttpClient>();
-            services.AddScoped<HavaDurumuService>();
             services.AddScoped<Mapper>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
