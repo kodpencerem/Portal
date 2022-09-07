@@ -83,6 +83,7 @@ namespace VedasPortal
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddScoped<HttpClient>();
             services.AddScoped<Mapper>();
+            services.AddScoped<DovizDegisimleri>();
             services.AddScoped<AylikToplantiService>();
             services.AddScoped<ToplantiService>();
             services.AddBlazorTable();

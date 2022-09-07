@@ -1,4 +1,7 @@
-﻿@using VedasPortal.Services.Doviz;
+﻿@page "/dovizler"
+@using VedasPortal.Services.Doviz;
+
+@*@inject VedasPortal.Services.Doviz.DovizDegisimleri doviz*@
 
 <CardComponent cardStyle="Style.secondary">
     <CardHeader>
@@ -19,6 +22,7 @@
                 
                 <tr>
                     <td>
+                        
                         @dolar?.DovizAdi
                     </td>
                     <td>@dolar?.DovizAlis</td>
