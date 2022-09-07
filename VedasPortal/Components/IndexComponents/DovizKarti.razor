@@ -1,10 +1,5 @@
-﻿@using System.Net
-@using Newtonsoft.Json
-@using VedasPortal.Services.Doviz;
-@using System.Xml.Linq;
+﻿@using VedasPortal.Services.Doviz;
 
-@*@inject Services.Doviz.AltinDegisimleri altinDegisimleri
-*@
 <CardComponent cardStyle="Style.secondary">
     <CardHeader>
         <i class="fas fa-money-check-alt"></i>Döviz Kurları |
@@ -21,23 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @*<tr>
-                    <td>
-                        @listDoviz.result?.FirstOrDefault().name
-                    </td>
-                    <td>@listDoviz.result?.FirstOrDefault().buy</td>
-                    <td>
-                        @listDoviz.result?.FirstOrDefault().sell
-                    </td>
-
-                    <td>
-                        <i data-feather="chevrons-up"></i>
-                    </td>
-
-                    <td>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf4F6tQG4sww2u7kAUxeIsQTqKEAeqZGFV4Q&usqp=CAU" alt="" width="15">
-                    </td>
-                </tr>*@
+                
                 <tr>
                     <td>
                         @dolar?.DovizAdi
@@ -86,28 +65,8 @@
 
 @code {
 
-    [Parameter]
-    public string Code { get; set; }
-    [Parameter]
-    public DateTime? Tarih { get; set; }
-
     DovizKurlari dolar = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.USD);
     DovizKurlari euro = DovizDegisimleriServisi.GunlukDovizDegisimleriGetir(DovizKodlari.EUR);
-
-    
-    //public DovizDegisimleriResult listDoviz { get; set; }
-
-    //protected override async Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    await base.OnAfterRenderAsync(firstRender);
-
-    //    listDoviz = await altinDegisimleri.DovizDegisimleriniGetir(Code,Tarih);
-
-    //    await InvokeAsync(StateHasChanged);
-    //}
-
-    
-
 }
 
 <style>

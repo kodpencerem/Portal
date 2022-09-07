@@ -44,6 +44,7 @@ using VedasPortal.Repository.Interface;
 using VedasPortal.Repository.Interface.Anket;
 using VedasPortal.Services.Anket;
 using VedasPortal.Services.AuthServices;
+using VedasPortal.Services.Doviz;
 using VedasPortal.Services.FileUploadDownload;
 using VedasPortal.Services.ToplantiServices;
 using VedasPortal.Utils.Anket.FromMapper;
