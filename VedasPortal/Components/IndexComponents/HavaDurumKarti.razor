@@ -10,7 +10,7 @@
                 <div class="row">
                     <img style="margin-left:5px"
                          src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" width="60">
-                    <span class="font-15">Max Sıcaklık:@HavaDurumuGetir(@Sehir.ToString()).FirstOrDefault().MaksimunDerece C°</span>
+                    <span class="font-15">Max Sıcaklık:@HavaDurumuGetir(@Sehir.ToString()).FirstOrDefault().MaksimumDerece C°</span>
                     <span class="font-10" style="margin-left:5px">@HavaDurumuGetir(@Sehir.ToString()).FirstOrDefault().Durum</span>
 
                 </div>
@@ -58,7 +58,7 @@
                 Merkez = (string)o.Element("Merkez"),
                 Durum = (string)o.Element("Durum"),
                 Ili = (string)o.Element("ili"),
-                MaksimunDerece = (string)o.Element("Mak")
+                MaksimumDerece = (string)o.Element("Mak")
             }).ToList();
             return HavaDurumuList;
         }
