@@ -4,29 +4,23 @@
 
 <div class="loader"></div>
 
-<AuthorizeView>
-    <Authorized>
-        <div id="app">
-            <div class="main-wrapper main-wrapper-1">
-                <NavMenu />
-                <!-- Main Content -->
-                <div class="main-content">
-                    <section class="section">
-                        <div class="section-body">
-                            <div class="row">
-                                @Body
-                            </div>
-                        </div>
-                    </section>
+
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <NavMenu />
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-body">
+                    <div class="row">
+                        @Body
+                    </div>
                 </div>
-                <Footer CompanyName="Vedaş - Vangölü Elektrik Dağıtım A.Ş - Her Hakkı Saklıdır"
-                        Href="https://www.vedas.com.tr"
-                        Target="Target.Blank" />
-            </div>
+            </section>
         </div>
-    </Authorized>
-    <NotAuthorized>
-        <NotAuthorizedComponent />
-    </NotAuthorized>
-</AuthorizeView>
+        <Footer CompanyName="Vedaş - Vangölü Elektrik Dağıtım A.Ş - Her Hakkı Saklıdır"
+                Href="https://www.vedas.com.tr"
+                Target="Target.Blank" />
+    </div>
+</div>
 
