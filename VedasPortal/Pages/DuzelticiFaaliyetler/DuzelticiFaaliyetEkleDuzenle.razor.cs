@@ -23,6 +23,7 @@ namespace VedasPortal.Pages.DuzelticiFaaliyetler
         [Inject]
         public IBaseRepository<ImageFile> DuzelticiFaaliyetDosya { get; set; }
 
+        [CascadingParameter]
         public Task<AuthenticationState> State { get; set; }
         public string UserName;
 
