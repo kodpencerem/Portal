@@ -1,0 +1,217 @@
+
+/*****************globals*************/
+body[b-c20x3wu2hp] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-c20x3wu2hp] {
+    max-width: 100%;
+}
+
+.preview[b-c20x3wu2hp] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-c20x3wu2hp] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-c20x3wu2hp] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-c20x3wu2hp] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-c20x3wu2hp] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-c20x3wu2hp] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-c20x3wu2hp] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-c20x3wu2hp] {
+            margin-right: 0;
+        }
+
+.tab-content[b-c20x3wu2hp] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-c20x3wu2hp] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-c20x3wu2hp;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-c20x3wu2hp] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-c20x3wu2hp] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-c20x3wu2hp] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-c20x3wu2hp] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-c20x3wu2hp], .price[b-c20x3wu2hp], .sizes[b-c20x3wu2hp], .colors[b-c20x3wu2hp] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-c20x3wu2hp], .price span[b-c20x3wu2hp] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-c20x3wu2hp], .rating[b-c20x3wu2hp], .product-description[b-c20x3wu2hp], .price[b-c20x3wu2hp], .vote[b-c20x3wu2hp], .sizes[b-c20x3wu2hp] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-c20x3wu2hp] {
+    margin-top: 0;
+}
+
+.size[b-c20x3wu2hp] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-c20x3wu2hp] {
+        margin-left: 40px;
+    }
+
+.color[b-c20x3wu2hp] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-c20x3wu2hp] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-c20x3wu2hp], .like[b-c20x3wu2hp] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-c20x3wu2hp], .like:hover[b-c20x3wu2hp] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-c20x3wu2hp] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-c20x3wu2hp]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-c20x3wu2hp] {
+    background: #ff9f1a;
+}
+
+.green[b-c20x3wu2hp] {
+    background: #85ad00;
+}
+
+.blue[b-c20x3wu2hp] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-c20x3wu2hp] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-c20x3wu2hp {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */

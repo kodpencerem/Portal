@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Emrullah\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.4.0</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="C:\Users\Emrullah\.nuget\packages\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.core\20.2.0.36\buildTransitive\Syncfusion.Blazor.Core.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.core\20.2.0.36\buildTransitive\Syncfusion.Blazor.Core.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.spinner\20.2.0.36\buildTransitive\Syncfusion.Blazor.Spinner.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.spinner\20.2.0.36\buildTransitive\Syncfusion.Blazor.Spinner.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.popups\20.2.0.36\buildTransitive\Syncfusion.Blazor.Popups.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.popups\20.2.0.36\buildTransitive\Syncfusion.Blazor.Popups.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.splitbuttons\20.2.0.36\buildTransitive\Syncfusion.Blazor.SplitButtons.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.splitbuttons\20.2.0.36\buildTransitive\Syncfusion.Blazor.SplitButtons.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.data\20.2.0.36\buildTransitive\Syncfusion.Blazor.Data.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.data\20.2.0.36\buildTransitive\Syncfusion.Blazor.Data.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.lists\20.2.0.36\buildTransitive\Syncfusion.Blazor.Lists.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.lists\20.2.0.36\buildTransitive\Syncfusion.Blazor.Lists.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.inputs\20.2.0.36\buildTransitive\Syncfusion.Blazor.Inputs.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.inputs\20.2.0.36\buildTransitive\Syncfusion.Blazor.Inputs.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.dropdowns\20.2.0.36\buildTransitive\Syncfusion.Blazor.DropDowns.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.dropdowns\20.2.0.36\buildTransitive\Syncfusion.Blazor.DropDowns.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.navigations\20.2.0.36\buildTransitive\Syncfusion.Blazor.Navigations.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.navigations\20.2.0.36\buildTransitive\Syncfusion.Blazor.Navigations.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.layouts\20.2.0.36\buildTransitive\Syncfusion.Blazor.Layouts.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.layouts\20.2.0.36\buildTransitive\Syncfusion.Blazor.Layouts.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.calendars\20.2.0.36\buildTransitive\Syncfusion.Blazor.Calendars.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.calendars\20.2.0.36\buildTransitive\Syncfusion.Blazor.Calendars.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.grid\20.2.0.36\buildTransitive\Syncfusion.Blazor.Grid.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.grid\20.2.0.36\buildTransitive\Syncfusion.Blazor.Grid.props')" />
+    <Import Project="$(NuGetPackageRoot)syncfusion.blazor.filemanager\20.2.0.36\buildTransitive\Syncfusion.Blazor.FileManager.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.filemanager\20.2.0.36\buildTransitive\Syncfusion.Blazor.FileManager.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.visualstudio.azure.containers.tools.targets\1.17.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.visualstudio.azure.containers.tools.targets\1.17.0\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.typescript.msbuild\4.7.3\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)microsoft.typescript.msbuild\4.7.3\build\Microsoft.TypeScript.MSBuild.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\7.0.1\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\7.0.1\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\7.0.1\build\net6.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\7.0.1\build\net6.0\Microsoft.EntityFrameworkCore.Design.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\7.0.1\build\Microsoft.AspNetCore.Identity.UI.props" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\7.0.1\build\Microsoft.AspNetCore.Identity.UI.props')" />
+    <Import Project="$(NuGetPackageRoot)chronos.blazor.cropper\1.2.6\buildTransitive\Chronos.Blazor.Cropper.props" Condition="Exists('$(NuGetPackageRoot)chronos.blazor.cropper\1.2.6\buildTransitive\Chronos.Blazor.Cropper.props')" />
+    <Import Project="$(NuGetPackageRoot)blazortable\1.17.0\buildTransitive\BlazorTable.props" Condition="Exists('$(NuGetPackageRoot)blazortable\1.17.0\buildTransitive\BlazorTable.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorise\0.9.5.7\buildTransitive\Blazorise.props" Condition="Exists('$(NuGetPackageRoot)blazorise\0.9.5.7\buildTransitive\Blazorise.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorise.sidebar\0.9.5.7\buildTransitive\Blazorise.Sidebar.props" Condition="Exists('$(NuGetPackageRoot)blazorise.sidebar\0.9.5.7\buildTransitive\Blazorise.Sidebar.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorise.datagrid\0.9.5.7\buildTransitive\Blazorise.DataGrid.props" Condition="Exists('$(NuGetPackageRoot)blazorise.datagrid\0.9.5.7\buildTransitive\Blazorise.DataGrid.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorise.bootstrap\0.9.5.7\buildTransitive\Blazorise.Bootstrap.props" Condition="Exists('$(NuGetPackageRoot)blazorise.bootstrap\0.9.5.7\buildTransitive\Blazorise.Bootstrap.props')" />
+    <Import Project="$(NuGetPackageRoot)blazored.toast\3.2.2\buildTransitive\Blazored.Toast.props" Condition="Exists('$(NuGetPackageRoot)blazored.toast\3.2.2\buildTransitive\Blazored.Toast.props')" />
+    <Import Project="$(NuGetPackageRoot)blazored.modal\6.0.1\buildTransitive\Blazored.Modal.props" Condition="Exists('$(NuGetPackageRoot)blazored.modal\6.0.1\buildTransitive\Blazored.Modal.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Emrullah\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.3</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgMicrosoft_CodeAnalysis_AnalyzerUtilities Condition=" '$(PkgMicrosoft_CodeAnalysis_AnalyzerUtilities)' == '' ">C:\Users\Emrullah\.nuget\packages\microsoft.codeanalysis.analyzerutilities\3.3.0</PkgMicrosoft_CodeAnalysis_AnalyzerUtilities>
+    <PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets Condition=" '$(PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets)' == '' ">C:\Users\Emrullah\.nuget\packages\microsoft.visualstudio.azure.containers.tools.targets\1.17.0</PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets>
+    <PkgMicrosoft_TypeScript_MSBuild Condition=" '$(PkgMicrosoft_TypeScript_MSBuild)' == '' ">C:\Users\Emrullah\.nuget\packages\microsoft.typescript.msbuild\4.7.3</PkgMicrosoft_TypeScript_MSBuild>
+    <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\Emrullah\.nuget\packages\microsoft.entityframeworkcore.tools\7.0.1</PkgMicrosoft_EntityFrameworkCore_Tools>
+  </PropertyGroup>
+</Project>

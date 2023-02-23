@@ -1,0 +1,25 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="C:\Users\t1emrullahisik\source\repos\Vedas_Portal\VedasPortal\obj\Release\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="/Identity" Path="C:\Users\t1emrullahisik\.nuget\packages\microsoft.aspnetcore.identity.ui\5.0.17\staticwebassets\V4\" />
+  <ContentRoot BasePath="_content/Blazored.Modal" Path="C:\Users\t1emrullahisik\.nuget\packages\blazored.modal\6.0.1\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Blazored.Toast" Path="C:\Users\t1emrullahisik\.nuget\packages\blazored.toast\3.2.2\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Blazorise" Path="C:\Users\t1emrullahisik\.nuget\packages\blazorise\0.9.5.7\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Blazorise.Bootstrap" Path="C:\Users\t1emrullahisik\.nuget\packages\blazorise.bootstrap\0.9.5.7\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Blazorise.DataGrid" Path="C:\Users\t1emrullahisik\.nuget\packages\blazorise.datagrid\0.9.5.7\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Blazorise.Sidebar" Path="C:\Users\t1emrullahisik\.nuget\packages\blazorise.sidebar\0.9.5.7\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/BlazorTable" Path="C:\Users\t1emrullahisik\.nuget\packages\blazortable\1.17.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Chronos.Blazor.Cropper" Path="C:\Users\t1emrullahisik\.nuget\packages\chronos.blazor.cropper\1.2.6\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Calendars" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.calendars\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Core" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.core\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Data" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.data\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.DropDowns" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.dropdowns\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.FileManager" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.filemanager\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Grid" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.grid\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Inputs" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.inputs\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Layouts" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.layouts\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Lists" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.lists\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Navigations" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.navigations\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Popups" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.popups\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.Spinner" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.spinner\20.2.0.36\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Syncfusion.Blazor.SplitButtons" Path="C:\Users\t1emrullahisik\.nuget\packages\syncfusion.blazor.splitbuttons\20.2.0.36\build\..\staticwebassets\" />
+</StaticWebAssets>

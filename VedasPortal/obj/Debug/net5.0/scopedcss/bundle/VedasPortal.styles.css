@@ -1,0 +1,2096 @@
+/* _content/VedasPortal/Pages/BasindaBiz/HaberDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-0gbzihemeo] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-0gbzihemeo] {
+    max-width: 100%;
+}
+
+.preview[b-0gbzihemeo] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-0gbzihemeo] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-0gbzihemeo] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-0gbzihemeo] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-0gbzihemeo] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-0gbzihemeo] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-0gbzihemeo] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-0gbzihemeo] {
+            margin-right: 0;
+        }
+
+.tab-content[b-0gbzihemeo] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-0gbzihemeo] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-0gbzihemeo;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-0gbzihemeo] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-0gbzihemeo] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-0gbzihemeo] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-0gbzihemeo] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-0gbzihemeo], .price[b-0gbzihemeo], .sizes[b-0gbzihemeo], .colors[b-0gbzihemeo] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-0gbzihemeo], .price span[b-0gbzihemeo] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-0gbzihemeo], .rating[b-0gbzihemeo], .product-description[b-0gbzihemeo], .price[b-0gbzihemeo], .vote[b-0gbzihemeo], .sizes[b-0gbzihemeo] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-0gbzihemeo] {
+    margin-top: 0;
+}
+
+.size[b-0gbzihemeo] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-0gbzihemeo] {
+        margin-left: 40px;
+    }
+
+.color[b-0gbzihemeo] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-0gbzihemeo] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-0gbzihemeo], .like[b-0gbzihemeo] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-0gbzihemeo], .like:hover[b-0gbzihemeo] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-0gbzihemeo] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-0gbzihemeo]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-0gbzihemeo] {
+    background: #ff9f1a;
+}
+
+.green[b-0gbzihemeo] {
+    background: #85ad00;
+}
+
+.blue[b-0gbzihemeo] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-0gbzihemeo] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-0gbzihemeo {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/Duyurular/DuyuruDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-uvejbr2jki] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-uvejbr2jki] {
+    max-width: 100%;
+}
+
+.preview[b-uvejbr2jki] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-uvejbr2jki] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-uvejbr2jki] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-uvejbr2jki] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-uvejbr2jki] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-uvejbr2jki] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-uvejbr2jki] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-uvejbr2jki] {
+            margin-right: 0;
+        }
+
+.tab-content[b-uvejbr2jki] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-uvejbr2jki] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-uvejbr2jki;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-uvejbr2jki] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-uvejbr2jki] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-uvejbr2jki] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-uvejbr2jki] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-uvejbr2jki], .price[b-uvejbr2jki], .sizes[b-uvejbr2jki], .colors[b-uvejbr2jki] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-uvejbr2jki], .price span[b-uvejbr2jki] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-uvejbr2jki], .rating[b-uvejbr2jki], .product-description[b-uvejbr2jki], .price[b-uvejbr2jki], .vote[b-uvejbr2jki], .sizes[b-uvejbr2jki] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-uvejbr2jki] {
+    margin-top: 0;
+}
+
+.size[b-uvejbr2jki] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-uvejbr2jki] {
+        margin-left: 40px;
+    }
+
+.color[b-uvejbr2jki] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-uvejbr2jki] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-uvejbr2jki], .like[b-uvejbr2jki] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-uvejbr2jki], .like:hover[b-uvejbr2jki] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-uvejbr2jki] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-uvejbr2jki]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-uvejbr2jki] {
+    background: #ff9f1a;
+}
+
+.green[b-uvejbr2jki] {
+    background: #85ad00;
+}
+
+.blue[b-uvejbr2jki] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-uvejbr2jki] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-uvejbr2jki {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/Etkinlikler/EtkinlikDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-xcrwgig8iu] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-xcrwgig8iu] {
+    max-width: 100%;
+}
+
+.preview[b-xcrwgig8iu] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-xcrwgig8iu] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-xcrwgig8iu] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-xcrwgig8iu] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-xcrwgig8iu] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-xcrwgig8iu] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-xcrwgig8iu] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-xcrwgig8iu] {
+            margin-right: 0;
+        }
+
+.tab-content[b-xcrwgig8iu] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-xcrwgig8iu] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-xcrwgig8iu;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-xcrwgig8iu] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-xcrwgig8iu] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-xcrwgig8iu] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-xcrwgig8iu] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-xcrwgig8iu], .price[b-xcrwgig8iu], .sizes[b-xcrwgig8iu], .colors[b-xcrwgig8iu] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-xcrwgig8iu], .price span[b-xcrwgig8iu] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-xcrwgig8iu], .rating[b-xcrwgig8iu], .product-description[b-xcrwgig8iu], .price[b-xcrwgig8iu], .vote[b-xcrwgig8iu], .sizes[b-xcrwgig8iu] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-xcrwgig8iu] {
+    margin-top: 0;
+}
+
+.size[b-xcrwgig8iu] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-xcrwgig8iu] {
+        margin-left: 40px;
+    }
+
+.color[b-xcrwgig8iu] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-xcrwgig8iu] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-xcrwgig8iu], .like[b-xcrwgig8iu] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-xcrwgig8iu], .like:hover[b-xcrwgig8iu] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-xcrwgig8iu] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-xcrwgig8iu]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-xcrwgig8iu] {
+    background: #ff9f1a;
+}
+
+.green[b-xcrwgig8iu] {
+    background: #85ad00;
+}
+
+.blue[b-xcrwgig8iu] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-xcrwgig8iu] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-xcrwgig8iu {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/FaydaliIcerikler/Egitimler/EgitimDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-c20x3wu2hp] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-c20x3wu2hp] {
+    max-width: 100%;
+}
+
+.preview[b-c20x3wu2hp] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-c20x3wu2hp] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-c20x3wu2hp] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-c20x3wu2hp] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-c20x3wu2hp] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-c20x3wu2hp] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-c20x3wu2hp] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-c20x3wu2hp] {
+            margin-right: 0;
+        }
+
+.tab-content[b-c20x3wu2hp] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-c20x3wu2hp] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-c20x3wu2hp;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-c20x3wu2hp] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-c20x3wu2hp] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-c20x3wu2hp] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-c20x3wu2hp] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-c20x3wu2hp], .price[b-c20x3wu2hp], .sizes[b-c20x3wu2hp], .colors[b-c20x3wu2hp] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-c20x3wu2hp], .price span[b-c20x3wu2hp] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-c20x3wu2hp], .rating[b-c20x3wu2hp], .product-description[b-c20x3wu2hp], .price[b-c20x3wu2hp], .vote[b-c20x3wu2hp], .sizes[b-c20x3wu2hp] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-c20x3wu2hp] {
+    margin-top: 0;
+}
+
+.size[b-c20x3wu2hp] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-c20x3wu2hp] {
+        margin-left: 40px;
+    }
+
+.color[b-c20x3wu2hp] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-c20x3wu2hp] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-c20x3wu2hp], .like[b-c20x3wu2hp] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-c20x3wu2hp], .like:hover[b-c20x3wu2hp] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-c20x3wu2hp] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-c20x3wu2hp]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-c20x3wu2hp] {
+    background: #ff9f1a;
+}
+
+.green[b-c20x3wu2hp] {
+    background: #85ad00;
+}
+
+.blue[b-c20x3wu2hp] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-c20x3wu2hp] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-c20x3wu2hp {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/FaydaliIcerikler/GuncelMevzuatlar/MevzuatDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-zbnoizstuh] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-zbnoizstuh] {
+    max-width: 100%;
+}
+
+.preview[b-zbnoizstuh] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-zbnoizstuh] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-zbnoizstuh] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-zbnoizstuh] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-zbnoizstuh] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-zbnoizstuh] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-zbnoizstuh] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-zbnoizstuh] {
+            margin-right: 0;
+        }
+
+.tab-content[b-zbnoizstuh] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-zbnoizstuh] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-zbnoizstuh;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-zbnoizstuh] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-zbnoizstuh] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-zbnoizstuh] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-zbnoizstuh] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-zbnoizstuh], .price[b-zbnoizstuh], .sizes[b-zbnoizstuh], .colors[b-zbnoizstuh] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-zbnoizstuh], .price span[b-zbnoizstuh] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-zbnoizstuh], .rating[b-zbnoizstuh], .product-description[b-zbnoizstuh], .price[b-zbnoizstuh], .vote[b-zbnoizstuh], .sizes[b-zbnoizstuh] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-zbnoizstuh] {
+    margin-top: 0;
+}
+
+.size[b-zbnoizstuh] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-zbnoizstuh] {
+        margin-left: 40px;
+    }
+
+.color[b-zbnoizstuh] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-zbnoizstuh] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-zbnoizstuh], .like[b-zbnoizstuh] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-zbnoizstuh], .like:hover[b-zbnoizstuh] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-zbnoizstuh] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-zbnoizstuh]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-zbnoizstuh] {
+    background: #ff9f1a;
+}
+
+.green[b-zbnoizstuh] {
+    background: #85ad00;
+}
+
+.blue[b-zbnoizstuh] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-zbnoizstuh] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-zbnoizstuh {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/OneriSistemi/OneriDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-qslt75466s] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-qslt75466s] {
+    max-width: 100%;
+}
+
+.preview[b-qslt75466s] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-qslt75466s] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-qslt75466s] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-qslt75466s] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-qslt75466s] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-qslt75466s] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-qslt75466s] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-qslt75466s] {
+            margin-right: 0;
+        }
+
+.tab-content[b-qslt75466s] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-qslt75466s] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-qslt75466s;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-qslt75466s] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-qslt75466s] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-qslt75466s] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-qslt75466s] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-qslt75466s], .price[b-qslt75466s], .sizes[b-qslt75466s], .colors[b-qslt75466s] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-qslt75466s], .price span[b-qslt75466s] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-qslt75466s], .rating[b-qslt75466s], .product-description[b-qslt75466s], .price[b-qslt75466s], .vote[b-qslt75466s], .sizes[b-qslt75466s] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-qslt75466s] {
+    margin-top: 0;
+}
+
+.size[b-qslt75466s] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-qslt75466s] {
+        margin-left: 40px;
+    }
+
+.color[b-qslt75466s] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-qslt75466s] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-qslt75466s], .like[b-qslt75466s] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-qslt75466s], .like:hover[b-qslt75466s] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-qslt75466s] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-qslt75466s]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-qslt75466s] {
+    background: #ff9f1a;
+}
+
+.green[b-qslt75466s] {
+    background: #85ad00;
+}
+
+.blue[b-qslt75466s] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-qslt75466s] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-qslt75466s {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/ToplantiOdalari/OdaDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-4klltzs56o] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-4klltzs56o] {
+    max-width: 100%;
+}
+
+.preview[b-4klltzs56o] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-4klltzs56o] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-4klltzs56o] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-4klltzs56o] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-4klltzs56o] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-4klltzs56o] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-4klltzs56o] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-4klltzs56o] {
+            margin-right: 0;
+        }
+
+.tab-content[b-4klltzs56o] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-4klltzs56o] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-4klltzs56o;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-4klltzs56o] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-4klltzs56o] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-4klltzs56o] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-4klltzs56o] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-4klltzs56o], .price[b-4klltzs56o], .sizes[b-4klltzs56o], .colors[b-4klltzs56o] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-4klltzs56o], .price span[b-4klltzs56o] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-4klltzs56o], .rating[b-4klltzs56o], .product-description[b-4klltzs56o], .price[b-4klltzs56o], .vote[b-4klltzs56o], .sizes[b-4klltzs56o] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-4klltzs56o] {
+    margin-top: 0;
+}
+
+.size[b-4klltzs56o] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-4klltzs56o] {
+        margin-left: 40px;
+    }
+
+.color[b-4klltzs56o] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-4klltzs56o] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-4klltzs56o], .like[b-4klltzs56o] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-4klltzs56o], .like:hover[b-4klltzs56o] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-4klltzs56o] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-4klltzs56o]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-4klltzs56o] {
+    background: #ff9f1a;
+}
+
+.green[b-4klltzs56o] {
+    background: #85ad00;
+}
+
+.blue[b-4klltzs56o] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-4klltzs56o] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-4klltzs56o {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/ToplantiOdalari/ToplantiDetay.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-ws0lcl1ay4] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-ws0lcl1ay4] {
+    max-width: 100%;
+}
+
+.preview[b-ws0lcl1ay4] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-ws0lcl1ay4] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-ws0lcl1ay4] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-ws0lcl1ay4] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-ws0lcl1ay4] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-ws0lcl1ay4] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-ws0lcl1ay4] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-ws0lcl1ay4] {
+            margin-right: 0;
+        }
+
+.tab-content[b-ws0lcl1ay4] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-ws0lcl1ay4] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-ws0lcl1ay4;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-ws0lcl1ay4] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-ws0lcl1ay4] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-ws0lcl1ay4] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-ws0lcl1ay4] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-ws0lcl1ay4], .price[b-ws0lcl1ay4], .sizes[b-ws0lcl1ay4], .colors[b-ws0lcl1ay4] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-ws0lcl1ay4], .price span[b-ws0lcl1ay4] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-ws0lcl1ay4], .rating[b-ws0lcl1ay4], .product-description[b-ws0lcl1ay4], .price[b-ws0lcl1ay4], .vote[b-ws0lcl1ay4], .sizes[b-ws0lcl1ay4] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-ws0lcl1ay4] {
+    margin-top: 0;
+}
+
+.size[b-ws0lcl1ay4] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-ws0lcl1ay4] {
+        margin-left: 40px;
+    }
+
+.color[b-ws0lcl1ay4] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-ws0lcl1ay4] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-ws0lcl1ay4], .like[b-ws0lcl1ay4] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-ws0lcl1ay4], .like:hover[b-ws0lcl1ay4] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-ws0lcl1ay4] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-ws0lcl1ay4]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-ws0lcl1ay4] {
+    background: #ff9f1a;
+}
+
+.green[b-ws0lcl1ay4] {
+    background: #85ad00;
+}
+
+.blue[b-ws0lcl1ay4] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-ws0lcl1ay4] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-ws0lcl1ay4 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Pages/ToplantiOdalari/ToplantiNotDetayi.razor.rz.scp.css */
+
+/*****************globals*************/
+body[b-0x9173pkc7] {
+    font-family: 'open sans';
+    overflow-x: hidden;
+}
+
+img[b-0x9173pkc7] {
+    max-width: 100%;
+}
+
+.preview[b-0x9173pkc7] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview[b-0x9173pkc7] {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic[b-0x9173pkc7] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs[b-0x9173pkc7] {
+    border: none;
+    margin-top: 15px;
+}
+
+    .preview-thumbnail.nav-tabs li[b-0x9173pkc7] {
+        width: 18%;
+        margin-right: 2.5%;
+    }
+
+        .preview-thumbnail.nav-tabs li img[b-0x9173pkc7] {
+            max-width: 100%;
+            display: block;
+        }
+
+        .preview-thumbnail.nav-tabs li a[b-0x9173pkc7] {
+            padding: 0;
+            margin: 0;
+        }
+
+        .preview-thumbnail.nav-tabs li:last-of-type[b-0x9173pkc7] {
+            margin-right: 0;
+        }
+
+.tab-content[b-0x9173pkc7] {
+    overflow: hidden;
+}
+
+    .tab-content img[b-0x9173pkc7] {
+        width: 100%;
+        -webkit-animation-name: opacity;
+        animation-name: opacity-b-0x9173pkc7;
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+    }
+
+.card[b-0x9173pkc7] {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper[b-0x9173pkc7] {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+.details[b-0x9173pkc7] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.colors[b-0x9173pkc7] {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.product-title[b-0x9173pkc7], .price[b-0x9173pkc7], .sizes[b-0x9173pkc7], .colors[b-0x9173pkc7] {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+    .checked[b-0x9173pkc7], .price span[b-0x9173pkc7] {
+        color: #ff9f1a;
+    }
+
+.product-title[b-0x9173pkc7], .rating[b-0x9173pkc7], .product-description[b-0x9173pkc7], .price[b-0x9173pkc7], .vote[b-0x9173pkc7], .sizes[b-0x9173pkc7] {
+    margin-bottom: 15px;
+}
+
+.product-title[b-0x9173pkc7] {
+    margin-top: 0;
+}
+
+.size[b-0x9173pkc7] {
+    margin-right: 10px;
+}
+
+    .size:first-of-type[b-0x9173pkc7] {
+        margin-left: 40px;
+    }
+
+.color[b-0x9173pkc7] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+    .color:first-of-type[b-0x9173pkc7] {
+        margin-left: 20px;
+    }
+
+.add-to-cart[b-0x9173pkc7], .like[b-0x9173pkc7] {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+    .add-to-cart:hover[b-0x9173pkc7], .like:hover[b-0x9173pkc7] {
+        background: #b36800;
+        color: #fff;
+    }
+
+.not-available[b-0x9173pkc7] {
+    text-align: center;
+    line-height: 2em;
+}
+
+    .not-available[b-0x9173pkc7]:before {
+        font-family: fontawesome;
+        content: "\f00d";
+        color: #fff;
+    }
+
+.orange[b-0x9173pkc7] {
+    background: #ff9f1a;
+}
+
+.green[b-0x9173pkc7] {
+    background: #85ad00;
+}
+
+.blue[b-0x9173pkc7] {
+    background: #0076ad;
+}
+
+.tooltip-inner[b-0x9173pkc7] {
+    padding: 1.3em;
+}
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity-b-0x9173pkc7 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*# sourceMappingURL=style.css.map */
+/* _content/VedasPortal/Shared/MainLayout.razor.rz.scp.css */
+.page[b-mmydg583l2] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-mmydg583l2] {
+    flex: 1;
+}
+
+.sidebar[b-mmydg583l2] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-mmydg583l2] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-mmydg583l2]  a, .top-row .btn-link[b-mmydg583l2] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-mmydg583l2] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-mmydg583l2] {
+        display: none;
+    }
+
+    .top-row.auth[b-mmydg583l2] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-mmydg583l2], .top-row .btn-link[b-mmydg583l2] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-mmydg583l2] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-mmydg583l2] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-mmydg583l2] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-mmydg583l2] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* _content/VedasPortal/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-oszq77ytux] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-oszq77ytux] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-oszq77ytux] {
+    font-size: 1.1rem;
+}
+
+.oi[b-oszq77ytux] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-oszq77ytux] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-oszq77ytux] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-oszq77ytux] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-oszq77ytux]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-oszq77ytux]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-oszq77ytux]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-oszq77ytux] {
+        display: none;
+    }
+
+    .collapse[b-oszq77ytux] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}

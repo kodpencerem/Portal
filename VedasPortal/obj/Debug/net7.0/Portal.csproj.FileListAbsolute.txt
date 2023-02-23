@@ -1,0 +1,9 @@
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.csproj.AssemblyReference.cache
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.AssemblyInfoInputs.cache
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.AssemblyInfo.cs
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.csproj.CoreCompileInputs.cache
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.RazorAssemblyInfo.cache
+C:\Users\Emrullah\source\repos\Portal\VedasPortal\obj\Debug\net7.0\Portal.RazorAssemblyInfo.cs

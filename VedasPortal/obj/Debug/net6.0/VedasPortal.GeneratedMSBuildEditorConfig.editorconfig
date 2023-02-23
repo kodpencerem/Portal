@@ -1,0 +1,745 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = VedasPortal
+build_property.RootNamespace = VedasPortal
+build_property.ProjectDir = C:\Users\t1emrullahisik\source\repos\Vedas_Portal\VedasPortal\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\t1emrullahisik\source\repos\Vedas_Portal\VedasPortal
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Alert/SweetAlert/SweetAlertComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbGVydFxTd2VldEFsZXJ0XFN3ZWV0QWxlcnRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Alert/ToastrComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbGVydFxUb2FzdHJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/AnketDuzenleComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxBbmtldER1emVubGVDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/AnketEkleComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxBbmtldEVrbGVDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/AnketKatilimSayisi.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxBbmtldEthdGlsaW1TYXlpc2kucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/AnketSecenekItem.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxBbmtldFNlY2VuZWtJdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/EnPopulerAnket.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxFblBvcHVsZXJBbmtldC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/Modals/AnketSecenekEkle.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxNb2RhbHNcQW5rZXRTZWNlbmVrRWtsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/Modals/OnayComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxNb2RhbHNcT25heUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/Modals/YeniAnketSecenekEkle.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxNb2RhbHNcWWVuaUFua2V0U2VjZW5la0VrbGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Anket/SecilmisAnket.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBbmtldFxTZWNpbG1pc0Fua2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Auth/EditRoleModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXEVkaXRSb2xlTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Auth/EditUserModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXEVkaXRVc2VyTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Auth/EditUserRolesModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXEVkaXRVc2VyUm9sZXNNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Auth/PasswordModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXFBhc3N3b3JkTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Auth/UsersTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoXFVzZXJzVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ErrorPages/ErrorPageComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFcnJvclBhZ2VzXEVycm9yUGFnZUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ErrorPages/RequestCompoment.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFcnJvclBhZ2VzXFJlcXVlc3RDb21wb21lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/AuthAdminLink.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcQXV0aEFkbWluTGluay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/AuthOtherUsersLink.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcQXV0aE90aGVyVXNlcnNMaW5rLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/BildirimComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcQmlsZGlyaW1Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/CardComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcQ2FyZENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/DovizKarti.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcRG92aXpLYXJ0aS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/Duyurular.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcRHV5dXJ1bGFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/Etkinlikler.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcRXRraW5saWtsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcRm9vdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/Haberler.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcSGFiZXJsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/HavaDurumKarti.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcSGF2YUR1cnVtS2FydGkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/NotAuthorizedComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcTm90QXV0aG9yaXplZENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/PersonelDurumComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcUGVyc29uZWxEdXJ1bUNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/SliderBox.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcU2xpZGVyQm94LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/SliderComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcU2xpZGVyQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/IndexComponents/YaklasanToplanti.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmRleENvbXBvbmVudHNcWWFrbGFzYW5Ub3BsYW50aS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Kanban/Dropzone.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xLYW5iYW5cRHJvcHpvbmUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Kanban/IsEmirleri.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xLYW5iYW5cSXNFbWlybGVyaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/Kanban/NewTask.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xLYW5iYW5cTmV3VGFzay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ShowModalComponent/LikeButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaG93TW9kYWxDb21wb25lbnRcTGlrZUJ1dHRvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ShowModalComponent/MarkDownComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaG93TW9kYWxDb21wb25lbnRcTWFya0Rvd25Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ShowModalComponent/ModalComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaG93TW9kYWxDb21wb25lbnRcTW9kYWxDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ShowModalComponent/ShowModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaG93TW9kYWxDb21wb25lbnRcU2hvd01vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/CalendarComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcQ2FsZW5kYXJDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/DayComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcRGF5Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/MonthComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcTW9udGhDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/TimePickerComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcVGltZVBpY2tlckNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/ToplantiDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcVG9wbGFudGlEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/ToplantiEkle.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcVG9wbGFudGlFa2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/ToplantiListComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcVG9wbGFudGlMaXN0Q29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/ToplantiTakvimi/ToplantiSec.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb3BsYW50aVRha3ZpbWlcVG9wbGFudGlTZWMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/UploadComponent/CKEditorBlazor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVcGxvYWRDb21wb25lbnRcQ0tFZGl0b3JCbGF6b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/UploadComponent/ImageResizer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVcGxvYWRDb21wb25lbnRcSW1hZ2VSZXNpemVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/UploadComponent/MultipleUpload.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVcGxvYWRDb21wb25lbnRcTXVsdGlwbGVVcGxvYWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/VideoComponent/PlayerList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xWaWRlb0NvbXBvbmVudFxQbGF5ZXJMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/VideoComponent/VideoBoxComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xWaWRlb0NvbXBvbmVudFxWaWRlb0JveENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/VideoComponent/VideoKoleksiyonu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xWaWRlb0NvbXBvbmVudFxWaWRlb0tvbGVrc2l5b251LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Components/VideoComponent/VideoPlayerComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xWaWRlb0NvbXBvbmVudFxWaWRlb1BsYXllckNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anasayfa/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5hc2F5ZmFcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anasayfa/Kisayollar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5hc2F5ZmFcS2lzYXlvbGxhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anket/Admin/AnketEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5rZXRcQWRtaW5cQW5rZXRFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anket/Admin/Anketler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5rZXRcQWRtaW5cQW5rZXRsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anket/Admin/AnketSonuc.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5rZXRcQWRtaW5cQW5rZXRTb251Yy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anket/Anket.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5rZXRcQW5rZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Anket/Anketler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQW5rZXRcQW5rZXRsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Auth/ManageRoles.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxNYW5hZ2VSb2xlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Auth/ManageUsers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxNYW5hZ2VVc2Vycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/BasindaBiz/Admin/HaberEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmFzaW5kYUJpelxBZG1pblxIYWJlckVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/BasindaBiz/Haberler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmFzaW5kYUJpelxIYWJlcmxlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Doviz/TumDovizler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG92aXpcVHVtRG92aXpsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Duyurular/Admin/DuyuruEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV5dXJ1bGFyXEFkbWluXER1eXVydUVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Duyurular/Duyurular.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV5dXJ1bGFyXER1eXVydWxhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/DuzelticiFaaliyetler/Admin/DuzelticiFaaliyetEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV6ZWx0aWNpRmFhbGl5ZXRsZXJcQWRtaW5cRHV6ZWx0aWNpRmFhbGl5ZXRFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/DuzelticiFaaliyetler/DuzelticiFaaliyetEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV6ZWx0aWNpRmFhbGl5ZXRsZXJcRHV6ZWx0aWNpRmFhbGl5ZXRFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/DuzelticiFaaliyetler/DuzelticiFaaliyetOlusturma.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV6ZWx0aWNpRmFhbGl5ZXRsZXJcRHV6ZWx0aWNpRmFhbGl5ZXRPbHVzdHVybWEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/DuzelticiFaaliyetler/FaaliyetDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV6ZWx0aWNpRmFhbGl5ZXRsZXJcRmFhbGl5ZXREZXRheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Etkinlikler/Admin/EtkinlikEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXRraW5saWtsZXJcQWRtaW5cRXRraW5saWtFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Etkinlikler/Admin/KatilimciEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXRraW5saWtsZXJcQWRtaW5cS2F0aWxpbWNpRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Etkinlikler/Etkinlikler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXRraW5saWtsZXJcRXRraW5saWtsZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/Dokumanlar/Admin/DosyaYoneticisisi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxEb2t1bWFubGFyXEFkbWluXERvc3lhWW9uZXRpY2lzaXNpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/Dokumanlar/DosyaYoneticisisi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxEb2t1bWFubGFyXERvc3lhWW9uZXRpY2lzaXNpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/Egitimler/Admin/EgitimEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxFZ2l0aW1sZXJcQWRtaW5cRWdpdGltRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/Egitimler/Egitimler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxFZ2l0aW1sZXJcRWdpdGltbGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/GuncelMevzuatlar/Admin/MevzuatEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxHdW5jZWxNZXZ6dWF0bGFyXEFkbWluXE1ldnp1YXRFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/GuncelMevzuatlar/GuncelMevzuatTakibi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxHdW5jZWxNZXZ6dWF0bGFyXEd1bmNlbE1ldnp1YXRUYWtpYmkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/EmptyDataPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxFbXB0eURhdGFQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/Page403.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxQYWdlNDAzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/Page404.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxQYWdlNDA0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/Page500.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxQYWdlNTAwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/Page503.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxQYWdlNTAzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/HataSayfalari/RequestFailed.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGF0YVNheWZhbGFyaVxSZXF1ZXN0RmFpbGVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/InsanKaynaklariUygulamalari/Admin/IkUygulamaEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zYW5LYXluYWtsYXJpVXlndWxhbWFsYXJpXEFkbWluXElrVXlndWxhbWFFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/InsanKaynaklariUygulamalari/IKUygulamalari.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zYW5LYXluYWtsYXJpVXlndWxhbWFsYXJpXElLVXlndWxhbWFsYXJpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/IzinTalep/Admin/GelenIzinTalepleri.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSXppblRhbGVwXEFkbWluXEdlbGVuSXppblRhbGVwbGVyaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/IzinTalep/Admin/IzinDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSXppblRhbGVwXEFkbWluXEl6aW5EdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/IzinTalep/Personel/IzinTalepFormu.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSXppblRhbGVwXFBlcnNvbmVsXEl6aW5UYWxlcEZvcm11LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/KullaniciDurumlari/KursEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS3VsbGFuaWNpRHVydW1sYXJpXEt1cnNFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/KullaniciDurumlari/MezuniyetEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS3VsbGFuaWNpRHVydW1sYXJpXE1lenVuaXlldEVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/KullaniciDurumlari/Profil.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS3VsbGFuaWNpRHVydW1sYXJpXFByb2ZpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/KullaniciDurumlari/UzmanlikAlaniEkle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS3VsbGFuaWNpRHVydW1sYXJpXFV6bWFubGlrQWxhbmlFa2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/OneriSistemi/Admin/OneriEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25lcmlTaXN0ZW1pXEFkbWluXE9uZXJpRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/OneriSistemi/OneriEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25lcmlTaXN0ZW1pXE9uZXJpRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/OneriSistemi/Oneriler.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25lcmlTaXN0ZW1pXE9uZXJpbGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Admin/AyrilisEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXEFkbWluXEF5cmlsaXNFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Admin/GorevDegisikligiEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXEFkbWluXEdvcmV2RGVnaXNpa2xpZ2lFa2xlRHV6ZW5sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Admin/VefatDurumuEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXEFkbWluXFZlZmF0RHVydW11RWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Admin/YeniBaslayanEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXEFkbWluXFllbmlCYXNsYXlhbkVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Personel/Ayrilanlar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXFBlcnNvbmVsXEF5cmlsYW5sYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Personel/Doganlar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXFBlcnNvbmVsXERvZ2FubGFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Personel/GorevDegisikligi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXFBlcnNvbmVsXEdvcmV2RGVnaXNpa2xpZ2kucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Personel/Katilanlar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXFBlcnNvbmVsXEthdGlsYW5sYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/PersonelBilgilendirme/Personel/Vefatlar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVyc29uZWxCaWxnaWxlbmRpcm1lXFBlcnNvbmVsXFZlZmF0bGFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/Admin/MerkezEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXEFkbWluXE1lcmtlekVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/Admin/OdaEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXEFkbWluXE9kYUVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/Admin/ToplantiEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXEFkbWluXFRvcGxhbnRpRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/Admin/ToplantiNotuEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXEFkbWluXFRvcGxhbnRpTm90dUVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/ToplantiNotlariVeKararlar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXFRvcGxhbnRpTm90bGFyaVZlS2FyYXJsYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/ToplantiOdalari.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXFRvcGxhbnRpT2RhbGFyaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/VedasRehber/Admin/RehbereEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVkYXNSZWhiZXJcQWRtaW5cUmVoYmVyZUVrbGVEdXplbmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/VedasRehber/VedasRehber.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVkYXNSZWhiZXJcVmVkYXNSZWhiZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/YorumYonetim/Admin/YorumEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcWW9ydW1Zb25ldGltXEFkbWluXFlvcnVtRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/YorumYonetim/YorumEkleDuzenle.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcWW9ydW1Zb25ldGltXFlvcnVtRWtsZUR1emVubGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Shared/LoginDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luRGlzcGxheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/BasindaBiz/HaberDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmFzaW5kYUJpelxIYWJlckRldGF5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-0gbzihemeo
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Duyurular/DuyuruDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHV5dXJ1bGFyXER1eXVydURldGF5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-uvejbr2jki
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Etkinlikler/EtkinlikDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXRraW5saWtsZXJcRXRraW5saWtEZXRheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-xcrwgig8iu
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/Egitimler/EgitimDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxFZ2l0aW1sZXJcRWdpdGltRGV0YXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c20x3wu2hp
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/FaydaliIcerikler/GuncelMevzuatlar/MevzuatDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF5ZGFsaUljZXJpa2xlclxHdW5jZWxNZXZ6dWF0bGFyXE1ldnp1YXREZXRheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-zbnoizstuh
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/OneriSistemi/OneriDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT25lcmlTaXN0ZW1pXE9uZXJpRGV0YXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-qslt75466s
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/OdaDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXE9kYURldGF5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-4klltzs56o
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/ToplantiDetay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXFRvcGxhbnRpRGV0YXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ws0lcl1ay4
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/ToplantiOdalari/ToplantiNotDetayi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9wbGFudGlPZGFsYXJpXFRvcGxhbnRpTm90RGV0YXlpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-0x9173pkc7
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mmydg583l2
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-oszq77ytux
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ConfirmEmailChange.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWxDaGFuZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ExternalLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxFeHRlcm5hbExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Lockout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2Nrb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/LoginWith2fa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbldpdGgyZmEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/LoginWithRecoveryCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbldpdGhSZWNvdmVyeUNvZGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/LogOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dPdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/DeletePersonalData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRGVsZXRlUGVyc29uYWxEYXRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/Disable2fa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRGlzYWJsZTJmYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/DownloadPersonalData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRG93bmxvYWRQZXJzb25hbERhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/Email.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW5hYmxlQXV0aGVudGljYXRvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/ExternalLogins.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRXh0ZXJuYWxMb2dpbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/GenerateRecoveryCodes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcR2VuZXJhdGVSZWNvdmVyeUNvZGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/PersonalData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcUGVyc29uYWxEYXRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/ResetAuthenticator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcUmVzZXRBdXRoZW50aWNhdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2V0UGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/ShowRecoveryCodes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2hvd1JlY292ZXJ5Q29kZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/TwoFactorAuthentication.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcVHdvRmFjdG9yQXV0aGVudGljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1N0YXR1c01lc3NhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ResendEmailConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNlbmRFbWFpbENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/_StatusMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfU3RhdHVzTWVzc2FnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Auth/SignIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxTaWduSW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/t1emrullahisik/source/repos/Vedas_Portal/VedasPortal/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
